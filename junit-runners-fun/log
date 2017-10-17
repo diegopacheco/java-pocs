@@ -1,0 +1,34 @@
+total 788
+ 40 drwxrwxrwt 23 root  root   36864 Jul 19 15:38 .
+  4 drwxr-xr-x 25 root  root    4096 Jul 15 10:38 ..
+ 40 -rw-------  1 diego diego  40131 Jul 19 11:56 .com.google.Chrome.9bnd3O
+176 -rw-------  1 diego diego 176672 Jul 19 12:43 .com.google.Chrome.9Ryv00
+  4 drwx------  2 diego diego   4096 Jul 19 10:11 .com.google.Chrome.fc8w7x
+ 80 -rw-------  1 diego diego  79277 Jul 19 11:56 .com.google.Chrome.OnYuL8
+ 96 -rw-------  1 diego diego  97375 Jul 19 11:56 .com.google.Chrome.SzaPce
+ 24 -rw-------  1 diego diego  23477 Jul 19 11:56 .com.google.Chrome.wCuCN1
+216 -rw-------  1 diego diego 220311 Jul 19 10:56 .com.google.Chrome.WyAh0C
+ 28 -rw-------  1 diego diego  25822 Jul 19 14:39 .com.google.Chrome.zNeOXW
+  0 -rw-------  1 diego diego      0 Jul 19 10:06 config-err-uMbhAZ
+  4 drwx------  2 root  root    4096 Jul 19 10:03 cvcd
+  4 drwxrwxr-x  2 diego diego   4096 Jul 19 13:13 dm
+  4 drwxrwxrwt  2 root  root    4096 Jul 19 10:02 .font-unix
+  4 drwxrwxr-x  2 diego diego   4096 Jul 19 11:46 gitter-notification-avatars_
+  4 drwxr-xr-x  2 diego diego   4096 Jul 19 15:39 hsperfdata_diego
+  4 drwxrwxrwt  2 root  root    4096 Jul 19 10:06 .ICE-unix
+  4 drwxrwxr-x  2 diego diego   4096 Jul 19 13:13 jna-95580520
+  4 drwxr-xr-x  3 root  root    4096 Jul 19 14:22 npm-18059-df1b9708
+  4 drwx------  8 diego diego   4096 Jul 19 10:06 .org.chromium.Chromium.KZzrqx
+  4 drwx------  2 diego diego   4096 Jul 19 10:06 .org.chromium.Chromium.MQ0TjB
+  4 drwx------  2 diego diego   4096 Jul 19 10:07 .org.chromium.Chromium.qJMcRT
+  0 srwxrwxr-x  1 diego diego      0 Jul 19 10:11 qtsingleapp-homedi-209d-3e8
+  0 -rw-rw-r--  1 diego diego      0 Jul 19 10:11 qtsingleapp-homedi-209d-3e8-lockfile
+  4 drwx------  3 diego diego   4096 Jul 19 10:11 skype-4561
+  4 drwx------  2 diego diego   4096 Jul 19 10:07 Slack Crashes
+  4 drwx------  3 root  root    4096 Jul 19 10:03 systemd-private-6597e41607c44a4e96d03d631e035aa8-colord.service-oAPZw4
+  4 drwx------  3 root  root    4096 Jul 19 10:03 systemd-private-6597e41607c44a4e96d03d631e035aa8-rtkit-daemon.service-aAyLs0
+  4 drwx------  3 root  root    4096 Jul 19 10:02 systemd-private-6597e41607c44a4e96d03d631e035aa8-systemd-timesyncd.service-aJ8rpE
+  4 drwxrwxrwt  2 root  root    4096 Jul 19 10:02 .Test-unix
+  4 drwx------  2 diego diego   4096 Jul 19 14:13 tracker-extract-files.1000
+  4 drwxrwxrwt  2 root  root    4096 Jul 19 10:06 .X11-unix
+  4 drwxrwxrwt  2 root  root    4096 Jul 19 10:02 .XIM-unix

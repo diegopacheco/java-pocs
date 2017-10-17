@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.deliveredtechnologies/rulebook-core/0.9/82a50a2b25deb05d1c838ca7fe71533f0bc3d0e9/rulebook-core-0.9.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/com.deliveredtechnologies/rulebook-core/0.9/9fe4ae5169bb25fac351b90884b599e87b3edd53/rulebook-core-0.9-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.22/a1c83373863cec7ae8d89dc1c5722d8cb6ec0309/slf4j-api-1.7.22.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.22/2b9722cdf33bd0b1d1639a98034dde38b156ad34/slf4j-api-1.7.22-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

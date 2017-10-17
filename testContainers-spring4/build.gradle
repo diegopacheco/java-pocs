@@ -1,0 +1,30 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8 
+
+repositories {
+    maven { url 'http://repo.spring.io/libs-release' }
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/groups/public/" } 
+    mavenLocal() 
+}
+
+dependencies {
+	compile([ 
+			  'log4j:log4j:1.2.17',	
+			  'org.slf4j:slf4j-log4j12:1.7.25',
+			  'org.springframework:spring-core:4.3.8.RELEASE',
+			  'org.springframework:spring-context:4.3.8.RELEASE',
+			  'org.springframework:spring-beans:4.3.8.RELEASE',
+			  'redis.clients:jedis:2.9.0',
+			  'com.zaxxer:HikariCP-java6:2.3.13',
+			  'mysql:mysql-connector-java:6.0.6',
+              'org.testcontainers:mysql:1.2.1'
+	        ])
+	 	    
+	testCompile([
+			'junit:junit:4.12',
+			'org.springframework:spring-test:4.3.8.RELEASE'
+    ])
+}

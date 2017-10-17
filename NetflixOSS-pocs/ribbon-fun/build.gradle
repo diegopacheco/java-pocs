@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'scala'
+
+sourceSets {
+    main {
+        scala {
+            srcDirs = ['src/main/java','src/main/scala']
+        }
+    }
+    test {
+        scala {
+            srcDirs = ['test/main/java','test/main/scala']
+        }
+    }
+}
+
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8 
+
+repositories {
+	mavenLocal() 
+    mavenCentral()
+    maven {
+       url "https://oss.sonatype.org/content/groups/public/"
+    } 
+}
+
+dependencies {
+	compile(['org.scala-lang:scala-library:2.11.5',
+			  'com.netflix.ribbon:ribbon-httpclient:2.0-RC9',
+			  'com.netflix.ribbon:ribbon-httpasyncclient:0.3.13',
+			  'com.netflix.rxjava:rxjava-core:0.20.5',
+			  'com.netflix.rxnetty:rx-netty:0.3.14',
+			  'com.netflix.hystrix:hystrix-core:1.4.0-RC5'
+			  ])
+}

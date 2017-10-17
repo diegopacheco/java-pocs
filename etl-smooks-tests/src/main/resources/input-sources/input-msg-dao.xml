@@ -1,0 +1,14 @@
+<pessoas>
+	<pessoa>
+		<id>1</id>
+		<nome>fulano</nome>
+	</pessoa>
+	<pessoa>
+		<id>2</id>
+		<nome>beltrano</nome>
+	</pessoa>
+		<pessoa>
+		<id>3</id>
+		<nome>ciclano</nome>
+	</pessoa>	
+</pessoas>

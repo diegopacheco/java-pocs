@@ -1,0 +1,30 @@
+apply plugin: 'scala'
+
+sourceSets {
+    main {
+        scala {
+            srcDirs = ['src/main/scala']
+        }
+    }
+    test {
+        scala {
+            srcDirs = ['test/main/scala']
+        }
+    }
+}
+
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8 
+
+repositories {
+	mavenLocal() 
+    mavenCentral()
+    maven {
+       url "https://oss.sonatype.org/content/groups/public/"
+    } 
+}
+
+dependencies {
+	compile(['org.scala-lang:scala-library:2.11.5',
+			  'io.gatling:gatling-core:2.1.5'])
+}

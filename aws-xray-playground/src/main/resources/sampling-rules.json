@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "description": "POC",
+      "service_name": "*",
+      "http_method": "*",
+      "url_path": "/*",
+      "fixed_target": 0,
+      "rate": 0.05
+    }
+  ],
+  "default": {
+    "fixed_target": 1,
+    "rate": 0.1
+  }
+}

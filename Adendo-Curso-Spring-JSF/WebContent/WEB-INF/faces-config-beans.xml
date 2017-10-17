@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	version="1.2">
+
+	<application>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	</application>
+	
+	
+	<managed-bean>
+		<managed-bean-name>carrocinhaBean</managed-bean-name>
+		<managed-bean-class>com.blogspot.diegopacheco.springframework25.jsf.mb.CarrocinhaBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>carrocinhaService</property-name>
+			<property-class>com.blogspot.diegopacheco.springframework25.jsf.service.CarrocinhaService</property-class>
+			<value>#{caveiraoService}</value>
+		</managed-property>
+	</managed-bean>
+
+</faces-config>

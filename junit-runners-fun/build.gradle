@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven {
+	   url "https://oss.sonatype.org/content/groups/public/"
+	}
+	maven {
+        url 'http://repo.spring.io/milestone'
+    }
+}
+
+eclipse {
+	classpath {
+	   downloadSources=true
+	}
+}
+
+dependencies {
+    compile group: 'org.apache.ant', name: 'ant', version: '1.9.7'
+	compile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    manifest {
+        attributes(
+          "Manifest-Version": "1.0",
+           "Main-Class": "com.github.diegopacheco.sandbox.java.task.MyHelloWorldClass"
+        )
+    }
+}
+   

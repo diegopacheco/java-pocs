@@ -1,0 +1,50 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8 
+
+mainClassName = "com.github.diegopacheco.sandbox.java.guice4.servlet.jetty.JettyServerRunner"
+applicationDefaultJvmArgs = [
+  "-Djava.net.preferIPv4Stack=true",
+  "-Djava.net.preferIPv6Addresses=false",
+  "-server",
+  "-Xmx2048m",
+  "-Xms128m" 
+]
+
+repositories {
+   maven { url 'http://repo.spring.io/libs-milestone' }
+   maven { url 'http://repo.spring.io/libs-release' }
+   mavenCentral()
+   maven { url "https://oss.sonatype.org/content/groups/public/" } 
+   mavenLocal()
+}
+
+buildscript {
+	repositories {
+		jcenter()
+		mavenLocal()
+	}
+}
+
+dependencies {
+	compile([ 
+           'com.google.inject:guice:4.1.0',
+           'com.google.inject.extensions:guice-servlet:4.1.0',
+		   
+		   'org.eclipse.jetty:jetty-server:9.4.6.v20170531',
+		   'org.eclipse.jetty:jetty-servlet:9.4.6.v20170531',
+		   'org.eclipse.jetty:jetty-webapp:9.4.6.v20170531',
+ 		   'org.slf4j:slf4j-log4j12:1.7.25',
+ 		   
+		   'org.glassfish.jersey.core:jersey-server:2.7',
+		   'org.glassfish.jersey.containers:jersey-container-servlet-core:2.7',
+		   'org.glassfish.jersey.containers:jersey-container-jetty-http:2.7',
+		   
+		   'com.netflix.hystrix:hystrix-core:1.4.26',
+		   'com.netflix.hystrix:hystrix-metrics-event-stream:1.4.26',
+		   
+	])
+}

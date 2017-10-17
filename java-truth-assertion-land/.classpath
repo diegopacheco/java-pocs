@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java">
+		<attributes>
+			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src/main/resources">
+		<attributes>
+			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.google.truth/truth/0.27/bd17774d2dc0fffa884d42c07d2537e86c67acd6/truth-0.27.jar" sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.google.truth/truth/0.27/68a2f3f4ec1d0f3e63d0fa32dc9a13d6f612c80b/truth-0.27-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/com/google/guava/guava/18.0/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/junit/junit/4.10/junit-4.10.jar" sourcepath="C:/Users/diego/.m2/repository/junit/junit/4.10/junit-4.10-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" sourcepath="C:/Users/diego/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

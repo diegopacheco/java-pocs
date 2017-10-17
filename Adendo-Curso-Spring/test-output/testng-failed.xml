@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="5" skipfailedinvocationCounts="false" verbose="1" name="Failed suite [Adendo-Curso-Spring]" junit="false" annotations="JDK">
+  <test name="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest(failed)" junit="false" annotations="JDK">
+    <classes>
+      <class name="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest">
+        <methods>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="testInjecaoSpring"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amq="http://activemq.apache.org/schema/core"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd"
+>
+	
+	<camelContext xmlns="http://camel.apache.org/schema/spring" />
+	
+	<!-- Componente Broker com JMX e filas duraveis -->
+	
+	<broker xmlns="http://activemq.apache.org/schema/core" useJmx="true" persistent="false">
+		<persistenceAdapter>
+			<!-- <kahaDB directory="activemq-data" journalMaxFileLength="32mb" /> -->
+			<amqPersistenceAdapter directory="activemq-data" maxFileLength="32mb"/>
+		</persistenceAdapter>
+		<transportConnectors>
+			<transportConnector uri="tcp://4Winds:61616" />
+		</transportConnectors>
+	</broker>
+
+	<!-- Componente ActiveMQ  -->
+	
+    <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="brokerURL" value="tcp://4Winds:61616"/>        
+    </bean>
+
+
+	<!-- Bean da aplicação - POJOS -->
+	
+	<bean class="com.blogspot.diegopacheco.camel.pojo.DataBean" />
+	<bean class="com.blogspot.diegopacheco.camel.pojo.DataConsumer" />
+
+</beans>

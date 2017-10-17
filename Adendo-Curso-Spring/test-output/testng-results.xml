@@ -1,0 +1,100 @@
+<testng-results>
+  <reporter-output>
+  </reporter-output>
+  <suite name="Adendo-Curso-Spring">
+    <groups>
+      <group name="curso-spring">
+        <method signature="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest.testExceptionDivisao()" name="testExceptionDivisao" class="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest"/>
+        <method signature="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest.setup()" name="setup" class="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest"/>
+        <method signature="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest.testCalculoDivisao()" name="testCalculoDivisao" class="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest"/>
+        <method signature="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest.testInjecaoSpring()" name="testInjecaoSpring" class="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest"/>
+      </group>
+    </groups>
+    <test name="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest">
+      <class name="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest">
+        <test-method status="PASS" signature="testExceptionDivisao()" name="testExceptionDivisao" duration-ms="34" started-at="2009-10-06T17:32:57Z" finished-at="2009-10-06T17:32:58Z">
+        </test-method>
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2009-10-06T17:32:58Z" finished-at="2009-10-06T17:32:58Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest.testInjecaoSpring()]]>
+              </value>
+            </param>
+          </params>
+        </test-method>
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2009-10-06T17:32:57Z" finished-at="2009-10-06T17:32:57Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest.testExceptionDivisao()]]>
+              </value>
+            </param>
+          </params>
+        </test-method>
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2009-10-06T17:32:58Z" finished-at="2009-10-06T17:32:58Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest.testInjecaoSpring()]]>
+              </value>
+            </param>
+          </params>
+        </test-method>
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="758" started-at="2009-10-06T17:32:57Z" finished-at="2009-10-06T17:32:57Z">
+        </test-method>
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)" name="springTestContextAfterTestMethod" is-config="true" duration-ms="20" started-at="2009-10-06T17:32:58Z" finished-at="2009-10-06T17:32:58Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest.testExceptionDivisao()]]>
+              </value>
+            </param>
+          </params>
+        </test-method>
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2009-10-06T17:32:58Z" finished-at="2009-10-06T17:32:58Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest.testCalculoDivisao()]]>
+              </value>
+            </param>
+          </params>
+        </test-method>
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2009-10-06T17:32:58Z" finished-at="2009-10-06T17:32:58Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest.setup()]]>
+              </value>
+            </param>
+          </params>
+        </test-method>
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2009-10-06T17:32:58Z" finished-at="2009-10-06T17:32:58Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest.testCalculoDivisao()]]>
+              </value>
+            </param>
+          </params>
+        </test-method>
+        <test-method status="PASS" signature="setup()" name="setup" duration-ms="1" started-at="2009-10-06T17:32:58Z" finished-at="2009-10-06T17:32:58Z">
+        </test-method>
+        <test-method status="PASS" signature="testInjecaoSpring()" name="testInjecaoSpring" duration-ms="12" started-at="2009-10-06T17:32:58Z" finished-at="2009-10-06T17:32:58Z">
+        </test-method>
+        <test-method status="PASS" signature="testCalculoDivisao()" name="testCalculoDivisao" duration-ms="6" started-at="2009-10-06T17:32:58Z" finished-at="2009-10-06T17:32:58Z">
+        </test-method>
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="1" started-at="2009-10-06T17:32:58Z" finished-at="2009-10-06T17:32:58Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest.setup()]]>
+              </value>
+            </param>
+          </params>
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

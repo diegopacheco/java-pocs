@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/org.eclipse.collections/eclipse-collections-api/8.2.0/9bf929f1e4094e41b5a58556a8188c20a4583e73/eclipse-collections-api-8.2.0.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/org.eclipse.collections/eclipse-collections-api/8.2.0/7541cc34c63756b8cb8d9b5a7439aab7bb3cdb29/eclipse-collections-api-8.2.0-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/org.eclipse.collections/eclipse-collections/8.2.0/e8828a1b674b98ad211b1c8a6f6c104308864246/eclipse-collections-8.2.0.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/org.eclipse.collections/eclipse-collections/8.2.0/e59d645e24e529a8cbf9b842cf0a74b919340966/eclipse-collections-8.2.0-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/net.jcip/jcip-annotations/1.0/afba4942caaeaf46aab0b976afd57cc7c181467e/jcip-annotations-1.0.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/net.jcip/jcip-annotations/1.0/d853625d8001c00d40abed553e670279504699f9/jcip-annotations-1.0-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

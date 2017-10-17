@@ -1,0 +1,62 @@
+apply plugin: "java"
+apply plugin: "groovy"
+apply plugin: "war"
+apply plugin: "jetty"
+
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8 
+
+sourceSets {
+    main.java.srcDirs = ["src/main/java"]
+}
+
+repositories {
+	mavenLocal() 
+    mavenCentral()
+    maven {
+       url "https://oss.sonatype.org/content/groups/public/"
+    } 
+}
+
+dependencies {
+	compile([ 'com.netflix.zuul:zuul-core:1.0.28',
+			  'com.netflix.zuul:zuul-netflix:1.0.28',
+			  'com.netflix.karyon:karyon2-archaius:2.2.0-rc.2',
+			  'com.netflix.karyon:karyon2-governator:2.2.0-rc.2',
+			  'com.netflix.karyon:karyon2-servo:2.2.0-rc.2',
+			  'com.netflix.karyon:karyon2-eureka:2.2.0-rc.2',
+			  'com.netflix.karyon:karyon2-jersey-blocking:2.2.0-rc.2',
+			  'com.netflix.karyon:karyon2-admin-web:2.2.0-rc.2',
+			  'com.sun.jersey:jersey-core:1.19',
+			  'com.sun.jersey:jersey-server:1.9',
+			  'com.sun.jersey:jersey-client:1.9',
+			  'com.sun.jersey:jersey-servlet:1.9',
+			  'commons-collections:commons-collections:3.2',
+			  'org.codehaus.groovy:groovy-all:2.3.3',
+			  'junit:junit-dep:4.10'
+	 		 ])
+}
+
+war {
+    webXml = file('src/main/webapp/WEB-INF/web.xml')
+    webInf{
+        from('src/main/groovy/filters') {
+            into('classes')
+        }
+    }
+}
+
+jettyRun.contextPath = '/'
+
+jettyRun.doFirst {
+    System.setProperty("archaius.deployment.applicationId", "zuul")
+    System.setProperty("zuul.filter.root", "src/main/groovy/filters")
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.javaslang/javaslang/1.2.2/9b04c5d476f373813fb8ca03facb7c731dc07363/javaslang-1.2.2.jar" sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.javaslang/javaslang/1.2.2/8648ed863e964441f431eb909990bee8e68ad4c9/javaslang-1.2.2-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

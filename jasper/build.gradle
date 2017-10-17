@@ -1,0 +1,42 @@
+apply plugin: "eclipse"
+apply plugin: "java"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets {
+    main.java.srcDirs = ["src/main/java"]
+}
+
+repositories {
+  maven { url "https://jaspersoft.artifactoryonline.com/jaspersoft/repo/" }
+  maven { url "https://jaspersoft.artifactoryonline.com/jaspersoft/jaspersoft-repo/" }
+  maven { url "https://jaspersoft.artifactoryonline.com/jaspersoft/jaspersoft-3rd-party/" }
+  maven { url "https://jaspersoft.artifactoryonline.com/jaspersoft/mondrian-repo-cache/" }
+  maven { url 'http://repo.spring.io/libs-milestone' }
+	maven { url 'http://repo.spring.io/libs-release' }
+  mavenCentral()
+  maven {
+     url "https://oss.sonatype.org/content/groups/public/"
+  }
+  mavenLocal()
+}
+
+dependencies {
+	compile([
+           "net.sf.jasperreports:jasperreports:6.2.2",
+           "net.sf.jasperreports:jasperreports-functions:6.2.2",
+           "net.sf.jasperreports:jasperreports-chart-themes:6.2.2",
+
+           "mysql:mysql-connector-java:6.0.3",
+           "org.olap4j:olap4j:1.2.0",
+           
+           "junit:junit-dep:4.10"
+         ])
+}
+
+eclipse {
+    classpath {
+       downloadSources=true
+    }
+}

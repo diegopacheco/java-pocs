@@ -1,0 +1,33 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+mainClassName = "com.github.diegopacheco.sandbox.java.rabbitmq.HelloApp"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	maven {
+	   url "https://oss.sonatype.org/content/groups/public/"
+	}
+	maven {
+        url 'http://repo.spring.io/milestone'
+    }
+}
+
+eclipse {
+	classpath {
+	   downloadSources=true
+	}
+}
+
+dependencies {
+	compile([
+				'com.rabbitmq:amqp-client:3.6.0',
+				'commons-io:commons-io:1.2',
+				'commons-cli:commons-cli:1.1'
+			])
+}

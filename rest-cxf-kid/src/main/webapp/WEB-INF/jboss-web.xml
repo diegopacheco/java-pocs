@@ -1,0 +1,3 @@
+<jboss-web>
+    <context-root>rest</context-root>
+</jboss-web>

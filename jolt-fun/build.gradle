@@ -1,0 +1,31 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+version = '1.0'
+sourceCompatibility = 1.8
+
+mainClassName = 'com.github.diegopacheco.sandbox.java.janio.MainJanio'
+
+repositories {
+  jcenter()
+}
+
+buildscript {
+  repositories {
+    mavenLocal()
+  }
+}
+
+eclipse {
+  classpath {
+    downloadSources = true
+  }
+}
+
+dependencies {
+  compile([
+     'com.bazaarvoice.jolt:jolt-core:0.1.0',
+     'com.bazaarvoice.jolt:json-utils:0.1.0'
+  ])
+}

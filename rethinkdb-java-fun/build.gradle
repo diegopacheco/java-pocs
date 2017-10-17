@@ -1,0 +1,31 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+mainClassName = "com.github.diegopacheco.sandbox.java.rethinkdb.MainApp"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	maven {
+	   url "https://oss.sonatype.org/content/groups/public/"
+	}
+	maven {
+        url 'http://repo.spring.io/milestone'
+    }
+}
+
+eclipse {
+	classpath {
+	   downloadSources=true
+	}
+}
+
+dependencies {
+	compile([
+				'com.rethinkdb:rethink-java-driver:0.3'
+			])
+}

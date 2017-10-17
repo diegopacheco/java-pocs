@@ -1,0 +1,7 @@
+<classpath>
+  <classpathentry kind="src" excluding="**/.svn/|**/CVS/" path="src/main/java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" sourcepath="M2_REPO/junit/junit/4.9/junit-4.9-sources.jar" javadocpath="M2_REPO/junit/junit/4.9/junit-4.9-javadoc.jar" path="M2_REPO/junit/junit/4.9/junit-4.9.jar"/>
+  <classpathentry kind="var" sourcepath="M2_REPO/org/jgroups/jgroups/3.0.1.Final/jgroups-3.0.1.Final-sources.jar" javadocpath="M2_REPO/org/jgroups/jgroups/3.0.1.Final/jgroups-3.0.1.Final-javadoc.jar" path="M2_REPO/org/jgroups/jgroups/3.0.1.Final/jgroups-3.0.1.Final.jar"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+</classpath>

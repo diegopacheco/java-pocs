@@ -1,0 +1,112 @@
+.rich-toolbar {
+	border-color: transparent;
+	border-width: 0px;
+	background-color: #C1DCED;
+	color: black;
+	background-image: none;
+	font-size: 16px;
+}
+
+/*Defines text style for a representation element*/
+.rich-label-text-decor {
+	font-size: 12px;
+}
+
+.rich-ddmenu-label {
+	color: #000000 ! important;
+}
+
+/*Defines styles for a wrapper <div> element of a selected representation element*/
+	/* LABEL QUANDO PASSA O MOUSE NO MENU */
+.rich-ddmenu-label-select {
+	border-color: transparent;
+	background-color: #ffffff;
+	color: #101D54 ! important;
+}
+
+/* Defines styles for borders */ /* BORDA DO SUBMENU */
+.rich-menu-list-border {
+	border-width: 1px;
+	border-color: #C1DCED;
+}
+
+/* Defines styles for a wrapper <div> element for an item */
+	/* Define as cores internas do submenu */
+.rich-menu-item {
+	border-color: #FFCC66;
+	background-color: #ffffff;
+	color: #000000;
+	font-size: 12px;
+}
+
+/* MENU QUANDO PASSA O MOUSE EM CIMA */
+.rich-menu-item-hover {
+	border-color: C1DCED;
+	background-color: #84ADCD;
+	color: white ! important;
+}
+
+/* define o estilo para o 'header' das tabelas */
+.rich-table-headercell {
+	background-color: #F66718 ! important;
+	background: #F66718 ! important;
+	color: #ffffff ! important;
+	font-size: 15px ! important;
+}
+
+/* define o estilo para o 'subheader' das tabelas */
+.rich-table-subheader {
+	background-color: #657174 ! important;
+	background: #657174 ! important;
+	color: white ! important;
+}
+
+.rich-table-footer {
+	background-color: #657174 ! important;
+	background: #657174 ! important;
+	color: white ! important;
+}
+
+/* Define largura do MENU - width */
+.rich-panel-header {
+	background-color: #F66718 ! important;
+	background: #C1DCED ! important;
+	color: black ! important;
+	width: 970px;
+}
+
+/* Define a largura da borda interna - width */
+.rich-panel-body {
+	color: #003D5A;
+	width: 570px ! important;
+	padding-bottom: 8px ! important;
+	padding-top: 10px ! important;
+	padding-left: 10px ! important;
+	padding-right: 10px ! important;
+	font-weight: bold ! important;
+}
+
+/* Define a largura da borda maior - width */
+.rich-panel {
+	width: 976px;
+}
+
+.rich-panel-interno {
+	width: 950px ! important;
+}
+.button {
+	background: #C1DCED ! important;
+	font-weight: bold ! important;
+}
+
+.output-text {
+	font-family: Arial, Bookman Old Style, Verdana, sans-serif ! important;
+  	color: #4B6176;
+  	font-weight: bold ! important;
+}
+
+div {
+}
+
+#rodape { position: absolute; right: 0px; bottom: 0px; }
+			div > div#rodape { position: fixed; }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	
+	<!-- Define o contexto do camel onde exixte o POJO que faz routing.  -->
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+		<package>com.blogspot.diegopacheco.camel.pojo</package>
+	</camelContext>
+
+	<!-- Define os bean do Spring que seram usados pelo camel e pela aplicação de roteamento. -->
+	<context:component-scan 
+			base-package="com.blogspot.diegopacheco.camel.pojo" 
+	/>
+	
+	<!-- Define o componente JMS usado no routing feito pelo POJO java. -->
+	<bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
+		<property name="connectionFactory">
+			<bean class="org.apache.activemq.ActiveMQConnectionFactory">
+				<property name="brokerURL" value="tcp://4Winds:61616" />
+			</bean>
+		</property>
+	</bean>
+
+</beans>

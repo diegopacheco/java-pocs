@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven {
+	   url "https://oss.sonatype.org/content/groups/public/"
+	}
+	maven { url 'http://repo.spring.io/milestone'}
+        mavenLocal()
+}
+
+dependencies {
+	compile([
+           'com.tngtech.archunit:archunit-junit:0.4.0',
+	])
+}

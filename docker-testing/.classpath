@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.testcontainers/testcontainers/0.9.9/6ae896cc8efec516dc3699021066d1e0a8cc9a75/testcontainers-0.9.9-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.testcontainers/testcontainers/0.9.9/4e53c2467a1e1f3a0ccd07a20faa038c52ed8413/testcontainers-0.9.9.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.testcontainers/docker-compose/0.9.9/8d3b1b920d38a4f78fa5fba8bf4cedbd7292f493/docker-compose-0.9.9-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.testcontainers/docker-compose/0.9.9/577a8cf51d0ec7877db1f30100c3d563f9b54906/docker-compose-0.9.9.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/redis.clients/jedis/2.8.0/356324b58a8d6dfaeb6ddd6289f3a972551c915b/jedis-2.8.0-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/redis.clients/jedis/2.8.0/a9486e200b2195f31ce9b8779a70a5e2450a73ba/jedis-2.8.0.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-log4j12/1.7.14/5e3a1878bb866d3ce95920a2f496e740162a9d81/slf4j-log4j12-1.7.14-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-log4j12/1.7.14/7f4a597d90aed60331761a6fe3ad4f55bbfc544d/slf4j-log4j12-1.7.14.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/junit/junit/4.12/junit-4.12.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.github.docker-java/docker-java/2.1.1/a1ce077978acabcc911790122720ae56e89c1fbb/docker-java-2.1.1-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.github.docker-java/docker-java/2.1.1/ea1a491f3df10f8e098a0e3df6c401dd81f14ce5/docker-java-2.1.1.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.zeroturnaround/zt-exec/1.8/5240d182f042072c98cbc1b2840af476c610873b/zt-exec-1.8-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.zeroturnaround/zt-exec/1.8/7d6c8d9f6067870cf6822741ad2e8a8fea37bbc1/zt-exec-1.8.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.rnorth.duct-tape/duct-tape/1.0.4/38b3021bf7be0e2fd66ab275ce0a4aab522d743b/duct-tape-1.0.4-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.rnorth.duct-tape/duct-tape/1.0.4/38bd10511a722fe3e97028a39a423e2e21499416/duct-tape-1.0.4.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-ext/1.7.2/8eaff6054d2bf9f4a396fd2b77f8dffbf2b7cfc2/slf4j-ext-1.7.2-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-ext/1.7.2/676a2fc95740d6d070e2c7c54920e83e6c6969ec/slf4j-ext-1.7.2.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.mongodb/mongo-java-driver/3.0.2/74e06a35f7949be5a0339588b41c87614dfe419d/mongo-java-driver-3.0.2-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.mongodb/mongo-java-driver/3.0.2/7d3880dec6c8a2f07c1f544776c326834b513712/mongo-java-driver-3.0.2.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/apache/commons/commons-pool2/2.3/commons-pool2-2.3.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.14/92d08f12e56087658ca5db6e067fad8a23083f0c/slf4j-api-1.7.14-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.14/862a5bc736005d68727d1387844d09d62efdb6cb/slf4j-api-1.7.14.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar" kind="lib" path="C:/Users/diego/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3-sources.jar" kind="lib" path="C:/Users/diego/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/com/fasterxml/jackson/jaxrs/jackson-jaxrs-json-provider/2.1.2/jackson-jaxrs-json-provider-2.1.2.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/glassfish/jersey/connectors/jersey-apache-connector/2.11/jersey-apache-connector-2.11.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/apache/httpcomponents/httpclient/4.3.1/httpclient-4.3.1.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/glassfish/jersey/core/jersey-client/2.11/jersey-client-2.11.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/de/gesellix/unix-socket-factory/2015-01-27T15-02-14/unix-socket-factory-2015-01-27T15-02-14.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/apache/commons/commons-compress/1.5/commons-compress-1.5.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/commons-codec/commons-codec/1.8/commons-codec-1.8.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6-sources.jar" kind="lib" path="C:/Users/diego/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/commons-io/commons-io/2.3/commons-io-2.3.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/jcl-over-slf4j/1.7.12/1f2ab7827a222427f8b8f20ee703fd5c5cfc055e/jcl-over-slf4j-1.7.12-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/jcl-over-slf4j/1.7.12/adef7a9e1263298255fdb5cb107ff171d07c82f3/jcl-over-slf4j-1.7.12.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/com/google/guava/guava/18.0/guava-18.0.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/bouncycastle/bcpkix-jdk15on/1.51/bcpkix-jdk15on-1.51.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/5991ca87ef1fb5544943d9abc5a9a37583fabe03/annotations-13.0-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/ch.qos.cal10n/cal10n-api/0.7.4/995bc582ad5ba0568e6ec0ef10b78f0e8c03764c/cal10n-api-0.7.4-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/ch.qos.cal10n/cal10n-api/0.7.4/132b7e1702af0335cf4259d30aaf959264db688f/cal10n-api-0.7.4.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.1.2/jackson-core-2.1.2.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.1.2/jackson-databind-2.1.2.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.1.2/jackson-module-jaxb-annotations-2.1.2.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/glassfish/jersey/core/jersey-common/2.11/jersey-common-2.11.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/apache/httpcomponents/httpcore/4.3/httpcore-4.3.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/glassfish/hk2/hk2-api/2.3.0-b05/hk2-api-2.3.0-b05.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/glassfish/hk2/external/javax.inject/2.3.0-b05/javax.inject-2.3.0-b05.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/glassfish/hk2/hk2-locator/2.3.0-b05/hk2-locator-2.3.0-b05.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/tukaani/xz/1.2/xz-1.2.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/bouncycastle/bcprov-jdk15on/1.51/bcprov-jdk15on-1.51.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.1.1/jackson-annotations-2.1.1.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/glassfish/jersey/bundles/repackaged/jersey-guava/2.11/jersey-guava-2.11.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/glassfish/hk2/osgi-resource-locator/1.0.1/osgi-resource-locator-1.0.1.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/glassfish/hk2/hk2-utils/2.3.0-b05/hk2-utils-2.3.0-b05.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/glassfish/hk2/external/aopalliance-repackaged/2.3.0-b05/aopalliance-repackaged-2.3.0-b05.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.m2/repository/javax/inject/javax.inject/1/javax.inject-1-sources.jar" kind="lib" path="C:/Users/diego/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar" exported="true"/>
+</classpath>

@@ -1,0 +1,23 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8 
+
+repositories {
+	mavenLocal() 
+    mavenCentral()
+    maven {
+       url "https://oss.sonatype.org/content/groups/public/"
+    } 
+}
+
+dependencies {
+	compile([
+              'org.testcontainers:testcontainers:0.9.9',
+              'org.testcontainers:docker-compose:0.9.9',
+              'redis.clients:jedis:2.8.0',
+              'org.slf4j:slf4j-log4j12:1.7.14',
+              'junit:junit:4.12'
+		    ])
+}

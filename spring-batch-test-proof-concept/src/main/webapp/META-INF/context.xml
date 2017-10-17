@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context 
+		 displayName="layout-manager" 
+		 docBase="layout-manager" path="/layout-manager"
+		 privileged="true" 
+		 distributable="true" 
+		 swallowOutput="off"
+>
+
+		<Resource 
+			name="jdbc/qualicorpIntegracaoOperadorasDS" 
+			auth="Container"
+			type="javax.sql.DataSource" 
+			driverClassName="oracle.jdbc.OracleDriver"
+			url="jdbc:oracle:thin:@10.99.0.8:1521:wfdb"
+			username="qualiportal_desenv" 
+			password="qualiportal_desenv" 
+			maxActive="20" 
+			maxWait="5000" 
+			minIdle="10" 
+			maxIdle="30" 
+			removeAbandoned="true" 
+			removeAbandonedTimeout="10" 
+			logAbandoned="true"
+		/>
+
+</Context>

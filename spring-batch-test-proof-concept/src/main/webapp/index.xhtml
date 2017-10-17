@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://www.ilegra.com/jsf"
+	xmlns:c="http://java.sun.com/jstl/core"
+	template="/template/template.xhtml">
+
+	<ui:param name="title" value="Qualicorp" />
+	<ui:define name="body">
+		<br/>
+		<br/>
+		<h:form id="form" >
+
+			<h:outputLink value="#{request.contextPath}/pages/batch.faces">
+				<h:outputText value="Executar Batch" />
+				<ui:insert />
+			</h:outputLink>
+			<br/>
+			
+		</h:form>
+	</ui:define> 
+</ui:composition>

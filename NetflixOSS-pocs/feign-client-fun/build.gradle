@@ -1,0 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'scala'
+
+sourceSets {
+    main {
+        scala {
+            srcDirs = ['src/main/java','src/main/scala']
+        }
+    }
+    test {
+        scala {
+            srcDirs = ['test/main/java','test/main/scala']
+        }
+    }
+}
+
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8 
+
+repositories {
+	mavenLocal() 
+    mavenCentral()
+    maven {
+       url "https://oss.sonatype.org/content/groups/public/"
+    } 
+}
+
+dependencies {
+	compile(['org.scala-lang:scala-library:2.11.5',
+			  'com.netflix.feign:feign-core:8.1.1',
+			  'com.netflix.feign:feign-jackson:8.1.1',
+			  'com.netflix.feign:feign-gson:8.1.1'			  
+			  ])
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf12540752113001" configfile="/Adendo-Curso-Spring-JSF/WebContent/WEB-INF/faces-config-nav.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" id="pf12540759627865" outlinks="pf12540759627866" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="Pages/lista" id="pf12540759627867" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf12540759627866" path="/Pages/lista-cao-pego.jsp"/>
+  <links id="pf12540759627866" target="pf12540759627867" source="pf12540759627865" outcome="sucesso" redirect="true"/>
+</pageflow:Pageflow>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/org.codehaus.janino/janino/2.7.5/bea838734aeae6e66523a7dc4eaa212c7a72da9f/janino-2.7.5.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/org.codehaus.janino/janino/2.7.5/9a9a6a4dc73c068cc4cb3000cc864c2e9fa79ca7/janino-2.7.5-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/org.codehaus.janino/commons-compiler/2.7.5/86b12400e53d73446b11eec7fbde4f099adc3057/commons-compiler-2.7.5.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/org.codehaus.janino/commons-compiler/2.7.5/db7712cb1abd3df1f11d780a3b631188edce288a/commons-compiler-2.7.5-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

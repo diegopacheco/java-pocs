@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+}
+
+task execute(type:JavaExec) {
+
+   // 1 - works
+   jvmArgs = ["-Dprop.my.value=Gradlew"]
+   
+   // 2 - other this works as well
+   // ./gradlew -PmainClass=com.github.diegopacheco.sandbox.java.gradle.sys.args.MainApp execute -Dprop.my.value=Gradlew2
+   //systemProperties = System.properties
+   
+   main = mainClass
+   classpath = sourceSets.main.runtimeClasspath
+}

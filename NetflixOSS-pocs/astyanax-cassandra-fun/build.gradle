@@ -1,0 +1,26 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8 
+
+sourceSets {
+    main.java.srcDirs = ["src/main/java"]
+}
+
+repositories {
+	mavenLocal() 
+    mavenCentral()
+    maven {
+       url "https://oss.sonatype.org/content/groups/public/"
+    } 
+}
+
+dependencies {
+	compile([
+		'com.netflix.astyanax:astyanax-core:2.0.2',
+		'com.netflix.astyanax:astyanax-cassandra:2.0.2',
+		'com.netflix.astyanax:astyanax-queue:2.0.2',
+		'com.netflix.astyanax:astyanax-thrift:2.0.2',
+		'org.slf4j:slf4j-log4j12:1.6.4'
+	])
+}

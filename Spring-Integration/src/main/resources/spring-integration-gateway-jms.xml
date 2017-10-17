@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:jms="http://www.springframework.org/schema/integration/jms"
+	xmlns:file="http://www.springframework.org/schema/integration/file"
+	xmlns:stream="http://www.springframework.org/schema/integration/stream"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/integration
+			http://www.springframework.org/schema/integration/spring-integration-1.0.xsd
+			http://www.springframework.org/schema/integration/jms
+			http://www.springframework.org/schema/integration/jms/spring-integration-jms-1.0.xsd
+			http://www.springframework.org/schema/integration/stream
+			http://www.springframework.org/schema/integration/stream/spring-integration-stream-1.0.xsd
+			http://www.springframework.org/schema/integration/file
+			http://www.springframework.org/schema/integration/file/spring-integration-file-1.0.xsd"
+>
+	
+	<!-- Spring Regular Beans -->
+	
+	<beans:bean id="twitterServiceEndpoint" 
+		  		class="com.ilegra.training.spring.integration.jms.TwitterService" 
+	/>
+	
+	
+	<!-- Inbound Gateway  -->
+
+	<channel id="twitterChannelIn"/>
+	
+	<jms:inbound-gateway 
+		request-destination="requestQueue"
+	    request-channel="twitterChannelIn"
+	    default-reply-destination="responseQueue"
+	/>
+
+	<service-activator input-channel="twitterChannelIn" ref="twitterServiceEndpoint" output-channel="twitterChannelOut" />
+	
+	<channel id="twitterChannelOut"/>
+	
+	<!-- file outbound-channel -->
+	
+	<file:outbound-channel-adapter  
+		channel="twitterChannelOut"
+		directory="file:C:/tmp/spring-integration/output-jms"								   
+		auto-create-directory="true"
+	/>
+			
+</beans:beans>

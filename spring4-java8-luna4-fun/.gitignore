@@ -1,0 +1,8 @@
+*target*
+*.jar
+*.war
+*.ear
+*.class
+*.jar
+target/
+project/target

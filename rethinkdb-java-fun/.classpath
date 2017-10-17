@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.rethinkdb/rethink-java-driver/0.3/8bc373a1d139621ff777d766b868af39f2607571/rethink-java-driver-0.3-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.rethinkdb/rethink-java-driver/0.3/7192f88464fda0176e62643795321e47647c5875/rethink-java-driver-0.3.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/com/google/protobuf/protobuf-java/2.5.0/protobuf-java-2.5.0.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/com/google/guava/guava/17.0/guava-17.0.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.0.9/e898ae326277ae2fe7316935583d3f8c5df7aa9b/logback-classic-1.0.9-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.0.9/258c3d8f956e7c8723f13fdea6b81e3d74201f68/logback-classic-1.0.9.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.0.9/4511629c49389adc6192811b987b6e6b1b3189eb/logback-core-1.0.9-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.0.9/41916886a1df068ad1dfea9bcc649a7b8ea4553e/logback-core-1.0.9.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/slf4j/slf4j-api/1.7.2/slf4j-api-1.7.2.jar" exported="true"/>
+</classpath>

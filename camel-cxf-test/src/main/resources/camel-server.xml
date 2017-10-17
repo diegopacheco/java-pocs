@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+
+    <import resource="classpath:camel-cxf.xml"/>
+
+    <bean id="report" class="org.apache.camel.example.server.IncidentBean"/>
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <route>
+            <from uri="cxf:bean:reportIncidentEndpoint"/>
+            <!-- simulate a little CPU processing -->
+            <delay><constant>1</constant></delay>
+            <to uri="jms:queue/drugs" />          
+        </route>
+        <route>
+            <from uri="jms:queue/drugs" />
+            <to uri="bean:report"/>                     
+        </route>        
+    </camelContext>
+	
+	<bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
+		<property name="connectionFactory">
+			<bean class="org.apache.activemq.ActiveMQConnectionFactory">
+				<property name="brokerURL" value="tcp://4Winds:61616" />
+			</bean>
+		</property>
+	</bean>
+	
+</beans>

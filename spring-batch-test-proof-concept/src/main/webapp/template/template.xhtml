@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link id="linkcss" href="#{request.contextPath}/css/default.css" rel="stylesheet" type="text/css" />
+		<script>
+		if (navigator.appName.indexOf("Microsoft")!= -1) {
+			document.getElementById('linkcss').href = '#{request.contextPath}/css/default.css';
+		} else {
+			document.getElementById('linkcss').href = '#{request.contextPath}/css/defaultBrowsers.css';
+		}
+		</script>
+		
+		<title>Qualicorp</title>		
+	</head>
+	<body>
+		<rich:jQuery selector=":input[class*=cpf]"
+			query="mask('999.999.999-99')" timing="onload" />
+		<rich:jQuery selector=":input[class*=telefone]"
+			query="mask('9999-9999')" timing="onload" />
+		<rich:jQuery selector=":input[class*=cep]" query="mask('99999-999')"
+			timing="onload" />
+		<rich:jQuery selector=":input[class*=ddd]"
+			query="mask('99', {	completed:function(){jQuery(this).next().focus();}})"
+			timing="onload" />
+		<rich:jQuery selector=":input[class*=somenteNumeros]" query="numeric()"
+			timing="onload" />
+		<rich:jQuery selector=":input[class*=valorMonetario]"
+			query="maskMoney({symbol:'R$',decimal:',',thousands:'.'})"
+			timing="onload" />
+			
+		<a4j:form>
+		<h:graphicImage value="/imgs/qualicorp_topo.png" style="border:0" />
+			<rich:toolBar contentClass="rich-toolbar" styleClass="rich-toolbar" width="980px">
+				<rich:dropDownMenu contentClass="rich-dropDownMenu" styleClass="rich-dropDownMenu">
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:outputText value="Retorno Bancário" />
+						</h:panelGroup>
+					</f:facet>
+
+					<rich:menuItem styleClass="rich-menuItem"
+						action="#{retornoBancarioBean.relatorioAnaliticoPagosBaixados}"
+						value="Relatório Analítico de Pagos e Baixados" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{retornoBancarioBean.relatorioAnaliticoPagosNaoBaixados}"
+						value="Relatorio Analítico de Pagos e Não Baixados" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{retornoBancarioBean.relatorioOcorrenciasBaixas}"
+						value="Relatório de Ocorrência de Baixas Bancárias" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{retornoBancarioBean.relatorioSinteticoRecebimentoContaCorrente}"
+						value="Relatório Sintético de Recebimento por ContaCorrente" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{retornoBancarioBean.relatorioOcorrenciasMovimentacao}"
+						value="Relatório de Ocorrência de Movimentação" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{retornoBancarioBean.relatorioOcorrenciasAtendimento}"
+						value="Relatório de Ocorrência de Atendimento" />
+				</rich:dropDownMenu>
+
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:outputText value="Pós-Faturamento" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{posFaturamentoBean.relatorioAgendamentoTerminados}"
+						value="Relatório de Agendamento Terminados" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{posFaturamentoBean.relatorioPrevFaturasFaturados}"
+						value="Relatório de Faturados" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{posFaturamentoBean.relatorioFaturadosCobrados}"
+						value="Relatório de Faturados e Cobrados" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{posFaturamentoBean.relatorioPedidosAdesaoAtivosSemCobranca}"
+						value="Relatório de Pedido Adesão de Ativos sem Cobrança" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{posFaturamentoBean.relatorioFaturasSemCobranca}"
+						value="Relatório de Faturas sem Cobrança" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem" 
+						action="#{posFaturamentoBean.relatorioLotes}"
+						value="Relatório de Lotes" />
+				</rich:dropDownMenu>
+
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:outputText value="Contas a Receber" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem" 
+						action="#{contasReceberBean.relFinanceiroAnalitico}"
+						value="Relatório Financeiro Analítico" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem" 
+						action="#{contasReceberBean.relFinanceiroSintetico}"
+						value="Relatório Financeiro Sintético" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem" 
+						action="#{contasReceberBean.relAcordoCobrancas}"
+						value="Relatório Acordo de Cobranças" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{contasReceberBean.relFechamentoCaixa}"
+						value="Relatório Fechamento de Caixa" />
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{contasReceberBean.relTitularesAdimplentes}"
+						value="Relatório de Titulares Adimplentes" />
+				</rich:dropDownMenu>
+
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:outputText value="Pedido de Adesão" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem" 
+						action="#{pedidoAdesaoBean.relPedidoAdesao}"
+						value="Relatório Pedido de Adesão" />
+				</rich:dropDownMenu>
+
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:outputText value="Movimentação" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{movimentacaoBean.relMovimentacao}"
+						value="Relatório de Movimentação" />
+				</rich:dropDownMenu>
+
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:outputText value="Central de Atendimento" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem contentClass="rich-menuItem" styleClass="rich-menuItem"
+						action="#{centralAtendimentoBean.relCentralAtendimento}"
+						value="Relatório Central de Atendimento" />
+				</rich:dropDownMenu>
+
+			</rich:toolBar>
+		</a4j:form>
+			
+		<a4j:outputPanel ajaxRendered="true" id="mainOutputPanel">
+			<ui:insert name="body"/>
+		</a4j:outputPanel>
+		<div>
+		<ui:insert name="footer" />
+		
+		<div id="rodape" >
+			<a href="#{request.contextPath}/notasVersao.txt" >v0.0.13</a>
+		</div>
+		
+		
+		</div>
+	</body>
+</html>

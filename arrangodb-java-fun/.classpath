@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.arangodb/arangodb-java-driver/2.7.0/e440c38514cc9b744b47becbe9b822714d1a9ca1/arangodb-java-driver-2.7.0-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.arangodb/arangodb-java-driver/2.7.0/d08fe6b93bf2f3355662916d4d862947665167e2/arangodb-java-driver-2.7.0.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/563dcb685903c96ce8abbd03adf7fa49e19aa8b4/gson-2.3.1-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.4.1/30cb4791019c7280227e027b01814f4964a02482/httpclient-4.4.1-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.4.1/16d0bc512222f1253ee6b64d389c84e22f697f0/httpclient-4.4.1.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.1/9700be0d0a331691654a8e901943c9a74e33c5fc/httpcore-4.4.1-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.1/f5aa318bda4c6c8d688c9d00b90681dcd82ce636/httpcore-4.4.1.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/commons-codec/commons-codec/1.9/commons-codec-1.9.jar" exported="true"/>
+</classpath>

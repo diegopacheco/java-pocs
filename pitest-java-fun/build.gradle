@@ -1,0 +1,50 @@
+apply plugin: "eclipse"
+apply plugin: "java"
+apply plugin: "info.solidsoft.pitest"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets {
+    main.java.srcDirs = ["src/main/java"]
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.10'
+    }
+}
+
+repositories {
+	maven { url 'http://repo.spring.io/libs-milestone' }
+	maven { url 'http://repo.spring.io/libs-release' }
+  mavenCentral()
+  maven {
+     url "https://oss.sonatype.org/content/groups/public/"
+  }
+  mavenLocal()
+}
+
+dependencies {
+	compile([
+            'junit:junit-dep:4.10'
+         ])
+}
+
+eclipse {
+    classpath {
+       downloadSources=true
+    }
+}
+
+build.dependsOn "pitest"
+
+pitest {
+    targetClasses = ['com.github.diegopacheco.*']  //by default "${project.group}.*"
+    pitestVersion = "1.1.0" //not needed when a default PIT version should be used
+    threads = 4
+    outputFormats = ['XML', 'HTML']
+}

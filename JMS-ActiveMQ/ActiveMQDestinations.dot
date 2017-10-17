@@ -1,0 +1,56 @@
+digraph "ActiveMQ Destinations" {
+
+node [style = "rounded,filled", fontname="Helvetica-Oblique"];
+
+topic_root [fillcolor = deepskyblue, label = "Topics" ];
+queue_root [fillcolor = deepskyblue, label = "Queues" ];
+
+subgraph queues {
+  node [fillcolor=red];     
+  label = "Queues"
+
+  queue_Root -> queue_Root_selectorPriorizationQueue;
+  queue_Root -> queue_Root_queueSelectorLondon;
+  queue_Root -> queue_Root_queueBlobLondon;
+  queue_Root -> queue_Root_queueLondon;
+}
+
+subgraph topics {
+  node [fillcolor=green];     
+  label = "Topics"
+
+  topic_Root -> topic_Root_londonTopic;
+  topic_Root -> topic_Root_ActiveMQ;
+  topic_Root_ActiveMQ -> topic_Root_ActiveMQ_Advisory;
+  topic_Root_ActiveMQ_Advisory -> topic_Root_ActiveMQ_Advisory_Consumer;
+  topic_Root_ActiveMQ_Advisory_Consumer -> topic_Root_ActiveMQ_Advisory_Consumer_Queue;
+  topic_Root_ActiveMQ_Advisory_Consumer_Queue -> topic_Root_ActiveMQ_Advisory_Consumer_Queue_queueBlobLondon;
+  topic_Root_ActiveMQ_Advisory -> topic_Root_ActiveMQ_Advisory_Topic;
+  topic_Root_ActiveMQ_Advisory -> topic_Root_ActiveMQ_Advisory_Producer;
+  topic_Root_ActiveMQ_Advisory_Producer -> topic_Root_ActiveMQ_Advisory_Producer_Queue;
+  topic_Root_ActiveMQ_Advisory_Producer_Queue -> topic_Root_ActiveMQ_Advisory_Producer_Queue_queueBlobLondon;
+  topic_Root_ActiveMQ_Advisory -> topic_Root_ActiveMQ_Advisory_Queue;
+  topic_Root_ActiveMQ_Advisory -> topic_Root_ActiveMQ_Advisory_Connection;
+}
+
+  queue_Root[ label = "Queues" ];
+  queue_Root_selectorPriorizationQueue[ label = "selectorPriorizationQueue" ];
+  queue_Root_queueSelectorLondon[ label = "queueSelectorLondon" ];
+  queue_Root_queueBlobLondon[ label = "queueBlobLondon" ];
+  queue_Root_queueLondon[ label = "queueLondon" ];
+
+  topic_Root[ label = "Topics" ];
+  topic_Root_londonTopic[ label = "londonTopic" ];
+  topic_Root_ActiveMQ[ label = "ActiveMQ" ];
+  topic_Root_ActiveMQ_Advisory[ label = "Advisory" ];
+  topic_Root_ActiveMQ_Advisory_Consumer[ label = "Consumer" ];
+  topic_Root_ActiveMQ_Advisory_Consumer_Queue[ label = "Queue" ];
+  topic_Root_ActiveMQ_Advisory_Consumer_Queue_queueBlobLondon[ label = "queueBlobLondon" ];
+  topic_Root_ActiveMQ_Advisory_Topic[ label = "Topic" ];
+  topic_Root_ActiveMQ_Advisory_Producer[ label = "Producer" ];
+  topic_Root_ActiveMQ_Advisory_Producer_Queue[ label = "Queue" ];
+  topic_Root_ActiveMQ_Advisory_Producer_Queue_queueBlobLondon[ label = "queueBlobLondon" ];
+  topic_Root_ActiveMQ_Advisory_Queue[ label = "Queue" ];
+  topic_Root_ActiveMQ_Advisory_Connection[ label = "Connection" ];
+
+}

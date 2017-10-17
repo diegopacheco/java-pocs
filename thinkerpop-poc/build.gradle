@@ -1,0 +1,26 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8 
+
+sourceSets {
+    main.java.srcDirs = ["src/main/java"]
+}
+
+repositories {
+	maven { url 'http://repo.spring.io/libs-milestone' }
+	maven { url 'http://repo.spring.io/libs-release' }
+	mavenLocal() 
+    mavenCentral()
+    maven {
+       url "https://oss.sonatype.org/content/groups/public/"
+    } 
+}
+
+dependencies {
+	compile([ 
+	          'org.apache.tinkerpop:gremlin-core:3.2.1',
+			  'org.apache.tinkerpop:tinkergraph-gremlin:3.2.1',
+			  'junit:junit-dep:4.10'
+	 	    ])
+}

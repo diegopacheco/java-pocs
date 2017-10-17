@@ -1,0 +1,33 @@
+apply plugin: 'java'
+apply plugin: 'scala'
+
+sourceSets {
+    main {
+        scala {
+            srcDirs = ['src/main/java','src/main/scala']
+        }
+    }
+    test {
+        scala {
+            srcDirs = ['test/main/java','test/main/scala']
+        }
+    }
+}
+
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8 
+
+repositories {
+	mavenLocal() 
+    mavenCentral()
+    maven {
+       url "https://oss.sonatype.org/content/groups/public/"
+    } 
+}
+
+dependencies {
+	compile(['org.scala-lang:scala-library:2.11.5',
+			  'com.netflix.rxjava:rxjava-scala:0.20.4',
+			  'com.netflix.rxjava:rxjava-apache-http:0.20.4'
+			  ])
+}

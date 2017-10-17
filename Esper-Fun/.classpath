@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.espertech/esper/5.3.0/97c56f40e4c73c26e84db6da846360bb54af2f37/esper-5.3.0.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/com.espertech/esper/5.3.0/e2f45aeb91a9439ce6883168d3d09ade951543c/esper-5.3.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/5af35056b4d257e4b64b9e8069c0746e8b08629f/log4j-1.2.17.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/677abe279b68c5e7490d6d50c6951376238d7d3e/log4j-1.2.17-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.3/f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f/commons-logging-1.1.3.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.3/28bb0405fddaf04f15058fbfbe01fe2780d7d3b6/commons-logging-1.1.3-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4-runtime/4.1/3f42a2396857e4b7d088a63ec265fd7817b14d7a/antlr4-runtime-4.1.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/org.antlr/antlr4-runtime/4.1/ffd5a61e58d0d93e759568ff2f058d4594026bc6/antlr4-runtime-4.1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/cglib/cglib-nodep/3.1/aa83efbd1aedc4f26bdf00e7ea78191483f2c9b3/cglib-nodep-3.1.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/cglib/cglib-nodep/3.1/e651cbd93cb1c2155afdea6675c50e567f7ce91e/cglib-nodep-3.1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/org.abego.treelayout/org.abego.treelayout.core/1.0.1/e31e79cba7a5414cf18fa69f3f0a2cf9ee997b61/org.abego.treelayout.core-1.0.1.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/org.abego.treelayout/org.abego.treelayout.core/1.0.1/6e1dd6f6efdb453c7b8ba35726c63fbf50cd7142/org.abego.treelayout.core-1.0.1-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

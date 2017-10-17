@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest" failures="0" tests="4" time="0.874" errors="0">
+  <properties/>
+  <testcase name="testExceptionDivisao" time="0.034" classname="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest"/>
+  <testcase name="setup" time="0.0010" classname="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest"/>
+  <testcase name="testCalculoDivisao" time="0.0060" classname="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest"/>
+  <testcase name="testInjecaoSpring" time="0.012" classname="com.blogspot.diegopacheco.springframework25.testng.CalculadoraTest"/>
+</testsuite>

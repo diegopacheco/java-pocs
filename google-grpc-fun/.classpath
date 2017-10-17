@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java">
+		<attributes>
+			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="build/generated/source/proto/main/grpc"/>
+	<classpathentry kind="src" path="build/generated/source/proto/main/java"/>
+	<classpathentry kind="src" path="src/main/resources">
+		<attributes>
+			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-netty/0.15.0/d759340d9ddd8b08eab9314022cde4a075d8d843/grpc-netty-0.15.0.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-netty/0.15.0/25bed85e6069a0703c27c4c6be9e0cbfafa2358e/grpc-netty-0.15.0-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf/0.15.0/2b76d45c6a721b08a0ca58b3904f7a9010a217a1/grpc-protobuf-0.15.0.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf/0.15.0/4dfcee2c4fbb43a3f254189c74da7a64ccc54b98/grpc-protobuf-0.15.0-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-stub/0.15.0/333da5bdf154b80f1fe2bc34b14d4836de16cc63/grpc-stub-0.15.0.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-stub/0.15.0/a4d2400a6070f9b76993805609f8cd882f49066e/grpc-stub-0.15.0-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-http2/4.1.1.Final/fc4baf0e7285b622162885d3724c1d419cb42ddd/netty-codec-http2-4.1.1.Final.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-http2/4.1.1.Final/1f417494a45d0be4161c9fec86d8de0baa45e959/netty-codec-http2-4.1.1.Final-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/0.15.0/1bb8d29217e87324eddc97c478cb26486bb022d5/grpc-core-0.15.0.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-core/0.15.0/c63b00f19f0105c6b5210a7c09a83396a28e189c/grpc-core-0.15.0-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.0.0-beta-3/ed8c2f9a63cfa770292f8173fd0172bdaa014fe3/protobuf-java-3.0.0-beta-3.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/19.0/6ce200f6b23222af3d8abb6b6459e6c44f4bb0e9/guava-19.0.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/19.0/91a4d115400e904f22b03a78deb355e9ea803cd4/guava-19.0-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf-lite/0.15.0/2a762e567f881e4d4db0310770830e0a675bc0eb/grpc-protobuf-lite-0.15.0.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.grpc/grpc-protobuf-lite/0.15.0/78cd5f20a5786b94054acb47ba6db1f88a03e18a/grpc-protobuf-lite-0.15.0-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java-util/3.0.0-beta-3/5c39485775c197fc1938e594dc358bfec1c188a0/protobuf-java-util-3.0.0-beta-3.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-http/4.1.1.Final/f224d753c5f4dbf7c2a69d3e1e453d7ef562ad0/netty-codec-http-4.1.1.Final.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-http/4.1.1.Final/43b525eb4bd2f57ad26f499239fe372931f69473/netty-codec-http-4.1.1.Final-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-handler/4.1.1.Final/e63c889c4401ebe9dad042990ee1aa8bc4799cee/netty-handler-4.1.1.Final.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-handler/4.1.1.Final/a18a34c64167d2c240706338059b13e1d1e77c78/netty-handler-4.1.1.Final-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/936f4430478909ed7b138d42f9ad73c919a87b26/jsr305-3.0.0-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3/5fc52c41ef0239d1093a1eb7c3697036183677ce/gson-2.3.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3/21e31b9298ed677b17fcac6dd0eb0a82ec35adc2/gson-2.3-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec/4.1.1.Final/dad7f30d68a0ff53412397c6c6053e251f8e78a6/netty-codec-4.1.1.Final.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec/4.1.1.Final/749c30fa424a51b288dc0de7206097ee2552fdd9/netty-codec-4.1.1.Final-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-buffer/4.1.1.Final/1a04a8250c4e8780d79fdd2d0f4e74e00a9b8042/netty-buffer-4.1.1.Final.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-buffer/4.1.1.Final/2c38105857d7e4a537c50c9facf15243ae2e371c/netty-buffer-4.1.1.Final-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport/4.1.1.Final/1bfc5b0e863966d164e3f96317d7e67de5dff2b0/netty-transport-4.1.1.Final.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport/4.1.1.Final/56e0730bd5aed710a89771cc8159d2064b86fc8f/netty-transport-4.1.1.Final-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-common/4.1.1.Final/c2d41a3420357bf4d81da4980dc1973c66e5bab6/netty-common-4.1.1.Final.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-common/4.1.1.Final/9978df28609eaf6871283e1061fe2330ecc35e0c/netty-common-4.1.1.Final-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-resolver/4.1.1.Final/8495cc4a14a4b25e5442004aabaa20101b7aeba7/netty-resolver-4.1.1.Final.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-resolver/4.1.1.Final/1e0e0908cb2d212aeb80eb22e42fb5c7bede5eec/netty-resolver-4.1.1.Final-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

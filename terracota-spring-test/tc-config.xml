@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:tc-config xmlns:con="http://www.terracotta.org/config">
+  <servers>
+    <server host="%i" name="localhost">
+      <dso-port>9510</dso-port>
+      <jmx-port>9520</jmx-port>
+      <data>terracotta/server-data</data>
+      <logs>terracotta/server-logs</logs>
+      <statistics>terracotta/cluster-statistics</statistics>
+    </server>
+  </servers>
+  <clients>
+    <logs>terracotta/client-logs</logs>
+  </clients>
+  <application>
+    <dso>
+      <instrumented-classes>
+        <include>
+          <class-expression>com.blogspot.diegopacheco.terracota.pojo.Alunos</class-expression>           
+        </include>
+		<include>
+          <class-expression>com.blogspot.diegopacheco.terracota.pojo.Pessoa</class-expression>           
+        </include>        
+      </instrumented-classes>
+      <roots>
+        <root>
+          <field-name>com.blogspot.diegopacheco.terracota.pojo.Alunos.pessoas</field-name>
+        </root>
+      </roots>
+      <locks>
+        <autolock auto-synchronized="false">
+          <method-expression>void com.blogspot.diegopacheco.terracota.pojo.Alunos.adicionarAlunos(com.blogspot.diegopacheco.terracota.pojo.Pessoa)</method-expression>
+          <lock-level>write</lock-level>
+        </autolock>
+        <autolock auto-synchronized="false">
+          <method-expression>* com.blogspot.diegopacheco.terracota.pojo.Alunos.*(..)</method-expression>
+          <lock-level>write</lock-level>
+        </autolock>
+      </locks>
+    </dso>
+  </application>
+</con:tc-config>

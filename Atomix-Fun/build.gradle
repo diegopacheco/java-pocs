@@ -1,0 +1,19 @@
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	  mavenCentral()
+    maven {
+       url "https://oss.sonatype.org/content/groups/public/"
+    }
+		mavenLocal()
+}
+
+dependencies {
+	compile([
+            'io.atomix:atomix-all:1.0.0-rc9'
+        ])
+}

@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+version = '1.0'
+sourceCompatibility = 1.8
+
+mainClassName = 'com.github.diegopacheco.sandbox.java.rulebook.main.SimpleMain'
+
+repositories {
+  jcenter()
+}
+
+buildscript {
+  repositories {
+    mavenLocal()
+  }
+}
+
+eclipse {
+  classpath {
+    downloadSources = true
+  }
+}
+
+dependencies {
+  compile([
+     'com.deliveredtechnologies:rulebook-core:0.9'
+  ])
+}

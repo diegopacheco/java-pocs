@@ -1,0 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+version = '1.0'
+sourceCompatibility = 1.8
+
+mainClassName = 'com.github.diegopacheco.aws.xray.main.MainRunner'
+
+repositories {
+  jcenter()
+}
+
+buildscript {
+  repositories {
+    mavenLocal()
+  }
+}
+
+eclipse {
+  classpath {
+    downloadSources = true
+  }
+}
+
+dependencies {
+  compile([
+    'com.amazonaws:aws-java-sdk-xray:1.11.133',
+    'com.amazonaws:aws-xray-recorder-sdk-core:1.1.2',
+    'com.amazonaws:aws-xray-recorder-sdk-aws-sdk-instrumentor:1.1.2',
+    'com.amazonaws:aws-xray-recorder-sdk-apache-http:1.1.2',
+	'javax.servlet:javax.servlet-api:3.1.0'
+  ])
+}

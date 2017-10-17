@@ -1,0 +1,21 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8 
+
+repositories {
+    maven { url 'http://repo.spring.io/libs-release' }
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/groups/public/" } 
+    mavenLocal() 
+}
+
+dependencies {
+	compile([ 
+		   'io.netty:netty-all:4.1.11.Final',
+	])
+	 	    
+	testCompile([
+			'junit:junit:4.12'
+        ])
+}

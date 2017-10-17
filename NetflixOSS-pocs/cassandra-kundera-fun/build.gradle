@@ -1,0 +1,28 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/repositories/releases"
+    }
+    maven {
+        url "http://kundera.googlecode.com/svn/maven2/maven-missing-resources"
+    }
+    maven {
+        url "http://mvn.riptano.com/content/repositories/public"
+    }
+    maven{
+       url "https://github.com/s7/mvnrepo/raw/master"	
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'com.impetus.kundera.core',   name: 'kundera-core', version: '2.16'
+    compile group: 'com.impetus.kundera.client', name: 'kundera-cassandra', version: '2.16'
+    compile group: 'com.impetus.kundera.client', name: 'kundera-cassandra-pelops', version: '2.16'
+    compile group: 'com.impetus.kundera.core',   name: 'fallback-impl', version: '2.16'
+}

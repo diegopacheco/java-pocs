@@ -1,0 +1,61 @@
+apply plugin: "eclipse"
+apply plugin: "java"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets {
+    main.java.srcDirs = ["src/main/java"]
+}
+
+configurations {
+    javaAgent
+}
+
+repositories {
+	maven { url 'http://repo.spring.io/libs-milestone' }
+	maven { url 'http://repo.spring.io/libs-release' }
+  mavenCentral()
+  maven {
+     url "https://oss.sonatype.org/content/groups/public/"
+  }
+  mavenLocal()
+}
+
+dependencies {
+	compile([
+	        'com.linecorp.armeria:armeria:0.24.1.Final',
+	        'ch.qos.logback:logback-classic:1.1.7',
+	        'org.slf4j:log4j-over-slf4j:1.7.21',
+            'junit:junit-dep:4.10'
+         ])
+    
+    [ "core", "jasper", "el" ].each { module ->
+       runtime group: 'org.apache.tomcat.embed', name: "tomcat-embed-$module", version: '8.5.4'
+    }      
+         
+   javaAgent group: 'org.mortbay.jetty.alpn', name: 'jetty-alpn-agent', version: '2.0.4'
+}
+
+eclipse {
+    classpath {
+       downloadSources=true
+    }
+}
+
+// Copy the JVM agent that enables TLS ALPN extension to the build directory.
+task copyJavaAgents(type: Copy) {
+    from configurations.javaAgent
+    into "$buildDir/javaAgents"
+    rename { String fileName ->
+        fileName.replaceFirst("-[0-9]+.[0-9]+.[0-9]+.[^.]+.jar", ".jar")
+    }
+}
+
+// Load the JVM agent that enables TLS ALPN extension for all Java executions.
+tasks.withType(JavaForkOptions) {
+    dependsOn 'copyJavaAgents'
+    // If using spring-boot plugin, you can use the 'agent' property:
+    // See: http://jdpgrailsdev.github.io/blog/2014/04/08/spring_boot_gradle_newrelic.html
+    jvmArgs "-javaagent:$buildDir/javaAgents/jetty-alpn-agent.jar"
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry path="src/main/java" kind="src">
+		<attributes>
+			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry path="src/main/resources" kind="src">
+		<attributes>
+			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry path="bin" kind="output"/>
+	<classpathentry path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/" kind="con"/>
+	<classpathentry path="/home/diego/.gradle/caches/modules-2/files-2.1/org.littleshoot/littleproxy/1.1.0/d2a43ea6d520fd541823e016c477f2b1490a40c1/littleproxy-1.1.0.jar" kind="lib" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/org.littleshoot/littleproxy/1.1.0/35c8bcdc99cb633b56b6e47d132894e20d0c6198/littleproxy-1.1.0-sources.jar"/>
+	<classpathentry path="/home/diego/.m2/repository/com/google/guava/guava/18.0/guava-18.0.jar" kind="lib"/>
+	<classpathentry path="/home/diego/.m2/repository/commons-cli/commons-cli/1.3.1/commons-cli-1.3.1.jar" kind="lib"/>
+	<classpathentry path="/home/diego/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.10/4b95f4897fa13f2cd904aee711aeafc0c5295cd8/commons-codec-1.10.jar" kind="lib" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.10/11fb3d88ae7e3b757d70237064210ceb954a5a04/commons-codec-1.10-sources.jar"/>
+	<classpathentry path="/home/diego/.m2/repository/commons-io/commons-io/2.4/commons-io-2.4.jar" kind="lib"/>
+	<classpathentry path="/home/diego/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.4/5fe28b9518e58819180a43a850fbc0dd24b7c050/commons-lang3-3.4.jar" kind="lib" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.4/b49dafc9cfef24c356827f322e773e7c26725dd2/commons-lang3-3.4-sources.jar"/>
+	<classpathentry path="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-all/4.0.36.Final/ad89ee6584a9ea41152fae012e18e7fa818eab73/netty-all-4.0.36.Final.jar" kind="lib" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/io.netty/netty-all/4.0.36.Final/5e69627eef99ce1b91678178db8083c263f296c2/netty-all-4.0.36.Final-sources.jar"/>
+	<classpathentry path="/home/diego/.gradle/caches/modules-2/files-2.1/com.barchart.udt/barchart-udt-bundle/2.3.0/3d1a29b2b08d20533ad08918411528dd1880515e/barchart-udt-bundle-2.3.0.jar" kind="lib" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/com.barchart.udt/barchart-udt-bundle/2.3.0/dbb3b69c400494d28555f6c9c343c873cbe3a4bb/barchart-udt-bundle-2.3.0-sources.jar"/>
+	<classpathentry path="/home/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.21/139535a69a4239db087de9bab0bee568bf8e0b70/slf4j-api-1.7.21.jar" kind="lib" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.21/f285ac123f201fb4b028bac556928d7cf527ef48/slf4j-api-1.7.21-sources.jar"/>
+</classpath>

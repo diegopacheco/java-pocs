@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.blogspot.diegopacheco.spring.batch</groupId>
+	<artifactId>spring-batch-tests</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>spring-batch-tests</name>
+	<description>spring-batch-tests</description>
+
+	<dependencies>
+
+		<!-- Spring Batch Dependencies -->
+		<dependency>
+			<groupId>org.springframework.batch</groupId>
+			<artifactId>org.springframework.batch.core</artifactId>
+			<version>2.0.4.RELEASE</version>
+		</dependency>
+		<!--
+			Repositórios do maven aqui:
+			http://static.springsource.org/spring-batch/downloads.html
+		-->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc5</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+
+	</dependencies>
+
+</project>

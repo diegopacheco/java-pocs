@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+version = '1.0'
+sourceCompatibility = 1.8
+
+mainClassName = 'com.github.diegopacheco.sandbox.java.ignite.MainIgnite'
+
+repositories {
+  jcenter()
+}
+
+buildscript {
+  repositories {
+    mavenLocal()
+  }
+}
+
+eclipse {
+  classpath {
+    downloadSources = true
+  }
+}
+
+dependencies {
+  compile([
+     'org.apache.ignite:ignite-core:2.0.0',
+     'org.apache.ignite:ignite-spring:2.0.0',
+     'org.apache.ignite:ignite-indexing:2.0.0'
+  ])
+}

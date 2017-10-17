@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.rabbitmq/amqp-client/3.6.0/83461c277dd71efbb82d9e8dd442612a76584645/amqp-client-3.6.0-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/com.rabbitmq/amqp-client/3.6.0/f1af4405e2fe1f1817006b06bcf6bb992c9b1999/amqp-client-3.6.0.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/1.2/8d9e9793b17242dd19b7e54abea4518a26a09d0e/commons-io-1.2-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/1.2/ad6ae511ca4608a18317fcb19850fd113bb2ae8/commons-io-1.2.jar" exported="true"/>
+	<classpathentry kind="lib" path="C:/Users/diego/.m2/repository/commons-cli/commons-cli/1.1/commons-cli-1.1.jar" exported="true"/>
+</classpath>

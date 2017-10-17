@@ -1,0 +1,31 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+version = '1.0'
+sourceCompatibility = 1.8
+
+mainClassName = 'com.github.diegopacheco.sandbox.java.eclipse.collections.EclipseCollectionsMain'
+
+repositories {
+  jcenter()
+}
+
+buildscript {
+  repositories {
+    mavenLocal()
+  }
+}
+
+eclipse {
+  classpath {
+    downloadSources = true
+  }
+}
+
+dependencies {
+  compile([
+     'org.eclipse.collections:eclipse-collections-api:8.2.0',
+     'org.eclipse.collections:eclipse-collections:8.2.0',
+  ])
+}

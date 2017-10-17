@@ -1,0 +1,19 @@
+<configuration xmlns="urn:hornetq"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="urn:hornetq /schema/hornetq-configuration.xsd">
+
+   <connectors>
+      <connector name="netty-connector">
+         <factory-class>org.hornetq.integration.transports.netty.NettyConnectorFactory</factory-class>
+      </connector>
+   </connectors>
+
+   <acceptors>
+      <acceptor name="netty-acceptor">
+         <factory-class>org.hornetq.integration.transports.netty.NettyAcceptorFactory</factory-class>
+      </acceptor>
+   </acceptors>
+
+   <security-enabled>false</security-enabled>
+
+</configuration>

@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8 
+
+mainClassName = "com.github.diegopacheco.sandbox.java.sockets.MainApp"
+applicationDefaultJvmArgs = [
+  "-Djava.net.preferIPv4Stack=true",
+  "-Djava.net.preferIPv6Addresses=false",
+  "-server",
+  "-Xmx2048m",
+  "-Xms128m" 
+]
+
+repositories {
+   maven { url 'http://repo.spring.io/libs-milestone' }
+   maven { url 'http://repo.spring.io/libs-release' }
+   mavenCentral()
+   maven { url "https://oss.sonatype.org/content/groups/public/" } 
+   mavenLocal()
+}
+
+buildscript {
+	repositories {
+		jcenter()
+		mavenLocal()
+	}
+}
+
+dependencies {
+	compile([ 
+	])
+}

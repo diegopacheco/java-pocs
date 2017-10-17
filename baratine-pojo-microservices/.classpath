@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry sourcepath="C:/Users/diego/.gradle/caches/modules-2/files-2.1/io.baratine/baratine/0.10.2/fa5b22dc8bd936a01b5981e32703ab72625a5f5/baratine-0.10.2-sources.jar" kind="lib" path="C:/Users/diego/.gradle/caches/modules-2/files-2.1/io.baratine/baratine/0.10.2/f31b5903ac669962f7c7a9f12606e4bfe1501c12/baratine-0.10.2.jar" exported="true"/>
+</classpath>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd       
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd"
+>
+	
+	<camelContext xmlns="http://camel.apache.org/schema/spring" >
+		<route>
+			<from uri="file://src/test/resources/data?delete=true"/>
+    		<to uri="hornetq:queue:topic_hornetq"/>
+		</route>
+		<route>
+			<from uri="hornetq:queue:topic_hornetq"/>
+    		<to uri="bean:beanConsumer"/>
+		</route>
+	</camelContext>
+	
+	<bean id="beanConsumer" class="com.blogspot.diegopacheco.camel.bean.BeanConsumer" />
+	
+	<bean id="hornetq" class="com.blogspot.diegopacheco.camel.hornetq.component.HornetQComponent" >
+		<property name="useNettyDefaults" value="true" />
+	</bean>
+	
+	<!--                                        -->
+	<!-- Usage with Customization of Transport  -->
+	<!-- 
+	<bean id="hornetq" class="com.blogspot.diegopacheco.camel.hornetq.component.HornetQComponent">		
+		<property name="connectionFactory">
+			<bean class="com.blogspot.diegopacheco.camel.hornetq.component.HornetQCamelConnectionFactory">
+				<property name="transportConfiguration">
+					<bean class="org.hornetq.api.core.TransportConfiguration" >
+						<constructor-arg index="0">
+							<value>org.hornetq.integration.transports.netty.NettyConnectorFactory</value>
+						</constructor-arg>
+					</bean>
+				</property>
+			</bean>
+		</property>		
+	</bean>
+	-->
+	
+</beans>

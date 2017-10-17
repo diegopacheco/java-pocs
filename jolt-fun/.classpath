@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry path="bin" kind="output"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
+	<classpathentry sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/com.bazaarvoice.jolt/jolt-core/0.1.0/43628af48e15a41d5810e42624c9627e269604f0/jolt-core-0.1.0-sources.jar" kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.bazaarvoice.jolt/jolt-core/0.1.0/df0dac4c9f2479e10e25bb8750c23531c80eee4b/jolt-core-0.1.0.jar"/>
+	<classpathentry sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/com.bazaarvoice.jolt/json-utils/0.1.0/352f2d4314c7f235187f946af28d496cfbc4acde/json-utils-0.1.0-sources.jar" kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.bazaarvoice.jolt/json-utils/0.1.0/6c3b831f0d08775d8610b14f8c8ebaae88e3cd4/json-utils-0.1.0.jar"/>
+	<classpathentry sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/a00123f261762a7c5e0ec916a2c7c8298d29c400/javax.inject-1-sources.jar" kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"/>
+	<classpathentry sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.5.0/113ec2d99085d9582885cc9c8f21a36cdd717f9e/jackson-databind-2.5.0-sources.jar" kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.5.0/489b7552dd3322b63f694122d16ce62c21c303b5/jackson-databind-2.5.0.jar"/>
+	<classpathentry sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.5.0/faf825edd353f3d6e8ec8189cb2148dd2af6a899/jackson-core-2.5.0-sources.jar" kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.5.0/b2ece1bd57ac7b4c315b7505b65ac79cb1da4270/jackson-core-2.5.0.jar"/>
+	<classpathentry sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.5.0/88b177349b719fe0636b50889687b9ed036bfd89/jackson-annotations-2.5.0-sources.jar" kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.5.0/a2a55a3375bc1cef830ca426d68d2ea22961190e/jackson-annotations-2.5.0.jar"/>
+</classpath>

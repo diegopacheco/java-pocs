@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="4Winds" name="com.github.diegopacheco.sandbox.java.buildr.java.test.HelloTest" tests="1" time="0.182" timestamp="2011-11-14T02:30:53">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_29\jre\bin" />
+    <property name="java.vm.version" value="20.4-b02" />
+    <property name="ant.version" value="Apache Ant version 1.8.0 compiled on February 1 2010" />
+    <property name="ant.java.version" value="1.6" />
+    <property name="java.vm.vendor" value="Sun Microsystems Inc." />
+    <property name="java.vendor.url" value="http://java.sun.com/" />
+    <property name="path.separator" value=";" />
+    <property name="java.vm.name" value="Java HotSpot(TM) Client VM" />
+    <property name="file.encoding.pkg" value="sun.io" />
+    <property name="user.country" value="BR" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="sun.os.patch.level" value="" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="user.dir" value="C:\tmp\buildr" />
+    <property name="java.runtime.version" value="1.6.0_29-b11" />
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment" />
+    <property name="basedir" value="C:\tmp\buildr" />
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_29\jre\lib\endorsed" />
+    <property name="os.arch" value="x86" />
+    <property name="ant.project.default-target" value="" />
+    <property name="java.io.tmpdir" value="C:\Users\DIEGOP~1\AppData\Local\Temp\" />
+    <property name="ant.core.lib" value="C:\Users\Diego Pacheco\.m2\repository\org\apache\ant\ant\1.8.0\ant-1.8.0.jar" />
+    <property name="line.separator" value="
+" />
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc." />
+    <property name="user.variant" value="" />
+    <property name="os.name" value="Windows 7" />
+    <property name="ant.project.name" value="junit" />
+    <property name="sun.jnu.encoding" value="Cp1252" />
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.6.0_29\jre\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Haskell\bin;D:\Diego\Java\bin\Haskell-Platform\2011.2.0.1\lib\extralibs\bin;D:\Diego\Java\bin\Haskell-Platform\2011.2.0.1\bin;C:\Program Files\CollabNet\Subversion Client;D:\Diego\Java\bin\Python26;C:\Perl\site\bin;C:\Perl\bin;C:\Program Files\Java\jdk1.6.0_29\\bin;D:\Diego\Java\bin\apache-maven-3.0.3\bin;D:\Diego\Java\bin\groovy-1.8.4\bin;D:\Diego\Java\bin\apache-ant-1.7.1\bin;D:\Diego\Java\bin\scala\bin;D:\Diego\Java\bin\scala\lib;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\GtkSharp\2.12\bin;C:\Program Files\Microsoft SQL Server\90\Tools\binn\;C:\Program Files\GnuWin32\bin;C:\Program Files\Graphviz2.26.3\bin;D:\Diego\Java\bin\ruby187\bin;D:\Diego\Java\bin\jruby-1.6.5\bin;D:\Diego\Java\bin\grails-1.3.5\bin;D:\Diego\Java\bin\jython2.5.2\bin;D:\Diego\Java\bin\PHP;C:\Program Files\MySQL\MySQL Server 5.1\bin;D:\Diego\Java\bin\PHP\ext;C:\MinGW\bin;C:\msysgit\msysgit\bin;D:\Diego\Java\bin\BeanShell;D:\Diego\Java\bin\jruby-1.6.5/bin;C:\Program Files\erl5.7.3\\bin;D:\Diego\Java\bin\appengine-java-sdk-1.3.8\bin;C:\Program Files\TortoiseGit\bin;C:\cygwin\;D:\Diego\Java\bin\clojure-1.3.0;D:\Diego\Java\bin\Python26\Scripts;C:\Program Files\QuickTime\QTSystem\;C:\Program Files\Vim\vim72\;C:\Program Files\TortoiseSVN\bin;D:\Diego\Java\bin\nodejs;D:\Diego\Java\bin\akka\bin;D:\Diego\Java\bin\apache-apollo-1.0-beta5\bin;C:\Users\Diego Pacheco\AppData\Roaming\cabal\bin;." />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="java.class.version" value="50.0" />
+    <property name="sun.management.compiler" value="HotSpot Client Compiler" />
+    <property name="os.version" value="6.1" />
+    <property name="user.home" value="C:\Users\Diego Pacheco" />
+    <property name="user.timezone" value="" />
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob" />
+    <property name="java.specification.version" value="1.6" />
+    <property name="file.encoding" value="Cp1252" />
+    <property name="java.class.path" value="C:\Users\Diego Pacheco\.m2\repository\junit\junit\4.9\junit-4.9.jar;C:\tmp\buildr\target\test\classes;C:\tmp\buildr\target\classes;C:\Users\Diego Pacheco\.m2\repository\commons-cli\commons-cli\1.2\commons-cli-1.2.jar;C:\Users\Diego Pacheco\.m2\repository\junit\junit\4.8.2\junit-4.8.2.jar;C:\Users\Diego Pacheco\.m2\repository\org\jmock\jmock\2.5.1\jmock-2.5.1.jar;C:\Users\Diego Pacheco\.m2\repository\org\jmock\jmock-junit4\2.5.1\jmock-junit4-2.5.1.jar;C:\Users\Diego Pacheco\.m2\repository\org\hamcrest\hamcrest-core\1.1\hamcrest-core-1.1.jar;C:\Users\Diego Pacheco\.m2\repository\org\hamcrest\hamcrest-library\1.1\hamcrest-library-1.1.jar;C:\tmp\buildr;D:\Diego\Java\bin\scala\lib;C:\Users\Diego Pacheco\.m2\repository\org\apache\ant\ant-launcher\1.8.0\ant-launcher-1.8.0.jar;C:\Users\Diego Pacheco\.m2\repository\org\apache\ant\ant\1.8.0\ant-1.8.0.jar;C:\Users\Diego Pacheco\.m2\repository\org\apache\ant\ant-junit\1.8.0\ant-junit-1.8.0.jar" />
+    <property name="user.name" value="Diego Pacheco" />
+    <property name="java.vm.specification.version" value="1.0" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner com.github.diegopacheco.sandbox.java.buildr.java.test.HelloTest filtertrace=true haltOnError=false haltOnFailure=false showoutput=false outputtoformatters=true logfailedtests=true logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.PlainJUnitResultFormatter,C:\tmp\buildr\reports\junit\TEST-com.github.diegopacheco.sandbox.java.buildr.java.test.HelloTest.txt formatter=org.apache.tools.ant.taskdefs.optional.junit.PlainJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\tmp\buildr\reports\junit\TEST-com.github.diegopacheco.sandbox.java.buildr.java.test.HelloTest.xml crashfile=C:\tmp\buildr\junitvmwatcher1776288100800924555.properties propsfile=C:\tmp\buildr\junit2170076802894329628.properties" />
+    <property name="sun.arch.data.model" value="32" />
+    <property name="java.home" value="C:\Program Files\Java\jdk1.6.0_29\jre" />
+    <property name="java.specification.vendor" value="Sun Microsystems Inc." />
+    <property name="user.language" value="pt" />
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
+    <property name="java.vm.info" value="mixed mode, sharing" />
+    <property name="java.version" value="1.6.0_29" />
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.6.0_29\jre\lib\ext;C:\Windows\Sun\Java\lib\ext" />
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.6.0_29\jre\lib\resources.jar;C:\Program Files\Java\jdk1.6.0_29\jre\lib\rt.jar;C:\Program Files\Java\jdk1.6.0_29\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.6.0_29\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.6.0_29\jre\lib\jce.jar;C:\Program Files\Java\jdk1.6.0_29\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.6.0_29\jre\lib\modules\jdk.boot.jar;C:\Program Files\Java\jdk1.6.0_29\jre\classes" />
+    <property name="java.vendor" value="Sun Microsystems Inc." />
+    <property name="file.separator" value="\" />
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi" />
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="baseDir" value="C:/tmp/buildr/target/test/classes" />
+    <property name="sun.desktop" value="windows" />
+    <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86" />
+  </properties>
+  <testcase classname="com.github.diegopacheco.sandbox.java.buildr.java.test.HelloTest" name="testSayHello" time="0.0080" />
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
