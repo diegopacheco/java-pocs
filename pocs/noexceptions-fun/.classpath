@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/com.machinezoo.noexception/noexception/1.2.0/ee99a0286f7f32233de8158846ecaca7b5bdba8d/noexception-1.2.0.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/com.machinezoo.noexception/noexception/1.2.0/9d5b76a92d923fe72f6fa5fa4d165c7aab2956cf/noexception-1.2.0-sources.jar"/>
+	<classpathentry kind="lib" path="/home/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.25/da76ca59f6a57ee3102f8f9bd9cee742973efa8a/slf4j-api-1.7.25.jar" sourcepath="/home/diego/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.25/962153db4a9ea71b79d047dfd1b2a0d80d8f4739/slf4j-api-1.7.25-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
