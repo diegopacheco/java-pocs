@@ -30,8 +30,14 @@ public class DNSResolver {
 	
 	public static void main(String[] args) {
 		
-		String ip = DNSResolver.resolve("gooogle.com");
-		System.out.format("Google IP %s ",ip);
+		System.out.println("Resolve... ");
+		String ipx = DNSResolver.resolve("gooogle.com");
+		System.out.format("Google IP %s ",ipx).println();;
+		
+		System.out.println("ResolveList... ");
+		List<String> ips = DNSResolver.resolveList("google.com");
+		for(String ip : ips)
+			System.out.format("Google IP %s ",ip).println();;
 		
 	}
 	
