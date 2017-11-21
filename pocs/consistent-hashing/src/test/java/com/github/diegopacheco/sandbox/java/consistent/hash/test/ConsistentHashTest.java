@@ -39,19 +39,19 @@ public class ConsistentHashTest {
 		Assert.assertNotNull(hf);
 		
 		Integer hash  = hf.hash("100");
-		Integer  slot = hash % 4;
+		Integer  slot = hash % 3;
 		System.out.printf("Key %d % d \n", hash,slot);
 		
 		hash  = hf.hash("100");
-		slot = hash % 4;
+		slot = hash % 3;
 		System.out.printf("Key %d % d \n", hash,slot);
 		
 		hash  = hf.hash("5000");
-		slot = hash % 4;
+		slot = hash % 3;
 		System.out.printf("Key %d % d \n", hash,slot);
 		
-		hash  = hf.hash("923320");
-		slot = hash % 4;
+		hash  = hf.hash("0");
+		slot = hash % 3;
 		System.out.printf("Key %d % d \n", hash,slot);
 				
 	}
