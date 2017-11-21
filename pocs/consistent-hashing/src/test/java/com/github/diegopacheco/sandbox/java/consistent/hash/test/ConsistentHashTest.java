@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.github.diegopacheco.sandbox.java.consistent.hash.ConsistentHash;
+import com.github.diegopacheco.sandbox.java.consistent.hash.HashFunction;
 import com.github.diegopacheco.sandbox.java.consistent.hash.SimpleHashFunction;
 
 public class ConsistentHashTest {
@@ -30,6 +31,29 @@ public class ConsistentHashTest {
 		
 		result = cs.get("1");
 		System.out.println("key: 1 = " + result);
+	}
+	
+	@Test
+	public void simpleConsistentHashingShardingTest(){
+		HashFunction hf = new SimpleHashFunction();
+		Assert.assertNotNull(hf);
+		
+		Integer hash  = hf.hash("100");
+		Integer  slot = hash % 4;
+		System.out.printf("Key %d % d \n", hash,slot);
+		
+		hash  = hf.hash("100");
+		slot = hash % 4;
+		System.out.printf("Key %d % d \n", hash,slot);
+		
+		hash  = hf.hash("5000");
+		slot = hash % 4;
+		System.out.printf("Key %d % d \n", hash,slot);
+		
+		hash  = hf.hash("923320");
+		slot = hash % 4;
+		System.out.printf("Key %d % d \n", hash,slot);
+				
 	}
 	
 }
