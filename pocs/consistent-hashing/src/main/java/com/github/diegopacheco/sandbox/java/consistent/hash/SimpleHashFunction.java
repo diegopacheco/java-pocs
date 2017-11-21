@@ -4,11 +4,14 @@ public class SimpleHashFunction implements HashFunction {
 
 	@Override
 	public Integer hash(Object key) {
-		int hash = 7;
+		Integer hash = key.toString().hashCode();
 		for (int i = 0; i < key.toString().length(); i++) {
 		    hash = hash*31 + key.toString().charAt(i);
 		}
-		return hash;
+		if (hash<0)
+			return hash * -1;
+		else
+			return hash;
 	}
 
 }

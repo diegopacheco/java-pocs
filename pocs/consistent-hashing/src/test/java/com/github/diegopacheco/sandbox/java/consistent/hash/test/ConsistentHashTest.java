@@ -17,14 +17,19 @@ public class ConsistentHashTest {
 		Assert.assertNotNull(cs);
 		
 		String result = cs.get("node10");
-		System.out.println(result);
+		System.out.println("Key node10 == " + result);
 		
 		result = cs.get("node20");
-		System.out.println(result);
+		System.out.println("key node20 == " + result);
 		
 		result = cs.get("node30");
-		System.out.println(result);
+		System.out.println("Key node30 == " + result);
 		
+		result = cs.get("100");
+		System.out.println("key 100 = " + result);
+		
+		result = cs.get("1");
+		System.out.println("key: 1 = " + result);
 	}
 	
 }
