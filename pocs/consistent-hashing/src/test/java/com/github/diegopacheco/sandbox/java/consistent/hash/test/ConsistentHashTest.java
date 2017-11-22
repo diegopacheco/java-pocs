@@ -56,4 +56,12 @@ public class ConsistentHashTest {
 				
 	}
 	
+	@Test
+	public void generateAllShardsKeyTest(){
+		ConsistentHash<String> cs = new ConsistentHash<>(new SimpleHashFunction(), 1, Arrays.asList(new String[]{"node1","node2","node3"}));
+		System.out.println("SHARD key-1:" +  cs.get("key-0") );
+		System.out.println("SHARD key-2:" +  cs.get("key-51000") );
+		System.out.println("SHARD key-3:" +  cs.get("key-9") );
+	}
+	
 }
