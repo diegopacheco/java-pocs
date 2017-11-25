@@ -18,7 +18,7 @@ public class JobMain {
 		String url  = System.getProperty("jenkins_url", "http://localhost:8080/jenkins");
 		String user = System.getProperty("jenkins_user", "");
 		String pass = System.getProperty("jenkins_pass", "");
-		log.info("Using args: URL [%s] USER [%s] PASS [%s]", url,user,pass);
+		log.info("Using args: URL [{}] USER [{}] PASS [{}]", url,user,pass);
 		
 		JenkinsServer jenkins = new JenkinsServer(new URI(url), user, pass);
 		Map<String, Job> jobs = jenkins.getJobs();
