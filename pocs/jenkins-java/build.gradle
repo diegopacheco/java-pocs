@@ -23,3 +23,6 @@ dependencies {
 
 }
 
+run {    
+   systemProperties System.getProperties()
+}
