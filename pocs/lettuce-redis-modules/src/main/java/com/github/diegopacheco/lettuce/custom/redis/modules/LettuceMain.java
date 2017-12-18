@@ -6,12 +6,12 @@ import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.async.RedisStringAsyncCommands;
 import io.lettuce.core.api.sync.RedisCommands;
 import io.lettuce.core.dynamic.Commands;
-import io.lettuce.core.dynamic.domain.Timeout;
+import io.lettuce.core.dynamic.RedisCommandFactory;
 
 public class LettuceMain {
 
 	public interface AsyncGetCommands extends Commands {
-		RedisFuture<String> get(String key, Timeout timeout);
+		RedisFuture<String> get(String key);
 	}
 
 	public static void main(String[] args) throws Throwable {
@@ -25,8 +25,13 @@ public class LettuceMain {
 		System.out.println(syncCommands.get("key"));
 
 		RedisFuture<String> get = async.get("key");
-		System.out.println("Async get: " + async.get("key").get());
-
+		System.out.println("Async get: " + get.get());
+		
+		RedisCommandFactory cmdFactory = new RedisCommandFactory(connection);
+		AsyncGetCommands agCmd = cmdFactory.getCommands(AsyncGetCommands.class);
+		RedisFuture<String>  aResult = agCmd.get("key");
+		System.out.println("Custom Command: " + aResult.get());
+		
 		connection.close();
 		redisClient.shutdown();
 
