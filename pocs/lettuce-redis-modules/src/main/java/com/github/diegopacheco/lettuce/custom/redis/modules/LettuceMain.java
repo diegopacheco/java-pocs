@@ -12,10 +12,8 @@ import io.lettuce.core.dynamic.annotation.Command;
 public class LettuceMain {
 
 	public interface AsyncGetCommands extends Commands {
-		
 		@Command("GET")
 		RedisFuture<String> get(String key);
-		
 	}
 
 	public static void main(String[] args) throws Throwable {
@@ -35,6 +33,11 @@ public class LettuceMain {
 		AsyncGetCommands agCmd = cmdFactory.getCommands(AsyncGetCommands.class);
 		RedisFuture<String>  aResult = agCmd.get("key");
 		System.out.println("Custom Command: " + aResult.get());
+		
+		// 		@CommandNaming(strategy = Strategy.DOT)
+		//	     String dpDate();
+		//String sResult = agCmd.dpDate();
+		//System.out.println("Real Custom Command[dp.DATE]: " + sResult);
 		
 		connection.close();
 		redisClient.shutdown();
