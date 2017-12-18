@@ -7,11 +7,15 @@ import io.lettuce.core.api.async.RedisStringAsyncCommands;
 import io.lettuce.core.api.sync.RedisCommands;
 import io.lettuce.core.dynamic.Commands;
 import io.lettuce.core.dynamic.RedisCommandFactory;
+import io.lettuce.core.dynamic.annotation.Command;
 
 public class LettuceMain {
 
 	public interface AsyncGetCommands extends Commands {
+		
+		@Command("GET")
 		RedisFuture<String> get(String key);
+		
 	}
 
 	public static void main(String[] args) throws Throwable {
