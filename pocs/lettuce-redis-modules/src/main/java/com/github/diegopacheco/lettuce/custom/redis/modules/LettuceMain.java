@@ -34,11 +34,6 @@ public class LettuceMain {
 		RedisFuture<String>  aResult = agCmd.get("key");
 		System.out.println("Custom Command: " + aResult.get());
 		
-		// 		@CommandNaming(strategy = Strategy.DOT)
-		//	     String dpDate();
-		//String sResult = agCmd.dpDate();
-		//System.out.println("Real Custom Command[dp.DATE]: " + sResult);
-		
 		connection.close();
 		redisClient.shutdown();
 
