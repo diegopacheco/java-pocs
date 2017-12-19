@@ -13,7 +13,7 @@ import io.lettuce.core.masterslave.StatefulRedisMasterSlaveConnection;
 public class EvalMain {
 	public static void main(String[] args) throws Throwable{
 		
-RedisClient redisClient = RedisClient.create();
+		RedisClient redisClient = RedisClient.create();
 		
 		StatefulRedisMasterSlaveConnection<String, String> connection = MasterSlave.connect(redisClient, new Utf8StringCodec(),RedisURI.create("redis://localhost"));
 		connection.setReadFrom(ReadFrom.MASTER_PREFERRED);
