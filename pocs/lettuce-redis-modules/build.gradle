@@ -14,7 +14,11 @@ repositories {
 dependencies {
   compile 'org.slf4j:slf4j-api:1.7.25'
   compile 'org.slf4j:slf4j-jdk14:1.7.25'
-  compile group: 'io.lettuce', name: 'lettuce-core', version: '5.0.1.RELEASE'
+  
+    
+  compile 'io.lettuce:lettuce-core:5.1.0.BUILD-SNAPSHOT'
+  //compile group: 'io.lettuce', name: 'lettuce-core', version: '5.0.1.RELEASE'
+  //compile group: 'biz.paluch.redis', name: 'lettuce', version: '4.4.2.Final'
   
   testCompile([
       'junit:junit:4.12'
