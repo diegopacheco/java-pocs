@@ -1,0 +1,35 @@
+apply plugin: 'application'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = 'com.github.diegopacheco.sandbox.java.Main'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/groups/public/' }
+}
+
+dependencies {
+  compile 'org.slf4j:slf4j-api:1.7.25'
+  compile 'org.slf4j:slf4j-jdk14:1.7.25'
+  
+  compile group: 'org.apache.opennlp', name: 'opennlp-tools', version: '1.8.3'
+  compile group: 'org.apache.opennlp', name: 'opennlp-uima', version: '1.8.3'
+  compile group: 'org.apache.opennlp', name: 'opennlp-morfologik-addon', version: '1.8.3'
+  compile group: 'org.apache.opennlp', name: 'opennlp-brat-annotator', version: '1.8.3'
+  compile group: 'org.apache.opennlp', name: 'opennlp', version: '1.8.3', ext: 'pom'
+  
+  compile group: 'org.apache.opennlp', name: 'opennlp-maxent', version: '3.0.3'
+  	  
+  testCompile([
+      'junit:junit:4.12'
+  ])		
+}
+
+run {    
+  systemProperties System.getProperties()
+}
+
+
