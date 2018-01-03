@@ -1,3 +1,3 @@
 ## java-pocs
 
-Java Simple Pocs
+POCS
