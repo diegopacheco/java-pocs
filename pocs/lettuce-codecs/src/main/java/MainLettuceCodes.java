@@ -23,6 +23,10 @@ public class MainLettuceCodes {
     return ByteBuffer.wrap(data).getLong();
   }
   
+  public static byte[] newEncodingMethod(String str) {
+  	return str.getBytes();
+  }
+  
 	public static void main(String[] args) throws Throwable{
 		
 		RedisCodec<byte[],byte[]> codec = new ByteArrayCodec();
@@ -30,7 +34,12 @@ public class MainLettuceCodes {
 		RedisClient client = RedisClient.create("redis://localhost:8102");
 		RedisAsyncConnection<byte[], byte[]> connection = client.connectAsync(codec);
 		
-		RedisFuture<Boolean> cmd = connection.hset(encodeStr("myhash1"), encodeStr("age"),encodeLong(33L));
+		// works
+		RedisFuture<Boolean> cmd = connection.hset(newEncodingMethod("myhash1"), newEncodingMethod("age"),newEncodingMethod(new String("33")));
+
+		// dont work
+		//RedisFuture<Boolean> cmd = connection.hset(encodeStr("myhash1"), encodeStr("age"),encodeLong(33L));
+		
 		System.out.println("result: " + cmd.get());
 		
 	}
