@@ -45,6 +45,12 @@ public class MainLettuceCodes {
     }
     return result;
 	}
+	
+	public static void printByteArray(byte[] byteArray) {
+		for(int i=0; i<byteArray.length;i++) {
+			System.out.print(byteArray[i] + " ");
+		}; System.out.println("");
+	}
 
 	public static void main(String[] args) throws Throwable {
 
@@ -59,8 +65,10 @@ public class MainLettuceCodes {
 		// dont work
 		RedisFuture<Boolean> cmd = connection.hset(encodeStr("myhash1"), encodeStr("age"), encodeLong(33L));
 		byte[] result = connection.hget(encodeStr("myhash1"), encodeStr("age")).get();
-		System.out.println("Result get bytes from redis: " + result);
+		System.out.print("Result get byteArray from redis: " + result + " bytes: ");
+		printByteArray(result);
 		System.out.println("Result get long  from redis: " + decodeLong(result));
+		
 		
 		// another try - dont work
 		//RedisFuture<Boolean> cmd = connection.hset(encodeStr("myhash1"), encodeStr("age"), longToBytes(33L));
