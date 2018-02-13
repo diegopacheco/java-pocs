@@ -50,19 +50,22 @@ public class MainLettuceCodes {
 
 		RedisCodec<byte[], byte[]> codec = new ByteArrayCodec();
 
-		RedisClient client = RedisClient.create("redis://localhost:8102");
+		RedisClient client = RedisClient.create("redis://localhost:6379");
 		RedisAsyncConnection<byte[], byte[]> connection = client.connectAsync(codec);
 
 		// works
-		RedisFuture<Boolean> cmd = connection.hset(newEncodingMethod("myhash1"),newEncodingMethod("age"),newEncodingMethod(new String("33")));
+		//RedisFuture<Boolean> cmd = connection.hset(newEncodingMethod("myhash1"),newEncodingMethod("age"),newEncodingMethod(new String("33")));
 
 		// dont work
-		//RedisFuture<Boolean> cmd = connection.hset(encodeStr("myhash1"), encodeStr("age"), encodeLong(33L));
+		RedisFuture<Boolean> cmd = connection.hset(encodeStr("myhash1"), encodeStr("age"), encodeLong(33L));
+		byte[] result = connection.hget(encodeStr("myhash1"), encodeStr("age")).get();
+		System.out.println("Result get bytes from redis: " + result);
+		System.out.println("Result get long  from redis: " + decodeLong(result));
 		
 		// another try - dont work
 		//RedisFuture<Boolean> cmd = connection.hset(encodeStr("myhash1"), encodeStr("age"), longToBytes(33L));
 
-		System.out.println("result: " + cmd.get());
+		System.out.println("was inserted: " + cmd.get());
 
 	}
 }
