@@ -18,11 +18,10 @@ public class MainLettuceCodes {
 		RedisAsyncConnection<byte[], byte[]> connection = client.connectAsync(codec);
 
 		// works
-		RedisFuture<Boolean> cmd = connection.hset(newEncodingMethod("myhash2"), newEncodingMethod("age"),
-		    newEncodingMethod(new String("33")));
+		RedisFuture<Boolean> cmd = connection.hset(newEncodingMethod("myhash2"), newEncodingMethod("age"),newEncodingMethod(new String("3")));
 
 		// dont work
-		cmd = connection.hset(encodeStr("myhash1"), encodeStr("age"), encodeLong(33L));
+		cmd = connection.hset(encodeStr("myhash1"), encodeStr("age"), encodeLong(3L));
 		byte[] result = connection.hget(encodeStr("myhash1"), encodeStr("age")).get();
 		System.out.print("Result get byteArray from redis: " + result + " bytes: ");
 		printByteArray(result);

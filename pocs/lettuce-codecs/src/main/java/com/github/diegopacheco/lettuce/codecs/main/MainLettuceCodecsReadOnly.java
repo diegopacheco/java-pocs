@@ -30,5 +30,10 @@ public class MainLettuceCodecsReadOnly {
 		printByteArray(result);
 		System.out.println("[myhash2] => Result get long  from redis: " + CodecUtils.decodeStr(ByteBuffer.wrap(result)));
 		
+		result = connection.hget(encodeStr("myhash3"), encodeStr("age")).get();
+		System.out.print("[myhash3] => Result get byteArray from redis: " + result + " bytes: ");
+		printByteArray(result);
+		System.out.println("[myhash3] => Result get long  from redis: " + CodecUtils.decodeStr(ByteBuffer.wrap(result)));
+		
 	}
 }
