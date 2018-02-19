@@ -4,7 +4,7 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-mainClassName = 'MainLettuceCodes'
+mainClassName = 'com.github.diegopacheco.lettuce.codecs.main.MainLettuceCodes'
 
 repositories {
     mavenCentral()
