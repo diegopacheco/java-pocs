@@ -26,7 +26,7 @@ public class MainLettuceCodesWirteAppend {
 	    public final byte[] bytes;
 		
 	    private HP() {
-	        bytes = "HP.HAPPEND".getBytes(LettuceCharsets.UTF8);
+	        bytes = "HP.HAPPEND".getBytes(LettuceCharsets.ASCII);
 	    }
 	    @Override
 	    public byte[] getBytes() {
