@@ -1,9 +1,7 @@
 package com.github.diegopacheco.lettuce.codecs.main;
 
 import static com.github.diegopacheco.lettuce.codecs.CodecUtils.decodeLong;
-import static com.github.diegopacheco.lettuce.codecs.CodecUtils.encodeLong;
 import static com.github.diegopacheco.lettuce.codecs.CodecUtils.encodeStr;
-import static com.github.diegopacheco.lettuce.codecs.CodecUtils.newEncodingMethod;
 import static com.github.diegopacheco.lettuce.codecs.CodecUtils.printByteArray;
 
 import java.nio.ByteBuffer;
@@ -16,7 +14,6 @@ import com.lambdaworks.redis.codec.ByteArrayCodec;
 import com.lambdaworks.redis.codec.RedisCodec;
 import com.lambdaworks.redis.output.StatusOutput;
 import com.lambdaworks.redis.protocol.CommandArgs;
-import com.lambdaworks.redis.protocol.LettuceCharsets;
 import com.lambdaworks.redis.protocol.ProtocolKeyword;
 
 public class MainLettuceCodesWirteAppend {
@@ -43,7 +40,7 @@ public class MainLettuceCodesWirteAppend {
 		RedisAsyncConnection<byte[], byte[]> connection = client.connectAsync(codec);
 		
 		RedisFuture<String> cmdAppend = connection.dispatch(HP.APPEND,new StatusOutput<>(codec),new CommandArgs<>(codec).add("myhash1").add("age").add(3L));
-		System.out.println("string [myhash1] HP.APPEND " + cmdAppend.get());
+		System.out.println("binary [myhash1] HP.APPEND " + cmdAppend.get());
 		
 		RedisFuture<String> cmdAppend2 = connection.dispatch(HP.APPEND,new StatusOutput<>(codec),new CommandArgs<>(codec).add("myhash2").add("age").add(3L));
 		System.out.println("string [myhash2] HP.APPEND " + cmdAppend2.get());
