@@ -21,7 +21,10 @@ public class BenchmarkRunner {
   public static void main(String[] args) throws Exception {
     Options opt = new OptionsBuilder()
         .include(".*" + BenchmarkRunner.class.getSimpleName() + ".*")
+        .include(".*" + StateBenchmark.class.getSimpleName()  + ".*")
+        .warmupIterations(1)
         .forks(1)
+        .threads(2)
         .build();
     new Runner(opt).run();
   }
