@@ -1,0 +1,32 @@
+plugins {
+  id "me.champeau.gradle.jmh" version "0.4.3"
+}
+
+apply plugin: 'application'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = 'com.github.diegopacheco.jmh.benchmark.java.BenchmarkRunner'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/groups/public/' }
+}
+
+dependencies {
+  compile 'org.slf4j:slf4j-api:1.7.25'
+  compile 'org.slf4j:slf4j-jdk14:1.7.25'
+
+  compile group: 'org.openjdk.jmh', name: 'jmh-core', version: '1.19'
+  compile group: 'org.openjdk.jmh', name: 'jmh-generator-annprocess', version: '1.19'
+  
+  testCompile([
+      'junit:junit:4.12'
+  ])		
+}
+
+run {    
+  systemProperties System.getProperties()
+}
