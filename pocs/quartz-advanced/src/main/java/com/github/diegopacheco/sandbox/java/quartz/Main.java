@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.quartz.JobDetail;
+import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerFactory;
 import org.quartz.Trigger;
@@ -46,7 +47,7 @@ public class Main {
 		Trigger trigger1 = newTrigger()
 		    .withIdentity("P1")
 		    .startAt(startTime)
-		    .withSchedule(simpleSchedule().withRepeatCount(1).withIntervalInSeconds(5))
+		    .withSchedule(simpleSchedule().withRepeatCount(1).withIntervalInSeconds(5).repeatForever())
 		    .withPriority(1)
 		    .forJob(job1)
 		    .build();
@@ -54,7 +55,7 @@ public class Main {
 		Trigger trigger2 = newTrigger()
 		    .withIdentity("P5")
 		    .startAt(startTime)
-		    .withSchedule(simpleSchedule().withRepeatCount(1).withIntervalInSeconds(5))
+		    .withSchedule(simpleSchedule().withRepeatCount(1).withIntervalInSeconds(5).repeatForever())
 		    .withPriority(5)
 		    .forJob(job2)
 		    .build();
@@ -62,7 +63,7 @@ public class Main {
 		Trigger trigger3 = newTrigger()
 		    .withIdentity("P10")
 		    .startAt(startTime)
-		    .withSchedule(simpleSchedule().withRepeatCount(1).withIntervalInSeconds(5))
+		    .withSchedule(simpleSchedule().withRepeatCount(1).withIntervalInSeconds(5).repeatForever())
 		    .withPriority(10)
 		    .forJob(job3)
 		    .build();
@@ -80,6 +81,9 @@ public class Main {
 		sched.scheduleJob(job3,trigger3);
 		sched.scheduleJob(job4,trigger4);
 		sched.start();
+		
+		Thread.sleep(10000L);
+		sched.deleteJob(new JobKey("job3","group1"));
 		
 	}
 	
