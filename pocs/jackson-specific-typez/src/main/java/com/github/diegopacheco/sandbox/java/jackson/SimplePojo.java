@@ -1,6 +1,7 @@
 package com.github.diegopacheco.sandbox.java.jackson;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
@@ -10,8 +11,7 @@ public class SimplePojo {
 	
 	private String name;
 	private Integer age;
-	
-	private Map<String,String> family;
+	private Map<String,String> family = new ConcurrentHashMap<>();
 	
 	private SimplePojo() {}
 	

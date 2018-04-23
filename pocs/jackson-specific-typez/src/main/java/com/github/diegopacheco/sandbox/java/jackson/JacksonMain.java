@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
 
 public class JacksonMain {
 	public static void main(String[] args) throws Throwable {
@@ -18,6 +19,8 @@ public class JacksonMain {
 		s1.setFamily(family);
 		
 		ObjectMapper mapper = new ObjectMapper();
+		mapper.enableDefaultTyping(DefaultTyping.OBJECT_AND_NON_CONCRETE);
+		
 		String s1Json = mapper.writeValueAsString(s1);
 		System.out.println("Simple Pojo as String : \n " + s1);
 		System.out.println("Simple Pojo as Json   : \n " + s1Json);
