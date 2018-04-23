@@ -3,7 +3,6 @@ package com.github.diegopacheco.sandbox.java.jackson;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class SimplePojo {
 	
@@ -12,7 +11,6 @@ public class SimplePojo {
 	private String name;
 	private Integer age;
 	
-	@JsonDeserialize(keyUsing = MapDeserializer.class)
 	private Map<String,String> family;
 	
 	private SimplePojo() {}
