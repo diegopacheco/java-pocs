@@ -46,7 +46,7 @@ public class ConcurrentTTLMap<K,V> implements TTLMap<K,V>{
 	private final Map<K,TTLEntry> internalMap = new ConcurrentHashMap<K,TTLEntry>();
 	private BiConsumer<K, V> callback;
 	private long ttl = 5000;
-	private int checkerInterval = 1000;
+	private int checkerInterval = (int)ttl;
 	
 	public ConcurrentTTLMap(long ttl,int checkerInterval, BiConsumer<K, V> callback) {
 		super();
