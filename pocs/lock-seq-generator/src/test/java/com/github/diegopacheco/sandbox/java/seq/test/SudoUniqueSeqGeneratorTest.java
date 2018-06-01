@@ -20,25 +20,25 @@ public class SudoUniqueSeqGeneratorTest {
 	
 	@Test
 	public void a_1_SimpleNextSlotShouldBe5() {
-		SudoUniqueSeqGenerator.getInstance().nextSlot();
-		SudoUniqueSeqGenerator.getInstance().nextSlot();
-		SudoUniqueSeqGenerator.getInstance().nextSlot();
-		SudoUniqueSeqGenerator.getInstance().nextSlot();
-		int next = SudoUniqueSeqGenerator.getInstance().nextSlot();
+		SudoUniqueSeqGenerator.getInstance().nextSlot("cluster1");
+		SudoUniqueSeqGenerator.getInstance().nextSlot("cluster1");
+		SudoUniqueSeqGenerator.getInstance().nextSlot("cluster1");
+		SudoUniqueSeqGenerator.getInstance().nextSlot("cluster1");
+		int next = SudoUniqueSeqGenerator.getInstance().nextSlot("cluster1");
 		assertTrue(4 == next);
 	}
 
 	@Test
 	public void a_2_SimpleNextSlot() {
-		int next = SudoUniqueSeqGenerator.getInstance().nextSlot();
-		assertTrue(5 == next);
+		int next = SudoUniqueSeqGenerator.getInstance().nextSlot("cluster2");
+		assertTrue(0 == next);
 	}
 	
 	private Runnable createRunnable() {
 		return new Runnable() {
 			@Override
 			public void run() {
-				int next = SudoUniqueSeqGenerator.getInstance().nextSlot();
+				int next = SudoUniqueSeqGenerator.getInstance().nextSlot("cluster3");
 				System.out.println(Thread.currentThread().getName() + " Got: " + next);
 				seqs.add(next);
 			}
@@ -53,8 +53,8 @@ public class SudoUniqueSeqGeneratorTest {
 			es.submit(createRunnable());
 		es.shutdown();
 		
-		int next = SudoUniqueSeqGenerator.getInstance().nextSlot();
-		assertTrue(16 == next);
+		int next = SudoUniqueSeqGenerator.getInstance().nextSlot("cluster3");
+		assertTrue(10 == next);
 		assertTrue(seqs.size()==10);
 	}
 
