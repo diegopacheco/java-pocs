@@ -12,10 +12,15 @@ public class CPUDevourerJob implements Job{
 		 int i = 0;
 		  while(true) {
 		  	 x += " ";
-		  	 if (i==100) {
+		  	 if (i==1000) {
 		  		 i = 0;
 		  		 x = "";
 		  		 if (x=="") x = "";
+		  		 try {
+						Thread.sleep(2000L);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 		  	 }
 		  	 i++;
 		  }
