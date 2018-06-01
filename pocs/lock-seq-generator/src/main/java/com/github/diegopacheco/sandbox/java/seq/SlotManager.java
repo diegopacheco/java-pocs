@@ -27,7 +27,21 @@ public class SlotManager {
 	}
 
 	public void registerCluster(String id, Integer totalSize) {
-		map.put(id, new ClusterTracker(id,totalSize));
+		lock.lock();
+		try {
+			
+			ClusterTracker ct = new ClusterTracker(id,totalSize);
+			AtomicInteger counter  = ct.getCounter();
+			for(int i=0; i<= totalSize-1; i++)
+				ct.getSlotsInUse().add(counter.incrementAndGet());
+				
+			map.put(id,ct);
+			
+		}catch(Exception e) {
+			throw new RuntimeException(e);
+		}finally {
+			lock.unlock();
+		}
 	}
 	
 	public int nextSlot(String id) {
@@ -39,16 +53,12 @@ public class SlotManager {
 				throw new RuntimeException("This cluster: " + id + " is not register - please register first! ");
 			}
 			
-			AtomicInteger counter = ct.getCounter();
-			if (counter.get() >= ct.getOriginalClusterSize()) {
-				counter.set(ct.getOriginalClusterSize());
+			Integer nextSlot = ct.getSlotsInUse().poll();
+			if (nextSlot==null) {
 				throw new IllegalStateException("You reach the maximuling number of SLOTS for the cluster: " + ct.getId() + " which is: " + ct.getOriginalClusterSize());
 			}
 			
-			int next = counter.incrementAndGet();
-			ct.getSlotsInUse().add(next);
-			
-			return next;			
+			return nextSlot;			
 		}catch(Exception e) {
 			if (!(e instanceof IllegalStateException))
 				throw new RuntimeException("Could not generate next slot sequence.");
