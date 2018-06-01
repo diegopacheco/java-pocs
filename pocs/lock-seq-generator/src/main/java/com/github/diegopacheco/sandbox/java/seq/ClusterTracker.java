@@ -1,14 +1,15 @@
 package com.github.diegopacheco.sandbox.java.seq;
 
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ClusterTracker {
 	
 	private String id;
 	private int originalClusterSize = 3;
+	private Queue<Integer> slotsInUse = new ConcurrentLinkedQueue<>();
 	private AtomicInteger counter = new AtomicInteger(-1);
-	
-	public ClusterTracker() {}
 	
 	public ClusterTracker(String id, int originalClusterSize) {
 		super();
@@ -43,6 +44,13 @@ public class ClusterTracker {
 		this.counter = counter;
 	}
 
+	public Queue<Integer> getSlotsInUse() {
+		return slotsInUse;
+	}
+	public void setSlotsInUse(Queue<Integer> slotsInUse) {
+		this.slotsInUse = slotsInUse;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -67,10 +75,10 @@ public class ClusterTracker {
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
-		return "ClusterTracker [id=" + id + ", originalClusterSize=" + originalClusterSize + ", counter=" + counter + "]";
+		return "ClusterTracker [id=" + id + ", originalClusterSize=" + originalClusterSize + ", slotsInUse=" + slotsInUse
+		    + ", counter=" + counter + "]";
 	}
 	
 }
