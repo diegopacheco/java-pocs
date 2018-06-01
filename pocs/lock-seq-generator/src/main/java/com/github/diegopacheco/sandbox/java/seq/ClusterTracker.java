@@ -9,6 +9,7 @@ public class ClusterTracker {
 	private String id;
 	private int originalClusterSize = 3;
 	private Queue<Integer> slotsInUse = new ConcurrentLinkedQueue<>();
+	private Queue<Integer> slotsAvaliable = new ConcurrentLinkedQueue<>();
 	private AtomicInteger counter = new AtomicInteger(-1);
 	
 	public ClusterTracker(String id, int originalClusterSize) {
@@ -51,6 +52,12 @@ public class ClusterTracker {
 		this.slotsInUse = slotsInUse;
 	}
 	
+	public Queue<Integer> getSlotsAvaliable() {
+		return slotsAvaliable;
+	}
+	public void setSlotsAvaliable(Queue<Integer> slotsAvaliable) {
+		this.slotsAvaliable = slotsAvaliable;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,10 +82,11 @@ public class ClusterTracker {
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		return "ClusterTracker [id=" + id + ", originalClusterSize=" + originalClusterSize + ", slotsInUse=" + slotsInUse
-		    + ", counter=" + counter + "]";
+		    + ", slotsAvaliable=" + slotsAvaliable + ", counter=" + counter + "]";
 	}
 	
 }

@@ -33,7 +33,7 @@ public class SlotManager {
 			ClusterTracker ct = new ClusterTracker(id,totalSize);
 			AtomicInteger counter  = ct.getCounter();
 			for(int i=0; i<= totalSize-1; i++)
-				ct.getSlotsInUse().add(counter.incrementAndGet());
+				ct.getSlotsAvaliable().add(counter.incrementAndGet());
 				
 			map.put(id,ct);
 			
@@ -53,10 +53,11 @@ public class SlotManager {
 				throw new RuntimeException("This cluster: " + id + " is not register - please register first! ");
 			}
 			
-			Integer nextSlot = ct.getSlotsInUse().poll();
+			Integer nextSlot = ct.getSlotsAvaliable().poll();
 			if (nextSlot==null) {
 				throw new IllegalStateException("You reach the maximuling number of SLOTS for the cluster: " + ct.getId() + " which is: " + ct.getOriginalClusterSize());
 			}
+			ct.getSlotsInUse().add(nextSlot);
 			
 			return nextSlot;			
 		}catch(Exception e) {
@@ -78,7 +79,12 @@ public class SlotManager {
 				throw new RuntimeException("This cluster: " + id + " is not register - please register first! ");
 			}
 			
+			if (!ct.getSlotsInUse().contains(slot)) {
+				throw new RuntimeException("This cluster: " + id + " Dont have this SLOT you trying to return! ");
+			}
+			
 			ct.getSlotsInUse().remove(slot);
+			ct.getSlotsAvaliable().add(slot);
 		}catch(Exception e) {
 			if (!(e instanceof IllegalStateException))
 				throw new RuntimeException("Could not return slot.");
