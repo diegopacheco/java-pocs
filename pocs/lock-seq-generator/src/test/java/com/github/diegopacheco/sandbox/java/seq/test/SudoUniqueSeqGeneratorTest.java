@@ -70,9 +70,9 @@ public class SudoUniqueSeqGeneratorTest {
 	@Test
 	public void a_4_ComplexNextSlot_ViolateMaxSlots() {
 		
-		SudoUniqueSeqGenerator.getInstance().registerCluster("cluster4", 5);
+		SudoUniqueSeqGenerator.getInstance().registerCluster("cluster4", 4);
 		
-		ExecutorService es = Executors.newFixedThreadPool(7);
+		ExecutorService es = Executors.newFixedThreadPool(8);
 		for(int i=0; i<=7; i++)
 			es.submit(createRunnable("cluster4",seqs_4));
 		es.shutdown();
