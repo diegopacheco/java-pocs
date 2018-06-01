@@ -4,6 +4,8 @@ import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
+import java.io.File;
+
 import org.quartz.Job;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
@@ -16,12 +18,13 @@ public class Main {
 	
 	public static void main(String[] args) throws Throwable {
 		
-		Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+		Scheduler scheduler = new StdSchedulerFactory(new File(".").getAbsolutePath() + "/src/main/resources/" + "quartz_priority.properties").getScheduler();
 		scheduler.start();
 		
-		scheduleJob(scheduler,new ErrorJob());
-		scheduleJob(scheduler,new OKJob());
-		scheduleJob(scheduler,new SlowJob());
+		scheduleJob(scheduler,new ErrorJob(),"group1");
+		scheduleJob(scheduler,new OKJob(),"group1");
+		scheduleJob(scheduler,new SlowJob(),"group1");
+		scheduleJob(scheduler,new CPUDevourerJob(),"groupEvil2");
 		
 		while(true) {
 			for(JobExecutionContext jec : scheduler.getCurrentlyExecutingJobs()) {
@@ -33,13 +36,13 @@ public class Main {
 		
 	}
 	
-	private static void scheduleJob(Scheduler scheduler,Job myJob) {
+	private static void scheduleJob(Scheduler scheduler,Job myJob,String group) {
 	  JobDetail job = newJob(myJob.getClass())
-	      .withIdentity("job_" + myJob.getClass().getSimpleName(), "group1")
+	      .withIdentity("job_" + myJob.getClass().getSimpleName(), group)
 	      .build();
 
 	  Trigger trigger = newTrigger()
-	      .withIdentity("trigger_" + myJob.getClass().getSimpleName(), "group1")
+	      .withIdentity("trigger_" + myJob.getClass().getSimpleName(), group)
 	      .startNow()
 	      .withSchedule(
 	      				 simpleSchedule()
