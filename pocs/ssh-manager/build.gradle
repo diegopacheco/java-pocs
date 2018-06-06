@@ -16,6 +16,9 @@ dependencies {
   compile 'org.slf4j:slf4j-jdk14:1.7.25'
 
   compile group: 'commons-io', name: 'commons-io', version: '2.6'
+  compile group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
+  compile group: 'com.googlecode.concurrentlinkedhashmap', name: 'concurrentlinkedhashmap-lru', version: '1.4.2'
+
   
   testCompile([
       'junit:junit:4.12'

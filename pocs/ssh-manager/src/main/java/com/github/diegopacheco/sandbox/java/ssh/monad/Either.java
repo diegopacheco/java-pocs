@@ -47,5 +47,12 @@ public class Either<T> {
   public T getError() {
     return left.get();
   }
+  
+  public void print() {
+  	if(hasError())
+  		System.out.println(getError());
+  	else	
+  		System.out.println(getValue());  	
+  }
 	
 }
