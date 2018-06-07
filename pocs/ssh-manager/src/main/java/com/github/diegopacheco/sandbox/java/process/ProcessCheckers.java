@@ -17,12 +17,10 @@ public class ProcessCheckers {
 		public boolean isDoingProgress(PIDMetadata pim) {
 			return true;
 		}
-
 		@Override
 		public boolean hasCompleted(PIDMetadata pim) {
 			return true;
 		}
-
 		@Override
 		public String toString() {
 			return "NO_CHECKER";
@@ -30,18 +28,12 @@ public class ProcessCheckers {
 	};
 
 	public static ProcessChecker PID_CHECKER = new ProcessChecker() {
-		
 		@Override
 		public boolean isDoingProgress(PIDMetadata pim) {
 			return true;
 		}
-
 		@Override
 		public boolean hasCompleted(PIDMetadata pim) {
-			return isPidRunning(pim);
-		}
-
-		private boolean isPidRunning(PIDMetadata pim) {
 			try {
 				
 				String cmd = "ps aux | grep " + pim.getPid();
@@ -66,7 +58,10 @@ public class ProcessCheckers {
 				return false;
 			}
 		}
-
-	};
+		@Override
+		public String toString() {
+			return "PID_CHECKER";
+		}
+	 };
 
 }
