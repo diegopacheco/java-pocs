@@ -3,6 +3,8 @@ package com.github.diegopacheco.sandbox.java.process;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.github.diegopacheco.sandbox.java.ssh.monad.Either;
+
 /**
  * Metadata around any PID that we run in linux in order to figure it out whats going on.
  * 
@@ -13,20 +15,17 @@ public class PIDMetadata {
 	
 	private String ownerID;
 	private BigDecimal pid;
-	private String pidFile;
 	private Date timestamp;  
-	private String logFile;
 	private ProcessChecker checker;
+	private Either<String,String> processResult;
 	
 	public PIDMetadata() {}
 	
-	public PIDMetadata(String ownerID, BigDecimal pid, String pidFile, Date timestamp, String logFile) {
+	public PIDMetadata(String ownerID, BigDecimal pid, Date timestamp, String logFile) {
 		super();
 		this.ownerID = ownerID;
 		this.pid = pid;
-		this.pidFile = pidFile;
 		this.timestamp = timestamp;
-		this.logFile = logFile;
 	}
 	
 	public String getOwnerID() {
@@ -41,36 +40,29 @@ public class PIDMetadata {
 	public void setPid(BigDecimal pid) {
 		this.pid = pid;
 	}
-	public String getPidFile() {
-		return pidFile;
-	}
-	public void setPidFile(String pidFile) {
-		this.pidFile = pidFile;
-	}
 	public Date getTimestamp() {
 		return timestamp;
 	}
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
-	public String getLogFile() {
-		return logFile;
-	}
-	public void setLogFile(String logFile) {
-		this.logFile = logFile;
-	}
-	
 	public ProcessChecker getChecker() {
 		return checker;
 	}
 	public void setChecker(ProcessChecker checker) {
 		this.checker = checker;
 	}
+	
+	public Either<String,String> getProcessResult() {
+		return processResult;
+	}
+	public void setProcessResult(Either<String,String> processResult) {
+		this.processResult = processResult;
+	}
 
 	@Override
 	public String toString() {
-		return "PIDMetadata [ownerID=" + ownerID + ", pid=" + pid + ", pidFile=" + pidFile + ", timestamp=" + timestamp
-		    + ", logFile=" + logFile + "]";
+		return "PIDMetadata [ownerID=" + ownerID + ", pid=" + pid + ", timestamp=" + timestamp + "]";
 	}
 
 	@Override

@@ -7,33 +7,33 @@ import java.util.Optional;
  * 
  * @author diegopacheco
  *
- * @param <T> Could be ANY type.
+ * @param <T,E> Could be ANY type.
  */
-public class Either<T> {
+public class Either<T,E> {
 
 	private Optional<T> right;
-	private Optional<T> left;
+	private Optional<E> left;
 
-	public Either(T right, T left) {
+	public Either(T right, E left) {
 		super();
 		this.right = Optional.ofNullable(right);
 		this.left = Optional.ofNullable(left);
 	}
 	
-  public static <U> Either<U> ok(U value) {
+  public static <U,X> Either<U,X> ok(U value) {
     return new Either<>(value, null);
   }
 
-  public static <U> Either<U> right(U value) {
+  public static <U,X> Either<U,X> right(U value) {
     return new Either<>(value, null);
   }
   
-  public static <U> Either<U> error(U error) {
-    return new Either<U>(null, error);
+  public static <U,X> Either<U,X> error(X error) {
+    return new Either<U,X>(null, error);
   }
   
-  public static <U> Either<U> left(U error) {
-    return new Either<U>(null, error);
+  public static <U,X> Either<U,X> left(X error) {
+    return new Either<U,X>(null, error);
   }
 	
 	public boolean hasError() {
@@ -44,7 +44,7 @@ public class Either<T> {
 		return right.get();
 	}
 	
-  public T getError() {
+  public E getError() {
     return left.get();
   }
   
