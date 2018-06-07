@@ -80,34 +80,44 @@ public class ProccessExecutor {
 			if (error==null || "".equals(error) ) {
 				pim.setProcessResult(Either.right(content));
 				either = Either.right(pim);
-				
-				Counter counter = metrics.get(pr.getName());
-				if(counter==null) {
-					counter = new Counter();
-					metrics.put(pr.getName(), counter);
-				}
-				counter.incrementOk();
-				
+				incOkCounter(pr);
 			}	else {
 				pim.setProcessResult(Either.left(error));
 				either = Either.left(error);
-				
-				Counter counter = metrics.get(pr.getName());
-				if(counter==null) {
-					counter = new Counter();
-					metrics.put(pr.getName(), counter);
-				}
-				counter.incrementError();
-				
+				incErrorCounter(pr);
 			}
+			
 			process.destroy();
 			return either;
+			
 		} catch (Exception e) {
+			
+			incErrorCounter(pr);
 			return Either.left(e.getMessage());
+			
 		} finally {
+			
 			if (process!=null && process.isAlive())
 				process.destroy();
 		}
+	}
+
+	private void incOkCounter(ProcessRequest pr) {
+		Counter counter = metrics.get(pr.getName());
+		if(counter==null) {
+			counter = new Counter();
+			metrics.put(pr.getName(), counter);
+		}
+		counter.incrementOk();
+	}
+
+	private void incErrorCounter(ProcessRequest pr) {
+		Counter counter = metrics.get(pr.getName());
+		if(counter==null) {
+			counter = new Counter();
+			metrics.put(pr.getName(), counter);
+		}
+		counter.incrementError();
 	}
 
 	private BigDecimal getPidOfProcess(Process p) {
@@ -146,9 +156,11 @@ public class ProccessExecutor {
 		CompletableFuture<Either<PIDMetadata,String>> f1 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.PID_CHECKER));
 		CompletableFuture<Either<PIDMetadata,String>> f2 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
 		CompletableFuture<Either<PIDMetadata,String>> f3 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
+		CompletableFuture<Either<PIDMetadata,String>> f4 = pe.execute(new ProcessRequest("wait","sleep 5", ProcessCheckers.NO_CHECKER));
+		CompletableFuture<Either<PIDMetadata,String>> f5 = pe.execute(new ProcessRequest("error","blablabla", ProcessCheckers.NO_CHECKER));
 		
 		System.out.println("Wait for all and aggrehate: ");
-		CompletableFutureUtils.waitAndAggregate(f1,f2,f3).get().forEach( r -> System.out.println(r.getValue()));
+		CompletableFutureUtils.waitAndAggregate(f1,f2,f3,f4,f5).join().forEach( r -> System.out.println(r.getValue()));
 		
 		System.out.println("Futures that are done - history: ");
 		pe.getProcessHistory().forEach(System.out::println);
