@@ -10,11 +10,11 @@ public class ProcessCheckers {
 	
 	public static ProcessChecker NO_CHECKER = new ProcessChecker() {
 		@Override
-		public boolean isDoingProgress() {
+		public boolean isDoingProgress(PIDMetadata pim) {
 			return true;
 		}
 		@Override
-		public boolean hasCompleted() {
+		public boolean hasCompleted(PIDMetadata pim) {
 			return true;
 		}
 		@Override

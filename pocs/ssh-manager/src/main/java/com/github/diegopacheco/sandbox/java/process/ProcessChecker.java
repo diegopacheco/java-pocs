@@ -10,7 +10,7 @@ package com.github.diegopacheco.sandbox.java.process;
  */
 public interface ProcessChecker {
 	
-	public boolean hasCompleted();
-	public boolean isDoingProgress();
+	public boolean hasCompleted(PIDMetadata pim);
+	public boolean isDoingProgress(PIDMetadata pim);
 	
 }

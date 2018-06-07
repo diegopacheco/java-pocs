@@ -1,19 +1,21 @@
 package com.github.diegopacheco.sandbox.java.process;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.io.IOUtils;
 
@@ -29,10 +31,13 @@ import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
  */
 public class ProccessExecutor {
 	
+	private static AtomicInteger id = new AtomicInteger(0);
 	private static Map<String,PIDMetadata> history =  
 			new ConcurrentLinkedHashMap.Builder<String, PIDMetadata>()
 				.maximumWeightedCapacity(1000)
 				.build();
+	
+	private static Map<String,Counter> metrics = new ConcurrentHashMap<>();
 	
 	private static ExecutorService executor = Executors.newSingleThreadExecutor();
 	private static ProccessExecutor instance;
@@ -65,7 +70,7 @@ public class ProccessExecutor {
         try {
             return future.get();
         } catch (InterruptedException|ExecutionException e) {
-            throw new RuntimeException(e);
+        	throw new RuntimeException(e);
         }
     });
 	}
@@ -77,7 +82,7 @@ public class ProccessExecutor {
 		pim.setChecker(pr.getChecker());
 		pim.setOwnerID("ProcessExecutor");
 		pim.setTimestamp(new Date());
-		history.put(pr.getName(), pim);
+		history.put(pr.getName() + id.getAndIncrement(), pim);
 
 		try {
 			process = Runtime.getRuntime().exec(pr.getCmd());
@@ -90,9 +95,23 @@ public class ProccessExecutor {
 			if (error==null || "".equals(error) ) {
 				pim.setProcessResult(Either.right(content));
 				either = Either.right(pim);
+				
+				Counter counter = metrics.get(pr.getName());
+				if(counter==null) {
+					metrics.put(pr.getName(), new Counter());
+				}
+				counter.incrementOk();
+				
 			}	else {
 				pim.setProcessResult(Either.left(error));
 				either = Either.left(error);
+				
+				Counter counter = metrics.get(pr.getName());
+				if(counter==null) {
+					metrics.put(pr.getName(), new Counter());
+				}
+				counter.incrementError();
+				
 			}
 			process.destroy();
 			return either;
@@ -104,15 +123,7 @@ public class ProccessExecutor {
 		}
 	}
 
-	private static String getCurrentPath() {
-		try {
-			return new File(".").getCanonicalPath();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	private static synchronized BigDecimal getPidOfProcess(Process p) {
+	private static BigDecimal getPidOfProcess(Process p) {
     long pid = -1;
     try {
       if (p.getClass().getName().equals("java.lang.UNIXProcess")) {
@@ -127,7 +138,7 @@ public class ProccessExecutor {
     return new BigDecimal(pid);
 	}
 	
-	public List<PIDMetadata> getProcessHistory() {
+	public synchronized List<PIDMetadata> getProcessHistory() {
 		 List<PIDMetadata> historyResult = new ArrayList<>();
 		 for(String key: history.keySet()) {
 			  historyResult.add( history.get(key) );
@@ -135,17 +146,29 @@ public class ProccessExecutor {
 		 return historyResult;
 	}
 	
-	public static void main(String[] args) {
+	public Map<String,Counter> getMetrics() {
+		 return Collections.unmodifiableMap(metrics);
+	}
+	
+	public void shutdown() {
+		executor.shutdown();
+	}
+	
+	public static void main(String[] args) throws Throwable {
 		ProccessExecutor pe = ProccessExecutor.getInstance();
-		CompletableFuture<Either<PIDMetadata,String>> f1 = pe.execute(new ProcessRequest("list 1","ls -lsa", ProcessCheckers.NO_CHECKER));
-		CompletableFuture<Either<PIDMetadata,String>> f2 = pe.execute(new ProcessRequest("list 2","ls -lsa", ProcessCheckers.NO_CHECKER));
-		CompletableFuture<Either<PIDMetadata,String>> f3 = pe.execute(new ProcessRequest("list 3","ls -lsa", ProcessCheckers.NO_CHECKER));
+		CompletableFuture<Either<PIDMetadata,String>> f1 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
+		CompletableFuture<Either<PIDMetadata,String>> f2 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
+		CompletableFuture<Either<PIDMetadata,String>> f3 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
+		//CompletableFuture<Either<PIDMetadata,String>> f4 = pe.execute(new ProcessRequest("list_error","blabah", ProcessCheckers.NO_CHECKER));
 		
-		CompletableFuture.allOf(f1,f2,f3);
+		pe.shutdown();
 		
 		System.out.println("Futures that are done - history: ");
 		pe.getProcessHistory().forEach(System.out::println);
 		
+		System.out.println("Metrics: ");
+		pe.getMetrics().forEach(  (k,v) ->  System.out.println("task: " + k + " ok/erros: " + v) );
+
 	}
 	
 }	
