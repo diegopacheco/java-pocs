@@ -51,7 +51,10 @@ public class ProccessExecutor {
 			@Override
 			public Either<PIDMetadata,String> call() throws Exception {
 				 Either<PIDMetadata,String> result = executeCMD(pr);
-				 result.print();
+				 if (!result.hasError()) {
+					  result.getValue().getProcessResult().print();
+					  result.print();
+				 }
 				 return result;
 			}
 		}));
