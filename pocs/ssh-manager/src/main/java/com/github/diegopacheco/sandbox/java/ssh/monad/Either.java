@@ -41,7 +41,7 @@ public class Either<T,E> {
 	}
 
 	public T getValue() {
-		return right.get();
+		return (right.isPresent()) ? right.get() : null;
 	}
 	
   public E getError() {

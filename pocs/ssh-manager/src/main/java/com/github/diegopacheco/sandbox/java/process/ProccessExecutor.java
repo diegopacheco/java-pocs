@@ -83,7 +83,8 @@ public class ProccessExecutor {
 				
 				Counter counter = metrics.get(pr.getName());
 				if(counter==null) {
-					metrics.put(pr.getName(), new Counter());
+					counter = new Counter();
+					metrics.put(pr.getName(), counter);
 				}
 				counter.incrementOk();
 				
@@ -93,7 +94,8 @@ public class ProccessExecutor {
 				
 				Counter counter = metrics.get(pr.getName());
 				if(counter==null) {
-					metrics.put(pr.getName(), new Counter());
+					counter = new Counter();
+					metrics.put(pr.getName(), counter);
 				}
 				counter.incrementError();
 				
@@ -145,7 +147,8 @@ public class ProccessExecutor {
 		CompletableFuture<Either<PIDMetadata,String>> f2 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
 		CompletableFuture<Either<PIDMetadata,String>> f3 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
 		
-		CompletableFutureUtils.wait(f1,f2,f3);
+		System.out.println("Wait for all and aggrehate: ");
+		CompletableFutureUtils.waitAndAggregate(f1,f2,f3).get().forEach( r -> System.out.println(r.getValue()));
 		
 		System.out.println("Futures that are done - history: ");
 		pe.getProcessHistory().forEach(System.out::println);

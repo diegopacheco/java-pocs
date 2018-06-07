@@ -2,6 +2,12 @@ package com.github.diegopacheco.sandbox.java.ssh.concurrent;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Thread-safe counters for success and errors.
+ * 
+ * @author diegopacheco
+ *
+ */
 public class Counter {
 	
 	private AtomicInteger ok     = new AtomicInteger(0);
@@ -16,10 +22,10 @@ public class Counter {
 	}
 	
 	public Integer getOk() {
-		return (ok.get()==0) ? 0 : ok.get() + 1;
+		return ok.get();
 	}
 	public Integer getError() {
-		return (error.get()==0) ? 0 : error.get() + 1;
+		return error.get();
 	}
 
 	@Override
