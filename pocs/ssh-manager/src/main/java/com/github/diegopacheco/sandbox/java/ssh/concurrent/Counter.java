@@ -1,4 +1,4 @@
-package com.github.diegopacheco.sandbox.java.process;
+package com.github.diegopacheco.sandbox.java.ssh.concurrent;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,15 +16,15 @@ public class Counter {
 	}
 	
 	public Integer getOk() {
-		return ok.get();
+		return (ok.get()==0) ? 0 : ok.get() + 1;
 	}
 	public Integer getError() {
-		return error.get();
+		return (error.get()==0) ? 0 : error.get() + 1;
 	}
 
 	@Override
 	public String toString() {
-		return "Counter [ok=" + ok.get() + ", error=" + error.get() + "]";
+		return "Counter [ok=" + getOk() + ", error=" + getError() + "]";
 	}
 	
 }

@@ -11,14 +11,14 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.io.IOUtils;
 
+import com.github.diegopacheco.sandbox.java.ssh.concurrent.CompletableFutureUtils;
+import com.github.diegopacheco.sandbox.java.ssh.concurrent.Counter;
 import com.github.diegopacheco.sandbox.java.ssh.monad.Either;
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 
@@ -38,7 +38,6 @@ public class ProccessExecutor {
 				.build();
 	
 	private static Map<String,Counter> metrics = new ConcurrentHashMap<>();
-	
 	private static ExecutorService executor = Executors.newSingleThreadExecutor();
 	private static ProccessExecutor instance;
 
@@ -52,37 +51,23 @@ public class ProccessExecutor {
 	}
 	
 	public CompletableFuture<Either<PIDMetadata,String>> execute(final ProcessRequest pr) {
-		return makeCompletableFuture(executor.submit(new Callable<Either<PIDMetadata,String>>() {
+		return CompletableFutureUtils.makeCompletableFutureSync(executor.submit(new Callable<Either<PIDMetadata,String>>() {
 			@Override
 			public Either<PIDMetadata,String> call() throws Exception {
 				 Either<PIDMetadata,String> result = executeCMD(pr);
-				 if (!result.hasError()) {
-					  result.getValue().getProcessResult().print();
-					  result.print();
-				 }
 				 return result;
 			}
 		}));
 	}
 	
-	private static <T> CompletableFuture<T> makeCompletableFuture(Future<T> future) {
-    return CompletableFuture.supplyAsync(() -> {
-        try {
-            return future.get();
-        } catch (InterruptedException|ExecutionException e) {
-        	throw new RuntimeException(e);
-        }
-    });
-	}
-	
-	private static Either<PIDMetadata,String> executeCMD(ProcessRequest pr) {
+	private Either<PIDMetadata,String> executeCMD(ProcessRequest pr) {
 		Process process = null;
 		Either<PIDMetadata,String> either = null;
 		PIDMetadata pim = new PIDMetadata();
 		pim.setChecker(pr.getChecker());
 		pim.setOwnerID("ProcessExecutor");
 		pim.setTimestamp(new Date());
-		history.put(pr.getName() + id.getAndIncrement(), pim);
+		history.put(pr.getName() + "_" + id.getAndIncrement(), pim);
 
 		try {
 			process = Runtime.getRuntime().exec(pr.getCmd());
@@ -123,7 +108,7 @@ public class ProccessExecutor {
 		}
 	}
 
-	private static BigDecimal getPidOfProcess(Process p) {
+	private BigDecimal getPidOfProcess(Process p) {
     long pid = -1;
     try {
       if (p.getClass().getName().equals("java.lang.UNIXProcess")) {
@@ -138,7 +123,7 @@ public class ProccessExecutor {
     return new BigDecimal(pid);
 	}
 	
-	public synchronized List<PIDMetadata> getProcessHistory() {
+	public List<PIDMetadata> getProcessHistory() {
 		 List<PIDMetadata> historyResult = new ArrayList<>();
 		 for(String key: history.keySet()) {
 			  historyResult.add( history.get(key) );
@@ -159,16 +144,19 @@ public class ProccessExecutor {
 		CompletableFuture<Either<PIDMetadata,String>> f1 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
 		CompletableFuture<Either<PIDMetadata,String>> f2 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
 		CompletableFuture<Either<PIDMetadata,String>> f3 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
-		//CompletableFuture<Either<PIDMetadata,String>> f4 = pe.execute(new ProcessRequest("list_error","blabah", ProcessCheckers.NO_CHECKER));
 		
-		pe.shutdown();
+		CompletableFutureUtils.wait(f1,f2,f3);
 		
 		System.out.println("Futures that are done - history: ");
 		pe.getProcessHistory().forEach(System.out::println);
 		
 		System.out.println("Metrics: ");
 		pe.getMetrics().forEach(  (k,v) ->  System.out.println("task: " + k + " ok/erros: " + v) );
-
+		
+		System.out.println("Process Outputs: ");
+		pe.getProcessHistory().forEach( p-> p.getProcessResult().print() );
+		
+		pe.shutdown();
 	}
 	
 }	

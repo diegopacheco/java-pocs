@@ -17,7 +17,7 @@ public class PIDMetadata {
 	private BigDecimal pid;
 	private Date timestamp;  
 	private ProcessChecker checker;
-	private Either<String,String> processResult;
+	private Either<String,String> processResult = new Either<String, String>(null, null);
 	
 	public PIDMetadata() {}
 	
