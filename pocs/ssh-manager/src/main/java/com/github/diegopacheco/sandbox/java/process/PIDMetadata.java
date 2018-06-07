@@ -1,4 +1,4 @@
-package com.github.diegopacheco.sandbox.java.ssh;
+package com.github.diegopacheco.sandbox.java.process;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -16,7 +16,7 @@ public class PIDMetadata {
 	private String pidFile;
 	private Date timestamp;  
 	private String logFile;
-	private PIDChecker checker;
+	private ProcessChecker checker;
 	
 	public PIDMetadata() {}
 	
@@ -60,10 +60,10 @@ public class PIDMetadata {
 		this.logFile = logFile;
 	}
 	
-	public PIDChecker getChecker() {
+	public ProcessChecker getChecker() {
 		return checker;
 	}
-	public void setChecker(PIDChecker checker) {
+	public void setChecker(ProcessChecker checker) {
 		this.checker = checker;
 	}
 

@@ -1,4 +1,4 @@
-package com.github.diegopacheco.sandbox.java.ssh;
+package com.github.diegopacheco.sandbox.java.process;
 
 /**
  * The idea behind PIDChecker is to be able to check if a PID is alive. most of times just running PS AUX. 
@@ -8,7 +8,7 @@ package com.github.diegopacheco.sandbox.java.ssh;
  * @author diegopacheco
  *
  */
-public interface PIDChecker {
+public interface ProcessChecker {
 	
 	public boolean hasCompleted();
 	public boolean isDoingProgress();

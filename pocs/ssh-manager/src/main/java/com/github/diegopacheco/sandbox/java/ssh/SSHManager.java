@@ -10,6 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.io.IOUtils;
 
+import com.github.diegopacheco.sandbox.java.process.PIDMetadata;
+import com.github.diegopacheco.sandbox.java.process.ProcessChecker;
 import com.github.diegopacheco.sandbox.java.ssh.monad.Either;
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 
@@ -28,7 +30,7 @@ public class SSHManager {
 
 	private static AtomicInteger pidCounter = new AtomicInteger(0);
 	
-	public synchronized static Either<String> execute(String name,String cmd,PIDChecker checker) {
+	public synchronized static Either<String> execute(String name,String cmd,ProcessChecker checker) {
 		String wrapperCMD = " nohup " + cmd + " &";
 		System.out.println(wrapperCMD);
 		
