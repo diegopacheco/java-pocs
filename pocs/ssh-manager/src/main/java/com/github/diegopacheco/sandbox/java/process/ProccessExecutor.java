@@ -143,7 +143,7 @@ public class ProccessExecutor {
 	
 	public static void main(String[] args) throws Throwable {
 		ProccessExecutor pe = ProccessExecutor.getInstance();
-		CompletableFuture<Either<PIDMetadata,String>> f1 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
+		CompletableFuture<Either<PIDMetadata,String>> f1 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.PID_CHECKER));
 		CompletableFuture<Either<PIDMetadata,String>> f2 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
 		CompletableFuture<Either<PIDMetadata,String>> f3 = pe.execute(new ProcessRequest("list","ls -lsa", ProcessCheckers.NO_CHECKER));
 		
@@ -158,6 +158,8 @@ public class ProccessExecutor {
 		
 		System.out.println("Process Outputs: ");
 		pe.getProcessHistory().forEach( p-> p.getProcessResult().print() );
+		
+		System.out.println("is first pid running ? " + pe.getProcessHistory().get(0).getChecker().hasCompleted( pe.getProcessHistory().get(0)));
 		
 		pe.shutdown();
 	}
