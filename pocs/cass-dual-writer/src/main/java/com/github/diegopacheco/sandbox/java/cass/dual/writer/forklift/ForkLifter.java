@@ -42,6 +42,7 @@ public class ForkLifter {
 	private static void forkLift(DaoPairs daoPair) {
 		System.out.println("Forklifiting " + daoPair);
 		
+		// data should be STREMEAD from cass in order to not load huge datasets to memeory
 		List<String> dataFrom = daoPair.getFrom().getAllData();
 		List<String> dataTo = daoPair.getTo().getAllData();
 		dataTo.removeAll(dataFrom);
