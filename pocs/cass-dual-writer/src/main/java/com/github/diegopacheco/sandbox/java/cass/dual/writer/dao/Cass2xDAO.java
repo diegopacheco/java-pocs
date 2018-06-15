@@ -18,7 +18,7 @@ public class Cass2xDAO extends BaseDAO {
 			df.generateRecords(1500000, dao);
 			
 			System.out.println("Listing all data in CASS 2.x");
-			dao.getAllData().forEach(System.out::println);			
+			System.out.println("Cass 2x. now has: " + dao.getAllData().size() + " keys");			
 	}
 	
 }
