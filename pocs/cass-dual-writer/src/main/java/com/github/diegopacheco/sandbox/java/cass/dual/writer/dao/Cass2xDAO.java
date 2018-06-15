@@ -14,7 +14,7 @@ public class Cass2xDAO extends BaseDAO {
 			
 			System.out.println("Insert all data in CASS 2.x");
 			DataFactory df = new DataFactory();
-			df.generateRecords(10, dao);
+			df.generateRecords(1, dao);
 			
 			System.out.println("Listing all data in CASS 2.x");
 			dao.getAllData().forEach(System.out::println);			

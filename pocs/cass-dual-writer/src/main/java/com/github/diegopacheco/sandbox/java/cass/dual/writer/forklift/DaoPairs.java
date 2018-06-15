@@ -26,5 +26,10 @@ public class DaoPairs {
 	public void setTo(CassDAO to) {
 		this.to = to;
 	}
+
+	@Override
+	public String toString() {
+		return "DaoPairs [from=" + from.getClass().getSimpleName() + ", to=" + to.getClass().getSimpleName() + "]";
+	}
 	
 }
