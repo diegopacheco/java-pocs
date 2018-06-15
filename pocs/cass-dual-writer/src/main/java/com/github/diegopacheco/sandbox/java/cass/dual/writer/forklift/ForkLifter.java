@@ -49,6 +49,7 @@ public class ForkLifter {
 		if (dataTo.size()==0) {
 			System.out.println("All in SYNC");
 		}else {
+			// Before inserting forklifter should be more smart an compare hashs to know if that really changed. 
 			System.out.println(dataTo.size() + " to Be Migrated");
 			dataTo.forEach( d ->  daoPair.getTo().insertData(d, d) );
 			System.out.println("DONE forklifiting " + daoPair);
