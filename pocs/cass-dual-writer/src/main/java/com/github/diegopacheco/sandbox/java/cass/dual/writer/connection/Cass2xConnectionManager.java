@@ -17,9 +17,9 @@ public class Cass2xConnectionManager implements CassConnectionManager {
 	public Cluster getCluster() {
 		Cluster cluster = Cluster.builder()
         .withClusterName("cass2x_cluster")
-        .addContactPoint("178.18.0.101")
-        .addContactPoint("178.18.0.102")
-        .addContactPoint("178.18.0.103")
+        .addContactPoint("128.18.0.21")
+        .addContactPoint("128.18.0.22")
+        .addContactPoint("128.18.0.23")
         .build();
 		return cluster;
 	}
