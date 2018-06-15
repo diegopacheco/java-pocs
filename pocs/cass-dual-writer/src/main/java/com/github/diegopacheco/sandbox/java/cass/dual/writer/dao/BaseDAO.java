@@ -13,6 +13,9 @@ import com.github.diegopacheco.sandbox.java.cass.dual.writer.connection.CassConn
 public class BaseDAO implements CassDAO {
 	
 	protected CassConnectionManager connectionManager;
+	protected Cluster cluster;
+	
+	private static PreparedStatement prepared;
 	
 	public List<String> getAllData() {
 		List<String> result = new ArrayList<>();
@@ -26,11 +29,18 @@ public class BaseDAO implements CassDAO {
 	}
 
 	public void insertData(String key, String value) {
-		Cluster cluster = connectionManager.getCluster();
 		Session session = cluster.connect("cluster_test");
-		PreparedStatement prepared = session.prepare("INSERT INTO TEST (key,value) VALUES (?, ?);");
+		prepared = getPreparedStatement(session);
 		BoundStatement bound = prepared.bind(key, value);
 		session.execute(bound);
+		session.close();
+	}
+	
+	private synchronized static PreparedStatement getPreparedStatement(Session session) {
+		if (prepared==null) {
+			prepared = session.prepare("INSERT INTO TEST (key,value) VALUES (?, ?);");
+		}
+		return prepared;
 	}
 
 }

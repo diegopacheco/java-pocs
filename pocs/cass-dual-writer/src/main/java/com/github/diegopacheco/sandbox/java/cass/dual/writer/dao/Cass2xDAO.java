@@ -7,6 +7,7 @@ public class Cass2xDAO extends BaseDAO {
 	
 	public Cass2xDAO(){
 		connectionManager = Cass2xConnectionManager.getInstance();
+		cluster = connectionManager.getCluster();
 	}
 	
 	public static void main(String[] args) {
@@ -14,7 +15,7 @@ public class Cass2xDAO extends BaseDAO {
 			
 			System.out.println("Insert all data in CASS 2.x");
 			DataFactory df = new DataFactory();
-			df.generateRecords(1, dao);
+			df.generateRecords(1000000, dao);
 			
 			System.out.println("Listing all data in CASS 2.x");
 			dao.getAllData().forEach(System.out::println);			

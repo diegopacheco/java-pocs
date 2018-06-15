@@ -10,6 +10,8 @@ public class DataFactory {
 		IntStream stream = IntStream.iterate(0, i -> i + 1);
 		stream
 			.limit(soManyRecords)
-			.forEach( i->  dao.insertData("k"+i+"k", "v"+i+"v"));
+			.forEach( i->  { 
+				dao.insertData("k"+i+"k", "v"+i+"v");
+			});
 	}
 }
