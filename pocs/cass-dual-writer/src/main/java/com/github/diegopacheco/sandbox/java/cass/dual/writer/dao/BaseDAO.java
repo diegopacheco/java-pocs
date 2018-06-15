@@ -15,32 +15,38 @@ public class BaseDAO implements CassDAO {
 	protected CassConnectionManager connectionManager;
 	protected Cluster cluster;
 	
+	private static Session session;
 	private static PreparedStatement prepared;
 	
 	public List<String> getAllData() {
 		List<String> result = new ArrayList<>();
-		Cluster cluster = connectionManager.getCluster();
-		Session session = cluster.connect("cluster_test");
+		Session session = getSession(cluster);
 		for (Row row : session.execute("SELECT * FROM test")) {
 			result.add(row.getString("key") + "-" + row.getString("value"));
 		}
-		session.close();
 		return result;
 	}
 
 	public void insertData(String key, String value) {
-		Session session = cluster.connect("cluster_test");
-		prepared = getPreparedStatement(session);
+		Session session = getSession(cluster);
+		prepared = getPreparedStatement(cluster);
 		BoundStatement bound = prepared.bind(key, value);
 		session.execute(bound);
-		session.close();
 	}
 	
-	private synchronized static PreparedStatement getPreparedStatement(Session session) {
+	private synchronized static PreparedStatement getPreparedStatement(Cluster cluster) {
+		Session session = getSession(cluster);
 		if (prepared==null) {
 			prepared = session.prepare("INSERT INTO TEST (key,value) VALUES (?, ?);");
 		}
 		return prepared;
+	}
+	
+	private synchronized static Session getSession(Cluster cluster) {
+		if (session==null) {
+			session = cluster.connect("cluster_test");
+		}
+		return session;
 	}
 
 }
