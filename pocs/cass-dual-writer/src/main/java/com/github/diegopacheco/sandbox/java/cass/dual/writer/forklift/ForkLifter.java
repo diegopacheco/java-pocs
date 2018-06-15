@@ -41,11 +41,19 @@ public class ForkLifter {
 	
 	private static void forkLift(DaoPairs daoPair) {
 		System.out.println("Forklifiting " + daoPair);
-		List<String> data = daoPair.getFrom().getAllData();
-		System.out.println(data.size() + " to be MIGRATED");
 		
-		data.forEach( d ->  daoPair.getTo().insertData(d, d) );
-		System.out.println("DONE forklifiting " + daoPair);
+		List<String> dataFrom = daoPair.getFrom().getAllData();
+		List<String> dataTo = daoPair.getTo().getAllData();
+		dataTo.removeAll(dataFrom);
+		
+		if (dataTo.size()==0) {
+			System.out.println("All in SYNC");
+		}else {
+			System.out.println(dataTo.size() + " to Be Migrated");
+			dataTo.forEach( d ->  daoPair.getTo().insertData(d, d) );
+			System.out.println("DONE forklifiting " + daoPair);
+		}
+		
 	}
 	
 	public void addDaoPair(DaoPairs daoPair) {
