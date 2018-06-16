@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import com.datastax.driver.core.Row;
+import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.HashComparableRow;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.Cass2xDAO;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.Cass3xDAO;
 
@@ -30,7 +30,7 @@ public class ForkLifter {
 					System.out.println("Fork Lifting... " + daos.size() + " daos");
 					forkLiftDaos();
 				}
-			}, 0, 10, TimeUnit.SECONDS);
+			}, 0, 30, TimeUnit.SECONDS);
 			
 		}
 		return instance;
@@ -56,15 +56,15 @@ public class ForkLifter {
 		
 		// data should be Stremead from cass in order to not load huge datasets to memeory
 		// Before inserting forklifter should be more smart an compare hashs to know if that really changed.
-		List<Row> dataFrom = daoPair.getFrom().getAllDataAsRow();
-		List<Row> dataTo = daoPair.getTo().getAllDataAsRow();
+		List<HashComparableRow> dataFrom = daoPair.getFrom().getAllDataAsRow();
+		List<HashComparableRow> dataTo = daoPair.getTo().getAllDataAsRow();
 		dataFrom.removeAll(dataTo);
 		
 		if (dataFrom.size()==0) { 
 			System.out.println("All in SYNC");
 		}else {
 			System.out.println(dataFrom.size() + " ROW to Be Migrated");
-			dataFrom.forEach( d ->  daoPair.getTo().insertDataFromRow(d));
+			dataFrom.forEach( d ->  daoPair.getTo().insertDataFromRow(d.getOriginalRow()));
 			System.out.println("DONE fork lifiting " + daoPair);
 		}
 		

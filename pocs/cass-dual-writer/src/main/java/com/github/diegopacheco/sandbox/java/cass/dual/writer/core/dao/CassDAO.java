@@ -5,7 +5,7 @@ import java.util.List;
 import com.datastax.driver.core.Row;
 
 public interface CassDAO {
-	public List<Row> getAllDataAsRow();
+	public List<HashComparableRow> getAllDataAsRow();
 	public void insertDataFromRow(Row row);
 	public RowHasher getRowHasher();
 }

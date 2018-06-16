@@ -10,6 +10,7 @@ import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.connection.CassConnectionManager;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.CassDAO;
+import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.HashComparableRow;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.RowHasher;
 
 public class BaseDAO implements BusinessDAO, CassDAO {
@@ -19,6 +20,10 @@ public class BaseDAO implements BusinessDAO, CassDAO {
 	
 	private Session session;
 	private PreparedStatement prepared;
+	
+	//
+	// Regular Business Methods
+	//
 	
 	public List<String> getAllData() {
 		List<String> result = new ArrayList<>();
@@ -51,12 +56,16 @@ public class BaseDAO implements BusinessDAO, CassDAO {
 		return session;
 	}
 	
+	//
+	// Fork Lifting methods 
+	//
+	
 	@Override
-	public List<Row> getAllDataAsRow(){
-		List<Row> result = new ArrayList<>();
+	public List<HashComparableRow> getAllDataAsRow(){
+		List<HashComparableRow> result = new ArrayList<>();
 		Session session = getSession(cluster);
 		for (Row row : session.execute("SELECT * FROM test")) {
-			result.add(row);
+			result.add( new HashComparableRow(getRowHasher(), row));
 		}
 		return result;
 	}
