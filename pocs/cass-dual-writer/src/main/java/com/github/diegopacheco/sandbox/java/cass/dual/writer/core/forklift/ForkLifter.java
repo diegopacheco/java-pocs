@@ -48,20 +48,19 @@ public class ForkLifter {
 			    TimeUnit.MILLISECONDS.toSeconds(millis) - 
 			    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
 			);
-		 System.out.println("DONE Fork Lifting took " + time );
+		 System.out.println("DONE Fork Lifting took " + time + " \n");
 	}
 	
 	private static void forkLift(DaoPairs daoPair) {
 		System.out.println("Forklifiting " + daoPair);
 		
-		// data should be Stremead from cass in order to not load huge datasets to memeory
-		// Before inserting forklifter should be more smart an compare hashs to know if that really changed.
+		// TODO: data should be Stremead from cass in order to not load huge datasets to memeory
 		List<HashComparableRow> dataFrom = daoPair.getFrom().getAllDataAsRow();
 		List<HashComparableRow> dataTo = daoPair.getTo().getAllDataAsRow();
 		dataFrom.removeAll(dataTo);
 		
 		if (dataFrom.size()==0) { 
-			System.out.println("All in SYNC");
+			System.out.println("All in SYNC - Nothing to do!");
 		}else {
 			System.out.println(dataFrom.size() + " ROW to Be Migrated");
 			dataFrom.forEach( d ->  daoPair.getTo().insertDataFromRow(d.getOriginalRow()));

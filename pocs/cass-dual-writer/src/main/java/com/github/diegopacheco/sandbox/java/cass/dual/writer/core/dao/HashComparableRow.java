@@ -2,6 +2,10 @@ package com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao;
 
 import com.datastax.driver.core.Row;
 
+/**
+ * @author diego
+ *
+ */
 public class HashComparableRow {
 	
 	private RowHasher hasher;
@@ -33,9 +37,16 @@ public class HashComparableRow {
 		if (hasher == null) {
 			if (other.hasher != null)
 				return false;
-		} else if (!hasher.hash(originalRow).equals(other.getHasher().hash(originalRow)))
+		} else if (!hasher.hash(originalRow).equals(other.getHasher().hash(other.getOriginalRow())))
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "HashComparableRow [hasher=" + ((hasher!=null) ? hasher.hashCode() : "null") + ", originalRow=" + originalRow + "]";
+	}
+	
+	
 	
 }
