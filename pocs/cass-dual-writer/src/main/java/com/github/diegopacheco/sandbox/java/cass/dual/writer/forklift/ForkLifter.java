@@ -25,7 +25,7 @@ public class ForkLifter {
 			
 			executor.scheduleAtFixedRate( () -> {
 				if (daos==null || daos.size()==0){
-					System.out.println("NOTHING to ForkLift. ");
+					System.out.println("NO DAOs to ForkLift. ");
 				}else {
 					System.out.println("Fork Lifting... " + daos.size() + " daos");
 					forkLiftDaos();
@@ -48,13 +48,13 @@ public class ForkLifter {
 			    TimeUnit.MILLISECONDS.toSeconds(millis) - 
 			    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
 			);
-		 System.out.println("DONE - Fork Lifting took " + time );
+		 System.out.println("DONE Fork Lifting took " + time );
 	}
 	
 	private static void forkLift(DaoPairs daoPair) {
 		System.out.println("Forklifiting " + daoPair);
 		
-		// data should be STREMEAD from cass in order to not load huge datasets to memeory
+		// data should be Stremead from cass in order to not load huge datasets to memeory
 		// Before inserting forklifter should be more smart an compare hashs to know if that really changed.
 		List<Row> dataFrom = daoPair.getFrom().getAllDataAsRow();
 		List<Row> dataTo = daoPair.getTo().getAllDataAsRow();
@@ -63,9 +63,9 @@ public class ForkLifter {
 		if (dataFrom.size()==0) { 
 			System.out.println("All in SYNC");
 		}else {
-			System.out.println(dataFrom.size() + " to Be Migrated");
+			System.out.println(dataFrom.size() + " ROW to Be Migrated");
 			dataFrom.forEach( d ->  daoPair.getTo().insertDataFromRow(d));
-			System.out.println("DONE forklifiting " + daoPair);
+			System.out.println("DONE fork lifiting " + daoPair);
 		}
 		
 	}
