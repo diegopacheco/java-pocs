@@ -1,13 +1,17 @@
 package com.github.diegopacheco.sandbox.java.cass.dual.writer.dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PreparedStatement;
+import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.core.SimpleStatement;
+import com.datastax.driver.core.Statement;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.connection.CassConnectionManager;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.CassDAO;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.HashComparableRow;
@@ -64,8 +68,16 @@ public class BaseDAO implements BusinessDAO, CassDAO {
 	public List<HashComparableRow> getAllDataAsRow(){
 		List<HashComparableRow> result = new ArrayList<>();
 		Session session = getSession(cluster);
-		for (Row row : session.execute("SELECT * FROM test")) {
-			result.add( new HashComparableRow(getRowHasher(), row));
+		
+		Statement stmt = new SimpleStatement("SELECT * FROM test");
+		stmt.setFetchSize(100);
+
+		ResultSet rs = session.execute(stmt);
+		Iterator<Row> iter = rs.iterator();
+		while (!rs.isFullyFetched()) {
+		  rs.fetchMoreResults();
+		  Row row = iter.next();
+		  result.add( new HashComparableRow(getRowHasher(), row));
 		}
 		return result;
 	}
