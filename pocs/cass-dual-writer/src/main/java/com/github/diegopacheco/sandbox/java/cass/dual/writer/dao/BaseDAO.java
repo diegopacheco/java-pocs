@@ -10,13 +10,13 @@ import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.connection.CassConnectionManager;
 
-public class BaseDAO implements CassDAO {
+public class BaseDAO implements BusinessDAO, CassDAO {
 	
 	protected CassConnectionManager connectionManager;
 	protected Cluster cluster;
 	
-	private static Session session;
-	private static PreparedStatement prepared;
+	private Session session;
+	private PreparedStatement prepared;
 	
 	public List<String> getAllData() {
 		List<String> result = new ArrayList<>();
@@ -34,7 +34,7 @@ public class BaseDAO implements CassDAO {
 		session.execute(bound);
 	}
 	
-	private synchronized static PreparedStatement getPreparedStatement(Cluster cluster) {
+	private synchronized PreparedStatement getPreparedStatement(Cluster cluster) {
 		Session session = getSession(cluster);
 		if (prepared==null) {
 			prepared = session.prepare("INSERT INTO TEST (key,value) VALUES (?, ?);");
@@ -42,11 +42,29 @@ public class BaseDAO implements CassDAO {
 		return prepared;
 	}
 	
-	private synchronized static Session getSession(Cluster cluster) {
+	private synchronized Session getSession(Cluster cluster) {
 		if (session==null) {
 			session = cluster.connect("cluster_test");
 		}
 		return session;
+	}
+	
+	@Override
+	public List<Row> getAllDataAsRow(){
+		List<Row> result = new ArrayList<>();
+		Session session = getSession(cluster);
+		for (Row row : session.execute("SELECT * FROM test")) {
+			result.add(row);
+		}
+		return result;
+	}
+	
+	@Override
+	public void insertDataFromRow(Row row) {
+		Session session = getSession(cluster);
+		prepared = getPreparedStatement(cluster);
+		BoundStatement bound = prepared.bind(row.getString("key"), row.getString("value"));
+		session.execute(bound);
 	}
 
 }

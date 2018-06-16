@@ -2,10 +2,10 @@ package com.github.diegopacheco.sandbox.java.cass.dual.writer.dao;
 
 import java.util.List;
 
-public class DualWriter implements CassDAO{
+public class DualWriter implements BusinessDAO{
 	
-	private CassDAO dao2x = new Cass2xDAO();
-	private CassDAO dao3x = new Cass3xDAO();
+	private BusinessDAO dao2x = new Cass2xDAO();
+	private BusinessDAO dao3x = new Cass3xDAO();
 	
 	@Override
 	public void insertData(String key, String value) {
