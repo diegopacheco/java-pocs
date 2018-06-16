@@ -1,4 +1,4 @@
-package com.github.diegopacheco.sandbox.java.cass.dual.writer.forklift;
+package com.github.diegopacheco.sandbox.java.cass.dual.writer.core.forklift;
 
 import java.util.ArrayList;
 import java.util.List;

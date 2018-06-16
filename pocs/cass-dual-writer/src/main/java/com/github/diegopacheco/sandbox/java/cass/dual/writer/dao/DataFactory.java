@@ -1,8 +1,6 @@
-package com.github.diegopacheco.sandbox.java.cass.dual.writer.data;
+package com.github.diegopacheco.sandbox.java.cass.dual.writer.dao;
 
 import java.util.stream.IntStream;
-
-import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.BusinessDAO;
 
 public class DataFactory {
 	

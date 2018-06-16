@@ -1,6 +1,6 @@
-package com.github.diegopacheco.sandbox.java.cass.dual.writer.forklift;
+package com.github.diegopacheco.sandbox.java.cass.dual.writer.core.forklift;
 
-import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.CassDAO;
+import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.CassDAO;
 
 public class DaoPairs {
 	

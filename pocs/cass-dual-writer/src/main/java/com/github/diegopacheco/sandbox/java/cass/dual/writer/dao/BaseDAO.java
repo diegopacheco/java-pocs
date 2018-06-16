@@ -9,6 +9,8 @@ import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.connection.CassConnectionManager;
+import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.CassDAO;
+import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.RowHasher;
 
 public class BaseDAO implements BusinessDAO, CassDAO {
 	
@@ -65,6 +67,20 @@ public class BaseDAO implements BusinessDAO, CassDAO {
 		prepared = getPreparedStatement(cluster);
 		BoundStatement bound = prepared.bind(row.getString("key"), row.getString("value"));
 		session.execute(bound);
+	}
+	
+	@Override
+	public RowHasher getRowHasher() {
+		return new RowHasher() {
+			@Override
+			public String hash(Row row) {
+				String key = row.getString("key");
+				String value = row.getString("value");
+				String hash   = (key!=null) ? key.hashCode() + "" : "";
+							 hash  += (value!=null) ? value.hashCode() + "" : "";
+				return hash;
+			}
+		};
 	}
 
 }

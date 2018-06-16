@@ -1,7 +1,6 @@
 package com.github.diegopacheco.sandbox.java.cass.dual.writer.dao;
 
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.connection.Cass2xConnectionManager;
-import com.github.diegopacheco.sandbox.java.cass.dual.writer.data.DataFactory;
 
 public class Cass2xDAO extends BaseDAO {
 	
