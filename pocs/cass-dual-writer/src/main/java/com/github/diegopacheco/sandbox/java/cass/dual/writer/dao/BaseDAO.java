@@ -10,7 +10,6 @@ import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.SimpleStatement;
-import com.datastax.driver.core.Statement;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.connection.CassConnectionManager;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.CassDAO;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.HashComparableRow;
@@ -81,10 +80,11 @@ public class BaseDAO implements BusinessDAO, CassDAO {
 	
 	@Override
 	public ResultSet getReadResultSet() {
-		Statement stmt = new SimpleStatement("SELECT * FROM cluster_test.test");
-		//stmt.setFetchSize(100);
+		SimpleStatement statement = new SimpleStatement("select * from TEST");
+		statement.setFetchSize(100);
+
 		Session session = getSession(cluster);
-		ResultSet rs = session.execute(stmt);
+		ResultSet rs = session.execute(statement);
 		return rs;
 	}
 	
