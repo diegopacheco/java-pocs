@@ -14,8 +14,15 @@ repositories {
 dependencies {
   compile 'org.slf4j:slf4j-api:1.7.25'
   compile 'org.slf4j:slf4j-jdk14:1.7.25'
+  
   compile group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version: '3.5.0'
   
+  compile group: 'org.eclipse.jetty', name: 'jetty-server',  version: '9.4.11.v20180605'
+  compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.4.11.v20180605'
+  
+  compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-jetty-http', version: '2.27'
+  compile group: 'org.glassfish.jersey.media', name: 'jersey-media-moxy', version: '2.27'
+    
   testCompile([
       'junit:junit:4.12'
   ])		
