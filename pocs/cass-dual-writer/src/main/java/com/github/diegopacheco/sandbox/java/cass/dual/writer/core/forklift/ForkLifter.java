@@ -82,7 +82,8 @@ public class ForkLifter {
 		
 		Map<String,HashComparableRow> result = new HashMap<>();
 		ResultSet rs = dao.getReadResultSet();
-
+		rs.fetchMoreResults();
+		
 		Iterator<Row> iter = rs.iterator();
 		while (!rs.isFullyFetched()) {
 		  rs.fetchMoreResults();
