@@ -30,12 +30,20 @@ public class ForkLifter {
 			instance = new ForkLifter();
 			
 			executor.scheduleAtFixedRate( () -> {
-				if (daos==null || daos.size()==0){
-					System.out.println("NO DAOs to ForkLift. ");
-				}else {
-					System.out.println("Fork Lifting... " + daos.size() + " daos");
-					forkLiftDaos();
+				
+				try {
+						
+						if (daos==null || daos.size()==0){
+							System.out.println("NO DAOs to ForkLift. ");
+						}else {
+							System.out.println("Fork Lifting... " + daos.size() + " daos");
+							forkLiftDaos();
+						}	
+					
+				}catch(Exception e) {
+					 System.out.println("ERROR: " + e);
 				}
+				
 			}, 0, 30, TimeUnit.SECONDS);
 			
 		}
@@ -61,7 +69,10 @@ public class ForkLifter {
 		System.out.println("Forklifiting " + daoPair);
 		
 		Map<String,HashComparableRow> dataFrom = getAllDataAsRow(daoPair.getFrom());
+		System.out.println("Got: " + dataFrom.size() + " from dao");
+		
 		Map<String,HashComparableRow> dataTo = getAllDataAsRow(daoPair.getTo());
+		System.out.println("Got: " + dataTo.size() + " to dao");
 		
 		for(String key : dataFrom.keySet()) {
 			 if (dataTo.get(key)!=null)

@@ -81,8 +81,7 @@ public class BaseDAO implements BusinessDAO, CassDAO {
 	@Override
 	public ResultSet getReadResultSet() {
 		SimpleStatement statement = new SimpleStatement("select * from TEST");
-		statement.setFetchSize(100);
-
+		//statement.setFetchSize(100);
 		Session session = getSession(cluster);
 		ResultSet rs = session.execute(statement);
 		return rs;
