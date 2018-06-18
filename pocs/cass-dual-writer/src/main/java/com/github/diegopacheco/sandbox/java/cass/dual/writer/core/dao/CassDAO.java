@@ -1,11 +1,13 @@
 package com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao;
 
-import java.util.List;
-
-import com.datastax.driver.core.Row;
+import com.datastax.driver.core.ResultSet;
 
 public interface CassDAO {
-	public List<HashComparableRow> getAllDataAsRow();
-	public void insertDataFromRow(Row row);
+	
+	public ResultSet getReadResultSet();
+
 	public RowHasher getRowHasher();
+	
+	public void insertData(HashComparableRow row);
+	
 }

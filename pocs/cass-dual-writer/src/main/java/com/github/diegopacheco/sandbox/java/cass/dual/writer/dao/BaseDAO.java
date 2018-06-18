@@ -1,7 +1,6 @@
 package com.github.diegopacheco.sandbox.java.cass.dual.writer.dao;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.datastax.driver.core.BoundStatement;
@@ -64,44 +63,36 @@ public class BaseDAO implements BusinessDAO, CassDAO {
 	// Fork Lifting methods 
 	//
 	
-	@Override
-	public List<HashComparableRow> getAllDataAsRow(){
-		List<HashComparableRow> result = new ArrayList<>();
-		Session session = getSession(cluster);
-		
-		Statement stmt = new SimpleStatement("SELECT * FROM test");
-		stmt.setFetchSize(100);
-
-		ResultSet rs = session.execute(stmt);
-		Iterator<Row> iter = rs.iterator();
-		while (!rs.isFullyFetched()) {
-		  rs.fetchMoreResults();
-		  Row row = iter.next();
-		  result.add( new HashComparableRow(getRowHasher(), row));
+	private RowHasher hasher = new RowHasher() {
+		@Override
+		public String hash(Row row) {
+			String key = row.getString("key");
+			String value = row.getString("value");
+			String hash   = (key!=null) ? key.hashCode() + "" : "";
+						 hash  += (value!=null) ? value.hashCode() + "" : "";
+			return hash;
 		}
-		return result;
-	}
-	
-	@Override
-	public void insertDataFromRow(Row row) {
-		Session session = getSession(cluster);
-		prepared = getPreparedStatement(cluster);
-		BoundStatement bound = prepared.bind(row.getString("key"), row.getString("value"));
-		session.execute(bound);
-	}
+	};
 	
 	@Override
 	public RowHasher getRowHasher() {
-		return new RowHasher() {
-			@Override
-			public String hash(Row row) {
-				String key = row.getString("key");
-				String value = row.getString("value");
-				String hash   = (key!=null) ? key.hashCode() + "" : "";
-							 hash  += (value!=null) ? value.hashCode() + "" : "";
-				return hash;
-			}
-		};
+		return hasher;
 	}
-
+	
+	@Override
+	public ResultSet getReadResultSet() {
+		Statement stmt = new SimpleStatement("SELECT * FROM test");
+		stmt.setFetchSize(100);
+		ResultSet rs = session.execute(stmt);
+		return rs;
+	}
+	
+	@Override
+	public void insertData(HashComparableRow row) {
+		Session session = getSession(cluster);
+		prepared = getPreparedStatement(cluster);
+		BoundStatement bound = prepared.bind(row.getOriginalRow().getString("key"), row.getOriginalRow().getString("value"));
+		session.execute(bound);
+	}
+	
 }
