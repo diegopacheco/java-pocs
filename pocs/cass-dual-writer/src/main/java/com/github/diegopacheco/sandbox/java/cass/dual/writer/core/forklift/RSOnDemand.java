@@ -6,6 +6,7 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.core.SimpleStatement;
 
 public class RSOnDemand {
 	public static void main(String[] args) {
@@ -18,11 +19,14 @@ public class RSOnDemand {
         .build();
 		
 		Session session = cluster.connect("cluster_test");
-		ResultSet rs = session.execute("select * from TEST");
 		
+		SimpleStatement statement = new SimpleStatement("select * from TEST");
+		statement.setFetchSize(100);
+		
+		ResultSet rs = session.execute(statement);
 		Iterator<Row> iter = rs.iterator();
+		
 		while (iter.hasNext()) {
-		  rs.fetchMoreResults();
 		  Row row = iter.next();
 		  System.out.println(row);
 		}
