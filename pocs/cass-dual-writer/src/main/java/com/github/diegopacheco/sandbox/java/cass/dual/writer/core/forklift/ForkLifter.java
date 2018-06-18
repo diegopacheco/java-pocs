@@ -1,10 +1,10 @@
 package com.github.diegopacheco.sandbox.java.cass.dual.writer.core.forklift;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -91,7 +91,7 @@ public class ForkLifter {
 	
 	private static Map<String,HashComparableRow> getAllDataAsRow(CassDAO dao){
 		
-		Map<String,HashComparableRow> result = new HashMap<>();
+		Map<String,HashComparableRow> result = new ConcurrentHashMap<>();
 		ResultSet rs = dao.getReadResultSet();
 		
 		Iterator<Row> iter = rs.iterator();
