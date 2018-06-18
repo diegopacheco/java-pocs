@@ -20,6 +20,8 @@ dependencies {
   compile group: 'org.eclipse.jetty', name: 'jetty-server',  version: '9.4.11.v20180605'
   compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.4.11.v20180605'
   
+  compile group: 'org.glassfish.jersey.core', name: 'jersey-server', version: '2.27'
+  compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet-core', version: '2.27'
   compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-jetty-http', version: '2.27'
   compile group: 'org.glassfish.jersey.media', name: 'jersey-media-moxy', version: '2.27'
     
