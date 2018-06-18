@@ -2,12 +2,11 @@ package com.github.diegopacheco.sandbox.java.cass.dual.writer.core.forklift;
 
 import java.util.Iterator;
 
+import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.core.SimpleStatement;
-import com.datastax.driver.core.Statement;
 
 public class RSOnDemand {
 	public static void main(String[] args) {
@@ -20,8 +19,10 @@ public class RSOnDemand {
         .build();
 		
 		Session session = cluster.connect("cluster_test");
-		Statement stmt = new SimpleStatement("SELECT * FROM TEST");
-		stmt.setFetchSize(100);
+		//Statement stmt = new SimpleStatement("");
+		//stmt.setFetchSize(100);
+		BoundStatement stmt = session.prepare("select * from cluster_test.TEST").bind();
+		
 		ResultSet rs = session.execute(stmt);
 		System.out.println(rs.isFullyFetched());
 		
