@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.forklift.DaoPairs;
+import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.forklift.ForkLiftMetricsManager;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.forklift.ForkLifter;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.toggle.TogglesManager;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.Cass2xDAO;
@@ -51,6 +52,7 @@ public class EntryPoint {
     data.put("/dw", "Tells if DUAL.WRITE is ON or OFF");
     data.put("/dw/switch", "FLIPS DUAL.WRITE");
     data.put("/fl", "Tells if FORKLIFT is ON or OFF");
+    data.put("/fl/stats", "Provide internal statistic about ForkLift");
     data.put("/fl/switch", "FLIPS FORKLIFT");
     
   	Response response = Response.ok( data , MediaType.APPLICATION_JSON).build();
@@ -133,6 +135,15 @@ public class EntryPoint {
   @Consumes(MediaType.APPLICATION_JSON)
   public Response getForkLift(){
   	Response response = Response.ok( togglesManager.isForkLift(), MediaType.APPLICATION_JSON).build();
+  	return response;
+  }
+  
+  @GET
+  @Path("fl/stats")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response getForkLiftStats(){
+  	Response response = Response.ok( ForkLiftMetricsManager.getIntansce()  , MediaType.APPLICATION_JSON).build();
   	return response;
   }
   
