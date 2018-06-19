@@ -25,6 +25,8 @@ dependencies {
   compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-jetty-http', version: '2.27'
   compile group: 'org.glassfish.jersey.media', name: 'jersey-media-moxy', version: '2.27'
   compile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.27'
+  
+  compile ('com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.9.6')
     
   testCompile([
       'junit:junit:4.12'

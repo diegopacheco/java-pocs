@@ -2,11 +2,13 @@ package com.github.diegopacheco.sandbox.java.cass.dual.writer.rest;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.Cass2xDAO;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.DataFactory;
@@ -20,14 +22,16 @@ public class EntryPoint {
 	
   @GET
   @Path("healthchecker")
-  @Produces(MediaType.TEXT_PLAIN)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   public String healthchecker() {
       return "OK";
   }
   
   @GET
   @Path("generate/{records}")
-  @Produces(MediaType.TEXT_PLAIN)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   public String count(@PathParam("records") Integer soManyRecords) {
   	System.out.println("Generating " + soManyRecords + " in Cass 2x.");
   	DataFactory df = new DataFactory();
@@ -37,7 +41,8 @@ public class EntryPoint {
   
   @GET
   @Path("insert/{k}/{v}")
-  @Produces(MediaType.TEXT_PLAIN)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
   public String insert(@PathParam("k") String key,@PathParam("v") String value) {
   	dualWriter.insertData(key, value);
   	return "OK";
@@ -46,9 +51,11 @@ public class EntryPoint {
   @GET
   @Path("all")
   @Produces(MediaType.APPLICATION_JSON)
-  public List<String> getAll() {
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response getAll() {
   	List<String> data = dualWriter.getAllData();
-  	return data;
+  	Response response = Response.ok( new Result(data) , MediaType.APPLICATION_JSON).build();
+  	return response;
   }
 	
 }

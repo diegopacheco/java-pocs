@@ -16,7 +16,10 @@ public class JettyServer {
     ServletHolder jerseyServlet = context.addServlet(org.glassfish.jersey.servlet.ServletContainer.class, "/*");
     jerseyServlet.setInitOrder(0);
     jerseyServlet.setInitParameter("jersey.config.server.provider.classnames",EntryPoint.class.getCanonicalName());
-
+    
+    /* Register Jackson as JSON provider */
+    jerseyServlet.setInitParameter("jersey.config.server.provider.packages", "com.fasterxml.jackson.jaxrs.json"); 
+    
     try {
     	  System.out.println("Jetty Server running on http://127.0.0.1:8080 "); 
         jettyServer.start();
