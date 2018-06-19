@@ -143,15 +143,15 @@ public class ForkLiftExecutionMetric {
 	}
 	
 	public String toJSON() {
-		return "{ \"fromCount\"=\"" + fromCount + "\","
-					 + " \"toCount\"=" + toCount + "\", "
-					 + "\"fromDaoName\"=\"" + fromDaoName + "\", "
-					 + "\"toDaoName\"=" + toDaoName + "\","
-					 + "\"startTime\"=" + startTime + "\", "
-					 + "\"finishTime\"=" + finishTime + "\", "
-					 + "\"totalTime\"=" + totalTime + "\", "
-					 + "\"totalTimeAsString\"=" + totalTimeAsString + "\", "
-					 + "\"pending\"=" + pending + "\" " 
+		return "{ 'fromCount'='" + fromCount + "',"
+					 + " 'toCount'=" + toCount + "', "
+					 + "'fromDaoName'='" + fromDaoName + "', "
+					 + "'toDaoName'=" + toDaoName + "',"
+					 + "'startTime'=" + startTime + "', "
+					 + "'finishTime'=" + finishTime + "', "
+					 + "'totalTime'=" + totalTime + "', "
+					 + "'totalTimeAsString'=" + totalTimeAsString + "', "
+					 + "'pending'=" + pending + "' " 
 					 + "}";
 	}
 	
