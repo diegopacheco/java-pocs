@@ -136,11 +136,23 @@ public class ForkLiftExecutionMetric {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ForkLiftExecutionMetric [fromCount=" + fromCount + ", toCount=" + toCount + ", fromDaoName=" + fromDaoName
-		    + ", toDaoName=" + toDaoName + ", startTime=" + startTime + ", finishTime=" + finishTime + ", totalTime="
-		    + totalTime + "]";
+		return toJSON();
 	}
+	
+	public String toJSON() {
+		return "{ \"fromCount\"=\"" + fromCount + "\","
+					 + " \"toCount\"=" + toCount + "\", "
+					 + "\"fromDaoName\"=\"" + fromDaoName + "\", "
+					 + "\"toDaoName\"=" + toDaoName + "\","
+					 + "\"startTime\"=" + startTime + "\", "
+					 + "\"finishTime\"=" + finishTime + "\", "
+					 + "\"totalTime\"=" + totalTime + "\", "
+					 + "\"totalTimeAsString\"=" + totalTimeAsString + "\", "
+					 + "\"pending\"=" + pending + "\" " 
+					 + "}";
+	}
+	
 }

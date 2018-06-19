@@ -143,7 +143,7 @@ public class EntryPoint {
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   public Response getForkLiftStats(){
-  	Response response = Response.ok( ForkLiftMetricsManager.getIntansce()  , MediaType.APPLICATION_JSON).build();
+  	Response response = Response.ok( ForkLiftMetricsManager.getIntansce().getStats() , MediaType.APPLICATION_JSON).build();
   	return response;
   }
   

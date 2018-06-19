@@ -1,7 +1,9 @@
 package com.github.diegopacheco.sandbox.java.cass.dual.writer.core.forklift;
 
 import java.util.Collections;
+import java.util.Map;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ForkLiftMetricsManager {
@@ -33,6 +35,13 @@ public class ForkLiftMetricsManager {
 
 	public Queue<ForkLiftExecutionMetric> getPreviousExecutions() {
 		return (Queue<ForkLiftExecutionMetric>) Collections.unmodifiableCollection(previousExecutions);
+	}
+	
+	public Map<String,String> getStats(){
+		Map<String,String> stats = new ConcurrentHashMap<>();
+		stats.put("currentExecution", (currentExecution==null) ? "nothing_running_now" : currentExecution.toJSON());
+		stats.put("previousExecution", previousExecutions.toString());
+		return stats;
 	}
 	
 }
