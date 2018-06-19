@@ -43,6 +43,19 @@ public class BaseDAO implements BusinessDAO, CassDAO {
 		session.execute(bound);
 	}
 	
+	@Override
+	public String getById(String id) {
+		Session session = getSession(cluster);
+		ResultSet rs = session.execute("SELECT COUNT(*) FROM test WHERE KEY='" + id + "'");
+		return rs.all().get(0).getString("key") + ":" + rs.all().get(0).getString("value") ;
+	}
+
+	
+	//
+	// Simple caching
+	//
+	
+	
 	private synchronized PreparedStatement getPreparedStatement(Cluster cluster) {
 		Session session = getSession(cluster);
 		if (prepared==null) {
