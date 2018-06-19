@@ -1,5 +1,7 @@
 package com.github.diegopacheco.sandbox.java.cass.dual.writer.rest;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -39,6 +41,14 @@ public class EntryPoint {
   public String insert(@PathParam("k") String key,@PathParam("v") String value) {
   	dualWriter.insertData(key, value);
   	return "OK";
+  }
+  
+  @GET
+  @Path("all")
+  @Produces(MediaType.APPLICATION_JSON)
+  public List<String> getAll() {
+  	List<String> data = dualWriter.getAllData();
+  	return data;
   }
 	
 }
