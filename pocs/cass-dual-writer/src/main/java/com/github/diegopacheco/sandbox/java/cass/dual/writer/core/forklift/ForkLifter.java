@@ -64,6 +64,7 @@ public class ForkLifter {
 		System.out.println("Forklifiting " + daoPair);
 		
 		Map<String,HashComparableRow> dataFrom = getAllDataAsRow(daoPair.getFrom());
+		Integer originalSize = dataFrom.size();
 		System.out.println("Got: " + dataFrom.size() + " from dao");
 		
 		Map<String,HashComparableRow> dataTo = getAllDataAsRow(daoPair.getTo());
@@ -82,7 +83,7 @@ public class ForkLifter {
 			ForkLiftExecutionMetric metrics = new ForkLiftExecutionMetric();
 			metrics.setFromDaoName(daoPair.getFrom().getClass().getSimpleName());
 			metrics.setToDaoName(daoPair.getTo().getClass().getSimpleName());
-			metrics.setFromCount(dataFrom.size());
+			metrics.setFromCount(originalSize);
 			metrics.setToCount(dataTo.size());
 			metrics.setStartTime(System.currentTimeMillis());
 			
