@@ -49,6 +49,14 @@ public class EntryPoint {
   }
   
   @GET
+  @Path("get/{k}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
+  public String insert(@PathParam("k") String key) {
+  	return dualWriter.getById(key);
+  }
+  
+  @GET
   @Path("all")
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
