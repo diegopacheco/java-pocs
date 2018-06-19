@@ -6,7 +6,18 @@ public class TogglesProps {
 	public static final String SOURCE_OF_TRUTH_PROP = "source.of.truth";
 	
 	public static enum SourceOfTruth{
-		CASS2x, CASS3x
+		
+		CASS2x("Cassandra_2x"), CASS3x("Cassandra_3x");
+		
+		private String desc;
+		
+		SourceOfTruth(String desc){
+			this.desc = desc;
+		}
+		
+		public String toString() {
+			return desc;
+		}
 	};
 	
 }
