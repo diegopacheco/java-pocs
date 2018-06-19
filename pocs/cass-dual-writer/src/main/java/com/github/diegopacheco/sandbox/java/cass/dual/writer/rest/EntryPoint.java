@@ -1,6 +1,8 @@
 package com.github.diegopacheco.sandbox.java.cass.dual.writer.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -10,8 +12,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.forklift.DaoPairs;
+import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.forklift.ForkLifter;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.toggle.TogglesManager;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.Cass2xDAO;
+import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.Cass3xDAO;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.DataFactory;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.DualWriter;
 
@@ -28,6 +33,28 @@ public class EntryPoint {
   @Consumes(MediaType.APPLICATION_JSON)
   public String healthchecker() {
       return "OK";
+  }
+  
+  @GET
+  @Path("/")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response getOptions() {
+  	Map<String,String> data = new HashMap<>();
+  	data.put("/", "Show all options - all things you can do");
+    data.put("/healthchecker", "/Service Healthcechker operation.");
+    data.put("/generate/{records}", "Generate as many records as you want! ");
+    data.put("/insert/{k}/{v}", "Insert a single record");
+    data.put("/get/{k}", "Get a single record by id");
+    data.put("/all", "Get All data in DB");
+    data.put("/sot", "Tells who is the database source of truth");
+    data.put("/dw", "Tells if DUAL.WRITE is ON or OFF");
+    data.put("/dw/switch", "FLIPS DUAL.WRITE");
+    data.put("/fl", "Tells if FORKLIFT is ON or OFF");
+    data.put("/fl/switch", "FLIPS FORKLIFT");
+    
+  	Response response = Response.ok( data , MediaType.APPLICATION_JSON).build();
+  	return response;
   }
   
   @GET
@@ -97,6 +124,34 @@ public class EntryPoint {
   public Response setDualWriteOn(){
   	togglesManager.switchDualWrite();
   	Response response = Response.ok( togglesManager.isDualWrtiteEnable() , MediaType.APPLICATION_JSON).build();
+  	return response;
+  }
+  
+  @GET
+  @Path("fl")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response getForkLift(){
+  	Response response = Response.ok( togglesManager.isForkLift(), MediaType.APPLICATION_JSON).build();
+  	return response;
+  }
+  
+  @GET
+  @Path("fl/switch")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response setForkLift(){
+  	boolean isForkLiftOn = togglesManager.switchForkLift();
+  	Response response = Response.ok( togglesManager.isForkLift() , MediaType.APPLICATION_JSON).build();
+  	
+  	if(isForkLiftOn) {
+  		ForkLifter fl = ForkLifter.getInstance();
+  		fl.addDaoPair(new DaoPairs(new Cass2xDAO(), new Cass3xDAO()));
+  	}else {
+  		ForkLifter fl = ForkLifter.getInstance();
+  		fl.gracefulStop();
+  	}
+  	
   	return response;
   }
   

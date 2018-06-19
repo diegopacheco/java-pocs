@@ -1,27 +1,26 @@
 package com.github.diegopacheco.sandbox.java.cass.dual.writer.core.forklift;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.CassDAO;
 import com.github.diegopacheco.sandbox.java.cass.dual.writer.core.dao.HashComparableRow;
-import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.Cass2xDAO;
-import com.github.diegopacheco.sandbox.java.cass.dual.writer.dao.Cass3xDAO;
 
 public class ForkLifter {
 	
 	private static ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
 	private static ForkLifter instance;
-	private static List<DaoPairs> daos = new ArrayList<>();
+	private static Queue<DaoPairs> daos = new ConcurrentLinkedQueue<>();
 	
 	private ForkLifter() {}
 	
@@ -57,11 +56,7 @@ public class ForkLifter {
 		 
 		 long end = System.currentTimeMillis();
 		 long millis = (end-init);
-		 String time = String.format("%d min, %d sec", 
-			    TimeUnit.MILLISECONDS.toMinutes(millis),
-			    TimeUnit.MILLISECONDS.toSeconds(millis) - 
-			    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
-			);
+		 String time = TimeUtils.format(millis);
 		 System.out.println("DONE Fork Lifting took " + time + " \n");
 	}
 	
@@ -83,7 +78,26 @@ public class ForkLifter {
 			System.out.println("All in SYNC - Nothing to do!");
 		}else {
 			System.out.println(dataFrom.size() + " ROW to Be Migrated");
-			dataFrom.forEach( (k,v) ->  daoPair.getTo().insertData(v));
+			
+			ForkLiftExecutionMetric metrics = new ForkLiftExecutionMetric();
+			metrics.setFromDaoName(daoPair.getFrom().getClass().getSimpleName());
+			metrics.setToDaoName(daoPair.getTo().getClass().getSimpleName());
+			metrics.setFromCount(dataFrom.size());
+			metrics.setToCount(dataTo.size());
+			metrics.setStartTime(System.currentTimeMillis());
+			
+			AtomicInteger pending = new AtomicInteger(dataFrom.size());
+			metrics.setPending(pending);
+			ForkLiftMetricsManager.getIntansce().addExecution(metrics);
+			
+			dataFrom.forEach( (k,v) ->  {
+				daoPair.getTo().insertData(v); 
+				pending.decrementAndGet(); 
+			});
+			
+			metrics.setFinishTime(System.currentTimeMillis());
+			metrics.setTotalTime( metrics.getFinishTime() -  metrics.getStartTime() );
+			metrics.setTotalTimeAsString(TimeUtils.format(metrics.getTotalTime()));
 			System.out.println("DONE fork lifiting " + daoPair);
 		}
 		
@@ -102,14 +116,13 @@ public class ForkLifter {
 		return result;
 	}
 	
-	public void addDaoPair(DaoPairs daoPair) {
+	public synchronized void addDaoPair(DaoPairs daoPair) {
 		daos.add(daoPair);
 	}
 	
-	public static void main(String[] args) {
-		ForkLifter fl = ForkLifter.getInstance();
-		System.out.println(fl);
-		fl.addDaoPair(new DaoPairs(new Cass2xDAO(), new Cass3xDAO()));
+	public synchronized void gracefulStop() {
+		System.out.println("STOPPING FORKLIFT NOW - BY removing DAOs! ");
+		daos = new ConcurrentLinkedQueue<>();
 	}
 	
 }
