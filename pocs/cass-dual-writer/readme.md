@@ -10,3 +10,8 @@ we would need todo target cassandra(TO DAO) and do a query there. This would be 
 This is another assumption is that Forklift is short lived. Once 2 dabs are in sync, Dual write will make sure they are in sync.
 When we deploy forklit we add more memory wait to forklift finish and redeploy the service again with forklift off and less
 memory. This is under the assuptionns we are using spinnaker and we can doi traffic switch without downtime.
+
+## This is a POC
+
+This is not a PRODUCTION READY and FINAL CODE. So it could have bugs. So its better to test local with docker you can
+use this solution to help you out: https://github.com/diegopacheco/dualwrite-cass-docker.
