@@ -11,10 +11,10 @@ There are some "generic" infrastructure code and some especific business code wh
 
 ForkLifter is very memory intensive, since will load all data from 2 databases in to memory.
 However that will happen 1 DAO at the time in a single thread application. This is like a mini crippled Spark. 
-We could save mekory for the case that dataset is too big but them each chunk of data 
-we would need todo target cassandra(TO DAO) and do a query there. This would be saving lots of memory but slow donw a lot the overall process.
+We could save memory for the case that dataset is too big but them each chunk of data 
+we would need todo target cassandra(TO DAO) and do a query there. This would be saving lots of memory but slow donw a lot the overall process however todo that you would need to change forklift code and the contract with the DAOs but is possible and not that hard - but this is not default - memory is the default.
 
-## Spinakker usage
+## Spinnaker usage
 
 This is another assumption is that Forklift is short lived. Once 2 dabs are in sync, Dual write will make sure they are in sync.
 When we deploy forklit we add more memory wait to forklift finish and redeploy the service again with forklift off and less
