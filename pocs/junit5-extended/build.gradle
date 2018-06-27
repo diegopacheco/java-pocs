@@ -16,6 +16,8 @@ dependencies {
   compile 'org.slf4j:slf4j-jdk14:1.7.25'
   
   testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.2.0'
+  testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.2.0'
+  testCompile group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.2.0'
   
 }
 
