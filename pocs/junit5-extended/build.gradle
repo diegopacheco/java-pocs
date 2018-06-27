@@ -33,7 +33,8 @@ test {
     }
     failFast = true
     testLogging {
-        events 'PASSED', 'FAILED', 'SKIPPED'
+        events 'PASSED', 'FAILED', 'SKIPPED', 'STANDARD_OUT'
+        showStandardStreams = true
     }
     afterSuite { desc, result ->
         if (!desc.parent) {

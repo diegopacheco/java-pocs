@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
@@ -15,6 +16,11 @@ import com.github.diegopacheco.sandbox.java.service.test.DataServiceTestConfig;
 @Tag("v1x")
 @RunWith(JUnitPlatform.class)
 public class DataServiceImplV1x {
+	
+	@BeforeAll
+	public static void setup() {
+		 DataServiceTestConfig.setUp();
+	}
 	
 	@Test	
 	public void testWrongVersion(){
