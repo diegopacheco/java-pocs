@@ -1,14 +1,16 @@
 package com.github.diegopacheco.sandbox.java.service.test.v1x;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.github.diegopacheco.sandbox.java.service.Version;
 import com.github.diegopacheco.sandbox.java.service.test.DataServiceTestConfig;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+@Tag("v1x")
 public class DataServiceImplV1x {
 	
 	@Test	
