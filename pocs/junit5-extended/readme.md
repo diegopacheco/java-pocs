@@ -42,3 +42,9 @@ test {
 }
 ```
 So we can run: $ ./gradlew cleanTest test
+
+## Junit 5 and Order
+
+So far there is no solution for that in JUNIT 5. This is not needed for Unit Tests<BR>
+However sometimes integration tests need order. You can follow up here: https://github.com/junit-team/junit5/issues/48 In the POC I workaround a solution but is
+fine for setup since I can control to run just once, shutdown is more complicated since ot need be the last thing.
