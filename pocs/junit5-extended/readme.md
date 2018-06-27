@@ -7,7 +7,7 @@ This is a very recommended reading
 
 ## Take Aways
 
-* We are using Junit 5(Jupiter API) here
+* We are using Junit 5(Jupiter API) here https://junit.org/junit5/docs/current/user-guide/
 * Dont use Inheritance
 * Tests are versionated by Package -> https://github.com/diegopacheco/java-pocs/tree/master/pocs/junit5-extended/src/test/java/com/github/diegopacheco/sandbox/java/service/test
 * All common and resuable code goes here: https://github.com/diegopacheco/java-pocs/blob/master/pocs/junit5-extended/src/test/java/com/github/diegopacheco/sandbox/java/service/test/DataServiceTestConfig.java
