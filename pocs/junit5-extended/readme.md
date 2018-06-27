@@ -13,11 +13,13 @@ This is a very recommended reading
 * All common and resuable code goes here: https://github.com/diegopacheco/java-pocs/blob/master/pocs/junit5-extended/src/test/java/com/github/diegopacheco/sandbox/java/service/test/DataServiceTestConfig.java
 * DataServiceTestConfig should not have assertions
 * Suites was removed in Junit 5, Its possible to use backward compatibility but is better use TAGS now.
+* All tests as tagd with @Tag where we are passing the version to the TAG
+* Tags are picked up by build.gradle in useJUnitPlatform.includeTags where are only allowing 1x and 2x to run.
 
 ## Running with Gradle
 
 We need to make sue we are using gradle >= 4.6 (4.7 or highther would be even better).</BR>
-In gradle.build we need configure to use the Junit 5 engine and print more info.
+In build.gradle we need configure to use the Junit 5 engine and print more info.
 ```grovy
 test {
     useJUnitPlatform {
