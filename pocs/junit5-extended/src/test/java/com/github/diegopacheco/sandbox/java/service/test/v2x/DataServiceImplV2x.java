@@ -6,11 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import com.github.diegopacheco.sandbox.java.service.Version;
 import com.github.diegopacheco.sandbox.java.service.test.DataServiceTestConfig;
 
 @Tag("v2x")
+@RunWith(JUnitPlatform.class)
 public class DataServiceImplV2x {
 
 	@Test	
