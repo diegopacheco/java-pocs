@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,15 @@ public class DataServiceImplV2x {
 			String result = DataServiceTestConfig.getDataService().getCurrentDate(new Version("2.x"));
 			assertNotNull(result);
 			assertTrue(!"".equals(result));
+	}
+
+	/**
+	 * This is kind of danger because we need make sure this is the last one to run.
+	 * So we need watch the names and package :(
+	 */
+	@AfterAll
+	public static void afterAll() {
+			DataServiceTestConfig.tearDown();
 	}
 	
 }
