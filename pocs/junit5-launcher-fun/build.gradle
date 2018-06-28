@@ -1,0 +1,45 @@
+apply plugin: 'application'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = 'com.github.diegopacheco.sandbox.java.Main'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/groups/public/' }
+}
+
+dependencies {
+  compile 'org.slf4j:slf4j-api:1.7.25'
+  compile 'org.slf4j:slf4j-jdk14:1.7.25'
+  
+  testCompile  group: 'org.junit.jupiter' , name: 'junit-jupiter-api'       , version: '5.2.0'
+  testCompile  group: 'org.junit.jupiter' , name: 'junit-jupiter-engine'    , version: '5.2.0'
+  
+  testCompile  group: 'org.junit.platform', name: 'junit-platform-launcher' , version: '1.2.0'
+  testCompile  group: 'org.junit.platform', name: 'junit-platform-runner'   , version: '1.2.0'	
+}
+
+run {    
+  systemProperties System.getProperties()
+}
+
+test {
+    useJUnitPlatform()
+    failFast = true
+    testLogging {
+        events 'PASSED', 'FAILED', 'SKIPPED', 'STANDARD_OUT'
+        showStandardStreams = true
+    }
+    afterSuite { desc, result ->
+        if (!desc.parent) {
+            println "\nTest result: ${result.resultType}"
+            println "Test summary: ${result.testCount} tests, " +
+                    "${result.successfulTestCount} succeeded, " +
+                    "${result.failedTestCount} failed, " +
+                    "${result.skippedTestCount} skipped"
+        }
+    }
+}
