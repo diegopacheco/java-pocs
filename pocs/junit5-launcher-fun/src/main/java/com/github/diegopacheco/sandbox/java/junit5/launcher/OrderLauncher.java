@@ -3,6 +3,11 @@ package com.github.diegopacheco.sandbox.java.junit5.launcher;
 import static org.junit.platform.engine.discovery.ClassNameFilter.includeClassNamePatterns;
 import static org.junit.platform.engine.discovery.DiscoverySelectors.selectPackage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+
 import org.junit.platform.launcher.Launcher;
 import org.junit.platform.launcher.LauncherDiscoveryRequest;
 import org.junit.platform.launcher.TestExecutionListener;
@@ -15,6 +20,10 @@ public class OrderLauncher {
 	
 	public static void main(String[] args) throws Throwable {
 		
+		LogManager.getLogManager().readConfiguration(
+				new FileInputStream( 
+						new File(".").getCanonicalPath() + "/src/main/resources/" +  "logging.properties"));
+		
 		LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder.request()
 		    .selectors(
 		        selectPackage("com.example.mytests")
@@ -26,13 +35,13 @@ public class OrderLauncher {
 
 		Launcher launcher = LauncherFactory.create();
 		TestPlan testPlan = launcher.discover(request);
-		System.out.println(testPlan);
+		System.out.println(testPlan.containsTests());
 		
-		TestExecutionListener listener = LoggingListener.forJavaUtilLogging();
+		TestExecutionListener listener = LoggingListener.forJavaUtilLogging(Level.ALL);
 		launcher.registerTestExecutionListeners(listener);
 		launcher.execute(request);
 		
-		Thread.sleep(3000L);
+		Thread.sleep(5000L);
 	}
 	
 }
