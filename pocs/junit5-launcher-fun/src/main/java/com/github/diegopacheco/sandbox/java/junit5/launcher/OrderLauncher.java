@@ -9,7 +9,7 @@ import org.junit.platform.launcher.TestExecutionListener;
 import org.junit.platform.launcher.TestPlan;
 import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.junit.platform.launcher.core.LauncherFactory;
-import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
+import org.junit.platform.launcher.listeners.LoggingListener;
 
 public class OrderLauncher {
 	
@@ -18,10 +18,9 @@ public class OrderLauncher {
 		LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder.request()
 		    .selectors(
 		        selectPackage("com.example.mytests")
-		        //,selectClass(MyTestClass.class)
 		    )
 		    .filters(
-		        includeClassNamePatterns(".*Tests")
+		        includeClassNamePatterns(".*Test")
 		    )
 		    .build();
 
@@ -29,7 +28,7 @@ public class OrderLauncher {
 		TestPlan testPlan = launcher.discover(request);
 		System.out.println(testPlan);
 		
-		TestExecutionListener listener = new SummaryGeneratingListener();
+		TestExecutionListener listener = LoggingListener.forJavaUtilLogging();
 		launcher.registerTestExecutionListeners(listener);
 		launcher.execute(request);
 		
