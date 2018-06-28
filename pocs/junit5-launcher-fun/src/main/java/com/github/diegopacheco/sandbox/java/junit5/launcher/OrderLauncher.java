@@ -5,7 +5,6 @@ import static org.junit.platform.engine.discovery.DiscoverySelectors.selectPacka
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.logging.Level;
 import java.util.logging.LogManager;
 
 import org.junit.platform.launcher.Launcher;
@@ -37,11 +36,9 @@ public class OrderLauncher {
 		TestPlan testPlan = launcher.discover(request);
 		System.out.println(testPlan.containsTests());
 		
-		TestExecutionListener listener = LoggingListener.forJavaUtilLogging(Level.ALL);
+		TestExecutionListener listener = LoggingListener.forJavaUtilLogging();
 		launcher.registerTestExecutionListeners(listener);
 		launcher.execute(request);
-		
-		Thread.sleep(5000L);
 	}
 	
 }
