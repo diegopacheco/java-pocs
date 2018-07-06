@@ -4,8 +4,6 @@ import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ShutdownHandler;
-import org.eclipse.jetty.server.handler.StatisticsHandler;
-import org.eclipse.jetty.server.handler.gzip.GzipHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.servlet.ServletContainer;
@@ -43,8 +41,7 @@ public class JettyServerRunner {
 			
 	    Server server = new Server(8080);
 	    HandlerList handlers = new HandlerList();
-	    handlers.setHandlers(new Handler[]
-	    { context, shutdown, new StatisticsHandler(), new GzipHandler() });
+	    handlers.setHandlers(new Handler[]{context});
 	    server.setHandler(handlers);
 	    server.setStopAtShutdown(true);
 	    shutdown.setServer(server);
@@ -52,8 +49,8 @@ public class JettyServerRunner {
 			
 			System.out.println("Jetty Server 9.4 running on: http://localhost:8080/");
 			System.out.println("You can do: ");
-			System.out.println("-- http://localhost:8080/date");
-			System.out.println("-- http://localhost:8080/admin/shutdown");
+			System.out.println("-- curl -X GET http://localhost:8080/date");
+			System.out.println("-- curl -X GET http://localhost:8080/admin/shutdown");
 			JettyServerRunner.server = server;
 			server.join();
 			
