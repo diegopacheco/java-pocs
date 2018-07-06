@@ -5,6 +5,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ShutdownHandler;
 import org.eclipse.jetty.server.handler.StatisticsHandler;
+import org.eclipse.jetty.server.handler.gzip.GzipHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.servlet.ServletContainer;
@@ -43,7 +44,7 @@ public class JettyServerRunner {
 	    Server server = new Server(8080);
 	    HandlerList handlers = new HandlerList();
 	    handlers.setHandlers(new Handler[]
-	    { context, shutdown, new StatisticsHandler() });
+	    { context, shutdown, new StatisticsHandler(), new GzipHandler() });
 	    server.setHandler(handlers);
 	    server.setStopAtShutdown(true);
 	    shutdown.setServer(server);
