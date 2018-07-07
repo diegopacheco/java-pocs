@@ -1,6 +1,6 @@
 buildscript {
   repositories {
-    jcenter()  
+    jcenter()
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/groups/public/' }
   }
@@ -8,11 +8,9 @@ buildscript {
     classpath 'org.ajoberstar:gradle-git:1.7.2'
   }
 }
-
-apply plugin: 'java'
 apply plugin: 'org.ajoberstar.grgit'
-
-import org.ajoberstar.grgit.*
+apply   from: 'https://raw.githubusercontent.com/diegopacheco/arch-annotations/master/config.gradle'
+apply plugin: 'java'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -24,34 +22,9 @@ repositories {
 }
 
 dependencies {
-  compile 'org.slf4j:slf4j-api:1.7.25'
-  compile 'org.slf4j:slf4j-jdk14:1.7.25'
-  
   // github task downloaded from github now we can use it here :D
   compile 'com.github.diegopacheco.sandbox.java:arch-annotations:1.0-SNAPSHOT'
-    
-  testCompile([
-      'junit:junit:4.12'
-  ])		
 }
 
-
-task github {
- File dir=new File('target/github')
- if(!dir.exists()) {
-  def grgit = Grgit.clone(dir: dir, uri: 'https://github.com/diegopacheco/arch-annotations.git')
-  exec {
-    workingDir 'target/github'
-    commandLine 'sh', '-c', 'mvn clean package install'
-  }
- }
-}
 compileJava.dependsOn github
-
-task githubClean {
-  exec {
-    workingDir '.'
-    commandLine 'sh', '-c', 'rm -rf target/github'
-  }
-}
 clean.dependsOn githubClean
