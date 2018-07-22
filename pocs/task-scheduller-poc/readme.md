@@ -5,6 +5,8 @@
 
 ### Architecture
 
+![alt text](threads-model-screth-draw.jpg "Architecture Draw / Scatch")
+
 Basically here we are 4 main componentes on this architecre:
  - Qaurtz
  - Thread Pool in Quartz = 10 Threads (check quartz.properties)
