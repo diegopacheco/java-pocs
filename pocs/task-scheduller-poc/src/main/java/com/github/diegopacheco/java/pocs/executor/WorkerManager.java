@@ -17,7 +17,7 @@ public class WorkerManager {
 	}
 	
 	public void schedule(Task t){
-		executor.schedule(() -> { t.execute(); }, 1, TimeUnit.SECONDS);
+		executor.scheduleAtFixedRate(() -> t.execute() , 0, 1, TimeUnit.SECONDS);
 	}
 	
 }
