@@ -36,6 +36,8 @@ public class MainApp {
 	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
 	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
 	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
+	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
+	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
 	  
 	}
 }
