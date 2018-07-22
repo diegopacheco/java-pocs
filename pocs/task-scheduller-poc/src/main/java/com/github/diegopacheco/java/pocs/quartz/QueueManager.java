@@ -32,15 +32,16 @@ public class QueueManager {
 	}
 	
 	public Job giveMeWork(String group) {
+		validateGrpup(group);
 		Queue<Job> queue = groupQueueMappings.get(group);
 		if (queue.size()==0) 
 			return null;
-		validateGrpup(group);
+
 		if(freeQueueMappings.get(group)) {
 			freeQueueMappings.put(group, false);
 			return queue.poll();
 		}else {
-			System.out.println("Queue: " + group + " is busy now... ");
+			System.out.println("Queue: " + group + " is busy now... " + " Size: " + queue.size());
 			return null;
 		}
 	}
