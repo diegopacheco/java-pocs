@@ -13,7 +13,8 @@ public class MainApp {
 
 	public static void main(String[] args) throws Throwable{
 
-		QueueManager.getInstance().register("date"); 
+		QueueManager.getInstance().register("date");
+		QueueManager.getInstance().register("date2");
 		
 	  Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 	  scheduler.start();
@@ -38,6 +39,11 @@ public class MainApp {
 	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
 	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
 	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
+	  QuietThread.sleep(5000);
+	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
+	  QueueManager.getInstance().enqueueTask(new DateTask(), "date2");
+	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
+	  QueueManager.getInstance().enqueueTask(new DateTask(), "date2");
 	  
 	}
 }

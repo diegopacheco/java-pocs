@@ -23,6 +23,7 @@ public class QueueManager {
 	public void register(String group) {
 		groupQueueMappings.put(group, new ConcurrentLinkedQueue<>());
 		freeQueueMappings.put(group, true);
+		CircularQueueTracker.getInstance().register(groupQueueMappings.get(group));
 	}
 	
 	public void enqueueTask(Job task,String group){
@@ -33,7 +34,7 @@ public class QueueManager {
 	
 	public Job giveMeWork(String group) {
 		validateGrpup(group);
-		Queue<Job> queue = groupQueueMappings.get(group);
+		Queue<Job> queue = CircularQueueTracker.getInstance().next();
 		if (queue.size()==0) 
 			return null;
 

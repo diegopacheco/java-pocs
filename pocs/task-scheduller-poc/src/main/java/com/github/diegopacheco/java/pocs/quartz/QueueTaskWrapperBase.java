@@ -12,7 +12,7 @@ public abstract class QueueTaskWrapperBase implements GroupTask {
 		
 				try {
 				
-					System.out.println("Running Task: " + work.getClass().getSimpleName());
+					System.out.println("Running Task: " + work.getClass().getSimpleName() + " from group: " + getGroup());
 					work.execute(context);
 					
 				}catch(Exception e) {
