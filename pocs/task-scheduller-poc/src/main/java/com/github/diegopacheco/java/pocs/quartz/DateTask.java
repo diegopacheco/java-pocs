@@ -11,6 +11,7 @@ public class DateTask implements Job {
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		System.out.println("Current Date:" + new Date());
+		QuietThread.sleep(1000);
 	}
 	
 }

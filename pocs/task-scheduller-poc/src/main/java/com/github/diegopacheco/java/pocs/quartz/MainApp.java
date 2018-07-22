@@ -34,6 +34,8 @@ public class MainApp {
 	  
 	  QuietThread.sleep(3000);
 	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
+	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
+	  QueueManager.getInstance().enqueueTask(new DateTask(), "date");
 	  
 	}
 }

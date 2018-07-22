@@ -11,6 +11,7 @@ public class QueueManager {
 	
 	private static QueueManager instance;
 	private Map<String, Queue<Job>> groupQueueMappings = new ConcurrentHashMap<>();
+	private Map<String, Boolean>     freeQueueMappings = new ConcurrentHashMap<>();
 	
 	public synchronized static QueueManager getInstance(){
 		if (instance==null) {
@@ -21,6 +22,7 @@ public class QueueManager {
 	
 	public void register(String group) {
 		groupQueueMappings.put(group, new ConcurrentLinkedQueue<>());
+		freeQueueMappings.put(group, true);
 	}
 	
 	public void enqueueTask(Job task,String group){
@@ -31,8 +33,21 @@ public class QueueManager {
 	
 	public Job giveMeWork(String group) {
 		Queue<Job> queue = groupQueueMappings.get(group);
+		if (queue.size()==0) 
+			return null;
 		validateGrpup(group);
-		return queue.poll();
+		if(freeQueueMappings.get(group)) {
+			freeQueueMappings.put(group, false);
+			return queue.poll();
+		}else {
+			System.out.println("Queue: " + group + " is busy now... ");
+			return null;
+		}
+	}
+	
+	public void releaseWork(String group){
+		validateGrpup(group);
+		freeQueueMappings.put(group, true);
 	}
 	
 	private void validateGrpup(String group){
