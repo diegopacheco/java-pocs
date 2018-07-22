@@ -5,7 +5,7 @@
 
 ### Architecture
 
-![alt text](threads-model-screth-draw.jpg "Architecture Draw / Scatch")
+![alt text](https://raw.githubusercontent.com/diegopacheco/java-pocs/master/pocs/task-scheduller-poc/threads-model-screth-draw.jpg "Architecture Draw / Scatch")
 
 Basically here we are 4 main componentes on this architecre:
  - Qaurtz
