@@ -25,36 +25,36 @@ public class MainApp {
 	  Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 	  scheduler.start();
 		
-	  JobDetail job1 = newJob(Group1TaskAdapter.class)
-	      .withIdentity("job1", "group1")
+	  JobDetail job1 = newJob(GenericTaskAdapter.class)
+	      .withIdentity("job1", "g1")
 	      .build();
 	  
 	  Trigger trigger1 = newTrigger()
-	      .withIdentity("trigger1", "group1")
+	      .withIdentity("trigger1", "g1")
 	      .startNow()
 	      .withSchedule(simpleSchedule()
 	              .withIntervalInSeconds(1)
 	              .repeatForever())
 	      .build();
 	  
-	  JobDetail job2 = newJob(Group2TaskAdapter.class)
-	      .withIdentity("job2", "group2")
+	  JobDetail job2 = newJob(GenericTaskAdapter.class)
+	      .withIdentity("job2", "g2")
 	      .build();
 	  
 	  Trigger trigger2 = newTrigger()
-	      .withIdentity("trigger2", "group2")
+	      .withIdentity("trigger2", "g2")
 	      .startNow()
 	      .withSchedule(simpleSchedule()
 	              .withIntervalInSeconds(1)
 	              .repeatForever())
 	      .build();
 	  
-	  JobDetail job3 = newJob(Group3TaskAdapter.class)
-	      .withIdentity("job3", "group3")
+	  JobDetail job3 = newJob(GenericTaskAdapter.class)
+	      .withIdentity("job3", "g3")
 	      .build();
 	  
 	  Trigger trigger3 = newTrigger()
-	      .withIdentity("trigger3", "group3")
+	      .withIdentity("trigger3", "g3")
 	      .startNow()
 	      .withSchedule(simpleSchedule()
 	              .withIntervalInSeconds(1)

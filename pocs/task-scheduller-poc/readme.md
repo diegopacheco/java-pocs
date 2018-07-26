@@ -50,7 +50,23 @@ QueueManager.getInstance().enqueueTask(new DateTask(), "g1");
 ```
 When we schdulle something in the queue we need pass the group. This will work well for single_shot tasks.
 For RECORENT taskas we need have a backhround task or another single scheduller in quartz to KEEP schdulling recorent tasks
-but this need to happens only when is time to them to run. 
+but this need to happens only when is time to them to run. Its also possible to use a GenericTaskAdapter where the queue/group will be
+the quartz group fron the jobkey - this way we dont need create any adapters classes.
+```java
+    JobDetail job3 = newJob(GenericTaskAdapter.class)
+        .withIdentity("job3", "g3")
+        .build();
+    
+    Trigger trigger3 = newTrigger()
+        .withIdentity("trigger3", "g3")
+        .startNow()
+        .withSchedule(simpleSchedule()
+                .withIntervalInSeconds(1)
+                .repeatForever())
+        .build();
+
+    scheduler.scheduleJob(job3, trigger3);
+``` 
 
 ## How Thread Model Works (Executors - dont use quartz)]
 
@@ -210,3 +226,8 @@ Current Date:Sat Jul 21 22:43:05 PDT 2018
 [GlobalScheduler_Worker-2] Nothing to do... 
 [GlobalScheduler_Worker-4] Nothing to do... 
 ```
+
+### Diferences between Quartz and Executors
+
+With Quartz we dont have isolation between Threads, all tasks run in parallel, that why we need queue to SERIALIZE inside same group.
+With Executors N elements on same queue dont run any parallel, so they queue is the only thing we need to dont need CODE to ensure SERIALIZE like ConcurrentHashMap we need to have in quartz, so Executors PARALELZE per schule but SERIALIZE per queue thus more simple.
