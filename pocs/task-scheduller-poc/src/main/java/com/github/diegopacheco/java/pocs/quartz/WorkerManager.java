@@ -1,13 +1,14 @@
-package com.github.diegopacheco.java.pocs.executor;
+package com.github.diegopacheco.java.pocs.quartz;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.quartz.Job;
+
 public class WorkerManager {
 	
 	private static WorkerManager instance;
-	private ScheduledExecutorService executor           = Executors.newScheduledThreadPool(10);
 	private ScheduledExecutorService executorRecurrent  = Executors.newScheduledThreadPool(1);
 	
 	public synchronized static WorkerManager getInstance() {
@@ -17,11 +18,7 @@ public class WorkerManager {
 		return instance;
 	}
 	
-	public void schedule(Task t){
-		executor.scheduleAtFixedRate(() -> t.execute() , 0, 1, TimeUnit.SECONDS);
-	}
-	
-	public void scheduleRecurrent(Task t,String group,long period, TimeUnit timeUnit){
+	public void scheduleRecurrent(Job t,String group,long period, TimeUnit timeUnit){
 		executorRecurrent.scheduleAtFixedRate(() ->  QueueManager.getInstance().enqueueTask(t, group) , 0, period, timeUnit);
 	}
 	

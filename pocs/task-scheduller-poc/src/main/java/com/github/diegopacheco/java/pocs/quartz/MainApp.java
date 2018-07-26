@@ -4,7 +4,12 @@ import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import org.quartz.JobDetail;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.quartz.Scheduler;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
@@ -15,6 +20,7 @@ public class MainApp {
 
 		QueueManager.getInstance().register("g1");
 		QueueManager.getInstance().register("g2");
+		QueueManager.getInstance().register("g3");
 		
 	  Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 	  scheduler.start();
@@ -42,9 +48,22 @@ public class MainApp {
 	              .withIntervalInSeconds(1)
 	              .repeatForever())
 	      .build();
+	  
+	  JobDetail job3 = newJob(Group3TaskAdapter.class)
+	      .withIdentity("job3", "group3")
+	      .build();
+	  
+	  Trigger trigger3 = newTrigger()
+	      .withIdentity("trigger3", "group3")
+	      .startNow()
+	      .withSchedule(simpleSchedule()
+	              .withIntervalInSeconds(1)
+	              .repeatForever())
+	      .build();
 
 	  scheduler.scheduleJob(job1, trigger1);
 	  scheduler.scheduleJob(job2, trigger2);
+	  scheduler.scheduleJob(job3, trigger3);
 	  
 	  QuietThread.sleep(3000);
 	  QueueManager.getInstance().enqueueTask(new DateTask(), "g1");
@@ -57,6 +76,14 @@ public class MainApp {
 	  QueueManager.getInstance().enqueueTask(new DateTask(), "g2");
 	  QueueManager.getInstance().enqueueTask(new DateTask(), "g1");
 	  QueueManager.getInstance().enqueueTask(new DateTask(), "g2");
+	  
+	  //Recurrent schedulling
+	  WorkerManager.getInstance().scheduleRecurrent(new DateTask() {
+	  	@Override
+	  	public void execute(JobExecutionContext context) throws JobExecutionException {
+	  		System.out.println("3s Current Date:" + new Date());
+	  	}
+	  }, "g3", 3, TimeUnit.SECONDS);
 	  
 	}
 }
