@@ -7,8 +7,8 @@ public class MainApp {
 		QueueManager.getInstance().register("g1");
 		QueueManager.getInstance().register("g2");
 		
-		WorkerManager.getInstance().schedule(new Group1TaskAdapter());
-		WorkerManager.getInstance().schedule(new Group2TaskAdapter());
+		WorkerManager.getInstance().schedule(new GenericTaskAdapter("g1"));
+		WorkerManager.getInstance().schedule(new GenericTaskAdapter("g2"));
 	  
 	  QuietThread.sleep(3000);
 	  QueueManager.getInstance().enqueueTask(new DateTask(), "g1");

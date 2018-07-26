@@ -21,7 +21,7 @@ https://github.com/diegopacheco/java-pocs/tree/master/pocs/task-scheduller-poc/s
 Also there is other solution(same ideas) but whithout quartz:
 https://github.com/diegopacheco/java-pocs/tree/master/pocs/task-scheduller-poc/src/main/java/com/github/diegopacheco/java/pocs/executor
 
-### How Thread Model Works
+### How Thread Model Works (Quartz)
 
 You need to create your quartzs tasks normally and them you basically need to create an extra class that extends from: QueueTaskWrapperBase. You need to implement the method getGroup and need provide your group. Each group has they own queue.
 Them you need to register the group before start enqueue tasks like:
@@ -51,6 +51,32 @@ QueueManager.getInstance().enqueueTask(new DateTask(), "g1");
 When we schdulle something in the queue we need pass the group. This will work well for single_shot tasks.
 For RECORENT taskas we need have a backhround task or another single scheduller in quartz to KEEP schdulling recorent tasks
 but this need to happens only when is time to them to run. 
+
+## How Thread Model Works (Executors - dont use quartz)]
+
+The ideas are pretty much the same - however with Executors we can have a generic GenericTaskAdapter and we dont need
+create multiple adapters classes. Also with Executors we need to have a WorkerManager in order to schdule threads since
+we dont have quartz anymore.
+
+```java
+    QueueManager.getInstance().register("g1");
+    QueueManager.getInstance().register("g2");
+    
+    WorkerManager.getInstance().schedule(new GenericTaskAdapter("g1"));
+    WorkerManager.getInstance().schedule(new GenericTaskAdapter("g2"));
+    
+    QuietThread.sleep(3000);
+    QueueManager.getInstance().enqueueTask(new DateTask(), "g1");
+    QueueManager.getInstance().enqueueTask(new DateTask(), "g1");
+    QueueManager.getInstance().enqueueTask(new DateTask(), "g1");
+    QueueManager.getInstance().enqueueTask(new DateTask(), "g1");
+    QueueManager.getInstance().enqueueTask(new DateTask(), "g1");
+    QuietThread.sleep(5000);
+    QueueManager.getInstance().enqueueTask(new DateTask(), "g1");
+    QueueManager.getInstance().enqueueTask(new DateTask(), "g2");
+    QueueManager.getInstance().enqueueTask(new DateTask(), "g1");
+    QueueManager.getInstance().enqueueTask(new DateTask(), "g2");
+```
 
 ### Sample Output
 
