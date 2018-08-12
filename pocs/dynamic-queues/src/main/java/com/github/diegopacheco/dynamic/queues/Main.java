@@ -30,5 +30,7 @@ public class Main {
 	  SchedullerManager.getInstance().register("q4");
 	  SchedullerManager.getInstance().scheduleRecurrent(new DateTask(), "q4", 1, TimeUnit.SECONDS);
 	  
+	  QuietThread.sleep(5000);
+	  SchedullerManager.getInstance().unregister("q4");
 	}
 }

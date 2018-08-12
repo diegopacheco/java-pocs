@@ -38,16 +38,29 @@ class WorkerManager {
 
 	private static void registerExecutors() {
 		executorRecurrent.scheduleAtFixedRate(() ->  { 
+			
+			System.out.println("======================== STATS   ======================================================");
+			QueueManager.getInstance().getStats().forEach( (k,s)  -> System.out.println("Queue: " + k + " size: " + s) );
+			WorkerManager.getInstance().getStats().forEach( (k,w) -> System.out.print(k + " ") );
+			
+			System.out.println("======================== Running   ====================================================");
 			if (workers.size()==0) {
 				System.out.println("WorkerSheduller [" + Thread.currentThread().getName()  +  "] No Workers Registerd ");
 			}else {
 				workers.stream().forEach( w -> executor.submit(w) );
 			}
+			
 		}, 0, 1, TimeUnit.SECONDS);
 	}
 	
 	public void scheduleRecurrent(Task t,String group,long period, TimeUnit timeUnit){
 		executorRecurrentQueue.scheduleAtFixedRate(() ->  QueueManager.getInstance().enqueueTask(t, group) , 0, period, timeUnit);
+	}
+	
+	public Map<String,String> getStats(){
+		Map<String,String> stats = new ConcurrentHashMap<>();
+		workerQueueMap.keySet().stream().forEach( k ->  stats.put(workerQueueMap.get(k).getName(), k) );
+		return stats;
 	}
 	
 }

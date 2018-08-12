@@ -62,4 +62,10 @@ class QueueManager {
 		}
 	}
 	
+	public Map<String,Integer> getStats(){
+		Map<String,Integer> stats = new ConcurrentHashMap<>();
+		groupQueueMappings.keySet().stream().forEach( k ->  stats.put(k, groupQueueMappings.get(k).size()) );
+		return stats;
+	}
+	
 }
