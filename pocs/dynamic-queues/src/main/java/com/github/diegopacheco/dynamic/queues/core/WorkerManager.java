@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 class WorkerManager {
@@ -40,10 +41,13 @@ class WorkerManager {
 		executorRecurrent.scheduleAtFixedRate(() ->  { 
 			
 			System.out.println("======================== STATS   ======================================================");
+			System.out.println("Executor  queue size: " + ((ThreadPoolExecutor)executor).getQueue().size());
+			System.out.println("Recurrent queue size: " + ((ThreadPoolExecutor)executorRecurrent).getQueue().size());
+			System.out.println("Queue     queue size: " + ((ThreadPoolExecutor)executorRecurrentQueue).getQueue().size());
 			QueueManager.getInstance().getStats().forEach( (k,s)  -> System.out.println("Queue: " + k + " size: " + s) );
 			WorkerManager.getInstance().getStats().forEach( (k,w) -> System.out.print(k + " ") );
 			
-			System.out.println("======================== Running   ====================================================");
+			System.out.println("\n======================== Running   ====================================================");
 			if (workers.size()==0) {
 				System.out.println("WorkerSheduller [" + Thread.currentThread().getName()  +  "] No Workers Registerd ");
 			}else {

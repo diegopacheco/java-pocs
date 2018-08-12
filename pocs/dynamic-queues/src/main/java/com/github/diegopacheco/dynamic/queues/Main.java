@@ -32,5 +32,13 @@ public class Main {
 	  
 	  QuietThread.sleep(5000);
 	  SchedullerManager.getInstance().unregister("q4");
+	 
+	  // TODO: More Schedullers than workers or slow tasks could create a DOS - need to think about TTL on queues.
+	  /*
+	  SchedullerManager.getInstance().register("q1");
+	  SchedullerManager.getInstance().scheduleRecurrent(new DateTask(), "q1", 1, TimeUnit.SECONDS);
+	  SchedullerManager.getInstance().scheduleRecurrent(new DateTask(), "q1", 1, TimeUnit.SECONDS);
+	  SchedullerManager.getInstance().scheduleRecurrent(new DateTask(), "q1", 1, TimeUnit.SECONDS);7
+	  */
 	}
 }
