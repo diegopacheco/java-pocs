@@ -1,0 +1,15 @@
+server:
+  port: 8181
+  servlet:
+    context-path: /netflix-protected
+spring:
+  application:
+    name: netflix-protected
+  cloud:
+    config:
+      uri: http://localhost:9999
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8282/eureka}

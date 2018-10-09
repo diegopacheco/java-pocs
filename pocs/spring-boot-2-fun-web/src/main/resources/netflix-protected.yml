@@ -1,0 +1,8 @@
+external:
+  property: hello universe
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
