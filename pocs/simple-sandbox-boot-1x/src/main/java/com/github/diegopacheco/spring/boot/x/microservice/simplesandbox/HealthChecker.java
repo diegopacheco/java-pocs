@@ -1,11 +1,13 @@
 package com.github.diegopacheco.spring.boot.x.microservice.simplesandbox;
 
 import org.springframework.boot.actuate.health.Health;
+import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HealthChecker {
+public class HealthChecker implements HealthIndicator {
 	
+	@Override
 	public Health health() {
 		int errorCode = check(); 
 		if (errorCode != 0) {
