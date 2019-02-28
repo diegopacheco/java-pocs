@@ -1,0 +1,32 @@
+apply plugin: 'application'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = 'com.github.diegopacheco.sandbox.java.Main'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/groups/public/' }
+}
+
+dependencies {
+
+  compile group: 'com.linkedin.parseq', name: 'parseq', version: '3.0.5'
+  compile group: 'com.linkedin.parseq', name: 'parseq-http-client', version: '3.0.5'
+  compile group: 'com.linkedin.parseq', name: 'parseq-batching', version: '3.0.5'
+
+  compile 'org.slf4j:slf4j-api:1.7.25'
+  compile 'org.slf4j:slf4j-jdk14:1.7.25'
+  
+  testCompile([
+      'junit:junit:4.12'
+  ])		
+}
+
+run {    
+  systemProperties System.getProperties()
+}
+
+

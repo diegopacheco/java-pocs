@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ParseqMain",
+            "request": "launch",
+            "mainClass": "com.github.diegopacheco.sandbox.java.parseq.ParseqMain",
+            "projectName": "parseq-fun"
+        }
+    ]
+}
