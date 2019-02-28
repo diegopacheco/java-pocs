@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - GraphQlMain",
+            "request": "launch",
+            "mainClass": "com.github.diegopacheco.sandbox.java.graphql.GraphQlMain",
+            "projectName": "simple-graphql-java"
+        }
+    ]
+}
