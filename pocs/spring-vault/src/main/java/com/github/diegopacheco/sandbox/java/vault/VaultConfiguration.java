@@ -18,4 +18,5 @@ class VaultConfiguration extends AbstractVaultConfiguration {
   public ClientAuthentication clientAuthentication() {
     return new TokenAuthentication(System.getProperty("VAULT_TOKEN","00000000-0000-0000-0000-000000000000"));
   }
+  
 }
