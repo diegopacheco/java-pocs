@@ -1,0 +1,29 @@
+apply plugin: 'application'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = 'com.github.diegopacheco.sandbox.java.vault.VaultApp'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/groups/public/' }
+}
+
+dependencies {
+
+  compile group: 'org.springframework.vault', name: 'spring-vault-core', version: '2.1.2.RELEASE'
+  
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.1.2.RELEASE'
+  
+  testCompile([
+      'junit:junit:4.12'
+  ])		
+}
+
+run {    
+  systemProperties System.getProperties()
+}
+
+
