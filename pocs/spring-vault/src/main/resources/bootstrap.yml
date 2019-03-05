@@ -1,3 +1,4 @@
+spring.application.name: test
 spring.cloud.vault:
   authentication: TOKEN
   token: 00000000-0000-0000-0000-000000000000
@@ -5,3 +6,4 @@ spring.cloud.vault:
   port: 8200
   scheme: http
   uri: http://localhost:8200
+  kv.enabled: true

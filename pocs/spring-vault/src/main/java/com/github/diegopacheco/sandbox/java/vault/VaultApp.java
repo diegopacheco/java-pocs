@@ -7,10 +7,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
 @EnableAutoConfiguration
+@EnableConfigurationProperties(MyVaultConf.class)
 public class VaultApp implements CommandLineRunner {
+	
+  private final MyVaultConf conf;
+
+  public VaultApp(MyVaultConf configuration) {
+      this.conf = configuration;
+  }
 	
 	@Autowired
 	private ServiceUsingSecrets service;
@@ -25,7 +33,12 @@ public class VaultApp implements CommandLineRunner {
 
   @Override
   public void run(String... args) {
-  	LOG.info("Reading sensible data from Vault");
+  	System.out.println("Reading sensible data from Vault");
+  	System.out.println("RDS: ");
+  	System.out.println("** username: " + conf.getUsername());
+  	System.out.println("** password: " + conf.getPassword());
+  	System.out.println("END. ");
+  	
   	System.out.println(service.readSensibleData());
   }
   
