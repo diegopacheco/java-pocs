@@ -12,13 +12,6 @@ public class ServiceUsingSecrets {
   @Autowired
   private VaultOperations operations;
   
-  //@Value("${aws.access_key}")
-  private String awsAccessKey;
-
-  //@Value("${aws.secret_key}")
-  private String awsSecretKey;
-
-  
   public String readSensibleData(){
 			return readSecrets("secret","test");
   }
