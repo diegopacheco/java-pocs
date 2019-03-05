@@ -11,7 +11,9 @@ class VaultConfiguration extends AbstractVaultConfiguration {
 
   @Override
   public VaultEndpoint vaultEndpoint() {
-      return VaultEndpoint.create(System.getProperty("VAULT_DNS","127.0.0.1"), 8201);
+  		VaultEndpoint ve = VaultEndpoint.create(System.getProperty("VAULT_DNS","127.0.0.1"),8200);
+  		ve.setScheme("http");
+  		return ve;
   }
 
   @Override

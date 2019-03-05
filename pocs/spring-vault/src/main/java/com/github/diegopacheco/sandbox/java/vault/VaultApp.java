@@ -12,12 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableAutoConfiguration
 public class VaultApp implements CommandLineRunner {
 	
-  static {
-    System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
-  }
-	
 	@Autowired
-	private Example example;
+	private ServiceUsingSecrets service;
 	
   private static Logger LOG = LoggerFactory.getLogger(VaultApp.class);
 
@@ -29,7 +25,8 @@ public class VaultApp implements CommandLineRunner {
 
   @Override
   public void run(String... args) {
-  	System.out.println(example.readSensibleData());
+  	LOG.info("Reading sensible data from Vault");
+  	System.out.println(service.readSensibleData());
   }
   
 }
