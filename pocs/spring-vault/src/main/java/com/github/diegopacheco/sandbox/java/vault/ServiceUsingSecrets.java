@@ -11,7 +11,7 @@ public class ServiceUsingSecrets {
 
   @Autowired
   private VaultOperations operations;
-  
+
   public String readSensibleData(){
 			return readSecrets("secret","test");
   }

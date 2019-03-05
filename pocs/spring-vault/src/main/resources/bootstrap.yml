@@ -1,0 +1,7 @@
+spring.cloud.vault:
+  authentication: TOKEN
+  token: 00000000-0000-0000-0000-000000000000
+  host: localhost
+  port: 8200
+  scheme: http
+  uri: http://localhost:8200
