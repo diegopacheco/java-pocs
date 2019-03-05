@@ -1,3 +1,7 @@
+plugins {
+  id "io.errorlab.gradle.vault" version "0.1.0"
+}
+
 apply plugin: 'application'
 apply plugin: 'java'
 
@@ -28,4 +32,14 @@ run {
   systemProperties System.getProperties()
 }
 
+vault { 
+  addr = "http://localhost:8200"
+  token = "00000000-0000-0000-0000-000000000000"
+}
 
+task vaultTask {
+  doLast {
+      print "Running gradle task: vaultTask \n"
+      print "From Vault: " + project.vault.get("secret/data/test").data.data
+  }
+}
