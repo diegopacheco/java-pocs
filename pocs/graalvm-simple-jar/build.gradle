@@ -1,0 +1,28 @@
+
+plugins {
+  id "com.palantir.graal" version "0.3.0-2-g6c49b4d"
+}
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/groups/public/' }
+}
+
+dependencies {
+  compile 'org.slf4j:slf4j-api:1.7.25'
+  compile 'org.slf4j:slf4j-jdk14:1.7.25'
+  testCompile([
+      'junit:junit:4.12'
+  ])		
+}
+
+graal {
+    mainClass 'com.github.diegopacheco.sandbox.java.graalvm.SimpleConsoleApp'
+    outputName 'hello-world-native'
+    graalVersion '1.0.0-rc13'
+}
+
