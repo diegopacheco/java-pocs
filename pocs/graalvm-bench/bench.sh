@@ -7,4 +7,4 @@ echo "GraalVM - Runtime"
 time $GRAALVM_HOME/bin/java -jar build/libs/graalvm-bench.jar /tmp/bench.file.txt
 
 echo "GraalVM - Native"
-time build/topten-native /tmp/bench.file.txt
+time build/graal/topten-native /tmp/bench.file.txt

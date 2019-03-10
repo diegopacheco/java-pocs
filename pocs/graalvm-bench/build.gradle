@@ -21,6 +21,7 @@ graal {
     mainClass 'TopTen'
     outputName 'topten-native'
     graalVersion '1.0.0-rc13'
+    option '--enable-all-security-services'
 }
 
 jar {
