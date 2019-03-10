@@ -12,9 +12,6 @@ repositories {
 }
 
 dependencies {
-  compile 'org.slf4j:slf4j-api:1.7.25'
-  compile 'org.slf4j:slf4j-jdk14:1.7.25'
-  
   testCompile([
       'junit:junit:4.12'
   ])		
@@ -24,4 +21,13 @@ graal {
     mainClass 'TopTen'
     outputName 'topten-native'
     graalVersion '1.0.0-rc13'
+}
+
+jar {
+  manifest {
+    attributes(
+      "Class-Path": configurations.compile.collect { it.getName() }.join(' '),
+      "Main-Class": "TopTen"
+   )
+  }
 }

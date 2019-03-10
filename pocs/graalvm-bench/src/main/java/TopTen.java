@@ -27,7 +27,8 @@ public class TopTen {
         try {
             return Files.lines(Paths.get(path));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return null;
         }
     }
 
