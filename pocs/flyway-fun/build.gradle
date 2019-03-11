@@ -1,0 +1,43 @@
+plugins {
+  id "io.errorlab.gradle.vault" version "0.1.0"
+  id "org.flywaydb.flyway"      version "5.2.4"
+}
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/groups/public/' }
+}
+
+dependencies {
+  
+  compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
+
+  compile 'org.slf4j:slf4j-api:1.7.25'
+  compile 'org.slf4j:slf4j-jdk14:1.7.25'  
+  testCompile([
+      'junit:junit:4.12'
+  ])		
+}
+
+vault { 
+  addr = "http://localhost:8200"
+  token = "00000000-0000-0000-0000-000000000000"
+}
+
+flyway{
+  schemas = ['test']
+  user = 'root'
+  url  = project.vault.get("secret/data/rds/dev").data.data["jdbc.url"]
+  password = project.vault.get("secret/data/rds/dev").data.data["user.pass"] 
+}
+
+task testConf {
+  doLast{
+    println project.vault.get("secret/data/rds/dev").data.data["jdbc.url"]
+    println project.vault.get("secret/data/rds/dev").data.data["user.pass"] 
+  }
+}
