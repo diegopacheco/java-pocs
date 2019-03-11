@@ -1,0 +1,41 @@
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/groups/public/' }
+}
+
+dependencies {
+
+  //runtime group: 'org.glassfish.jersey.bundles', name: 'jaxrs-ri', version: '2.28'
+
+  compile "org.glassfish.jersey.containers:jersey-container-jetty-servlet:${jersey2Version}"
+  compile "org.glassfish.jersey.containers:jersey-container-jetty-http:${jersey2Version}"
+  compile "org.glassfish.jersey.containers:jersey-container-servlet:${jersey2Version}"
+  compile "org.eclipse.jetty:jetty-webapp:${jetty94Version}"
+  
+  compile 'org.glassfish.jersey.core:jersey-common:${jersey2Version}'
+  compile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: "${jersey2Version}"
+  compile "org.glassfish.jersey.media:jersey-media-json-jackson:${jersey2Version}"
+  
+  testCompile([
+      'junit:junit:4.12'
+  ])		
+  
+  testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.3.0'
+  testCompile 'io.rest-assured:json-path:3.3.0'
+  
+  testCompile "org.glassfish.jersey.test-framework:jersey-test-framework-core:${jersey2Version}" 
+  testCompile "org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-grizzly2:${jersey2Version}"
+    
+}
+
+gretty {
+    httpPort = 8080
+    contextPath = '/'
+    servletContainer = 'jetty9.4'
+}
