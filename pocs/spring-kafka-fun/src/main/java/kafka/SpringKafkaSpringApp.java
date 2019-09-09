@@ -2,12 +2,11 @@ package kafka;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Component;
 
-@Component
 @SpringBootApplication
 public class SpringKafkaSpringApp implements CommandLineRunner {
 
@@ -27,6 +26,10 @@ public class SpringKafkaSpringApp implements CommandLineRunner {
   public void run(String... args) {
     System.out.println("Spring app Running... " + kafkaTemplate);
     kafkaTemplate.send("myTopic", "hey how is it going? ");
+  }
+
+  public static void main(String[] args) {
+    SpringApplication.run(SpringKafkaSpringApp.class, args);
   }
 
 }
