@@ -1,6 +1,6 @@
 ### How to run? 
 
-``bash
+```bash
 docker-compose up
 ./create-topic.sh
 ./gradlew bootRun
