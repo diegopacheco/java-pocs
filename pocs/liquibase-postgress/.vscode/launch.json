@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - LiquibaseJavaRunner",
+            "request": "launch",
+            "mainClass": "LiquibaseJavaRunner",
+            "projectName": "liquibase-postgress"
+        }
+    ]
+}
