@@ -20,6 +20,7 @@ public class LiquibaseJavaRunner {
         Liquibase liquibase = new liquibase.Liquibase("changelog.xml", new ClassLoaderResourceAccessor(), database);
 
         liquibase.update(new Contexts(), new LabelExpression());
+        System.out.println("Used changeset: " + liquibase.getDatabaseChangeLog().getChangeSets());
 
     }
 
