@@ -44,7 +44,7 @@ dependencies {
     runtime 'ch.qos.logback:logback-classic:1.2.3'
     runtime 'org.slf4j:log4j-over-slf4j:1.7.29'
 
-    compile group: 'io.netty', name: 'netty-transport-native-epoll', version: '4.1.43.Final'
+    compile group: 'io.netty', name: 'netty-transport-native-epoll', version: '4.1.16.Final'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
