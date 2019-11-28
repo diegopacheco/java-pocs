@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - IonMain",
+            "request": "launch",
+            "mainClass": "IonMain",
+            "projectName": "ion-java-fun"
+        }
+    ]
+}
