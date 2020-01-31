@@ -1,0 +1,63 @@
+
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'com.adarshr:gradle-test-logger-plugin:1.6.0'
+    }
+}
+apply plugin: 'com.adarshr.test-logger'
+apply plugin: 'application'
+apply plugin: 'java'
+apply plugin: "groovy"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = 'com.github.diegopacheco.sandbox.java.Main'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/groups/public/' }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+  compile 'org.slf4j:slf4j-api:1.7.25'
+  compile 'org.slf4j:slf4j-jdk14:1.7.25'
+
+  compile "org.codehaus.groovy:groovy-all:2.5.8"
+  testCompile platform("org.spockframework:spock-bom:2.0-M1-groovy-2.5")
+  testCompile "org.spockframework:spock-core"  
+
+  compile 'org.spockframework:spock-core:1.1-groovy-2.4-rc-2'
+
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+}
+
+run {    
+  systemProperties System.getProperties()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+testlogger {
+    theme 'mocha'     
+    showExceptions true
+    slowThreshold 2000
+    showSummary true
+    showPassed true
+    showSkipped true
+    showFailed true
+    showStandardStreams false
+    showPassedStandardStreams true
+    showSkippedStandardStreams true
+    showFailedStandardStreams true
+}
+
