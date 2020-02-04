@@ -19,19 +19,23 @@ public class Main{
   }
 
   private static void switchfun(){
-    /*
-    boolean result = switch (new Random().nextBoolean()){
-      case true -> {
+    
+    boolean result = switch (new Random().nextInt() % 1){
+      case 0 -> {
           System.out.println("Bool true");
           yield true;
       }
-      case false -> {
+      case 1 -> {
           System.out.println("Bool false");
+          yield false;
+      }
+      default -> {
+          System.out.println("DEFAULT");
           yield false;
       }
     };
     System.out.println(result);
-    */
+    
   }
 
 }
