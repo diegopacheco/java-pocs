@@ -1,0 +1,61 @@
+
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+        jcenter()  
+    }
+    dependencies {
+        classpath 'com.adarshr:gradle-test-logger-plugin:1.6.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.+'
+    }
+}
+apply plugin: 'com.adarshr.test-logger'
+apply plugin: 'application'
+apply plugin: 'java'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 13
+targetCompatibility = 13
+
+mainClassName = 'com.github.diegopacheco.audible.fun.Main'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/groups/public/' }
+    jcenter()  
+}
+
+dependencies {
+  implementation 'ch.qos.logback:logback-classic:1.2.3'
+  implementation 'com.nfl.dm.util:audible:0.1.9'
+  implementation 'org.springframework.boot:spring-boot-starter' 
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+}
+
+run {    
+  systemProperties System.getProperties()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+testlogger {
+    theme 'mocha'     
+    showExceptions true
+    slowThreshold 2000
+    showSummary true
+    showPassed true
+    showSkipped true
+    showFailed true
+    showStandardStreams false
+    showPassedStandardStreams true
+    showSkippedStandardStreams true
+    showFailedStandardStreams true
+}
+
