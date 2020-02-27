@@ -5,9 +5,11 @@ buildscript {
             url 'https://plugins.gradle.org/m2/'
         }
     }
+    configurations.maybeCreate('pitest')
     dependencies {
         classpath 'com.adarshr:gradle-test-logger-plugin:1.6.0'
         classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.4.6'
+        pitest 'org.pitest:pitest-junit5-plugin:0.8'
     }
 }
 plugins {
@@ -59,6 +61,7 @@ testlogger {
 }
 
 pitest {
+    testPlugin = 'junit5'
     targetClasses = ['com.*']  //by default "${project.group}.*"
     pitestVersion = '1.4.1' //not needed when a default PIT version should be used
     threads = 4
