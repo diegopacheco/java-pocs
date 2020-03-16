@@ -6,5 +6,5 @@ functions:
   javafn:
     lang: java8
     handler: ./javafn
-    image: javafn:latest
+    image: javafn:v1
 
