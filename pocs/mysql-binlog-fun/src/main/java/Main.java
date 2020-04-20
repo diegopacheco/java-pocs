@@ -6,7 +6,7 @@ import com.github.shyiko.mysql.binlog.BinaryLogClient.EventListener;
 public class Main {
   public static void main(String args[]){
     try{
-      BinaryLogClient client = new BinaryLogClient("172.17.0.2", 3306, "root", "root");
+      BinaryLogClient client = new BinaryLogClient("127.0.0.1", 3325, "root", "pass");
       EventDeserializer eventDeserializer = new EventDeserializer();
       eventDeserializer.setCompatibilityMode(
           EventDeserializer.CompatibilityMode.DATE_AND_TIME_AS_LONG,
