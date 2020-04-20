@@ -4,5 +4,5 @@ log-bin-index=bin-log.index \n\
 max_binlog_size=100M \n\
 binlog_format=row \n\
 socket=mysql.sock" > /etc/mysql/my.ini
-RUN printf 'show_compatibility_56=ON' >> /etc/mysql/my.cfg 2>&1
+RUN echo 'show_compatibility_56=ON' >> /etc/mysql/my.cfg
 CMD ["mysqld"]
