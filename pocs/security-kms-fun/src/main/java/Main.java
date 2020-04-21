@@ -1,12 +1,17 @@
 import java.util.Collections;
 import java.util.Map;
 
+import com.amazonaws.auth.InstanceProfileCredentialsProvider;
 import com.amazonaws.encryptionsdk.AwsCrypto;
 import com.amazonaws.encryptionsdk.CryptoResult;
 import com.amazonaws.encryptionsdk.kms.KmsMasterKey;
 import com.amazonaws.encryptionsdk.kms.KmsMasterKeyProvider;
 
+
 public class Main {
+
+  private static InstanceProfileCredentialsProvider credentials =
+      InstanceProfileCredentialsProvider.createAsyncRefreshingProvider(true);
 
   private static String keyArn = "arn:aws:kms:us-east-1:000000000000:key/3c6c6917-6f79-4951-a6ad-4e20fc67df26";
   private static String data = "Diego Pacheco";
@@ -16,6 +21,7 @@ public class Main {
     final AwsCrypto crypto = new AwsCrypto();
 
     final KmsMasterKeyProvider prov = KmsMasterKeyProvider.builder()
+                                      .withCredentials(credentials)
                                       .withKeysForEncryption(keyArn).build();
 
     // Encrypt the data
@@ -52,5 +58,6 @@ public class Main {
 
     // Now we can return the plaintext data
     System.out.println("Decrypted: " + decryptResult.getResult());
+    credentials.close();
   }
 }
