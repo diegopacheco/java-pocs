@@ -1,14 +1,11 @@
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.encryptionsdk.AwsCrypto;
 import com.amazonaws.encryptionsdk.CryptoResult;
-import com.amazonaws.encryptionsdk.MasterKey;
 import com.amazonaws.encryptionsdk.kms.KmsMasterKey;
 import com.amazonaws.encryptionsdk.kms.KmsMasterKeyProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.kms.AWSKMSClientBuilder;
-
 import java.util.Base64;
-
 
 public class Main {
 
