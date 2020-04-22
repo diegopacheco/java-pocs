@@ -23,6 +23,8 @@ resource "aws_kms_key" "key2" {
   deletion_window_in_days = 10
 }
 
-output "kms_key_arm" {
-  value = ["${aws_kms_key.key2.arn}"]
+output "kms_key_key_created_details" {
+  value = ["${aws_kms_key.key2.arn}",
+           "${aws_kms_key.key2.key_id}",
+          "${aws_kms_key.key2.customer_master_key_spec}"]
 }
