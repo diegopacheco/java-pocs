@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.amazonaws:aws-encryption-sdk-java:1.6.1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-encryption-sdk-java/1.6.1/aws-encryption-sdk-java-1.6.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-encryption-sdk-java/1.6.1/aws-encryption-sdk-java-1.6.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-encryption-sdk-java/1.6.1/aws-encryption-sdk-java-1.6.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
