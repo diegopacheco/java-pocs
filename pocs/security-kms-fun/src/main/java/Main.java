@@ -13,12 +13,12 @@ import java.util.Base64;
 public class Main {
 
   // ./create-key.sh
-  private static String keyArn = "arn:aws:kms:us-east-1:000000000000:key/d2baffab-0150-4604-aec1-8714602f551c";
+  private static String keyArn = System.getenv().getOrDefault("KMS_KEY","arn:aws:kms:us-east-1:000000000000:key/e0765203-2842-41ee-baea-0857f7342c6d");
   private static String data = "Diego Pacheco";
 
   public static void main(String[] args) throws Exception {
 
-    final AwsCrypto crypto = new AwsCrypto();
+    System.out.println("KEY ARN: " + keyArn);
 
     final KmsMasterKeyProvider prov = KmsMasterKeyProvider.builder()
           .withCustomClientFactory(
@@ -27,7 +27,11 @@ public class Main {
                               new AwsClientBuilder.EndpointConfiguration("http://localhost:4566",Regions.US_EAST_1.getName())
                           ).build()
                   )
-          ).withKeysForEncryption(keyArn).build();
+          )
+            .withDefaultRegion(Regions.US_EAST_1.getName())
+            .withKeysForEncryption(keyArn).build();
+
+    final AwsCrypto crypto = new AwsCrypto();
 
     final CryptoResult<byte[], KmsMasterKey> result = crypto.encryptData(prov,data.getBytes());
     System.out.println("Ciphertext as Base64: " + Base64.getEncoder().encodeToString(result.getResult()));

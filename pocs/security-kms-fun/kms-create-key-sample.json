@@ -1,0 +1,14 @@
+{
+    "KeyMetadata": {
+        "AWSAccountId": "000000000000",
+        "KeyId": "3740a61f-f659-45e6-ac2a-608e4858dbaa",
+        "Arn": "arn:aws:kms:us-east-1:000000000000:key/3740a61f-f659-45e6-ac2a-608e4858dbaa",
+        "CreationDate": 1587565494,
+        "Enabled": true,
+        "Description": "",
+        "KeyUsage": "ENCRYPT_DECRYPT",
+        "KeyState": "Enabled",
+        "Origin": "AWS_KMS",
+        "KeyManager": "CUSTOMER"
+    }
+}
