@@ -1,19 +1,22 @@
-import java.util.Collections;
-import java.util.Map;
-
-import com.amazonaws.auth.InstanceProfileCredentialsProvider;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.encryptionsdk.AwsCrypto;
 import com.amazonaws.encryptionsdk.CryptoResult;
 import com.amazonaws.encryptionsdk.kms.KmsMasterKey;
 import com.amazonaws.encryptionsdk.kms.KmsMasterKeyProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.apigateway.model.EndpointConfiguration;
+
+import java.util.Collections;
+import java.util.Map;
 
 
 public class Main {
 
-  private static InstanceProfileCredentialsProvider credentials =
-      InstanceProfileCredentialsProvider.createAsyncRefreshingProvider(true);
+  private static BasicAWSCredentials awsCreds = new BasicAWSCredentials("0", "0");
 
-  private static String keyArn = "arn:aws:kms:us-east-1:000000000000:key/3c6c6917-6f79-4951-a6ad-4e20fc67df26";
+  // ./create-key.sh
+  private static String keyArn = "arn:aws:kms:us-east-1:000000000000:key/d2baffab-0150-4604-aec1-8714602f551c";
   private static String data = "Diego Pacheco";
 
   public static void main(String[] args) throws Exception {
@@ -21,43 +24,14 @@ public class Main {
     final AwsCrypto crypto = new AwsCrypto();
 
     final KmsMasterKeyProvider prov = KmsMasterKeyProvider.builder()
-                                      .withCredentials(credentials)
+                                      .withDefaultRegion(Regions.US_EAST_1.getName())
+                                      .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
                                       .withKeysForEncryption(keyArn).build();
 
-    // Encrypt the data
-    //
-    // Most encrypted data should have an associated encryption context
-    // to protect integrity. This sample uses placeholder values.
-    //
-    // For more information see:
-    // blogs.aws.amazon.com/security/post/Tx2LZ6WBJJANTNW/How-to-Protect-the-Integrity-of-Your-Encrypted-Data-by-Using-AWS-Key-Management
-    final Map<String, String> context = Collections.singletonMap("Example", "String");
-
-    final String ciphertext = crypto.encryptString(prov, data, context).getResult();
+    final String ciphertext = new String(crypto.encryptData(prov,data.getBytes()).getResult());
     System.out.println("Ciphertext: " + ciphertext);
 
-    // Decrypt the data
-    final CryptoResult<String, KmsMasterKey> decryptResult = crypto.decryptString(prov, ciphertext);
-
-    // Before returning the plaintext, verify that the customer master key that
-    // was used in the encryption operation was the one supplied to the master key
-    // provider.
-    if (!decryptResult.getMasterKeyIds().get(0).equals(keyArn)) {
-      throw new IllegalStateException("Wrong key ID!");
-    }
-
-    // Also, verify that the encryption context in the result contains the
-    // encryption context supplied to the encryptString method. Because the
-    // SDK can add values to the encryption context, don't require that
-    // the entire context matches.
-    for (final Map.Entry<String, String> e : context.entrySet()) {
-      if (!e.getValue().equals(decryptResult.getEncryptionContext().get(e.getKey()))) {
-        throw new IllegalStateException("Wrong Encryption Context!");
-      }
-    }
-
-    // Now we can return the plaintext data
+    final CryptoResult<byte[], KmsMasterKey> decryptResult = crypto.decryptData(prov,ciphertext.getBytes());
     System.out.println("Decrypted: " + decryptResult.getResult());
-    credentials.close();
   }
 }
