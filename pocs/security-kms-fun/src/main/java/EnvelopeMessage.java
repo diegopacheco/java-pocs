@@ -1,31 +1,29 @@
 import java.util.Arrays;
 
-public final class EnvelopeEncryptedMessage {
+public final class EnvelopeMessage {
 
     private byte[] encryptedKey;
-    private String ciphertext;
+    private String cypherText;
 
     public byte[] getEncryptedKey() {
         return encryptedKey;
     }
-
     public void setEncryptedKey(byte[] encryptedKey) {
         this.encryptedKey = encryptedKey;
     }
 
-    public void setCiphertext(String ciphertext) {
-        this.ciphertext = ciphertext;
+    public void setCypherText(String cypherText) {
+        this.cypherText = cypherText;
     }
-
-    public String getCiphertext() {
-        return ciphertext;
+    public String getCypherText() {
+        return cypherText;
     }
 
     @Override
     public String toString() {
         return "EnvelopeEncryptedMessage{" +
                 "encryptedKey=" + Arrays.toString(encryptedKey) +
-                ", ciphertext='" + ciphertext + '\'' +
+                ", cypherText='" + cypherText + '\'' +
                 '}';
     }
 }

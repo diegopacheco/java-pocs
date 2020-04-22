@@ -9,7 +9,7 @@ public class Main {
 
         System.out.println("Envelope Encryption... ");
         EnvelopeCrypoService ecs = EnvelopeCrypoService.getInstance();
-        EnvelopeEncryptedMessage envelope = ecs.encrypt("Diego");
+        EnvelopeMessage envelope = ecs.encrypt("Diego");
         System.out.println("Encrypt: " + envelope);
         String data = ecs.decrypt(envelope);
         System.out.println("Decrypted: " + data);
