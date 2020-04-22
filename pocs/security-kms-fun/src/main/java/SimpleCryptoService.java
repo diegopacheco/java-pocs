@@ -8,22 +8,22 @@ import com.amazonaws.services.kms.AWSKMSClientBuilder;
 
 import java.util.Base64;
 
-public class CryptoService {
+public class SimpleCryptoService {
 
     // ./create-key.sh
     private static String keyArn = System.getenv().getOrDefault("KMS_KEY","arn:aws:kms:us-east-1:000000000000:key/0c4c4b39-9992-4df7-bdd5-75359b78980b").toString();
     private static final AwsCrypto crypto = new AwsCrypto();
     private static KmsMasterKeyProvider prov;
 
-    private static CryptoService INSTANCE;
-    public static synchronized CryptoService getInstance(){
+    private static SimpleCryptoService INSTANCE;
+    public static synchronized SimpleCryptoService getInstance(){
         if (null==INSTANCE){
-            INSTANCE=new CryptoService();
+            INSTANCE=new SimpleCryptoService();
         }
         return INSTANCE;
     }
 
-    private CryptoService(){
+    private SimpleCryptoService(){
         if (null==prov){
             System.out.println("KEY ARN: " + keyArn);
             prov = KmsMasterKeyProvider.builder()

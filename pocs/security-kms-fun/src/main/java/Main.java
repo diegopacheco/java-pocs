@@ -1,19 +1,18 @@
-import com.amazonaws.client.builder.AwsClientBuilder;
-import com.amazonaws.encryptionsdk.AwsCrypto;
-import com.amazonaws.encryptionsdk.CryptoResult;
-import com.amazonaws.encryptionsdk.kms.KmsMasterKey;
-import com.amazonaws.encryptionsdk.kms.KmsMasterKeyProvider;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.kms.AWSKMSClientBuilder;
-import java.util.Base64;
-
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        CryptoService cs = CryptoService.getInstance();
+        System.out.println("Simple Encryption... ");
+        SimpleCryptoService cs = SimpleCryptoService.getInstance();
         String cipherText = cs.encrypt("Diego");
         System.out.println("Cipher text as Base64: " + cipherText);
         System.out.println("Decrypted: " + cs.decrypt(cipherText));
+
+        System.out.println("Envelope Encryption... ");
+        EnvelopeCrypoService ecs = EnvelopeCrypoService.getInstance();
+        EnvelopeEncryptedMessage envelope = ecs.encrypt("Diego");
+        System.out.println("Encrypt: " + envelope);
+        String data = ecs.decrypt(envelope);
+        System.out.println("Decrypted: " + data);
     }
 
 }
