@@ -13,7 +13,7 @@ import java.util.Base64;
 public class Main {
 
   // ./create-key.sh
-  private static String keyArn = System.getProperties().getOrDefault("KMS_KEYs","arn:aws:kms:us-east-1:000000000000:key/0c4c4b39-9992-4df7-bdd5-75359b78980b").toString();
+  private static String keyArn = System.getenv().getOrDefault("KMS_KEYs","arn:aws:kms:us-east-1:000000000000:key/0c4c4b39-9992-4df7-bdd5-75359b78980b").toString();
   private static String data = "Diego Pacheco";
 
   public static void main(String[] args) throws Exception {
