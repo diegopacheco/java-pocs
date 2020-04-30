@@ -18,7 +18,7 @@ public class Main{
     String json = Parser.write(conf);
     System.out.println(json);
 
-    // Simulates a new JSON formar being read by old application
+    // Simulates a new JSON formart being read by old application
     json = json.replace("appName","AppNamE"); // makes AppName == null
     json = json.replace("}",", \"version\": \"2\" }");
     System.out.println("Update Json: " + json);
@@ -26,5 +26,7 @@ public class Main{
     // Proofs that old code can serialize new data(insensitivity also).
     Config confNew = Parser.read(json);
     System.out.println("New Config: " + confNew);
+    assert(conf.equals(confNew));
+
   }
 }

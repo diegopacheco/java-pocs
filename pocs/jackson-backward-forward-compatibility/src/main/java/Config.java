@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Config {
 
     private String appName;
@@ -33,5 +35,20 @@ public class Config {
                 ", databaseURL='" + databaseURL + '\'' +
                 ", schema='" + schema + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Config config = (Config) o;
+        return Objects.equals(appName, config.appName) &&
+                Objects.equals(databaseURL, config.databaseURL) &&
+                Objects.equals(schema, config.schema);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(appName, databaseURL, schema);
     }
 }
