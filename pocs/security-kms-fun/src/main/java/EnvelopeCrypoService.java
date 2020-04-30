@@ -16,7 +16,7 @@ import java.util.Base64;
 public class EnvelopeCrypoService {
 
     // ./create-key.sh
-    private static String masterKey = System.getenv().getOrDefault("KMS_KEY","arn:aws:kms:us-east-1:000000000000:key/0c4c4b39-9992-4df7-bdd5-75359b78980b").toString();
+    private static String kmsUserMgmtCMK = System.getenv().getOrDefault("KMS_CUSTOMER_MANAGED_CMK_KEY","arn:aws:kms:us-east-1:000000000000:key/0c4c4b39-9992-4df7-bdd5-75359b78980b").toString();
     private static final AwsCrypto crypto = new AwsCrypto();
     private static KmsMasterKeyProvider prov;
     private static AWSKMS client;
@@ -31,7 +31,7 @@ public class EnvelopeCrypoService {
 
     private EnvelopeCrypoService(){
         if (null==prov){
-            System.out.println("MASTER KEY ARN: " + masterKey);
+            System.out.println("User Managed CMK KEY ARN: " + kmsUserMgmtCMK);
 
             this.client = AWSKMSClientBuilder.standard().withEndpointConfiguration(
                     new AwsClientBuilder.
@@ -41,7 +41,7 @@ public class EnvelopeCrypoService {
             this.prov = KmsMasterKeyProvider.builder()
                     .withCustomClientFactory( (regionName -> client ))
                     .withDefaultRegion(Regions.US_EAST_1.getName())
-                    .withKeysForEncryption(masterKey).build();
+                    .withKeysForEncryption(kmsUserMgmtCMK).build();
         }
     }
 
@@ -56,7 +56,7 @@ public class EnvelopeCrypoService {
             String cipherText = Base64.getEncoder().encodeToString(enc);
 
             EnvelopeMessage envelope = new EnvelopeMessage();
-            envelope.setEncryptedKey(dataKey.getCiphertextBlob().array());
+            envelope.setEncryptedDEK(dataKey.getCiphertextBlob().array());
             envelope.setCypherText(cipherText);
             return envelope;
         }catch(Exception e){
@@ -66,7 +66,7 @@ public class EnvelopeCrypoService {
 
     public String decrypt(EnvelopeMessage envelope){
         try{
-            ByteBuffer encryptedKey = ByteBuffer.wrap(envelope.getEncryptedKey());
+            ByteBuffer encryptedKey = ByteBuffer.wrap(envelope.getEncryptedDEK());
             DecryptRequest decryptRequest = new DecryptRequest().withCiphertextBlob(encryptedKey);
             ByteBuffer plainTextKey = client.decrypt(decryptRequest).getPlaintext();
             SecretKeySpec keyspec = new SecretKeySpec(plainTextKey.array(), "AES");
@@ -83,7 +83,7 @@ public class EnvelopeCrypoService {
 
     private GenerateDataKeyResult generateDataKey() {
         GenerateDataKeyRequest generateDataKeyRequest = new GenerateDataKeyRequest();
-        generateDataKeyRequest.setKeyId(masterKey);
+        generateDataKeyRequest.setKeyId(kmsUserMgmtCMK);
         generateDataKeyRequest.setKeySpec(DataKeySpec.AES_256);
         GenerateDataKeyResult dataKeyResult = client.generateDataKey(generateDataKeyRequest);
         return dataKeyResult;

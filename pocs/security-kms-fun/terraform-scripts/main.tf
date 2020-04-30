@@ -6,18 +6,18 @@ provider "aws" {
   skip_requesting_account_id = true
   skip_metadata_api_check = true
   s3_force_path_style = true
-  # In order to Mock with Localstack
+  # In order to Mock with localstack
   endpoints {
     kms = "http://localhost:4566"
   }
 }
 
-# Importing an exising key
+# Importing an existing KMS User Managed CMK key
 data "aws_kms_key" "mykey" {
   key_id = "010b31d6-676b-4cea-83c9-28a8375ca001"
 }
 
-# Generate a new Key
+# Generate a new KMS User Managed CMK key
 resource "aws_kms_key" "key2" {
   description             = "KMS key 2"
   deletion_window_in_days = 10

@@ -1,3 +1,4 @@
 #!/bin/bash
 
-awslocal kms create-key 
+# Will create a KMS Customer Managed CMK Key
+awslocal kms create-key

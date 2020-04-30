@@ -11,7 +11,7 @@ import java.util.Base64;
 public class SimpleCryptoService {
 
     // ./create-key.sh
-    private static String keyArn = System.getenv().getOrDefault("KMS_KEY","arn:aws:kms:us-east-1:000000000000:key/0c4c4b39-9992-4df7-bdd5-75359b78980b").toString();
+    private static String userMgmtCMK = System.getenv().getOrDefault("KMS_CUSTOMER_MANAGED_CMK_KEY","arn:aws:kms:us-east-1:000000000000:key/0c4c4b39-9992-4df7-bdd5-75359b78980b").toString();
     private static final AwsCrypto crypto = new AwsCrypto();
     private static KmsMasterKeyProvider prov;
 
@@ -25,7 +25,7 @@ public class SimpleCryptoService {
 
     private SimpleCryptoService(){
         if (null==prov){
-            System.out.println("KEY ARN: " + keyArn);
+            System.out.println("KEY ARN: " + userMgmtCMK);
             prov = KmsMasterKeyProvider.builder()
                     .withCustomClientFactory(
                             (regionName ->
@@ -35,7 +35,7 @@ public class SimpleCryptoService {
                             )
                     )
                     .withDefaultRegion(Regions.US_EAST_1.getName())
-                    .withKeysForEncryption(keyArn).build();
+                    .withKeysForEncryption(userMgmtCMK).build();
         }
     }
 
