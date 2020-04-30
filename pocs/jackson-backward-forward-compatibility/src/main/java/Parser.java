@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Parser {
@@ -7,6 +8,8 @@ public class Parser {
     static{
         // FIX UnrecognizedPropertyException
         om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        // FIX null for case sensitivity
+        om.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
     }
 
     public static Config read(String json){

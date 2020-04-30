@@ -18,10 +18,12 @@ public class Main{
     String json = Parser.write(conf);
     System.out.println(json);
 
-    //json = json.replace("appName","AppName"); // makes AppName == null
+    // Simulates a new JSON formar being read by old application
+    json = json.replace("appName","AppNamE"); // makes AppName == null
     json = json.replace("}",", \"version\": \"2\" }");
     System.out.println("Update Json: " + json);
 
+    // Proofs that old code can serialize new data(insensitivity also).
     Config confNew = Parser.read(json);
     System.out.println("New Config: " + confNew);
   }
