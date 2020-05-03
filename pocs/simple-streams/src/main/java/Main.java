@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String args[]) {
 
-      List<String> rawValues = Arrays.asList(new String[] { "Adam", "Allan","Anna","John","Paul","Peter" });
+      List<String> rawValues = Arrays.asList(new String[] { "Peter","Adam", "Allan","Anna","John","Paul","Peter" });
       List<String> people =  rawValues
                             .stream()
                             .distinct()
