@@ -135,3 +135,4 @@ override.tf.json
 # End of https://www.gitignore.io/api/terraform
 
 .idea/
+stale_outputs_checked
