@@ -2,9 +2,10 @@ package com.github.diegopacheco.sandboxspring.controller;
 
 import com.github.diegopacheco.sandboxspring.service.SimpleCache;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Duration;
 import java.util.Date;
 
 @RestController
@@ -26,6 +27,12 @@ public class HelloController {
 			sc.set("mycache",cache);
 		}
 		return cache;
+	}
+
+	@RequestMapping("/cache2")
+	public String cacheReactive() {
+		sc.getAndSetCachePrint("myCacheKey2");
+		return "Go Look logs :-) ";
 	}
 
 }
