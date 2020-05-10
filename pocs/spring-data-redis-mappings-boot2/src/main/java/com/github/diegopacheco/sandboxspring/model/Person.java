@@ -1,4 +1,5 @@
 package com.github.diegopacheco.sandboxspring.model;
+import com.github.diegopacheco.sandboxspring.meta.UpperCase;
 import org.springframework.data.redis.core.RedisHash;
 
 import java.util.Objects;
@@ -6,8 +7,12 @@ import java.util.Objects;
 @RedisHash
 public class Person {
 
-    private String name;
     private String id;
+
+    @UpperCase
+    private String name;
+
+    @UpperCase
     private String mail;
 
     public Person() {}

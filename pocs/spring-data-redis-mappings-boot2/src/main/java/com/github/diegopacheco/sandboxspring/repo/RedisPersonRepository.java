@@ -1,28 +1,50 @@
 package com.github.diegopacheco.sandboxspring.repo;
 
+import com.github.diegopacheco.sandboxspring.meta.UpperCase;
 import com.github.diegopacheco.sandboxspring.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Optional;
 
 @Repository
-public class RedisPersonRepository {
+public class RedisPersonRepository<T> {
 
     @Autowired
-    private PersonRepository repo;
+    private CrudRepository<T, String> repo;
 
-    public <S extends Person> S save(S entity) {
-        if (entity.getName()!=null) entity.setName(entity.getName().toUpperCase());
-        if (entity.getMail()!=null) entity.setMail(entity.getMail().toUpperCase());
-        return repo.save(entity);
+    public T save(T entity) {
+        try{
+            for(Field f : entity.getClass().getDeclaredFields()){
+                if (f.isAnnotationPresent(UpperCase.class)){
+                    Method getter = entity.getClass().getMethod("get" + toCamelCase(f.getName()));
+                    Method setter = entity.getClass().getMethod("set" + toCamelCase(f.getName()), f.getType() );
+
+                    Object value = getter.invoke(entity);
+                    if (null!=value)
+                        setter.invoke(entity,value.toString().toUpperCase());
+                }
+            }
+
+            return repo.save(entity);
+
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
-    public <S extends Person> Iterable<S> saveAll(Iterable<S> entities) {
+    private String toCamelCase(String name){
+        return (name.charAt(0) + "").toUpperCase() + name.substring(1);
+    }
+
+    public Iterable<T> saveAll(Iterable<T> entities) {
         return repo.saveAll(entities);
     }
 
-    public Optional<Person> findById(String s) {
+    public Optional<T> findById(String s) {
         return repo.findById(s);
     }
 
@@ -30,11 +52,11 @@ public class RedisPersonRepository {
         return repo.existsById(s);
     }
 
-    public Iterable<Person> findAll() {
+    public Iterable<T> findAll() {
         return repo.findAll();
     }
 
-    public Iterable<Person> findAllById(Iterable<String> strings) {
+    public Iterable<T> findAllById(Iterable<String> strings) {
         return repo.findAllById(strings);
     }
 
@@ -46,11 +68,11 @@ public class RedisPersonRepository {
         repo.deleteById(s);
     }
 
-    public void delete(Person entity) {
+    public void delete(T entity) {
         repo.delete(entity);
     }
 
-    public void deleteAll(Iterable<? extends Person> entities) {
+    public void deleteAll(Iterable<? extends T> entities) {
         repo.deleteAll(entities);
     }
 
