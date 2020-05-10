@@ -20,7 +20,7 @@ public class LettuceConfig {
     }
 
     @Bean
-    LettuceConnectionFactory lettuceConnectionFactory() {
+    public LettuceConnectionFactory lettuceConnectionFactory() {
         return new LettuceConnectionFactory();
     }
 
