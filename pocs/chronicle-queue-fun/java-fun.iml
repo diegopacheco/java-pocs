@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.6.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.6.2" level="project" />
+    <orderEntry type="library" name="Maven: net.openhft:chronicle-queue:5.19.15" level="project" />
+    <orderEntry type="library" name="Maven: net.openhft:chronicle-core:2.19.7" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains:annotations:17.0.0" level="project" />
+    <orderEntry type="library" name="Maven: net.openhft:chronicle-bytes:2.19.8" level="project" />
+    <orderEntry type="library" name="Maven: net.openhft:chronicle-wire:2.19.11" level="project" />
+    <orderEntry type="library" name="Maven: net.openhft:compiler:2.3.5" level="project" />
+    <orderEntry type="library" name="Maven: com.intellij:annotations:12.0" level="project" />
+    <orderEntry type="library" name="Maven: net.openhft:chronicle-threads:2.19.7" level="project" />
+    <orderEntry type="library" name="Maven: net.openhft:affinity:3.2.3" level="project" />
+    <orderEntry type="library" name="Maven: net.java.dev.jna:jna:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: net.java.dev.jna:jna-platform:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-cli:commons-cli:1.4" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.30" level="project" />
+  </component>
+</module>
