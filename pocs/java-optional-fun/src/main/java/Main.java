@@ -1,4 +1,6 @@
 import java.util.Optional;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Main{
   public static void main(String args[]){
@@ -21,5 +23,13 @@ public class Main{
                     orElseGet( () -> new EmptyFormatter()).
                     format("ok"));
 
-  }
+    /// Option #3 Streams
+    System.out.println("Option 3 ");
+    IntStream.of(1,2,3,4,5,6,7,8,9,10)
+            .map( i-> i * i)
+            .filter( n -> n%2==0 )
+            .mapToObj( n -> FormatterFactory.getPrinter("upper").get().format("Result: " + n) )
+            .forEach(System.out::println);
+
+ }
 }
