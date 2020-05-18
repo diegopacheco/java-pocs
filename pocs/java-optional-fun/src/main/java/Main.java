@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -31,5 +32,20 @@ public class Main{
             .mapToObj( n -> FormatterFactory.getPrinter("upper").get().format("Result: " + n) )
             .forEach(System.out::println);
 
+    Optional<Formatter> result =
+      Arrays.asList(FormatterFactory.getPrinter("lower"))
+              .stream()
+              .flatMap( f -> streamopt(f) )
+              .findFirst();
+    System.out.println("Option 3 - " + result.get().format("WORKS ? "));
+
  }
+
+  private static <T> Stream<T> streamopt(Optional<T> opt) {
+    if (opt.isPresent())
+      return Stream.of(opt.get());
+    else
+      return Stream.empty();
+  }
+
 }
