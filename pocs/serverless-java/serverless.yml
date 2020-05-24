@@ -1,0 +1,14 @@
+service: java-serverless
+frameworkVersion: ">=1.2.0 <2.0.0"
+provider:
+  name: aws
+  runtime: java8
+package:
+  artifact: target/distributions/aws-java-simple-http-endpoint.zip
+functions:
+  currentTime:
+    handler: com.github.diegopacheco.serverless.java.Handler
+    events:
+      - http:
+          path: ping
+          method: get
