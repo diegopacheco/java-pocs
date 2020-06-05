@@ -15,20 +15,21 @@ public class Main{
 
   public static void main(String args[]){
     try {
-      writeKeyStore();
-      KeyStore ks = readKeyStore();
+      KeyStore ks = KeyStore.getInstance("pkcs12");
+      writeKeyStore(ks);
+      ks = readKeyStore();
       ks = storeSymmetricKey(ks);
       Key dbKey = ks.getKey("db-encryption-secret", pwdArray);
       System.out.println("DB Key from JKS: " + Base64.getEncoder().encodeToString(dbKey.getEncoded()) + " @ " + dbKey.getAlgorithm() );
+      writeKeyStore(ks);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
 
   }
 
-  public static void writeKeyStore(){
+  public static void writeKeyStore(KeyStore ks){
     try{
-      KeyStore ks = KeyStore.getInstance("pkcs12");
       ks.load(null, pwdArray);
       try (FileOutputStream fos = new FileOutputStream("ks.jks")) {
         ks.store(fos,pwdArray);
