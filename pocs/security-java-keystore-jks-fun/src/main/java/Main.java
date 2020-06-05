@@ -16,6 +16,7 @@ public class Main{
   public static void main(String args[]){
     try {
       KeyStore ks = KeyStore.getInstance("pkcs12");
+      ks.load(null, pwdArray);
       writeKeyStore(ks);
       ks = readKeyStore();
       ks = storeSymmetricKey(ks);
@@ -30,7 +31,6 @@ public class Main{
 
   public static void writeKeyStore(KeyStore ks){
     try{
-      ks.load(null, pwdArray);
       try (FileOutputStream fos = new FileOutputStream("ks.jks")) {
         ks.store(fos,pwdArray);
       }
