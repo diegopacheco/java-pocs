@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="java-fun (1)" />
         <module name="java-fun" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="java-fun" target="1.8" />
+      <module name="java-fun (1)" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

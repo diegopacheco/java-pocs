@@ -2,10 +2,15 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.security.SecureRandom;
 import java.util.Base64;
 
 public class SecurityService {
+
+    public static SecretKey importKey(byte[] data){
+        return new SecretKeySpec(data, "AES");
+    }
 
     public static SecretKey generateKey(){
         try{
