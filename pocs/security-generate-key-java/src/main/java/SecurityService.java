@@ -5,6 +5,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Base64;
 
@@ -82,6 +83,21 @@ public class SecurityService {
             cipher.init(Cipher.DECRYPT_MODE, key.getPublic());
             return new String(cipher.doFinal(Base64.getDecoder().decode(text)));
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String generateHash(String password){
+        try{
+            MessageDigest algorithm = MessageDigest.getInstance("SHA-512");
+            byte[] messageDigest = algorithm.digest(password.getBytes("UTF-8"));
+
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : messageDigest) {
+                hexString.append(String.format("%02X", 0xFF & b));
+            }
+            return hexString.toString();
+        }catch(Exception e){
             throw new RuntimeException(e);
         }
     }

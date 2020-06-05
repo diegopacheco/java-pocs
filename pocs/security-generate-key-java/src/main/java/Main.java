@@ -9,6 +9,9 @@ public class Main{
     workWithKey(keyGen);
     workWithKey(keyImport);
     workWithKeyRSA(keyRSA);
+
+    System.out.println("\n\nHashing/Message Digest a password with SHA-512 : (admin) == " +
+            SecurityService.generateHash("admin") );
   }
 
   private static void workWithKey(SecretKey key) {
