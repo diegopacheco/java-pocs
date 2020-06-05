@@ -13,18 +13,24 @@ public class Main{
 
   private static void workWithKey(SecretKey key) {
     System.out.println("****** Using key: " + key + " @ " + key.getAlgorithm());
+    Long start = System.currentTimeMillis();
     String cipher = SecurityService.enc("This is a secret msg by Diego.",key);
     String text   = SecurityService.dec(cipher,key);
+    Long end = System.currentTimeMillis();
     System.out.println("Cipher: " + cipher);
     System.out.println("Text  : " + text);
+    System.out.println("Enc/Dec in: " + (end-start) + " ms");
   }
 
   private static void workWithKeyRSA(KeyPair key) {
     System.out.println("****** Using key: " + key + " @ " + key.getPublic());
+    Long start = System.currentTimeMillis();
     String cipher = SecurityService.encRSA("This is a secret msg by Diego.",key);
     String text   = SecurityService.decRSA(cipher,key);
+    Long end = System.currentTimeMillis();
     System.out.println("Cipher: " + cipher);
     System.out.println("Text  : " + text);
+    System.out.println("Enc/Dec in: " + (end-start) + " ms");
   }
 
 }
