@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/java-fun.iml" filepath="$PROJECT_DIR$/java-fun.iml" />
       <module fileurl="file://$USER_HOME$/git/diegopacheco/java-pocs/pocs/security-generate-key-java/java-fun (1).iml" filepath="$USER_HOME$/git/diegopacheco/java-pocs/pocs/security-generate-key-java/java-fun (1).iml" />
+      <module fileurl="file://$USER_HOME$/git/diegopacheco/java-pocs/pocs/security-java-keystore-jks-fun/java-fun (2).iml" filepath="$USER_HOME$/git/diegopacheco/java-pocs/pocs/security-java-keystore-jks-fun/java-fun (2).iml" />
     </modules>
   </component>
 </project>
