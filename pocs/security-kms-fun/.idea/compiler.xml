@@ -9,12 +9,14 @@
         <module name="java-fun" />
         <module name="java-fun (2)" />
         <module name="java-fun (1)" />
+        <module name="java-fun (3)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="java-fun" target="1.8" />
       <module name="java-fun (1)" target="1.8" />
       <module name="java-fun (2)" target="1.8" />
+      <module name="java-fun (3)" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
