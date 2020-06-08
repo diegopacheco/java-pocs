@@ -10,9 +10,9 @@ public class SecretsManagerService {
     private AWSSecretsManager client;
 
     public SecretsManagerService(){
-        // String endpoint = "secretsmanager." + Regions.US_EAST_1.getName() + ".amazonaws.com";
-        String endpoint = "http://localhost:4566";
         String region = Regions.US_EAST_1.getName();
+        // String endpoint = "secretsmanager." + region + ".amazonaws.com";
+        String endpoint = "http://localhost:4566";
 
         AwsClientBuilder.EndpointConfiguration config = new AwsClientBuilder.EndpointConfiguration(endpoint, region);
         AWSSecretsManagerClientBuilder clientBuilder = AWSSecretsManagerClientBuilder.standard();
