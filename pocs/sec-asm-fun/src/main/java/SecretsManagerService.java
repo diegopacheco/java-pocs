@@ -5,14 +5,12 @@ import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
 import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest;
 import com.amazonaws.services.secretsmanager.model.GetSecretValueResult;
 
-import java.nio.ByteBuffer;
-
 public class SecretsManagerService {
 
     private AWSSecretsManager client;
 
     public SecretsManagerService(){
-        // String endpoint = "secretsmanager.us-east-1.amazonaws.com";
+        // String endpoint = "secretsmanager." + Regions.US_EAST_1.getName() + ".amazonaws.com";
         String endpoint = "http://localhost:4566";
         String region = Regions.US_EAST_1.getName();
 
@@ -24,7 +22,6 @@ public class SecretsManagerService {
 
     public String getSecret(String secretName){
         String secret = null;
-        ByteBuffer binarySecretData;
         GetSecretValueRequest getSecretValueRequest = new GetSecretValueRequest().withSecretId(secretName);
         GetSecretValueResult getSecretValueResponse = null;
         try {
@@ -38,5 +35,4 @@ public class SecretsManagerService {
         }
         return secret;
     }
-
 }
