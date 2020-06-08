@@ -1,5 +1,6 @@
 import javax.crypto.SecretKey;
 import java.security.KeyPair;
+import java.util.Base64;
 
 public class Main{
   public static void main(String args[]){
@@ -15,7 +16,7 @@ public class Main{
   }
 
   private static void workWithKey(SecretKey key) {
-    System.out.println("****** Using key: " + key + " @ " + key.getAlgorithm());
+    System.out.println("****** Using key: " + Base64.getEncoder().encodeToString(key.getEncoded()) + " @ " + key.getAlgorithm());
     Long start = System.currentTimeMillis();
     String cipher = SecurityService.enc("This is a secret msg by Diego.",key);
     String text   = SecurityService.dec(cipher,key);
@@ -26,7 +27,8 @@ public class Main{
   }
 
   private static void workWithKeyRSA(KeyPair key) {
-    System.out.println("****** Using key: " + key + " @ " + key.getPublic());
+    System.out.println("****** Using key Public : " + Base64.getEncoder().encodeToString(key.getPublic().getEncoded()) + " @ " + key.getPublic());
+    System.out.println("****** Using key Private : " + Base64.getEncoder().encodeToString(key.getPrivate().getEncoded()) + " @ " + key.getPublic());
     Long start = System.currentTimeMillis();
     String cipher = SecurityService.encRSA("This is a secret msg by Diego.",key);
     String text   = SecurityService.decRSA(cipher,key);
