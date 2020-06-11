@@ -3,16 +3,31 @@ import java.util.Base64;
 
 public class Main{
   public static void main(String args[]) throws Exception {
-    bench("this is a secret"); //16
-    bench("this is a secretthis is a secret"); // 32
-    bench("this is a secretthis is a secretthis is a secretthis is a secret"); // 64
-    bench("this is a secretthis is a secretthis is a secretthis is a secretthis is a secretthis is a secretthis is a secretthis is a secret"); // 128
+    Key rootKey = CryptoService.generateKey(256);
+
+    bench(rootKey,generatePlainText(16));
+    bench(rootKey,generatePlainText(32));
+    bench(rootKey,generatePlainText(64));
+    bench(rootKey,generatePlainText(128));
+    bench(rootKey,generatePlainText(256));
+    bench(rootKey,generatePlainText(512));
+    bench(rootKey,generatePlainText(1024));
+    bench(rootKey,generatePlainText(2048));
+    bench(rootKey,generatePlainText(4096));
   }
 
-  private static void bench(String plainText){
+  private static String generatePlainText(int size){
+      String base = "this is a secret";
+      StringBuilder plainText = new StringBuilder();
+      for(int i=0;i<(size/16);i++){
+        plainText.append(base);
+      }
+      return plainText.toString();
+  }
+
+  private static void bench(Key rootKey,String plainText){
     try{
       System.out.println("******** Plain Text Size: " + plainText.length());
-      Key rootKey = CryptoService.generateKey(256);
       System.out.println("Root Key: " + Base64.getEncoder().encodeToString(rootKey.getEncoded()));
       System.out.println("Plain Text: " + plainText);
 
