@@ -18,8 +18,5 @@ repositories {
 }
 
 dependencies {
-	compile([ 
-	          'com.mashape.unirest:unirest-java:1.4.9',
-			  'junit:junit-dep:4.10'
-	 	    ])
+	compile(['com.konghq:unirest-java:3.7.02:standalone'])
 }
