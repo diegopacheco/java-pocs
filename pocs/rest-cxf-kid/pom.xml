@@ -75,7 +75,7 @@
 
 	<properties>
 		<jboss.home>D:/Diego/Java/bin/jboss-5.1.0.GA-jdk6</jboss.home>
-		<spring.version>3.0.3.RELEASE</spring.version>
+		<spring.version>5.2.7.RELEASE</spring.version>
 		<cxf.version>2.2.9</cxf.version>
 	</properties>
 
