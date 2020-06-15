@@ -48,7 +48,7 @@
 
 	<properties>
 		<camel.version>2.2.0</camel.version>
-		<spring.version>3.0.0.RELEASE</spring.version>
+		<spring.version>5.2.7.RELEASE</spring.version>
 		<activemq.version>5.3.1</activemq.version>
 	</properties>
 
