@@ -25,9 +25,9 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>Main</mainClass>
+          <mainClass>BenchmarkRunner</mainClass>
           <arguments>
-            <argument>ok</argument>
+            <argument></argument>
           </arguments>
         </configuration>
       </plugin>
