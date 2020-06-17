@@ -4,6 +4,8 @@ plugins {
 
 apply plugin: 'application'
 apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'me.champeau.gradle.jmh'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -29,4 +31,11 @@ dependencies {
 
 run {    
   systemProperties System.getProperties()
+}
+
+jmh {
+    include = ['com\\.github\\.*']
+    humanOutputFile = null
+    warmupIterations = 1
+    iterations = 1
 }
