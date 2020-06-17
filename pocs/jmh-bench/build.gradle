@@ -1,11 +1,19 @@
-plugins {
-  id "me.champeau.gradle.jmh" version "0.4.6"
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "me.champeau.gradle:jmh-gradle-plugin:0.5.0"
+    }
 }
 
+apply plugin: "me.champeau.gradle.jmh"
 apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'me.champeau.gradle.jmh'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -18,13 +26,9 @@ repositories {
 }
 
 dependencies {
-  implementation 'org.slf4j:slf4j-api:1.7.25'
-  implementation 'org.slf4j:slf4j-jdk14:1.7.25'
-
-  implementation  'org.openjdk.jmh:jmh-core:1.23'
-  implementation  'org.openjdk.jmh:jmh-generator-annprocess:1.23'
-
-  testImplementation 'junit:junit:4.12'
+    jmh 'commons-io:commons-io:2.4'
+    jmh 'org.openjdk.jmh:jmh-core:0.9'
+    jmh 'org.openjdk.jmh:jmh-generator-annprocess:0.9'
 }
 
 run {    
@@ -32,8 +36,32 @@ run {
 }
 
 jmh {
-    include = ['com\\.github\\.diegopacheco\\.jmh\\.benchmark\\.java\\.BenchmarkRunner.*']
-    humanOutputFile = null
-    warmupIterations = 1
-    iterations = 1
+   iterations = 3
+   benchmarkMode = ['thrpt','ss'] // Benchmark mode. Available modes are: [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, SingleShotTime/ss, All/all]
+   batchSize = 1 // Batch size: number of benchmark method calls per operation. (some benchmark modes can ignore this setting)
+   fork = 1 // How many times to forks a single benchmark. Use 0 to disable forking altogether
+   failOnError = false // Should JMH fail immediately if any benchmark had experienced the unrecoverable error?
+   forceGC = false // Should JMH force GC between iterations?
+   jvm = 'myjvm' // Custom JVM to use when forking.
+   operationsPerInvocation = 3 // Operations per invocation.
+   timeOnIteration = '1s' // Time to spend at each measurement iteration.
+   resultFormat = 'CSV' // Result format type (one of CSV, JSON, NONE, SCSV, TEXT)
+   threads = 3 // Number of worker threads to run with.
+   timeout = '1s' // Timeout for benchmark iteration.
+   timeUnit = 'ms' // Output time unit. Available time units are: [m, s, ms, us, ns].
+   verbosity = 'NORMAL' // Verbosity mode. Available modes are: [SILENT, NORMAL, EXTRA]
+   warmup = '1s' // Time to spend at each warmup iteration.
+   warmupBatchSize = 3 // Warmup batch size: number of benchmark method calls per operation.
+   warmupForks = 0 // How many warmup forks to make for a single benchmark. 0 to disable warmup forks.
+   warmupIterations = 1 // Number of warmup iterations to do.
+   warmupMode = 'INDI' // Warmup mode for warming up selected benchmarks. Warmup modes are: [INDI, BULK, BULK_INDI].
+   warmupBenchmarks = ['.*Warmup'] // Warmup benchmarks to include in the run in addition to already selected. JMH will not measure these benchmarks, but only use them for the warmup.
+   zip64 = true // Use ZIP64 format for bigger archives
+   jmhVersion = '1.21' // Specifies JMH version
+   includeTests = true // Allows to include test sources into generate JMH jar, i.e. use it when benchmarks depend on the test classes.
+   duplicateClassesStrategy = 'fail' // Strategy to apply when encountring duplicate classes during creation of the fat jar (i.e. while executing jmhJar task)
+}
+
+sourceSets{
+  jmh 
 }
