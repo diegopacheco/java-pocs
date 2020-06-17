@@ -42,7 +42,6 @@ jmh {
    fork = 1 // How many times to forks a single benchmark. Use 0 to disable forking altogether
    failOnError = false // Should JMH fail immediately if any benchmark had experienced the unrecoverable error?
    forceGC = false // Should JMH force GC between iterations?
-   jvm = 'myjvm' // Custom JVM to use when forking.
    operationsPerInvocation = 3 // Operations per invocation.
    timeOnIteration = '1s' // Time to spend at each measurement iteration.
    resultFormat = 'CSV' // Result format type (one of CSV, JSON, NONE, SCSV, TEXT)
