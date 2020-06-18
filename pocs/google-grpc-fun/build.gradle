@@ -26,7 +26,7 @@ buildscript {
     }    
   }
   dependencies {
-    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.7.7'
+    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.12'
   }
 }
 
@@ -56,6 +56,7 @@ dependencies {
   				'io.grpc:grpc-protobuf:0.15.0',
   				'io.grpc:grpc-stub:0.15.0'
 			])
+    compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
 }
 
 protobuf {
