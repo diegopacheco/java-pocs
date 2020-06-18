@@ -5,6 +5,7 @@ import com.github.diegopacheco.protobuf.protos.PersonProto;
 import com.github.diegopacheco.serdebenchs.avro.AvroHttpRequest;
 import com.github.diegopacheco.serdebenchs.avro.AvroSerdeServie;
 import com.github.diegopacheco.serdebenchs.avro.PersonIdentifier;
+import com.github.diegopacheco.serdebenchs.messagepack.MessagePackSerdeService;
 import com.github.diegopacheco.serdebenchs.model.Person;
 import com.github.diegopacheco.serdebenchs.base64.SerdeService;
 import com.github.diegopacheco.serdebenchs.base64.SerdeServiceV2;
@@ -34,6 +35,9 @@ public class SerdeBenchmarksTest {
     private static AvroSerdeServie avroSerdeServie;
     private static AvroHttpRequest avroReq;
     private static byte[] avroOut;
+
+    private static MessagePackSerdeService msgPackSerdeService;
+    private static byte[] outMsgPack;
 
     @BeforeAll
     public static void setupBase64(){
@@ -76,6 +80,12 @@ public class SerdeBenchmarksTest {
                 .setPersonIdentifier(pi)
                 .build();
         avroOut = avroSerdeServie.serializeToBinary(avroReq);
+    }
+
+    @BeforeAll
+    public static void setupMsgPack(){
+        msgPackSerdeService = new MessagePackSerdeService();
+        outMsgPack = msgPackSerdeService.serialize(person);
     }
 
     @Test
@@ -166,6 +176,24 @@ public class SerdeBenchmarksTest {
         avroSerdeServie.deSerealizeFromBinary(avroOut);
         long end = System.currentTimeMillis();
         System.out.println("Avro Deserialize: " + (end-start) + " ms");
+    }
+
+    @Test
+    @Order(11)
+    public void msgPackSerialize(){
+        long start = System.currentTimeMillis();
+        msgPackSerdeService.serialize(person);
+        long end = System.currentTimeMillis();
+        System.out.println("MessagePack Serialize: " + (end-start) + " ms");
+    }
+
+    @Test
+    @Order(12)
+    public void msgPackDeserialize(){
+        long start = System.currentTimeMillis();
+        msgPackSerdeService.deserialize(outMsgPack);
+        long end = System.currentTimeMillis();
+        System.out.println("MessagePack Deserialize: " + (end-start) + " ms");
     }
 
 }

@@ -52,5 +52,8 @@
     <orderEntry type="library" name="Maven: classworlds:classworlds:1.1-alpha-2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.shared:file-management:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.maven.shared:maven-shared-io:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.msgpack:msgpack:0.6.12" level="project" />
+    <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.javassist:javassist:3.18.1-GA" level="project" />
   </component>
 </module>
