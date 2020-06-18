@@ -1,5 +1,7 @@
 package com.github.diegopacheco.serdebenchs.base64;
 
+import com.github.diegopacheco.serdebenchs.model.Person;
+
 import java.util.Base64;
 
 public class SerdeServiceV2 {

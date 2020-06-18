@@ -1,4 +1,4 @@
-package com.github.diegopacheco.serdebenchs.base64;
+package com.github.diegopacheco.serdebenchs.model;
 
 import java.util.Objects;
 
