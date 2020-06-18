@@ -2,6 +2,9 @@ package com.github.diegopacheco.serdebenchs;
 
 import com.esotericsoftware.kryo.io.Output;
 import com.github.diegopacheco.protobuf.protos.PersonProto;
+import com.github.diegopacheco.serdebenchs.avro.AvroHttpRequest;
+import com.github.diegopacheco.serdebenchs.avro.AvroSerdeServie;
+import com.github.diegopacheco.serdebenchs.avro.PersonIdentifier;
 import com.github.diegopacheco.serdebenchs.model.Person;
 import com.github.diegopacheco.serdebenchs.base64.SerdeService;
 import com.github.diegopacheco.serdebenchs.base64.SerdeServiceV2;
@@ -27,6 +30,10 @@ public class SerdeBenchmarksTest {
     private static ProtobufSerdeService protoSerdeService;
     private static PersonProto.Person personProto;
     private static ByteArrayOutputStream outProto;
+
+    private static AvroSerdeServie avroSerdeServie;
+    private static AvroHttpRequest avroReq;
+    private static byte[] avroOut;
 
     @BeforeAll
     public static void setupBase64(){
@@ -55,6 +62,20 @@ public class SerdeBenchmarksTest {
                 .setName("Diego Pacheco")
                 .build();
         outProto = protoSerdeService.serialize(personProto);
+    }
+
+    @BeforeAll
+    public static void setupAvro(){
+        avroSerdeServie = new AvroSerdeServie();
+        PersonIdentifier pi = PersonIdentifier.newBuilder()
+                .setId(UUID.randomUUID().toString())
+                .setName("Diego Pacheco")
+                .setEmail("diego.pacheco.it@gmail.com")
+                .build();
+        avroReq = AvroHttpRequest.newBuilder()
+                .setPersonIdentifier(pi)
+                .build();
+        avroOut = avroSerdeServie.serializeToBinary(avroReq);
     }
 
     @Test
@@ -99,7 +120,7 @@ public class SerdeBenchmarksTest {
         long start = System.currentTimeMillis();
         kryoSerdeService.serialize(person);
         long end = System.currentTimeMillis();
-        System.out.println("Kryo V2 Serialize: " + (end-start) + " ms");
+        System.out.println("Kryo Serialize: " + (end-start) + " ms");
     }
 
     @Test
@@ -108,7 +129,7 @@ public class SerdeBenchmarksTest {
         long start = System.currentTimeMillis();
         kryoSerdeService.deserialize(outKryo);
         long end = System.currentTimeMillis();
-        System.out.println("Kryo V2 Deserialize: " + (end-start) + " ms");
+        System.out.println("Kryo Deserialize: " + (end-start) + " ms");
     }
 
     @Test
@@ -117,7 +138,7 @@ public class SerdeBenchmarksTest {
         long start = System.currentTimeMillis();
         protoSerdeService.serialize(personProto);
         long end = System.currentTimeMillis();
-        System.out.println("Protobuf V2 Serialize: " + (end-start) + " ms");
+        System.out.println("Protobuf Serialize: " + (end-start) + " ms");
     }
 
     @Test
@@ -126,7 +147,25 @@ public class SerdeBenchmarksTest {
         long start = System.currentTimeMillis();
         protoSerdeService.deserialize(outProto);
         long end = System.currentTimeMillis();
-        System.out.println("Protobuf V2 Deserialize: " + (end-start) + " ms");
+        System.out.println("Protobuf Deserialize: " + (end-start) + " ms");
+    }
+
+    @Test
+    @Order(9)
+    public void avroSerialize(){
+        long start = System.currentTimeMillis();
+        avroSerdeServie.serializeToBinary(avroReq);
+        long end = System.currentTimeMillis();
+        System.out.println("Avro Serialize: " + (end-start) + " ms");
+    }
+
+    @Test
+    @Order(10)
+    public void avroDeserialize(){
+        long start = System.currentTimeMillis();
+        avroSerdeServie.deSerealizeFromBinary(avroOut);
+        long end = System.currentTimeMillis();
+        System.out.println("Avro Deserialize: " + (end-start) + " ms");
     }
 
 }

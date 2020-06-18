@@ -1,0 +1,28 @@
+{
+  "type": "record",
+  "name": "AvroHttpRequest",
+  "namespace": "com.github.diegopacheco.serdebenchs.avro",
+  "fields": [
+    {
+      "name": "personIdentifier",
+      "type": {
+        "type": "record",
+        "name": "PersonIdentifier",
+        "fields": [
+          {
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ]
+}
