@@ -1,0 +1,10 @@
+package protobuf;
+
+option java_package = "com.github.diegopacheco.protobuf.protos";
+option java_outer_classname = "PersonProto";
+
+message Person {
+    required string id = 1;
+    required string name = 2;
+    required string email = 3;
+}
