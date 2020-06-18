@@ -26,7 +26,6 @@
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.12.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.avro:avro-compiler:1.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.avro:avro:1.9.2" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.10.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-compress:1.19" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.velocity:velocity-engine-core:2.2" level="project" />
@@ -55,5 +54,8 @@
     <orderEntry type="library" name="Maven: org.msgpack:msgpack:0.6.12" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.18.1-GA" level="project" />
+    <orderEntry type="library" name="Maven: de.ruedigermoeller:fst:2.56" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.6" level="project" />
   </component>
 </module>

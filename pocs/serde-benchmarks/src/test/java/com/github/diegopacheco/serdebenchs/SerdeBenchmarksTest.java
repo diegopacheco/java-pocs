@@ -5,6 +5,8 @@ import com.github.diegopacheco.protobuf.protos.PersonProto;
 import com.github.diegopacheco.serdebenchs.avro.AvroHttpRequest;
 import com.github.diegopacheco.serdebenchs.avro.AvroSerdeServie;
 import com.github.diegopacheco.serdebenchs.avro.PersonIdentifier;
+import com.github.diegopacheco.serdebenchs.fst.FSTSerdeService;
+import com.github.diegopacheco.serdebenchs.json.GsonSerdeService;
 import com.github.diegopacheco.serdebenchs.messagepack.MessagePackSerdeService;
 import com.github.diegopacheco.serdebenchs.model.Person;
 import com.github.diegopacheco.serdebenchs.base64.SerdeService;
@@ -38,6 +40,12 @@ public class SerdeBenchmarksTest {
 
     private static MessagePackSerdeService msgPackSerdeService;
     private static byte[] outMsgPack;
+
+    private static FSTSerdeService fstSerdeService;
+    private static byte[] fstOut;
+
+    private static GsonSerdeService gsonSerdeService;
+    private static byte[] gsonOut;
 
     @BeforeAll
     public static void setupBase64(){
@@ -86,6 +94,18 @@ public class SerdeBenchmarksTest {
     public static void setupMsgPack(){
         msgPackSerdeService = new MessagePackSerdeService();
         outMsgPack = msgPackSerdeService.serialize(person);
+    }
+
+    @BeforeAll
+    public static void setupFST(){
+        fstSerdeService = new FSTSerdeService();
+        fstOut = fstSerdeService.serialize(person);
+    }
+
+    @BeforeAll
+    public static void setupGson(){
+        gsonSerdeService = new GsonSerdeService();
+        gsonOut = gsonSerdeService.serialize(person);
     }
 
     @Test
@@ -194,6 +214,42 @@ public class SerdeBenchmarksTest {
         msgPackSerdeService.deserialize(outMsgPack);
         long end = System.currentTimeMillis();
         System.out.println("MessagePack Deserialize: " + (end-start) + " ms");
+    }
+
+    @Test
+    @Order(13)
+    public void fstSerialize(){
+        long start = System.currentTimeMillis();
+        fstSerdeService.serialize(person);
+        long end = System.currentTimeMillis();
+        System.out.println("FST Serialize: " + (end-start) + " ms");
+    }
+
+    @Test
+    @Order(14)
+    public void fstDeserialize(){
+        long start = System.currentTimeMillis();
+        fstSerdeService.deserialize(fstOut);
+        long end = System.currentTimeMillis();
+        System.out.println("FST Deserialize: " + (end-start) + " ms");
+    }
+
+    @Test
+    @Order(15)
+    public void jsonSerialize(){
+        long start = System.currentTimeMillis();
+        gsonSerdeService.serialize(person);
+        long end = System.currentTimeMillis();
+        System.out.println("Json/GSON Serialize: " + (end-start) + " ms");
+    }
+
+    @Test
+    @Order(16)
+    public void jsonDeserialize(){
+        long start = System.currentTimeMillis();
+        gsonSerdeService.deserialize(gsonOut);
+        long end = System.currentTimeMillis();
+        System.out.println("Json/GSON Deserialize: " + (end-start) + " ms");
     }
 
 }

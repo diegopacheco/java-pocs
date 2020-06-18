@@ -1,8 +1,9 @@
 package com.github.diegopacheco.serdebenchs.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Person {
+public class Person implements Serializable {
 
     private String id;
     private String name;
