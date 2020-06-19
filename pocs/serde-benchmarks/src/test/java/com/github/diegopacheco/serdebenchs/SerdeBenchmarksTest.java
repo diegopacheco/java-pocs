@@ -112,9 +112,9 @@ public class SerdeBenchmarksTest {
     @Order(1)
     public void base64V1Serialize(){
         long start = System.currentTimeMillis();
-        base64SerdeV1.serialize(person);
+        byte[] result = base64SerdeV1.serialize(person);
         long end = System.currentTimeMillis();
-        System.out.println("Base64 V1 Serialize: " + (end-start) + " ms");
+        System.out.println("Base64 V1 Serialize: " + (end-start) + " ms - size: " + result.length + " bytes");
     }
 
     @Test
@@ -130,9 +130,9 @@ public class SerdeBenchmarksTest {
     @Order(3)
     public void base64V2Serialize(){
         long start = System.currentTimeMillis();
-        base64SerdeV2.serialize(person);
+        byte[] result = base64SerdeV2.serialize(person);
         long end = System.currentTimeMillis();
-        System.out.println("Base64 V2 Serialize: " + (end-start) + " ms");
+        System.out.println("Base64 V2 Serialize: " + (end-start) + " ms - size: " + result.length + " bytes");
     }
 
     @Test
@@ -148,9 +148,9 @@ public class SerdeBenchmarksTest {
     @Order(5)
     public void kryoSerialize(){
         long start = System.currentTimeMillis();
-        kryoSerdeService.serialize(person);
+        Output result = kryoSerdeService.serialize(person);
         long end = System.currentTimeMillis();
-        System.out.println("Kryo Serialize: " + (end-start) + " ms");
+        System.out.println("Kryo Serialize: " + (end-start) + " ms - size: " + result.getBuffer().length + " bytes");
     }
 
     @Test
@@ -166,9 +166,9 @@ public class SerdeBenchmarksTest {
     @Order(7)
     public void protobufSerialize(){
         long start = System.currentTimeMillis();
-        protoSerdeService.serialize(personProto);
+        ByteArrayOutputStream result = protoSerdeService.serialize(personProto);
         long end = System.currentTimeMillis();
-        System.out.println("Protobuf Serialize: " + (end-start) + " ms");
+        System.out.println("Protobuf Serialize: " + (end-start)+ " ms - size: " + result.toByteArray().length + " bytes");
     }
 
     @Test
@@ -184,9 +184,9 @@ public class SerdeBenchmarksTest {
     @Order(9)
     public void avroSerialize(){
         long start = System.currentTimeMillis();
-        avroSerdeServie.serializeToBinary(avroReq);
+        byte[] result = avroSerdeServie.serializeToBinary(avroReq);
         long end = System.currentTimeMillis();
-        System.out.println("Avro Serialize: " + (end-start) + " ms");
+        System.out.println("Avro Serialize: " + (end-start) + " ms - size: " + result.length + " bytes");
     }
 
     @Test
@@ -202,9 +202,9 @@ public class SerdeBenchmarksTest {
     @Order(11)
     public void msgPackSerialize(){
         long start = System.currentTimeMillis();
-        msgPackSerdeService.serialize(person);
+        byte[] result = msgPackSerdeService.serialize(person);
         long end = System.currentTimeMillis();
-        System.out.println("MessagePack Serialize: " + (end-start) + " ms");
+        System.out.println("MessagePack Serialize: " + (end-start) + " ms - size: " + result.length + " bytes");
     }
 
     @Test
@@ -220,9 +220,9 @@ public class SerdeBenchmarksTest {
     @Order(13)
     public void fstSerialize(){
         long start = System.currentTimeMillis();
-        fstSerdeService.serialize(person);
+        byte[] result = fstSerdeService.serialize(person);
         long end = System.currentTimeMillis();
-        System.out.println("FST Serialize: " + (end-start) + " ms");
+        System.out.println("FST Serialize: " + (end-start) + " ms - size: " + result.length + " bytes");
     }
 
     @Test
@@ -238,9 +238,9 @@ public class SerdeBenchmarksTest {
     @Order(15)
     public void jsonSerialize(){
         long start = System.currentTimeMillis();
-        gsonSerdeService.serialize(person);
+        byte[] result = gsonSerdeService.serialize(person);
         long end = System.currentTimeMillis();
-        System.out.println("Json/GSON Serialize: " + (end-start) + " ms");
+        System.out.println("Json/GSON Serialize: " + (end-start) + " ms - size: " + result.length + " bytes");
     }
 
     @Test
