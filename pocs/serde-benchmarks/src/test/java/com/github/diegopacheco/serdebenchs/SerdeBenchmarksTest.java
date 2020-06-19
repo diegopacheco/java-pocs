@@ -14,6 +14,7 @@ import com.github.diegopacheco.serdebenchs.base64.SerdeService;
 import com.github.diegopacheco.serdebenchs.base64.SerdeServiceV2;
 import com.github.diegopacheco.serdebenchs.kryo.KryoSerdeService;
 import com.github.diegopacheco.serdebenchs.protobuf.ProtobufSerdeService;
+import com.github.diegopacheco.serdebenchs.std.StdJavaSerializationService;
 import org.junit.jupiter.api.*;
 
 import java.io.ByteArrayOutputStream;
@@ -50,6 +51,9 @@ public class SerdeBenchmarksTest {
 
     private static JacksonSerdeService jacksonSerdeService;
     private static byte[] jacksonOut;
+
+    private static StdJavaSerializationService stdJavaSerializationService;
+    private static byte[] stdOut;
 
     @BeforeAll
     public static void setupBase64(){
@@ -116,6 +120,12 @@ public class SerdeBenchmarksTest {
     public static void setupJackson(){
         jacksonSerdeService = new JacksonSerdeService();
         jacksonOut = jacksonSerdeService.serialize(person);
+    }
+
+    @BeforeAll
+    public static void setupStdJava(){
+        stdJavaSerializationService = new StdJavaSerializationService();
+        stdOut = stdJavaSerializationService.serialize(person);
     }
 
     @Test
@@ -278,6 +288,24 @@ public class SerdeBenchmarksTest {
         jacksonSerdeService.deserialize(jacksonOut);
         long end = System.currentTimeMillis();
         System.out.println("Json/Jackson Deserialize: " + (end-start) + " ms");
+    }
+
+    @Test
+    @Order(19)
+    public void stdJavaSerialize(){
+        long start = System.currentTimeMillis();
+        byte[] result = stdJavaSerializationService.serialize(person);
+        long end = System.currentTimeMillis();
+        System.out.println("STD Java Serialize: " + (end-start) + " ms - size: " + result.length + " bytes");
+    }
+
+    @Test
+    @Order(20)
+    public void stdJavaDeserialize(){
+        long start = System.currentTimeMillis();
+        stdJavaSerializationService.deserialize(stdOut);
+        long end = System.currentTimeMillis();
+        System.out.println("STD Java Deserialize: " + (end-start) + " ms");
     }
 
 }
