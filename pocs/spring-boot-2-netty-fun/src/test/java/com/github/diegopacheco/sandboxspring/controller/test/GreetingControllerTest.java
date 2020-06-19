@@ -1,4 +1,4 @@
-package com.github.diegopacheco.sandboxspring.controller;
+package com.github.diegopacheco.sandboxspring.controller.test;
 
 import com.github.diegopacheco.sandboxspring.service.GreetingService;
 import org.junit.jupiter.api.Test;
