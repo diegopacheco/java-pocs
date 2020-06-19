@@ -14,6 +14,7 @@ import com.github.diegopacheco.serdebenchs.base64.SerdeService;
 import com.github.diegopacheco.serdebenchs.base64.SerdeServiceV2;
 import com.github.diegopacheco.serdebenchs.kryo.KryoSerdeService;
 import com.github.diegopacheco.serdebenchs.protobuf.ProtobufSerdeService;
+import com.github.diegopacheco.serdebenchs.snappy.SnappySerdeService;
 import com.github.diegopacheco.serdebenchs.std.StdJavaSerializationService;
 import org.junit.jupiter.api.*;
 
@@ -54,6 +55,9 @@ public class SerdeBenchmarksTest {
 
     private static StdJavaSerializationService stdJavaSerializationService;
     private static byte[] stdOut;
+
+    private static SnappySerdeService snapppySerdeService;
+    private static byte[] snappyOut;
 
     @BeforeAll
     public static void setupBase64(){
@@ -126,6 +130,12 @@ public class SerdeBenchmarksTest {
     public static void setupStdJava(){
         stdJavaSerializationService = new StdJavaSerializationService();
         stdOut = stdJavaSerializationService.serialize(person);
+    }
+
+    @BeforeAll
+    public static void setupSnappy(){
+        snapppySerdeService = new SnappySerdeService();
+        snappyOut = snapppySerdeService.serialize(person);
     }
 
     @Test
@@ -306,6 +316,24 @@ public class SerdeBenchmarksTest {
         stdJavaSerializationService.deserialize(stdOut);
         long end = System.currentTimeMillis();
         System.out.println("STD Java Deserialize: " + (end-start) + " ms");
+    }
+
+    @Test
+    @Order(21)
+    public void snappySerialize(){
+        long start = System.currentTimeMillis();
+        byte[] result = snapppySerdeService.serialize(person);
+        long end = System.currentTimeMillis();
+        System.out.println("Snappy Serialize: " + (end-start) + " ms - size: " + result.length + " bytes");
+    }
+
+    @Test
+    @Order(22)
+    public void snappyDeserialize(){
+        long start = System.currentTimeMillis();
+        snapppySerdeService.deserialize(snappyOut);
+        long end = System.currentTimeMillis();
+        System.out.println("Snappy Deserialize: " + (end-start) + " ms");
     }
 
 }

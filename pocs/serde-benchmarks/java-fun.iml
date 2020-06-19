@@ -57,5 +57,6 @@
     <orderEntry type="library" name="Maven: de.ruedigermoeller:fst:2.56" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.6" level="project" />
+    <orderEntry type="library" name="Maven: org.xerial.snappy:snappy-java:1.1.7.5" level="project" />
   </component>
 </module>
