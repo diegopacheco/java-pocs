@@ -7,6 +7,7 @@ import com.github.diegopacheco.serdebenchs.avro.AvroSerdeServie;
 import com.github.diegopacheco.serdebenchs.avro.PersonIdentifier;
 import com.github.diegopacheco.serdebenchs.fst.FSTSerdeService;
 import com.github.diegopacheco.serdebenchs.json.GsonSerdeService;
+import com.github.diegopacheco.serdebenchs.json.JacksonSerdeService;
 import com.github.diegopacheco.serdebenchs.messagepack.MessagePackSerdeService;
 import com.github.diegopacheco.serdebenchs.model.Person;
 import com.github.diegopacheco.serdebenchs.base64.SerdeService;
@@ -46,6 +47,9 @@ public class SerdeBenchmarksTest {
 
     private static GsonSerdeService gsonSerdeService;
     private static byte[] gsonOut;
+
+    private static JacksonSerdeService jacksonSerdeService;
+    private static byte[] jacksonOut;
 
     @BeforeAll
     public static void setupBase64(){
@@ -106,6 +110,12 @@ public class SerdeBenchmarksTest {
     public static void setupGson(){
         gsonSerdeService = new GsonSerdeService();
         gsonOut = gsonSerdeService.serialize(person);
+    }
+
+    @BeforeAll
+    public static void setupJackson(){
+        jacksonSerdeService = new JacksonSerdeService();
+        jacksonOut = jacksonSerdeService.serialize(person);
     }
 
     @Test
@@ -236,7 +246,7 @@ public class SerdeBenchmarksTest {
 
     @Test
     @Order(15)
-    public void jsonSerialize(){
+    public void jsonGsonSerialize(){
         long start = System.currentTimeMillis();
         byte[] result = gsonSerdeService.serialize(person);
         long end = System.currentTimeMillis();
@@ -245,11 +255,29 @@ public class SerdeBenchmarksTest {
 
     @Test
     @Order(16)
-    public void jsonDeserialize(){
+    public void jsonGsonDeserialize(){
         long start = System.currentTimeMillis();
         gsonSerdeService.deserialize(gsonOut);
         long end = System.currentTimeMillis();
         System.out.println("Json/GSON Deserialize: " + (end-start) + " ms");
+    }
+
+    @Test
+    @Order(17)
+    public void jsonJacksonSerialize(){
+        long start = System.currentTimeMillis();
+        byte[] result = jacksonSerdeService.serialize(person);
+        long end = System.currentTimeMillis();
+        System.out.println("Json/Jackson Serialize: " + (end-start) + " ms - size: " + result.length + " bytes");
+    }
+
+    @Test
+    @Order(18)
+    public void jsonJacksonDeserialize(){
+        long start = System.currentTimeMillis();
+        jacksonSerdeService.deserialize(jacksonOut);
+        long end = System.currentTimeMillis();
+        System.out.println("Json/Jackson Deserialize: " + (end-start) + " ms");
     }
 
 }
