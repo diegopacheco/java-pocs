@@ -8,6 +8,8 @@ import com.github.diegopacheco.serdebenchs.avro.PersonIdentifier;
 import com.github.diegopacheco.serdebenchs.fst.FSTSerdeService;
 import com.github.diegopacheco.serdebenchs.json.GsonSerdeService;
 import com.github.diegopacheco.serdebenchs.json.JacksonSerdeService;
+import com.github.diegopacheco.serdebenchs.lz4.Lz4Result;
+import com.github.diegopacheco.serdebenchs.lz4.Lz4SerdeService;
 import com.github.diegopacheco.serdebenchs.messagepack.MessagePackSerdeService;
 import com.github.diegopacheco.serdebenchs.model.Person;
 import com.github.diegopacheco.serdebenchs.base64.SerdeService;
@@ -58,6 +60,9 @@ public class SerdeBenchmarksTest {
 
     private static SnappySerdeService snapppySerdeService;
     private static byte[] snappyOut;
+
+    private static Lz4SerdeService lz4SerdeService;
+    private static Lz4Result resultLz4;
 
     @BeforeAll
     public static void setupBase64(){
@@ -136,6 +141,12 @@ public class SerdeBenchmarksTest {
     public static void setupSnappy(){
         snapppySerdeService = new SnappySerdeService();
         snappyOut = snapppySerdeService.serialize(person);
+    }
+
+    @BeforeAll
+    public static void setupLz4(){
+        lz4SerdeService = new Lz4SerdeService();
+        resultLz4 = lz4SerdeService.serialize(person);
     }
 
     @Test
@@ -334,6 +345,24 @@ public class SerdeBenchmarksTest {
         snapppySerdeService.deserialize(snappyOut);
         long end = System.currentTimeMillis();
         System.out.println("Snappy Deserialize: " + (end-start) + " ms");
+    }
+
+    @Test
+    @Order(23)
+    public void lz4Serialize(){
+        long start = System.currentTimeMillis();
+        Lz4Result result = lz4SerdeService.serialize(person);
+        long end = System.currentTimeMillis();
+        System.out.println("LZ4 Serialize: " + (end-start) + " ms - size: " + result.getCompressed().length + " bytes");
+    }
+
+    @Test
+    @Order(24)
+    public void lz4Deserialize(){
+        long start = System.currentTimeMillis();
+        lz4SerdeService.deserialize(resultLz4);
+        long end = System.currentTimeMillis();
+        System.out.println("LZ4 Deserialize: " + (end-start) + " ms");
     }
 
 }
