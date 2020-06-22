@@ -12,7 +12,7 @@ public class HttpUtils {
         try{
             URL urlObj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) urlObj.openConnection();
-            con.setRequestMethod("GET");
+            con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
 
             con.setDoOutput(true);
