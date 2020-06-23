@@ -28,4 +28,14 @@ public class Client implements Contract{
         return implementation.mul(va,vb);
     }
 
+    @Override
+    public Double sub(Double va, Double vb) {
+        return implementation.sub(va,vb);
+    }
+
+    @Override
+    public Double div(Double va, Double vb) {
+        throw new UnsupportedOperationException("div is not supported yet.");
+    }
+
 }

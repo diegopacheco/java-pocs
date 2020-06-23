@@ -27,4 +27,13 @@ public class MathController {
 		return result+"";
 	}
 
+	@PostMapping(path= "/sub", consumes = "application/json", produces = "application/json")
+	public String sub(@RequestBody String boddy){
+		String[] data = boddy.split(",");
+		Double va = Double.parseDouble(data[0]);
+		Double vb = Double.parseDouble(data[1]);
+		Double result =  va - vb;
+		return result+"";
+	}
+
 }

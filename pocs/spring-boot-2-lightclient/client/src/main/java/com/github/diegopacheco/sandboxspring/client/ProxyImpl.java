@@ -8,7 +8,6 @@ public class ProxyImpl implements Contract{
     private static final String baseUrl = "http://localhost:8080";
     private static JSONParser parser = new JSONParser();
 
-
     @Override
     public Double sum(Double va, Double vb) {
         try{
@@ -32,6 +31,18 @@ public class ProxyImpl implements Contract{
         String result = HttpUtils.callGET(baseUrl+"/mul/" + va + "/" + vb);
         Double dblResult = Double.parseDouble(result);
         return dblResult;
+    }
+
+    @Override
+    public Double sub(Double va, Double vb) {
+        String boddy = va + "," + vb;
+        String result = HttpUtils.callPOST(baseUrl+"/sub/",boddy);
+        return Double.parseDouble(result);
+    }
+
+    @Override
+    public Double div(Double va, Double vb) {
+        throw new UnsupportedOperationException("Div not supported yet.");
     }
 
 }
