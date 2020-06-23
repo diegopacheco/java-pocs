@@ -1,3 +1,3 @@
 #!/bin/bash
-./mvnw spring-boot:run
 
+./mvnw spring-boot:run

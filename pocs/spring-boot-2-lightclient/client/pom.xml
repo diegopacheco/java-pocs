@@ -88,19 +88,17 @@
     </build>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.6.2</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>com.github.diegopacheco.sandbox.java</groupId>
             <artifactId>sb23x-lightweight-server</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <classifier>classes</classifier>
+            <type>jar</type>
             <scope>test</scope>
         </dependency>
 
