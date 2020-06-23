@@ -38,4 +38,9 @@ public class Client implements Contract{
         throw new UnsupportedOperationException("div is not supported yet.");
     }
 
+    @Override
+    public String echo(String msg) {
+        return implementation.echo(msg);
+    }
+
 }

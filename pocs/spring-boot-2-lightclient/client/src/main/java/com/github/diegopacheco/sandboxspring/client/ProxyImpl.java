@@ -2,6 +2,7 @@ package com.github.diegopacheco.sandboxspring.client;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.xerial.snappy.Snappy;
 
 public class ProxyImpl implements Contract{
 
@@ -43,6 +44,21 @@ public class ProxyImpl implements Contract{
     @Override
     public Double div(Double va, Double vb) {
         throw new UnsupportedOperationException("Div not supported yet.");
+    }
+
+    @Override
+    public String echo(String msg) {
+        try{
+            byte[] input = Snappy.compress(msg.getBytes("UTF-8"));
+            String inputString = new String(input,"UTF-8");
+            String result = HttpUtils.callPOST(baseUrl+"/echo/",inputString);
+            byte[] resultByte = result.getBytes("UTF-8");
+            byte[] uncompressedByte = Snappy.uncompress(resultByte);
+            String resultString = new String(uncompressedByte,"UTF-8");
+            return resultString;
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
 }

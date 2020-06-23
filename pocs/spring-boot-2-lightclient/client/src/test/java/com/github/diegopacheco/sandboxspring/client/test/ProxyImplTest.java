@@ -6,12 +6,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ProxyImplTest {
 
     @BeforeAll
     public static void setup(){
-        Application.main(new String[]{});
+       Application.main(new String[]{});
 
         // warmup
         Client client = Client.getInstance();
@@ -19,6 +20,7 @@ public class ProxyImplTest {
             client.mul(2D,3D+i);
             client.sum(3D,7D+i);
             client.sub(100D+i,10D);
+            client.echo("test"+i);
         }
     }
 
@@ -50,6 +52,17 @@ public class ProxyImplTest {
         Long end   = System.currentTimeMillis();
         assertEquals(50D,result);
         System.out.println("Sub(POST)-NoParser execution time: " + (end-start) + " ms");
+    }
+
+    @Test
+    public void testEcho(){
+        Client client = Client.getInstance();
+        Long start = System.currentTimeMillis();
+        String result = client.echo("okay, this is a msg? right? ok!");
+        Long end   = System.currentTimeMillis();
+        assertNotNull(result);
+        System.out.println("Result: " + result);
+        System.out.println("echo(POST)-Snappy execution time: " + (end-start) + " ms");
     }
 
 }
