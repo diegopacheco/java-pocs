@@ -47,6 +47,7 @@ public class Main{
 
   private static void validateAndAbort(boolean result) {
     if (result){
+      // (4) Java Exception Breakpoint with RuntimeExecption
       throw new RuntimeException(new IOException("Error!"));
     }
   }
