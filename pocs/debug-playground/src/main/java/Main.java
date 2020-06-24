@@ -9,9 +9,7 @@ public class Main{
     Pojo p = createPojo1();
     Pojo p2 = createPojo2();
     boolean result = decideAndPrint(p,p2);
-    if (result){
-      throw new RuntimeException(new IOException("Error!"));
-    }
+    validateAndAbort(result);
   }
 
   private static Pojo createPojo1(){
@@ -44,7 +42,13 @@ public class Main{
 
   private static void print(Pojo p,Pojo p2){
     // (1) From here we can Drop Frame 2x.
-    System.out.println( String.join(";", p.getEmail(), p2.getEmail()) );
+    System.out.println( "Joining 2 emails: " + String.join(";", p.getEmail(), p2.getEmail()) );
+  }
+
+  private static void validateAndAbort(boolean result) {
+    if (result){
+      throw new RuntimeException(new IOException("Error!"));
+    }
   }
 
 }
