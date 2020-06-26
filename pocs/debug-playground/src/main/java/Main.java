@@ -1,8 +1,5 @@
 import java.io.IOException;
 
-/*
-* More on: https://www.baeldung.com/intellij-debugging-tricks
-* */
 public class Main{
 
   public static void main(String args[]){
@@ -41,13 +38,13 @@ public class Main{
   }
 
   private static void print(Pojo p,Pojo p2){
-    // (1) From here we can Drop Frame 2x.
+    // (2) From here we can Drop Frame 2x.
     System.out.println( "Joining 2 emails: " + String.join(";", p.getEmail(), p2.getEmail()) );
   }
 
   private static void validateAndAbort(boolean result) {
     if (result){
-      // (4) Java Exception Breakpoint with RuntimeExecption
+      // (4) Java Exception Breakpoint with RuntimeExecption and (5) Evaluate Expression on the fly.
       throw new RuntimeException(new IOException("Error!"));
     }
   }
