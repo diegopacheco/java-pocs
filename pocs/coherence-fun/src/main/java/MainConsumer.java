@@ -6,6 +6,9 @@ import com.tangosol.net.NamedMap;
  */
 public class MainConsumer {
     public static void main(String args[]){
+
+        CacheFactory.ensureCluster();
+
         NamedMap<String, String> map = CacheFactory.getCache("welcomes");
 
         System.out.printf("Accessing map \"%s\" containing %d entries\n",
@@ -14,5 +17,7 @@ public class MainConsumer {
 
         map.entrySet().forEach(System.out::println);
         System.out.println("DONE.");
+
+        CacheFactory.shutdown();
     }
 }

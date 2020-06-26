@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<!DOCTYPE coherence SYSTEM "coherence.dtd">
+
+<coherence>
+    <cluster-config>
+        <member-identity>
+            <cluster-name>diego_cluster</cluster-name>
+        </member-identity>
+
+        <multicast-listener>
+            <address>224.3.6.0</address>
+            <port>port</port>
+            <time-to-live>0</time-to-live>
+        </multicast-listener>
+    </cluster-config>
+
+    <configurable-cache-factory-config>
+        <init-params>
+            <init-param>
+                <param-type>java.lang.String</param-type>
+                <param-value system-property="tangosol.coherence.cacheconfig">example-config.xml</param-value>
+            </init-param>
+        </init-params>
+    </configurable-cache-factory-config>
+</coherence>
