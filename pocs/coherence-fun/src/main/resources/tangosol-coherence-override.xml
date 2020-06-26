@@ -8,8 +8,8 @@
         </member-identity>
 
         <multicast-listener>
-            <address>224.3.6.0</address>
-            <port>port</port>
+            <address>172.17.0.1</address>
+            <port>7574</port>
             <time-to-live>0</time-to-live>
         </multicast-listener>
     </cluster-config>
