@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.example
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [annotation-api, app-name, docker, file-watch, http-client, java, java-application, jib, junit, kubernetes, logback, management, maven, netty-server, properties, readme]
