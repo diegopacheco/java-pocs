@@ -1,11 +1,13 @@
 package com.github.diegopacheco.serdebenchs.base64;
 
+import com.github.diegopacheco.serdebenchs.SerdeService;
 import com.github.diegopacheco.serdebenchs.model.Person;
 
 import java.util.Base64;
 
-public class SerdeServiceV2 {
+public class SerdeServiceV2 implements SerdeService<Person,byte[]> {
 
+    @Override
     public byte[] serialize(Person p){
         try{
             StringBuilder sb = new StringBuilder();
@@ -18,6 +20,7 @@ public class SerdeServiceV2 {
         }
     }
 
+    @Override
     public Person deserialize(byte[] data){
         try{
             Person p = new Person();

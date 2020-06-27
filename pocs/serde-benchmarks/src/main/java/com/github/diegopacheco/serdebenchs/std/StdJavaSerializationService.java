@@ -1,5 +1,6 @@
 package com.github.diegopacheco.serdebenchs.std;
 
+import com.github.diegopacheco.serdebenchs.SerdeService;
 import com.github.diegopacheco.serdebenchs.model.Person;
 
 import java.io.ByteArrayInputStream;
@@ -7,8 +8,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class StdJavaSerializationService {
+public class StdJavaSerializationService implements SerdeService<Person,byte[]> {
 
+    @Override
     public byte[] serialize(Person p){
         try{
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -20,6 +22,7 @@ public class StdJavaSerializationService {
         }
     }
 
+    @Override
     public Person deserialize(byte[] data){
         try{
             ObjectInputStream reader = new ObjectInputStream(new ByteArrayInputStream(data));

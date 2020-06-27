@@ -12,7 +12,7 @@ import com.github.diegopacheco.serdebenchs.lz4.Lz4Result;
 import com.github.diegopacheco.serdebenchs.lz4.Lz4SerdeService;
 import com.github.diegopacheco.serdebenchs.messagepack.MessagePackSerdeService;
 import com.github.diegopacheco.serdebenchs.model.Person;
-import com.github.diegopacheco.serdebenchs.base64.SerdeService;
+import com.github.diegopacheco.serdebenchs.base64.Base64SerdeService;
 import com.github.diegopacheco.serdebenchs.base64.SerdeServiceV2;
 import com.github.diegopacheco.serdebenchs.kryo.KryoSerdeService;
 import com.github.diegopacheco.serdebenchs.protobuf.ProtobufSerdeService;
@@ -27,7 +27,7 @@ import java.util.UUID;
 public class SerdeBenchmarksTest {
 
     private static Person person;
-    private static SerdeService base64SerdeV1;
+    private static Base64SerdeService base64SerdeV1;
     private static SerdeServiceV2 base64SerdeV2;
     private static byte[] bytesPersonV1;
     private static byte[] bytesPersonV2;
@@ -66,7 +66,7 @@ public class SerdeBenchmarksTest {
 
     @BeforeAll
     public static void setupBase64(){
-        base64SerdeV1 = new SerdeService();
+        base64SerdeV1 = new Base64SerdeService();
         base64SerdeV2 = new SerdeServiceV2();
         person = new Person();
         person.setId(UUID.randomUUID().toString());
@@ -104,7 +104,7 @@ public class SerdeBenchmarksTest {
         avroReq = AvroHttpRequest.newBuilder()
                 .setPersonIdentifier(pi)
                 .build();
-        avroOut = avroSerdeServie.serializeToBinary(avroReq);
+        avroOut = avroSerdeServie.serialize(avroReq);
     }
 
     @BeforeAll
@@ -225,7 +225,7 @@ public class SerdeBenchmarksTest {
     @Order(9)
     public void avroSerialize(){
         long start = System.currentTimeMillis();
-        byte[] result = avroSerdeServie.serializeToBinary(avroReq);
+        byte[] result = avroSerdeServie.serialize(avroReq);
         long end = System.currentTimeMillis();
         System.out.println("Avro Serialize: " + (end-start) + " ms - size: " + result.length + " bytes");
     }
@@ -234,7 +234,7 @@ public class SerdeBenchmarksTest {
     @Order(10)
     public void avroDeserialize(){
         long start = System.currentTimeMillis();
-        avroSerdeServie.deSerealizeFromBinary(avroOut);
+        avroSerdeServie.deserialize(avroOut);
         long end = System.currentTimeMillis();
         System.out.println("Avro Deserialize: " + (end-start) + " ms");
     }

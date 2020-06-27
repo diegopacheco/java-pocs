@@ -1,14 +1,16 @@
 package com.github.diegopacheco.serdebenchs.avro;
 
+import com.github.diegopacheco.serdebenchs.SerdeService;
 import org.apache.avro.io.*;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 
 import java.io.ByteArrayOutputStream;
 
-public class AvroSerdeServie {
+public class AvroSerdeServie implements SerdeService<AvroHttpRequest,byte[]> {
 
-    public byte[] serializeToBinary(AvroHttpRequest request) {
+    @Override
+    public byte[] serialize(AvroHttpRequest request) {
         DatumWriter<AvroHttpRequest> writer = new SpecificDatumWriter<>(AvroHttpRequest.class);
         byte[] data = new byte[0];
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -23,7 +25,8 @@ public class AvroSerdeServie {
         return data;
     }
 
-    public AvroHttpRequest deSerealizeFromBinary(byte[] data) {
+    @Override
+    public AvroHttpRequest deserialize(byte[] data) {
         DatumReader<AvroHttpRequest> employeeReader = new SpecificDatumReader<>(AvroHttpRequest.class);
         Decoder decoder = DecoderFactory.get().binaryDecoder(data, null);
         try {

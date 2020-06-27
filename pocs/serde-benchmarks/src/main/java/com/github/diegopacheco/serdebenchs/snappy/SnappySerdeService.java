@@ -1,9 +1,11 @@
 package com.github.diegopacheco.serdebenchs.snappy;
+import com.github.diegopacheco.serdebenchs.SerdeService;
 import com.github.diegopacheco.serdebenchs.model.Person;
 import org.xerial.snappy.Snappy;
 
-public class SnappySerdeService {
+public class SnappySerdeService implements SerdeService<Person,byte[]> {
 
+    @Override
     public byte[] serialize(Person p){
         try{
             return Snappy.compress(personToString(p).getBytes("UTF-8"));
@@ -12,6 +14,7 @@ public class SnappySerdeService {
         }
     }
 
+    @Override
     public Person deserialize(byte[] data){
         try{
             return (Person) fromString(Snappy.uncompress(data));

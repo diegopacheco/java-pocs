@@ -1,14 +1,16 @@
 package com.github.diegopacheco.serdebenchs.lz4;
 
+import com.github.diegopacheco.serdebenchs.SerdeService;
 import com.github.diegopacheco.serdebenchs.model.Person;
 import net.jpountz.lz4.LZ4Compressor;
 import net.jpountz.lz4.LZ4Factory;
 import net.jpountz.lz4.LZ4FastDecompressor;
 
-public class Lz4SerdeService {
+public class Lz4SerdeService implements SerdeService<Person,Lz4Result> {
 
     private static LZ4Factory factory = LZ4Factory.fastestInstance();
 
+    @Override
     public Lz4Result serialize(Person p){
         try{
             LZ4Compressor compressor = factory.fastCompressor();
@@ -26,6 +28,7 @@ public class Lz4SerdeService {
         }
     }
 
+    @Override
     public Person deserialize(Lz4Result result){
         try{
             LZ4FastDecompressor decompressor = factory.fastDecompressor();
