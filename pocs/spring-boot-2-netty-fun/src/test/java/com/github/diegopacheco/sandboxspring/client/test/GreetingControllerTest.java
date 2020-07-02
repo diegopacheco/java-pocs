@@ -1,5 +1,6 @@
 package com.github.diegopacheco.sandboxspring.client.test;
 
+import com.github.diegopacheco.sandboxspring.Application;
 import com.github.diegopacheco.sandboxspring.client.GreetingWebClient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,6 +34,7 @@ public class GreetingControllerTest {
 
     @Test
     public void testGreetOption2() {
+        Application.main(new String[]{});
         String result = greetingWebClient.greet("Diego");
         assertEquals("Greeting Diego", result);
     }

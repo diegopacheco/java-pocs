@@ -20,7 +20,7 @@ public class Application {
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
-			System.out.println("Spring Boot 2.0 working! Netty based now baby!");
+			System.out.println("Spring Boot 2.3.x working! Netty based now baby!");
 		};
 	}
 }
