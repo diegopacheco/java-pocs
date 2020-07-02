@@ -74,12 +74,36 @@ public class SerdeBenchmarksTest {
         person.setEmail("diego.pacheco.it@gmail.com");
         bytesPersonV1 = base64SerdeV1.serialize(person);
         bytesPersonV2 = base64SerdeV2.serialize(person);
+
+        for(int i=0;i<100;i++){
+            Person personWarm = new Person();
+            personWarm.setId(UUID.randomUUID().toString());
+            personWarm.setName("Warm up person");
+            personWarm.setEmail("someone.someboddy.what@something.com");
+
+            byte[] bytesPersonWarm   = base64SerdeV1.serialize(personWarm);
+            base64SerdeV1.deserialize(bytesPersonWarm);
+            byte[] bytesPersonWarmV2 = base64SerdeV2.serialize(personWarm);
+            base64SerdeV2.deserialize(bytesPersonWarmV2);
+        }
+
     }
 
     @BeforeAll
     public static void setupKryo(){
         kryoSerdeService = new KryoSerdeService();
         outKryo = kryoSerdeService.serialize(person);
+
+        for(int i=0;i<100;i++){
+            Person personWarm = new Person();
+            personWarm.setId(UUID.randomUUID().toString());
+            personWarm.setName("Warm up person");
+            personWarm.setEmail("someone.someboddy.what@something.com");
+
+            Output bytesPersonWarm   = kryoSerdeService.serialize(personWarm);
+            kryoSerdeService.deserialize(bytesPersonWarm);
+        }
+
     }
 
     @BeforeAll
@@ -91,6 +115,17 @@ public class SerdeBenchmarksTest {
                 .setName("Diego Pacheco")
                 .build();
         outProto = protoSerdeService.serialize(personProto);
+
+        for(int i=0;i<100;i++){
+            PersonProto.Person protoWarm = PersonProto.Person.newBuilder()
+                    .setId(UUID.randomUUID().toString())
+                    .setEmail("someone.someboddy.what@something.com")
+                    .setName("Warm up person")
+                    .build();
+
+            ByteArrayOutputStream bytesPersonWarm   = protoSerdeService.serialize(protoWarm);
+            protoSerdeService.deserialize(bytesPersonWarm);
+        }
     }
 
     @BeforeAll
@@ -105,48 +140,132 @@ public class SerdeBenchmarksTest {
                 .setPersonIdentifier(pi)
                 .build();
         avroOut = avroSerdeServie.serialize(avroReq);
+
+        for(int i=0;i<100;i++){
+            PersonIdentifier piWarm = PersonIdentifier.newBuilder()
+                    .setId(UUID.randomUUID().toString())
+                    .setName("Warm up person")
+                    .setEmail("someone.someboddy.what@something.com")
+                    .build();
+            AvroHttpRequest avroReqWarm = AvroHttpRequest.newBuilder()
+                    .setPersonIdentifier(pi)
+                    .build();
+
+            byte[] bytesPersonWarm   = avroSerdeServie.serialize(avroReqWarm);
+            avroSerdeServie.deserialize(bytesPersonWarm);
+        }
     }
 
     @BeforeAll
     public static void setupMsgPack(){
         msgPackSerdeService = new MessagePackSerdeService();
         outMsgPack = msgPackSerdeService.serialize(person);
+
+        for(int i=0;i<100;i++){
+            Person personWarm = new Person();
+            personWarm.setId(UUID.randomUUID().toString());
+            personWarm.setName("Warm up person");
+            personWarm.setEmail("someone.someboddy.what@something.com");
+
+            byte[] bytesPersonWarm   = msgPackSerdeService.serialize(personWarm);
+            msgPackSerdeService.deserialize(bytesPersonWarm);
+        }
     }
 
     @BeforeAll
     public static void setupFST(){
         fstSerdeService = new FSTSerdeService();
         fstOut = fstSerdeService.serialize(person);
+
+        for(int i=0;i<100;i++){
+            Person personWarm = new Person();
+            personWarm.setId(UUID.randomUUID().toString());
+            personWarm.setName("Warm up person");
+            personWarm.setEmail("someone.someboddy.what@something.com");
+
+            byte[] bytesPersonWarm   = fstSerdeService.serialize(personWarm);
+            fstSerdeService.deserialize(bytesPersonWarm);
+        }
     }
 
     @BeforeAll
     public static void setupGson(){
         gsonSerdeService = new GsonSerdeService();
         gsonOut = gsonSerdeService.serialize(person);
+
+        for(int i=0;i<100;i++){
+            Person personWarm = new Person();
+            personWarm.setId(UUID.randomUUID().toString());
+            personWarm.setName("Warm up person");
+            personWarm.setEmail("someone.someboddy.what@something.com");
+
+            byte[] bytesPersonWarm   = gsonSerdeService.serialize(personWarm);
+            gsonSerdeService.deserialize(bytesPersonWarm);
+        }
     }
 
     @BeforeAll
     public static void setupJackson(){
         jacksonSerdeService = new JacksonSerdeService();
         jacksonOut = jacksonSerdeService.serialize(person);
+
+        for(int i=0;i<100;i++){
+            Person personWarm = new Person();
+            personWarm.setId(UUID.randomUUID().toString());
+            personWarm.setName("Warm up person");
+            personWarm.setEmail("someone.someboddy.what@something.com");
+
+            byte[] bytesPersonWarm   = jacksonSerdeService.serialize(personWarm);
+            jacksonSerdeService.deserialize(bytesPersonWarm);
+        }
     }
 
     @BeforeAll
     public static void setupStdJava(){
         stdJavaSerializationService = new StdJavaSerializationService();
         stdOut = stdJavaSerializationService.serialize(person);
+
+        for(int i=0;i<100;i++){
+            Person personWarm = new Person();
+            personWarm.setId(UUID.randomUUID().toString());
+            personWarm.setName("Warm up person");
+            personWarm.setEmail("someone.someboddy.what@something.com");
+
+            byte[] bytesPersonWarm   = stdJavaSerializationService.serialize(personWarm);
+            stdJavaSerializationService.deserialize(bytesPersonWarm);
+        }
     }
 
     @BeforeAll
     public static void setupSnappy(){
         snapppySerdeService = new SnappySerdeService();
         snappyOut = snapppySerdeService.serialize(person);
+
+        for(int i=0;i<100;i++){
+            Person personWarm = new Person();
+            personWarm.setId(UUID.randomUUID().toString());
+            personWarm.setName("Warm up person");
+            personWarm.setEmail("someone.someboddy.what@something.com");
+
+            byte[] bytesPersonWarm   = snapppySerdeService.serialize(personWarm);
+            snapppySerdeService.deserialize(bytesPersonWarm);
+        }
     }
 
     @BeforeAll
     public static void setupLz4(){
         lz4SerdeService = new Lz4SerdeService();
         resultLz4 = lz4SerdeService.serialize(person);
+
+        for(int i=0;i<100;i++){
+            Person personWarm = new Person();
+            personWarm.setId(UUID.randomUUID().toString());
+            personWarm.setName("Warm up person");
+            personWarm.setEmail("someone.someboddy.what@something.com");
+
+            Lz4Result bytesPersonWarm   = lz4SerdeService.serialize(personWarm);
+            lz4SerdeService.deserialize(bytesPersonWarm);
+        }
     }
 
     @Test
