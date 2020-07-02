@@ -298,10 +298,10 @@ public class SerdeBenchmarksTest {
     @Test
     @Order(4)
     public void base64V2Deserialize(){
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         base64SerdeV2.deserialize(bytesPersonV2);
-        long end = System.currentTimeMillis();
-        System.out.println("Base64 V2 Deserialize: " + (end-start) + " ms");
+        long end = System.nanoTime();
+        System.out.println("Base64 V2 Deserialize: " + (end-start) + " ns");
     }
 
     @Test
