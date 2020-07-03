@@ -1,0 +1,7 @@
+// Example IDL file for our monster's schema.
+namespace Generated.Model;
+table Person {
+  id:string;
+  name:string;
+  email:string;
+}

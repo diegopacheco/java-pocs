@@ -1,16 +1,10 @@
-import MyGame.Sample.*;
+package MyGame.Sample;
+
 import com.google.flatbuffers.FlatBufferBuilder;
-
 import java.nio.ByteBuffer;
-import java.util.UUID;
 
-public class Main{
+public class MainMonsterSample {
   public static void main(String args[]){
-
-    Person p = new Person();
-    p.setId(UUID.randomUUID().toString());
-    p.setName("Diego");
-    p.setEmail("diego.pacheco.it@gmail.com");
 
     FlatBufferBuilder builder = new FlatBufferBuilder(0);
 

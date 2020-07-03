@@ -25,7 +25,7 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>Main</mainClass>
+          <mainClass>MyGame.Sample.MainMonsterSample</mainClass>
           <arguments>
             <argument>ok</argument>
           </arguments>
