@@ -25,18 +25,18 @@ public class MainPerson {
         long start = System.nanoTime();
         ByteBuffer buf = builder.dataBuffer();
         long end  = System.nanoTime();
-        System.out.println("Serilize time: " + (end-start) + " ms - size: " + buf.array().length);
+        System.out.println("Serilize time: " + (end-start) + " ns - size: " + buf.array().length);
         System.out.println(person);
 
         start = System.nanoTime();
         Person p2 = Person.getRootAsPerson(buf);
         end  = System.nanoTime();
-        System.out.println("Deserilize time: " + (end-start) + " ms");
+        System.out.println("Deserilize time: " + (end-start) + " ns");
         System.out.println(p2.toString());
 
         /**
-         * Serilize time: 507 ms - size: 128
-         * Deserilize time: 5922 ms
+         * Serilize time: 507 ns - size: 128
+         * Deserilize time: 5922 ns
          */
     }
 }
