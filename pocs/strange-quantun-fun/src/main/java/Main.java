@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Main{
   public static void main(String args[]){
     Program p = new Program(2);
-    Gate xGate1 = new Hadamard(0);
+    Gate xGate1 = Gate.x(0);
 
     Step step1 = new Step();
     step1.addGate(xGate1);
