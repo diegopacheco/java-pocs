@@ -5,11 +5,17 @@
 
 <struts>
 
-    <constant name="struts.devMode" value="true" />
+    <constant name="struts.devMode" value="true"/>
 
-    <package name="basicstruts2" extends="struts-default">
+    <package name="basicstructs" extends="struts-default">
         <action name="index">
             <result>/index.jsp</result>
+        </action>
+        <action name="HelloWorld"
+                class="com.github.diegopacheco.sandbox.java.struts.action.HelloWorldAction"
+                method="execute"
+        >
+            <result name="success">/HelloWorld.jsp</result>
         </action>
     </package>
 
