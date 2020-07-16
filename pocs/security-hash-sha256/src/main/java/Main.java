@@ -1,12 +1,42 @@
+import com.google.common.hash.Hashing;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.bouncycastle.util.encoders.Hex;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 public class Main{
   public static void main(String args[]) throws Exception{
     String originalString = "123456789";
-    System.out.println("Original String: " + originalString);
-    System.out.println("Generated Hash : " + bytesToHex(hash(originalString)));
-    System.out.println("Generated Hash : " + bytesToHex(hash(originalString)));
+    System.out.println("Original String        : " + originalString);
+    System.out.println("Generated Hash         : " + bytesToHex(hash(originalString)));
+    System.out.println("Generated Hash         : " + bytesToHex(hash(originalString)));
+    System.out.println("Generated Hash (Guava) : " + hashGuava(originalString));
+    System.out.println("Generated Hash (Guava) : " + hashGuava(originalString));
+    System.out.println("Generated Hash (CD)    : " + hashCD(originalString));
+    System.out.println("Generated Hash (CD)    : " + hashCD(originalString));
+    System.out.println("Generated Hash (BC)    : " + hashBC(originalString));
+    System.out.println("Generated Hash (BC)    : " + hashBC(originalString));
+  }
+
+  private static String hashGuava(String message){
+    String sha256hex = Hashing.sha256()
+            .hashString(message, StandardCharsets.UTF_8)
+            .toString();
+    return sha256hex;
+  }
+
+  private static String hashCD(String originalString){
+    String sha256hex = DigestUtils.sha256Hex(originalString);
+    return sha256hex;
+  }
+
+  private static String hashBC(String originalString) throws Exception{
+    MessageDigest digest = MessageDigest.getInstance("SHA-256");
+    byte[] hash = digest.digest(
+            originalString.getBytes(StandardCharsets.UTF_8));
+    String sha256hex = new String(Hex.encode(hash));
+    return sha256hex;
   }
 
   private static byte[] hash(String originalString) throws Exception{
