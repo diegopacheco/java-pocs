@@ -13,14 +13,18 @@ public class Main{
   public static void main(String args[]) throws Exception{
     String originalString = "123456789";
     System.out.println("Original String        : " + originalString);
+
+    System.out.println("=== SALT Method 1 ");
     System.out.println("Generated Hash         : " + bytesToHex(hash(originalString)));
     System.out.println("Generated Hash         : " + bytesToHex(hash(originalString)));
+    System.out.println("Generated Hash (BC)    : " + hashBC(originalString));
+    System.out.println("Generated Hash (BC)    : " + hashBC(originalString));
+
+    System.out.println("=== SALT Method 2 ");
     System.out.println("Generated Hash (Guava) : " + hashGuava(originalString));
     System.out.println("Generated Hash (Guava) : " + hashGuava(originalString));
     System.out.println("Generated Hash (CD)    : " + hashCD(originalString));
     System.out.println("Generated Hash (CD)    : " + hashCD(originalString));
-    System.out.println("Generated Hash (BC)    : " + hashBC(originalString));
-    System.out.println("Generated Hash (BC)    : " + hashBC(originalString));
   }
 
   private static byte[] getSalt() {
@@ -35,19 +39,28 @@ public class Main{
   }
 
   private static String hashGuava(String message){
-    String sha256hex = Hashing.sha256()
-            .hashString(message, StandardCharsets.UTF_8)
-            .toString();
-    return sha256hex;
+    try{
+      String sha256hex = Hashing.sha256()
+              .hashString(message + new String(salt,"UTf-8"), StandardCharsets.UTF_8)
+              .toString();
+      return sha256hex;
+    }catch(Exception e){
+      throw new RuntimeException(e);
+    }
   }
 
   private static String hashCD(String originalString){
-    String sha256hex = DigestUtils.sha256Hex(originalString);
-    return sha256hex;
+    try{
+      String sha256hex = DigestUtils.sha256Hex(originalString + new String(salt,"UTf-8"));
+      return sha256hex;
+    }catch(Exception e){
+      throw new RuntimeException(e);
+    }
   }
 
   private static String hashBC(String originalString) throws Exception{
     MessageDigest digest = MessageDigest.getInstance("SHA-256");
+    digest.update(salt);
     byte[] hash = digest.digest(
             originalString.getBytes(StandardCharsets.UTF_8));
     String sha256hex = new String(Hex.encode(hash));
