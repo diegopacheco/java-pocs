@@ -28,7 +28,7 @@ public class SumControllerTest {
         HttpEntity<String> request = new HttpEntity<String>(boddy, headers);
 
         String result = this.restTemplate.
-                postForObject("http://localhost:" + port + "/sum",request,String.class);
+                postForObject("http://localhost:" + port + "/sum", request, String.class);
         System.out.println("Result: " + result);
         assertThat(result).contains("2");
     }
