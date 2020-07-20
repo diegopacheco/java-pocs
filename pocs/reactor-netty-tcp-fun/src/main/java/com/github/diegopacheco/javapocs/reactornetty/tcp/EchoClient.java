@@ -34,7 +34,7 @@ public final class EchoClient {
             Connection connection = client.handle((in, out) -> {
                 String message = "echo_"+ UUID.randomUUID().toString();
                 System.out.println("Sending message... " + message);
-                return out.send(Flux.concat(ByteBufFlux.fromString(Mono.just(message)),in.receive().retain()));
+                return out.sendString(Mono.just(message));
             }).connectNow();
             connection.onDispose().block();
         }catch(Exception e){

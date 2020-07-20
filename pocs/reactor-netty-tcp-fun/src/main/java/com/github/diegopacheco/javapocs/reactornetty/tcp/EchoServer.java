@@ -18,9 +18,8 @@ public final class EchoServer {
                         .wiretap(WIRETAP)
                         .handle(
                                 (in, out) -> {
-                                    System.out.println("got message: ");
+                                    System.out.println("got... ");
                                     ByteBufFlux result = in.receive().retain();
-                                    result.asString().subscribe( data -> System.out.println("recived: " + data) );
                                     return out.send(result);
                                 }
                         );
