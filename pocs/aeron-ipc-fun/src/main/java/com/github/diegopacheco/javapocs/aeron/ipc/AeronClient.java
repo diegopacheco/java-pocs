@@ -16,7 +16,18 @@ public class AeronClient {
         Aeron aeron = Aeron.connect(ctx);
 
         final Publication publication = aeron.addPublication(channel, 1);
-        sentMessage(aeron,publication,"Hello");
+        for(int i=0;i<100;i++)
+            sentMessage(aeron,publication,"Hello");
+
+        long init = System.currentTimeMillis();
+        sentMessage(aeron,publication,"Hi, so this works really?");
+        long end = System.currentTimeMillis();
+        System.out.println("Sent message in " + (end - init) + " ms");
+
+        init = System.nanoTime();
+        sentMessage(aeron,publication,"Ok, this is another ok!?.");
+        end = System.nanoTime();
+        System.out.println("Sent message in " + (end - init) + " ns");
     }
 
     private static void sentMessage(Aeron aeron,Publication publication,String message){
