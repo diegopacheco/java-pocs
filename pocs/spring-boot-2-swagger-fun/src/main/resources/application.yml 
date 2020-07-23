@@ -1,0 +1,2 @@
+# Locations of static resources.
+spring.resources.static-locations: classpath:/webapp/
