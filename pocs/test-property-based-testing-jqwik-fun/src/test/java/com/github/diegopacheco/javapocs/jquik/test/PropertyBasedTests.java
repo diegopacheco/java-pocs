@@ -4,7 +4,6 @@ import com.github.diegopacheco.javapocs.jquik.BagOfCatsUtils;
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.*;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
