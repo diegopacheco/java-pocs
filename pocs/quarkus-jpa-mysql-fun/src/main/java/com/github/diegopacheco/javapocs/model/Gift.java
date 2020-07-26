@@ -1,11 +1,11 @@
 package com.github.diegopacheco.javapocs.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@NamedQuery(name="Gift.findAll", query="SELECT g FROM Gift g")
+@XmlRootElement
 public class Gift {
 
     private Long id;

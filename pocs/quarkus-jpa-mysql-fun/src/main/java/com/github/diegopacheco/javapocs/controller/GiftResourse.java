@@ -29,6 +29,7 @@ public class GiftResourse {
 
     @GET
     @Path("/all")
+    @Produces({MediaType.APPLICATION_JSON})
     public Gift[] getGifts() {
         return scs.findAll();
     }

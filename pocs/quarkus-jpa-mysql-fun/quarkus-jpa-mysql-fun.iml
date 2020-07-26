@@ -16,6 +16,19 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-resteasy-jsonb:1.6.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-jsonb:1.6.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse:yasson:1.0.7" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-arc:1.6.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus.arc:arc:1.6.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.microprofile.context-propagation:microprofile-context-propagation-api:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-jsonp:1.6.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.resteasy:resteasy-json-binding-provider:4.5.5.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish:jakarta.json:1.1.6" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.json.bind:jakarta.json.bind-api:1.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.3.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.resteasy:resteasy-json-p-provider:4.5.5.Final" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-resteasy:1.6.1.Final" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-vertx-http:1.6.1.Final" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-development-mode-spi:1.6.1.Final" level="project" />
@@ -46,9 +59,6 @@
     <orderEntry type="library" name="Maven: io.vertx:vertx-auth-common:3.9.1" level="project" />
     <orderEntry type="library" name="Maven: io.vertx:vertx-bridge-common:3.9.1" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-resteasy-server-common:1.6.1.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.quarkus:quarkus-arc:1.6.1.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.quarkus.arc:arc:1.6.1.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.eclipse.microprofile.context-propagation:microprofile-context-propagation-api:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-resteasy-common:1.6.1.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.resteasy:resteasy-core:4.5.5.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.spec.javax.ws.rs:jboss-jaxrs-api_2.1_spec:2.0.1.Final" level="project" />
@@ -73,7 +83,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.maven.resolver:maven-resolver-api:1.4.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.maven.resolver:maven-resolver-util:1.4.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.maven.shared:maven-shared-utils:3.2.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.google.inject:guice:no_aop:4.2.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.google.guava:guava:27.0.1-jre" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.google.guava:failureaccess:1.0.1" level="project" />
@@ -107,8 +116,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: io.quarkus:quarkus-devtools-utilities:1.6.1.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.quarkus:quarkus-builder:1.6.1.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.quarkus:quarkus-jsonp-deployment:1.6.1.Final" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.quarkus:quarkus-jsonp:1.6.1.Final" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.glassfish:jakarta.json:1.1.6" level="project" />
     <orderEntry type="library" name="Maven: org.jboss:jandex:2.1.3.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.jboss.logging:commons-logging-jboss-logging:1.0.0.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter:5.6.2" level="project" />
@@ -129,7 +136,6 @@
     <orderEntry type="library" name="Maven: io.smallrye.common:smallrye-common-expression:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: io.smallrye.common:smallrye-common-function:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: io.smallrye.common:smallrye-common-constraint:1.0.2" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.3.2.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logmanager:jboss-logmanager-embedded:1.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging-annotations:2.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.threads:jboss-threads:3.1.1.Final" level="project" />

@@ -30,6 +30,11 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-resteasy-jsonb -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jsonb</artifactId>
+    </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>

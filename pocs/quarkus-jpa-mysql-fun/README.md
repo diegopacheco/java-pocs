@@ -1,3 +1,17 @@
+### Run
+```bash
+./run.sh
+```
+
+### Test
+```bash
+xdg-open http://localhost:8080/gift/bonbon
+xdg-open http://localhost:8080/gift/flowers
+xdg-open http://localhost:8080/gift/magnetics
+
+xdg-open http://localhost:8080/gift/all
+```
+
 # quarkus-jpa-mysql-fun project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
