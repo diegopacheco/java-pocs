@@ -19,4 +19,10 @@ public class SantaClausService {
         gift.setName(giftDescription);
         em.persist(gift);
     }
+
+    @Transactional
+    public Gift[] findAll(){
+        return em.createNamedQuery("Gift.findAll", Gift.class).getResultList().toArray(new Gift[0]);
+    }
+
 }

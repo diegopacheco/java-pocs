@@ -13,8 +13,8 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.connection.username" value="root" />
             <property name="hibernate.connection.password" value="pass" />
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3325/" />
-            <property name="hibernate.default_schema" value="quarkusdb"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3325/hibernate_db" />
+            <property name="hibernate.default_schema" value="hibernate_db"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect"/>
             <property name="hibernate.show_sql" value="true"/>
