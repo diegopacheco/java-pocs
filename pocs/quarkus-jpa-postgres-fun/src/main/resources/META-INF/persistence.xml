@@ -1,0 +1,37 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="CustomerPU" transaction-type="JTA">
+
+        <description>My customer entities</description>
+
+        <properties>
+            <!-- Connection specific -->
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
+            <property name="hibernate.connection.username" value="root" />
+            <property name="hibernate.connection.password" value="root" />
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/hibernate_db" />
+           <!-- <property name="hibernate.default_schema" value="hibernate_db"/> -->
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL10Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <!--
+                Optimistically create the tables;
+                will cause background errors being logged if they already exist,
+                but is practical to retain existing data across runs (or create as needed) -->
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="javax.persistence.validation.mode" value="NONE"/>
+
+            <property name="hibernate.c3p0.min_size" value="1"/>
+            <property name="hibernate.c3p0.max_size" value="10"/>
+            <property name="hibernate.c3p0.timeout" value="300"/>
+            <property name="hibernate.c3p0.max_statements" value="50"/>
+            <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+        </properties>
+
+    </persistence-unit>
+</persistence>
