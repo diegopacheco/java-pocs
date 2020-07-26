@@ -1,3 +1,9 @@
+### Create DB on Mysql
+``bash
+./run-mysql-5.7-docker.sh
+echo "create database hibernate_db;" | mysql -uroot -ppass -h127.0.0.1 -P3325
+``
+
 ### Run
 ```bash
 ./run.sh
