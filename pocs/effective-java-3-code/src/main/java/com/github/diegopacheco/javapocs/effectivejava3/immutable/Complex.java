@@ -4,6 +4,9 @@ import java.util.Objects;
 
 public final class Complex {
 
+    public static final Complex ZERO = new Complex(0D,0D);
+    public static final Complex ONE  = new Complex(1D,0D);
+
     private final double real;
     private final double imaginary;
 
@@ -38,6 +41,10 @@ public final class Complex {
         return new Complex((real * c.real + imaginary * c.imaginary) / tmp,
                 (real * c.imaginary - imaginary * c.real) / tmp
         );
+    }
+
+    public static Complex valueOf(double real,double imaginary){
+        return new Complex(real,imaginary);
     }
 
     @Override

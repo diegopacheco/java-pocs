@@ -7,5 +7,8 @@ public class Main {
         System.out.println("complex 1 " + c1);
         System.out.println("complex 2 " + c2);
         System.out.println("complex 3 " + (c1.plus(c2)) );
+
+        System.out.println("ZERO and ONE " + Complex.ZERO + " | " + Complex.ONE);
+        System.out.println("complex: " + Complex.valueOf(4,0) );
     }
 }
