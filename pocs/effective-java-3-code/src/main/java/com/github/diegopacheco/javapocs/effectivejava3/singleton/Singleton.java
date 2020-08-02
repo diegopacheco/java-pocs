@@ -7,7 +7,7 @@ import java.io.Serializable;
 * */
 public class Singleton implements Serializable {
 
-    private static Singleton INSTANCE;
+    private volatile static Singleton INSTANCE;
 
     private Singleton(){}
 
