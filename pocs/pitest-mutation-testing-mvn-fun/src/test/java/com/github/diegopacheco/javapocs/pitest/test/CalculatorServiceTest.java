@@ -56,7 +56,7 @@ public class CalculatorServiceTest {
     }
 
     @Test
-    public void testPlusNull(){
+    public void testMulNull(){
         CalculatorService calc = new CalculatorService();
         Double a = null;
         Double b = null;
@@ -89,6 +89,14 @@ public class CalculatorServiceTest {
                     calc.sub(a,b);
                 }
         );
+    }
+
+    @Test
+    public void testSubZero(){
+        CalculatorService calc = new CalculatorService();
+        Double a = 0D;
+        Double b = 0D;
+        assertEquals(0, calc.sub(a,b));
     }
 
 }
