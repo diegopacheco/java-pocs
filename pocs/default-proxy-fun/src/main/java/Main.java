@@ -12,7 +12,7 @@ public class Main {
                 new DynamicInvocationHandler());
 
         System.out.println("Map.get(1) == " + proxyInstance.get("1"));
-    
+
         Map proxyInstanceLambda = (Map) Proxy.newProxyInstance(
                 DynamicInvocationHandler.class.getClassLoader(),
                 new Class[]{Map.class},
