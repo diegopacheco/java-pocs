@@ -1,4 +1,4 @@
-import com.github.diegopacheco.javapocs.pitest.test.service.CalculatorService;
+import com.github.diegopacheco.javapocs.pitest.service.CalculatorService;
 
 public class Main{
   public static void main(String args[]){

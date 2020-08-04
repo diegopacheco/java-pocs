@@ -58,7 +58,8 @@
           </dependency>
         </dependencies>
         <configuration>
-          <targetTests>com.github.diegopacheco.javapocs.pitest.test.*</targetTests>
+          <targetClasses>com.github.diegopacheco.javapocs.pitest.service*</targetClasses>
+          <targetTests>com.github.diegopacheco.javapocs.pitest.test*</targetTests>
         </configuration>
       </plugin>
       <plugin>

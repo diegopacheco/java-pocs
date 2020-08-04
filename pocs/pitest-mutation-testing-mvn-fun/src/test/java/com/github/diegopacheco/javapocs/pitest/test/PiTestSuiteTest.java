@@ -6,6 +6,6 @@ import org.junit.platform.suite.api.SelectPackages;
 import org.junit.runner.RunWith;
 
 @RunWith(JUnitPlatform.class)
-@SelectPackages("com.github.diegopacheco.javapocs.pitest.test.service")
-@IncludePackages("com.github.diegopacheco.javapocs.pitest.test.service")
-public class PiTestSuiteTest { }
+@SelectPackages("com.github.diegopacheco.javapocs.pitest.test")
+@IncludePackages("com.github.diegopacheco.javapocs.pitest.test")
+public class PiTestSuiteTest {}
