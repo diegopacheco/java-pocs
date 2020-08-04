@@ -1,4 +1,4 @@
-package com.github.diegopacheco.javapocs.pitest.service;
+package com.github.diegopacheco.javapocs.pitest.test.service;
 
 import java.util.Objects;
 

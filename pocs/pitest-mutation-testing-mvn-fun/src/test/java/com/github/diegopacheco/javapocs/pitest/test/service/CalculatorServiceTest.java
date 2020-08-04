@@ -1,8 +1,6 @@
-package com.github.diegopacheco.javapocs.pitest.service;
+package com.github.diegopacheco.javapocs.pitest.test.service;
 
-import com.github.diegopacheco.javapocs.pitest.service.CalculatorService;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorServiceTest {
