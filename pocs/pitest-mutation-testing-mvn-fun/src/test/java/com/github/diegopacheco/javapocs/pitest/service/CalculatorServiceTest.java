@@ -33,13 +33,9 @@ public class CalculatorServiceTest {
     @Test
     public void testDivZero(){
         CalculatorService calc = new CalculatorService();
-        Double a = 0D;
-        Double b = 1D;
-        assertThrows(
-                IllegalArgumentException.class,() -> {
-                    calc.divide(a,b);
-                }
-        );
+        double a = 0D;
+        double b = 1D;
+        assertThrows(IllegalArgumentException.class,() -> calc.divide(a,b));
     }
 
 }
