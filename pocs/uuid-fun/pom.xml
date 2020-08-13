@@ -57,6 +57,12 @@
       <version>5.6.2</version>
       <scope>test</scope>
    </dependency>
+
+    <dependency>
+      <groupId>com.github.f4b6a3</groupId>
+      <artifactId>uuid-creator</artifactId>
+      <version>2.7.5</version>
+    </dependency>
   
   </dependencies>
 </project>
