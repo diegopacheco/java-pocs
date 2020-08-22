@@ -15,7 +15,7 @@ import static org.powermock.api.easymock.PowerMock.*;
 @RunWith(PowerMockRunner.class)
 //@PrepareForTest({CalculatorFinal.class,CalculatorStatic.class}) // also works
 @PrepareForTest(fullyQualifiedNames="com.github.diegopacheco.javapocs.powermock.*") // also works
-public class PowerMockTests {
+public class PowerMockEasyMocksTests {
 
     @Mock
     CalculatorFinal mockFinal;
