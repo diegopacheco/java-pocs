@@ -19,4 +19,15 @@ public class StupidMapTest {
         assertNotEquals(mock.anwserOfTheUniverse(), sm.anwserOfTheUniverse());
     }
 
+    @Test
+    public void whenMockFinalOverride() {
+        StupidMap sm = new StupidMap();
+        StupidMap mock = mock(StupidMap.class);
+        when(mock.isEmpty()).thenReturn(false);
+
+        System.out.println("mock  == " + mock.isEmpty());
+        System.out.println("class == " + sm.isEmpty());
+        assertNotEquals(mock.isEmpty(), sm.isEmpty());
+    }
+
 }
