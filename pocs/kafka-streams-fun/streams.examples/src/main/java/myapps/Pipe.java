@@ -44,6 +44,7 @@ public class Pipe {
         builder.stream("streams-plaintext-input").to("streams-pipe-output");
 
         final Topology topology = builder.build();
+        System.out.println(topology.describe());
         final KafkaStreams streams = new KafkaStreams(topology, props);
         final CountDownLatch latch = new CountDownLatch(1);
 
