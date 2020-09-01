@@ -11,6 +11,9 @@ import java.net.URL;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Run with JDK 8 to avoid issue from 11 https://stackoverflow.com/questions/60790118/java-kubernetes-client-sslhandshakeexception-extension-5-should-not-be-present
+ * */
 @JunitKubernetes
 public class KubernetesJunitTest {
 
