@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Base64;
 
@@ -17,14 +18,14 @@ public class Main {
         return new BigInteger(hex, 16).toString(2);
     }
 
-    private static int binToDec(String binaryString) {
-        double j = 0;
-        for (int i = 0; i < binaryString.length(); i++) {
-            if (binaryString.charAt(i) == '1') {
-                j = j + Math.pow(2, binaryString.length() - 1 - i);
-            }
+    private static String binToDec(String binaryString) {
+        BigDecimal bd1 = new BigDecimal(binaryString.charAt(0)=='1'?1:0);
+        BigDecimal two = new BigDecimal(2);
+        for (int i = 1; i<binaryString.length(); i++) {
+            bd1 = bd1.multiply(two);
+            bd1 = bd1.add(new BigDecimal(binaryString.charAt(i)=='1'?1:0));
         }
-        return (int) j;
+        return bd1.toString();
     }
 
     private static String binToBase64(String binaryString) {
@@ -43,8 +44,9 @@ public class Main {
         }
     }
 
-    private static String decToHex(int dec) {
-        return Integer.toHexString(dec);
+    private static String decToHex(String dec) {
+        BigDecimal bd = new BigDecimal(dec);
+        return String.format("%X", bd.toBigInteger());
     }
 
 }
