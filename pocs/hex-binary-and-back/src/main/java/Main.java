@@ -4,10 +4,13 @@ import java.util.Base64;
 public class Main {
     public static void main(String args[]) {
         System.out.println("HEX      = 1234abcd12ab34cd56ef1234567890ab");
-        System.out.println("BIN      = " + hexToBinary("1234abcd12ab34cd56ef1234567890ab"));
-        System.out.println("DEC      = " + binToDec(hexToBinary("1234abcd12ab34cd56ef1234567890ab")));
-        System.out.println("BASE64   = " + binToBase64(hexToBinary("1234abcd12ab34cd56ef1234567890ab")));
-        System.out.println("HEX BACK = " + decToHex(binToDec(base64ToBin(binToBase64(hexToBinary("1234abcd12ab34cd56ef1234567890ab"))))));
+        System.out.println("BIN      = " + hexToBinary("1234abcd12ab34cd56ef1234567890ab") + " HEX BACK: " + binToHex(hexToBinary("1234abcd12ab34cd56ef1234567890ab")) );
+        System.out.println("DEC      = " + binToDec(hexToBinary("1234abcd12ab34cd56ef1234567890ab")) + " HEX BACK: " + decToHex(binToDec(hexToBinary("1234abcd12ab34cd56ef1234567890ab"))) );
+        System.out.println("BASE64   = " + binToBase64(hexToBinary("1234abcd12ab34cd56ef1234567890ab")) + "HEX BACK: " + binToHex(base64ToBin(binToBase64(hexToBinary("1234abcd12ab34cd56ef1234567890ab")))) );
+    }
+
+    private static String binToHex(String binaryString) {
+        return new BigInteger(binaryString, 2).toString(16);
     }
 
     private static String hexToBinary(String hex) {
