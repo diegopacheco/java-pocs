@@ -5,19 +5,23 @@ import java.util.Base64;
 /*
 *  HEX to Bin, Dec and Base64 and back.
 *
-*  HEX      = 1234abcd12ab34cd56ef1234567890ab
-*  BIN      = 10010001101001010101111001101000100101010101100110100110011010101011011101111000100100011010001010110011110001001000010101011 HEX BACK: 1234abcd12ab34cd56ef1234567890ab
-*  DEC      = 24199587900365542451626017331269374123 HEX BACK: 1234ABCD12AB34CD56EF1234567890AB
-*  BASE64   = MTAwMTAwMDExMDEwMDEwMTAxMDExMTEwMDExMDEwMDAxMDAxMDEwMTAxMDExMDAxMTAxMDAxMTAwMTEwMTAxMDEwMTEwMTExMDExMTEwMDAxMDAxMDAwMTEwMTAwMDEwMTAxMTAwMTExMTAwMDEwMDEwMDAwMTAxMDEwMTE=HEX BACK: 1234abcd12ab34cd56ef1234567890ab
+* HEX        = 1234abcd12ab34cd56ef1234567890ab
+* BIN        = 10010001101001010101111001101000100101010101100110100110011010101011011101111000100100011010001010110011110001001000010101011 HEX BACK: 1234abcd12ab34cd56ef1234567890ab
+* DEC        = 24199587900365542451626017331269374123 HEX BACK: 1234ABCD12AB34CD56EF1234567890AB
+* BASE64     = MTAwMTAwMDExMDEwMDEwMTAxMDExMTEwMDExMDEwMDAxMDAxMDEwMTAxMDExMDAxMTAxMDAxMTAwMTEwMTAxMDEwMTEwMTExMDExMTEwMDAxMDAxMDAwMTEwMTAwMDEwMTAxMTAwMTExMTAwMDEwMDEwMDAwMTAxMDEwMTE=HEX BACK: 1234abcd12ab34cd56ef1234567890ab
+* HEX to B64 = MTIzNGFiY2QxMmFiMzRjZDU2ZWYxMjM0NTY3ODkwYWI= size: 44
+* HEX size   = 32
 *
 * */
 public class Main {
 
     public static void main(String args[]) {
-        System.out.println("HEX      = 1234abcd12ab34cd56ef1234567890ab");
-        System.out.println("BIN      = " + hexToBinary("1234abcd12ab34cd56ef1234567890ab") + " HEX BACK: " + binToHex(hexToBinary("1234abcd12ab34cd56ef1234567890ab")) );
-        System.out.println("DEC      = " + binToDec(hexToBinary("1234abcd12ab34cd56ef1234567890ab")) + " HEX BACK: " + decToHex(binToDec(hexToBinary("1234abcd12ab34cd56ef1234567890ab"))) );
-        System.out.println("BASE64   = " + binToBase64(hexToBinary("1234abcd12ab34cd56ef1234567890ab")) + "HEX BACK: " + binToHex(base64ToBin(binToBase64(hexToBinary("1234abcd12ab34cd56ef1234567890ab")))) );
+        System.out.println("HEX        = 1234abcd12ab34cd56ef1234567890ab");
+        System.out.println("BIN        = " + hexToBinary("1234abcd12ab34cd56ef1234567890ab") + " HEX BACK: " + binToHex(hexToBinary("1234abcd12ab34cd56ef1234567890ab")) );
+        System.out.println("DEC        = " + binToDec(hexToBinary("1234abcd12ab34cd56ef1234567890ab")) + " HEX BACK: " + decToHex(binToDec(hexToBinary("1234abcd12ab34cd56ef1234567890ab"))) );
+        System.out.println("BASE64     = " + binToBase64(hexToBinary("1234abcd12ab34cd56ef1234567890ab")) + "HEX BACK: " + binToHex(base64ToBin(binToBase64(hexToBinary("1234abcd12ab34cd56ef1234567890ab")))) );
+        System.out.println("HEX to B64 = " + binToBase64("1234abcd12ab34cd56ef1234567890ab") + " size: " + binToBase64("1234abcd12ab34cd56ef1234567890ab").length());
+        System.out.println("HEX size   = " + "1234abcd12ab34cd56ef1234567890ab".length());
     }
 
     private static String binToHex(String binaryString) {
