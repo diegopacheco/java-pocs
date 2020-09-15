@@ -5,18 +5,14 @@ import java.util.Base64;
 /*
 *  HEX to Bin, Dec and Base64 and back.
 *
-*  HEX           = 1234ABCD12AB34CD56EF1234567890AB
-*  HEX size      = 32
-*  BIN           = 10010001101001010101111001101000100101010101100110100110011010101011011101111000100100011010001010110011110001001000010101011 HEX BACK: 1234abcd12ab34cd56ef1234567890ab
-*  BYTE[]        = [B@65b54208 size: 63 HEX BACK = 1234ABCD12AB34CD56EF1234567890AB
-*  BYTE[] to B64 = AQAQABEBABAQEBERABEBAAEAEBAQEBEAEQEAEQARAQEBARAREBERAAEAEAARAQABAQEQAREQABABAAAQEBAR size: 84
-*  DEC           = 24199587900365542451626017331269374123 HEX BACK: 1234ABCD12AB34CD56EF1234567890AB
-*  BASE64        = MTAwMTAwMDExMDEwMDEwMTAxMDExMTEwMDExMDEwMDAxMDAxMDEwMTAxMDExMDAxMTAxMDAxMTAwMTEwMTAxMDEwMTEwMTExMDExMTEwMDAxMDAxMDAwMTEwMTAwMDEwMTAxMTAwMTExMTAwMDEwMDEwMDAwMTAxMDEwMTE=HEX BACK: 1234abcd12ab34cd56ef1234567890ab
-*  HEX to B64    = MTIzNEFCQ0QxMkFCMzRDRDU2RUYxMjM0NTY3ODkwQUI= size: 44
+* HEX           = 1234ABCD12AB34CD56EF1234567890AB
+* HEX size      = 32
+* BIN           = 10010001101001010101111001101000100101010101100110100110011010101011011101111000100100011010001010110011110001001000010101011 HEX BACK: 1234abcd12ab34cd56ef1234567890ab
+* BYTE[]        = [B@65b54208 size: 16 HEX BACK = 1234ABCD12AB34CD56EF1234567890AB
+* BYTE[] to B64 = EjSrzRKrNM1W7xI0VniQqw== size: 24 HEX BACK = 1234ABCD12AB34CD56EF1234567890AB
+* DEC           = 24199587900365542451626017331269374123 HEX BACK: 1234ABCD12AB34CD56EF1234567890AB
 *
-* Process finished with exit code 0
-*
-* */
+**/
 public class Main {
 
     public static void main(String args[]) throws Exception{
@@ -24,11 +20,9 @@ public class Main {
         System.out.println("HEX           = " + hex);
         System.out.println("HEX size      = " + hex.length());
         System.out.println("BIN           = " + hexToBinary(hex) + " HEX BACK: " + binToHex(hexToBinary(hex)) );
-        System.out.println("BYTE[]        = " + hexStringToByteArray(hexToBinary(hex)) + " size: " + hexStringToByteArray(hexToBinary(hex)).length + " HEX BACK = " + byteArrayToHexStr(hexStringToByteArray(hex))  );
-        System.out.println("BYTE[] to B64 = " + binToBase64(new String(hexStringToByteArray(hexToBinary(hex)))) + " size: " + binToBase64(new String(hexStringToByteArray(hexToBinary(hex)))).length() );
+        System.out.println("BYTE[]        = " + hexStringToByteArray(hex) + " size: " + hexStringToByteArray(hex).length + " HEX BACK = " + byteArrayToHexStr(hexStringToByteArray(hex))  );
+        System.out.println("BYTE[] to B64 = " + byteArrayToBase64(hexStringToByteArray(hex)) + " size: " + byteArrayToBase64(hexStringToByteArray(hex)).length() + " HEX BACK = " + byteArrayToHexStr(base64ToByteArray(byteArrayToBase64(hexStringToByteArray(hex))) ) );
         System.out.println("DEC           = " + binToDec(hexToBinary(hex)) + " HEX BACK: " + decToHex(binToDec(hexToBinary(hex))) );
-        System.out.println("BASE64        = " + binToBase64(hexToBinary(hex)) + "HEX BACK: " + binToHex(base64ToBin(binToBase64(hexToBinary(hex)))) );
-        System.out.println("HEX to B64    = " + binToBase64(hex) + " size: " + binToBase64(hex).length());
     }
 
     public static byte[] hexStringToByteArray(String s) {
@@ -73,17 +67,17 @@ public class Main {
         return bd1.toString();
     }
 
-    private static String binToBase64(String binaryString) {
+    private static String byteArrayToBase64(byte[] a) {
         try {
-            return new String(Base64.getEncoder().encode(binaryString.getBytes("UTF-8")), "UTF-8");
+            return new String(Base64.getEncoder().encode(a), "UTF-8");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static String base64ToBin(String binaryString) {
+    private static byte[] base64ToByteArray(String base64Str) {
         try {
-            return new String(Base64.getDecoder().decode(binaryString.getBytes("UTF-8")), "UTF-8");
+            return Base64.getDecoder().decode(base64Str);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
