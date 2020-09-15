@@ -15,13 +15,39 @@ import java.util.Base64;
 * */
 public class Main {
 
-    public static void main(String args[]) {
-        System.out.println("HEX        = 1234abcd12ab34cd56ef1234567890ab");
-        System.out.println("BIN        = " + hexToBinary("1234abcd12ab34cd56ef1234567890ab") + " HEX BACK: " + binToHex(hexToBinary("1234abcd12ab34cd56ef1234567890ab")) );
-        System.out.println("DEC        = " + binToDec(hexToBinary("1234abcd12ab34cd56ef1234567890ab")) + " HEX BACK: " + decToHex(binToDec(hexToBinary("1234abcd12ab34cd56ef1234567890ab"))) );
-        System.out.println("BASE64     = " + binToBase64(hexToBinary("1234abcd12ab34cd56ef1234567890ab")) + "HEX BACK: " + binToHex(base64ToBin(binToBase64(hexToBinary("1234abcd12ab34cd56ef1234567890ab")))) );
-        System.out.println("HEX to B64 = " + binToBase64("1234abcd12ab34cd56ef1234567890ab") + " size: " + binToBase64("1234abcd12ab34cd56ef1234567890ab").length());
-        System.out.println("HEX size   = " + "1234abcd12ab34cd56ef1234567890ab".length());
+    public static void main(String args[]) throws Exception{
+        String hex = "1234abcd12ab34cd56ef1234567890ab".toUpperCase();
+        System.out.println("HEX        = " + hex);
+        System.out.println("HEX size   = " + hex.length());
+        System.out.println("BIN        = " + hexToBinary(hex) + " HEX BACK: " + binToHex(hexToBinary(hex)) );
+        System.out.println("BYTE[]     = " + hexStringToByteArray(hexToBinary(hex)) + " size: " + hexStringToByteArray(hexToBinary(hex)).length + " HEX BACK = " + byteArrayToHexStr(hexStringToByteArray(hex))  );
+        System.out.println("DEC        = " + binToDec(hexToBinary(hex)) + " HEX BACK: " + decToHex(binToDec(hexToBinary(hex))) );
+        System.out.println("BASE64     = " + binToBase64(hexToBinary(hex)) + "HEX BACK: " + binToHex(base64ToBin(binToBase64(hexToBinary(hex)))) );
+        System.out.println("HEX to B64 = " + binToBase64(hex) + " size: " + binToBase64(hex).length());
+    }
+
+    public static byte[] hexStringToByteArray(String s) {
+        byte[] byteArray = new BigInteger(s, 16)
+                .toByteArray();
+        if (byteArray[0] == 0) {
+            byte[] output = new byte[byteArray.length - 1];
+            System.arraycopy(
+                    byteArray, 1, output,
+                    0, output.length);
+            return output;
+        }
+        return byteArray;
+    }
+
+    private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
+    public static String byteArrayToHexStr(byte[] bytes) {
+        char[] hexChars = new char[bytes.length * 2];
+        for ( int j = 0; j < bytes.length; j++ ) {
+            int v = bytes[j] & 0xFF;
+            hexChars[j * 2] = hexArray[v >>> 4];
+            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        }
+        return new String(hexChars);
     }
 
     private static String binToHex(String binaryString) {
