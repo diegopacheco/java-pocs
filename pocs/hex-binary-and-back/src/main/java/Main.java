@@ -5,12 +5,15 @@ import java.util.Base64;
 /*
 *  HEX to Bin, Dec and Base64 and back.
 *
-* HEX           = 1234ABCD12AB34CD56EF1234567890AB
-* HEX size      = 32
-* BIN           = 10010001101001010101111001101000100101010101100110100110011010101011011101111000100100011010001010110011110001001000010101011 HEX BACK: 1234abcd12ab34cd56ef1234567890ab
-* BYTE[]        = [B@65b54208 size: 16 HEX BACK = 1234ABCD12AB34CD56EF1234567890AB
-* BYTE[] to B64 = EjSrzRKrNM1W7xI0VniQqw== size: 24 HEX BACK = 1234ABCD12AB34CD56EF1234567890AB
-* DEC           = 24199587900365542451626017331269374123 HEX BACK: 1234ABCD12AB34CD56EF1234567890AB
+*  HEX           = 1234ABCD12AB34CD56EF1234567890AB
+*  HEX size      = 32
+*  BIN           = 10010001101001010101111001101000100101010101100110100110011010101011011101111000100100011010001010110011110001001000010101011 HEX BACK: 1234abcd12ab34cd56ef1234567890ab
+*  BYTE[]        = [B@65b54208 size: 16 HEX BACK = 1234ABCD12AB34CD56EF1234567890AB
+*  BYTE[] to B64 = EjSrzRKrNM1W7xI0VniQqw== size: 24 HEX BACK = 1234ABCD12AB34CD56EF1234567890AB
+*  DEC           = 24199587900365542451626017331269374123 HEX BACK: 1234ABCD12AB34CD56EF1234567890AB
+*****************
+*  Hex to Byte[] to Base64 String in 1 ms [EjSrzRKrNM1W7xI0VniQqw==]
+*  Base64 String to Byte[] to Hex String in 0 ms [1234ABCD12AB34CD56EF1234567890AB]
 *
 **/
 public class Main {
@@ -23,6 +26,18 @@ public class Main {
         System.out.println("BYTE[]        = " + hexStringToByteArray(hex) + " size: " + hexStringToByteArray(hex).length + " HEX BACK = " + byteArrayToHexStr(hexStringToByteArray(hex))  );
         System.out.println("BYTE[] to B64 = " + byteArrayToBase64(hexStringToByteArray(hex)) + " size: " + byteArrayToBase64(hexStringToByteArray(hex)).length() + " HEX BACK = " + byteArrayToHexStr(base64ToByteArray(byteArrayToBase64(hexStringToByteArray(hex))) ) );
         System.out.println("DEC           = " + binToDec(hexToBinary(hex)) + " HEX BACK: " + decToHex(binToDec(hexToBinary(hex))) );
+        System.out.println("*****************");
+
+        Long init = System.currentTimeMillis();
+        String b64Str = byteArrayToBase64(hexStringToByteArray(hex));
+        Long end = System.currentTimeMillis();
+        System.out.println("Hex to Byte[] to Base64 String in " + (end-init) + " ms [" + b64Str + "]");
+
+        init = System.currentTimeMillis();
+        String hexBack = byteArrayToHexStr(base64ToByteArray(b64Str));
+        end = System.currentTimeMillis();
+        System.out.println("Base64 String to Byte[] to Hex String in " + (end-init) + " ms [" + hexBack + "]");
+
     }
 
     public static byte[] hexStringToByteArray(String s) {
