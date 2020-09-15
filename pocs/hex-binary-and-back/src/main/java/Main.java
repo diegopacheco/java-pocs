@@ -17,13 +17,14 @@ public class Main {
 
     public static void main(String args[]) throws Exception{
         String hex = "1234abcd12ab34cd56ef1234567890ab".toUpperCase();
-        System.out.println("HEX        = " + hex);
-        System.out.println("HEX size   = " + hex.length());
-        System.out.println("BIN        = " + hexToBinary(hex) + " HEX BACK: " + binToHex(hexToBinary(hex)) );
-        System.out.println("BYTE[]     = " + hexStringToByteArray(hexToBinary(hex)) + " size: " + hexStringToByteArray(hexToBinary(hex)).length + " HEX BACK = " + byteArrayToHexStr(hexStringToByteArray(hex))  );
-        System.out.println("DEC        = " + binToDec(hexToBinary(hex)) + " HEX BACK: " + decToHex(binToDec(hexToBinary(hex))) );
-        System.out.println("BASE64     = " + binToBase64(hexToBinary(hex)) + "HEX BACK: " + binToHex(base64ToBin(binToBase64(hexToBinary(hex)))) );
-        System.out.println("HEX to B64 = " + binToBase64(hex) + " size: " + binToBase64(hex).length());
+        System.out.println("HEX           = " + hex);
+        System.out.println("HEX size      = " + hex.length());
+        System.out.println("BIN           = " + hexToBinary(hex) + " HEX BACK: " + binToHex(hexToBinary(hex)) );
+        System.out.println("BYTE[]        = " + hexStringToByteArray(hexToBinary(hex)) + " size: " + hexStringToByteArray(hexToBinary(hex)).length + " HEX BACK = " + byteArrayToHexStr(hexStringToByteArray(hex))  );
+        System.out.println("BYTE[] to B64 = " + binToBase64(new String(hexStringToByteArray(hexToBinary(hex)))) + " size: " + binToBase64(new String(hexStringToByteArray(hexToBinary(hex)))).length() );
+        System.out.println("DEC           = " + binToDec(hexToBinary(hex)) + " HEX BACK: " + decToHex(binToDec(hexToBinary(hex))) );
+        System.out.println("BASE64        = " + binToBase64(hexToBinary(hex)) + "HEX BACK: " + binToHex(base64ToBin(binToBase64(hexToBinary(hex)))) );
+        System.out.println("HEX to B64    = " + binToBase64(hex) + " size: " + binToBase64(hex).length());
     }
 
     public static byte[] hexStringToByteArray(String s) {
