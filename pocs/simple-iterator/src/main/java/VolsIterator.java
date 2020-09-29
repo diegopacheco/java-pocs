@@ -22,8 +22,7 @@ public class VolsIterator implements Iterator<Character> {
     public Character next() {
         while(position<word.length()){
             if (vols.contains(word.charAt(position))){
-                position++;
-                return word.charAt(position-1);
+                return word.charAt(position++);
             }
             position++;
         }
