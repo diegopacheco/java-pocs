@@ -3,6 +3,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+/*
+* Early Loading Iterator(Constructor) does not return null on next. Delegates to Iterator.
+* */
 public class VolsIteratorV2 implements Iterator<Character> {
 
     private String word;

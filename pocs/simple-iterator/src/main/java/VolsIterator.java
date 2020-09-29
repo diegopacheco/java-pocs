@@ -2,6 +2,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+/*
+ * Lazy Iterator, returns nulls on last call.
+ * */
 public class VolsIterator implements Iterator<Character> {
 
     private String word;

@@ -3,6 +3,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+/*
+* Lazy Iterator that does not return null on next. But first call to next|hasNext does the work.
+* */
 public class VolsIteratorV3 implements Iterator<Character> {
 
     private String word;
