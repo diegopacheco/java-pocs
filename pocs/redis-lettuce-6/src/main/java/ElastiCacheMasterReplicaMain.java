@@ -15,9 +15,7 @@ public class ElastiCacheMasterReplicaMain {
         RedisClient redisClient = RedisClient.create();
 
         // Syntax: redis://[password@]host[:port][/databaseNumber]
-        List<RedisURI> nodes = Arrays.asList(RedisURI.create("redis://127.0.0.1:30001"), RedisURI.create("redis://127.0.0.1:30002"),
-                RedisURI.create("redis://127.0.0.1:30003"),RedisURI.create("redis://127.0.0.1:30004"),RedisURI.create("redis://127.0.0.1:30005"),
-                RedisURI.create("redis://127.0.0.1:30006"));
+        List<RedisURI> nodes = Arrays.asList(RedisURI.create("redis://127.0.0.1:30003"),RedisURI.create("redis://127.0.0.1:30001"),RedisURI.create("redis://127.0.0.1:30002"));
 
         StatefulRedisMasterReplicaConnection<String, String> connection = MasterReplica.connect(redisClient, StringCodec.UTF8,nodes);
         connection.setReadFrom(ReadFrom.UPSTREAM_PREFERRED);
