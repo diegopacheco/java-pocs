@@ -23,6 +23,8 @@ public class ElastiCacheMasterReplicaMain {
         connection.setReadFrom(ReadFrom.UPSTREAM_PREFERRED);
         System.out.println("Connected to Redis");
 
+        System.out.println("Keys from Redis: " + connection.sync().keys("*"));
+        
         connection.sync().set("key", "Hello, Redis! " + new Date());
         String value = connection.sync().get("key");
         System.out.println("Get from Redis: " + value);
