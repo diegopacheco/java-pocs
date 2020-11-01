@@ -25,8 +25,10 @@ public class MainConsumer {
         String result = channel.basicConsume("products_queue", true, consumer);
         System.out.println("result: " + result);
 
+        Thread.sleep(2000L);
+
         channel.close();
         connection.close();
-        System.out.println("Message received - all good.");
+        System.out.println("FIN- all good.");
     }
 }
