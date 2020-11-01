@@ -29,6 +29,6 @@ public class MainConsumer {
 
         channel.close();
         connection.close();
-        System.out.println("FIN- all good.");
+        System.out.println("FIN - all good.");
     }
 }
