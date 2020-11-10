@@ -8,9 +8,9 @@ public class Main{
 
     RedisClient redisClient = RedisClient.create("redis://localhost:6379");
     StatefulRedisConnection<String, String> connection = redisClient.connect();
+    connection.sync().flushall();
 
     long init = System.currentTimeMillis();
-
     long n = 1000000; // 1M
     for(long i=0;i<=n;i++){
        connection.sync().sadd("s1",i+"");
@@ -22,6 +22,7 @@ public class Main{
 
     init = System.currentTimeMillis();
     Set<String> delta = connection.sync().sdiff("s1","s2");
+    end = System.currentTimeMillis();
     System.out.println("Delta size: " + delta.size());
     System.out.println(n + " Delta time == " + (end-init) + " ms");
 
