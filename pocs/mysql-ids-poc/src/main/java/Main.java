@@ -5,16 +5,18 @@ import java.util.function.Consumer;
 
 public class Main {
     public static void main(String args[]) {
+
         // 1.5M records, took 3 minutes to insert them.
-        /*
         benchIt((Void) -> {
             insertBatch(1000000, "Test");
             insertBatch(500000, "Test2");
         });
-        */
+
+        // 1.5M recods(2 tables) diff took: 2321 ms(2 seconds).
         benchIt((Void) -> {
                     diff();
                 });
+
         System.out.println("FIN.");
     }
 
