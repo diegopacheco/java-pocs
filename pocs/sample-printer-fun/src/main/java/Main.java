@@ -7,7 +7,7 @@ public class Main{
     while(true){
       printer.print("going counting on... " + i + " @ " + new Date());
       i++;
-      Thread.sleep(1);
+      Thread.sleep(1000L);
     }
   }
 }
