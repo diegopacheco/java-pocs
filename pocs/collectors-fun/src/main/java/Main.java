@@ -1,7 +1,5 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,5 +24,13 @@ public class Main{
             stream().
             collect(Collectors.joining(" velho, "));
     System.out.println("Joined: " + joined);
+
+    List<Integer> numbers = Arrays.asList(1,10,42,34,27,32,3,18);
+    IntSummaryStatistics stats = numbers.stream().collect(Collectors.summarizingInt(Integer::new));
+    System.out.println("Max   : " + stats.getMax());
+    System.out.println("Min   : " + stats.getMin());
+    System.out.println("Avg   : " + stats.getAverage());
+    System.out.println("Count : " + stats.getCount());
+    System.out.println("Sum   : " + stats.getSum());
   }
 }
