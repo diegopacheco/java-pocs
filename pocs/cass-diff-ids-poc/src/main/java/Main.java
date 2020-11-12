@@ -15,14 +15,15 @@ import static com.datastax.oss.driver.api.querybuilder.QueryBuilder.*;
 public class Main {
 
     public static void main(String args[]) {
+        cleanup();
 
         // Insert 1.5M records took 53168 ms (53 seconds)
-       /* bench((Void) -> {
+        bench((Void) -> {
             insertData("Test",1000000);
             insertData("Test2",500000);
         },"Data Insert");
-*/
-        // Diff 1.5M records took ms ( seconds)
+
+        // Diff 1.5M records took 282554 ms (4.7 minutes)
         bench((Void) -> {
             count();
         },"Diff IDS");
@@ -68,6 +69,12 @@ public class Main {
             PreparedStatement preparedIdsDiff =  session.prepare(diffQuery.build());
             ResultSet rsDiff =  session.execute(preparedIdsDiff.bind(ids).setExecutionProfileName("aggregatedprofile"));
             System.out.println("Total IDS: " + rsDiff.all().size());
+        }
+    }
+
+    private static void cleanup() {
+        try (CqlSession session = CqlSession.builder().build()) {
+            session.execute("USE CLUSTER_TEST; TRUNCATE table Test; TRUNCATE table Test2;");
         }
     }
 
