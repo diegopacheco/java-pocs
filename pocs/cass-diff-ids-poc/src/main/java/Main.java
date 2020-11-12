@@ -2,7 +2,6 @@ import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.cql.*;
 import com.datastax.oss.driver.api.querybuilder.insert.Insert;
 import com.datastax.oss.driver.api.querybuilder.select.Select;
-import com.datastax.oss.driver.internal.core.cql.DefaultPreparedStatement;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -22,7 +21,7 @@ public class Main {
             insertData("Test",1000000);
             insertData("Test2",500000);
         },"Data Insert");
-        */
+*/
         // Diff 1.5M records took ms ( seconds)
         bench((Void) -> {
             count();
@@ -60,14 +59,14 @@ public class Main {
             List<String> ids = rsIDs.
                     all().
                     stream().
-                    map(r -> r.get("k",String.class) ).
+                    map(r -> r.get("key",String.class) ).
                     collect(Collectors.toList());
 
             Select diffQuery = selectFrom("CLUSTER_TEST", "Test2").
                     column("key").
                     whereColumn("key").in(bindMarker());
             PreparedStatement preparedIdsDiff =  session.prepare(diffQuery.build());
-            ResultSet rsDiff =  session.execute(preparedIdsDiff.bind(ids) );
+            ResultSet rsDiff =  session.execute(preparedIdsDiff.bind(ids).setExecutionProfileName("aggregatedprofile"));
             System.out.println("Total IDS: " + rsDiff.all().size());
         }
     }
