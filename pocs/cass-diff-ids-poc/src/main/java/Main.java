@@ -1,5 +1,6 @@
 import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.cql.BatchStatement;
+import com.datastax.oss.driver.api.core.cql.BatchStatementBuilder;
 import com.datastax.oss.driver.api.core.cql.BatchType;
 import com.datastax.oss.driver.api.core.cql.ResultSet;
 import com.datastax.oss.driver.api.querybuilder.insert.Insert;
@@ -29,21 +30,18 @@ public class Main {
         try (CqlSession session = CqlSession.builder().build()) {
             session.execute("USE CLUSTER_TEST");
 
-            final int batchSize = 10000;
+            final int batchSize = 1000;
             for(int j=1;j<=records;j+=batchSize){
+
+                BatchStatementBuilder batch = BatchStatement.builder(BatchType.UNLOGGED);
                 for(int i=1;i<=batchSize;i++){
                     Insert insert = insertInto(table)
                             .value("key", literal("k"+(i+j)))
-                            .value("value", literal("V"+(i+j))).ifNotExists();
-
-                    BatchStatement batch =
-                            BatchStatement.builder(BatchType.UNLOGGED)
-                                    .addStatement(insert.build())
-                                    .build();
-
-                    ResultSet rs = session.execute(batch);
-                    printer.print(batchSize + " records created? " + rs.wasApplied() + " " + new Date());
+                            .value("value", literal("V"+(i+j)));
+                    batch.addStatement(insert.build());
                 }
+                ResultSet rs = session.execute(batch.build());
+                printer.print(batchSize + " records created? " + rs.wasApplied() + " " + new Date());
             }
         }
     }
