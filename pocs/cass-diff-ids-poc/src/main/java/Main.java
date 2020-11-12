@@ -4,6 +4,9 @@ import com.datastax.oss.driver.api.core.cql.BatchType;
 import com.datastax.oss.driver.api.core.cql.ResultSet;
 import com.datastax.oss.driver.api.querybuilder.insert.Insert;
 import com.datastax.oss.driver.api.querybuilder.select.Select;
+
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 import java.util.function.Consumer;
 
@@ -22,10 +25,11 @@ public class Main {
     }
 
     private static void insertData(String table,int records) {
+        SamplePrinter printer = new SamplePrinter();
         try (CqlSession session = CqlSession.builder().build()) {
             session.execute("USE CLUSTER_TEST");
 
-            final int batchSize = 1000;
+            final int batchSize = 10000;
             for(int j=1;j<=records;j+=batchSize){
                 for(int i=1;i<=batchSize;i++){
                     Insert insert = insertInto(table)
@@ -33,12 +37,12 @@ public class Main {
                             .value("value", literal("V"+(i+j))).ifNotExists();
 
                     BatchStatement batch =
-                            BatchStatement.builder(BatchType.LOGGED)
+                            BatchStatement.builder(BatchType.UNLOGGED)
                                     .addStatement(insert.build())
                                     .build();
 
                     ResultSet rs = session.execute(batch);
-                    System.out.println(batchSize + " records created? " + rs.wasApplied() + " " + new Date());
+                    printer.print(batchSize + " records created? " + rs.wasApplied() + " " + new Date());
                 }
             }
         }
@@ -62,4 +66,15 @@ public class Main {
         System.out.println(msg + " .Executed in > " + (end - init) + " ms.");
     }
 
+    private static  class SamplePrinter {
+        private Instant watermark = Instant.now();
+        public void print(String msg){
+            Instant now = Instant.now();
+            Duration delta = Duration.between(watermark, now);
+            if (delta.getSeconds()>=30){
+                System.out.println(msg);
+                watermark = Instant.now();
+            }
+        }
+    }
 }
