@@ -1,25 +1,29 @@
 import com.datastax.oss.driver.api.core.CqlSession;
-import com.datastax.oss.driver.api.core.cql.BatchStatement;
-import com.datastax.oss.driver.api.core.cql.BatchStatementBuilder;
-import com.datastax.oss.driver.api.core.cql.BatchType;
-import com.datastax.oss.driver.api.core.cql.ResultSet;
+import com.datastax.oss.driver.api.core.cql.*;
 import com.datastax.oss.driver.api.querybuilder.insert.Insert;
 import com.datastax.oss.driver.api.querybuilder.select.Select;
+import com.datastax.oss.driver.internal.core.cql.DefaultPreparedStatement;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import static com.datastax.oss.driver.api.querybuilder.QueryBuilder.*;
 
 public class Main {
 
     public static void main(String args[]) {
-        bench((Void) -> {
+
+        // Insert 1.5M records took 53168 ms (53 seconds)
+       /* bench((Void) -> {
             insertData("Test",1000000);
             insertData("Test2",500000);
         },"Data Insert");
+        */
+        // Diff 1.5M records took ms ( seconds)
         bench((Void) -> {
             count();
         },"Diff IDS");
@@ -28,7 +32,7 @@ public class Main {
     private static void insertData(String table,int records) {
         SamplePrinter printer = new SamplePrinter();
         try (CqlSession session = CqlSession.builder().build()) {
-            session.execute("USE CLUSTER_TEST");
+            session.execute("USE CLUSTER_TEST;");
 
             final int batchSize = 1000;
             for(int j=1;j<=records;j+=batchSize){
@@ -50,10 +54,21 @@ public class Main {
         try (CqlSession session = CqlSession.builder().build()) {
             session.execute("USE CLUSTER_TEST");
 
-            Select query = selectFrom("CLUSTER_TEST", "Test2").
+            Select baseIDsQuery = selectFrom("CLUSTER_TEST", "Test").
                     column("key");
-            ResultSet rs = session.execute(query.build());
-            System.out.println("Total IDS: " + rs.all().size());
+            ResultSet rsIDs = session.execute(baseIDsQuery.build());
+            List<String> ids = rsIDs.
+                    all().
+                    stream().
+                    map(r -> r.get("k",String.class) ).
+                    collect(Collectors.toList());
+
+            Select diffQuery = selectFrom("CLUSTER_TEST", "Test2").
+                    column("key").
+                    whereColumn("key").in(bindMarker());
+            PreparedStatement preparedIdsDiff =  session.prepare(diffQuery.build());
+            ResultSet rsDiff =  session.execute(preparedIdsDiff.bind(ids) );
+            System.out.println("Total IDS: " + rsDiff.all().size());
         }
     }
 
