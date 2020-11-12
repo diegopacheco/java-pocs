@@ -4,8 +4,6 @@ import com.datastax.oss.driver.api.core.cql.BatchType;
 import com.datastax.oss.driver.api.core.cql.ResultSet;
 import com.datastax.oss.driver.api.querybuilder.insert.Insert;
 import com.datastax.oss.driver.api.querybuilder.select.Select;
-
-import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.function.Consumer;
 
@@ -27,8 +25,9 @@ public class Main {
         try (CqlSession session = CqlSession.builder().build()) {
             session.execute("USE CLUSTER_TEST");
 
-            for(int j=1;j<records/1000;j+=1000){
-                for(int i=1;i<1000;i++){
+            final int batchSize = 1000;
+            for(int j=1;j<=records;j+=batchSize){
+                for(int i=1;i<=batchSize;i++){
                     Insert insert = insertInto(table)
                             .value("key", literal("k"+(i+j)))
                             .value("value", literal("V"+(i+j))).ifNotExists();
@@ -39,7 +38,7 @@ public class Main {
                                     .build();
 
                     ResultSet rs = session.execute(batch);
-                    System.out.println("1000k records created? " + rs.wasApplied() + " " + new Date());
+                    System.out.println(batchSize + " records created? " + rs.wasApplied() + " " + new Date());
                 }
             }
         }
