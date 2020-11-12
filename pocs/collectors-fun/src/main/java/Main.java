@@ -20,5 +20,11 @@ public class Main{
             stream().
             collect(Collectors.toSet());
     System.out.println("Removed Duplicates: " + result);
+
+    List<String> cities = Arrays.asList("Porto", "Cabo", "Rio", "Planalto", "Cachorro");
+    String joined = cities.
+            stream().
+            collect(Collectors.joining(" velho, "));
+    System.out.println("Joined: " + joined);
   }
 }
