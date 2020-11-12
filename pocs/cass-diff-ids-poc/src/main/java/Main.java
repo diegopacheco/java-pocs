@@ -2,6 +2,7 @@ import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.cql.*;
 import com.datastax.oss.driver.api.querybuilder.insert.Insert;
 import com.datastax.oss.driver.api.querybuilder.select.Select;
+import org.json.Test;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -74,7 +75,9 @@ public class Main {
 
     private static void cleanup() {
         try (CqlSession session = CqlSession.builder().build()) {
-            session.execute("USE CLUSTER_TEST; TRUNCATE table Test; TRUNCATE table Test2;");
+            session.execute("USE CLUSTER_TEST");
+            session.execute("TRUNCATE table Test");
+            session.execute("TRUNCATE table Test2");
         }
     }
 
