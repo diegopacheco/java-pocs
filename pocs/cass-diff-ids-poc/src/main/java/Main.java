@@ -2,13 +2,14 @@ import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.cql.*;
 import com.datastax.oss.driver.api.querybuilder.insert.Insert;
 import com.datastax.oss.driver.api.querybuilder.select.Select;
-import org.json.Test;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.datastax.oss.driver.api.querybuilder.QueryBuilder.*;
@@ -22,12 +23,17 @@ public class Main {
         bench((Void) -> {
             insertData("Test",1000000);
             insertData("Test2",500000);
-        },"Data Insert");
+        },"1.5M Data Inserted");
 
         // Diff 1.5M records took 282554 ms (4.7 minutes)
         bench((Void) -> {
-            count();
-        },"Diff IDS");
+            countInQuery();
+        },"Diff IDS(in query)");
+
+        // Diff 1.5M records took 7994 ms (7.9 seconds)
+        bench((Void) -> {
+            countClientSideJoin();
+        },"Diff IDS(client side join)");
     }
 
     private static void insertData(String table,int records) {
@@ -51,7 +57,7 @@ public class Main {
         }
     }
 
-    private static void count() {
+    private static void countInQuery() {
         try (CqlSession session = CqlSession.builder().build()) {
             session.execute("USE CLUSTER_TEST");
 
@@ -70,6 +76,31 @@ public class Main {
             PreparedStatement preparedIdsDiff =  session.prepare(diffQuery.build());
             ResultSet rsDiff =  session.execute(preparedIdsDiff.bind(ids).setExecutionProfileName("aggregatedprofile"));
             System.out.println("Total IDS: " + rsDiff.all().size());
+        }
+    }
+
+    private static void countClientSideJoin() {
+        try (CqlSession session = CqlSession.builder().build()) {
+            session.execute("USE CLUSTER_TEST");
+
+            Select baseIDsQuery = selectFrom("CLUSTER_TEST", "Test").
+                    column("key");
+            ResultSet rsIDs = session.execute(baseIDsQuery.build());
+            Map<String,String> ids = rsIDs.
+                    all().
+                    stream().
+                    map(r -> r.get("key",String.class) ).
+                    collect(Collectors.toMap(String::new, Function.identity()));
+
+            Select diffQuery = selectFrom("CLUSTER_TEST", "Test2").
+                    column("key");
+            ResultSet rsDiff =  session.execute(diffQuery.build());
+            rsDiff.
+                    all().
+                    stream().
+                    map(r -> r.get("key",String.class) ).
+                    forEach( k -> ids.remove(k) );
+            System.out.println("Diff IDS: " + ids.size());
         }
     }
 
