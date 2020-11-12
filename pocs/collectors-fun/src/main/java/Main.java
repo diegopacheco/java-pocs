@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class Main{
   public static void main(String args[]){
 
-    List<String> names = Arrays.asList(new String[]{"Diego","Andressa","Gandalf","Melina"});
+    List<String> names = Arrays.asList("Diego","Andressa","Gandalf","Melina");
     Map<String,String> nameMap = names
             .stream()
             .map( e -> e.toLowerCase() )
