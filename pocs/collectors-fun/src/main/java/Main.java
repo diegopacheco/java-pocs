@@ -15,6 +15,7 @@ public class Main{
     List<String> listWithDuplicates = Arrays.asList("Gremio", "Gremio", "Gremio", "Barcelona", "Gremio");
     Set<String> result = listWithDuplicates.
             stream().
+            filter( e -> !e.startsWith("B") ).
             collect(Collectors.toSet());
     System.out.println("Removed Duplicates: " + result);
 
