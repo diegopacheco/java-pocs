@@ -1,15 +1,14 @@
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Main{
-  public static void main(String args[]){
+  public static void main(String[] args){
 
     List<String> names = Arrays.asList("Diego","Andressa","Gandalf","Melina");
     Map<String,String> nameMap = names
             .stream()
-            .map( e -> e.toLowerCase() )
+            .map(String::toLowerCase)
             .collect(Collectors.toMap(String::new, Function.identity()));
     System.out.println(nameMap);
 
