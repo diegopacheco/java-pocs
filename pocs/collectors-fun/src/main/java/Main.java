@@ -25,7 +25,7 @@ public class Main{
     System.out.println("Joined: " + joined);
 
     List<Integer> numbers = Arrays.asList(1,10,42,34,27,32,3,18);
-    IntSummaryStatistics stats = numbers.stream().collect(Collectors.summarizingInt(Integer::new));
+    IntSummaryStatistics stats = numbers.stream().collect(Collectors.summarizingInt(Integer::valueOf));
     System.out.println("Max   : " + stats.getMax());
     System.out.println("Min   : " + stats.getMin());
     System.out.println("Avg   : " + stats.getAverage());
