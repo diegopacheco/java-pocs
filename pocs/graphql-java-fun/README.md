@@ -10,8 +10,8 @@ xdg-open "http://localhost:8080/graphiql"
 ```
 {
      bookById(id:"book-1"){
-    	 	name,
-    		pageCount,
+    	name,
+    	pageCount,
         author {
           id,
           firstName,
