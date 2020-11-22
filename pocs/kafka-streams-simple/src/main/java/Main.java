@@ -32,7 +32,7 @@ public class Main{
             .groupBy((key, word) -> word)
             .count();
 
-    wordCounts.foreach((w, c) -> System.out.println("word: " + w + " -> " + c));
+    wordCounts.toStream().foreach( (w,c) -> System.out.println("word: " + w + " -> " + c) );
 
     wordCounts.toStream()
             .to("outputTopic", Produced.with(Serdes.String(), Serdes.Long()));
