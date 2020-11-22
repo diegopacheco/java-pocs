@@ -5,6 +5,7 @@ import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
+import org.apache.kafka.streams.kstream.Produced;
 
 import java.util.Arrays;
 import java.util.Properties;
@@ -33,10 +34,8 @@ public class Main{
 
     wordCounts.foreach((w, c) -> System.out.println("word: " + w + " -> " + c));
 
-    String outputTopic = "outputTopic";
-    Serde<String> stringSerde = Serdes.String();
-    Serde<Long> longSerde = Serdes.Long();
-    wordCounts.to(stringSerde, longSerde, outputTopic);
+    wordCounts.toStream()
+            .to("outputTopic", Produced.with(Serdes.String(), Serdes.Long()));
 
     final KafkaStreams streams = new KafkaStreams(builder.build(), streamsConfiguration);
     streams.start();
