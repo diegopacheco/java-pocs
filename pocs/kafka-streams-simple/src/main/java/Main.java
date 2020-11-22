@@ -1,9 +1,9 @@
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
+import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.KStreamBuilder;
 import org.apache.kafka.streams.kstream.KTable;
 
 import java.util.Arrays;
@@ -23,21 +23,22 @@ public class Main{
     streamsConfiguration.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
     streamsConfiguration.put(StreamsConfig.STATE_DIR_CONFIG,"/tmp/kafka-streams/");
 
-    KStreamBuilder builder = new KStreamBuilder();
-    KStream<String, String> textLines = builder.stream(inputTopic);
+    final StreamsBuilder builder = new StreamsBuilder();
+    KStream<String, String> source = builder.stream(inputTopic);
     Pattern pattern = Pattern.compile("\\W+", Pattern.UNICODE_CHARACTER_CLASS);
-    KTable<String, Long> wordCounts = textLines
+    KTable<String, Long> wordCounts = source
             .flatMapValues(value -> Arrays.asList(pattern.split(value.toLowerCase())))
             .groupBy((key, word) -> word)
             .count();
 
     wordCounts.foreach((w, c) -> System.out.println("word: " + w + " -> " + c));
+
     String outputTopic = "outputTopic";
     Serde<String> stringSerde = Serdes.String();
     Serde<Long> longSerde = Serdes.Long();
     wordCounts.to(stringSerde, longSerde, outputTopic);
 
-    KafkaStreams streams = new KafkaStreams(builder, streamsConfiguration);
+    final KafkaStreams streams = new KafkaStreams(builder.build(), streamsConfiguration);
     streams.start();
     //streams.close();
   }
