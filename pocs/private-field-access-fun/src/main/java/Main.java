@@ -3,6 +3,7 @@ import com.github.diegopacheco.pojos.PojoB;
 import com.github.diegopacheco.pojos.PojoC;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class Main{
   public static void main(String args[]) throws Exception{
@@ -22,6 +23,10 @@ public class Main{
     privatePojoCField.setAccessible(true);
     PojoC fieldValuePojoC = (PojoC) privatePojoCField.get(fieldValuePojoB);
     System.out.println("fieldValue = " + fieldValuePojoC);
+
+    Method privateStringMethod = PojoC.class.getDeclaredMethod("dontCallMeNow", null);
+    privateStringMethod.setAccessible(true);
+    privateStringMethod.invoke(fieldValuePojoC, null);
 
   }
 }
