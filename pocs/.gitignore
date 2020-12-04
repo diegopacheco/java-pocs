@@ -5,6 +5,8 @@ bazel-bin/*
 bazel-out/*
 bazel-testlogs/*
 
+bazel-java-simple/bazel-bazel-java-simple
+
 ### Gradle
 build/
 .lock
