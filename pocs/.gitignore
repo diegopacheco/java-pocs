@@ -1,9 +1,9 @@
 
 # Created by https://www.gitignore.io/api/java,eclipse
 
-bazel-bin/
-bazel-out/
-bazel-testlogs/
+bazel-bin/*
+bazel-out/*
+bazel-testlogs/*
 
 ### Gradle
 build/
