@@ -19,6 +19,7 @@ Build the application by running:
 
 ```
 $ bazel build //:bazel-java-simple 
+$ bazel run java-maven
 ```
 
 Test the application by running:
