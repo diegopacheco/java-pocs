@@ -3,6 +3,9 @@
 bin/
 build/
 
+.buckd/
+buck-out/ 
+
 bazel-bin
 bazel-out
 bazel-testlogs
