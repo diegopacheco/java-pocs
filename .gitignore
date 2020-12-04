@@ -3,6 +3,9 @@
 bin/
 build/
 
+bazel-bin/*
+bazel-out/*
+bazel-testlogs/*
 
 # Created by https://www.gitignore.io/api/intellij
 # Edit at https://www.gitignore.io/?templates=intellij
