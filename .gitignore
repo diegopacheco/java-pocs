@@ -3,6 +3,10 @@
 bin/
 build/
 
+bazel-bin
+bazel-out
+bazel-testlogs
+
 bazel-bin/*
 bazel-out/*
 bazel-testlogs/*
