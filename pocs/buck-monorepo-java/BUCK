@@ -20,17 +20,20 @@ java_library(
 java_binary(
     name = "projectc",
     main_class = "com.github.diegopacheco.projectc.App",
-    deps = [":projecta-java-maven-lib",":projectb-java-maven-lib",":projectc-java-maven-lib"],
+    deps = [":projecta-java-maven-lib",
+            ":projectb-java-maven-lib",
+            ":projectc-java-maven-lib"
+           ],
 )
 
 java_test(
     name = "tests",
-    srcs = glob(["project-c/src/test/java/com/github/diegopacheco/projectc/*.java"]),
+    srcs = glob(["project-c/**/*.java"]),
     deps = [
         ":projecta-java-maven-lib",
         ":projectb-java-maven-lib",
         ":projectc-java-maven-lib",
-        "@maven//:com_google_guava_guava",
-        "@maven//:junit_junit",
+        maven_jar('com.google.guava','guava','28.0-jre','54fed371b4b8a8cce1e94a9abd9620982d3aa54b','2d1dca555245ef4bacb35f25299f323d8dd10b27'),
+        "junit_junit",
     ],
 )
