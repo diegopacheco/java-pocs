@@ -37,3 +37,22 @@ java_test(
         "@maven//:junit_junit",
     ],
 )
+
+load("@rules_intellij_generate//:def.bzl", "intellij_project")
+intellij_project(
+    name="idea",
+    deps=[
+        ":projecta-java-maven-lib",
+        ":projectb-java-maven-lib",
+        ":projectc-java-maven-lib",
+    ],
+    test_lib_label_matchlist=['{"label_name":"tests"}'],
+    iml_types_file="//:iml_types.xml",
+    project_root_filegroup="//:automatically_placed_intellij_project_files",
+    project_root_filegroup_ignore_prefix="intellij_project_files",
+    modules=[
+        "/projecta:iml",
+        "/projectb:iml",
+        "/projectc:iml",
+    ]
+)
