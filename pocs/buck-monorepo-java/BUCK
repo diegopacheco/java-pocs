@@ -30,9 +30,9 @@ java_test(
     name = "tests",
     srcs = glob(["project-c/**/*.java"]),
     deps = [
-        ":projecta-java-maven-lib",
-        ":projectb-java-maven-lib",
-        ":projectc-java-maven-lib",
-        "//lib:junit",
+        ':projecta-java-maven-lib',
+        ':projectb-java-maven-lib',
+        ':projectc-java-maven-lib',
+        '//lib:junit',
     ],
 )
