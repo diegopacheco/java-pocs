@@ -40,7 +40,8 @@ java_test(
     target = '8',
     test_type = 'junit',
     deps = [
-        '//lib:hamcrest',
+        '//lib:junit',
+        '//lib:hamcrest-all',
         ':projecta-java-maven-lib',
         ':projectb-java-maven-lib',
         ':projectc-java-maven-lib',
