@@ -1,0 +1,31 @@
+def maven_jar(
+        group_id,
+        artifact_id,
+        version,
+        bin_sha1,
+        src_sha1,
+        visibility=['PUBLIC']):
+    bin_jar_name = artifact_id + '-jar'
+    src_jar_name = artifact_id + '-src'
+
+    prebuilt_jar(
+        name = artifact_id,
+        binary_jar=':' + bin_jar_name,
+        source_jar=':' + src_jar_name,
+        visibility=visibility
+    )
+
+    remote_file(
+        name=bin_jar_name,
+        sha1=bin_sha1,
+        url='mvn:' + group_id + ':' + artifact_id + ':jar:' + version,
+        out=artifact_id + '-' + version +'.jar',
+    )
+
+    remote_file(
+        name=src_jar_name,
+        sha1=src_sha1,
+        url='mvn:' + group_id + ':' + artifact_id + ':src:' + version,
+        out=artifact_id + '-' + version +'-sources.jar',
+
+    )

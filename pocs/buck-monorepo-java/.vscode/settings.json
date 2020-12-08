@@ -1,0 +1,8 @@
+{
+    "buck.projectConfig": {
+        "projectPath": "/mnt/e35d88d4-42b9-49ea-bf29-c4c3b018d429/diego/git/diegopacheco/java-pocs/pocs/buck-monorepo-java",
+        "flavor": [],
+        "target": "",
+        "platform": "linux-x86_64"
+    }
+}
