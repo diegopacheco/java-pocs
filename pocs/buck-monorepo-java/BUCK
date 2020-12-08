@@ -1,7 +1,7 @@
 java_library(
     name = "projecta-java-maven-lib",
     srcs = glob(['project-a/**/*.java']),
-    deps = maven_jar('com.google.guava','guava','30.0-jre','8ddbc8769f73309fe09b54c5951163f10b0d89fa','44b1d40ac2743daef983d85b81f4534bc6a17d04'),
+    deps = maven_jar('com.google.guava','guava','28.0-jre','54fed371b4b8a8cce1e94a9abd9620982d3aa54b','2d1dca555245ef4bacb35f25299f323d8dd10b27')
 )
 
 java_library(
