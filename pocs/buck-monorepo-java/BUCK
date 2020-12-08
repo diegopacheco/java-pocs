@@ -6,13 +6,15 @@ java_library(
 
 java_library(
     name = "projectb-java-maven-lib",
-    srcs = glob(["project-b/src/main/java/com/github/diegopacheco/projectb/*.java"]),
+    srcs = glob(["project-b/**/*.java"]),
  )
 
 java_library(
     name = "projectc-java-maven-lib",
-    srcs = glob(["project-c/src/main/java/com/github/diegopacheco/projectc/*.java"]),
-    deps = [":projecta-java-maven-lib",":projectb-java-maven-lib"],
+    srcs = glob(["project-c/**/*.java"]),
+    deps = [":projecta-java-maven-lib",
+            ":projectb-java-maven-lib"
+           ],
 )
 
 java_binary(
