@@ -1,5 +1,6 @@
 maven_jar('com.google.guava','guava','28.0-jre',
 '54fed371b4b8a8cce1e94a9abd9620982d3aa54b','2d1dca555245ef4bacb35f25299f323d8dd10b27')
-
 maven_jar('junit','junit','4.13.1',
 'cdd00374f1fee76b11e2a9d127405aa3f6be5b6a','523bdce923a13622132b263550d06519fc591ec4')
+maven_jar('org.hamcrest','hamcrest-all','1.3',
+'63a21ebc981131004ad02e0434e799fd7f3a8d5a','47e033b7ab18c5dbd5fe29fc1bd5a40afe028818')

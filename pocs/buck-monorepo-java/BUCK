@@ -1,36 +1,46 @@
 java_library(
-    name = "projecta-java-maven-lib",
+    name = 'projecta-java-maven-lib',
     srcs = glob(['project-a/**/*.java']),
-    deps = ['//lib:guava']
+    source = '8',
+    target = '8',
+    deps = ['//lib:guava'],
 )
 
 java_library(
-    name = "projectb-java-maven-lib",
-    srcs = glob(["project-b/**/*.java"]),
+    name = 'projectb-java-maven-lib',
+    srcs = glob(['project-b/**/*.java']),
+    source = '8',
+    target = '8',
  )
 
 java_library(
-    name = "projectc-java-maven-lib",
-    srcs = glob(["project-c/**/*.java"]),
-    deps = [":projecta-java-maven-lib",
-            ":projectb-java-maven-lib"
+    name = 'projectc-java-maven-lib',
+    srcs = glob(['project-c/**/*.java']),
+    source = '8',
+    target = '8',    
+    deps = [':projecta-java-maven-lib',
+            ':projectb-java-maven-lib',
+            '//lib:junit',
            ],
 )
 
 java_binary(
-    name = "projectc",
-    main_class = "com.github.diegopacheco.projectc.App",
-    deps = [":projecta-java-maven-lib",
-            ":projectb-java-maven-lib",
-            ":projectc-java-maven-lib"
+    name = 'projectc',
+    main_class = 'com.github.diegopacheco.projectc.App', 
+    deps = [':projecta-java-maven-lib',
+            ':projectb-java-maven-lib',
+            ':projectc-java-maven-lib'
            ],
 )
 
 java_test(
-    name = "tests",
-    srcs = glob(["project-c/**/*.java"]),
+    name = 'tests',
+    srcs = glob(['project-c/**/*.java']),
+    source = '8',
+    target = '8',
+    test_type = 'junit',
     deps = [
-        '//lib:junit',
+        '//lib:hamcrest',
         ':projecta-java-maven-lib',
         ':projectb-java-maven-lib',
         ':projectc-java-maven-lib',
