@@ -1,6 +1,6 @@
 java_library(
     name = "projecta-java-maven-lib",
-    srcs = ["project-a/src/main/java/com/github/diegopacheco/projecta/*.java"],
+    srcs = glob(['project-a/**/*.java']),
     deps = maven_jar('com.google.guava','guava','30.0-jre','8ddbc8769f73309fe09b54c5951163f10b0d89fa','44b1d40ac2743daef983d85b81f4534bc6a17d04'),
 )
 
