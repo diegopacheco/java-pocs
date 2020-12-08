@@ -6,6 +6,8 @@ build/
 .buckd/
 buck-out/ 
 
+bazel-bazel-monorepo-java
+
 bazel-bin
 bazel-out
 bazel-testlogs
