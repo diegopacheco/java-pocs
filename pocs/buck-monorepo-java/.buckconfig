@@ -5,3 +5,6 @@ includes = //root.defs
 src_roots = java, resources, src
 source_level = 8
 target_level = 8
+
+[maven_repositories]
+central = https://repo1.maven.org/maven2

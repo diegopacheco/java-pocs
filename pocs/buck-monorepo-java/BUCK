@@ -1,7 +1,7 @@
 java_library(
     name = "projecta-java-maven-lib",
     srcs = glob(['project-a/**/*.java']),
-    deps = maven_jar('com.google.guava','guava','28.0-jre','54fed371b4b8a8cce1e94a9abd9620982d3aa54b','2d1dca555245ef4bacb35f25299f323d8dd10b27')
+    deps = ['//lib:guava']
 )
 
 java_library(
@@ -33,6 +33,6 @@ java_test(
         ":projecta-java-maven-lib",
         ":projectb-java-maven-lib",
         ":projectc-java-maven-lib",
-        "junit_junit",
+        "//lib:junit",
     ],
 )
