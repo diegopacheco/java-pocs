@@ -1,13 +1,13 @@
 package com.github.diegopacheco.sandboxspring.dao;
 
 import com.github.diegopacheco.sandboxspring.model.Thing;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-@Component
+@Repository
 public class ThingDao {
 
     private static final EntityManagerFactory emFactory;
@@ -35,7 +35,7 @@ public class ThingDao {
     }
 
     public Thing getThing(Long id){
-        return null;
+        return new Thing();
     }
 
 }

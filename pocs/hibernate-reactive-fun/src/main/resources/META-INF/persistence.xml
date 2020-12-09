@@ -7,7 +7,7 @@
         <provider>org.hibernate.reactive.provider.ReactivePersistenceProvider</provider>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3325/hibernate_db" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3325/hibernate_db" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="pass" />
             <property name="hibernate.default_schema" value="hibernate_db"/>
