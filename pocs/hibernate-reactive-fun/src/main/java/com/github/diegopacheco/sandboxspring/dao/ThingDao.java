@@ -1,36 +1,24 @@
 package com.github.diegopacheco.sandboxspring.dao;
 
 import com.github.diegopacheco.sandboxspring.model.Thing;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.transaction.Transactional;
 
 @Repository
 public class ThingDao {
 
-    private static final EntityManagerFactory emFactory;
-    private static final String PERSISTENCE_UNIT_NAME = "ThingPU";
+    @Autowired
+    private SessionFactory sessionFactory;
 
-    static {
-        emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-    }
-
-    private static EntityManager getEntityManager() {
-        return emFactory.createEntityManager();
-    }
-
+    @Transactional
     public void createThing(String name){
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-
         Thing t = new Thing();
         t.setName(name);
         t.setId(1L);
-        em.persist(t);
-        em.getTransaction().commit();
-        em.clear();
+
+        sessionFactory.getCurrentSession().save(t);
         System.out.println("Record Successfully Inserted In The Database");
     }
 
