@@ -27,4 +27,11 @@ public class Thing {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Thing{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

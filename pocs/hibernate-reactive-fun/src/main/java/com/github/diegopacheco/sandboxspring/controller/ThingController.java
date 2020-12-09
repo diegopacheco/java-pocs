@@ -13,7 +13,6 @@ public class ThingController {
 
 	@RequestMapping("/")
 	public String index() {
-		dao.createThing("Diego");
 		return "Greetings from Spring Boot and Hibernate Reactive! Thing: " + dao.getThing(1L);
 	}
 
