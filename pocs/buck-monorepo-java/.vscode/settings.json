@@ -2,7 +2,7 @@
     "buck.projectConfig": {
         "projectPath": "/mnt/e35d88d4-42b9-49ea-bf29-c4c3b018d429/diego/git/diegopacheco/java-pocs/pocs/buck-monorepo-java",
         "flavor": [],
-        "target": "",
+        "target": "//:projecta-java-maven-lib",
         "platform": "linux-x86_64"
     }
 }
