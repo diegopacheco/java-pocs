@@ -6,10 +6,12 @@ import org.hibernate.reactive.mutiny.Mutiny;
 import org.hibernate.reactive.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.transaction.Transactional;
+import java.util.concurrent.ExecutionException;
 
 @Repository
 public class ThingDao {
@@ -45,6 +47,18 @@ public class ThingDao {
                 .await().indefinitely();
 
         return session.find(Thing.class, id).await().indefinitely();
+    }
+
+    public Mono<Thing> getMonoThing(Long id) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ThingPU");
+        Mutiny.SessionFactory sessionFactory = emf.unwrap(Mutiny.SessionFactory.class);
+        Mutiny.Session session = sessionFactory.openSession();
+
+        try {
+            return Mono.fromFuture(session.find(Thing.class, id).subscribe().asCompletionStage());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
