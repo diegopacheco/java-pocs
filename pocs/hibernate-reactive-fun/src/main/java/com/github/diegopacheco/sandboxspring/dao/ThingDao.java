@@ -3,7 +3,6 @@ package com.github.diegopacheco.sandboxspring.dao;
 import com.github.diegopacheco.sandboxspring.model.Thing;
 import org.hibernate.SessionFactory;
 import org.hibernate.reactive.mutiny.Mutiny;
-import org.hibernate.reactive.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
@@ -11,7 +10,6 @@ import reactor.core.publisher.Mono;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.transaction.Transactional;
-import java.util.concurrent.ExecutionException;
 
 @Repository
 public class ThingDao {

@@ -1,12 +1,10 @@
 package com.github.diegopacheco.sandboxspring.client.test;
 
 import com.github.diegopacheco.sandboxspring.Application;
-import com.github.diegopacheco.sandboxspring.dao.ThingDao;
 import com.github.diegopacheco.sandboxspring.model.Thing;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
