@@ -6,6 +6,7 @@ import com.github.diegopacheco.sandboxspring.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -37,6 +38,12 @@ public class BookService {
             return;
         }
         throw new BookNotFoundException("Book with id: "+id+" Not Found. Impossible to delete record.");
+    }
+
+    @Transactional
+    public void deleteAllBooks(){
+        dao.deleteAll();
+        dao.resetIdSequence();
     }
 
 }
