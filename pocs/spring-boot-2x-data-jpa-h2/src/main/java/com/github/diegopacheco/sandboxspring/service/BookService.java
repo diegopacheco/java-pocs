@@ -31,7 +31,12 @@ public class BookService {
     }
 
     public void deleteById(Long id){
-        dao.deleteById(id);
+        Boolean exist = dao.existsById(id);
+        if (exist){
+            dao.deleteById(id);
+            return;
+        }
+        throw new BookNotFoundException("Book with id: "+id+" Not Found. Impossible to delete record.");
     }
 
 }
