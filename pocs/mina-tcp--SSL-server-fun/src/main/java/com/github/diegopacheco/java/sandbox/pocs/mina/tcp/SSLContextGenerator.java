@@ -27,8 +27,8 @@ public class SSLContextGenerator {
         SSLContext sslContext = null;
         try {
             String baseDir = new File(".").getCanonicalPath();
-            File keyStoreFile = new File(   baseDir+"/keystore.jks");
-            File trustStoreFile = new File(baseDir+"/myTrustStore");
+            File keyStoreFile = new File(   baseDir+"/server.keystore");
+            File trustStoreFile = new File(baseDir+"/server.truststore");
 
             if (keyStoreFile.exists() && trustStoreFile.exists()) {
                 final KeyStoreFactory keyStoreFactory = new KeyStoreFactory();
