@@ -4,16 +4,14 @@ import java.util.HashMap;
 import java.util.Optional;
 
 /**
- *
  * SimpleLRUCache Better LRU cache impl.
- *
+ * <p>
  * Hash a Map for Storing objects and a Double-Linked-List(start and end) to track LRU with o(1) insert and remove operations :D
  *
  * @param <T> any type really.
- *
  * @author Diego Pacheco
  */
-public class SimpleLRUCache<T> implements LRUCache<T>{
+public class SimpleLRUCache<T> implements LRUCache<T> {
 
     private HashMap<String, ReferenceEntry> hashmap = hashmap = new HashMap<String, ReferenceEntry>();
     private ReferenceEntry start, end;      // Double-LinkedList for tracking LRU
@@ -32,26 +30,26 @@ public class SimpleLRUCache<T> implements LRUCache<T>{
 
     @Override
     public void set(String key, T value) {
-        if (hashmap.containsKey(key)){
+        if (hashmap.containsKey(key)) {
             ReferenceEntry<T> ref = hashmap.get(key);
             ref.value = value;
             removeNode(ref);
             addAtTop(ref);
-        } else {
-            ReferenceEntry<T> ref = new ReferenceEntry<>();
-            ref.left = null;
-            ref.right = null;
-            ref.value = value;
-            ref.key = key;
-            if (hashmap.size() >= THRESHOLD){
-                hashmap.remove(end.key);
-                removeNode(end);
-                addAtTop(ref);
-            } else {
-                addAtTop(ref);
-            }
-            hashmap.put(key, ref);
+            return;
         }
+        ReferenceEntry<T> ref = new ReferenceEntry<>();
+        ref.left = null;
+        ref.right = null;
+        ref.value = value;
+        ref.key = key;
+        if (hashmap.size() >= THRESHOLD) {
+            hashmap.remove(end.key);
+            removeNode(end);
+            addAtTop(ref);
+        } else {
+            addAtTop(ref);
+        }
+        hashmap.put(key, ref);
     }
 
     @Override
