@@ -1,22 +1,13 @@
-package com.github.diegopacheco.sandbox.java.cache;
+package com.github.diegopacheco.sandbox.java.cache.v2;
 
-import java.math.BigInteger;
-import java.util.Comparator;
 import java.util.Objects;
 
 /*
-*  ReferenceEntry is a container to keep track of data between hashmap and the heap.
+*  ReferenceEntry is a container to keep track of data between hashmap and the double-linked-list.
 *
 *  @author Diego Pacheco
 * */
 public class ReferenceEntry<T> {
-
-    public static class ReferenceEntryMinComparator implements Comparator<ReferenceEntry> {
-        @Override
-        public int compare (ReferenceEntry x, ReferenceEntry y) {
-            return Long.compare(x.lastTimestampAccess,y.lastTimestampAccess);
-        }
-    }
 
     private String key;
     private T value;

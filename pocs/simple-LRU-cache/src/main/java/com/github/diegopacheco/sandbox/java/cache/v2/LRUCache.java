@@ -1,4 +1,4 @@
-package com.github.diegopacheco.sandbox.java.cache;
+package com.github.diegopacheco.sandbox.java.cache.v2;
 
 import java.util.Optional;
 

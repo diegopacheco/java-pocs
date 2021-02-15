@@ -1,5 +1,7 @@
-import com.github.diegopacheco.sandbox.java.cache.LRUCache;
-import com.github.diegopacheco.sandbox.java.cache.SimpleLRUCache;
+package com.github.diegopacheco.sandbox.java.cache.v1;
+
+import com.github.diegopacheco.sandbox.java.cache.v1.LRUCache;
+import com.github.diegopacheco.sandbox.java.cache.v1.SimpleLRUCache;
 
 public class Main{
 

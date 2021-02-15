@@ -23,7 +23,7 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>Main</mainClass>
+          <mainClass>com.github.diegopacheco.sandbox.java.cache.v1.Main</mainClass>
           <arguments>
             <argument>ok</argument>
           </arguments>

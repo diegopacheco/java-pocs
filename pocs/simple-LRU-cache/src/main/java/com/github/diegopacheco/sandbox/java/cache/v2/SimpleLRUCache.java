@@ -1,24 +1,25 @@
-package com.github.diegopacheco.sandbox.java.cache;
+package com.github.diegopacheco.sandbox.java.cache.v2;
 
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * SimpleLRUCache is a simple LRU cache impl with a ConcurrentHashMap and PriorityQueue as heap.
- * ReferenceEntry is used as container to track map and heap together.
+ * SimpleLRUCache is a simple LRU cache impl with a ConcurrentHashMap and LinkedList as double-linked-list.
+ * ReferenceEntry is used as container to track map and double-linked-list together.
  * Evictions are done in SET operations. Heap is refreshed in GET/SET Operations.
  *
  * @param <T> is any type.
  *
  * @author Diego Pacheco
  */
-public class SimpleLRUCache<T> implements LRUCache<T>{
+public class SimpleLRUCache<T> implements LRUCache<T> {
 
     private static final Integer THRESHOLD = 2;
-    private Map<String,ReferenceEntry<T>>  cache = new ConcurrentHashMap<>();
-    private PriorityQueue<ReferenceEntry<T>> lru = new PriorityQueue<>(new ReferenceEntry.ReferenceEntryMinComparator());
+    private Map<String, ReferenceEntry<T>>  cache = new ConcurrentHashMap<>();
+    private LinkedList<ReferenceEntry<T>> lru = new LinkedList<ReferenceEntry<T>>();
 
     public Optional<T> get(String key){
         ReferenceEntry<T> ref = cache.get(key);
