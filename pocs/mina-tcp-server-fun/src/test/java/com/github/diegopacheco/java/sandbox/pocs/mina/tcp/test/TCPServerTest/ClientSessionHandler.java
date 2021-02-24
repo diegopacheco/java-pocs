@@ -25,11 +25,12 @@ public class ClientSessionHandler extends IoHandlerAdapter {
 
     @Override
     public void messageReceived(IoSession session, Object message ) throws Exception {
-        System.out.println("CLIENT got : "+ message);
-        if (null==sessionBuffers.get(session.getId()) || Optional.empty().equals(sessionBuffers.get(session.getId()))){
-            sessionBuffers.put(session.getId()+"",Optional.of(new StringBuffer()));
+        String sessionID = session.getId()+"";
+        System.out.println("CLIENT got : "+ message + " - " + sessionID);
+        if (null==sessionBuffers.get(sessionID) || Optional.empty().equals(sessionID)){
+            sessionBuffers.put(sessionID,Optional.of(new StringBuffer()));
         }
-        sessionBuffers.get(session.getId()+"").get().append((String)message);
+        sessionBuffers.get(sessionID).get().append((String)message);
     }
 
     public void setServerWritingSession(IoSession serverWritingSession) {
