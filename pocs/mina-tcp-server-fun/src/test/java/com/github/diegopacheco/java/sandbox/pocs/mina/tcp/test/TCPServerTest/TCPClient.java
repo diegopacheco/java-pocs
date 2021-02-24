@@ -12,7 +12,18 @@ import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 
 public class TCPClient {
-    public static void main(String[] args) throws Throwable {
+
+    private ClientSessionHandler clientHandler = new ClientSessionHandler();
+
+    public TCPClient(){
+        try{
+            new Thread( ()-> init() ).start();
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void init(){
 
         System.out.println("████████╗ ██████╗██████╗  ██████╗██╗     ██╗███████╗███╗   ██╗████████╗\n" +
                 "╚══██╔══╝██╔════╝██╔══██╗██╔════╝██║     ██║██╔════╝████╗  ██║╚══██╔══╝\n" +
@@ -30,7 +41,6 @@ public class TCPClient {
         connector.getFilterChain().addLast( "codec",
                 new ProtocolCodecFilter( new TextLineCodecFactory( Charset.forName( "UTF-8" ),"\n","\n")));
 
-        ClientSessionHandler clientHandler = new ClientSessionHandler();
         connector.setHandler(clientHandler);
         IoSession session;
 
@@ -44,13 +54,13 @@ public class TCPClient {
             } catch (RuntimeIoException e) {
                 System.err.println("Failed to connect.");
                 e.printStackTrace();
-                Thread.sleep(5000);
             }
         }
-
-        clientHandler.askTime();
-
         session.getCloseFuture().awaitUninterruptibly();
         connector.dispose();
+    }
+
+    public String askTime(){
+        return clientHandler.askTime();
     }
 }
