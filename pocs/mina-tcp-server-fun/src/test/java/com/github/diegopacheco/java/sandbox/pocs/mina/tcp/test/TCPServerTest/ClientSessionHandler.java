@@ -26,7 +26,7 @@ public class ClientSessionHandler extends IoHandlerAdapter {
     @Override
     public void messageReceived(IoSession session, Object message ) throws Exception {
         System.out.println("CLIENT got : "+ message);
-        if (null==sessionBuffers.get(session.getId())){
+        if (null==sessionBuffers.get(session.getId()) || Optional.empty().equals(sessionBuffers.get(session.getId()))){
             sessionBuffers.put(session.getId()+"",Optional.of(new StringBuffer()));
         }
         sessionBuffers.get(session.getId()+"").get().append((String)message);
