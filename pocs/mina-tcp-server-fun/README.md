@@ -13,3 +13,7 @@ telnet 127.0.0.1 9000
 <options/>
 <quit/>
 ```
+### TCP Dump
+```bash
+sudo tcpdump -i lo -A -s 0 tcp port 9000 -w server.pcap 
+```
