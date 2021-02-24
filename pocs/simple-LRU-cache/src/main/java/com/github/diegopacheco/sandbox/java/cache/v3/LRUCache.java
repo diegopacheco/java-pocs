@@ -2,7 +2,7 @@ package com.github.diegopacheco.sandbox.java.cache.v3;
 
 import java.util.Optional;
 
-/**LRUCACHE contract
+/**LRU CACHE contract
  *
  * WRITE based LRU
  * @param <T> generic type of Anything.
@@ -11,6 +11,6 @@ import java.util.Optional;
  */
 public interface LRUCache<T> {
      public Optional<T> get(String key);
-     public void set(String key,T value);
+     public void put(String key, T value);
      public Integer size();
 }

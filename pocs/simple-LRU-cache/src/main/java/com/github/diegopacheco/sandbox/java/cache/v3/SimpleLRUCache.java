@@ -29,7 +29,7 @@ public class SimpleLRUCache<T> implements LRUCache<T> {
     }
 
     @Override
-    public void set(String key, T value) {
+    public void put(String key, T value) {
         if (hashmap.containsKey(key)) {
             ReferenceEntry<T> ref = hashmap.get(key);
             ref.value = value;
