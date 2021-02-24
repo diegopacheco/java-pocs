@@ -47,6 +47,7 @@ public class TCPClient {
         for (;;) {
             try {
                 ConnectFuture future = connector.connect(new InetSocketAddress("127.0.0.1", 9000));
+                connector.getSessionConfig().setReuseAddress(true);
                 future.awaitUninterruptibly();
                 session = future.getSession();
                 clientHandler.setServerWritingSession(session);

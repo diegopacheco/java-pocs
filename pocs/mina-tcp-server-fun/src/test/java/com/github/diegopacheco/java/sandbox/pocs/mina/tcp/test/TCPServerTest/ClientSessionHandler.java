@@ -4,20 +4,22 @@ import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ClientSessionHandler extends IoHandlerAdapter {
 
     private IoSession serverWritingSession;
-    private Map<String,StringBuffer> sessionBuffers = new ConcurrentHashMap<>();
+    private Map<String, Optional<StringBuffer>> sessionBuffers = new ConcurrentHashMap<>();
 
     public String askTime(){
+        String sessionID = serverWritingSession.getId()+"";
         serverWritingSession.write("</time>");
-        while(null==sessionBuffers.get(serverWritingSession.getId()+"")){
+        while(null==sessionBuffers.get(sessionID) || Optional.empty().equals(sessionBuffers.get(sessionID))){
             SleepWell.sleepSilently(100);
         }
-        String temp = sessionBuffers.get(serverWritingSession.getId()+"").toString();
-        sessionBuffers.put(serverWritingSession.getId()+"",null);
+        String temp = sessionBuffers.get(sessionID).get().toString();
+        sessionBuffers.put(sessionID,Optional.empty());
         return temp;
     }
 
@@ -25,9 +27,9 @@ public class ClientSessionHandler extends IoHandlerAdapter {
     public void messageReceived(IoSession session, Object message ) throws Exception {
         System.out.println("CLIENT got : "+ message);
         if (null==sessionBuffers.get(session.getId())){
-            sessionBuffers.put(session.getId()+"",new StringBuffer());
+            sessionBuffers.put(session.getId()+"",Optional.of(new StringBuffer()));
         }
-        sessionBuffers.get(session.getId()+"").append((String)message);
+        sessionBuffers.get(session.getId()+"").get().append((String)message);
     }
 
     public void setServerWritingSession(IoSession serverWritingSession) {
