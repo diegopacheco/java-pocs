@@ -9,9 +9,9 @@
 ### test via telnet
 ```bash
 telnet 127.0.0.1 9000
-<time/>
-<options/>
-<quit/>
+</time>
+</options>
+</quit>
 ```
 ### TCP Dump
 ```bash
