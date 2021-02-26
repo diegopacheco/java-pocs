@@ -13,9 +13,9 @@ public class Main {
                 .setPort(KSQLDB_SERVER_HOST_PORT);
         Client client = Client.create(options);
 
-        StreamedQueryResult streamedQueryResult = client.streamQuery("SELECT * FROM MY_STREAM EMIT CHANGES;").get();
-
-        for (int i = 0; i < 10; i++) {
+        String pushQuery = "SELECT * FROM MY_STREAM EMIT CHANGES;";
+        StreamedQueryResult streamedQueryResult = client.streamQuery(pushQuery).get();
+        for (int i = 0; i < 5; i++) {
             // Block until a new row is available
             Row row = streamedQueryResult.poll();
             if (row != null) {
