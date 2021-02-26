@@ -33,7 +33,6 @@ public class EsperMainStdLasevent {
 			System.out.println("Stmt on Esper: " + name + " Status: "
 					+ epService.getEPAdministrator().getStatement(name).getState() + " Text: "
 					+ epService.getEPAdministrator().getStatement(name).getText());
-
 		}
 
 		new Thread(new Runnable() {

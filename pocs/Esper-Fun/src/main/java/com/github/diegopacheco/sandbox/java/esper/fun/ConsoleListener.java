@@ -7,6 +7,7 @@ public class ConsoleListener implements UpdateListener {
     
 	public void update(EventBean[] newEvents, EventBean[] oldEvents) {
         EventBean event = newEvents[0];
+		System.out.println("Event:" + event);
         System.out.println("Event Status:" + get("status",event) + " - timestamp: " + get("timestamp",event) );
     }
     
