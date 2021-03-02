@@ -6,8 +6,6 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.NoTypePermission;
 import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
-
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class SerializationService<T> {
@@ -23,7 +21,6 @@ public class SerializationService<T> {
                 "com.github.diegopacheco.**"
         });
         xstream.alias("Author", Author.class);
-        xstream.alias("hobbies", ArrayList.class);
         xstream.processAnnotations(Author.class);
         xstream.processAnnotations(Book.class);
     }

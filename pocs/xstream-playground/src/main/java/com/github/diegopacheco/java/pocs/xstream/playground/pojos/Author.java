@@ -1,5 +1,6 @@
 package com.github.diegopacheco.java.pocs.xstream.playground.pojos;
 
+import com.github.diegopacheco.java.pocs.xstream.playground.converters.NullTagConverter;
 import com.thoughtworks.xstream.annotations.*;
 import java.util.List;
 import java.util.Objects;
@@ -13,14 +14,19 @@ public class Author {
 
     @XStreamAsAttribute
     private String email;
+
     private String name;
 
     @XStreamImplicit
     private List<Book> books;
 
-    // default bank String forces XStream to print null value: <facebookID></facebookID>
+    // 3 Options:
+    // 1. default bank String(facebookID="") forces XStream to print null value: <facebookID></facebookID>
+    // 2. Do #1 and use the generic converter I created NullTagConverter which will force any String to be empty tag of null or empty String
+    @XStreamConverter(NullTagConverter.class)
     private String facebookID="";
 
+    // 3. Option 3 - use Optional
     private Optional<String> twitterID = Optional.empty(); // make the empty as: <twitterID/>
 
     @XStreamImplicit(itemFieldName = "subject") // make a flat list with the tag subject

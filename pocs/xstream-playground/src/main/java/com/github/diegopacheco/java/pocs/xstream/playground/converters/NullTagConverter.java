@@ -10,12 +10,10 @@ public class NullTagConverter implements Converter {
 
     @Override
     public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
-        if (null==source){
-            writer.setValue("<FaceBookID/>");
+        if (null==source || "".equals(source)){
+           // Do nothing will force for empty tag e.g: <FacebookID/>
         }else{
-            writer.startNode("FacebookID");
             writer.setValue(source+"");
-            writer.endNode();
         }
     }
 
@@ -26,6 +24,6 @@ public class NullTagConverter implements Converter {
 
     @Override
     public boolean canConvert(Class type) {
-        return String.class.equals(type.getClass());
+        return type.equals(String.class);
     }
 }
