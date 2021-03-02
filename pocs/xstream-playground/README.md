@@ -7,7 +7,7 @@
 <Author email="diego@diego.diego">
     <name>Diego Pacheco</name>
     <Book year="2016" authorName="DiegoPacheco">Building Scala Applications</Book>
-    <facebookID></facebookID>
+    <facebookID/>
     <twitterID/>
     <subject>Footbal</subject>
     <subject>Music</subject>
