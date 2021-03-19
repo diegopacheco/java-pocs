@@ -56,7 +56,15 @@ public class PojoToListConverter implements Converter {
         writeToPojo(contact,"Email",reader,String.class);
         reader.moveUp();
 
+        reader.moveDown();
+        field = reader.getNodeName();
+        value = reader.getValue();
+        writeToPojo(contact,"SpokenLanguages",reader,List.class);
+        reader.moveUp();
+
         contacts.add(contact);
+
+        reader.moveDown();
 
         c.setContacts(contacts);
         return c;
@@ -73,21 +81,36 @@ public class PojoToListConverter implements Converter {
                     } else {
                         setter.invoke(pojo, value);
                     }
-                    break;
+                break;
                 case "Integer":
                     if (null == value) {
                         setter.invoke(pojo, 0);
                     } else {
                         setter.invoke(pojo, Integer.parseInt(value.toString()));
                     }
-                    break;
+                break;
                 case "Boolean":
                     if (null == value) {
                         setter.invoke(pojo, true);
                     } else {
                         setter.invoke(pojo, Boolean.parseBoolean(value.toString()));
                     }
-                    break;
+                break;
+                case "List":
+                    if (null == value) {
+                        setter.invoke(pojo, new ArrayList<>());
+                    } else {
+                        List<String> list = new ArrayList<>();
+                        String tag = reader.getNodeName();
+                        while(field.equals(tag)){
+                            list.add(reader.getValue());
+                            reader.moveUp();
+                            reader.moveDown();
+                            tag = reader.getNodeName();
+                        }
+                        setter.invoke(pojo,list);
+                    }
+                break;
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
