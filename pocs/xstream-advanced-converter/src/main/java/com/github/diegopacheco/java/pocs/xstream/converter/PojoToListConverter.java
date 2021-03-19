@@ -7,6 +7,7 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.path.PathTrackingReader;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -83,6 +84,8 @@ public class PojoToListConverter implements Converter {
                         while(field.equals(tag)){
                             list.add(reader.getValue());
                             reader.moveUp();
+                            if (((PathTrackingReader) reader).peekNextChild()==null)
+                                return;
                             reader.moveDown();
                             tag = reader.getNodeName();
                         }
