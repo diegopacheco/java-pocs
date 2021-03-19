@@ -25,7 +25,6 @@ public class XstreamSerializationServiceTest {
                 "<SpokenLanguages>Portuguese</SpokenLanguages>" +
                 "<ID>3</ID>" +
                 "<Name>Melina</Name>" +
-                "<Active>True</Active>" +
                 "<Email>mel@mel.com</Email>" +
                 "<SpokenLanguages>Catness</SpokenLanguages>" +
                 "<SpokenLanguages>Portuguese</SpokenLanguages>" +

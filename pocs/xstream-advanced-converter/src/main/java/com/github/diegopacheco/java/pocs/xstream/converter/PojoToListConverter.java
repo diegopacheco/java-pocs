@@ -51,6 +51,11 @@ public class PojoToListConverter implements Converter {
 
     private void writeToPojo(Object pojo, String field, HierarchicalStreamReader reader, Class classType) {
         try {
+
+            if (!field.equals(reader.getNodeName())){
+                return;
+            }
+
             Method setter = pojo.getClass().getDeclaredMethod("set" + field, classType);
             Object value = reader.getValue();
             switch (classType.getSimpleName()) {
@@ -84,8 +89,10 @@ public class PojoToListConverter implements Converter {
                         while(field.equals(tag)){
                             list.add(reader.getValue());
                             reader.moveUp();
-                            if (((PathTrackingReader) reader).peekNextChild()==null)
+                            if (((PathTrackingReader) reader).peekNextChild()==null){
+                                setter.invoke(pojo,list);
                                 return;
+                            }
                             reader.moveDown();
                             tag = reader.getNodeName();
                         }
