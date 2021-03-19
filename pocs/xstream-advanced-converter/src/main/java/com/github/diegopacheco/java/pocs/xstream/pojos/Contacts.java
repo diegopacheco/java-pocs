@@ -13,7 +13,6 @@ import java.util.Objects;
 @XStreamConverter(PojoToListConverter.class)
 public class Contacts {
 
-    @XStreamImplicit
     private List<Contact> contactList = new ArrayList<>();
 
     public Contacts() {}

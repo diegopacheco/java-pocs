@@ -1,5 +1,7 @@
 package com.github.diegopacheco.java.pocs.xstream.serialization;
 
+import com.github.diegopacheco.java.pocs.xstream.pojos.ContactPre;
+import com.github.diegopacheco.java.pocs.xstream.pojos.ContactsPre;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.converters.Converter;
@@ -71,6 +73,10 @@ public class XStreamSerializationService implements SerializationService {
 
     @Override
     public String preProcess(String xml) {
+        xStream.alias("contacts", ContactsPre.class);
+        xStream.alias("Contact", ContactPre.class);
+        xStream.processAnnotations(ContactsPre.class);
+        xStream.processAnnotations(ContactPre.class);
         xml = xml.replaceAll("<ID>","<ContactList/><ContactList><ID>");
         xml = xml.replaceAll("<contacts><ContactList/>","<contacts>");
         xml = xml.replaceAll("</contacts>","<ContactList/></contacts>");
