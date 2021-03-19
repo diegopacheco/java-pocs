@@ -26,28 +26,11 @@ public class PojoToListConverter implements Converter {
     public void marshal(Object o, HierarchicalStreamWriter writer, MarshallingContext ctx) {
         Contacts c = (Contacts)o;
         for(Contact contact : c.getContacts()){
-            writer.startNode("ID");
-            writer.setValue(contact.getID().toString());
-            writer.endNode();
-
-            writer.startNode("Name");
-            writer.setValue(contact.getName().toString());
-            writer.endNode();
-
-            writer.startNode("Active");
-            writer.setValue( (contact.getActive()!=null) ? contact.getActive().toString() : "" );
-            writer.endNode();
-
-            writer.startNode("Email");
-            writer.setValue(contact.getEmail().toString());
-            writer.endNode();
-
-            for(String s: contact.getSpokenLanguages()){
-                writer.startNode("SpokenLanguages");
-                writer.setValue(s);
-                writer.endNode();
-            }
-
+            writeToXML(contact,"ID",writer,Integer.class);
+            writeToXML(contact,"Name",writer,String.class);
+            writeToXML(contact,"Active",writer,Boolean.class);
+            writeToXML(contact,"Email",writer,String.class);
+            writeToXML(contact,"SpokenLanguages",writer,List.class);
         }
     }
 
@@ -71,6 +54,58 @@ public class PojoToListConverter implements Converter {
 
         c.setContacts(contacts);
         return c;
+    }
+
+    private void writeToXML(Object pojo, String field, HierarchicalStreamWriter writer, Class classType) {
+        try {
+            Method getter = pojo.getClass().getDeclaredMethod("get" + field);
+            Object value = getter.invoke(pojo,null);
+            switch (classType.getSimpleName()) {
+                case "String":
+                    writer.startNode(field);
+                    if (null == value) {
+                        writer.setValue("");
+                    } else {
+                        writer.setValue(value.toString());
+                    }
+                    writer.endNode();
+                    break;
+                case "Integer":
+                    writer.startNode(field);
+                    if (null == value) {
+                        writer.setValue("0");
+                    } else {
+                        writer.setValue(value.toString());
+                    }
+                    writer.endNode();
+                    break;
+                case "Boolean":
+                    writer.startNode(field);
+                    if (null == value) {
+                        writer.setValue("true");
+                    } else {
+                        writer.setValue(value.toString());
+                    }
+                    writer.endNode();
+                    break;
+                case "List":
+                    if (null == value) {
+                        writer.startNode(field);
+                        writer.setValue(new ArrayList<String>().toString());
+                        writer.endNode();
+                    } else {
+                        List<String> list = (List<String>)value;
+                        for(String s: list){
+                            writer.startNode(field);
+                            writer.setValue(s);
+                            writer.endNode();
+                        }
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void writeToPojo(Object pojo, String field, HierarchicalStreamReader reader, Class classType) {
