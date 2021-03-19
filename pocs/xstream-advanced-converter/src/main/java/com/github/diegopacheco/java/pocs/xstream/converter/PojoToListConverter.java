@@ -28,43 +28,21 @@ public class PojoToListConverter implements Converter {
 
     @Override
     public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext ctx) {
+        reader.moveDown();
         Contacts c = new Contacts();
         List<Contact> contacts = new ArrayList<>();
-        reader.moveDown();
 
-        Contact contact = new Contact();
-        String field = reader.getNodeName();
-        String value = reader.getValue();
-        writeToPojo(contact,"ID",reader,Integer.class);
-        reader.moveUp();
-
-        reader.moveDown();
-        field = reader.getNodeName();
-        value = reader.getValue();
-        writeToPojo(contact,"Name",reader,String.class);
-        reader.moveUp();
-
-        reader.moveDown();
-        field = reader.getNodeName();
-        value = reader.getValue();
-        writeToPojo(contact,"Active",reader,Boolean.class);
-        reader.moveUp();
-
-        reader.moveDown();
-        field = reader.getNodeName();
-        value = reader.getValue();
-        writeToPojo(contact,"Email",reader,String.class);
-        reader.moveUp();
-
-        reader.moveDown();
-        field = reader.getNodeName();
-        value = reader.getValue();
-        writeToPojo(contact,"SpokenLanguages",reader,List.class);
-        reader.moveUp();
-
-        contacts.add(contact);
-
-        reader.moveDown();
+        String tag = reader.getNodeName();
+        while("ID".equals(tag)){
+            Contact contact = new Contact();
+            writeToPojo(contact,"ID",reader,Integer.class);
+            writeToPojo(contact,"Name",reader,String.class);
+            writeToPojo(contact,"Active",reader,Boolean.class);
+            writeToPojo(contact,"Email",reader,String.class);
+            writeToPojo(contact,"SpokenLanguages",reader,List.class);
+            contacts.add(contact);
+            tag = reader.getNodeName();
+        }
 
         c.setContacts(contacts);
         return c;
@@ -109,9 +87,12 @@ public class PojoToListConverter implements Converter {
                             tag = reader.getNodeName();
                         }
                         setter.invoke(pojo,list);
+                        return;
                     }
                 break;
             }
+            reader.moveUp();
+            reader.moveDown();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
