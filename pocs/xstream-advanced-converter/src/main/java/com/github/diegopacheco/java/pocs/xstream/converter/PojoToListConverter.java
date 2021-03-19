@@ -30,29 +30,41 @@ public class PojoToListConverter implements Converter {
     public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext ctx) {
         Contacts c = new Contacts();
         List<Contact> contacts = new ArrayList<>();
-        while (reader.hasMoreChildren()) {
-            Contact contact = new Contact();
-            String field = reader.getNodeName();
-            String value = reader.getValue();
-            reader.moveDown();
-            if (canConvertClass.contains(field))
-                continue;
+        reader.moveDown();
 
-            /*
-                writeToPojo(contact,"ID",reader,Integer.class);
-                writeToPojo(contact,"Name",reader,String.class);
-                writeToPojo(contact,"Email",reader,String.class);
-                writeToPojo(contact,"Active",reader,Boolean.class);
-             */
-            contacts.add(contact);
-        }
+        Contact contact = new Contact();
+        String field = reader.getNodeName();
+        String value = reader.getValue();
+        writeToPojo(contact,"ID",reader,Integer.class);
+        reader.moveUp();
+
+        reader.moveDown();
+        field = reader.getNodeName();
+        value = reader.getValue();
+        writeToPojo(contact,"Name",reader,String.class);
+        reader.moveUp();
+
+        reader.moveDown();
+        field = reader.getNodeName();
+        value = reader.getValue();
+        writeToPojo(contact,"Active",reader,Boolean.class);
+        reader.moveUp();
+
+        reader.moveDown();
+        field = reader.getNodeName();
+        value = reader.getValue();
+        writeToPojo(contact,"Email",reader,String.class);
+        reader.moveUp();
+
+        contacts.add(contact);
+
         c.setContacts(contacts);
         return c;
     }
 
     private void writeToPojo(Object pojo, String field, HierarchicalStreamReader reader, Class classType) {
         try {
-            Method setter = pojo.getClass().getDeclaredMethod("set" + field,classType);
+            Method setter = pojo.getClass().getDeclaredMethod("set" + field, classType);
             Object value = reader.getValue();
             switch (classType.getSimpleName()) {
                 case "String":
@@ -61,21 +73,21 @@ public class PojoToListConverter implements Converter {
                     } else {
                         setter.invoke(pojo, value);
                     }
-                break;
+                    break;
                 case "Integer":
                     if (null == value) {
                         setter.invoke(pojo, 0);
                     } else {
                         setter.invoke(pojo, Integer.parseInt(value.toString()));
                     }
-                break;
+                    break;
                 case "Boolean":
                     if (null == value) {
                         setter.invoke(pojo, true);
                     } else {
                         setter.invoke(pojo, Boolean.parseBoolean(value.toString()));
                     }
-                break;
+                    break;
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

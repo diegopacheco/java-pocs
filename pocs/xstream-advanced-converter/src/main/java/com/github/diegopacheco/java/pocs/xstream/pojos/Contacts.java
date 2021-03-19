@@ -23,7 +23,7 @@ public class Contacts {
     public List<Contact> getContacts() {
         return contactList;
     }
-    public void setContacts(List<Contact> contacts) {
+    public void setContacts(List<Contact> contactList) {
         this.contactList = contactList;
     }
 
