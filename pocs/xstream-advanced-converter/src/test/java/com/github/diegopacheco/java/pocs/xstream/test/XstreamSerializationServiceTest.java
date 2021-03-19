@@ -33,6 +33,11 @@ public class XstreamSerializationServiceTest {
         Contacts contacts = serialization.deserialize(xml);
         assertNotNull(contacts);
         System.out.println(contacts);
+
+        String xmlAgain = serialization.serialize(contacts);
+        assertNotNull(xmlAgain);
+        System.out.println(xmlAgain);
+
     }
 
 }

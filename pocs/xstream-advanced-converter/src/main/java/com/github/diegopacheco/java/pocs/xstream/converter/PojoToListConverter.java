@@ -23,8 +23,32 @@ public class PojoToListConverter implements Converter {
     }
 
     @Override
-    public void marshal(Object o, HierarchicalStreamWriter hierarchicalStreamWriter, MarshallingContext marshallingContext) {
-        System.out.println("here");
+    public void marshal(Object o, HierarchicalStreamWriter writer, MarshallingContext ctx) {
+        Contacts c = (Contacts)o;
+        for(Contact contact : c.getContacts()){
+            writer.startNode("ID");
+            writer.setValue(contact.getID().toString());
+            writer.endNode();
+
+            writer.startNode("Name");
+            writer.setValue(contact.getName().toString());
+            writer.endNode();
+
+            writer.startNode("Active");
+            writer.setValue( (contact.getActive()!=null) ? contact.getActive().toString() : "" );
+            writer.endNode();
+
+            writer.startNode("Email");
+            writer.setValue(contact.getEmail().toString());
+            writer.endNode();
+
+            for(String s: contact.getSpokenLanguages()){
+                writer.startNode("SpokenLanguages");
+                writer.setValue(s);
+                writer.endNode();
+            }
+
+        }
     }
 
     @Override
