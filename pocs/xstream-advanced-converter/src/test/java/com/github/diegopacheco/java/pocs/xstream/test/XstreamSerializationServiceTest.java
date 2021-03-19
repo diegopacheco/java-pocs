@@ -37,7 +37,34 @@ public class XstreamSerializationServiceTest {
         String xmlAgain = serialization.serialize(contacts);
         assertNotNull(xmlAgain);
         System.out.println(xmlAgain);
+    }
 
+    @Test
+    public void testPreProcess(){
+        String xml = "<contacts>" +
+                "<ID>1</ID>" +
+                "<Name>Diego</Name>" +
+                "<Active>True</Active>" +
+                "<Email>diego@diego.com</Email>" +
+                "<SpokenLanguages>Portuguese</SpokenLanguages>" +
+                "<SpokenLanguages>English</SpokenLanguages>" +
+                "<ID>2</ID>" +
+                "<Name>Gandalf</Name>" +
+                "<Active>True</Active>" +
+                "<Email>gan@white.com</Email>" +
+                "<SpokenLanguages>Catness</SpokenLanguages>" +
+                "<SpokenLanguages>Portuguese</SpokenLanguages>" +
+                "<ID>3</ID>" +
+                "<Name>Melina</Name>" +
+                "<Email>mel@mel.com</Email>" +
+                "<SpokenLanguages>Catness</SpokenLanguages>" +
+                "<SpokenLanguages>Portuguese</SpokenLanguages>" +
+                "</contacts>";
+        SerializationService serialization = new XStreamSerializationService();
+        String preProcessedXML = serialization.preProcess(xml);
+        System.out.println(preProcessedXML);
+        Contacts c = serialization.deserialize(preProcessedXML);
+        System.out.println(c);
     }
 
 }

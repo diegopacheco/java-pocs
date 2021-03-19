@@ -3,6 +3,7 @@ package com.github.diegopacheco.java.pocs.xstream.pojos;
 import com.github.diegopacheco.java.pocs.xstream.converter.PojoToListConverter;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Objects;
 @XStreamConverter(PojoToListConverter.class)
 public class Contacts {
 
+    @XStreamImplicit
     private List<Contact> contactList = new ArrayList<>();
 
     public Contacts() {}

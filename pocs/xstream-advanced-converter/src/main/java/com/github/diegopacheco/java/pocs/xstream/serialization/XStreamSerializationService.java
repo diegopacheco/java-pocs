@@ -69,4 +69,18 @@ public class XStreamSerializationService implements SerializationService {
         return xStream.toXML(pojo);
     }
 
+    @Override
+    public String preProcess(String xml) {
+        xml = xml.replaceAll("<ID>","<ContactList/><ContactList><ID>");
+        xml = xml.replaceAll("<contacts><ContactList/>","<contacts>");
+        xml = xml.replaceAll("</contacts>","<ContactList/></contacts>");
+        return xml;
+    }
+
+    @Override
+    public <T> String serializePreProcess(T pojo) {
+        return null;
+    }
+
+
 }
