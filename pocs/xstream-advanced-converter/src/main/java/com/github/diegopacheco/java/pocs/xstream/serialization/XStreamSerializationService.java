@@ -74,7 +74,7 @@ public class XStreamSerializationService implements SerializationService {
     @Override
     public String preProcess(String xml) {
         xStream.alias("contacts", ContactsPre.class);
-        xStream.alias("Contact", ContactPre.class);
+        xStream.alias("ContactList", ContactPre.class);
         xStream.processAnnotations(ContactsPre.class);
         xStream.processAnnotations(ContactPre.class);
         xml = xml.replaceAll("<ID>","<ContactList/><ContactList><ID>");
