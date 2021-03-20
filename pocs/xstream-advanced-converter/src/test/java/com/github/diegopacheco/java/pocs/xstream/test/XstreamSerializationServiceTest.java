@@ -77,9 +77,11 @@ public class XstreamSerializationServiceTest {
         ContactItems.add(tempItem);
 
         tempRoot.setContactItems(ContactItems);
-        String tempXml =  new XStreamSerializationService().serialize(tempRoot);
+
+        SerializationService ser = new XStreamSerializationService();
+        String tempXml =  ser.serialize(tempRoot);
         System.out.println(tempXml);
-        ContactRoot r2 = new XStreamSerializationService().deserialize(tempXml);
+        ContactRoot r2 = ser.deserialize(tempXml);
         System.out.println(r2);
 
         /*

@@ -10,7 +10,7 @@ import java.util.Objects;
 @XStreamAlias("ContactRoot")
 public class ContactRoot {
 
-    @XStreamImplicit
+    //@XStreamImplicit
     List<ContactItem> ContactItems = new ArrayList<>();
 
     public ContactRoot() {}
