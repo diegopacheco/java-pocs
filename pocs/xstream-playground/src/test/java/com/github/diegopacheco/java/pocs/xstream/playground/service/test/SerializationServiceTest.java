@@ -17,6 +17,8 @@ public class SerializationServiceTest {
     public void testSerialize(){
         List<Book> books = new ArrayList<>();
         books.add(new Book("Building Scala Applications",2016,"DiegoPacheco"));
+        books.add(new Book("Building Scala Applications",2016,"DiegoPacheco"));
+        books.add(new Book("Building Scala Applications",2016,"DiegoPacheco"));
 
         List<String> interests = new ArrayList<>();
         interests.add("Footbal");
