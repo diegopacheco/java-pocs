@@ -1,11 +1,13 @@
 package com.github.diegopacheco.java.pocs.xstream.pojos;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@XStreamAlias("ContactPre")
 public class ContactPre {
 
     private Integer ID=1;

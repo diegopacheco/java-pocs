@@ -1,7 +1,7 @@
 package com.github.diegopacheco.java.pocs.xstream.test;
 
 import com.github.diegopacheco.java.pocs.xstream.pojos.Contacts;
-import com.github.diegopacheco.java.pocs.xstream.pojos.ContactsPre;
+import com.github.diegopacheco.java.pocs.xstream.pojos.Contacts2;
 import com.github.diegopacheco.java.pocs.xstream.serialization.SerializationService;
 import com.github.diegopacheco.java.pocs.xstream.serialization.XStreamSerializationService;
 import org.junit.jupiter.api.Test;
@@ -42,7 +42,7 @@ public class XstreamSerializationServiceTest {
 
     @Test
     public void testPreProcess(){
-        String xml = "<contacts>" +
+        String xml = "<Contacts2>" +
                 "<ID>1</ID>" +
                 "<Name>Diego</Name>" +
                 "<Active>True</Active>" +
@@ -60,11 +60,11 @@ public class XstreamSerializationServiceTest {
                 "<Email>mel@mel.com</Email>" +
                 "<SpokenLanguages>Catness</SpokenLanguages>" +
                 "<SpokenLanguages>Portuguese</SpokenLanguages>" +
-                "</contacts>";
+                "</Contacts2>";
         SerializationService serialization = new XStreamSerializationService();
         String preProcessedXML = serialization.preProcess(xml);
         System.out.println(preProcessedXML);
-        ContactsPre c = serialization.deserialize(preProcessedXML);
+        Contacts2 c = serialization.deserialize(preProcessedXML);
         System.out.println(c);
     }
 

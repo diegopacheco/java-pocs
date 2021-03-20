@@ -1,25 +1,20 @@
 package com.github.diegopacheco.java.pocs.xstream.pojos;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Objects;
 
-@XStreamAlias("contacts2")
+@XStreamAlias("Contacts2")
 public class Contacts2 {
 
-    private List<ContactPre> list = new ArrayList<>();
+    private ListOfContacts list = new ListOfContacts();
 
-    public ContactsPre() {}
+    public Contacts2() {}
 
-    public ContactsPre(List<ContactPre> list) {
-        this.list = list;
-    }
-
-    public List<ContactPre> getList() {
+    public ListOfContacts getList() {
         return list;
     }
-    public void setList(List<ContactPre> list) {
+    public void setList(ListOfContacts list) {
         this.list = list;
     }
 
@@ -27,8 +22,8 @@ public class Contacts2 {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ContactsPre that = (ContactsPre) o;
-        return Objects.equals(list, that.list);
+        Contacts2 contacts2 = (Contacts2) o;
+        return Objects.equals(list, contacts2.list);
     }
 
     @Override
@@ -38,7 +33,7 @@ public class Contacts2 {
 
     @Override
     public String toString() {
-        return "ContactsPre{" +
+        return "Contacts2{" +
                 "list=" + list +
                 '}';
     }

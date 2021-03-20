@@ -1,7 +1,8 @@
 package com.github.diegopacheco.java.pocs.xstream.serialization;
 
 import com.github.diegopacheco.java.pocs.xstream.pojos.ContactPre;
-import com.github.diegopacheco.java.pocs.xstream.pojos.ContactsPre;
+import com.github.diegopacheco.java.pocs.xstream.pojos.Contacts2;
+import com.github.diegopacheco.java.pocs.xstream.pojos.ListOfContacts;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.converters.Converter;
@@ -73,13 +74,15 @@ public class XStreamSerializationService implements SerializationService {
 
     @Override
     public String preProcess(String xml) {
-        xStream.alias("contacts", ContactsPre.class);
-        xStream.alias("ContactList", ContactPre.class);
-        xStream.processAnnotations(ContactsPre.class);
+        xStream.processAnnotations(Contacts2.class);
         xStream.processAnnotations(ContactPre.class);
-        xml = xml.replaceAll("<ID>","<ContactList/><ContactList><ID>");
-        xml = xml.replaceAll("<contacts><ContactList/>","<contacts>");
-        xml = xml.replaceAll("</contacts>","<ContactList/></contacts>");
+        xStream.processAnnotations(ListOfContacts.class);
+        //xStream.addImplicitCollection(ListOfContacts.class, "ContactPre",ContactPre.class);
+
+        xml = xml.replaceAll("<Contacts2>","<Contacts2><list>");
+        xml = xml.replaceAll("<ID>","<ContactPre/><ContactPre><ID>");
+        xml = xml.replaceAll("<Contacts2><list><ContactPre/>","<Contacts2><list>");
+        xml = xml.replaceAll("</Contacts2>","<ContactPre/></list></Contacts2>");
         return xml;
     }
 
