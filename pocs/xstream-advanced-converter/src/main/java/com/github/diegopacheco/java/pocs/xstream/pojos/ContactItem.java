@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@XStreamAlias("ContactPre")
-public class ContactPre {
+@XStreamAlias("ContactItem")
+public class ContactItem {
 
     private Integer ID=1;
     private String Name="";
@@ -18,9 +18,9 @@ public class ContactPre {
     @XStreamImplicit
     private List<String> SpokenLanguages = new ArrayList<>();
 
-    public ContactPre() {}
+    public ContactItem() {}
 
-    public ContactPre(Integer ID, String name, String email, Boolean active, List<String> spokenLanguages) {
+    public ContactItem(Integer ID, String name, String email, Boolean active, List<String> spokenLanguages) {
         this.ID = ID;
         Name = name;
         Email = email;
@@ -67,7 +67,7 @@ public class ContactPre {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ContactPre that = (ContactPre) o;
+        ContactItem that = (ContactItem) o;
         return Objects.equals(ID, that.ID) && Objects.equals(Name, that.Name) && Objects.equals(Email, that.Email) && Objects.equals(Active, that.Active) && Objects.equals(SpokenLanguages, that.SpokenLanguages);
     }
 
@@ -78,7 +78,7 @@ public class ContactPre {
 
     @Override
     public String toString() {
-        return "ContactPre{" +
+        return "ContactItem{" +
                 "ID=" + ID +
                 ", Name='" + Name + '\'' +
                 ", Email='" + Email + '\'' +

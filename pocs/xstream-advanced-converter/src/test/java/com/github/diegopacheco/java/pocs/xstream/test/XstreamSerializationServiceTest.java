@@ -1,10 +1,16 @@
 package com.github.diegopacheco.java.pocs.xstream.test;
 
+import com.github.diegopacheco.java.pocs.xstream.pojos.ContactItem;
+import com.github.diegopacheco.java.pocs.xstream.pojos.ContactRoot;
 import com.github.diegopacheco.java.pocs.xstream.pojos.Contacts;
-import com.github.diegopacheco.java.pocs.xstream.pojos.Contacts2;
 import com.github.diegopacheco.java.pocs.xstream.serialization.SerializationService;
 import com.github.diegopacheco.java.pocs.xstream.serialization.XStreamSerializationService;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class XstreamSerializationServiceTest {
@@ -42,7 +48,42 @@ public class XstreamSerializationServiceTest {
 
     @Test
     public void testPreProcess(){
-        String xml = "<Contacts2>" +
+
+        ContactRoot tempRoot = new ContactRoot();
+
+        List<ContactItem> ContactItems = new ArrayList<>();
+        ContactItem tempItem = new ContactItem();
+        tempItem.setID(1);
+        tempItem.setActive(true);
+        tempItem.setEmail("e@e.com");
+        tempItem.setName("e");
+        tempItem.setSpokenLanguages(Arrays.asList("a","b"));
+        ContactItems.add(tempItem);
+
+        tempItem = new ContactItem();
+        tempItem.setID(2);
+        tempItem.setActive(true);
+        tempItem.setEmail("f@f.com");
+        tempItem.setName("f");
+        tempItem.setSpokenLanguages(Arrays.asList("a","b"));
+        ContactItems.add(tempItem);
+
+        tempItem = new ContactItem();
+        tempItem.setID(3);
+        tempItem.setActive(true);
+        tempItem.setEmail("g@g.com");
+        tempItem.setName("g");
+        tempItem.setSpokenLanguages(Arrays.asList("a","b"));
+        ContactItems.add(tempItem);
+
+        tempRoot.setContactItems(ContactItems);
+        String tempXml =  new XStreamSerializationService().serialize(tempRoot);
+        System.out.println(tempXml);
+        ContactRoot r2 = new XStreamSerializationService().deserialize(tempXml);
+        System.out.println(r2);
+
+        /*
+        String xml = "<ContactRoot>" +
                 "<ID>1</ID>" +
                 "<Name>Diego</Name>" +
                 "<Active>True</Active>" +
@@ -60,12 +101,14 @@ public class XstreamSerializationServiceTest {
                 "<Email>mel@mel.com</Email>" +
                 "<SpokenLanguages>Catness</SpokenLanguages>" +
                 "<SpokenLanguages>Portuguese</SpokenLanguages>" +
-                "</Contacts2>";
+                "</ContactRoot>";
         SerializationService serialization = new XStreamSerializationService();
         String preProcessedXML = serialization.preProcess(xml);
         System.out.println(preProcessedXML);
-        Contacts2 c = serialization.deserialize(preProcessedXML);
+        ContactRoot c = serialization.deserialize(preProcessedXML);
         System.out.println(c);
+
+         */
     }
 
 }
