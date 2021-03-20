@@ -12,6 +12,7 @@ import org.scannotation.AnnotationDB;
 import org.scannotation.ClasspathUrlFinder;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
@@ -36,6 +37,7 @@ public class XStreamSerializationService implements SerializationService {
 
             Set<String> alias = db.getAnnotationIndex().get(XStreamAlias.class.getName());
             for (String clazz : alias) {
+                System.out.println("Support for: " + clazz);
                 xStream.processAnnotations(Class.forName(clazz));
             }
 
@@ -56,6 +58,7 @@ public class XStreamSerializationService implements SerializationService {
                             getDeclaredConstructor().newInstance());
             }
             //xStream.ignoreUnknownElements();
+            //xStream.alias("ContactItems", ArrayList.class);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
