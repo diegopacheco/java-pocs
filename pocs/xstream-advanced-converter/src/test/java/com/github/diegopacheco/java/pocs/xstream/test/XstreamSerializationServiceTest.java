@@ -80,8 +80,18 @@ public class XstreamSerializationServiceTest {
 
         SerializationService ser = new XStreamSerializationService();
         String tempXml =  ser.serialize(tempRoot);
+        String prepDeserialize = ser.serializePreProcess(tempRoot);
+
+        System.out.println("XML no pre-process: ");
         System.out.println(tempXml);
-        ContactRoot r2 = ser.deserialize(tempXml);
+
+        System.out.println("XMl with pre-process");
+        System.out.println(prepDeserialize);
+
+        System.out.println("original XML and deserialize now... ");
+        String pre = ser.preProcess(prepDeserialize);
+        System.out.println(pre);
+        ContactRoot r2 = ser.deserialize(pre);
         System.out.println(r2);
 
     }

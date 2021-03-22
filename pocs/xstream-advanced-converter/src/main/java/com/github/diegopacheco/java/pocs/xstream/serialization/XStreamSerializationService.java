@@ -55,34 +55,47 @@ public class XStreamSerializationService implements SerializationService {
                             getDeclaredConstructor().newInstance());
             }
             //xStream.ignoreUnknownElements();
-            //xStream.alias("ContactItems", ArrayList.class);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
+    // for method 1
     @Override
     public <T> T deserialize(String xml) {
         return (T)xStream.fromXML(xml);
     }
 
+    // for method 1
     @Override
     public <T> String serialize(T pojo) {
         return xStream.toXML(pojo);
     }
 
+    // PRE-DESerialize
+    // for method 2
     @Override
     public String preProcess(String xml) {
         xml = xml.replaceAll("<ID>","</ContactItem>\n<ContactItem><ID>");
         xml = xml.replaceAll("</ContactRoot>","</ContactItem>\n</ContactRoot>");
         xml = xml.replaceAll("<ContactRoot>\n" +
                 "    </ContactItem>","<ContactRoot>\n");
+
+        xml = xml.replaceAll("<ContactRoot>\n" +
+                "  \n" +
+                "    </ContactItem>","<ContactRoot>");
+
         return xml;
     }
 
+    // POST-Serialize
+    // for method 2
     @Override
     public <T> String serializePreProcess(T pojo) {
-        return null;
+        String xml = serialize(pojo);
+        xml = xml.replaceAll("<ContactItem>","");
+        xml = xml.replaceAll("</ContactItem>","");
+        return xml;
     }
 
 
