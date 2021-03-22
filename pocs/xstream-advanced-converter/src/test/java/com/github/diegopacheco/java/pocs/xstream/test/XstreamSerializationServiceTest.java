@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class XstreamSerializationServiceTest {
 
     @Test
-    public void testComplexXMLDeserialize(){
+    public void testMethod1(){
         String xml = "<contacts>" +
                 "<ID>1</ID>" +
                 "<Name>Diego</Name>" +
@@ -47,7 +47,7 @@ public class XstreamSerializationServiceTest {
     }
 
     @Test
-    public void testPreProcess(){
+    public void testMethod2FromPojo(){
 
         ContactRoot tempRoot = new ContactRoot();
 
@@ -84,33 +84,35 @@ public class XstreamSerializationServiceTest {
         ContactRoot r2 = ser.deserialize(tempXml);
         System.out.println(r2);
 
-        /*
-        String xml = "<ContactRoot>" +
-                "<ID>1</ID>" +
-                "<Name>Diego</Name>" +
-                "<Active>True</Active>" +
-                "<Email>diego@diego.com</Email>" +
-                "<SpokenLanguages>Portuguese</SpokenLanguages>" +
-                "<SpokenLanguages>English</SpokenLanguages>" +
-                "<ID>2</ID>" +
-                "<Name>Gandalf</Name>" +
-                "<Active>True</Active>" +
-                "<Email>gan@white.com</Email>" +
-                "<SpokenLanguages>Catness</SpokenLanguages>" +
-                "<SpokenLanguages>Portuguese</SpokenLanguages>" +
-                "<ID>3</ID>" +
-                "<Name>Melina</Name>" +
-                "<Email>mel@mel.com</Email>" +
-                "<SpokenLanguages>Catness</SpokenLanguages>" +
-                "<SpokenLanguages>Portuguese</SpokenLanguages>" +
+    }
+
+    @Test
+    public void testMethod2FromXml(){
+        String xml = "<ContactRoot>\n" +
+                "    <ID>1</ID>\n" +
+                "    <Name>e</Name>\n" +
+                "    <Email>e@e.com</Email>\n" +
+                "    <Active>true</Active>\n" +
+                "    <SpokenLanguages>a</SpokenLanguages>\n" +
+                "    <SpokenLanguages>b</SpokenLanguages>\n" +
+                "    <ID>2</ID>\n" +
+                "    <Name>f</Name>\n" +
+                "    <Email>f@f.com</Email>\n" +
+                "    <Active>true</Active>\n" +
+                "    <SpokenLanguages>a</SpokenLanguages>\n" +
+                "    <SpokenLanguages>b</SpokenLanguages>\n" +
+                "    <ID>3</ID>\n" +
+                "    <Name>g</Name>\n" +
+                "    <Email>g@g.com</Email>\n" +
+                "    <Active>true</Active>\n" +
+                "    <SpokenLanguages>a</SpokenLanguages>\n" +
+                "    <SpokenLanguages>b</SpokenLanguages>\n" +
                 "</ContactRoot>";
         SerializationService serialization = new XStreamSerializationService();
         String preProcessedXML = serialization.preProcess(xml);
         System.out.println(preProcessedXML);
         ContactRoot c = serialization.deserialize(preProcessedXML);
         System.out.println(c);
-
-         */
     }
 
 }

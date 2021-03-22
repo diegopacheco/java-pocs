@@ -15,7 +15,7 @@ public class ContactItem {
     private String Email="";
     private Boolean Active=true;
 
-    @XStreamImplicit
+    @XStreamImplicit(itemFieldName = "SpokenLanguages")
     private List<String> SpokenLanguages = new ArrayList<>();
 
     public ContactItem() {}

@@ -1,7 +1,5 @@
 package com.github.diegopacheco.java.pocs.xstream.serialization;
 
-import com.github.diegopacheco.java.pocs.xstream.pojos.ContactItem;
-import com.github.diegopacheco.java.pocs.xstream.pojos.ContactRoot;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.converters.Converter;
@@ -12,7 +10,6 @@ import org.scannotation.AnnotationDB;
 import org.scannotation.ClasspathUrlFinder;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
@@ -76,10 +73,10 @@ public class XStreamSerializationService implements SerializationService {
 
     @Override
     public String preProcess(String xml) {
-        xml = xml.replaceAll("<ContactRoot>","<ContactRoot>");
-        xml = xml.replaceAll("<ID>","<ContactItem/><ContactItem><ID>");
-        xml = xml.replaceAll("<ContactRoot><ContactItem/>","<ContactRoot>");
-        xml = xml.replaceAll("</ContactRoot>","<ContactItem/></ContactRoot>");
+        xml = xml.replaceAll("<ID>","</ContactItem>\n<ContactItem><ID>");
+        xml = xml.replaceAll("</ContactRoot>","</ContactItem>\n</ContactRoot>");
+        xml = xml.replaceAll("<ContactRoot>\n" +
+                "    </ContactItem>","<ContactRoot>\n");
         return xml;
     }
 
