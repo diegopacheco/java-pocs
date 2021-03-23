@@ -5,27 +5,32 @@ import com.github.diegopacheco.javapocs.reclections.annotations.UpperCasePostToS
 
 import java.lang.reflect.Method;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SimpleLogger implements Logger{
 
-    private Map<Class,Method> cachePostProc = new ConcurrentHashMap<>();
+    private Map<Class,Optional<Method>> cachePostProc = new ConcurrentHashMap<>();
     private Map<Class,Boolean> cacheUpper = new ConcurrentHashMap<>();
 
     @Override
     public <T> void log(T obj) {
         try{
-            Method customPostProcessor = cachePostProc.get(obj.getClass());
-            if (null!=customPostProcessor){
-                callCustomProcessor(obj,customPostProcessor);
+            Optional<Method> customPostProcessor = cachePostProc.get(obj.getClass());
+            if (null!=customPostProcessor && !Optional.empty().equals(customPostProcessor)){
+                callCustomProcessor(obj,customPostProcessor.get());
                 return;
-            }
-            Method[] methods = obj.getClass().getDeclaredMethods();
-            for(Method m: methods){
-                if(null!=m.getDeclaredAnnotation(PostProcessToString.class)){
-                    cachePostProc.put(obj.getClass(),m);
-                    callCustomProcessor(obj,m);
-                    return;
+            }else{
+                if (!Optional.empty().equals(cachePostProc.get(obj.getClass()))){
+                    Method[] methods = obj.getClass().getDeclaredMethods();
+                    for(Method m: methods){
+                        if(null!=m.getDeclaredAnnotation(PostProcessToString.class)){
+                            cachePostProc.put(obj.getClass(),Optional.of(m));
+                            callCustomProcessor(obj,m);
+                            return;
+                        }
+                    }
+                    cachePostProc.put(obj.getClass(),Optional.empty());
                 }
             }
 
