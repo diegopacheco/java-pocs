@@ -1,3 +1,4 @@
+import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
 import org.bouncycastle.asn1.x509.KeyPurposeId;
 import org.bouncycastle.asn1.x509.X509Extensions;
@@ -36,14 +37,14 @@ public class Main{
     certGen.setSerialNumber(BigInteger.valueOf(System.currentTimeMillis()));
     certGen.setSubjectDN(new X509Name("dc=name"));
     certGen.setIssuerDN(dnName); // use the same
-    // yesterday
+
+    // from
     certGen.setNotBefore(Date.from(LocalDate.of(2021, 1, 1).
             atStartOfDay(ZoneOffset.UTC).toInstant()));
-            //new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000));
     // in 10 years
     certGen.setNotAfter(Date.from(LocalDate.of(2031, 1, 1).
             atStartOfDay(ZoneOffset.UTC).toInstant()));
-            //new Date(System.currentTimeMillis() + 2 * 365 * 24 * 60 * 60 * 1000));
+
     certGen.setPublicKey(keyPair.getPublic());
     certGen.setSignatureAlgorithm("SHA256WithRSAEncryption");
     certGen.addExtension(X509Extensions.ExtendedKeyUsage,
