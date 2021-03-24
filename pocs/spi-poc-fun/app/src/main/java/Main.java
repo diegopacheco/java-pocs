@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Main{
   public static void main(String args[]){
+    System.out.println("Running... ");
+
     ExchangeRate.providers().forEach(provider -> {
       System.out.println("Retreiving USD quotes from provider :" + provider);
       List<Quote> quotes = provider.create().getQuotes("USD", LocalDate.now());
@@ -15,5 +17,7 @@ public class Main{
         System.out.println("USD --> " + quote.getCurrency() + " : " + String.format("%12f|%12f", quote.getAsk(), quote.getBid()));
       });
     });
+    
+    System.out.println("DONE.");
   }
 }
