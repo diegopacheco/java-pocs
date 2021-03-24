@@ -18,5 +18,7 @@ public class Main{
     log.log(pet);
 
     log.log("nothing different should happen here. ");
+    log.log("nothing different should happen here. ");
+    log.log("nothing different should happen here. ");
   }
 }

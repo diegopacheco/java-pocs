@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SimpleLogger implements Logger{
 
     private Map<Class,Optional<Method>> cachePostProc = new ConcurrentHashMap<>();
-    private Map<Class,Boolean> cacheUpper = new ConcurrentHashMap<>();
+    private Map<Class,Optional<Boolean>> cacheUpper = new ConcurrentHashMap<>();
 
     @Override
     public <T> void log(T obj) {
@@ -34,18 +34,19 @@ public class SimpleLogger implements Logger{
                 }
             }
 
-            if (null!=cacheUpper.get(obj.getClass()) && cacheUpper.get(obj.getClass())){
+            if (null!=cacheUpper.get(obj.getClass()) && cacheUpper.get(obj.getClass()).isPresent()){
                 System.out.println(obj.toString().toUpperCase());
                 return;
             }
-            UpperCasePostToString annotation = obj.getClass().getAnnotation(UpperCasePostToString.class);
-            if (null!=annotation){
-                cacheUpper.put(obj.getClass(),true);
-                System.out.println(obj.toString().toUpperCase());
-                return;
+            if (!Optional.empty().equals(cacheUpper.get(obj.getClass()))){
+                UpperCasePostToString annotation = obj.getClass().getAnnotation(UpperCasePostToString.class);
+                if (null!=annotation){
+                    cacheUpper.put(obj.getClass(),Optional.of(true));
+                    System.out.println(obj.toString().toUpperCase());
+                    return;
+                }
+                cacheUpper.put(obj.getClass(),Optional.empty());
             }
-
-            cacheUpper.put(obj.getClass(),false);
             System.out.println(obj);
         }catch(Exception e){
             throw new RuntimeException(e);

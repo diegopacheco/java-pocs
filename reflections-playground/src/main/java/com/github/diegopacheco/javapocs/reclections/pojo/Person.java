@@ -1,7 +1,6 @@
 package com.github.diegopacheco.javapocs.reclections.pojo;
 
 import com.github.diegopacheco.javapocs.reclections.annotations.PostProcessToString;
-import com.github.diegopacheco.javapocs.reclections.annotations.UpperCasePostToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +85,7 @@ public class Person {
 
     @PostProcessToString
     public String toStringPostProcessing(String s){
-            System.out.println("running generic post process... ");
+           System.out.println("running generic post process... ");
            return s.toLowerCase();
     }
 
