@@ -51,8 +51,12 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>fully.qualified.MainClass</mainClass>
+                            <mainClass></mainClass>
                         </manifest>
+                        <manifestEntries>
+                            <Application-Class>com.github.diegopacheco.app.Main</Application-Class>
+                            <Premain-Class>com.github.diegopacheco.app.Main</Premain-Class>
+                        </manifestEntries>
                     </archive>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
