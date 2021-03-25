@@ -1,14 +1,17 @@
 package com.github.diegopacheco.app;
 
+import java.util.Arrays;
+
 public class Main{
 
   public static void main(String args[])throws Exception{
-    if (args.length==1){
-      System.out.println("Doing Agent Dynamic Load");
-      AgentLoader.run(args);
-    }else{
+    System.out.println("Args: " + Arrays.asList(args));
+    if (args.length<=1){
       System.out.println("Doing Regular main");
       regularMain();
+    }else{
+      System.out.println("Doing Agent Dynamic Load");
+      AgentLoader.run(args);
     }
   }
 
