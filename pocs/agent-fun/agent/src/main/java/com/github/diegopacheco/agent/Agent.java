@@ -6,13 +6,13 @@ public class Agent {
 
     public static void premain(String agentArgs, Instrumentation inst) {
         System.out.println("[com.github.diegopacheco.agent.Agent] In premain method");
-        String className = "com.github.diegopacheco.app.Main";
+        String className = "com.github.diegopacheco.app.DataProcess";
         transformClass(className,inst);
     }
 
     public static void agentmain(String agentArgs, Instrumentation inst) {
         System.out.println("[com.github.diegopacheco.agent.Agent] In agentmain method");
-        String className = "com.github.diegopacheco.app.Main";
+        String className = "com.github.diegopacheco.app.DataProcess";
         transformClass(className,inst);
     }
 
@@ -26,7 +26,8 @@ public class Agent {
             transform(targetCls, targetClassLoader, instrumentation);
             return;
         } catch (Exception ex) {
-            System.out.println("Class [{}] not found with Class.forName");
+            System.out.println("Class ["+className+"] not found with Class.forName");
+            ex.printStackTrace();
         }
         // otherwise iterate all loaded classes and find what we want
         for(Class<?> clazz: instrumentation.getAllLoadedClasses()) {

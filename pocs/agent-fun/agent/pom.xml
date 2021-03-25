@@ -55,7 +55,9 @@
                         </manifest>
                         <manifestEntries>
                             <Application-Class>com.github.diegopacheco.app.Main</Application-Class>
-                            <Premain-Class>com.github.diegopacheco.app.Main</Premain-Class>
+                            <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                            <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                            <Premain-Class>com.github.diegopacheco.agent.Agent</Premain-Class>
                         </manifestEntries>
                     </archive>
                     <descriptorRefs>
@@ -79,6 +81,12 @@
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
             <version>3.27.0-GA</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.diegopacheco.javapocs</groupId>
+            <artifactId>app</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>

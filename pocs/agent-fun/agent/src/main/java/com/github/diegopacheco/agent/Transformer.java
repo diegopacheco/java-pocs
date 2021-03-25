@@ -32,7 +32,7 @@ public class Transformer  implements ClassFileTransformer {
         }
 
         if (className.equals(finalTargetClassName) && loader.equals(targetClassLoader)) {
-            System.out.println("[com.github.diegopacheco.agent.Agent] Transforming class MyAtm");
+            System.out.println("[com.github.diegopacheco.agent.Agent] Transforming class: DataProcess");
             try {
                 ClassPool cp = ClassPool.getDefault();
                 CtClass cc = cp.get(targetClassName);
@@ -47,7 +47,7 @@ public class Transformer  implements ClassFileTransformer {
                 endBlock.append("endTime = System.currentTimeMillis();");
                 endBlock.append("opTime = (endTime-startTime)/1000;");
 
-                endBlock.append("LOGGER.info(\"[Application] Withdrawal operation completed in:\" + opTime + \" seconds!\");");
+                endBlock.append("System.out.println(\"[HIJACKED Application] Withdrawal operation completed in :\" + opTime + \" seconds!\");");
 
                 m.insertAfter(endBlock.toString());
 
