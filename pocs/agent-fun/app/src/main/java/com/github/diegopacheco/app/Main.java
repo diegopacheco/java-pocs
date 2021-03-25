@@ -6,16 +6,18 @@ public class Main{
 
   public static void main(String args[])throws Exception{
     System.out.println("Args: " + Arrays.asList(args));
-    if (args.length<=1){
+    if (args.length<=0){
       System.out.println("Doing Regular main");
       regularMain();
     }else{
       System.out.println("Doing Agent Dynamic Load");
-      AgentLoader.run(args);
+      AgentLoader.run(null);
+      regularMain();
     }
   }
 
-  private static void regularMain(){
+  private static void regularMain() throws Exception{
+    Thread.sleep(3000L);
     System.out.println("[APP] INIT APP.");
     System.out.println("[APP] My application is running... ");
     DataProcess.processData(2);

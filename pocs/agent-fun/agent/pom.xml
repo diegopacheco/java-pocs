@@ -57,6 +57,7 @@
                             <Application-Class>com.github.diegopacheco.app.Main</Application-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
                             <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                            <Agent-Class>com.github.diegopacheco.agent.Agent</Agent-Class>
                             <Premain-Class>com.github.diegopacheco.agent.Agent</Premain-Class>
                         </manifestEntries>
                     </archive>

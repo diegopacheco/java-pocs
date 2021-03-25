@@ -9,7 +9,7 @@ public class AgentLoader {
     public static void run(String[] args) throws Exception{
         String agentFilePath = "/home/diego/git/diegopacheco/java-pocs/pocs/agent-fun";
         agentFilePath += "/agent/target/agent-1.0-SNAPSHOT-jar-with-dependencies.jar";
-        String applicationName = "Main";
+        String applicationName = "com.github.diegopacheco.app.Main";
 
         //iterate all jvms and get the first one that matches our application name
         Optional<String> jvmProcessOpt = Optional.ofNullable(VirtualMachine.list()

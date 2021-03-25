@@ -9,6 +9,6 @@ then
 else
   echo "[Doing Dynamic Load]"
   ./mvnw clean compile assembly:single
-  java -classpath "./agent/target/agent-1.0-SNAPSHOT-jar-with-dependencies.jar:/home/diego/bin/jdk1.8.0_241/lib/tools.jar" \
-  -jar app/target/app-1.0-SNAPSHOT-jar-with-dependencies.jar "agent" "agent"
+  java -classpath "/home/diego/bin/jdk1.8.0_241/lib/tools.jar:app/target/app-1.0-SNAPSHOT-jar-with-dependencies.jar:agent/target/agent-1.0-SNAPSHOT-jar-with-dependencies.jar" \
+  com.github.diegopacheco.app.Main "comom.github.diegopacheco.agent.Agent"
 fi
