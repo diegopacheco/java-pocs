@@ -1,6 +1,5 @@
 package com.github.diegopacheco.javapocs.pojo;
 
-import java.math.BigDecimal;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -83,6 +82,10 @@ public class Person {
         return (int)Math.ceil(doubleSize);
     }
 
+    public static int getPadCount(String serialization){
+        return (int)serialization.chars().filter(ch -> ch == '=').count();
+    }
+
     public static String toSerialization(Person p){
         ByteBuffer byteBuffer = ByteBuffer.allocate(getObjectSize(p));
         byteBuffer.putInt(p.getId().byteValue());
@@ -133,6 +136,14 @@ public class Person {
         }catch(Exception e){
             throw new RuntimeException(e);
         }
+    }
+
+    private static int ceilDiv(int x, int y) {
+        return (x + y - 1) / y;
+    }
+    public static int estimateB64Size(int n) {
+        int blocks = ceilDiv(n, 3);
+        return blocks * 4;
     }
 
 }
