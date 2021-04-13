@@ -4,6 +4,13 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * === TOTALS:
+ * Sysout       = 1093ms
+ * ConsoleLo4j2 = 1940ms
+ * AsyncLo4j2   = 769ms
+ *
+ */
 public class Main{
 
   private static final Logger asyncLogger = LogManager.getLogger(Main.class);
