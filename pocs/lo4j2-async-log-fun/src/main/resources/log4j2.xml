@@ -9,10 +9,16 @@
                 <Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
             </PatternLayout>
         </RandomAccessFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
     </Appenders>
     <Loggers>
         <Root level="info" includeLocation="false">
             <AppenderRef ref="RandomAccessFile"/>
         </Root>
+        <logger name="console" additivity="false">
+            <AppenderRef ref="Console"/>
+        </logger>
     </Loggers>
 </Configuration>
