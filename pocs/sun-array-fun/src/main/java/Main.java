@@ -2,14 +2,10 @@ public class Main {
 
     public static int sumArrayRange(int[] dataArray, int limit) {
         int sum = 0;
-        int i = 0;
-        while (i != limit) {
-            if (dataArray[i]!=limit){
-                sum += dataArray[i];
-            }else{
+        for(int i=0;i<=dataArray.length;i++){
+            if (dataArray[i]==limit)
                 return sum;
-            }
-            i++;
+            sum += dataArray[i];
         }
         return sum;
     }
