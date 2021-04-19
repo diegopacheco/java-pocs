@@ -33,6 +33,8 @@ public class SimpleTest {
     @ParameterizedTest
     @Event(value = "event.json", type = ScheduledEvent.class)
     public void testLoadEventBridgeEvent(ScheduledEvent event) {
+        assertThat(event,is(not(nullValue())));
+
         // Given
         MyLambdaHandler handler = new MyLambdaHandler();
 
@@ -45,7 +47,6 @@ public class SimpleTest {
 
     @Test
     public void testLoadEventMissingArgEvent() throws IOException {
-
         // Given
         ScheduledEvent event = EventLoader.loadScheduledEvent("event_missing_arg.json");
         MyLambdaHandler handler = new MyLambdaHandler();
@@ -55,7 +56,6 @@ public class SimpleTest {
             handler.handleRequest((Map) event.getDetail(), null);
         });
         assertThat(exception,is(not(nullValue())));
-
     }
 
 }
