@@ -8,6 +8,8 @@ import java.util.Map;
 public class MyLambdaHandler implements RequestHandler<Map<String,String>, String> {
     @Override
     public String handleRequest(Map<String,String> event, Context context) {
+        if(null==event.get("message")) throw new IllegalArgumentException("message missing");
+
         String message = event.get("message");
         return message;
     }
