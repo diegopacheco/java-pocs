@@ -5,8 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import java.util.Map;
+
 @Configuration
-@PropertySource("classpath:service.override.properties")
+@PropertySource("classpath:/service.override.properties")
 public class PropsBean {
 
     @Value("${service.env}")
@@ -20,6 +22,9 @@ public class PropsBean {
 
     @Value("#{AnswerOfTheUniverse.get}")
     private int answerOfTheUniverse;
+
+    @Value("#{systemProperties}")
+    private Map<String, String> systemPropertiesMap;
 
     public String getEnv() {
         return env;
@@ -35,6 +40,10 @@ public class PropsBean {
 
     public int getAnswerOfTheUniverse() {
         return answerOfTheUniverse;
+    }
+
+    public Map<String, String> getSystemPropertiesMap() {
+        return systemPropertiesMap;
     }
 
     @Bean(name="AnswerOfTheUniverse")

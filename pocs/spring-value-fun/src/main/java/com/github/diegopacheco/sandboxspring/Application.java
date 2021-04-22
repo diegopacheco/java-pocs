@@ -28,6 +28,7 @@ public class Application {
 			System.out.println("Port="+pb.getPort());
 			System.out.println("JAVA_HOME="+pb.getJavaHome());
 			System.out.println("Answer="+pb.getAnswerOfTheUniverse());
+			System.out.println("SystemProps="+pb.getSystemPropertiesMap());
 		};
 	}
 }
