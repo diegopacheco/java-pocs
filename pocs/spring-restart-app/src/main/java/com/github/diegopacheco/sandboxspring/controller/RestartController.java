@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RestartController {
 
     @RequestMapping("/reboot")
-    public void reboot(){
+    public String reboot(){
         System.out.println("Going to RESTART the APP!");
         new Thread( () -> {
             Application.restart();
         }).run();
+        return "Reboot in 3 seconds from now.";
     }
 
 }
