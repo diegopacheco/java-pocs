@@ -5,11 +5,12 @@ import com.github.diegopacheco.java.pocs.visibility.core.Readable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class CacheService implements Writeable<String>, Readable<String> {
+public class CacheService implements Readable<String> {
 
     private static volatile CacheService INSTANCE;
     private static Map<String,String> innerCache = new ConcurrentHashMap<>();
 
+    private CacheService(){}
     public static CacheService getInstance(){
         if (null==INSTANCE){
             synchronized (CacheService.class){
@@ -26,8 +27,7 @@ public class CacheService implements Writeable<String>, Readable<String> {
         return innerCache.get(key);
     }
 
-    @Override
-    public void set(String key, String value) {
-        innerCache.put(key,value);
+    void set(LazyPair<String> pair) {
+        innerCache.put(pair.getKey(),pair.getValue());
     }
 }
