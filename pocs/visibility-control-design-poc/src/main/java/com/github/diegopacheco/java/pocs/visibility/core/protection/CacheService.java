@@ -5,7 +5,7 @@ import com.github.diegopacheco.java.pocs.visibility.core.Readable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class CacheService implements Readable<String> {
+class CacheService implements Readable<String> {
 
     private static volatile CacheService INSTANCE;
     private static Map<String,String> innerCache = new ConcurrentHashMap<>();
