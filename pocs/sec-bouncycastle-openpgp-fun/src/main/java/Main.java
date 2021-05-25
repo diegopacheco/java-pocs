@@ -1,3 +1,4 @@
+import com.github.diegopacheco.bouncycastle.openpgp.rsa.GenerateRSAKey;
 import org.bouncycastle.bcpg.ArmoredOutputStream;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openpgp.*;
@@ -196,6 +197,20 @@ public class Main {
     public static void main(String args[]) throws Exception{
         Security.addProvider(new BouncyCastleProvider());
 
+        PGPKeyRingGenerator krgen =
+                GenerateRSAKey.
+                generateKeyRingGenerator("diego.pacheco.it@gmail.com", PASSPHRASE.toCharArray());
+
+        PGPSecretKeyRing sec = krgen.generateSecretKeyRing();
+        BufferedOutputStream secout = new BufferedOutputStream(new FileOutputStream("/tmp/sec.key"));
+        sec.encode(secout);
+        secout.close();
+
+        PGPPublicKeyRing pub = krgen.generatePublicKeyRing();
+        BufferedOutputStream pubout = new BufferedOutputStream(new FileOutputStream("/tmp/pub.key"));
+        pub.encode(pubout);
+        pubout.close();
+
         byte[] original = "Hello world".getBytes();
         System.out.println("Starting PGP test");
 
@@ -211,7 +226,7 @@ public class Main {
         FileInputStream secKey = new FileInputStream("/tmp/sec.key");
 
         System.out.println("\nencrypted data = '" + new String(encrypted) + "'");
-        byte[] decrypted = decrypt(encFromFile, secKey, "passphrase".toCharArray());
+        byte[] decrypted = decrypt(encFromFile, secKey, PASSPHRASE.toCharArray());
 
         System.out.println("\ndecrypted data = '" + new String(decrypted) + "'");
     }
