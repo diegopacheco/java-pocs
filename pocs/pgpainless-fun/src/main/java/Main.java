@@ -32,9 +32,10 @@ public class Main {
                 com.github.diegopacheco.bouncycastle.openpgp.rsa.GenerateRSAKey.
                         generateKeyRingGenerator("", PASSPHRASE.toCharArray());
 
+        PGPSecretKeyRing secKey = krGen.generateSecretKeyRing();
         PGPPublicKeyRing pubKey = krGen.generatePublicKeyRing();
 
-        PGPSecretKeyRing secKey = PGPainless.generateKeyRing()
+        /*PGPSecretKeyRing secKey = PGPainless.generateKeyRing()
                 .withSubKey(
                         KeySpec.getBuilder(ECDSA.fromCurve(EllipticCurve._P256))
                                 .withKeyFlags(KeyFlag.SIGN_DATA)
@@ -45,7 +46,8 @@ public class Main {
                                 .withFeature(Feature.MODIFICATION_DETECTION)
                                 .done()
                 ).withSubKey(
-                        KeySpec.getBuilder(ECDH.fromCurve(EllipticCurve._P256))
+                        KeySpec.getBuilder(
+                                ECDH.fromCurve(EllipticCurve._P256))
                                 .withKeyFlags(KeyFlag.ENCRYPT_COMMS, KeyFlag.ENCRYPT_STORAGE)
                                 .withDefaultAlgorithms()
                 ).withMasterKey(
@@ -55,6 +57,7 @@ public class Main {
                 ).withPrimaryUserId(USER_ID)
                 .withPassphrase(Passphrase.fromPassword(PASSPHRASE))
                 .build();
+        */
 
         FileInputStream plaintextInputStream = new FileInputStream("/tmp/msg.txt");
         FileOutputStream outputStream = new FileOutputStream("/tmp/out-painless.txt");
@@ -72,8 +75,8 @@ public class Main {
                                         .addRecipient(pubKey)
                                         .addPassphrase(Passphrase.fromPassword(PASSPHRASE)),
                                 new SigningOptions()
-                                        .addInlineSignature(secProc, secKey, DocumentSignatureType.BINARY_DOCUMENT)
-                                        .addDetachedSignature(secProc, secKey, DocumentSignatureType.BINARY_DOCUMENT)
+                                        //.addInlineSignature(secProc, secKey, DocumentSignatureType.CANONICAL_TEXT_DOCUMENT)
+                                        //.addDetachedSignature(secProc, secKey, DocumentSignatureType.CANONICAL_TEXT_DOCUMENT)
                                         .overrideHashAlgorithm(HashAlgorithm.SHA256)
                         ).setAsciiArmor(true)
                 );
