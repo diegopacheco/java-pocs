@@ -26,20 +26,15 @@ public class Main {
     public static void main(String args[]) throws Exception {
 
         String PASSPHRASE = "123456";
+        String USER_ID="diego.pacheco.it@gmail.com";
 
-        PGPKeyRingGenerator krgen =
+        PGPKeyRingGenerator krGen =
                 com.github.diegopacheco.bouncycastle.openpgp.rsa.GenerateRSAKey.
-                        generateKeyRingGenerator("diego.pacheco.it@gmail.com", PASSPHRASE.toCharArray());
+                        generateKeyRingGenerator("", PASSPHRASE.toCharArray());
 
-        PGPSecretKeyRing secKey = krgen.generateSecretKeyRing();
-        PGPPublicKeyRing pubKey = krgen.generatePublicKeyRing();
+        PGPPublicKeyRing pubKey = krGen.generatePublicKeyRing();
 
-        // RSA key without additional subkeys
-        PGPSecretKeyRing secretKeys = PGPainless.generateKeyRing()
-                .simpleRsaKeyRing("Diego <di@pacheco.diego>", RsaLength._4096);
-
-        // Customized key
-        PGPSecretKeyRing keyRing = PGPainless.generateKeyRing()
+        PGPSecretKeyRing secKey = PGPainless.generateKeyRing()
                 .withSubKey(
                         KeySpec.getBuilder(ECDSA.fromCurve(EllipticCurve._P256))
                                 .withKeyFlags(KeyFlag.SIGN_DATA)
@@ -57,8 +52,8 @@ public class Main {
                         KeySpec.getBuilder(RSA.withLength(RsaLength._4096))
                                 .withKeyFlags(KeyFlag.SIGN_DATA, KeyFlag.CERTIFY_OTHER)
                                 .withDefaultAlgorithms()
-                ).withPrimaryUserId("Diego <di@pacheco.diego>")
-                .withPassphrase(new Passphrase("123456".toCharArray()))
+                ).withPrimaryUserId(USER_ID)
+                .withPassphrase(Passphrase.fromPassword(PASSPHRASE))
                 .build();
 
         FileInputStream plaintextInputStream = new FileInputStream("/tmp/msg.txt");
@@ -75,17 +70,12 @@ public class Main {
                         ProducerOptions.signAndEncrypt(
                                 new EncryptionOptions()
                                         .addRecipient(pubKey)
-                                        // optionally encrypt to a passphrase
-                                        .addPassphrase(Passphrase.fromPassword("123456")),
-                                        // optionally override symmetric encryption algorithm,
+                                        .addPassphrase(Passphrase.fromPassword(PASSPHRASE)),
                                 new SigningOptions()
-                                        // Sign in-line (using one-pass-signature packet)
-                                        .addInlineSignature(secProc, secretKeys, DocumentSignatureType.BINARY_DOCUMENT)
-                                        // Sign using a detached signature
-                                        .addDetachedSignature(secProc, secretKeys, DocumentSignatureType.BINARY_DOCUMENT)
-                                        // optionally override hash algorithm
+                                        .addInlineSignature(secProc, secKey, DocumentSignatureType.BINARY_DOCUMENT)
+                                        .addDetachedSignature(secProc, secKey, DocumentSignatureType.BINARY_DOCUMENT)
                                         .overrideHashAlgorithm(HashAlgorithm.SHA256)
-                        ).setAsciiArmor(true) // Ascii armor or not
+                        ).setAsciiArmor(true)
                 );
 
         Streams.pipeAll(plaintextInputStream, encryptionStream);
@@ -95,7 +85,7 @@ public class Main {
 
         DecryptionStream decryptionStream = PGPainless.decryptAndOrVerify()
                 .onInputStream(encryptedInputStream)
-                .decryptWith(secProc, secretKeys)
+                .decryptWith(secProc, secKey)
                 .verifyWith(pubKey)
                 .ignoreMissingPublicKeys()
                 .build();
@@ -108,5 +98,6 @@ public class Main {
         System.out.println(metadata);
 
         System.out.println("DONE.");
+        System.out.println("Look: /tmp/out-painless.txt");
     }
 }
