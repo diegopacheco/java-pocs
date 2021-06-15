@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -17,6 +19,7 @@ public class Main{
     System.out.println("config.db.host=="+System.getProperty("config.db.host"));
     System.out.println("config.metadata.appid=="+System.getProperty("config.metadata.appid"));
     System.out.println("config.metadata.owner=="+System.getProperty("config.metadata.owner"));
+    System.out.println("Remote Props == " + getRemoteProps());
   }
 
   private static String getSpecificProperty(){
@@ -73,6 +76,19 @@ public class Main{
           } catch (Exception e) {
               throw new RuntimeException(e);
           }
+      }
+  }
+
+  public static Properties getRemoteProps(){
+      try{
+          URL url = new URL("https://raw.githubusercontent.com/diegopacheco/java-pocs/" +
+                  "master/pocs/properties-find-load-fun/src/main/resources/log4j.properties");
+          InputStream is = url.openStream();
+          Properties props = new Properties();
+          props.load(is);
+          return props;
+      }catch(Exception e){
+          throw new RuntimeException(e);
       }
   }
 
