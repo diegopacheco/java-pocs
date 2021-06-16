@@ -1,0 +1,11 @@
+{
+  "version": "0.4.1",
+  "stacks": {
+    "tf-cdk-example": {
+      "name": "tf-cdk-example",
+      "constructPath": "tf-cdk-example",
+      "workingDirectory": "stacks/tf-cdk-example",
+      "synthesizedStackPath": "stacks/tf-cdk-example/cdk.tf.json"
+    }
+  }
+}

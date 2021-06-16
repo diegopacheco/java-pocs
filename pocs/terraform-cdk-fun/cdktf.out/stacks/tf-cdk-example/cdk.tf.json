@@ -1,0 +1,181 @@
+{
+  "//": {
+    "metadata": {
+      "version": "0.4.1",
+      "stackName": "tf-cdk-example"
+    }
+  },
+  "terraform": {
+    "required_providers": {
+      "kubernetes": {
+        "version": "~> 1.11.3",
+        "source": "kubernetes"
+      }
+    }
+  },
+  "provider": {
+    "kubernetes": [
+      {}
+    ]
+  },
+  "resource": {
+    "kubernetes_namespace": {
+      "tfcdkexample_40839E7B": {
+        "metadata": [
+          {
+            "name": "tf-cdk-example"
+          }
+        ],
+        "//": {
+          "metadata": {
+            "path": "tf-cdk-example/tf-cdk-example",
+            "uniqueId": "tfcdkexample_40839E7B",
+            "stackTrace": [
+              "new TerraformElement (/tmp/jsii-kernel-qZ1g3k/node_modules/cdktf/lib/terraform-element.js:21:28)",
+              "new TerraformResource (/tmp/jsii-kernel-qZ1g3k/node_modules/cdktf/lib/terraform-resource.js:17:9)",
+              "new Namespace (/tmp/jsii-kernel-qZ1g3k/node_modules/kubernetes/providers/kubernetes/namespace.js:40:9)",
+              "/tmp/jsii-java-runtime10702311861025705148/lib/program.js:8154:58",
+              "Kernel._wrapSandboxCode (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:8582:24)",
+              "Kernel._create (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:8154:34)",
+              "Kernel.create (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:7895:29)",
+              "KernelHost.processRequest (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:9479:36)",
+              "KernelHost.run (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:9442:22)",
+              "Immediate._onImmediate (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:9443:46)",
+              "processImmediate (internal/timers.js:461:21)"
+            ]
+          }
+        }
+      }
+    },
+    "kubernetes_deployment": {
+      "tfcdkexample_nginxdeployment_CEC52272": {
+        "metadata": [
+          {
+            "labels": {
+              "app": "nginx-example"
+            },
+            "name": "nginx-example",
+            "namespace": "${kubernetes_namespace.tfcdkexample_40839E7B.id}"
+          }
+        ],
+        "spec": [
+          {
+            "replicas": 2,
+            "selector": [
+              {
+                "match_labels": {
+                  "app": "nginx-example"
+                }
+              }
+            ],
+            "template": [
+              {
+                "metadata": [
+                  {
+                    "labels": {
+                      "app": "nginx-example"
+                    }
+                  }
+                ],
+                "spec": [
+                  {
+                    "container": [
+                      {
+                        "image": "nginx:1.7.8",
+                        "name": "example",
+                        "port": [
+                          {
+                            "container_port": 80
+                          }
+                        ],
+                        "resources": [
+                          {
+                            "limits": [
+                              {
+                                "cpu": "0.5",
+                                "memory": "512Mi"
+                              }
+                            ],
+                            "requests": [
+                              {
+                                "cpu": "250m",
+                                "memory": "50Mi"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "//": {
+          "metadata": {
+            "path": "tf-cdk-example/nginx-deployment",
+            "uniqueId": "tfcdkexample_nginxdeployment_CEC52272",
+            "stackTrace": [
+              "new TerraformElement (/tmp/jsii-kernel-qZ1g3k/node_modules/cdktf/lib/terraform-element.js:21:28)",
+              "new TerraformResource (/tmp/jsii-kernel-qZ1g3k/node_modules/cdktf/lib/terraform-resource.js:17:9)",
+              "new Deployment (/tmp/jsii-kernel-qZ1g3k/node_modules/kubernetes/providers/kubernetes/deployment.js:1775:9)",
+              "/tmp/jsii-java-runtime10702311861025705148/lib/program.js:8154:58",
+              "Kernel._wrapSandboxCode (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:8582:24)",
+              "Kernel._create (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:8154:34)",
+              "Kernel.create (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:7895:29)",
+              "KernelHost.processRequest (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:9479:36)",
+              "KernelHost.run (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:9442:22)",
+              "Immediate._onImmediate (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:9443:46)",
+              "processImmediate (internal/timers.js:461:21)"
+            ]
+          }
+        }
+      }
+    },
+    "kubernetes_service": {
+      "tfcdkexample_nginxservice_E46BAA2C": {
+        "metadata": [
+          {
+            "name": "nginx-example",
+            "namespace": "${kubernetes_namespace.tfcdkexample_40839E7B.id}"
+          }
+        ],
+        "spec": [
+          {
+            "selector": {
+              "app": "nginx-example"
+            },
+            "type": "NodePort",
+            "port": [
+              {
+                "node_port": 30201,
+                "port": 80,
+                "target_port": "80"
+              }
+            ]
+          }
+        ],
+        "//": {
+          "metadata": {
+            "path": "tf-cdk-example/nginx-service",
+            "uniqueId": "tfcdkexample_nginxservice_E46BAA2C",
+            "stackTrace": [
+              "new TerraformElement (/tmp/jsii-kernel-qZ1g3k/node_modules/cdktf/lib/terraform-element.js:21:28)",
+              "new TerraformResource (/tmp/jsii-kernel-qZ1g3k/node_modules/cdktf/lib/terraform-resource.js:17:9)",
+              "new Service (/tmp/jsii-kernel-qZ1g3k/node_modules/kubernetes/providers/kubernetes/service.js:84:9)",
+              "/tmp/jsii-java-runtime10702311861025705148/lib/program.js:8154:58",
+              "Kernel._wrapSandboxCode (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:8582:24)",
+              "Kernel._create (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:8154:34)",
+              "Kernel.create (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:7895:29)",
+              "KernelHost.processRequest (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:9479:36)",
+              "KernelHost.run (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:9442:22)",
+              "Immediate._onImmediate (/tmp/jsii-java-runtime10702311861025705148/lib/program.js:9443:46)",
+              "processImmediate (internal/timers.js:461:21)"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
