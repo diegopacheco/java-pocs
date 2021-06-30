@@ -1,14 +1,19 @@
 package com.github.diegopacheco.algo.bloom.filter;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.ToIntFunction;
 
 public class SimpleBloomFilter<T> implements BloomFilter<T> {
 
+    // a bit array of m(size) bits
     private final long[] array;
+
+    /*
+    * size need to be 1,2,4,8,16,32,64,128,256,512,1024,2048,4096...
+    **/
     private final int size;
+
+    // Hash Functions
     private final List<ToIntFunction<T>> hashFunctions;
 
     public SimpleBloomFilter(long[] array, int logicalSize, List<ToIntFunction<T>> hashFunctions) {
@@ -26,7 +31,10 @@ public class SimpleBloomFilter<T> implements BloomFilter<T> {
         private List<ToIntFunction<T>> hashFunctions;
 
         public Builder<T> withSize(int size) {
-            assert Integer.bitCount(size) == 1;
+            if (Integer.bitCount(size) != 1){
+                throw new IllegalArgumentException("Consider size being " +
+                        "1,2,4,8,16,32,64,128,256,512,1024,2048,4096... Where Integer.bitCount(size) == 1 ");
+            }
             this.size = size;
             return this;
         }
@@ -63,25 +71,4 @@ public class SimpleBloomFilter<T> implements BloomFilter<T> {
         }
         return true;
     }
-
-    public static void main(String[] args) {
-        SimpleBloomFilter<Integer> bf = new Builder<Integer>()
-                .withSize(2000) // need to be bigger enough because of >>> 6
-                .withHashFunctions(Arrays.asList(new ToIntFunction(){
-                    @Override
-                    public int applyAsInt(Object value) {
-                        int hash = Objects.hash(value);
-                        return hash;
-                    }
-                })).build();
-
-        bf.add(1);
-        bf.add(2);
-        bf.add(3);
-        bf.add(4);
-        bf.add(5);
-        System.out.println("is 4 present? == " + bf.mightContain(4));
-        System.out.println("is 6 present? == " + bf.mightContain(6));
-    }
-
 }
