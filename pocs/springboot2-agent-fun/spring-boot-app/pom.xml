@@ -5,6 +5,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.5.2</version>
+        <relativePath></relativePath>
 	</parent>
   <groupId>com.github.diegopacheco.javapocs</groupId>
   <artifactId>spring-boot-app</artifactId>
