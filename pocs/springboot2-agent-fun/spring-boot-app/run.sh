@@ -7,4 +7,7 @@ current_dir=$(pwd)
 #./mvnw spring-boot:run
 
 # option 2 - Before Spring Boot App
-./mvnw spring-boot:run -Dspring-boot.run.agents="../java-agent/target/java-agent-1.0-SNAPSHOT-jar-with-dependencies.jar"
+./mvnw spring-boot:run -Dspring-boot.run.agents="../java-agent/target/java-agent-1.0-SNAPSHOT-jar-with-dependencies.jar,../java-agent/target/java-agent-1.0-SNAPSHOT-jar-with-dependencies.jar"
+
+# option 3 - Running with Java
+#java -javaagent:../java-agent/target/java-agent-1.0-SNAPSHOT-jar-with-dependencies.jar -jar target/spring-boot-app-1.0-SNAPSHOT.jar
