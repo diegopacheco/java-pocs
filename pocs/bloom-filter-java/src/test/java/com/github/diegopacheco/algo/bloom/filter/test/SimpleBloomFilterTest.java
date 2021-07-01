@@ -1,8 +1,8 @@
 package com.github.diegopacheco.algo.bloom.filter.test;
 
 import com.github.diegopacheco.algo.bloom.filter.BloomFilter;
-import com.github.diegopacheco.algo.bloom.filter.IntObjectsHash;
-import com.github.diegopacheco.algo.bloom.filter.SimpleBloomFilter;
+import com.github.diegopacheco.algo.bloom.filter.v2.IntObjectsHash;
+import com.github.diegopacheco.algo.bloom.filter.v2.SimpleBloomFilter;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -74,6 +74,19 @@ public class SimpleBloomFilterTest {
         for(int i=0;i<=99;i++){
             assertEquals(false,bloom.mightContain(i));
         }
+    }
+
+    @Test
+    public void testBasicOpsMightContain9FalseHas10(){
+        SimpleBloomFilter<Integer> bf = new SimpleBloomFilter.Builder<Integer>()
+                .withSize(2048)
+                .withHashFunctions(IntObjectsHash.build())
+                .build();
+        bf.add(10);
+        System.out.println("is 10 present? == " + bf.mightContain(10));
+        System.out.println("is 9  present? == " + bf.mightContain(9));
+        assertEquals(true,bf.mightContain(10));
+        assertEquals(false,bf.mightContain(9));
     }
 
 }

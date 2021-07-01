@@ -1,4 +1,4 @@
-package com.github.diegopacheco.algo.bloom.filter;
+package com.github.diegopacheco.algo.bloom.filter.v2;
 
 import java.util.Arrays;
 import java.util.List;

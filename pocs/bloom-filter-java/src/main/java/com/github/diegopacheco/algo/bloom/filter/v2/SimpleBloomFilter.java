@@ -1,8 +1,19 @@
-package com.github.diegopacheco.algo.bloom.filter;
+package com.github.diegopacheco.algo.bloom.filter.v2;
+
+import com.github.diegopacheco.algo.bloom.filter.BloomFilter;
 
 import java.util.List;
 import java.util.function.ToIntFunction;
 
+/**
+ * Huge time and memory savings compared with Trees, Tries, HashTables, Arrays, Sets.
+ *
+ * SimpleBloomFilter will do: First insert them item them(add) them check(mightContain).
+ *
+ * A HASH will be MAPPED to a POSITION into a BIT Array(which will have):
+ *  BIG NUMBER meaning the value might be present
+ *  0 meaning the value for sure is not present
+ */
 public class SimpleBloomFilter<T> implements BloomFilter<T> {
 
     // a bit array of m(size) bits
@@ -53,6 +64,17 @@ public class SimpleBloomFilter<T> implements BloomFilter<T> {
         return hash & (size - 1);
     }
 
+    //
+    // >>> bitwise unsigned right shift - Shifts the bits of the number to the right and fills 0 on voids left as a result.
+    // The leftmost bit is set to 0. (>>>) is unsigned-shift; it’ll insert 0. (>>) is signed, and will extend the sign bit.
+    //
+    // <<  bitwise left shift - Shifts the bits of the number to the left and fills 0 on voids left as a result.
+    // Similar effect as of multiplying the number with some power of two.
+    //
+    // |=  bitwise or (a |= b; same as a = (a | b);) - Bitwise OR (|) This operator is a binary operator,
+    // denoted by ‘|’. It returns bit by bit OR of input values, i.e,
+    // if either of the bits is 1, it gives 1, else it gives 0.
+    //
     @Override
     public void add(T value) {
         for (ToIntFunction<T> function : hashFunctions) {
