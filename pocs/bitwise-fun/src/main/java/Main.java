@@ -8,7 +8,10 @@ public class Main{
     bitwiseComplement();
     bitwiseSignedRightShift();
     bitwiseUnsignedRightShift();
+    bitwiseLeftShift();
     //bitwiseLeftShift(); // not in java
+    String bin = Integer.toBinaryString(7);
+    System.out.println(bin);
   }
 
   /**
