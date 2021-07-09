@@ -1,31 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>comgithub.diegopacheco.javapocs</groupId>
   <artifactId>hello-maven-plugin</artifactId>
   <version>1.0</version>
   <packaging>maven-plugin</packaging>
-
   <name>hello-maven-plugin Maven Plugin</name>
-
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
-
   <prerequisites>
     <maven>${maven.version}</maven>
   </prerequisites>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <maven.version>3.3.9</maven.version>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -70,7 +62,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
@@ -139,12 +130,10 @@
       </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>run-its</id>
       <build>
-
         <plugins>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
