@@ -4,13 +4,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Priority;
-
 @Configuration
-@Priority(100)
+//@Priority(100)
 public class ConfigLast {
 
     @Component
+    //@Order(100)
     public static class Last{}
 
     @Bean

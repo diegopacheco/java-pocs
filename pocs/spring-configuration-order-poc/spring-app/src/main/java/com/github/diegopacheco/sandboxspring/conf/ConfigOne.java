@@ -4,10 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Priority;
-
 @Configuration
-@Priority(1)
+//@Priority(1)
 public class ConfigOne {
 
     @Component
