@@ -19,7 +19,10 @@ public class Agent {
                     try{
                         logger.debug("Agent ID["+id+"] running... ");
                         Thread.sleep(1000L);
-                    }catch(Exception e){}
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        logger.error("fail to run ",e);
+                    }
                 }
             }
         }.start();
