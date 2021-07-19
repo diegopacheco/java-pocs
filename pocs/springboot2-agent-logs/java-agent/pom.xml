@@ -57,15 +57,28 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- common logging contract - since agent should not push a logging impl and use whatever is on the app -->
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.31</version>
+        </dependency>
+
+        <!--
+           Since SpringBoot 2 App already adds loggers this is for test only.
+        -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>2.14.1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.14.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
