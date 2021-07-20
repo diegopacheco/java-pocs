@@ -12,20 +12,22 @@ public class Agent {
     public static void premain(String agentArgs, Instrumentation inst) {
         final String id = UUID.randomUUID().toString();
         logger.info("[premain] Agent ID["+id+"] running before main app... ");
-        new Thread(){
+        Thread t = new Thread(){
             @Override
             public void run() {
                 while(true){
                     try{
                         logger.debug("Agent ID["+id+"] running... ");
                         Thread.sleep(1000L);
-                    }catch(Exception e){
-                        e.printStackTrace();
-                        logger.error("fail to run ",e);
+                    }catch(Throwable t){
+                        t.printStackTrace();
+                        logger.error("fail to run ",t);
                     }
                 }
             }
-        }.start();
+        };
+        t.setDaemon(true);
+        t.start();
     }
 
     public static void agentmain(String agentArgs, Instrumentation inst) {
