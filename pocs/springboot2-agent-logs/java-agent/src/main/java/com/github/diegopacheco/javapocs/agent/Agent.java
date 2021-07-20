@@ -17,8 +17,8 @@ public class Agent {
             public void run() {
                 while(true){
                     try{
-                        logger.debug("Agent ID["+id+"] running... ");
-                        Thread.sleep(1000L);
+                        logger.info("Agent ID["+id+"] running... ");
+                        Thread.sleep(3000L);
                     }catch(Throwable t){
                         t.printStackTrace();
                         logger.error("fail to run ",t);
