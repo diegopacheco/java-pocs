@@ -5,5 +5,6 @@ public class Main {
         SecureFacade facade = new SecureFacade();
         SecurePerson person =  facade.encrypt("Diego","123456");
         System.out.println(person);
+        System.out.println(facade.decrypt(person.getEncryptedName(),person.getPassword()));
     }
 }
