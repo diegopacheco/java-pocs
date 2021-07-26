@@ -2,6 +2,7 @@ package com.github.diegopacheco.design.patterns.structural.adapter;
 
 import java.util.Properties;
 
+// Adapter
 public class PersistentConfigProviderAdapter implements PersistentConfigProvider{
 
     private ConfigProvider configProvider;
