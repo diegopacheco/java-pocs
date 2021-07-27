@@ -57,7 +57,15 @@
       <version>5.6.2</version>
       <scope>test</scope>
    </dependency>
-  
+
+    <!-- https://mvnrepository.com/artifact/org.hsqldb/hsqldb -->
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>2.6.0</version>
+    </dependency>
+
+
   </dependencies>
 </project>
 
