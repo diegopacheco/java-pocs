@@ -1,6 +1,10 @@
 import com.codahale.metrics.*;
+import com.codahale.metrics.health.HealthCheck;
+import com.codahale.metrics.health.HealthCheckRegistry;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import static com.codahale.metrics.MetricRegistry.name;
 
 public class Main{
 
@@ -8,8 +12,18 @@ public class Main{
   private final static Meter requests = metrics.meter("requests");
   private final static Counter counter = metrics.counter("counter");
   private final static Gauge gauges = metrics.gauge("gauges");
+  private final static Timer responses = metrics.timer(name(Main.class, "responses"));
+  private final static HealthCheckRegistry healthChecks = new HealthCheckRegistry();
 
-  public static void main(String args[]){
+  public static class HealthChecker extends HealthCheck {
+    public HealthChecker() { }
+    @Override
+    public HealthCheck.Result check() throws Exception {
+        return HealthCheck.Result.healthy();
+    }
+  }
+
+  public static void main(String[] args){
 
     ConsoleReporter reporter = ConsoleReporter.forRegistry(metrics)
             .convertRatesTo(TimeUnit.SECONDS)
@@ -17,10 +31,16 @@ public class Main{
             .build();
     reporter.start(3, TimeUnit.SECONDS);
 
+    healthChecks.register("app",new HealthChecker());
+
     requests.mark();
     requests.mark();
     counter.inc();
     gauges.getValue();
+
+    try(final Timer.Context context = responses.time()) {
+      wait5Seconds();
+    };
 
     wait5Seconds();
     requests.mark();
@@ -29,6 +49,19 @@ public class Main{
 
     wait5Seconds();
     wait5Seconds();
+
+    final Map<String, HealthCheck.Result> results = healthChecks.runHealthChecks();
+    for (Map.Entry<String, HealthCheck.Result> entry : results.entrySet()) {
+      if (entry.getValue().isHealthy()) {
+        System.out.println(entry.getKey() + " is healthy");
+      } else {
+        System.err.println(entry.getKey() + " is UNHEALTHY: " + entry.getValue().getMessage());
+        final Throwable e = entry.getValue().getError();
+        if (e != null) {
+          e.printStackTrace();
+        }
+      }
+    }
   }
 
   static void wait5Seconds() {
