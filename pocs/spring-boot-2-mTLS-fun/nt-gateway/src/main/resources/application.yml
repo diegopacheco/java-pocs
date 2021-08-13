@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: nt-gateway
+---
+server:
+  port: 8080
+  ssl:
+    enabled: true
+    client-auth: need
+    key-store: classpath:nt-gateway.jks
+    key-store-password: 123456
+    key-alias: nt-gateway
+    key-store-type: JKS
+    key-store-provider: SUN
+    trust-store: classpath:nt-gateway.jks
+    trust-store-password: 123456
+    trust-store-type: JKS
+---
+endpoint:
+  ms-service: https://localhost:9002/data
