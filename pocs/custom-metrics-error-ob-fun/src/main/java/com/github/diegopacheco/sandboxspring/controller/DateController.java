@@ -6,15 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-public class HelloController {
+public class DateController {
 
 	@Autowired
 	DateService service;
-
-	@RequestMapping("/")
-	public String index() {
-		return "Greetings from Spring Boot!";
-	}
 
 	@RequestMapping("/date")
 	public String getDate() {
