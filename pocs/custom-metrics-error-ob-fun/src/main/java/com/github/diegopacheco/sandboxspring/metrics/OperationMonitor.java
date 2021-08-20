@@ -17,6 +17,11 @@ public class OperationMonitor {
     private static Map<String, List<AtomicLong>> cumulativeLatencies = new ConcurrentHashMap<>();
     private static Map<String, Exception> lastExceptions = new ConcurrentHashMap<>();
 
+    static{
+        okCounters.put("success-getCurrentDate", new AtomicInteger(0));
+        okCounters.put("error-getCurrentDate", new AtomicInteger(0));
+    }
+
     public static void recordException(String operation,Exception ex){
         lastExceptions.put("exception-" + operation,ex);
     }
