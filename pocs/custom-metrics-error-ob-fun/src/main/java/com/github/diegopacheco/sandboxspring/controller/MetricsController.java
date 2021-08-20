@@ -58,11 +58,11 @@ public class MetricsController {
         System.out.println("Parameters: " + parameters);
 
         if ("table".equals(dataType)){
-            return getTableData();
+            return getTableData(target);
         }else if ("timeserie".equals(dataType)){
             return getTimeserieData(target);
         } else{
-            return getTableData();
+            return getTableData(target);
         }
     }
 
@@ -72,7 +72,7 @@ public class MetricsController {
 
         Long datapoint = 0L;
         try{
-            datapoint = (Long)OperationMonitor.dump().get(targetMetric);
+            datapoint = Long.parseLong( ((AtomicInteger)OperationMonitor.dump().get(targetMetric)).get() + "" );
             if (null==datapoint) datapoint=0L;
         }catch(Exception e){}
 
@@ -89,32 +89,21 @@ public class MetricsController {
         return result;
     }
 
-    private Map<String,Object>[] getTableData(){
-        Map<String,Object>[] columns = new Map[2];
+    private Map<String,Object>[] getTableData(String targetMetric){
+        Map<String,Object>[] columns = new Map[1];
         Map<String,Object> column = new HashMap<>();
-        column.put("text","success-getCurrentDate");
+        column.put("text",targetMetric);
         column.put("type","number");
         columns[0]=column;
 
-        column = new HashMap<>();
-        column.put("text","error-getCurrentDate");
-        column.put("type","number");
-        columns[1]=column;
-
-        Long datapointOK = 0L;
+        Long datapoint = 0L;
         try{
-            datapointOK = Long.parseLong( ((AtomicInteger)OperationMonitor.dump().get("success-getCurrentDate")).get() + "");
-            if (null==datapointOK) datapointOK=0L;
-        }catch(Exception e){}
-
-        Long datapointError = 0L;
-        try{
-            datapointError = Long.parseLong( ((AtomicInteger)OperationMonitor.dump().get("error-getCurrentDate")).get() + "");
-            if (null==datapointError) datapointError=0L;
+            datapoint = Long.parseLong( ((AtomicInteger)OperationMonitor.dump().get(targetMetric)).get() + "");
+            if (null==datapoint) datapoint=0L;
         }catch(Exception e){}
 
         Object[] rows = {
-                new Object[]{datapointOK,datapointError},
+                new Object[]{datapoint},
         };
 
         Map<String,Object> queryResult = new HashMap<>();
