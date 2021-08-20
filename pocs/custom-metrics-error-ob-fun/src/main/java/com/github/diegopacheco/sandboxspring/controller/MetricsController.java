@@ -38,7 +38,7 @@ public class MetricsController {
     @RequestMapping(value="/query",
                     method = RequestMethod.POST,
                     headers = "Accept=application/json")
-    public Map<String,Object> query(@RequestBody Map<Object,Object> parameters) {
+    public Map<String,Object>[] query(@RequestBody Map<Object,Object> parameters) {
 
         String target = parameters.getOrDefault("target","").toString();
 
@@ -62,7 +62,11 @@ public class MetricsController {
         Map<String,Object> queryResult = new HashMap<>();
         queryResult.put("columns",columns);
         queryResult.put("rows",rows);
-        return queryResult;
+
+        Map<String,Object>[] result = new Map[1];
+        result[0]= queryResult;
+
+        return result;
     }
 
     @RequestMapping(value="/annotations",
