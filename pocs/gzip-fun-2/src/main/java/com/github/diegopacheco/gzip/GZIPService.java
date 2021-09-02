@@ -21,6 +21,7 @@ public class GZIPService {
             gzip.write( (null==readEncoding) ? str.getBytes() : str.getBytes(readEncoding));
             gzip.close();
             String outStr = (null==writeEncoding) ? obj.toString() : obj.toString(writeEncoding);
+            //String outStr = (null==writeEncoding) ? new String(obj.toByteArray()) : new String(obj.toByteArray(),writeEncoding); // blows same way
             System.out.println("Output String length : " + outStr.length());
             return outStr;
         }catch(Exception e){
