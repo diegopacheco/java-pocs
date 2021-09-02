@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -21,7 +20,6 @@ public class GZIPService {
             gzip.write( (null==readEncoding) ? str.getBytes() : str.getBytes(readEncoding));
             gzip.close();
             String outStr = (null==writeEncoding) ? obj.toString() : obj.toString(writeEncoding);
-            //String outStr = (null==writeEncoding) ? new String(obj.toByteArray()) : new String(obj.toByteArray(),writeEncoding); // blows same way
             System.out.println("Output String length : " + outStr.length());
             return outStr;
         }catch(Exception e){
@@ -29,7 +27,7 @@ public class GZIPService {
         }
     }
 
-    public static String decompress(String str,String readEncoding,String writeEncoding){
+    public static String decompress(String str,String readEncoding){
         try{
             if (str == null || str.length() == 0) {
                 return str;
@@ -38,8 +36,7 @@ public class GZIPService {
             GZIPInputStream gis = new GZIPInputStream(new ByteArrayInputStream(
                     (null==readEncoding) ? str.getBytes() : str.getBytes(readEncoding)
             ));
-            BufferedReader bf = new BufferedReader(new InputStreamReader(gis,
-                    (null==writeEncoding) ? Charset.defaultCharset().name() : writeEncoding));
+            BufferedReader bf = new BufferedReader(new InputStreamReader(gis));
             String outStr = "";
             String line;
             while ((line=bf.readLine())!=null) {

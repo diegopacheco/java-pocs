@@ -14,15 +14,21 @@ public class Main{
     }
 
     try{
-      stringWay();
+      stringWayISO();
+    }catch(Exception e){
+      e.printStackTrace();
+    }
+
+    try{
+      stringWayUTF8();
     }catch(Exception e){
       e.printStackTrace();
     }
 
   }
 
-  private static void stringWay(){
-    System.out.println("String WAY ======");
+  private static void stringWayUTF8(){
+    System.out.println("stringWayUTF8 ======");
     System.out.println("Java Default charset is: " + Charset.defaultCharset().name());
     String str = "this is german utf8 stuff -> Entwickeln Sie mit Vergnügen!"; // 58 chars
     System.out.println("after compress:");
@@ -30,7 +36,20 @@ public class Main{
     System.out.println(compressed);
     System.out.println("after decompress:");
     // blows as ZipException: Not in GZIP format
-    String decomp = GZIPService.decompress(compressed,StandardCharsets.UTF_8.name(),StandardCharsets.UTF_8.name());
+    String decomp = GZIPService.decompress(compressed,StandardCharsets.UTF_8.name());
+    System.out.println(decomp);
+  }
+
+  private static void stringWayISO(){
+    System.out.println("stringWayISO ======");
+    System.out.println("Java Default charset is: " + Charset.defaultCharset().name());
+    String str = "this is german utf8 stuff -> Entwickeln Sie mit Vergnügen!"; // 58 chars
+    System.out.println("after compress:");
+    String compressed = GZIPService.compress(str, StandardCharsets.ISO_8859_1.name(),StandardCharsets.ISO_8859_1.name());
+    System.out.println(compressed);
+    System.out.println("after decompress:");
+    // blows as ZipException: Not in GZIP format
+    String decomp = GZIPService.decompress(compressed,StandardCharsets.ISO_8859_1.name());
     System.out.println(decomp);
   }
 
