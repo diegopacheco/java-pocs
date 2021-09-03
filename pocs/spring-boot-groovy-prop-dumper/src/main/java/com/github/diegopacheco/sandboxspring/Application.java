@@ -13,9 +13,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 
 import javax.naming.Context;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @SpringBootApplication
 @EnableAutoConfiguration
@@ -46,7 +44,7 @@ public class Application {
 		});
 
 		propertySources.stream()
-				.map(propertySource -> propertySource.getSource().keySet())
+				.map(propertySource ->  propertySource.getSource().keySet())
 				.flatMap(Collection::stream)
 				.distinct()
 				.sorted()

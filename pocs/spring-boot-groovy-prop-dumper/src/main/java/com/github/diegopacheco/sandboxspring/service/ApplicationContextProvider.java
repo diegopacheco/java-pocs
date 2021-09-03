@@ -60,14 +60,18 @@ public class ApplicationContextProvider implements ApplicationContextAware {
             }
         });
 
+        final Map<String,MapPropertySource> cps = new HashMap<>();
         propertySources.stream()
-                .map(propertySource -> propertySource.getSource().keySet())
+                .map(propertySource -> {
+                    cps.put("CPS", propertySource);
+                    return propertySource.getSource().keySet();
+                })
                 .flatMap(Collection::stream)
                 .distinct()
                 .sorted()
                 .forEach(key -> {
                     try {
-                        result.put(key,key + "=" + env.getProperty(key));
+                        result.put(key, cps.get("CPS") + "." +  key + "=" + env.getProperty(key));
                     } catch (Exception e) {
                         result.put(key,(String.format("%s -> %s", key, e.getMessage())));
                     }
