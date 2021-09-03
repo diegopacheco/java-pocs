@@ -72,6 +72,14 @@ public class ApplicationContextProvider implements ApplicationContextAware {
                         result.put(key,(String.format("%s -> %s", key, e.getMessage())));
                     }
                 });
+
+
+        Iterator<MapPropertySource> ps = propertySources.iterator();
+        int total=0;
+        while (ps.hasNext()){
+            result.put("PROPERTY_SOURCE_"+total,ps.next().getName());
+            total++;
+        }
         return result;
     }
 
