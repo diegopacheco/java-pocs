@@ -1,0 +1,56 @@
+body {
+  background-color: #4d4d4d;
+  margin: 0;
+  padding: 0;
+}
+
+.blockUI {
+  font-family: sans-serif;
+}
+
+.input-code-title img {
+  position: absolute;
+  top: 1px;
+}
+
+.input-code-title .title {
+  margin-left: 40px;
+}
+
+.input-code-title button {
+  background-color: #5f5f5f;
+  font-family: sans-serif;
+  font-size: 12px;
+  height: 22px;
+  color: #fff;
+  border: 1px solid #ddd;
+  margin-left: 20px;
+}
+
+.input-code-title .pulled-right {
+  float: right;
+}
+
+.input-code-title a {
+  color: #fff;
+}
+
+.input-code-title select {
+  background-color: #5f5f5f;
+  font-family: sans-serif;
+  font-size: 12px;
+  height: 22px;
+  color: #fff;
+  border: 1px solid #ddd;
+  margin-right: 20px;
+}
+
+.input-code-title, .result-code-title {
+  background-color: #4d4d4d;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  font-family: sans-serif;
+  font-size: 12px;
+  color: #fff;
+  padding: 6px;
+}

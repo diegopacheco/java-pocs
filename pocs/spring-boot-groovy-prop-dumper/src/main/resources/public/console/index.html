@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Groovy Web Console</title>
+    <meta name="description" content="Groovy Web Console">
+    <link rel="stylesheet" href="css/console.css">
+    <link rel="stylesheet" href="css/codemirror.css">
+    <link rel="stylesheet" href="css/ambiance.css">
+  </head>
+  <body>
+    <form>
+      <div class="input-code-title">
+        <img src="images/console.png" />
+        <span class="title">Edit code</span>
+        <button id="send-button" type="button">&#9654; Execute</button>
+        <button id="permalink-button" type="button">&#128279; Permalink</button>
+        <span class="pulled-right">
+          <label for="input-code-example-select">Example:</label>
+          <select id="input-code-example-select">
+            <option value="" selected="selected">---</option>
+            <option value="/console/examples/get-environment-info.groovy">Get environment info</option>
+            <option value="/console/examples/list-spring-beans.groovy">List all spring beans</option>
+            <option value="/console/examples/is-it-friday.groovy">Is it friday?</option>
+          </select>
+        </span>
+      </div>
+      <textarea id="input-code" name="input-code"></textarea>
+      <div class="result-code-title"><span class="title">Result</span></div>
+      <textarea id="result-code" name="result-code"></textarea>
+    </form>
+    <script src="js/codemirror.js"></script>
+    <script src="js/matchbrackets.js"></script>
+    <script src="js/groovy.js"></script>
+    <script src="js/javascript.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery.blockui.js"></script>
+    <script src="js/lz-string.js"></script>
+    <script src="js/console.js"></script>
+  </body>
+</html>

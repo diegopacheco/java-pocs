@@ -7,11 +7,9 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
-@Component
+@Component("ApplicationContextProvider")
 public class ApplicationContextProvider implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
@@ -49,6 +47,32 @@ public class ApplicationContextProvider implements ApplicationContextAware {
                     }
                 });
         System.out.println("******************************************************************************");
+    }
+
+    public static Map<String,String> getAllConfigs(){
+        Map<String,String> result = new HashMap<>();
+        ConfigurableEnvironment env = (ConfigurableEnvironment) getContext().getEnvironment();
+        List<MapPropertySource> propertySources = new ArrayList<>();
+
+        env.getPropertySources().forEach(it -> {
+            if (it instanceof MapPropertySource) {
+                propertySources.add((MapPropertySource) it);
+            }
+        });
+
+        propertySources.stream()
+                .map(propertySource -> propertySource.getSource().keySet())
+                .flatMap(Collection::stream)
+                .distinct()
+                .sorted()
+                .forEach(key -> {
+                    try {
+                        result.put(key,key + "=" + env.getProperty(key));
+                    } catch (Exception e) {
+                        result.put(key,(String.format("%s -> %s", key, e.getMessage())));
+                    }
+                });
+        return result;
     }
 
 }
