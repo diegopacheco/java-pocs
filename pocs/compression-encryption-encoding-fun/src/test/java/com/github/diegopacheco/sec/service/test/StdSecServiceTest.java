@@ -4,8 +4,8 @@ import com.github.diegopacheco.sec.service.StdSecService;
 import com.github.diegopacheco.sec.service.contract.SecService;
 import org.junit.jupiter.api.Test;
 import java.nio.charset.StandardCharsets;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StdSecServiceTest {
 
@@ -36,6 +36,7 @@ public class StdSecServiceTest {
         String rawStr = secService.decodeDecryptDecompress(keyAlias,result);
         assertNotNull(rawStr);
         System.out.println("Decoded/Decrypted/Uncompressed == " + rawStr + " - size: " + rawStr.length());
+        assertEquals(plainText,rawStr);
     }
 
 }
