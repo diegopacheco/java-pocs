@@ -1,10 +1,8 @@
 <html>
 	<head>
 	    <title>Chat WebSocket</title>
-	    
 	    <script src="lib/sockjs-0.3.4.js"></script>
 	    <script src="lib/stomp.js"></script>
-	    
 	    <script type="text/javascript">
 
 	        var stompClient = null;
@@ -18,8 +16,8 @@
 	        }
 
 	        function connect() {
-
-	            var socket = new SockJS('/chat');
+				var options = {};	
+	            var socket = new SockJS('http://127.0.0.1:8080/chat',options);
 	            stompClient = Stomp.over(socket);
 
 	            stompClient.connect({}, function(frame) {
