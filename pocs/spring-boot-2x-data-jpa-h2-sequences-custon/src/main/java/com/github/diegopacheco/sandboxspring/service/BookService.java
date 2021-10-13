@@ -31,7 +31,7 @@ public class BookService {
         return dao.findAll();
     }
 
-    public void deleteById(Long id){
+    public void deleteById(String id){
         Boolean exist = dao.existsById(id);
         if (exist){
             dao.deleteById(id);

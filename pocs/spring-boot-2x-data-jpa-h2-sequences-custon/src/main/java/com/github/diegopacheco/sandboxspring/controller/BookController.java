@@ -44,7 +44,7 @@ public class BookController {
 	@RequestMapping(method = RequestMethod.DELETE,value = "/book/{id}",
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public void deleteBookById(@PathVariable("id") Long id){
+	public void deleteBookById(@PathVariable("id") String id){
 		service.deleteById(id);
 	}
 
