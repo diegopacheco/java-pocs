@@ -27,7 +27,7 @@ public class Application {
 		return args -> {
 			System.out.println("Cleaning up all previous books");
 			service.deleteAllBooks();
-			System.out.println("Done. Checkout: http://localhost:8080/h2-console/");
+			System.out.println("Done. Checkout: http://localhost:8082/ password: sa");
 		};
 	}
 }
