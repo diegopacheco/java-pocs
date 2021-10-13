@@ -42,8 +42,8 @@ public class BookService {
 
     @Transactional
     public void deleteAllBooks(){
-        dao.deleteAll();
-        dao.resetIdSequence();
+        //dao.deleteAll();
+        //dao.resetIdSequence();
     }
 
 }
