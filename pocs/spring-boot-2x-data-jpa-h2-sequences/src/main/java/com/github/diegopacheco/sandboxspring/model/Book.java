@@ -9,8 +9,8 @@ public class Book {
 
     @Id
     @GeneratedValue(generator = "bookSeqGenerator",strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "bookSeqGenerator", sequenceName = "book_seq", allocationSize = 50, initialValue = 1,
-    schema = "book_schema")
+    @SequenceGenerator(name = "bookSeqGenerator", sequenceName = "book_seq",
+            allocationSize = 50, initialValue = 1, schema = "book_schema")
     private Long id;
 
     private String title;

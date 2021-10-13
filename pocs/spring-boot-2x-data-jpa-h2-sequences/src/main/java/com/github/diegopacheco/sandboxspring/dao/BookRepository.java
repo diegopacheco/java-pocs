@@ -12,7 +12,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     Book findByTitle(@Param("title") String title);
 
     @Modifying
-    @Query(value = "alter sequence book_schema.BOOKS_SEQ restart with 1",nativeQuery = true)
+    @Query(value = "alter sequence BOOK_SEQ restart with 1",nativeQuery = true)
     void resetIdSequence();
 
 }
