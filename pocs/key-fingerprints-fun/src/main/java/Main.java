@@ -7,8 +7,8 @@ public class Main {
     public static void main(String args[]) {
         SecretKey key = generateKey();
         System.out.println("Key                  : " + toHex(key.getEncoded()));
-        System.out.println("FingerPrint (SHA256) : " + toHex(generateFingerPrint(key,"SHA256")));
         System.out.println("FingerPrint (MD5)    : " + toHex(generateFingerPrint(key,"MD5")));
+        System.out.println("FingerPrint (SHA256) : " + toHex(generateFingerPrint(key,"SHA256")));
     }
 
     private static byte[] generateFingerPrint(SecretKey key,String algo) {
