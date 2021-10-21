@@ -1,0 +1,22 @@
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+metrics:
+  export:
+    prometheus:
+      enabled: true
+  endpoint:
+    shutdown:
+      enabled: true
+
+endpoint:
+  health:
+    show-components: "always"
+    show-details: "always"

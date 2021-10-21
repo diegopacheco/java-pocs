@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.5.5'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+dependencies {
+
+    implementation group: 'io.micrometer', name: 'micrometer-core', version: '1.7.5'
+    implementation group: 'io.micrometer', name: 'micrometer-registry-prometheus', version: '1.7.5'
+    implementation group: 'io.micrometer', name: 'micrometer-registry-jmx', version: '1.7.5'
+    implementation group: 'io.micrometer', name: 'micrometer-registry-health', version: '1.7.5'
+
+    implementation group: 'com.google.guava', name: 'guava', version: '31.0.1-jre'
+
+    implementation('ch.qos.logback:logback-classic')
+    implementation('org.slf4j:slf4j-api')
+
+    implementation 'io.prometheus:simpleclient_pushgateway'
+    implementation 'io.projectreactor.netty:reactor-netty-http'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation('org.springframework.boot:spring-boot-starter-actuator') {
+        exclude group: 'io.micrometer', module: 'micrometer-core'
+    }
+}
+
+bootJar {
+    enabled = false
+}
+
+bootJarMainClassName {
+    enabled = false
+}
