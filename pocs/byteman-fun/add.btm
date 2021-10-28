@@ -1,0 +1,17 @@
+RULE printbetter
+CLASS Main
+METHOD print()
+COMPILE
+AT ENTRY
+IF true
+DO traceln("*** better print: ")
+ENDRULE
+
+RULE addvalue
+CLASS Main
+METHOD print()
+COMPILE
+AT ENTRY
+IF $this.values.size() <= 1
+DO $this.add("works")
+ENDRULE

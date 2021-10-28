@@ -3,17 +3,17 @@ import java.util.List;
 
 public class Main {
 
-    private static List<String> values = Arrays.asList("hi");
+    List<String> values = Arrays.asList("hi");
 
     public static void main(String args[]) {
+        Main m = new Main();    
         System.out.println("From Main app - It works!");
 
         for (int i = 0; i < args.length; i++) {
             final String arg = args[i];
-            Thread thread = new Thread("[Thread-"+arg+"]") {
+            Thread thread = new Thread("[Thread-" + arg + "]") {
                 public void run() {
-                    System.out.println("From Thread: " +
-                            Thread.currentThread().getName() + " arg: " + arg);
+                    System.out.println("From Thread: " + Thread.currentThread().getName() + " arg: " + arg);
                 }
             };
             thread.start();
@@ -24,17 +24,25 @@ public class Main {
             }
         }
 
-        while(true){
-            try{
-                values.forEach(System.out::println);
-                Thread.sleep(2000L);
-            }catch(Exception e){
+        while (true) {
+            try {
+                m.print();
+            } catch (Exception e) {
                 System.out.println(e);
             }
         }
     }
 
-    public static void add(String s){
+    public void print() {
+        try {
+            values.forEach(System.out::println);
+            Thread.sleep(2000L);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void add(String s) {
         System.out.println("added value " + s);
         values.add(s);
     }
