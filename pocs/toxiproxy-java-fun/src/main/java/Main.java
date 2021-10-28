@@ -27,6 +27,11 @@ public class Main{
           cleanUpChaos(redisProxy);
         }
 
+        if (100<=i) {
+          System.out.println("fin.");
+          System.exit(0);
+        }
+
       }catch(Exception e){
         throw new RuntimeException(e);
       }
