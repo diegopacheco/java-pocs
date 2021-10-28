@@ -1,0 +1,22 @@
+RULE trace main entry
+CLASS Main
+METHOD main
+AT ENTRY
+IF true
+DO traceln("entering main")
+ENDRULE
+
+RULE trace main exit
+CLASS Main
+METHOD main
+AT EXIT
+IF true
+DO traceln("exiting main")
+ENDRULE
+
+RULE trace thread start
+CLASS java.lang.Thread
+METHOD start()
+IF true
+DO traceln("*** start for thread: "+ $0.getName())
+ENDRULE
