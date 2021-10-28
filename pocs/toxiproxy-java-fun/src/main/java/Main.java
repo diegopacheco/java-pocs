@@ -10,30 +10,52 @@ import java.util.Date;
 public class Main{
   public static void main(String args[]){
 
-    setupChaos();
+    Proxy redisProxy = setupChaos();
     RedisCommands<String, String> commands = setUpRedisConnection();
 
+    int i = 0;
     while(true){
       try{
+
         String value = commands.set("k1", new Date().toString());
         String result = commands.get("k1");
-        System.out.println("SET: " + value + " - GET: " + result);
+        System.out.println("SET: " + value + " - GET: " + result + " + i=="+i);
+        i += 1;
         //Thread.sleep(1000L);
+
+        if (10==i){
+          cleanUpChaos(redisProxy);
+        }
+
       }catch(Exception e){
         throw new RuntimeException(e);
       }
     }
   }
 
-  private static void setupChaos(){
+  private static Proxy setupChaos(){
     try{
       ToxiproxyClient client = new ToxiproxyClient("127.0.0.1", 8474);
       Proxy redisProxy = client.createProxy("redis", "127.0.0.1:26379", "127.0.0.1:6379");
       redisProxy.toxics().latency("1s-latency-toxic", ToxicDirection.DOWNSTREAM, 1000).setJitter(0);
       System.out.println("Redis Chaos Setup Done. ");
       System.out.println(" * 1s latency per ops added. ");
+      return redisProxy;
     }catch(Exception e){
       System.out.println(e);
+      throw new RuntimeException(e);
+    }
+  }
+
+  private static void cleanUpChaos(Proxy proxy){
+    try{
+      System.out.println(" ToxiProxy clean up done.");
+      proxy.delete();
+      ToxiproxyClient client = new ToxiproxyClient("127.0.0.1", 8474);
+      proxy = client.createProxy("redis", "127.0.0.1:26379", "127.0.0.1:6379");
+    }catch(Exception e){
+      System.out.println(e);
+      throw new RuntimeException(e);
     }
   }
 
