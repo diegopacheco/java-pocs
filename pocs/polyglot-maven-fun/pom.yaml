@@ -1,0 +1,8 @@
+modelVersion: 4.0.0
+groupId: com.github.diegopacheco.javapocs
+artifactId: fun-polyglot-maven-fun
+version: 1.0-SNAPSHOT
+name: 'fun-polyglot-maven-fun'
+properties: {maven.compiler.source: 1.8, maven.compiler.target: 1.8}
+dependencies:
+- {artifactId: junit, groupId: junit, scope: test, version: 4.12}
