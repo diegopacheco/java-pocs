@@ -19,4 +19,8 @@ public class PersonService {
         return result;
     }
 
+    public void save(Person p){
+        repository.save(p);
+    }
+
 }
