@@ -5,6 +5,7 @@ import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.search.SearchHit;
 
 public class Main{
   public static void main(String args[]){
@@ -62,7 +63,13 @@ public class Main{
     System.out.println(sr);
     System.out.println(sr.status());
     System.out.println(sr.getTook());
-    System.out.println(sr.getHits().getHits()[0]);
+
+    SearchHit[] hits = sr.getHits().getHits();
+    System.out.println("Search Result Count " + hits.length);
+    for(int i=0;i<=hits.length;i++){
+      SearchHit sh = hits[i];
+      System.out.println(sh);
+    }
 
   }
 }
