@@ -19,7 +19,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String args[]) throws Exception {
-
         Directory memoryIndex = new ByteBuffersDirectory();
         StandardAnalyzer analyzer = new StandardAnalyzer();
         IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
@@ -32,6 +31,9 @@ public class Main {
 
         List<Document> documents =  searchIndex("title", "conan",memoryIndex,analyzer);
         System.out.println(documents);
+
+        List<Document> documents2 =  searchIndex("title", "bulls",memoryIndex,analyzer);
+        System.out.println(documents2);
     }
 
     public static List<Document>  searchIndex(String inField, String queryString,Directory memoryIndex,StandardAnalyzer analyzer) throws Exception {
