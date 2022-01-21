@@ -9,7 +9,17 @@ age = 63
 []
 comment=this is base property
 
+//
+// macros
+//
+
+foo=nice
+my.key1=Something ${foo}
+
+//
 // profiles
+//
+
 [db<develop>]
 url=localhost
 

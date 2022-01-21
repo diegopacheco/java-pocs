@@ -14,5 +14,9 @@ public class Main {
 
         String url = p.getValue("db.url", "develop");
         System.out.println(url);
+
+        String key1 = p.getValue("my.key1");
+        System.out.println(key1);
+
     }
 }
