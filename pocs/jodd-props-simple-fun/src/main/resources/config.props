@@ -1,0 +1,17 @@
+// same as
+// users.data.weight = 49.5
+// users.data.height = 87.7
+// users.data.age = 63
+[users.data]
+weight = 49.5
+height = 87.7
+age = 63
+[]
+comment=this is base property
+
+// profiles
+[db<develop>]
+url=localhost
+
+[db<deploy>]
+url=192.168.1.101
