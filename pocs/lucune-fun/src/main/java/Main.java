@@ -12,13 +12,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.IndexInput;
-import org.apache.lucene.store.IndexOutput;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,6 +49,8 @@ public class Main {
         Arrays.stream(memoryIndex.listAll()).forEach( f -> {
             try {
                 System.out.println("File: " + f.toString() + " len: " + (memoryIndex.fileLength(f.toString()))+"");
+                System.out.println("content: ");
+                ((EnhancedDirectory)memoryIndex).hijack(f.toString());
             } catch (Exception e) {
                 e.printStackTrace();
             };

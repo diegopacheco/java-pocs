@@ -1,7 +1,8 @@
 import org.apache.lucene.store.*;
 
+import java.io.EOFException;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,8 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class EnhancedDirectory extends BaseDirectory {
 
     private ByteBuffersDirectory delegate = new ByteBuffersDirectory();
-    private ConcurrentHashMap<String,IndexInput> indexInputMap = new ConcurrentHashMap<String,IndexInput>();
-    private ConcurrentHashMap<String,IndexOutput> indexOutputMap = new ConcurrentHashMap<String,IndexOutput>();
+    private ConcurrentHashMap<String, IndexInput> indexInputMap = new ConcurrentHashMap<String, IndexInput>();
+    private ConcurrentHashMap<String, IndexOutput> indexOutputMap = new ConcurrentHashMap<String, IndexOutput>();
 
     public EnhancedDirectory() {
         super(new SingleInstanceLockFactory());
@@ -33,14 +34,14 @@ public class EnhancedDirectory extends BaseDirectory {
 
     @Override
     public IndexOutput createOutput(String name, IOContext context) throws IOException {
-        IndexOutput result = delegate.createOutput(name,context);
-        indexOutputMap.put(name,result);
+        IndexOutput result = delegate.createOutput(name, context);
+        indexOutputMap.put(name, result);
         return result;
     }
 
     @Override
     public IndexOutput createTempOutput(String prefix, String suffix, IOContext context) throws IOException {
-        IndexOutput result = delegate.createTempOutput(prefix,suffix,context);
+        IndexOutput result = delegate.createTempOutput(prefix, suffix, context);
         return result;
     }
 
@@ -56,19 +57,14 @@ public class EnhancedDirectory extends BaseDirectory {
 
     @Override
     public void rename(String source, String dest) throws IOException {
-        delegate.rename(source,dest);
+        delegate.rename(source, dest);
     }
 
     @Override
     public IndexInput openInput(String name, IOContext context) throws IOException {
-        IndexInput result = delegate.openInput(name,context);
-        indexInputMap.put(name,result);
+        IndexInput result = delegate.openInput(name, context);
+        indexInputMap.put(name, result);
         System.out.println("Opening : " + result.toString());
-        try {
-            readDataPrint(this,name,0,(int)fileLength(name));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return result;
     }
 
@@ -90,16 +86,24 @@ public class EnhancedDirectory extends BaseDirectory {
         return indexOutputMap;
     }
 
-    private static void readDataPrint(Directory memoryIndex,String file,long pointer,int len) throws Exception {
-        byte[] buffer = new byte[len];
-        IndexInput indexInput = ((EnhancedDirectory)memoryIndex).getIndexInputMap().get(file);
-        if (indexInput!=null){
-            indexInput.readBytes(buffer,0,len);
-            System.out.println(new String(buffer, StandardCharsets.UTF_8));
-            indexInput.seek(0);
-        }else{
-            System.out.println("dont have this file yet: " + file);
+    public void hijack(String file) {
+        try {
+            System.out.println(">>> Hijack file: " + file);
+            Field field = delegate.getClass().getDeclaredField("files");
+            field.setAccessible(true);
+            ConcurrentHashMap<String, Object> files = (ConcurrentHashMap) field.get(delegate);
+            Object o = files.get(file);
+            Field contentField = o.getClass().getDeclaredField("content");
+            contentField.setAccessible(true);
+            IndexInput indexInput = (IndexInput) contentField.get(o);
+            System.out.println(indexInput);
+            System.out.println(indexInput.readString());
+        } catch (EOFException ee) {
+            System.out.println("already close " + file);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
 
 }
