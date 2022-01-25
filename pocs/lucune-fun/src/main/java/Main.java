@@ -11,15 +11,21 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.store.ByteBuffersDirectory;
 import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.IndexInput;
+import org.apache.lucene.store.IndexOutput;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String args[]) throws Exception {
-        Directory memoryIndex = new ByteBuffersDirectory();
+        Directory memoryIndex = new EnhancedDirectory();
         StandardAnalyzer analyzer = new StandardAnalyzer();
         IndexWriterConfig indexWriterConfig = new IndexWriterConfig(analyzer);
         IndexWriter writter = new IndexWriter(memoryIndex, indexWriterConfig);
@@ -29,11 +35,43 @@ public class Main {
         writter.addDocument(document);
         writter.close();
 
+        indexInfo(memoryIndex);
+
         List<Document> documents =  searchIndex("title", "conan",memoryIndex,analyzer);
         System.out.println(documents);
 
+        //indexInfo(memoryIndex);
+
         List<Document> documents2 =  searchIndex("title", "bulls",memoryIndex,analyzer);
         System.out.println(documents2);
+
+
+    }
+
+    private static void indexInfo(Directory memoryIndex) throws Exception{
+        System.out.println("*** Index info ");
+        System.out.println("all files: ");
+        Arrays.stream(memoryIndex.listAll()).forEach( f -> {
+            try {
+                System.out.println("File: " + f.toString() + " len: " + (memoryIndex.fileLength(f.toString()))+"");
+                System.out.print("Content: ");
+                readDataPrint(memoryIndex,f.toString(),0,(int)memoryIndex.fileLength(f.toString()));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            };
+        });
+    }
+
+    private static void readDataPrint(Directory memoryIndex,String file,long pointer,int len) throws Exception {
+        byte[] buffer = new byte[len];
+        IndexInput indexInput = ((EnhancedDirectory)memoryIndex).getIndexInputMap().get(file);
+        if (indexInput!=null){
+            indexInput.readBytes(buffer,0,len);
+            System.out.println(new String(buffer, StandardCharsets.UTF_8));
+        }else{
+            System.out.println("dont have this file yet: " + file);
+        }
     }
 
     public static List<Document>  searchIndex(String inField, String queryString,Directory memoryIndex,StandardAnalyzer analyzer) throws Exception {
