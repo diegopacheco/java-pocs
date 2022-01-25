@@ -34,7 +34,7 @@ public class Main {
         List<Document> documents =  searchIndex("title", "conan",memoryIndex,analyzer);
         System.out.println(documents);
 
-        indexInfo(memoryIndex);
+        //indexInfo(memoryIndex);
 
         List<Document> documents2 =  searchIndex("title", "bulls",memoryIndex,analyzer);
         System.out.println(documents2);
