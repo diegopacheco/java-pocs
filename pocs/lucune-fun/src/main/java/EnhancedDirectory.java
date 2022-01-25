@@ -4,6 +4,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -104,7 +105,14 @@ public class EnhancedDirectory extends BaseDirectory {
             Field blocks = bbdi.getClass().getDeclaredField("blocks");
             blocks.setAccessible(true);
             ByteBuffer[] bba = (ByteBuffer[])blocks.get(bbdi);
-            System.out.println(bba.getClass());
+
+            for(int i = 0; i< bba.length; i++){
+                byte[] bytes = new byte[bba[i].remaining()];
+                bba[i].get(bytes);
+                String newContent = new String(bytes, StandardCharsets.UTF_8);
+                System.out.println("!!!!! Content:: BB["+i+"]" + " " +newContent);
+            }
+
             System.out.println(indexInput.readString());
         } catch (EOFException ee) {
             System.out.println("already close " + file);
