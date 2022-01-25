@@ -3,6 +3,7 @@ import org.apache.lucene.store.*;
 import java.io.EOFException;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -97,6 +98,13 @@ public class EnhancedDirectory extends BaseDirectory {
             contentField.setAccessible(true);
             IndexInput indexInput = (IndexInput) contentField.get(o);
             System.out.println(indexInput);
+            Field inField = indexInput.getClass().getDeclaredField("in");
+            inField.setAccessible(true);
+            ByteBuffersDataInput bbdi = (ByteBuffersDataInput)inField.get(indexInput);
+            Field blocks = bbdi.getClass().getDeclaredField("blocks");
+            blocks.setAccessible(true);
+            ByteBuffer[] bba = (ByteBuffer[])blocks.get(bbdi);
+            System.out.println(bba.getClass());
             System.out.println(indexInput.readString());
         } catch (EOFException ee) {
             System.out.println("already close " + file);
