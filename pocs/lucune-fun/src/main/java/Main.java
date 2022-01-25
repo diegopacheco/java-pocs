@@ -29,7 +29,7 @@ public class Main {
         writter.addDocument(document);
         writter.close();
 
-        indexInfo(memoryIndex);
+        //indexInfo(memoryIndex);
 
         List<Document> documents =  searchIndex("title", "conan",memoryIndex,analyzer);
         System.out.println(documents);
@@ -40,6 +40,7 @@ public class Main {
         System.out.println(documents2);
 
         indexInfo(memoryIndex);
+        ((EnhancedDirectory)memoryIndex).touch("segments_1");
         System.out.println("FIN.");
     }
 
@@ -57,16 +58,22 @@ public class Main {
         });
     }
 
-    public static List<Document>  searchIndex(String inField, String queryString,Directory memoryIndex,StandardAnalyzer analyzer) throws Exception {
-        Query query = new QueryParser(inField, analyzer).parse(queryString);
-        IndexReader indexReader = DirectoryReader.open(memoryIndex);
-        IndexSearcher searcher = new IndexSearcher(indexReader);
-        TopDocs topDocs = searcher.search(query, 10);
-        List<Document> documents = new ArrayList<>();
-        for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
-            documents.add(searcher.doc(scoreDoc.doc));
+    public static List<Document>  searchIndex(String inField, String queryString,Directory memoryIndex,StandardAnalyzer analyzer) {
+        try {
+            Query query = new QueryParser(inField, analyzer).parse(queryString);
+            IndexReader indexReader = DirectoryReader.open(memoryIndex);
+            IndexSearcher searcher = new IndexSearcher(indexReader);
+            TopDocs topDocs = searcher.search(query, 10);
+            List<Document> documents = new ArrayList<>();
+            for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
+                documents.add(searcher.doc(scoreDoc.doc));
+            }
+            return documents;
+        }catch (Exception e){
+            System.out.println("could not search !!!!!!!!!!!!!!1");
+            e.printStackTrace();
         }
-        return documents;
+        return new ArrayList<>();
     }
 
 }

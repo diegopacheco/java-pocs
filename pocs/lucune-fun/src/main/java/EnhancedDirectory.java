@@ -110,6 +110,7 @@ public class EnhancedDirectory extends BaseDirectory {
                 byte[] bytes = new byte[bba[i].remaining()];
                 bba[i].get(bytes);
                 String newContent = new String(bytes, StandardCharsets.UTF_8);
+                bba[i].rewind();
                 System.out.println("!!!!! Content:: BB["+i+"]" + " " +newContent);
             }
 
@@ -117,6 +118,18 @@ public class EnhancedDirectory extends BaseDirectory {
         } catch (EOFException ee) {
             System.out.println("already close " + file);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void touch(String file){
+        try{
+            System.out.println("********************************************");
+            IndexOutput writter =  getIndexOutputMap().get(file);
+            writter.writeInt(42);
+            System.out.println("write done");
+        }catch (Exception e){
+            System.out.println("could not write. ");
             e.printStackTrace();
         }
     }
