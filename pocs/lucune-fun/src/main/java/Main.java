@@ -40,12 +40,13 @@ public class Main {
         List<Document> documents =  searchIndex("title", "conan",memoryIndex,analyzer);
         System.out.println(documents);
 
-        //indexInfo(memoryIndex);
+        indexInfo(memoryIndex);
 
         List<Document> documents2 =  searchIndex("title", "bulls",memoryIndex,analyzer);
         System.out.println(documents2);
 
-
+        indexInfo(memoryIndex);
+        System.out.println("FIN.");
     }
 
     private static void indexInfo(Directory memoryIndex) throws Exception{
@@ -54,24 +55,10 @@ public class Main {
         Arrays.stream(memoryIndex.listAll()).forEach( f -> {
             try {
                 System.out.println("File: " + f.toString() + " len: " + (memoryIndex.fileLength(f.toString()))+"");
-                System.out.print("Content: ");
-                readDataPrint(memoryIndex,f.toString(),0,(int)memoryIndex.fileLength(f.toString()));
-
             } catch (Exception e) {
                 e.printStackTrace();
             };
         });
-    }
-
-    private static void readDataPrint(Directory memoryIndex,String file,long pointer,int len) throws Exception {
-        byte[] buffer = new byte[len];
-        IndexInput indexInput = ((EnhancedDirectory)memoryIndex).getIndexInputMap().get(file);
-        if (indexInput!=null){
-            indexInput.readBytes(buffer,0,len);
-            System.out.println(new String(buffer, StandardCharsets.UTF_8));
-        }else{
-            System.out.println("dont have this file yet: " + file);
-        }
     }
 
     public static List<Document>  searchIndex(String inField, String queryString,Directory memoryIndex,StandardAnalyzer analyzer) throws Exception {
