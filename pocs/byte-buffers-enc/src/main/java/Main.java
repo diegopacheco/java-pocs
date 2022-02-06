@@ -57,6 +57,39 @@ public class Main {
         bench(new Supplier<Void>() {
             @Override
             public Void get() {
+                for(int i=0;i<=1000;i++){
+                    ByteBuffer bbEnc = encrypt(stringToBB(""+i));
+                }
+                System.out.println("Enc 1000 DONE");
+                return null;
+            }
+        });
+
+        bench(new Supplier<Void>() {
+            @Override
+            public Void get() {
+                for(int i=0;i<=10000;i++){
+                    ByteBuffer bbEnc = encrypt(stringToBB(""+i));
+                }
+                System.out.println("Enc 10000 DONE");
+                return null;
+            }
+        });
+
+        bench(new Supplier<Void>() {
+            @Override
+            public Void get() {
+                for(int i=0;i<=100000;i++){
+                    ByteBuffer bbEnc = encrypt(stringToBB(""+i));
+                }
+                System.out.println("Enc 100000 DONE");
+                return null;
+            }
+        });
+
+        bench(new Supplier<Void>() {
+            @Override
+            public Void get() {
                 for(int i=0;i<=100000000;i++){
                     ByteBuffer bbEnc = encrypt(stringToBB(""+i));
                 }
