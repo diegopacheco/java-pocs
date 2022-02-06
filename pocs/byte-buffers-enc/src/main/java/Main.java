@@ -53,6 +53,18 @@ public class Main {
                     }
                 });
         System.out.println("got back from BB enc/dec: " + bbToString(bbDec));
+
+        bench(new Supplier<Void>() {
+            @Override
+            public Void get() {
+                for(int i=0;i<=100000000;i++){
+                    ByteBuffer bbEnc = encrypt(stringToBB(""+i));
+                }
+                System.out.println("Enc 100000000 DONE");
+                return null;
+            }
+        });
+
         System.out.println("FIN.");
     }
 }
