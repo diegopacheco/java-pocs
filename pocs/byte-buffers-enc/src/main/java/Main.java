@@ -1,4 +1,5 @@
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.function.Supplier;
 
 import static com.github.diegopacheco.bb.BenchUtils.bench;
@@ -7,6 +8,16 @@ import static com.github.diegopacheco.bb.EncryptionUtils.*;
 
 public class Main {
     public static void main(String args[]) {
+
+        bench(new Supplier<Void>() {
+            @Override
+            public Void get() {
+                ByteBuffer r = encrypt(ByteBuffer.wrap("1".getBytes(StandardCharsets.UTF_8)));
+                decrypt(r);
+                System.out.println("Enc/Dec WARM UP DONE! ");
+                return null;
+            }
+        });
 
         bench(new Supplier<Void>() {
             @Override
