@@ -10,6 +10,7 @@ import org.elasticsearch.search.SearchHit;
 public class Main{
   public static void main(String args[]){
     ESDriver driver = new ESDriver();
+    driver.prepareIndexBeforeFeeder("posts");
 
     Document doc1 = new Document();
     doc1.setId("1");
@@ -66,7 +67,7 @@ public class Main{
 
     SearchHit[] hits = sr.getHits().getHits();
     System.out.println("Search Result Count " + hits.length);
-    for(int i=0;i<=hits.length;i++){
+    for(int i=0;i<hits.length;i++){
       SearchHit sh = hits[i];
       System.out.println(sh);
     }

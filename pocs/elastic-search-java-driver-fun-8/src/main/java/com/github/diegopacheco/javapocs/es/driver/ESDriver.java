@@ -14,6 +14,9 @@ import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.xcontent.XContentType;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 public class ESDriver {
 
     private RestHighLevelClient client;
@@ -50,6 +53,42 @@ public class ESDriver {
         }
     }
 
+    public void prepareIndexBeforeFeeder(String index){
+        try{
+                String[] commands = new String[]{"curl",
+                    "-X",
+                    "PUT",
+                    "localhost:9200/posts?pretty",
+                    "-H",
+                    "Content-Type: application/json",
+                    "-d",
+                    "{\n" +
+                    "  \"mappings\": {\n" +
+                    "    \"_source\": {\n" +
+                    "      \"includes\": [\n" +
+                    "        \"postDate\",\n" +
+                    "        \"user\"\n" +
+                    "      ],\n" +
+                    "      \"excludes\": [\n" +
+                    "        \"message\"\n" +
+                    "      ]\n" +
+                    "    }\n" +
+                    "  }\n" +
+                    "}"};
+            Process process = Runtime.getRuntime().exec(commands);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            StringBuffer response = new StringBuffer();
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            System.out.println(response.toString());
+
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
     public IndexResponse index(Document document){
         IndexRequest request = new IndexRequest(document.getIndex());
         request.id(document.getId());
@@ -57,7 +96,9 @@ public class ESDriver {
 
         try {
             IndexResponse indexResponse = client.index(request, RequestOptions.DEFAULT);
+            System.out.println(indexResponse);
             return indexResponse;
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
