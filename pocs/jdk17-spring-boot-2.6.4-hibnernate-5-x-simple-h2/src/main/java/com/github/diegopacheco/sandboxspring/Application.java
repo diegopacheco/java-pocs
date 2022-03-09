@@ -1,5 +1,7 @@
 package com.github.diegopacheco.sandboxspring;
 
+import com.github.diegopacheco.sandboxspring.dao.DBLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -17,10 +19,15 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
+	@Autowired
+	DBLoader loder;
+
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
-			System.out.println("Spring Boot 2.0 working! ");
+			System.out.println("Spring Boot 2.5.6 up and running! ");
+			loder.insertData();
+			System.out.println("DB Loader done. ");
 		};
 	}
 }
