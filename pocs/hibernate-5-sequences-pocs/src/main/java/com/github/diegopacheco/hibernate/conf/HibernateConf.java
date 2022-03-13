@@ -7,6 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -25,6 +30,7 @@ public class HibernateConf {
     // Hibernate
     //
 
+    /*
     @Bean(name="entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -40,6 +46,7 @@ public class HibernateConf {
         transactionManager.setSessionFactory(sessionFactory().getObject());
         return transactionManager;
     }
+    */
 
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
@@ -53,7 +60,7 @@ public class HibernateConf {
     // JPA
     //
 
-    /*
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em  = new LocalContainerEntityManagerFactoryBean();
@@ -65,11 +72,12 @@ public class HibernateConf {
         em.setJpaProperties(hibernateProperties());
         return em;
     }
+
     @Bean
     public PlatformTransactionManager transactionManager(){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject() );
         return transactionManager;
     }
-    */
+
 }

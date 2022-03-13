@@ -7,6 +7,6 @@ CREATE TABLE `mydatabase`.`Contact` (
  `phone` VARCHAR(45) NULL,
  PRIMARY KEY (`id`));
 
- ALTER TABLE `mydatabase`.`Contact`
- CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ,
- ADD UNIQUE INDEX `id_UNIQUE` (`id` ASC);
+ --ALTER TABLE `mydatabase`.`Contact`
+ --CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ,
+ --ADD UNIQUE INDEX `id_UNIQUE` (`id` ASC);
