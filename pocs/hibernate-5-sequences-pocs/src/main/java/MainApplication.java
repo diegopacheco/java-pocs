@@ -12,28 +12,28 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("com.github.diegopacheco")
 public class MainApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(MainApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(MainApplication.class, args);
+    }
 
-  @Autowired
-  DBFeeder feeder;
+    @Autowired
+    DBFeeder feeder;
 
-  @Autowired
-  ContactService service;
+    @Autowired
+    ContactService service;
 
-  @Bean
-  public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
-    return args -> {
-      System.out.println(">>> Spring Boot 2.6.4, Hibernate 5.6.5 up and running! ");
+    @Bean
+    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+        return args -> {
+            System.out.println(">>> Spring Boot 2.6.4, Hibernate 5.6.5 up and running! ");
 
-      System.out.println("Feeding 10 records to the DB via Hibernate... ");
-      feeder.feedData();
-      System.out.println("DONE. ");
+            System.out.println("Feeding 10 records to the DB via Hibernate... ");
+            feeder.feedData();
+            System.out.println("DONE. ");
 
-      System.out.println("All Records: ");
-      service.list().forEach(System.out::println);
-      System.out.println("DONE. ");
-    };
-  }
+            System.out.println("All Records: ");
+            service.list().forEach(System.out::println);
+            System.out.println("DONE. ");
+        };
+    }
 }
