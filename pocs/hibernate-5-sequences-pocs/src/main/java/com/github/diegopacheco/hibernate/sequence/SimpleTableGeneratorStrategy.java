@@ -1,10 +1,13 @@
 package com.github.diegopacheco.hibernate.sequence;
 
 import org.hibernate.MappingException;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.enhanced.StandardOptimizerDescriptor;
 import org.hibernate.id.enhanced.TableGenerator;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.Type;
+
+import java.io.Serializable;
 import java.util.Properties;
 
 public class SimpleTableGeneratorStrategy extends TableGenerator {
@@ -36,4 +39,12 @@ public class SimpleTableGeneratorStrategy extends TableGenerator {
         }
         return incValue;
     }
+
+    /*
+    public Serializable generate(final SharedSessionContractImplementor session, final Object obj) {
+        Serializable result = super.generate(session,obj);
+        Long newResult = ((Long)result)+1;
+        return newResult;
+    }
+    */
 }
