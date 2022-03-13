@@ -4,12 +4,14 @@ import com.github.diegopacheco.hibernate.model.Contact;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
-@Component
+@Repository
+@Transactional
 public class ContactDao {
 
     @Autowired
@@ -18,8 +20,9 @@ public class ContactDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public void save(Contact contact){
+    public boolean save(Contact contact){
         sessionFactory.getCurrentSession().save(contact);
+        return true;
     }
 
     public List<Contact> list(){

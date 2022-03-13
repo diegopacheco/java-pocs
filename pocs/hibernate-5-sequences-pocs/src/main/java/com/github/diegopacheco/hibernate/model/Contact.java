@@ -1,13 +1,28 @@
 package com.github.diegopacheco.hibernate.model;
 
-import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Entity;
 import java.util.Objects;
 
 @Entity
 public class Contact {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name="tableGen", strategy="com.github.diegopacheco.hibernate.sequence.SimpleTableGeneratorStrategy",
+            parameters={
+                    @Parameter(name = org.hibernate.id.enhanced.TableGenerator.TABLE_PARAM, value = "my_table_sequence"),
+                    @Parameter(name = org.hibernate.id.enhanced.TableGenerator.SEGMENT_COLUMN_PARAM, value = "name"),
+                    @Parameter(name = org.hibernate.id.enhanced.TableGenerator.VALUE_COLUMN_PARAM, value = "value"),
+                    @Parameter(name = org.hibernate.id.enhanced.TableGenerator.SEGMENT_VALUE_PARAM, value = "my_seq_val_seq")
+            }
+    )
+    @GeneratedValue(strategy= GenerationType.TABLE, generator="tableGen")
     private Long id;
 
     @Column(name="name")

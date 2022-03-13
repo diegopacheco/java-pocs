@@ -38,7 +38,7 @@ public class ContactDaoTest {
         dao.list().forEach(System.out::println);
 
         System.out.println("Total records: " + dao.count());
-        assertEquals(11,dao.count());
+        assertEquals(10,dao.count());
     }
 
 }

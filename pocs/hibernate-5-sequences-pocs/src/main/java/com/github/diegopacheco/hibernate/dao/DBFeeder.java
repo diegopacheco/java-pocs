@@ -12,7 +12,7 @@ public class DBFeeder {
     ContactService service;
 
     public void feedData(){
-        for(int i=0;i<=10;i++){
+        for(int i=0;i<10;i++){
             Contact contact = new Contact();
             contact.setEmail("contant_email"+ i + "@gmail.com");
             contact.setName("Person"+i);
