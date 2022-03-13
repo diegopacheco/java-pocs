@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.MOCK,
         classes = {
@@ -34,6 +36,9 @@ public class ContactDaoTest {
     public void testList(){
         dbFeeder.feedData();
         dao.list().forEach(System.out::println);
+
+        System.out.println("Total records: " + dao.count());
+        assertEquals(11,dao.count());
     }
 
 }
