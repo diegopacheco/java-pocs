@@ -40,6 +40,7 @@ public class SimpleTableGeneratorStrategy extends TableGenerator {
         return incValue;
     }
 
+    // Hibernate 5.6 starts at 1 (if add this code Id will start at 2)
     /*
     public Serializable generate(final SharedSessionContractImplementor session, final Object obj) {
         Serializable result = super.generate(session,obj);
