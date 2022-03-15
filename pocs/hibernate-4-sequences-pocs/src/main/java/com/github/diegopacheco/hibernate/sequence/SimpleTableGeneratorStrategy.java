@@ -12,6 +12,44 @@ import java.util.Properties;
 
 /*
  * For some reason the pool starts at 101 instead of 100.
+ *
+ * Hibernate 4.3 logs:
+ *
+ *  table=my_table_sequence,
+ *   pkColumnName=name,
+ *   valueColumnName=value,
+ *   pkColumnValue=my_seq_val_seq,
+ *   allocationSize=null
+ *   using Optimizer => POOLED_LO
+ *   Ignoring increment size of 1 using minimum of 100
+ *
+ * mysql> select * from my_table_sequence;
+ *  +----------------+-------+
+ *  | name           | value |
+ *  +----------------+-------+
+ *  | my_seq_val_seq |   101 |
+ *  +----------------+-------+
+ *  1 row in set (0,00 sec)
+ *
+ *  ID started at 1
+ *
+ *  mysql> select * from Contact;
+ *  +----+--------------------------+---------+--------------+
+ *  | id | email                    | name    | phone        |
+ *  +----+--------------------------+---------+--------------+
+ *  |  1 | contant_email0@gmail.com | Person0 | 415-1234-120 |
+ *  |  2 | contant_email1@gmail.com | Person1 | 415-1234-121 |
+ *  |  3 | contant_email2@gmail.com | Person2 | 415-1234-122 |
+ *  |  4 | contant_email3@gmail.com | Person3 | 415-1234-123 |
+ *  |  5 | contant_email4@gmail.com | Person4 | 415-1234-124 |
+ *  |  6 | contant_email5@gmail.com | Person5 | 415-1234-125 |
+ *  |  7 | contant_email6@gmail.com | Person6 | 415-1234-126 |
+ *  |  8 | contant_email7@gmail.com | Person7 | 415-1234-127 |
+ *  |  9 | contant_email8@gmail.com | Person8 | 415-1234-128 |
+ *  | 10 | contant_email9@gmail.com | Person9 | 415-1234-129 |
+ *  +----+--------------------------+---------+--------------+
+ *  10 rows in set (0,00 sec)
+ *
  **/
 public class SimpleTableGeneratorStrategy extends TableGenerator {
 
