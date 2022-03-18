@@ -1,3 +1,8 @@
+import org.bouncycastle.util.io.pem.PemObject;
+import org.bouncycastle.util.io.pem.PemObjectGenerator;
+import org.bouncycastle.util.io.pem.PemWriter;
+
+import java.io.StringWriter;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
@@ -24,6 +29,22 @@ public class Main{
       System.out.println("Private key Format " + privateKey.getFormat());
       System.out.println("Public key Format " + privateKey.getFormat());
 
+      writeKey(pair);
+
+    }catch(Exception e){
+      throw new RuntimeException(e);
+    }
+  }
+
+  private static void writeKey(KeyPair pair){
+    try{
+      StringWriter sw = new StringWriter();
+      try (PemWriter writer = new PemWriter(sw);) {
+        writer.writeObject((PemObjectGenerator)new PemObject("PRIVATE KEY", pair.getPrivate().getEncoded()));
+        writer.writeObject((PemObjectGenerator)new PemObject("PUBLIC KEY", pair.getPublic().getEncoded()));
+      }
+      String pemFormat = sw.toString();
+      System.out.println(pemFormat);
     }catch(Exception e){
       throw new RuntimeException(e);
     }
