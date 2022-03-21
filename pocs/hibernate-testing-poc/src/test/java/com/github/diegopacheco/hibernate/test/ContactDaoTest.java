@@ -11,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.IdentifiableType;
+import javax.persistence.metamodel.Metamodel;
+import javax.persistence.metamodel.SingularAttribute;
 import javax.transaction.Transactional;
 import java.lang.reflect.Field;
 import java.util.List;
@@ -52,7 +55,7 @@ public class ContactDaoTest {
 
     @Test
     @Transactional
-    public void genericListTest() throws Exception{
+    public void genericListRemoveInsertQueryByIDTest() throws Exception{
         dbFeeder.feedData();
 
         System.out.println("All Entities");
@@ -70,13 +73,25 @@ public class ContactDaoTest {
             assertNotNull(result);
             result.forEach(System.out::println);
 
-            System.out.println("Remove entity and insert it Again: ");
+            Metamodel m = em.getMetamodel();
+            IdentifiableType<?> of = (IdentifiableType<?>) m.managedType(clazz);
+            SingularAttribute id = of.getId(of.getIdType().getJavaType());
+            System.out.println("ID Discovered: " + id);
+
+            System.out.println("Remove entity and insert it Again! ");
             Object copy = result.get(0);
             em.remove(copy);
-            Field field = copy.getClass().getDeclaredField("id");
+            em.flush();
+
+            Field field = copy.getClass().getDeclaredField(id.getName());
             field.setAccessible(true);
             field.set(copy,null);
             em.persist(copy);
+            em.flush();
+
+            String jpaQLQuery = "from " + e.getName() + " where " + id.getName() + "=" + field.get(copy);
+            result = em.createQuery(jpaQLQuery).getResultList();
+            result.forEach(System.out::println);
 
         }
 
