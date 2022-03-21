@@ -9,11 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
 import javax.transaction.Transactional;
-
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Set;
 
@@ -53,7 +52,7 @@ public class ContactDaoTest {
 
     @Test
     @Transactional
-    public void genericListTest(){
+    public void genericListTest() throws Exception{
         dbFeeder.feedData();
 
         System.out.println("All Entities");
@@ -63,11 +62,25 @@ public class ContactDaoTest {
             Class clazz = e.getBindableJavaType();
             System.out.println("Entity: " + e.getName() + " class: " + clazz);
 
+            System.out.println("Entity Fields");
+            e.getDeclaredAttributes().forEach(System.out::println);
+
             System.out.println("Dynamic Query top 3 from entity: " + e.getName());
             List<Object> result = em.createQuery("from " + e.getName()).setMaxResults(3).getResultList();
             assertNotNull(result);
             result.forEach(System.out::println);
+
+            System.out.println("Remove entity and insert it Again: ");
+            Object copy = result.get(0);
+            em.remove(copy);
+            Field field = copy.getClass().getDeclaredField("id");
+            field.setAccessible(true);
+            field.set(copy,null);
+            em.persist(copy);
+
         }
+
+
     }
 
 
