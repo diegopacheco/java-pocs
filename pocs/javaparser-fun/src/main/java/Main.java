@@ -8,7 +8,10 @@ public class Main{
   public static void main(String args[]){
 
     CompilationUnit cu = JavaParser.parse("class A { " +
+            " @Documented(as=\"always\") " +
             " public static int myConstant = 43; " +
+            " public int myConstant2 = 44; " +
+            " private int myConstant3 = 45; " +
             "}");
 
     Optional<ClassOrInterfaceDeclaration>
@@ -18,7 +21,7 @@ public class Main{
             .filter( f -> f.isPublic() && f.isStatic())
             .forEach( f -> {
                 System.out.println("Check static field:[" +
-                        f +
+                        f.getAnnotations() +
                         "] at line: " +
                         f.getRange().
                         map( r -> r.begin.line).orElse(-1));
