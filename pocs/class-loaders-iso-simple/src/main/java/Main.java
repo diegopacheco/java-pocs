@@ -10,9 +10,10 @@ public class Main {
         System.setProperty("U", "DC");
         System.out.println("Universe is: " + System.getProperty("U"));
 
-        ExecutorService es = Executors.newFixedThreadPool(2);
-        submit(es,"MCU");
-        submit(es,"SpiderVerse");
+        ExecutorService es1 = Executors.newFixedThreadPool(1);
+        ExecutorService es2 = Executors.newFixedThreadPool(1);
+        submit(es1,"MCU");
+        submit(es2,"SpiderVerse");
 
     }
 
