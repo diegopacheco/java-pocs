@@ -1,0 +1,13 @@
+oauthClient:
+  redirectUris:
+    - http://localhost:8080/login/oauth2/code/okta
+  applicationType: web
+
+directions: |+2
+  Okta configuration written to .okta.env.
+
+  Add this file to .gitignore!
+
+  Run this application with:
+
+      mvn spring-boot:run
