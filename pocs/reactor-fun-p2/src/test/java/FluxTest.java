@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import reactor.core.publisher.ConnectableFlux;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -30,6 +31,22 @@ public class FluxTest {
         Flux.firstWithSignal(a, b)
                 .toIterable()
                 .forEach(System.out::println);
+    }
+
+    @Test
+    public void throttlingTest(){
+        ConnectableFlux<Object> publish = Flux.create(fluxSink -> {
+                    int i = 1;
+                    while(true) {
+                        fluxSink.next(System.currentTimeMillis());
+                        if (100000000==i)break;
+                        i++;
+                    }
+                })
+                .sample(Duration.ofSeconds(2))
+                .publish();
+        publish.subscribe(System.out::println);
+        publish.connect();
     }
 
 
