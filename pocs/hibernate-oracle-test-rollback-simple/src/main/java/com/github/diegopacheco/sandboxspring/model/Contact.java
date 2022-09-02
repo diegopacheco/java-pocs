@@ -9,7 +9,7 @@ public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_generator")
-    @SequenceGenerator(name="contact_generator", sequenceName = "contact_seq")
+    @SequenceGenerator(name="contact_generator", sequenceName = "system.contact_seq")
     private Long id;
 
     @Column(name="name") private String name;
