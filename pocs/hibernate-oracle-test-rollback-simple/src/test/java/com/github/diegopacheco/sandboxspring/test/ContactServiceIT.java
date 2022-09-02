@@ -9,6 +9,7 @@ import com.github.diegopacheco.sandboxspring.service.ContactService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -35,11 +36,30 @@ public class ContactServiceIT {
 
     @Test
     @Transactional
-    public void testTxInsert(){
+    // by default don't even need this annotation:@Rollback and default is true.
+    @Rollback(value = true)
+    public void testTxInsert10(){
         dbFeeder.feedData();
         List<Contact> result = service.list();
         result.forEach(System.out::println);
         assertNotNull(result);
     }
+
+    @Test
+    @Transactional
+    // make it not rollback
+    @Rollback(value = false)
+    public void testTxInsert(){
+        Contact c = new Contact();
+        c.setName("c1 name");
+        c.setEmail("c1@name.com");
+        c.setPhone("123456789");
+        service.save(c);
+
+        List<Contact> result = service.list();
+        result.forEach(System.out::println);
+        assertNotNull(result);
+    }
+
 
 }
