@@ -4,10 +4,12 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(schema = "system")
 public class Contact {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_generator")
+    @SequenceGenerator(name="contact_generator", sequenceName = "contact_seq")
     private Long id;
 
     @Column(name="name") private String name;

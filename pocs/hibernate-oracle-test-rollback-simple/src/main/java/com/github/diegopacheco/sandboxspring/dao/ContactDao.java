@@ -18,7 +18,6 @@ public class ContactDao {
     JdbcTemplate jdbcTemplate;
 
     public boolean save(Contact contact){
-        //sessionFactory.getCurrentSession().save(contact);
         em.persist(contact);
         return true;
     }
@@ -28,7 +27,7 @@ public class ContactDao {
     }
 
     public Integer count(){
-        return jdbcTemplate.queryForObject("Select COUNT(*) from Contact",Integer.class);
+        return jdbcTemplate.queryForObject("Select COUNT(*) from system.Contact",Integer.class);
     }
 
 }
