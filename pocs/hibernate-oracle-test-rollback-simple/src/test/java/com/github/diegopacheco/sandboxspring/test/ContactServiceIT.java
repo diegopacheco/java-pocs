@@ -1,5 +1,7 @@
 package com.github.diegopacheco.sandboxspring.test;
 
+import com.github.diegopacheco.sandboxspring.config.DBConf;
+import com.github.diegopacheco.sandboxspring.config.HibernateConf;
 import com.github.diegopacheco.sandboxspring.dao.ContactDao;
 import com.github.diegopacheco.sandboxspring.dao.DBFeeder;
 import com.github.diegopacheco.sandboxspring.model.Contact;
@@ -18,7 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
         classes = {
             ContactDao.class,
             DBFeeder.class,
-            ContactService.class
+            ContactService.class,
+            DBConf.class,
+            HibernateConf.class
         }
 )
 public class ContactServiceIT {
