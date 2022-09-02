@@ -8,8 +8,7 @@ import java.util.Objects;
 public class Contact {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_generator")
-    @SequenceGenerator(name="contact_generator", sequenceName = "system.contact_seq")
+    @GeneratedValue
     private Long id;
 
     @Column(name="name") private String name;
