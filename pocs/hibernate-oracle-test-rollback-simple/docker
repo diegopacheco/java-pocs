@@ -1,0 +1,6 @@
+connect system/1234@XE
+CREATE SCHEMA AUTHORIZATION system;
+CREATE TABLE system.contact (id number PRIMARY KEY,name VARCHAR2(32),email VARCHAR2(32),phone VARCHAR2(32));
+INSERT INTO system.test (id,name,email,phone) VALUES (1,'di','di@e.com','12345');
+commit;
+ exec -it oracle sqlplus /nolog
