@@ -11,7 +11,7 @@ public class Main {
         p.setName("Person1");
         PersonV2 p2 = new PersonV2();
 
-        // warm up
+        // warm up 10%
         for(int i=0;i<=UP_TO/10;i++) {
             benchReflections(p,p2);
             benchUnsafe(p, p2);
