@@ -56,6 +56,38 @@ public class Main{
             "                     inner join con_groups on con_groups.content_id = con.content_id\n" +
             "                          where con_groups.content_group_id = 10);\n");
 
+    extractTable("SELECT   a.file_id,\n" +
+            "         a.sale_start,\n" +
+            "         a.activity_start,\n" +
+            "         a.activity_end,\n" +
+            "         a.item_code_cust,\n" +
+            "         a.division,\n" +
+            "         (SELECT MAX (DISTINCT (NVL (b.advertised, 'No')))\n" +
+            "            FROM arch b\n" +
+            "           WHERE b.file_id = a.file_id\n" +
+            "             AND NVL (b.sale_start, 'NULL') = NVL (a.sale_start, 'NULL')\n" +
+            "             AND NVL (b.activity_start, 'NULL') = NVL (a.activity_start, 'NULL')\n" +
+            "             AND NVL (b.activity_end, 'NULL') = NVL (a.activity_end, 'NULL')\n" +
+            "             AND b.item_code_cust = a.item_code_cust\n" +
+            "             AND b.division = a.division) advertised,\n" +
+            "         (SELECT activity_id\n" +
+            "            FROM (SELECT c.activity_id,\n" +
+            "                         ROW_NUMBER () OVER (ORDER BY (c.activity_retail / c.activity_mult)) rnk\n" +
+            "                    FROM arch c\n" +
+            "                       WHERE NVL (c.sale_start, 'NULL') = NVL (a.sale_start, 'NULL')\n" +
+            "                       AND NVL (c.activity_start, 'NULL') = NVL (a.activity_start, 'NULL')\n" +
+            "                       AND NVL (c.activity_end, 'NULL') = NVL (a.activity_end, 'NULL')\n" +
+            "                       AND c.item_code_cust = a.item_code_cust\n" +
+            "                       AND c.division = a.division\n" +
+            "                       AND UPPER (NVL (c.advertised, 'N')) = a.advertised\n" +
+            "                       AND c.file_id = 217)\n" +
+            "           WHERE rnk = 1) primary_id,\n" +
+            "         COUNT (*)\n" +
+            "    FROM arch a\n" +
+            "   WHERE a.file_id = 217\n" +
+            "GROUP BY a.file_id, a.sale_start, a.activity_start, a.activity_end, a.item_code_cust, a.division\n" +
+            "  HAVING COUNT (*) > 1;");
+
   }
 
   private static void extractTable(String query){
