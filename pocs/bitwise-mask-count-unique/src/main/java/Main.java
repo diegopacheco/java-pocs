@@ -1,7 +1,7 @@
 
 public class Main {
     public static void main(String[] args) {
-        String str = "abacdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+        String str = "aababacdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
         long uniqueChars = 0;  // we will use a long to store the unique characters using bitwise masks
         int count = 0;         // counter to keep track of how many unique characters we have found
         int foundIndex=0;      // store the index we find the first 5 continous chars
@@ -15,6 +15,7 @@ public class Main {
                 // duplicated char, reset the count
                 count=0;
                 uniqueChars=0;
+                i = i-1;
             }
             // we have found the first 5 unique characters
             if (count == 5) {
@@ -22,6 +23,7 @@ public class Main {
                 break;
             }
         }
+        // will print: First five unique characters: bacde
         System.out.println("First five unique characters: " + str.substring(foundIndex,foundIndex+5));
     }
 }
