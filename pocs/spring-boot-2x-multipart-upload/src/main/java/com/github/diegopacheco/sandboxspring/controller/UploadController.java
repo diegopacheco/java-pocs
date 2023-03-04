@@ -2,15 +2,17 @@ package com.github.diegopacheco.sandboxspring.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 @RestController
 public class UploadController {
@@ -26,6 +28,22 @@ public class UploadController {
         fout.write(file.getBytes());
         fout.close();
         return new ResponseEntity<Object>("The File Uploaded Successfully.", HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/up2", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity<Object> uploadFile2(@RequestPart("File") MultipartFile document) throws IOException {
+        System.out.println(document);
+        System.out.println("Filename: " + document.getOriginalFilename());
+        System.out.println("Content: " + document.getContentType());
+        System.out.println("Resource: " + document.getResource());
+        System.out.println("size: " + document.getSize());
+
+        FileOutputStream out = new FileOutputStream(new
+                File(fileDirectory + "/upload_" + document.getOriginalFilename()));
+        Path path = Path.of(fileDirectory + "/upload_" + document.getOriginalFilename());
+        Files.copy(document.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
+
+        return new ResponseEntity<Object>("Ok. Got it!", HttpStatus.OK);
     }
 
 }
