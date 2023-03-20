@@ -1,10 +1,35 @@
 package com.github.diegopacheco.j19.vthreads.fun;
 
 import java.time.Duration;
+import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String args[]) {
-        concurrentMorningRoutine();
+        //concurrentMorningRoutine();
+        concurrentMorningRoutineUsingExecutors();
+    }
+
+    static void concurrentMorningRoutineUsingExecutors() {
+        try{
+            try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+                var bathTime =
+                        executor.submit(
+                                () -> {
+                                    log("I'm going to take a bath");
+                                    sleep(Duration.ofMillis(500L));
+                                    log("I'm done with the bath");
+                                });
+                var boilingWater =
+                        executor.submit(
+                                () -> {
+                                    log("I'm going to boil some water");
+                                    sleep(Duration.ofSeconds(1L));
+                                    log("I'm done with the water");
+                                });
+                bathTime.get();
+                boilingWater.get();
+            }
+        }catch(Exception e){}
     }
 
     static void concurrentMorningRoutine() {
