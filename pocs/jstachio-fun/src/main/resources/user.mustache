@@ -1,0 +1,25 @@
+{{#name}}
+<p>Name: {{.}}, Name Length is {{length}}</p>
+{{/name}}
+
+<p>Age: {{  age  }}</p>
+
+<p>Achievements:</p>
+
+<ul>
+{{#array}}
+  <li>{{.}}</li>
+{{/array}}
+</ul>
+
+{{^array}}
+<p>No achievements</p>
+{{/array}}
+
+<p>Items:</p>
+
+<ol>
+{{#list}}
+  <li>{{value}}</li>
+{{/list}}
+</ol>
