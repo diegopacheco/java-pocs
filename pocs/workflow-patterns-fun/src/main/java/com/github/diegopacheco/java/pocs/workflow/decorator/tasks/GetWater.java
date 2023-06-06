@@ -14,9 +14,10 @@ public class GetWater extends BaseTask {
     }
 
     public Boolean execute(Context context) {
-        //before(context,this.getClass().getSimpleName());
+        before(context,this.getClass().getSimpleName());
+
         System.out.println("Getting water. Boiling water. ");
-        //executeNext(context);
+        after(context);
         return true;
     }
 }

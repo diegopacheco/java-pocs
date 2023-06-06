@@ -14,9 +14,10 @@ public class SelectCoffee extends BaseTask {
     }
 
     public Boolean execute(Context context) {
-        //before(context,this.getClass().getSimpleName());
+        before(context,this.getClass().getSimpleName());
         System.out.println("Selecting coffee: " + context.get("COFFEE_TYPE") );
-        //executeNext(context);
+
+        after(context);
         return true;
     }
 }
