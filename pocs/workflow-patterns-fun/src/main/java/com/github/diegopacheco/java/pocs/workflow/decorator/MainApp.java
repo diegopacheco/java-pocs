@@ -11,7 +11,7 @@ public class MainApp {
         ec.set("STEP","1");
 
         // full workflow running.
-        new GetWater(new SelectCoffee(new BrewCoffee())).execute(ec);
+        new GetWater(new SelectCoffee(new BrewCoffee())).run(ec);
 
         // start from 2/3 of tasks
         ec = new Context();

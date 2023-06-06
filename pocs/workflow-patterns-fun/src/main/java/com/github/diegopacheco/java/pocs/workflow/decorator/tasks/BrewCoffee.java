@@ -14,9 +14,9 @@ public class BrewCoffee extends BaseTask {
 
     @Override
     public  Boolean execute(Context context) {
-        before(context,this.getClass().getSimpleName());
+        //before(context,this.getClass().getSimpleName());
         System.out.println("Pouring water on the coffee. Brewing baby! ");
-        executeNext(context);
+        //executeNext(context);
         return true;
     }
 }
