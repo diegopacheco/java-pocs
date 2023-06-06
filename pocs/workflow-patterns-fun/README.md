@@ -32,6 +32,7 @@ Decorator: https://refactoring.guru/design-patterns/decorator <br/>
 
 ### Other Options to consider:
 
+* Template Method Pattern
 * Apache Camel
 * AWS Lambda + Step Functions
 * Spring StateMachine
