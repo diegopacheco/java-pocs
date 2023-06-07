@@ -19,11 +19,12 @@ stoped. Now can we design a code that has the properties?
 * Easy to undertsand and Mantainable
 * Avoid bad Duplication and Complexity
 
-Were is the implementation using 4 different Design Patterns and Java:
+Were is the implementation using 5 different Design Patterns and Java:
  * Chain of Responsibility
  * Builder
  * Decorator
  * Template Method-ish
+ * Composite
 
 For this implementation will do something very simple, will skip 
 Database call, Api calls, parsing and things I know you know how to do it. 
@@ -35,6 +36,7 @@ Chain of Responsibility: https://refactoring.guru/design-patterns/chain-of-respo
 Builder: https://refactoring.guru/design-patterns/builder <br/>
 Decorator: https://refactoring.guru/design-patterns/decorator <br/>
 Template Method: https://refactoring.guru/design-patterns/template-method <br/>
+Composite: https://refactoring.guru/design-patterns/composite <br/>
 
 ### Other Options to consider:
 
