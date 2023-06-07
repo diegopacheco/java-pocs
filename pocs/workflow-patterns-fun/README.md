@@ -19,20 +19,25 @@ stoped. Now can we design a code that has the properties?
 * Easy to undertsand and Mantainable
 * Avoid bad Duplication and Complexity
 
-Were is the implementation using 3 different Design Patterns and Java:
+Were is the implementation using 4 different Design Patterns and Java:
  * Chain of Responsibility
  * Builder
  * Decorator
+ * Template Method-ish
+
+For this implementation will do something very simple, will skip 
+Database call, Api calls, parsing and things I know you know how to do it. 
+Will focus on the Structure and Design so will do  a Simple Coffee Machine.
 
 ### Basic Patterns Reference
 
 Chain of Responsibility: https://refactoring.guru/design-patterns/chain-of-responsibility <br/>
 Builder: https://refactoring.guru/design-patterns/builder <br/>
 Decorator: https://refactoring.guru/design-patterns/decorator <br/>
+Template Method: https://refactoring.guru/design-patterns/template-method <br/>
 
 ### Other Options to consider:
 
-* Template Method Pattern
 * Apache Camel
 * AWS Lambda + Step Functions
 * Spring StateMachine
