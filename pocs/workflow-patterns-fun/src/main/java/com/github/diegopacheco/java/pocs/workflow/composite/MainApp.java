@@ -3,6 +3,7 @@ package com.github.diegopacheco.java.pocs.workflow.composite;
 import com.github.diegopacheco.java.pocs.workflow.composite.tasks.BrewCoffee;
 import com.github.diegopacheco.java.pocs.workflow.composite.tasks.GetWater;
 import com.github.diegopacheco.java.pocs.workflow.composite.tasks.SelectCoffee;
+import com.github.diegopacheco.java.pocs.workflow.composite.tasks.WorkflowEngineTask;
 
 public class MainApp {
     public static void main(String[] args) {
@@ -10,7 +11,7 @@ public class MainApp {
         // Run the whole workflow
         Context ec = new Context();
         ec.set("COFFEE_TYPE","Mocha Blend");
-        WorkflowEngine engine = new WorkflowEngine();
+        WorkflowEngineTask engine = new WorkflowEngineTask();
         engine.addChild(new GetWater());
         engine.addChild(new SelectCoffee());
         engine.addChild(new BrewCoffee());

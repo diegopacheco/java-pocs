@@ -1,4 +1,7 @@
-package com.github.diegopacheco.java.pocs.workflow.composite;
+package com.github.diegopacheco.java.pocs.workflow.composite.tasks;
+
+import com.github.diegopacheco.java.pocs.workflow.composite.Context;
+import com.github.diegopacheco.java.pocs.workflow.composite.Task;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -6,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 // Responsible for know the execution order.
-public class WorkflowEngine implements Task {
+public class WorkflowEngineTask implements Task {
 
     private ConcurrentLinkedDeque<Task> tasks = new ConcurrentLinkedDeque<>();
 
