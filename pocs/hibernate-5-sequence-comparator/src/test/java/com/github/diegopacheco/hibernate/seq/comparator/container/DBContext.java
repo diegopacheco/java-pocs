@@ -1,4 +1,4 @@
-package container;
+package com.github.diegopacheco.hibernate.seq.comparator.container;
 
 import org.hibernate.Transaction;
 import org.hibernate.boot.Metadata;
@@ -9,7 +9,8 @@ import org.hibernate.boot.spi.MetadataBuildingContext;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hibernate.engine.spi.SessionImplementor;
-import org.hibernate.id.*;
+import org.hibernate.id.IdentifierGenerator;
+import org.hibernate.id.SequenceValueExtractor;
 import org.hibernate.internal.SessionImpl;
 import org.hibernate.testing.boot.MetadataBuildingContextTestingImpl;
 import org.hibernate.type.StandardBasicTypes;
@@ -25,23 +26,20 @@ public class DBContext {
     private SessionImplementor sessionImpl;
     private SequenceValueExtractor sequenceValueExtractor;
     private IdentifierGenerator generator;
+    private MetadataBuildingContext buildingContext;
 
-    public DBContext(Properties properties, IdentifierGenerator generator){
-
+    // Made it generic, so can pass any properties with any optimized or settings
+    public DBContext(IdentifierGenerator generator){
         serviceRegistry = new StandardServiceRegistryBuilder()
                 .enableAutoClose()
                 .applySetting( AvailableSettings.HBM2DDL_AUTO, "create-drop" )
                 .build();
 
-        MetadataBuildingContext buildingContext = new MetadataBuildingContextTestingImpl( serviceRegistry );
-
-        properties.setProperty( SequenceGenerator.SEQUENCE, TEST_SEQUENCE );
-        properties.put(
-                PersistentIdentifierGenerator.IDENTIFIER_NORMALIZER,
-                buildingContext.getObjectNameNormalizer()
-        );
+        buildingContext = new MetadataBuildingContextTestingImpl( serviceRegistry );
         this.generator = generator;
+    }
 
+    public void connect(Properties properties){
         generator.configure( StandardBasicTypes.LONG, properties, serviceRegistry );
 
         Metadata metadata = new MetadataSources( serviceRegistry ).buildMetadata();
@@ -52,6 +50,14 @@ public class DBContext {
         sequenceValueExtractor = new SequenceValueExtractor( sessionFactory.getDialect(), TEST_SEQUENCE );
 
         sessionImpl = (SessionImpl) sessionFactory.openSession();
+    }
+
+    public MetadataBuildingContext getMetadataBuildingContext(){
+        return buildingContext;
+    }
+
+    public StandardServiceRegistry getServiceRegistry(){
+        return serviceRegistry;
     }
 
     public void shutDown(){
