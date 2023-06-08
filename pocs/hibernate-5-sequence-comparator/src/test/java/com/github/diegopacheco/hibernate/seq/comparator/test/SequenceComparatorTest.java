@@ -1,16 +1,12 @@
 package com.github.diegopacheco.hibernate.seq.comparator.test;
 
 import com.github.diegopacheco.hibernate.seq.comparator.diff.Diff;
-import org.hibernate.boot.model.naming.ObjectNameNormalizer;
-import org.hibernate.boot.spi.MetadataBuildingContext;
 import org.hibernate.id.IdentifierGenerator;
-import org.hibernate.id.PersistentIdentifierGenerator;
 import org.hibernate.id.SequenceGenerator;
 import org.hibernate.id.SequenceHiLoGenerator;
 import org.hibernate.id.enhanced.LegacyHiLoAlgorithmOptimizer;
 import org.hibernate.id.enhanced.PooledLoOptimizer;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
-import org.hibernate.testing.boot.MetadataBuildingContextTestingImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
@@ -29,10 +25,6 @@ public class SequenceComparatorTest {
         leftProperties.setProperty(SequenceGenerator.GENERATOR_NAME, "hilo");
         leftProperties.setProperty(SequenceHiLoGenerator.MAX_LO, "3");
         leftProperties.setProperty(SequenceGenerator.SEQUENCE, TEST_SEQUENCE);
-     /*   leftProperties.put(
-                PersistentIdentifierGenerator.IDENTIFIER_NORMALIZER,
-                context.getMetadataBuildingContext().getObjectNameNormalizer()
-        );*/
 
         String rightOptimizer = PooledLoOptimizer.class.getName();
         IdentifierGenerator rightGenerator = new SequenceStyleGenerator();
@@ -43,15 +35,6 @@ public class SequenceComparatorTest {
         rightProperties.setProperty(SequenceStyleGenerator.OPT_PARAM, PooledLoOptimizer.class.getName());
         rightProperties.setProperty(SequenceStyleGenerator.INITIAL_PARAM, "1");
         rightProperties.setProperty(SequenceStyleGenerator.INCREMENT_PARAM, "4"); // needs to be bigger than 1 or silently chooses Noop
-        /*rightProperties.put(
-                PersistentIdentifierGenerator.IDENTIFIER_NORMALIZER,
-                new ObjectNameNormalizer() {
-                    @Override
-                    protected MetadataBuildingContext getBuildingContext() {
-                        return new MetadataBuildingContextTestingImpl(context2.getServiceRegistry());
-                    }
-                }
-        );*/
 
         Diff diff = new Diff(leftOptimizer, leftProperties, leftGenerator,
                 rightOptimizer, rightProperties, rightGenerator);
