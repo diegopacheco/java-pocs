@@ -17,7 +17,7 @@ Hibernate has Generators and Optimizers. Generators Generate id by:
 * Custom
 * etc...
 
-Hibernate has all this Generators:
+Hibernate has all this Generators: <br/>
 ![image](images/Generators.png)
 
 Optimizers reduce the amount of DB calls, like:
@@ -27,7 +27,7 @@ Optimizers reduce the amount of DB calls, like:
 * Noop
 * etc...
 
-Hibernate has all this Optimizers:
+Hibernate has all this Optimizers: <br/>
 ![image](images/Optimizers.png)
 https://github.com/hibernate/hibernate-orm/blob/5.6/hibernate-core/src/main/java/org/hibernate/id/enhanced/StandardOptimizerDescriptor.java
 
