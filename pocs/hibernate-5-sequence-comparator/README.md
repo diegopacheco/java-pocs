@@ -41,9 +41,8 @@ compatible with SequenceHiLoGenerator/LegacyHiLoAlgorithmOptimizer.
 
 The diff will output something like this:
 ```
-
 ***** DIFF ***** 
->>> LEFT: generator[org.hibernate.id.SequenceHiLoGenerator] optimizer[org.hibernate.id.enhanced.LegacyHiLoAlgorithmOptimizer]
+>>> LEFT: generator[org.hibernate.id.SequenceHiLoGenerator@3e1a3801] optimizer[org.hibernate.id.enhanced.LegacyHiLoAlgorithmOptimizer]
 Next Value[4] DB Sequence Val[1]
 Next Value[5] DB Sequence Val[1]
 Next Value[6] DB Sequence Val[1]
@@ -95,7 +94,7 @@ Next Value[51] DB Sequence Val[12]
 Next Value[52] DB Sequence Val[13]
 Next Value[53] DB Sequence Val[13]
 
-<<< RIGHT: generator[org.hibernate.id.enhanced.SequenceStyleGenerator] optimizer[org.hibernate.id.enhanced.PooledLoOptimizer]
+<<< RIGHT: generator[org.hibernate.id.enhanced.SequenceStyleGenerator@6fd12c5] optimizer[org.hibernate.id.enhanced.PooledLoOptimizer]
 Next Value[1] DB Sequence Val[1]
 Next Value[2] DB Sequence Val[1]
 Next Value[3] DB Sequence Val[1]
