@@ -1,16 +1,6 @@
 
 # Created by https://www.gitignore.io/api/java,eclipse
 
-# C extern
-*.so
-*.so.o
-
-bazel-bin/*
-bazel-out/*
-bazel-testlogs/*
-
-bazel-java-simple/bazel-bazel-java-simple
-
 ### Gradle
 build/
 .lock
