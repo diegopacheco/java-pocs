@@ -430,7 +430,9 @@ public class ConnectionWrapper implements JdbcConnection, Session.SessionEventLi
 
     @Override
     public Statement createStatement() throws SQLException {
-        return connection.createStatement();
+        Statement stmt = connection.createStatement();
+        StatementWrapper wrapper = new StatementWrapper(stmt);
+        return wrapper;
     }
 
     @Override
