@@ -25,7 +25,7 @@ public class MainApplication {
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
-            System.out.println(">>> Spring Boot 2.6.4, Hibernate 5.6.5 up and running! ");
+            System.out.println(">>> Spring Boot 2.7.13, Hibernate 5.6.15 up and running! ");
 
             System.out.println("Feeding 10 records to the DB via Hibernate... ");
             feeder.feedData();

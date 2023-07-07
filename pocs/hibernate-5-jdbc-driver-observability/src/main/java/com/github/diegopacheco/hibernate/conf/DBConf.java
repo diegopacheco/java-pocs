@@ -14,6 +14,9 @@ public class DBConf {
     @Bean
     public DataSource getDataSource(){
         HikariConfig config = new HikariConfig();
+        // hibernate.connection.driver_class=com.mysql.cj.jdbc.Driver
+        config.setDriverClassName("com.github.diegopacheco.hibernate.driver.observability.MySQLObservableDriver");
+
         config.setJdbcUrl("jdbc:mysql://127.0.0.1:3325/mydatabase?useSSL=false");
         config.setUsername("root");
         config.setPassword("pass");
