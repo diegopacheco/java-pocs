@@ -45,7 +45,9 @@ public class ConnectionWrapper implements JdbcConnection, Session.SessionEventLi
         log.info("[OBSERVABLE DRIVER] SQL running: " + sql);
 
         List<String> tables = SQLParser.extractTable(sql);
-        MetricsManager.incTable(tables.get(0),sql);
+        if (null!=tables){
+            MetricsManager.incTable(tables.get(0),sql);
+        }
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         PreparedStatementWrapper wrapper = new PreparedStatementWrapper(preparedStatement);
