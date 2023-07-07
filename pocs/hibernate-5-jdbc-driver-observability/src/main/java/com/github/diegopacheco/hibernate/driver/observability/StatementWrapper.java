@@ -1,8 +1,11 @@
 package com.github.diegopacheco.hibernate.driver.observability;
 
 import java.sql.*;
+import java.util.logging.Logger;
 
 public class StatementWrapper implements Statement {
+
+    Logger log = Logger.getLogger(StatementWrapper.class.getName());
 
     private Statement statement;
     public StatementWrapper(Statement statement){
