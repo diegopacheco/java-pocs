@@ -437,7 +437,9 @@ public class ConnectionWrapper implements JdbcConnection, Session.SessionEventLi
 
     @Override
     public PreparedStatement prepareStatement(String sql) throws SQLException {
-        return connection.prepareStatement(sql);
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        PreparedStatementWrapper wrapper = new PreparedStatementWrapper(preparedStatement);
+        return wrapper;
     }
 
     @Override
