@@ -10,22 +10,40 @@ import com.mysql.cj.jdbc.result.ResultSetInternalMethods;
 import com.mysql.cj.protocol.ServerSessionStateController;
 
 import java.io.Serializable;
-import java.sql.*;
 import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Clob;
 import java.sql.DatabaseMetaData;
 import java.sql.NClob;
+import java.sql.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
+import java.util.logging.Logger;
 
 public class ConnectionWrapper implements JdbcConnection, Session.SessionEventListener, Serializable {
+
+    Logger log = Logger.getLogger(ConnectionWrapper.class.getName());
 
     private ConnectionImpl connection;
     public ConnectionWrapper(ConnectionImpl connection) {
         this.connection = connection;
+    }
+
+    @Override
+    public Statement createStatement() throws SQLException {
+        Statement stmt = connection.createStatement();
+        StatementWrapper wrapper = new StatementWrapper(stmt);
+        return wrapper;
+    }
+
+    @Override
+    public PreparedStatement prepareStatement(String sql) throws SQLException {
+        log.info("[OBSERVABLE DRIVER] SQL running: " + sql);
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        PreparedStatementWrapper wrapper = new PreparedStatementWrapper(preparedStatement);
+        return wrapper;
     }
 
     @Override
@@ -426,20 +444,6 @@ public class ConnectionWrapper implements JdbcConnection, Session.SessionEventLi
     @Override
     public void transactionCompleted() {
         connection.transactionCompleted();
-    }
-
-    @Override
-    public Statement createStatement() throws SQLException {
-        Statement stmt = connection.createStatement();
-        StatementWrapper wrapper = new StatementWrapper(stmt);
-        return wrapper;
-    }
-
-    @Override
-    public PreparedStatement prepareStatement(String sql) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        PreparedStatementWrapper wrapper = new PreparedStatementWrapper(preparedStatement);
-        return wrapper;
     }
 
     @Override
