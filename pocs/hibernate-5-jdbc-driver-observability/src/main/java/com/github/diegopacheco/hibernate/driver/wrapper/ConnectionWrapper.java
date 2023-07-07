@@ -1,5 +1,7 @@
-package com.github.diegopacheco.hibernate.driver.observability;
+package com.github.diegopacheco.hibernate.driver.wrapper;
 
+import com.github.diegopacheco.hibernate.driver.observability.MetricsManager;
+import com.github.diegopacheco.hibernate.driver.parser.SQLParser;
 import com.mysql.cj.ServerVersion;
 import com.mysql.cj.Session;
 import com.mysql.cj.exceptions.ExceptionInterceptor;
@@ -41,6 +43,10 @@ public class ConnectionWrapper implements JdbcConnection, Session.SessionEventLi
     @Override
     public PreparedStatement prepareStatement(String sql) throws SQLException {
         log.info("[OBSERVABLE DRIVER] SQL running: " + sql);
+
+        List<String> tables = SQLParser.extractTable(sql);
+        MetricsManager.incTable(tables.get(0),sql);
+
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         PreparedStatementWrapper wrapper = new PreparedStatementWrapper(preparedStatement);
         return wrapper;

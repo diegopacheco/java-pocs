@@ -1,4 +1,4 @@
-package com.github.diegopacheco.hibernate.driver.observability;
+package com.github.diegopacheco.hibernate.driver.wrapper;
 
 import java.io.InputStream;
 import java.io.Reader;

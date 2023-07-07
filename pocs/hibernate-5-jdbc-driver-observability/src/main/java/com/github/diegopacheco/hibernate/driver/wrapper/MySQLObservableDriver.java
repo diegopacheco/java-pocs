@@ -1,4 +1,4 @@
-package com.github.diegopacheco.hibernate.driver.observability;
+package com.github.diegopacheco.hibernate.driver.wrapper;
 
 import com.mysql.cj.jdbc.ConnectionImpl;
 import com.mysql.cj.jdbc.Driver;

@@ -1,4 +1,4 @@
-package com.github.diegopacheco.hibernate.driver.observability;
+package com.github.diegopacheco.hibernate.driver.wrapper;
 
 import java.sql.*;
 import java.util.logging.Logger;
