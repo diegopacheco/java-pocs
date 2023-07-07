@@ -234,281 +234,281 @@ public class PreparedStatementWrapper implements PreparedStatement {
 
     @Override
     public void setSQLXML(int parameterIndex, SQLXML xmlObject) throws SQLException {
-
+        preparedStatement.setSQLXML(parameterIndex,xmlObject);
     }
 
     @Override
     public void setObject(int parameterIndex, Object x, int targetSqlType, int scaleOrLength) throws SQLException {
-
+        preparedStatement.setObject(parameterIndex,x,targetSqlType,scaleOrLength);
     }
 
     @Override
     public void setAsciiStream(int parameterIndex, InputStream x, long length) throws SQLException {
-
+        preparedStatement.setAsciiStream(parameterIndex,x,length);
     }
 
     @Override
     public void setBinaryStream(int parameterIndex, InputStream x, long length) throws SQLException {
-
+        preparedStatement.setBinaryStream(parameterIndex,x,length);
     }
 
     @Override
     public void setCharacterStream(int parameterIndex, Reader reader, long length) throws SQLException {
-
+        preparedStatement.setCharacterStream(parameterIndex,reader,length);
     }
 
     @Override
     public void setAsciiStream(int parameterIndex, InputStream x) throws SQLException {
-
+        preparedStatement.setAsciiStream(parameterIndex,x);
     }
 
     @Override
     public void setBinaryStream(int parameterIndex, InputStream x) throws SQLException {
-
+        preparedStatement.setBinaryStream(parameterIndex,x);
     }
 
     @Override
     public void setCharacterStream(int parameterIndex, Reader reader) throws SQLException {
-
+        preparedStatement.setCharacterStream(parameterIndex,reader);
     }
 
     @Override
     public void setNCharacterStream(int parameterIndex, Reader value) throws SQLException {
-
+        preparedStatement.setNCharacterStream(parameterIndex,value);
     }
 
     @Override
     public void setClob(int parameterIndex, Reader reader) throws SQLException {
-
+        preparedStatement.setClob(parameterIndex,reader);
     }
 
     @Override
     public void setBlob(int parameterIndex, InputStream inputStream) throws SQLException {
-
+        preparedStatement.setBlob(parameterIndex,inputStream);
     }
 
     @Override
     public void setNClob(int parameterIndex, Reader reader) throws SQLException {
-
+        preparedStatement.setNClob(parameterIndex,reader);
     }
 
     @Override
     public ResultSet executeQuery(String sql) throws SQLException {
-        return null;
+        return preparedStatement.executeQuery(sql);
     }
 
     @Override
     public int executeUpdate(String sql) throws SQLException {
-        return 0;
+        return preparedStatement.executeUpdate(sql);
     }
 
     @Override
     public void close() throws SQLException {
-
+        preparedStatement.close();
     }
 
     @Override
     public int getMaxFieldSize() throws SQLException {
-        return 0;
+        return preparedStatement.getMaxFieldSize();
     }
 
     @Override
     public void setMaxFieldSize(int max) throws SQLException {
-
+        preparedStatement.setMaxFieldSize(max);
     }
 
     @Override
     public int getMaxRows() throws SQLException {
-        return 0;
+        return preparedStatement.getMaxRows();
     }
 
     @Override
     public void setMaxRows(int max) throws SQLException {
-
+        preparedStatement.setMaxRows(max);
     }
 
     @Override
     public void setEscapeProcessing(boolean enable) throws SQLException {
-
+        preparedStatement.setEscapeProcessing(enable);
     }
 
     @Override
     public int getQueryTimeout() throws SQLException {
-        return 0;
+        return preparedStatement.getQueryTimeout();
     }
 
     @Override
     public void setQueryTimeout(int seconds) throws SQLException {
-
+        preparedStatement.setQueryTimeout(seconds);
     }
 
     @Override
     public void cancel() throws SQLException {
-
+        preparedStatement.cancel();
     }
 
     @Override
     public SQLWarning getWarnings() throws SQLException {
-        return null;
+        return preparedStatement.getWarnings();
     }
 
     @Override
     public void clearWarnings() throws SQLException {
-
+        preparedStatement.clearWarnings();
     }
 
     @Override
     public void setCursorName(String name) throws SQLException {
-
+        preparedStatement.setCursorName(name);
     }
 
     @Override
     public boolean execute(String sql) throws SQLException {
-        return false;
+        return preparedStatement.execute(sql);
     }
 
     @Override
     public ResultSet getResultSet() throws SQLException {
-        return null;
+        return preparedStatement.getResultSet();
     }
 
     @Override
     public int getUpdateCount() throws SQLException {
-        return 0;
+        return preparedStatement.getUpdateCount();
     }
 
     @Override
     public boolean getMoreResults() throws SQLException {
-        return false;
+        return preparedStatement.getMoreResults();
     }
 
     @Override
     public void setFetchDirection(int direction) throws SQLException {
-
+        preparedStatement.setFetchDirection(direction);
     }
 
     @Override
     public int getFetchDirection() throws SQLException {
-        return 0;
+        return preparedStatement.getFetchDirection();
     }
 
     @Override
     public void setFetchSize(int rows) throws SQLException {
-
+        preparedStatement.setFetchSize(rows);
     }
 
     @Override
     public int getFetchSize() throws SQLException {
-        return 0;
+        return preparedStatement.getFetchSize();
     }
 
     @Override
     public int getResultSetConcurrency() throws SQLException {
-        return 0;
+        return preparedStatement.getResultSetConcurrency();
     }
 
     @Override
     public int getResultSetType() throws SQLException {
-        return 0;
+        return preparedStatement.getResultSetType();
     }
 
     @Override
     public void addBatch(String sql) throws SQLException {
-
+        preparedStatement.addBatch(sql);
     }
 
     @Override
     public void clearBatch() throws SQLException {
-
+        preparedStatement.clearBatch();
     }
 
     @Override
     public int[] executeBatch() throws SQLException {
-        return new int[0];
+        return preparedStatement.executeBatch();
     }
 
     @Override
     public Connection getConnection() throws SQLException {
-        return null;
+        return preparedStatement.getConnection();
     }
 
     @Override
     public boolean getMoreResults(int current) throws SQLException {
-        return false;
+        return preparedStatement.getMoreResults(current);
     }
 
     @Override
     public ResultSet getGeneratedKeys() throws SQLException {
-        return null;
+        return preparedStatement.getGeneratedKeys();
     }
 
     @Override
     public int executeUpdate(String sql, int autoGeneratedKeys) throws SQLException {
-        return 0;
+        return preparedStatement.executeUpdate(sql,autoGeneratedKeys);
     }
 
     @Override
     public int executeUpdate(String sql, int[] columnIndexes) throws SQLException {
-        return 0;
+        return preparedStatement.executeUpdate(sql,columnIndexes);
     }
 
     @Override
     public int executeUpdate(String sql, String[] columnNames) throws SQLException {
-        return 0;
+        return preparedStatement.executeUpdate(sql,columnNames);
     }
 
     @Override
     public boolean execute(String sql, int autoGeneratedKeys) throws SQLException {
-        return false;
+        return preparedStatement.execute(sql,autoGeneratedKeys);
     }
 
     @Override
     public boolean execute(String sql, int[] columnIndexes) throws SQLException {
-        return false;
+        return preparedStatement.execute(sql,columnIndexes);
     }
 
     @Override
     public boolean execute(String sql, String[] columnNames) throws SQLException {
-        return false;
+        return preparedStatement.execute(sql,columnNames);
     }
 
     @Override
     public int getResultSetHoldability() throws SQLException {
-        return 0;
+        return preparedStatement.getResultSetHoldability();
     }
 
     @Override
     public boolean isClosed() throws SQLException {
-        return false;
+        return preparedStatement.isClosed();
     }
 
     @Override
     public void setPoolable(boolean poolable) throws SQLException {
-
+        preparedStatement.setPoolable(poolable);
     }
 
     @Override
     public boolean isPoolable() throws SQLException {
-        return false;
+        return preparedStatement.isPoolable();
     }
 
     @Override
     public void closeOnCompletion() throws SQLException {
-
+        preparedStatement.closeOnCompletion();
     }
 
     @Override
     public boolean isCloseOnCompletion() throws SQLException {
-        return false;
+        return preparedStatement.isCloseOnCompletion();
     }
 
     @Override
     public <T> T unwrap(Class<T> iface) throws SQLException {
-        return null;
+        return preparedStatement.unwrap(iface);
     }
 
     @Override
     public boolean isWrapperFor(Class<?> iface) throws SQLException {
-        return false;
+        return preparedStatement.isWrapperFor(iface);
     }
 }
