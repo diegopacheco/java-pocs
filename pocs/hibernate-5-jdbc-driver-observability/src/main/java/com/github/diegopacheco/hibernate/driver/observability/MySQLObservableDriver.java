@@ -1,5 +1,6 @@
 package com.github.diegopacheco.hibernate.driver.observability;
 
+import com.mysql.cj.jdbc.ConnectionImpl;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.Connection;
@@ -26,7 +27,9 @@ public class MySQLObservableDriver implements java.sql.Driver {
     @Override
     public Connection connect(String url, Properties info) throws SQLException {
         log.info("[OBSERVABLE DRIVER] creating connection... ");
-        return driver.connect(url,info);
+        Connection conn = driver.connect(url,info);
+        ConnectionWrapper wrapper = new ConnectionWrapper((ConnectionImpl) conn);
+        return wrapper;
     }
 
     @Override
