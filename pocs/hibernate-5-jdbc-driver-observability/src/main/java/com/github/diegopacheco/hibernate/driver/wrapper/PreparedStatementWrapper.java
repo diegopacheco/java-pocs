@@ -12,7 +12,7 @@ public class PreparedStatementWrapper implements PreparedStatement {
 
     Logger log = Logger.getLogger(PreparedStatementWrapper.class.getName());
 
-    PreparedStatement preparedStatement;
+    private PreparedStatement preparedStatement;
     public PreparedStatementWrapper(PreparedStatement preparedStatement){
         this.preparedStatement=preparedStatement;
     }
