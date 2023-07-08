@@ -6,7 +6,7 @@
 ### How to run
 ```bash
 ./run-mysq-5.7-podman.sh
-./create-dd.sh
+./create-db.sh
 curl http://localhost:8080/all
 ```
 ```json
@@ -80,9 +80,17 @@ curl http://localhost:8080/metrics
 ```
 ```json
 {
-  "tables.write": "[Contact]",
+  "connection.count": "10",
   "tables": "[my_table_sequence, Contact]",
-  "table.write.count": "10",
-  "table.count": "12"
+  "tables.write": "[Contact]",
+  "table.Contact.read": "1",
+  "table.Contact.write": "20",
+  "table.my_table_sequence.read": "2"
 }
 ```
+JSON explained:
+* connection.count: Total SQL connections open. 
+* tables: All tables that the application is using for real
+* tables.write: All tables that have inserts
+* table.$TABLE_NAME.read: count of total reads per $TABLE_NAME
+* table.$TABLE_NAME.write: count of total writes per $TABLE_NAME
