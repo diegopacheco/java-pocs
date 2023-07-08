@@ -1,5 +1,6 @@
 package com.github.diegopacheco.hibernate.driver.wrapper;
 
+import com.github.diegopacheco.hibernate.driver.observability.MetricsManager;
 import com.mysql.cj.jdbc.ConnectionImpl;
 import com.mysql.cj.jdbc.Driver;
 
@@ -17,7 +18,7 @@ public class MySQLObservableDriver implements java.sql.Driver {
     private final Driver driver = getInstance();
     private Driver getInstance(){
         try{
-            log.info("[OBSERVABLE DRIVER] creating instance of REAL driver... ");
+            log.info("[OBSERVABLE DRIVER] creating instance of REAL driver under the hood... ");
             return new Driver();
         }catch(Exception e){
             throw new RuntimeException(e);
@@ -29,6 +30,7 @@ public class MySQLObservableDriver implements java.sql.Driver {
         log.info("[OBSERVABLE DRIVER] creating connection... ");
         Connection conn = driver.connect(url,info);
         ConnectionWrapper wrapper = new ConnectionWrapper((ConnectionImpl) conn);
+        MetricsManager.incConnection();
         return wrapper;
     }
 
@@ -61,4 +63,5 @@ public class MySQLObservableDriver implements java.sql.Driver {
     public Logger getParentLogger() throws SQLFeatureNotSupportedException {
         return driver.getParentLogger();
     }
+
 }
