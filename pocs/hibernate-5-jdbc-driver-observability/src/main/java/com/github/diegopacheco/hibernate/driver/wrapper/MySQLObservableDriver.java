@@ -9,6 +9,7 @@ import java.sql.DriverPropertyInfo;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MySQLObservableDriver implements java.sql.Driver {
@@ -18,7 +19,7 @@ public class MySQLObservableDriver implements java.sql.Driver {
     private final Driver driver = getInstance();
     private Driver getInstance(){
         try{
-            log.info("[OBSERVABLE DRIVER] creating instance of REAL driver under the hood... ");
+            log.log(Level.FINEST,"[OBSERVABLE DRIVER] creating instance of REAL driver under the hood... ");
             return new Driver();
         }catch(Exception e){
             throw new RuntimeException(e);
@@ -27,7 +28,7 @@ public class MySQLObservableDriver implements java.sql.Driver {
 
     @Override
     public Connection connect(String url, Properties info) throws SQLException {
-        log.info("[OBSERVABLE DRIVER] creating connection... ");
+        log.log(Level.FINEST,"[OBSERVABLE DRIVER] creating connection... ");
         Connection conn = driver.connect(url,info);
         ConnectionWrapper wrapper = new ConnectionWrapper((ConnectionImpl) conn);
         MetricsManager.incConnection();

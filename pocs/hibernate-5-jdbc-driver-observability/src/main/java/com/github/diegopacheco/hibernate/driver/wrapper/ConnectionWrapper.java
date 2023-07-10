@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConnectionWrapper implements JdbcConnection, Session.SessionEventListener, Serializable {
@@ -34,7 +35,7 @@ public class ConnectionWrapper implements JdbcConnection, Session.SessionEventLi
 
     @Override
     public PreparedStatement prepareStatement(String sql) throws SQLException {
-        log.info("[OBSERVABLE DRIVER] SQL running: " + sql);
+        log.log(Level.FINEST,"[OBSERVABLE DRIVER] SQL running: " + sql);
         MetricsManager.observeSQL(sql);
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
