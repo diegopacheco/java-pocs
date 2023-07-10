@@ -75,6 +75,7 @@ curl http://localhost:8080/all
 ```
 
 ### SQL Metrics
+The MetricsManager only reads the queue and process metrics in every *30s*
 ```bash
 curl http://localhost:8080/metrics
 ```
@@ -98,15 +99,15 @@ JSON explained:
 ### Benchmarks
 Using standard MySQL Driver
 ```
-Benchmark 10  in: 52 ms
-Benchmark 100 in: 425 ms
-Benchmark 1k  in: 3961 ms
-Benchmark 10k in: 29811 ms
+Benchmark 10  in: 59 ms
+Benchmark 100 in: 467 ms
+Benchmark 1k  in: 3692 ms
+Benchmark 10k in: 28555 ms
 ```
 Using Observability Driver + standard MySQL Driver
 ```
-Benchmark 10  in: 61 ms
-Benchmark 100 in: 450 ms
-Benchmark 1k  in: 3833 ms
-Benchmark 10k in: 28192 ms
+Benchmark 10  in: 51 ms
+Benchmark 100 in: 565 ms
+Benchmark 1k  in: 3456 ms
+Benchmark 10k in: 28117 ms
 ```

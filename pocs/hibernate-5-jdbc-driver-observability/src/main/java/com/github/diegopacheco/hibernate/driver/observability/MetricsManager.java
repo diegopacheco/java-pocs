@@ -30,7 +30,7 @@ public class MetricsManager {
                     }
                 }
             }
-        }, 0, 3, TimeUnit.SECONDS);
+        }, 0, 30, TimeUnit.SECONDS);
     }
 
     public static boolean observeSQL(String sql){
