@@ -94,3 +94,19 @@ JSON explained:
 * tables.write: All tables that have inserts
 * table.$TABLE_NAME.read: count of total reads per $TABLE_NAME
 * table.$TABLE_NAME.write: count of total writes per $TABLE_NAME
+
+### Benchmarks
+Using standard MySQL Driver
+```
+Benchmark 10  in: 52 ms
+Benchmark 100 in: 425 ms
+Benchmark 1k  in: 3961 ms
+Benchmark 10k in: 29811 ms
+```
+Using Observability Driver + standard MySQL Driver
+```
+Benchmark 10  in: 61 ms
+Benchmark 100 in: 450 ms
+Benchmark 1k  in: 3833 ms
+Benchmark 10k in: 28192 ms
+```

@@ -36,4 +36,15 @@ public class MainApplication {
             System.out.println("DONE. ");
         };
     }
+
+    @Bean
+    public CommandLineRunner benchmark(ApplicationContext ctx) {
+        System.out.println("Running Benchmarks... ");
+        return args -> {
+            System.out.println("Benchmark 10 in: " + feeder.benchmark(10) + " ms");
+            System.out.println("Benchmark 100 in: " + feeder.benchmark(100) + " ms");
+            System.out.println("Benchmark 1k in: " + feeder.benchmark(1000) + " ms");
+            System.out.println("Benchmark 10k in: " + feeder.benchmark(10000) + " ms");
+        };
+    }
 }

@@ -21,4 +21,18 @@ public class DBFeeder {
         }
     }
 
+    public long benchmark(int items){
+        long init = System.currentTimeMillis();
+        for(int i=0;i<items;i++){
+            Contact contact = new Contact();
+            contact.setEmail("contant_email"+ i + "@gmail.com");
+            contact.setName("Person"+i);
+            contact.setPhone("415-1234-12"+i);
+            service.save(contact);
+        }
+        long end = System.currentTimeMillis();
+        long time = end - init;
+        return time;
+    }
+
 }

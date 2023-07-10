@@ -15,6 +15,7 @@ public class DBConf {
     public DataSource getDataSource(){
         HikariConfig config = new HikariConfig();
         // hibernate.connection.driver_class=com.mysql.cj.jdbc.Driver
+        //config.setDriverClassName("com.mysql.cj.jdbc.Driver");
         config.setDriverClassName("com.github.diegopacheco.hibernate.driver.wrapper.MySQLObservableDriver");
 
         config.setJdbcUrl("jdbc:mysql://127.0.0.1:3325/mydatabase?useSSL=false");
