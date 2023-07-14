@@ -24,8 +24,7 @@ public class Main {
             System.out.println(app.getName());
         }
         */
-
-         */
+        
         Logger logger = Logger.getLogger(Main.class.getName());
         logger.info("This is going to splunk. app=mainapp env=local test=true");
         logger.severe("This is a test error for log4j test app=mainapp env=local test=true");
