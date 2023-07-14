@@ -1,0 +1,4 @@
+Jul 14, 2023 12:09:53 AM Main main
+INFO: This is going to splunk. app=mainapp env=local test=true
+Jul 14, 2023 12:09:53 AM Main main
+SEVERE: This is a test error for log4j test app=mainapp env=local test=true
