@@ -6,24 +6,21 @@
                     pattern="%style{%d{ISO8601}} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{10}}{bright,yellow}: %msg%n%throwable"/>
         </Console>
         <SplunkHttp
-                name="splunk_data_input_http_event_collector"
-                url="http://127.0.0.1:8088/"
+                name="splunk_http"
+                url="https://127.0.0.1:8088"
                 token="5086f1e1-2bfd-4352-9b3f-cb11fcfcf099"
-                host="127.0.0.1"
-                index="main"
-                type="raw"
-                source="5086f1e1-2bfd-4352-9b3f-cb11fcfcf099"
-                sourcetype="log4j"
-                messageFormat="text"
+                host="localhost"
+                index="history"
+                sourcetype="_json"
                 disableCertificateValidation="true">
-            <PatternLayout pattern="%m"/>
+            <PatternLayout
+                    pattern="event:{%style{%d{ISO8601}} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{10}}{bright,yellow}: %msg%n%throwable}"/>
         </SplunkHttp>
     </Appenders>
     <Loggers>
-        <!-- LOG everything at INFO level -->
         <Root level="info">
             <AppenderRef ref="console"/>
-            <AppenderRef ref="splunk_data_input_http_event_collector"/>
+            <AppenderRef ref="splunk_http"/>
         </Root>
     </Loggers>
 </Configuration>
