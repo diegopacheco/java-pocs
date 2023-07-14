@@ -30,7 +30,7 @@ public class Main {
         Logger logger = LogManager.getLogger(Main.class);
         logger.info("This is going to splunk. app=mainapp env=local test=true");
         logger.error("This is a test error for log4j test app=mainapp env=local test=true");
-        logger.error("here is a stack there " + new RuntimeException(new RuntimeException(new IOException("fake"))));
+        logger.error("here is a stack there ", new RuntimeException(new RuntimeException(new IOException("fake"))));
         logger.info("DONE! app=mainapp env=local test=true");
         logger.info("DONE! app=mainapp env=local test=true");
         logger.info("DONE! app=mainapp env=local test=true");
