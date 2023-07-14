@@ -1,3 +1,7 @@
+import org.graphstream.algorithm.generator.BarabasiAlbertGenerator;
+import org.graphstream.algorithm.generator.DorogovtsevMendesGenerator;
+import org.graphstream.algorithm.generator.Generator;
+import org.graphstream.algorithm.generator.RandomEuclideanGenerator;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
@@ -14,6 +18,9 @@ public class Main {
         graph.addEdge("AB", "A", "B");
         graph.addEdge("BC", "B", "C");
         graph.addEdge("CA", "C", "A");
+
+        Generator gen = new DorogovtsevMendesGenerator();
+        gen.addSink(graph);
         graph.display();
     }
 }
