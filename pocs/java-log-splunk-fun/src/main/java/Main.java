@@ -8,6 +8,6 @@ public class Main{
     logger.info("This is going to splunk. app=mainapp env=local test=true");
     logger.error("This is a test error for log4j test app=mainapp env=local test=true");
     Thread.sleep(5000);
-    System.out.println("done");
+    logger.info("DONE! app=mainapp env=local test=true");
   }
 }

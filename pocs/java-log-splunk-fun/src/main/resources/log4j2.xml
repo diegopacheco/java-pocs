@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="info" name="example" packages="com.splunk.logging">
+<Configuration>
     <Appenders>
-        <Socket name="socket" host="127.0.0.1" port="8000">
-            <PatternLayout pattern="%p: %m%n" charset="UTF-8"/>
-        </Socket>
-        <SplunkHttp name="http-input"
-                    url="http://localhost:8000"
-                    token="11111111-2222-3333-4444-555555555555"
-                    host="127.0.0.1"
-                    index=""
-                    source="splunktest"
-                    sourcetype="javalog"
-                    messageFormat="text"
-                    middleware="HttpEventCollectorUnitTestMiddleware"
-                    batch_size_bytes="0"
-                    batch_size_count="0"
-                    batch_interval="0"
-                    connect_timeout="5000"
-                    termination_timeout="1000"
-                    disableCertificateValidation="true">
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%style{%d{ISO8601}} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{10}}{bright,yellow}: %msg%n%throwable"/>
+        </Console>
+        <SplunkHttp
+                name="splunk_data_input_http_event_collector"
+                url="http://127.0.0.1:8088/"
+                token="5086f1e1-2bfd-4352-9b3f-cb11fcfcf099"
+                host="127.0.0.1"
+                index="main"
+                type="raw"
+                source="5086f1e1-2bfd-4352-9b3f-cb11fcfcf099"
+                sourcetype="log4j"
+                messageFormat="text"
+                disableCertificateValidation="true">
             <PatternLayout pattern="%m"/>
         </SplunkHttp>
     </Appenders>
-    <!-- Define a logger named 'splunk.logger' which writes to the socket appender we defined above. -->
     <Loggers>
-        <Root level="INFO">
+        <!-- LOG everything at INFO level -->
+        <Root level="info">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="splunk_data_input_http_event_collector"/>
         </Root>
-        <Logger name="splunk.logger" level="info">
-            <AppenderRef ref="socket"/>
-        </Logger>
-        <Logger name="splunk.log4j" level="info">
-            <AppenderRef ref="http-input"/>
-        </Logger>
     </Loggers>
 </Configuration>
