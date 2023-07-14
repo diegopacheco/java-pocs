@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration>
+<Configuration
+  name="development"
+  packages="com.splunk.logging" status="DEBUG"
+>
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout
                     pattern="%style{%d{ISO8601}} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{10}}{bright,yellow}: %msg%n%throwable"/>
         </Console>
-        <SplunkHttp
-                name="splunk_http"
-                url="https://127.0.0.1:8088"
-                token="5086f1e1-2bfd-4352-9b3f-cb11fcfcf099"
-                host="localhost"
-                index="history"
-                sourcetype="_json"
-                disableCertificateValidation="true">
-            <PatternLayout
-                    pattern="event:{%style{%d{ISO8601}} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{10}}{bright,yellow}: %msg%n%throwable}"/>
+        <SplunkHttp name="splunk_http"
+                    source="java-log4j2-app"
+                    url="https://localhost:8088/"
+                    token="5086f1e1-2bfd-4352-9b3f-cb11fcfcf099"
+                    index="main"
+                    disableCertificateValidation="true">
+            <PatternLayout pattern="[%d{MM-dd HH:mm:ss}] %-5p %c{1} [%t]: %m%n"/>
         </SplunkHttp>
     </Appenders>
     <Loggers>
-        <Root level="info">
+        <Root level="DEBUG">
             <AppenderRef ref="console"/>
             <AppenderRef ref="splunk_http"/>
         </Root>
