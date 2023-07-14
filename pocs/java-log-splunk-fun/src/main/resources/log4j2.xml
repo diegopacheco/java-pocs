@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration
-  name="development"
-  packages="com.splunk.logging" status="DEBUG"
->
+<Configuration status="DEBUG">>
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout
@@ -12,15 +9,15 @@
                     source="java-log4j2-app"
                     url="https://localhost:8088/"
                     token="5086f1e1-2bfd-4352-9b3f-cb11fcfcf099"
-                    index="main"
+                    index="history"
                     disableCertificateValidation="true">
             <PatternLayout pattern="[%d{MM-dd HH:mm:ss}] %-5p %c{1} [%t]: %m%n"/>
         </SplunkHttp>
     </Appenders>
     <Loggers>
-        <Root level="DEBUG">
-            <AppenderRef ref="console"/>
+        <Logger name="com" level="DEBUG" additivity="false">
             <AppenderRef ref="splunk_http"/>
-        </Root>
+            <AppenderRef ref="console"/>
+        </Logger>
     </Loggers>
 </Configuration>

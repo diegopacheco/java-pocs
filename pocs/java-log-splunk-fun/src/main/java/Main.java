@@ -1,12 +1,13 @@
 import com.splunk.Application;
 import com.splunk.Service;
 import com.splunk.ServiceArgs;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.net.ssl.*;
 import java.io.IOException;
 import java.net.Socket;
 import java.security.cert.CertificateException;
-import java.util.logging.Logger;
 
 public class Main {
     public static void main(String args[]) throws Exception {
@@ -24,11 +25,15 @@ public class Main {
             System.out.println(app.getName());
         }
         */
-        
-        Logger logger = Logger.getLogger(Main.class.getName());
+
+        //Logger logger = Logger.getLogger(Main.class.getName());
+        Logger logger = LogManager.getLogger(Main.class);
         logger.info("This is going to splunk. app=mainapp env=local test=true");
-        logger.severe("This is a test error for log4j test app=mainapp env=local test=true");
-        logger.severe("here is a stack there " + new RuntimeException(new RuntimeException(new IOException("fake"))));
+        logger.error("This is a test error for log4j test app=mainapp env=local test=true");
+        logger.error("here is a stack there " + new RuntimeException(new RuntimeException(new IOException("fake"))));
+        logger.info("DONE! app=mainapp env=local test=true");
+        logger.info("DONE! app=mainapp env=local test=true");
+        logger.info("DONE! app=mainapp env=local test=true");
         logger.info("DONE! app=mainapp env=local test=true");
         Thread.sleep(5000);
     }
