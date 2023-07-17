@@ -8,6 +8,6 @@
 total is 10000
 Run in 9 ms
 >>> Access 10k elements on CPU. 
-total is 0
-Run in 4 ms
+total is 10000
+Run in 2 ms
 ```

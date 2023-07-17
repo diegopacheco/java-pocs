@@ -10,7 +10,7 @@ public class Main{
   private static void withMemory(){
     Map<String,String> map = new HashMap<>();
     for (int i=0;i<10000;i++){
-      map.put("k"+i,"v"+i);
+      map.put("k"+i,i*i+"");
     }
     Bench.with(new Runnable() {
       @Override
@@ -18,7 +18,7 @@ public class Main{
         int total = 0;
         for (int i=0;i<10000;i++){
           String v = map.get("k"+i);
-           if (("v"+i).equals(v)){
+           if ((i*i+"").equals(v)){
              total++;
           }
         }
@@ -28,12 +28,10 @@ public class Main{
   }
 
   private static void withCPU(){
-    Map<String,String> map = new HashMap<>();
-    String key = "C";
-    String value = "T";
+    int count = 0;
     for (int i=0;i<10000;i++){
-       if ((key+i).equals(value+i)){
-         i=0;
+       if ((i*i+"").equals(i*i+"")){
+         count++;
        }
     }
     Bench.with(new Runnable() {
@@ -41,8 +39,7 @@ public class Main{
       public void run() {
         int total = 0;
         for (int i=0;i<10000;i++){
-          String v = key+i;
-          if ((value+i).equals(v)){
+          if ((i*i+"").equals(i*i+"")){
             total++;
           }
         }
