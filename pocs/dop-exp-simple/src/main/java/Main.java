@@ -24,7 +24,7 @@ public class Main{
         }
         System.out.println("total is " + total);
       }
-    },">>> Access 10k elements on map. ");
+    },">>> Access 10k elements on memory(map). ");
   }
 
   private static void withCPU(){
@@ -45,7 +45,7 @@ public class Main{
         }
         System.out.println("total is " + total);
       }
-    },">>> Access 10k elements on CPU. ");
+    },">>> Access 10k elements on CPU(math). ");
   }
 
 }
