@@ -11,5 +11,10 @@ public class HelloController {
 		return "Greetings from Spring Boot!";
 	}
 
+	@RequestMapping("/universe")
+	public String universe() {
+		return "42";
+	}
+
 }
 
