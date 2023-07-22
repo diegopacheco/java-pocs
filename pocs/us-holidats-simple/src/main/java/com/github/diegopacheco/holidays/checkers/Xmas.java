@@ -6,7 +6,7 @@ import com.github.diegopacheco.holidays.Holiday;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class NewYearEveHoliday implements Holiday {
+public class Xmas implements Holiday {
 
     @Override
     public boolean isHoliday(Date date) {
@@ -16,7 +16,7 @@ public class NewYearEveHoliday implements Holiday {
         LocalDate localDate = DateUtils.fromDate(date);
         int day = localDate.getDayOfMonth();
         int month = localDate.getMonth().getValue();
-        if (1==day && 1==month){
+        if (25==day && 12==month){
             return true;
         }
         return false;

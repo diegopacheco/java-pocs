@@ -27,6 +27,19 @@ public class DateUtils {
         return lastMonday;
     }
 
+    public static LocalDate secondMondayOfMonth(Date date){
+        LocalDate localDate = date.toInstant().atZone(zoneId).toLocalDate();
+        LocalDate lastMonday = localDate.with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
+        return lastMonday;
+    }
+
+    public static LocalDate lastThursdayOfMonth(Date date){
+        LocalDate localDate = date.toInstant().atZone(zoneId).toLocalDate();
+        LocalDate lastMonday = localDate.with(TemporalAdjusters.lastInMonth(DayOfWeek.THURSDAY));
+        return lastMonday;
+    }
+
+
     public static LocalDate fromDate(Date date){
         Instant instant = date.toInstant();
         LocalDate currentDate = LocalDate.ofInstant(instant,zoneId);

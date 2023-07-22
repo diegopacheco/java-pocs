@@ -11,15 +11,17 @@ public class USHolidays {
     private static final List<Holiday> holidays = new ArrayList<>();
 
     static{
-        holidays.add(new NewYearEveHoliday());
+        holidays.add(new NewYearEve());
         holidays.add(new BirthdayMLK());
         holidays.add(new BirthdayWashington());
         holidays.add(new JuneteenthDay());
         holidays.add(new IndependenceDay());
         holidays.add(new LaborDay());
+        holidays.add(new ColumbusDay());
         holidays.add(new MemorialDay());
         holidays.add(new VeteransDay());
-        holidays.add(new XmasHoliday());
+        holidays.add(new Thanksgiving());
+        holidays.add(new Xmas());
     }
 
     public static boolean isHoliday(Date date){

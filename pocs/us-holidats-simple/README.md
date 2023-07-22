@@ -12,9 +12,9 @@
 [x] Juneteenth National Independence Day, June 19.
 [x] Independence Day, July 4.
 [x] Labor Day, the first Monday in September.
-[ ] Columbus Day, the second Monday in October.
+[x] Columbus Day, the second Monday in October.
 [x] Veterans Day, November 11.
-[ ] Thanksgiving Day, the fourth Thursday in November.
+[x] Thanksgiving Day, the fourth Thursday in November.
 [x] Christmas Day, December 25.
 ```
 more: https://www.law.cornell.edu/uscode/text/5/6103

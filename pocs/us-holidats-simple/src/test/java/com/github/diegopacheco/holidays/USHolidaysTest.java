@@ -126,6 +126,48 @@ public class USHolidaysTest {
     }
 
     @Test
+    public void columbusDayFor10Years(){
+        List<Date> columbusHolidays = new ArrayList<>();
+        columbusHolidays.add(new GregorianCalendar(2018, Calendar.OCTOBER, 8).getTime());
+        columbusHolidays.add(new GregorianCalendar(2019, Calendar.OCTOBER, 14).getTime());
+        columbusHolidays.add(new GregorianCalendar(2020, Calendar.OCTOBER, 12).getTime());
+        columbusHolidays.add(new GregorianCalendar(2021, Calendar.OCTOBER, 11).getTime());
+        columbusHolidays.add(new GregorianCalendar(2022, Calendar.OCTOBER, 10).getTime());
+        columbusHolidays.add(new GregorianCalendar(2023, Calendar.OCTOBER, 9).getTime());
+        columbusHolidays.add(new GregorianCalendar(2024, Calendar.OCTOBER, 14).getTime());
+        columbusHolidays.add(new GregorianCalendar(2025, Calendar.OCTOBER, 13).getTime());
+        columbusHolidays.add(new GregorianCalendar(2026, Calendar.OCTOBER, 12).getTime());
+        columbusHolidays.add(new GregorianCalendar(2027, Calendar.OCTOBER, 11).getTime());
+        columbusHolidays.add(new GregorianCalendar(2028, Calendar.OCTOBER, 9).getTime());
+
+        for(Date d: columbusHolidays){
+            boolean result = USHolidays.isHoliday(d);
+            assertTrue(result);
+        }
+    }
+
+    @Test
+    public void thanksgivingDayFor10Years(){
+        List<Date> thanksgivingHolidays = new ArrayList<>();
+        thanksgivingHolidays.add(new GregorianCalendar(2018, Calendar.NOVEMBER, 22).getTime());
+        thanksgivingHolidays.add(new GregorianCalendar(2019, Calendar.NOVEMBER, 28).getTime());
+        thanksgivingHolidays.add(new GregorianCalendar(2020, Calendar.NOVEMBER, 26).getTime());
+        thanksgivingHolidays.add(new GregorianCalendar(2021, Calendar.NOVEMBER, 25).getTime());
+        thanksgivingHolidays.add(new GregorianCalendar(2022, Calendar.NOVEMBER, 24).getTime());
+        thanksgivingHolidays.add(new GregorianCalendar(2023, Calendar.NOVEMBER, 23).getTime());
+        thanksgivingHolidays.add(new GregorianCalendar(2024, Calendar.NOVEMBER, 28).getTime());
+        thanksgivingHolidays.add(new GregorianCalendar(2025, Calendar.NOVEMBER, 27).getTime());
+        thanksgivingHolidays.add(new GregorianCalendar(2026, Calendar.NOVEMBER, 26).getTime());
+        thanksgivingHolidays.add(new GregorianCalendar(2027, Calendar.NOVEMBER, 25).getTime());
+        thanksgivingHolidays.add(new GregorianCalendar(2028, Calendar.NOVEMBER, 23).getTime());
+
+        for(Date d: thanksgivingHolidays){
+            boolean result = USHolidays.isHoliday(d);
+            assertTrue(result);
+        }
+    }
+
+    @Test
     public void tenDecatesJuneteenthHoliday(){
         for (int i=1;i<=100;i++){
             Date holiday = new GregorianCalendar(2019+i, Calendar.JUNE, 19).getTime();
