@@ -168,7 +168,7 @@ public class USHolidaysTest {
     }
 
     @Test
-    public void tenDecatesJuneteenthHoliday(){
+    public void tenDecadesJuneteenthHoliday(){
         for (int i=1;i<=100;i++){
             Date holiday = new GregorianCalendar(2019+i, Calendar.JUNE, 19).getTime();
             boolean result = USHolidays.isHoliday(holiday);
@@ -177,7 +177,7 @@ public class USHolidaysTest {
     }
 
     @Test
-    public void twoDecatesVeteransHoliday(){
+    public void twoDecadesVeteransHoliday(){
         for (int i=1;i<=20;i++){
             Date holiday = new GregorianCalendar(2019+i, Calendar.NOVEMBER, 11).getTime();
             boolean result = USHolidays.isHoliday(holiday);
@@ -186,7 +186,7 @@ public class USHolidaysTest {
     }
 
     @Test
-    public void twoDecatesXmasDayHoliday(){
+    public void twoDecadesXmasDayHoliday(){
         for (int i=1;i<=20;i++){
             Date holiday = new GregorianCalendar(2019+i, Calendar.DECEMBER, 25).getTime();
             boolean result = USHolidays.isHoliday(holiday);
