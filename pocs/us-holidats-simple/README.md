@@ -31,7 +31,7 @@ introduced in Java 8 which make dates sane again.
 
 ## Should this code be a service or a library?
 
-The main benefit of a service, you do much less migrations, things are more transparent. 
+The main benefit of a service, you do fewer migrations, things are more transparent. 
 For this case, so far, is the perfect library, since there is ZERO Dependencies, by definition is a Lean Library.
 While using the service approach, we could benefit from testing, adding more complex dates processing on the fly.
 
@@ -40,8 +40,12 @@ hard in service or lib that does not change if is a lib or service,
 you need to test well and them the library will be fine. 
 Pay attention there is not hardcoded holidays, everything is done via math, which is provided by US federal law.
 
-Doing what is right is always more diffult, takes more time, and require thinking, not always is obvious, lots of times will look like a Service make sense but actually the library will make more sense, othertimes a library will make more sense but actually you sohuld build a service, so think about the tradeoffs and challedge the assumptions.
+Doing what is right is always more difficult, takes more time, and require thinking, not always is obvious, 
+lots of times will look like a Service make sense but actually the library will make more sense, sometimes like this a library will 
+make more sense but actually you sohuld build a service, so think about the tradeoffs and challenge the assumptions.
 
 ## Design
 
-****Basically we are using polymorphism at is best. There is a Holiday interface and them all the classes on the checkers package implement Holiday. USHolidays is just just one aggregator, which you might know by the pattern name Facade and a form of Composite because it also implements Holiday.
+****Basically we are using polymorphism at is best. There is a Holiday interface and them all the classes on the 
+checkers package implement Holiday. USHolidays is just just one aggregator, which you might know by the 
+pattern name Facade and a form of Composite because it also implements Holiday.
