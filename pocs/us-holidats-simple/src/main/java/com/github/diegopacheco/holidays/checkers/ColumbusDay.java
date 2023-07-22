@@ -18,8 +18,8 @@ public class ColumbusDay implements Holiday {
         }
         LocalDate localDate = DateUtils.fromDate(date);
         LocalDate october = LocalDate.of(localDate.getYear(), Month.OCTOBER, 1);
-        LocalDate secondMondayInOctober = october.with(TemporalAdjusters.lastInMonth(DayOfWeek.MONDAY))
-                                                 .with(TemporalAdjusters.lastInMonth(DayOfWeek.MONDAY));
+        LocalDate secondMondayInOctober = october.with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY))
+                                                 .with(TemporalAdjusters.next(DayOfWeek.MONDAY));
 
         Instant parameterInstant = date.toInstant();
         Instant holidayInstant = secondMondayInOctober.atStartOfDay(DateUtils.getCurrentZoneId()).toInstant();
