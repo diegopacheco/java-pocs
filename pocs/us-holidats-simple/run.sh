@@ -1,3 +1,4 @@
+
 #!/bin/bash
-./mvnw spring-boot:run
+./mvnw exec:java -Dexec.mainClass="Main" -Dexec.classpathScope=runtime
 

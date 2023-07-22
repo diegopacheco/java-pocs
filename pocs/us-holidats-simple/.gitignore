@@ -24,7 +24,7 @@ local.properties
 # External tool builders
 .externalToolBuilders/
 
-# Locally stored "Eclipse launch configurations"
+# Locally stored Eclipse launch configurations
 *.launch
 
 # PyDev specific (Python IDE for Eclipse)
@@ -72,6 +72,14 @@ local.properties
 
 # Log file
 *.log
+*.xml.bak
+target
+out
+*.epoch
+.DS_Store
+git.properties
+nbactions.xml
+**/logs/
 
 # BlueJ files
 *.ctxt
