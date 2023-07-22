@@ -1,9 +1,6 @@
 package com.github.diegopacheco.holidays;
 
-import com.github.diegopacheco.holidays.checkers.BirthdayMLK;
-import com.github.diegopacheco.holidays.checkers.BirthdayWashington;
-import com.github.diegopacheco.holidays.checkers.IndependenceDay;
-import com.github.diegopacheco.holidays.checkers.NewYearEveHoliday;
+import com.github.diegopacheco.holidays.checkers.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +15,8 @@ public class USHolidays {
         holidays.add(new IndependenceDay());
         holidays.add(new BirthdayMLK());
         holidays.add(new BirthdayWashington());
+        holidays.add(new MemorialDay());
+        holidays.add(new XmasHoliday());
     }
 
     public static boolean isHoliday(Date date){

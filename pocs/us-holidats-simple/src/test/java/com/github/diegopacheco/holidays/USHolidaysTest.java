@@ -82,4 +82,36 @@ public class USHolidaysTest {
         }
     }
 
+    @Test
+    public void memorialDayYears(){
+        List<Date> mlkHolidays = new ArrayList<>();
+        mlkHolidays.add(new GregorianCalendar(2017, Calendar.MAY, 29).getTime());
+        mlkHolidays.add(new GregorianCalendar(2018, Calendar.MAY, 28).getTime());
+        mlkHolidays.add(new GregorianCalendar(2019, Calendar.MAY, 27).getTime());
+        mlkHolidays.add(new GregorianCalendar(2020, Calendar.MAY, 25).getTime());
+        mlkHolidays.add(new GregorianCalendar(2021, Calendar.MAY, 31).getTime());
+        mlkHolidays.add(new GregorianCalendar(2022, Calendar.MAY, 30).getTime());
+        mlkHolidays.add(new GregorianCalendar(2023, Calendar.MAY, 29).getTime());
+        mlkHolidays.add(new GregorianCalendar(2024, Calendar.MAY, 27).getTime());
+        mlkHolidays.add(new GregorianCalendar(2025, Calendar.MAY, 26).getTime());
+        mlkHolidays.add(new GregorianCalendar(2026, Calendar.MAY, 25).getTime());
+        mlkHolidays.add(new GregorianCalendar(2027, Calendar.MAY, 31).getTime());
+        mlkHolidays.add(new GregorianCalendar(2028, Calendar.MAY, 29).getTime());
+        mlkHolidays.add(new GregorianCalendar(2029, Calendar.MAY, 28).getTime());
+
+        for(Date d: mlkHolidays){
+            boolean result = USHolidays.isHoliday(d);
+            assertTrue(result);
+        }
+    }
+
+    @Test
+    public void twoDecatesXmasDayHoliday(){
+        for (int i=1;i<=20;i++){
+            Date holiday = new GregorianCalendar(2019+i, Calendar.DECEMBER, 25).getTime();
+            boolean result = USHolidays.isHoliday(holiday);
+            assertTrue(result);
+        }
+    }
+
 }
