@@ -10,39 +10,60 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class USHolidaysTest {
 
     @Test
-    public void notAHoliday(){
+    public void notAHoliday() {
         Date notHoliday = new GregorianCalendar(2023, Calendar.JANUARY, 2).getTime();
-        boolean result = USHolidays.isHoliday(notHoliday);
+        boolean result = new USHolidays().isHoliday(notHoliday);
         assertFalse(result);
     }
 
     @Test
-    public void tenDecadesNewYearEveHoliday(){
-        for (int i=1;i<=100;i++){
-            Date holiday = new GregorianCalendar(2019+i, Calendar.JANUARY, 1).getTime();
-            boolean result = USHolidays.isHoliday(holiday);
+    public void notHolidays() {
+        List<Date> notHolidays = new ArrayList<>();
+        notHolidays.add(new GregorianCalendar(2024, Calendar.JANUARY, 10).getTime());
+        notHolidays.add(new GregorianCalendar(2025, Calendar.FEBRUARY, 4).getTime());
+        notHolidays.add(new GregorianCalendar(2026, Calendar.MARCH, 1).getTime());
+        notHolidays.add(new GregorianCalendar(2027, Calendar.MAY, 1).getTime());
+        notHolidays.add(new GregorianCalendar(2028, Calendar.JUNE, 1).getTime());
+        notHolidays.add(new GregorianCalendar(2029, Calendar.JULY, 1).getTime());
+        notHolidays.add(new GregorianCalendar(2030, Calendar.AUGUST, 20).getTime());
+        notHolidays.add(new GregorianCalendar(2031, Calendar.SEPTEMBER, 7).getTime());
+        notHolidays.add(new GregorianCalendar(2032, Calendar.OCTOBER, 1).getTime());
+        notHolidays.add(new GregorianCalendar(2033, Calendar.NOVEMBER, 1).getTime());
+        notHolidays.add(new GregorianCalendar(2034, Calendar.DECEMBER, 1).getTime());
+
+        for (Date d : notHolidays) {
+            boolean result = new USHolidays().isHoliday(d);
+            assertFalse(result);
+        }
+    }
+
+    @Test
+    public void tenDecadesNewYearEveHoliday() {
+        for (int i = 1; i <= 100; i++) {
+            Date holiday = new GregorianCalendar(2019 + i, Calendar.JANUARY, 1).getTime();
+            boolean result = new USHolidays().isHoliday(holiday);
             assertTrue(result);
         }
     }
 
     @Test
-    public void tenDecadesIndependenceDayHoliday(){
-        for (int i=1;i<=100;i++){
-            Date holiday = new GregorianCalendar(2019+i, Calendar.JULY, 4).getTime();
-            boolean result = USHolidays.isHoliday(holiday);
+    public void tenDecadesIndependenceDayHoliday() {
+        for (int i = 1; i <= 100; i++) {
+            Date holiday = new GregorianCalendar(2019 + i, Calendar.JULY, 4).getTime();
+            boolean result = new USHolidays().isHoliday(holiday);
             assertTrue(result);
         }
     }
 
     @Test
-    public void birthdayMLK2023(){
+    public void birthdayMLK2023() {
         Date notHoliday = new GregorianCalendar(2023, Calendar.JANUARY, 16).getTime();
-        boolean result = USHolidays.isHoliday(notHoliday);
+        boolean result = new USHolidays().isHoliday(notHoliday);
         assertTrue(result);
     }
 
     @Test
-    public void birthdayMLKFor10Years(){
+    public void birthdayMLKFor10Years() {
         List<Date> birthdayMLKHolidays = new ArrayList<>();
         birthdayMLKHolidays.add(new GregorianCalendar(2024, Calendar.JANUARY, 15).getTime());
         birthdayMLKHolidays.add(new GregorianCalendar(2025, Calendar.JANUARY, 20).getTime());
@@ -55,14 +76,14 @@ public class USHolidaysTest {
         birthdayMLKHolidays.add(new GregorianCalendar(2032, Calendar.JANUARY, 19).getTime());
         birthdayMLKHolidays.add(new GregorianCalendar(2033, Calendar.JANUARY, 17).getTime());
 
-        for(Date d: birthdayMLKHolidays){
-            boolean result = USHolidays.isHoliday(d);
+        for (Date d : birthdayMLKHolidays) {
+            boolean result = new USHolidays().isHoliday(d);
             assertTrue(result);
         }
     }
 
     @Test
-    public void birthdayWashington10Years(){
+    public void birthdayWashington10Years() {
         List<Date> birthdayWashingtonHolidays = new ArrayList<>();
         birthdayWashingtonHolidays.add(new GregorianCalendar(2019, Calendar.FEBRUARY, 18).getTime());
         birthdayWashingtonHolidays.add(new GregorianCalendar(2020, Calendar.FEBRUARY, 17).getTime());
@@ -76,14 +97,14 @@ public class USHolidaysTest {
         birthdayWashingtonHolidays.add(new GregorianCalendar(2028, Calendar.FEBRUARY, 21).getTime());
         birthdayWashingtonHolidays.add(new GregorianCalendar(2029, Calendar.FEBRUARY, 19).getTime());
 
-        for(Date d: birthdayWashingtonHolidays){
-            boolean result = USHolidays.isHoliday(d);
+        for (Date d : birthdayWashingtonHolidays) {
+            boolean result = new USHolidays().isHoliday(d);
             assertTrue(result);
         }
     }
 
     @Test
-    public void memorialDayTenYears(){
+    public void memorialDayTenYears() {
         List<Date> memorialDayHolidays = new ArrayList<>();
         memorialDayHolidays.add(new GregorianCalendar(2017, Calendar.MAY, 29).getTime());
         memorialDayHolidays.add(new GregorianCalendar(2018, Calendar.MAY, 28).getTime());
@@ -99,14 +120,14 @@ public class USHolidaysTest {
         memorialDayHolidays.add(new GregorianCalendar(2028, Calendar.MAY, 29).getTime());
         memorialDayHolidays.add(new GregorianCalendar(2029, Calendar.MAY, 28).getTime());
 
-        for(Date d: memorialDayHolidays){
-            boolean result = USHolidays.isHoliday(d);
+        for (Date d : memorialDayHolidays) {
+            boolean result = new USHolidays().isHoliday(d);
             assertTrue(result);
         }
     }
 
     @Test
-    public void laborDayYears(){
+    public void laborDayYears() {
         List<Date> laborDayHolidays = new ArrayList<>();
         laborDayHolidays.add(new GregorianCalendar(2024, Calendar.SEPTEMBER, 2).getTime());
         laborDayHolidays.add(new GregorianCalendar(2025, Calendar.SEPTEMBER, 1).getTime());
@@ -119,14 +140,14 @@ public class USHolidaysTest {
         laborDayHolidays.add(new GregorianCalendar(2032, Calendar.SEPTEMBER, 6).getTime());
         laborDayHolidays.add(new GregorianCalendar(2033, Calendar.SEPTEMBER, 5).getTime());
 
-        for(Date d: laborDayHolidays){
-            boolean result = USHolidays.isHoliday(d);
+        for (Date d : laborDayHolidays) {
+            boolean result = new USHolidays().isHoliday(d);
             assertTrue(result);
         }
     }
 
     @Test
-    public void columbusDayFor10Years(){
+    public void columbusDayFor10Years() {
         List<Date> columbusHolidays = new ArrayList<>();
         columbusHolidays.add(new GregorianCalendar(2018, Calendar.OCTOBER, 8).getTime());
         columbusHolidays.add(new GregorianCalendar(2019, Calendar.OCTOBER, 14).getTime());
@@ -140,14 +161,14 @@ public class USHolidaysTest {
         columbusHolidays.add(new GregorianCalendar(2027, Calendar.OCTOBER, 11).getTime());
         columbusHolidays.add(new GregorianCalendar(2028, Calendar.OCTOBER, 9).getTime());
 
-        for(Date d: columbusHolidays){
-            boolean result = USHolidays.isHoliday(d);
+        for (Date d : columbusHolidays) {
+            boolean result = new USHolidays().isHoliday(d);
             assertTrue(result);
         }
     }
 
     @Test
-    public void thanksgivingDayFor10Years(){
+    public void thanksgivingDayFor10Years() {
         List<Date> thanksgivingHolidays = new ArrayList<>();
         thanksgivingHolidays.add(new GregorianCalendar(2018, Calendar.NOVEMBER, 22).getTime());
         thanksgivingHolidays.add(new GregorianCalendar(2019, Calendar.NOVEMBER, 28).getTime());
@@ -161,35 +182,35 @@ public class USHolidaysTest {
         thanksgivingHolidays.add(new GregorianCalendar(2027, Calendar.NOVEMBER, 25).getTime());
         thanksgivingHolidays.add(new GregorianCalendar(2028, Calendar.NOVEMBER, 23).getTime());
 
-        for(Date d: thanksgivingHolidays){
-            boolean result = USHolidays.isHoliday(d);
+        for (Date d : thanksgivingHolidays) {
+            boolean result = new USHolidays().isHoliday(d);
             assertTrue(result);
         }
     }
 
     @Test
-    public void tenDecadesJuneteenthHoliday(){
-        for (int i=1;i<=100;i++){
-            Date holiday = new GregorianCalendar(2019+i, Calendar.JUNE, 19).getTime();
-            boolean result = USHolidays.isHoliday(holiday);
+    public void tenDecadesJuneteenthHoliday() {
+        for (int i = 1; i <= 100; i++) {
+            Date holiday = new GregorianCalendar(2019 + i, Calendar.JUNE, 19).getTime();
+            boolean result = new USHolidays().isHoliday(holiday);
             assertTrue(result);
         }
     }
 
     @Test
-    public void twoDecadesVeteransHoliday(){
-        for (int i=1;i<=20;i++){
-            Date holiday = new GregorianCalendar(2019+i, Calendar.NOVEMBER, 11).getTime();
-            boolean result = USHolidays.isHoliday(holiday);
+    public void twoDecadesVeteransHoliday() {
+        for (int i = 1; i <= 20; i++) {
+            Date holiday = new GregorianCalendar(2019 + i, Calendar.NOVEMBER, 11).getTime();
+            boolean result = new USHolidays().isHoliday(holiday);
             assertTrue(result);
         }
     }
 
     @Test
-    public void twoDecadesXmasDayHoliday(){
-        for (int i=1;i<=20;i++){
-            Date holiday = new GregorianCalendar(2019+i, Calendar.DECEMBER, 25).getTime();
-            boolean result = USHolidays.isHoliday(holiday);
+    public void twoDecadesXmasDayHoliday() {
+        for (int i = 1; i <= 20; i++) {
+            Date holiday = new GregorianCalendar(2019 + i, Calendar.DECEMBER, 25).getTime();
+            boolean result = new USHolidays().isHoliday(holiday);
             assertTrue(result);
         }
     }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class USHolidays {
+public class USHolidays implements Holiday{
 
     private static final List<Holiday> holidays = new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class USHolidays {
         holidays.add(new Xmas());
     }
 
-    public static boolean isHoliday(Date date){
+    public boolean isHoliday(Date date){
         if (null==date){
             return false;
         }

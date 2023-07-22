@@ -41,3 +41,7 @@ you need to test well and them the library will be fine.
 Pay attention there is not hardcoded holidays, everything is done via math, which is provided by US federal law.
 
 Doing what is right is always more diffult, takes more time, and require thinking, not always is obvious, lots of times will look like a Service make sense but actually the library will make more sense, othertimes a library will make more sense but actually you sohuld build a service, so think about the tradeoffs and challedge the assumptions.
+
+## Design
+
+****Basically we are using polymorphism at is best. There is a Holiday interface and them all the classes on the checkers package implement Holiday. USHolidays is just just one aggregator, which you might know by the pattern name Facade and a form of Composite because it also implements Holiday.
