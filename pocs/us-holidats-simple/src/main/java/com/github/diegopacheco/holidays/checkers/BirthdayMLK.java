@@ -6,6 +6,8 @@ import com.github.diegopacheco.holidays.Holiday;
 import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 public class BirthdayMLK implements Holiday {
@@ -15,10 +17,13 @@ public class BirthdayMLK implements Holiday {
             return false;
         }
         LocalDate localDate = DateUtils.fromDate(date);
-        LocalDate nth = DateUtils.nthWeek(date,3, DayOfWeek.MONDAY);
+        LocalDate jan = LocalDate.of(localDate.getYear(), Month.JANUARY, 1);
+        LocalDate thrivedMondayInJan = jan.with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY))
+                .with(TemporalAdjusters.next(DayOfWeek.MONDAY))
+                .with(TemporalAdjusters.next(DayOfWeek.MONDAY));
 
         Instant parameterInstant = date.toInstant();
-        Instant nthInstant = nth.atStartOfDay(DateUtils.getCurrentZoneId()).toInstant();
-        return nthInstant.equals(parameterInstant);
+        Instant holidayInstant = thrivedMondayInJan.atStartOfDay(DateUtils.getCurrentZoneId()).toInstant();
+        return holidayInstant.equals(parameterInstant);
     }
 }
