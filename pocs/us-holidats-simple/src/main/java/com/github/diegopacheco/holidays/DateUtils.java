@@ -1,6 +1,9 @@
 package com.github.diegopacheco.holidays;
 
-import java.time.*;
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
@@ -18,12 +21,6 @@ public class DateUtils {
     public static LocalDate lastMondayOfMonth(Date date){
         LocalDate localDate = date.toInstant().atZone(zoneId).toLocalDate();
         LocalDate lastMonday = localDate.with(TemporalAdjusters.lastInMonth(DayOfWeek.MONDAY));
-        return lastMonday;
-    }
-
-    public static LocalDate firstMondayOfMonth(Date date){
-        LocalDate localDate = date.toInstant().atZone(zoneId).toLocalDate();
-        LocalDate lastMonday = localDate.with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
         return lastMonday;
     }
 
@@ -48,10 +45,6 @@ public class DateUtils {
 
     public static ZoneId getCurrentZoneId(){
         return zoneId;
-    }
-
-    public static Date today(){
-        return new Date();
     }
 
 }
