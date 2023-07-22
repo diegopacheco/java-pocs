@@ -61,4 +61,25 @@ public class USHolidaysTest {
         }
     }
 
+    @Test
+    public void birthdayWashington10Years(){
+        List<Date> mlkHolidays = new ArrayList<>();
+        mlkHolidays.add(new GregorianCalendar(2019, Calendar.FEBRUARY, 18).getTime());
+        mlkHolidays.add(new GregorianCalendar(2020, Calendar.FEBRUARY, 17).getTime());
+        mlkHolidays.add(new GregorianCalendar(2021, Calendar.FEBRUARY, 15).getTime());
+        mlkHolidays.add(new GregorianCalendar(2022, Calendar.FEBRUARY, 21).getTime());
+        mlkHolidays.add(new GregorianCalendar(2023, Calendar.FEBRUARY, 20).getTime());
+        mlkHolidays.add(new GregorianCalendar(2024, Calendar.FEBRUARY, 19).getTime());
+        mlkHolidays.add(new GregorianCalendar(2025, Calendar.FEBRUARY, 17).getTime());
+        mlkHolidays.add(new GregorianCalendar(2026, Calendar.FEBRUARY, 16).getTime());
+        mlkHolidays.add(new GregorianCalendar(2027, Calendar.FEBRUARY, 15).getTime());
+        mlkHolidays.add(new GregorianCalendar(2028, Calendar.FEBRUARY, 21).getTime());
+        mlkHolidays.add(new GregorianCalendar(2029, Calendar.FEBRUARY, 19).getTime());
+
+        for(Date d: mlkHolidays){
+            boolean result = USHolidays.isHoliday(d);
+            assertTrue(result);
+        }
+    }
+
 }
