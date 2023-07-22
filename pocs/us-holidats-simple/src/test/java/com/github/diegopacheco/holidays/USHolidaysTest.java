@@ -83,7 +83,7 @@ public class USHolidaysTest {
     }
 
     @Test
-    public void memorialDayYears(){
+    public void memorialDayTenYears(){
         List<Date> memorialDayHolidays = new ArrayList<>();
         memorialDayHolidays.add(new GregorianCalendar(2017, Calendar.MAY, 29).getTime());
         memorialDayHolidays.add(new GregorianCalendar(2018, Calendar.MAY, 28).getTime());
