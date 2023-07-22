@@ -46,6 +46,6 @@ make more sense but actually you sohuld build a service, so think about the trad
 
 ## Design
 
-****Basically we are using polymorphism at is best. There is a Holiday interface and them all the classes on the 
+Basically we are using polymorphism at is best. There is a Holiday interface and them all the classes on the 
 checkers package implement Holiday. USHolidays is just just one aggregator, which you might know by the 
 pattern name Facade and a form of Composite because it also implements Holiday.
