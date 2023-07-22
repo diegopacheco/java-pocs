@@ -15,6 +15,18 @@ public class DateUtils {
         return nth;
     }
 
+    public static LocalDate lastMondayOfMonth(Date date){
+        LocalDate localDate = date.toInstant().atZone(zoneId).toLocalDate();
+        LocalDate lastMonday = localDate.with(TemporalAdjusters.lastInMonth(DayOfWeek.MONDAY));
+        return lastMonday;
+    }
+
+    public static LocalDate firstMondayOfMonth(Date date){
+        LocalDate localDate = date.toInstant().atZone(zoneId).toLocalDate();
+        LocalDate lastMonday = localDate.with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
+        return lastMonday;
+    }
+
     public static LocalDate fromDate(Date date){
         Instant instant = date.toInstant();
         LocalDate currentDate = LocalDate.ofInstant(instant,zoneId);

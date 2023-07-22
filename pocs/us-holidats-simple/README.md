@@ -11,7 +11,7 @@
 [x] Memorial Day, the last Monday in May.
 [x] Juneteenth National Independence Day, June 19.
 [x] Independence Day, July 4.
-[ ] Labor Day, the first Monday in September.
+[x] Labor Day, the first Monday in September.
 [ ] Columbus Day, the second Monday in October.
 [x] Veterans Day, November 11.
 [ ] Thanksgiving Day, the fourth Thursday in November.

@@ -17,8 +17,8 @@ public class USHolidaysTest {
     }
 
     @Test
-    public void tenDecatesNewYearEveHoliday(){
-        for (int i=1;i<=20;i++){
+    public void tenDecadesNewYearEveHoliday(){
+        for (int i=1;i<=100;i++){
             Date holiday = new GregorianCalendar(2019+i, Calendar.JANUARY, 1).getTime();
             boolean result = USHolidays.isHoliday(holiday);
             assertTrue(result);
@@ -26,8 +26,8 @@ public class USHolidaysTest {
     }
 
     @Test
-    public void tenDecatesIndependenceDayHoliday(){
-        for (int i=1;i<=20;i++){
+    public void tenDecadesIndependenceDayHoliday(){
+        for (int i=1;i<=100;i++){
             Date holiday = new GregorianCalendar(2019+i, Calendar.JULY, 4).getTime();
             boolean result = USHolidays.isHoliday(holiday);
             assertTrue(result);
@@ -43,19 +43,19 @@ public class USHolidaysTest {
 
     @Test
     public void birthdayMLKFor10Years(){
-        List<Date> mlkHolidays = new ArrayList<>();
-        mlkHolidays.add(new GregorianCalendar(2024, Calendar.JANUARY, 15).getTime());
-        mlkHolidays.add(new GregorianCalendar(2025, Calendar.JANUARY, 20).getTime());
-        mlkHolidays.add(new GregorianCalendar(2026, Calendar.JANUARY, 19).getTime());
-        mlkHolidays.add(new GregorianCalendar(2027, Calendar.JANUARY, 18).getTime());
-        mlkHolidays.add(new GregorianCalendar(2028, Calendar.JANUARY, 17).getTime());
-        mlkHolidays.add(new GregorianCalendar(2029, Calendar.JANUARY, 15).getTime());
-        mlkHolidays.add(new GregorianCalendar(2030, Calendar.JANUARY, 21).getTime());
-        mlkHolidays.add(new GregorianCalendar(2031, Calendar.JANUARY, 20).getTime());
-        mlkHolidays.add(new GregorianCalendar(2032, Calendar.JANUARY, 19).getTime());
-        mlkHolidays.add(new GregorianCalendar(2033, Calendar.JANUARY, 17).getTime());
+        List<Date> birthdayMLKHolidays = new ArrayList<>();
+        birthdayMLKHolidays.add(new GregorianCalendar(2024, Calendar.JANUARY, 15).getTime());
+        birthdayMLKHolidays.add(new GregorianCalendar(2025, Calendar.JANUARY, 20).getTime());
+        birthdayMLKHolidays.add(new GregorianCalendar(2026, Calendar.JANUARY, 19).getTime());
+        birthdayMLKHolidays.add(new GregorianCalendar(2027, Calendar.JANUARY, 18).getTime());
+        birthdayMLKHolidays.add(new GregorianCalendar(2028, Calendar.JANUARY, 17).getTime());
+        birthdayMLKHolidays.add(new GregorianCalendar(2029, Calendar.JANUARY, 15).getTime());
+        birthdayMLKHolidays.add(new GregorianCalendar(2030, Calendar.JANUARY, 21).getTime());
+        birthdayMLKHolidays.add(new GregorianCalendar(2031, Calendar.JANUARY, 20).getTime());
+        birthdayMLKHolidays.add(new GregorianCalendar(2032, Calendar.JANUARY, 19).getTime());
+        birthdayMLKHolidays.add(new GregorianCalendar(2033, Calendar.JANUARY, 17).getTime());
 
-        for(Date d: mlkHolidays){
+        for(Date d: birthdayMLKHolidays){
             boolean result = USHolidays.isHoliday(d);
             assertTrue(result);
         }
@@ -63,20 +63,20 @@ public class USHolidaysTest {
 
     @Test
     public void birthdayWashington10Years(){
-        List<Date> mlkHolidays = new ArrayList<>();
-        mlkHolidays.add(new GregorianCalendar(2019, Calendar.FEBRUARY, 18).getTime());
-        mlkHolidays.add(new GregorianCalendar(2020, Calendar.FEBRUARY, 17).getTime());
-        mlkHolidays.add(new GregorianCalendar(2021, Calendar.FEBRUARY, 15).getTime());
-        mlkHolidays.add(new GregorianCalendar(2022, Calendar.FEBRUARY, 21).getTime());
-        mlkHolidays.add(new GregorianCalendar(2023, Calendar.FEBRUARY, 20).getTime());
-        mlkHolidays.add(new GregorianCalendar(2024, Calendar.FEBRUARY, 19).getTime());
-        mlkHolidays.add(new GregorianCalendar(2025, Calendar.FEBRUARY, 17).getTime());
-        mlkHolidays.add(new GregorianCalendar(2026, Calendar.FEBRUARY, 16).getTime());
-        mlkHolidays.add(new GregorianCalendar(2027, Calendar.FEBRUARY, 15).getTime());
-        mlkHolidays.add(new GregorianCalendar(2028, Calendar.FEBRUARY, 21).getTime());
-        mlkHolidays.add(new GregorianCalendar(2029, Calendar.FEBRUARY, 19).getTime());
+        List<Date> birthdayWashingtonHolidays = new ArrayList<>();
+        birthdayWashingtonHolidays.add(new GregorianCalendar(2019, Calendar.FEBRUARY, 18).getTime());
+        birthdayWashingtonHolidays.add(new GregorianCalendar(2020, Calendar.FEBRUARY, 17).getTime());
+        birthdayWashingtonHolidays.add(new GregorianCalendar(2021, Calendar.FEBRUARY, 15).getTime());
+        birthdayWashingtonHolidays.add(new GregorianCalendar(2022, Calendar.FEBRUARY, 21).getTime());
+        birthdayWashingtonHolidays.add(new GregorianCalendar(2023, Calendar.FEBRUARY, 20).getTime());
+        birthdayWashingtonHolidays.add(new GregorianCalendar(2024, Calendar.FEBRUARY, 19).getTime());
+        birthdayWashingtonHolidays.add(new GregorianCalendar(2025, Calendar.FEBRUARY, 17).getTime());
+        birthdayWashingtonHolidays.add(new GregorianCalendar(2026, Calendar.FEBRUARY, 16).getTime());
+        birthdayWashingtonHolidays.add(new GregorianCalendar(2027, Calendar.FEBRUARY, 15).getTime());
+        birthdayWashingtonHolidays.add(new GregorianCalendar(2028, Calendar.FEBRUARY, 21).getTime());
+        birthdayWashingtonHolidays.add(new GregorianCalendar(2029, Calendar.FEBRUARY, 19).getTime());
 
-        for(Date d: mlkHolidays){
+        for(Date d: birthdayWashingtonHolidays){
             boolean result = USHolidays.isHoliday(d);
             assertTrue(result);
         }
@@ -84,30 +84,50 @@ public class USHolidaysTest {
 
     @Test
     public void memorialDayYears(){
-        List<Date> mlkHolidays = new ArrayList<>();
-        mlkHolidays.add(new GregorianCalendar(2017, Calendar.MAY, 29).getTime());
-        mlkHolidays.add(new GregorianCalendar(2018, Calendar.MAY, 28).getTime());
-        mlkHolidays.add(new GregorianCalendar(2019, Calendar.MAY, 27).getTime());
-        mlkHolidays.add(new GregorianCalendar(2020, Calendar.MAY, 25).getTime());
-        mlkHolidays.add(new GregorianCalendar(2021, Calendar.MAY, 31).getTime());
-        mlkHolidays.add(new GregorianCalendar(2022, Calendar.MAY, 30).getTime());
-        mlkHolidays.add(new GregorianCalendar(2023, Calendar.MAY, 29).getTime());
-        mlkHolidays.add(new GregorianCalendar(2024, Calendar.MAY, 27).getTime());
-        mlkHolidays.add(new GregorianCalendar(2025, Calendar.MAY, 26).getTime());
-        mlkHolidays.add(new GregorianCalendar(2026, Calendar.MAY, 25).getTime());
-        mlkHolidays.add(new GregorianCalendar(2027, Calendar.MAY, 31).getTime());
-        mlkHolidays.add(new GregorianCalendar(2028, Calendar.MAY, 29).getTime());
-        mlkHolidays.add(new GregorianCalendar(2029, Calendar.MAY, 28).getTime());
+        List<Date> memorialDayHolidays = new ArrayList<>();
+        memorialDayHolidays.add(new GregorianCalendar(2017, Calendar.MAY, 29).getTime());
+        memorialDayHolidays.add(new GregorianCalendar(2018, Calendar.MAY, 28).getTime());
+        memorialDayHolidays.add(new GregorianCalendar(2019, Calendar.MAY, 27).getTime());
+        memorialDayHolidays.add(new GregorianCalendar(2020, Calendar.MAY, 25).getTime());
+        memorialDayHolidays.add(new GregorianCalendar(2021, Calendar.MAY, 31).getTime());
+        memorialDayHolidays.add(new GregorianCalendar(2022, Calendar.MAY, 30).getTime());
+        memorialDayHolidays.add(new GregorianCalendar(2023, Calendar.MAY, 29).getTime());
+        memorialDayHolidays.add(new GregorianCalendar(2024, Calendar.MAY, 27).getTime());
+        memorialDayHolidays.add(new GregorianCalendar(2025, Calendar.MAY, 26).getTime());
+        memorialDayHolidays.add(new GregorianCalendar(2026, Calendar.MAY, 25).getTime());
+        memorialDayHolidays.add(new GregorianCalendar(2027, Calendar.MAY, 31).getTime());
+        memorialDayHolidays.add(new GregorianCalendar(2028, Calendar.MAY, 29).getTime());
+        memorialDayHolidays.add(new GregorianCalendar(2029, Calendar.MAY, 28).getTime());
 
-        for(Date d: mlkHolidays){
+        for(Date d: memorialDayHolidays){
             boolean result = USHolidays.isHoliday(d);
             assertTrue(result);
         }
     }
 
     @Test
-    public void twoDecatesJuneteenthHoliday(){
-        for (int i=1;i<=20;i++){
+    public void laborDayYears(){
+        List<Date> laborDayHolidays = new ArrayList<>();
+        laborDayHolidays.add(new GregorianCalendar(2024, Calendar.SEPTEMBER, 2).getTime());
+        laborDayHolidays.add(new GregorianCalendar(2025, Calendar.SEPTEMBER, 1).getTime());
+        laborDayHolidays.add(new GregorianCalendar(2026, Calendar.SEPTEMBER, 7).getTime());
+        laborDayHolidays.add(new GregorianCalendar(2027, Calendar.SEPTEMBER, 6).getTime());
+        laborDayHolidays.add(new GregorianCalendar(2028, Calendar.SEPTEMBER, 4).getTime());
+        laborDayHolidays.add(new GregorianCalendar(2029, Calendar.SEPTEMBER, 3).getTime());
+        laborDayHolidays.add(new GregorianCalendar(2030, Calendar.SEPTEMBER, 2).getTime());
+        laborDayHolidays.add(new GregorianCalendar(2031, Calendar.SEPTEMBER, 1).getTime());
+        laborDayHolidays.add(new GregorianCalendar(2032, Calendar.SEPTEMBER, 6).getTime());
+        laborDayHolidays.add(new GregorianCalendar(2033, Calendar.SEPTEMBER, 5).getTime());
+
+        for(Date d: laborDayHolidays){
+            boolean result = USHolidays.isHoliday(d);
+            assertTrue(result);
+        }
+    }
+
+    @Test
+    public void tenDecatesJuneteenthHoliday(){
+        for (int i=1;i<=100;i++){
             Date holiday = new GregorianCalendar(2019+i, Calendar.JUNE, 19).getTime();
             boolean result = USHolidays.isHoliday(holiday);
             assertTrue(result);
