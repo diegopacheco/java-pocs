@@ -25,4 +25,8 @@ public class DateUtils {
         return zoneId;
     }
 
+    public static Date today(){
+        return new Date();
+    }
+
 }

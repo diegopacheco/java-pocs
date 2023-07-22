@@ -9,11 +9,11 @@
 [x] Birthday of Martin Luther King, Jr., the third Monday in January.
 [x] Washington’s Birthday, the third Monday in February.
 [x] Memorial Day, the last Monday in May.
-[ ] Juneteenth National Independence Day, June 19.
+[x] Juneteenth National Independence Day, June 19.
 [x] Independence Day, July 4.
 [ ] Labor Day, the first Monday in September.
 [ ] Columbus Day, the second Monday in October.
-[ ] Veterans Day, November 11.
+[x] Veterans Day, November 11.
 [ ] Thanksgiving Day, the fourth Thursday in November.
 [x] Christmas Day, December 25.
 ```

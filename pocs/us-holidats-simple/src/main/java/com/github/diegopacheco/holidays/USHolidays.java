@@ -16,6 +16,8 @@ public class USHolidays {
         holidays.add(new BirthdayMLK());
         holidays.add(new BirthdayWashington());
         holidays.add(new MemorialDay());
+        holidays.add(new JuneteenthDay());
+        holidays.add(new VeteransDay());
         holidays.add(new XmasHoliday());
     }
 
