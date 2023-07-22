@@ -4,7 +4,7 @@
 ```
 ### Law definition
 According to US federal law. (a)The following are legal public holidays:
-```json
+```
 [x] New Year’s Day, January 1.
 [x] Birthday of Martin Luther King, Jr., the third Monday in January.
 [x] Washington’s Birthday, the third Monday in February.
