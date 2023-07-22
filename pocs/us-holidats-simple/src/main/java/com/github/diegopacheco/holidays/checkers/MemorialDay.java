@@ -17,11 +17,11 @@ public class MemorialDay implements Holiday {
             return false;
         }
         LocalDate localDate = DateUtils.fromDate(date);
-        LocalDate september = LocalDate.of(localDate.getYear(), Month.MAY, 1);
-        LocalDate lastMondayinMay = september.with(TemporalAdjusters.lastInMonth(DayOfWeek.MONDAY));
+        LocalDate may = LocalDate.of(localDate.getYear(), Month.MAY, 1);
+        LocalDate lastMondayMay = may.with(TemporalAdjusters.lastInMonth(DayOfWeek.MONDAY));
 
         Instant parameterInstant = date.toInstant();
-        Instant holidayInstant = lastMondayinMay.atStartOfDay(DateUtils.getCurrentZoneId()).toInstant();
+        Instant holidayInstant = lastMondayMay.atStartOfDay(DateUtils.getCurrentZoneId()).toInstant();
         return holidayInstant.equals(parameterInstant);
     }
 }
