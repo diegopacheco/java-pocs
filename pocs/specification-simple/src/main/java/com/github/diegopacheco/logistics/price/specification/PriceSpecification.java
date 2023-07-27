@@ -1,7 +1,5 @@
 package com.github.diegopacheco.logistics.price.specification;
 
-import com.github.diegopacheco.logistics.price.PreOrder;
-
 import java.math.BigDecimal;
 
 public interface PriceSpecification {
