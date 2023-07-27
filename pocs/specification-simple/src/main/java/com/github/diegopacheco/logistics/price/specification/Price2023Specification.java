@@ -73,5 +73,3 @@ public class Price2023Specification implements PriceSpecification{
     }
 
 }
-
-

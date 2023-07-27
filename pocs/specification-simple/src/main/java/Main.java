@@ -13,14 +13,14 @@ public class Main {
         Set<PreOrder.Item> items = new HashSet<PreOrder.Item>();
         items.add(new PreOrder.Item("paperclips", 100, 2));
 
-        PreOrder preoder = new PreOrder(
+        PreOrder preorder = new PreOrder(
                 PreOrder.Priority.HIGH,
                 items,
                 10279,
                 State.New_York
         );
         PriceSimulation simulation = new PriceSimulationService();
-        BigDecimal price = simulation.simulate(preoder);
-        System.out.println(preoder + " will cost: " + price);
+        BigDecimal price = simulation.simulate(preorder);
+        System.out.println(preorder + " will cost: " + price);
     }
 }

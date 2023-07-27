@@ -13,7 +13,7 @@ public class PriceSimulationService implements PriceSimulation {
 
         BigDecimal total = preorder.getTotal();
         BigDecimal taxState = priceSpecification.getTax(state);
-        BigDecimal taxTotal = total.subtract(total.subtract(taxState));
+        BigDecimal taxTotal = total.multiply(taxState.divide(new BigDecimal(100)));
         BigDecimal totalPlusTax = total.add(taxTotal);
         return totalPlusTax;
     }
