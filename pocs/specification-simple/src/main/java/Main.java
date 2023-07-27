@@ -21,6 +21,6 @@ public class Main {
         );
         PriceSimulation simulation = new PriceSimulationService();
         BigDecimal price = simulation.simulate(preorder);
-        System.out.println(preorder + " will cost: " + price);
+        System.out.println(preorder + " will cost: USD " + price + " w/tax");
     }
 }

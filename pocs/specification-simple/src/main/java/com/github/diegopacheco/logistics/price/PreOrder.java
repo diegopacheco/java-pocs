@@ -55,6 +55,15 @@ public class PreOrder {
         public int getWeight() {
             return weight;
         }
+
+        @Override
+        public String toString() {
+            return "Item{" +
+                    "name='" + name + '\'' +
+                    ", quantity=" + quantity +
+                    ", weight=" + weight +
+                    '}';
+        }
     }
 
     public Priority getPriority() {

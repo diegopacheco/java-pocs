@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class PriceSimulationService implements PriceSimulation {
     @Override
     public BigDecimal simulate(PreOrder preorder) {
-        PriceSpecification priceSpecification = PriceSimulationFactory.build(2023);
+        PriceSpecification priceSpecification = PriceSpecificationFactory.build(2023);
         State state = preorder.getDestinationState();
 
         BigDecimal total = preorder.getTotal();
