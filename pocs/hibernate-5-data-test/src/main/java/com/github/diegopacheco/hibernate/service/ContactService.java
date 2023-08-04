@@ -4,7 +4,6 @@ import com.github.diegopacheco.hibernate.dao.ContactDao;
 import com.github.diegopacheco.hibernate.model.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
