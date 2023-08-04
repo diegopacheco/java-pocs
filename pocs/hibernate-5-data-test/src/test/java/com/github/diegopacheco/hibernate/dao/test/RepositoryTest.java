@@ -24,7 +24,7 @@ public class RepositoryTest {
     TestEntityManager entityManager;
 
     @Autowired
-    ContactRepository contactRepository;
+    private ContactRepository contactRepository;
 
     @Test
     public void injectedComponentsAreNotNullTest(){
