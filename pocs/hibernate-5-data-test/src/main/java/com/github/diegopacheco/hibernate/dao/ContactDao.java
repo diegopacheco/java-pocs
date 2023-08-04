@@ -1,13 +1,10 @@
 package com.github.diegopacheco.hibernate.dao;
 
 import com.github.diegopacheco.hibernate.model.Contact;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
