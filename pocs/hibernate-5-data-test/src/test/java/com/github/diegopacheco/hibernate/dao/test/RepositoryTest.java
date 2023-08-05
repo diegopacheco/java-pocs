@@ -1,5 +1,6 @@
 package com.github.diegopacheco.hibernate.dao.test;
 
+import com.github.diegopacheco.hibernate.dao.ContactRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +17,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest(includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Repository.class))
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = "com.github.diegopacheco.hibernate.dao.*")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 public class RepositoryTest {
 
     @Autowired
     TestEntityManager entityManager;
 
-    //@Autowired
-    //private ContactRepository contactRepository;
+    @Autowired
+    private ContactRepository contactRepository;
 
     @Test
     public void injectedComponentsAreNotNullTest(){
