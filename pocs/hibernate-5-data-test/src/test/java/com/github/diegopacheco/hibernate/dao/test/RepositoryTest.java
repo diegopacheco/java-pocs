@@ -17,15 +17,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest(includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Repository.class))
-@EnableJpaRepositories(basePackages = "com.github.diegopacheco.hibernate.dao.*")
+@EnableJpaRepositories
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 public class RepositoryTest {
 
     @Autowired
     TestEntityManager entityManager;
 
-    @Autowired
-    private ContactRepository contactRepository;
+    //@Autowired
+    //private ContactRepository contactRepository;
 
     @Test
     public void injectedComponentsAreNotNullTest(){
