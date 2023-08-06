@@ -40,7 +40,7 @@ Loose some performance
   * CONS: Break type system (Runtime eval) - Sucks with serialization, DB loads
 * IF Objects
   * PROS: Concise, Good Code Readability
-  * CONS: Uses more memory (more objects) 
+  * CONS: Uses more memory (more objects)
 * Functional: (Predicates, Suppliers and Functions) 
   * PROS: Greater reuse: Granular Functions, Functional Style 
   * CONS: More Complex, Still has IFs
