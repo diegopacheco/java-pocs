@@ -5,18 +5,24 @@
 
 ### How to handle decisions?
 
-9 different techniques to handle branches:
-* IFs
-* Switch
-* SCM branches
-* Maps
-* Enums
-* IF Objects
-* Functional
-* Reflection and InstanceOf
-* Type System + Polymorphism
+10 different techniques to handle branches:<br/>
+```
+Basic Branches
+ * IFs
+ * Switch
+ * SCM branches
+Elegant Options
+ * Maps
+ * Enums
+ * IF Objects
+ * Functional
+ * Composable Decorators
+Polymorphism + Type System
+ * Reflection and InstanceOf
+ * Type System + Polymorphism
+```
 
-### Branches
+### Basic Branches
 
 * IFs
   * Pros: Fast, simple to do
@@ -28,7 +34,7 @@
   * PROS: Might be the only solution (lack of BC) 
   * CONS: Harder to maintain, is a bit more obscure 
 
-### Elegant IFs
+### Elegant Options
 
 Loose some performance
 
@@ -44,6 +50,9 @@ Loose some performance
 * Functional: (Predicates, Suppliers and Functions) 
   * PROS: Greater reuse: Granular Functions, Functional Style 
   * CONS: More Complex, Still has IFs
+* Composable Decorator (from Elegant Objects)
+  * PROS: Elegant Pure OOP Style
+  * CONS: More memory usage, a bit more complex 
 
 ### Polymorphism + Type System
 
