@@ -41,7 +41,7 @@ Loose some performance
 * IF Objects
   * PROS: 
   * CONS:  
-* Predicates, Suppliers and Functions: 
+* Functional: (Predicates, Suppliers and Functions) 
   * PROS: Greater reuse: Granular Functions, Functional Style 
   * CONS: More Complex, Still has IFs
 
