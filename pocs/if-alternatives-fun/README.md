@@ -12,7 +12,7 @@
 * Maps
 * Enums
 * IF Objects
-* Filters
+* Functional
 * Reflection and InstanceOf
 * Type System + Polymorphism
 
@@ -39,8 +39,8 @@ Loose some performance
   * PROS: Concise, Type System
   * CONS: Break type system (Runtime eval) - Sucks with serialization, DB loads
 * IF Objects
-  * PROS: 
-  * CONS:  
+  * PROS: Concise, Good Code Readability
+  * CONS: Uses more memory (more objects) 
 * Functional: (Predicates, Suppliers and Functions) 
   * PROS: Greater reuse: Granular Functions, Functional Style 
   * CONS: More Complex, Still has IFs
