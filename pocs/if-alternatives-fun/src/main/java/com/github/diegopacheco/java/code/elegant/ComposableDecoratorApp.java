@@ -29,6 +29,9 @@ public class ComposableDecoratorApp {
             if (type!=null && type.equals(supportedType)){
                 return tollPrice.price() + value;
             }
+            if (supportedType==null && type==null){
+                return tollPrice.price() + value;
+            }
             return tollPrice.price();
         }
 
