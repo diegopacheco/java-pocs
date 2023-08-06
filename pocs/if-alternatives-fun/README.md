@@ -59,8 +59,8 @@ Loose some performance
 Use the language and proper OO Design
 
 * Reflection and InstanceOf
-  * PROS: 
-  * CONS: 
+  * PROS: More elegant
+  * CONS: A bit more complex, Break the Type System - instanceOf is resolved at runtime
 * Type System + Polymorphism
   * PROS: 
   * CONS:  
