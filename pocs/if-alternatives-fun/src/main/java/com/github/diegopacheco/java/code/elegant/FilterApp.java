@@ -17,6 +17,7 @@ public class FilterApp {
         final Predicate<String> isCar = s -> "car".equals(s);
         final Predicate<String> isMotorhome = s -> "motorhome".equals(s);
         final Predicate<String> isTruck = s -> "truck".equals(s);
+        final Predicate<String> isDefault = s -> null==s || "".equals(s.trim());
 
         Supplier<Double> carPrice = () -> 6.35;
         Supplier<Double> motorhomePrice = () -> 8.72d;
@@ -24,12 +25,16 @@ public class FilterApp {
         Supplier<Double> defaultPrice = () -> 4.31d;
         Supplier<Double> zeroPrice = () -> 0.0d;
 
+        // Would be better: IF we did not need a router(simulateTollPrice) this functions could be exposed directly.
         Function<String,Supplier<Double>> carFunction = (s) -> isCar.test(s) ? carPrice : zeroPrice;
         Function<String,Supplier<Double>> motorhomeFunction = (s) -> isMotorhome.test(s) ? motorhomePrice : zeroPrice;
         Function<String,Supplier<Double>> truckFunction = (s) -> isTruck.test(s) ? truckPrice : zeroPrice;
+        Function<String,Supplier<Double>> defaultFunction = (s) -> isDefault.test(s) ? defaultPrice : zeroPrice;
 
-        double result = carFunction.apply(type).get() + motorhomeFunction.apply(type).get() + truckFunction.apply(type).get();
-        return  0d==result ? defaultPrice.get() : result;
+        return carFunction.apply(type).get() +
+               motorhomeFunction.apply(type).get() +
+               truckFunction.apply(type).get() +
+               defaultFunction.apply(type).get();
     }
 
 }
