@@ -42,8 +42,8 @@ Loose some performance
   * PROS: 
   * CONS:  
 * Predicates, Suppliers and Functions: 
-  * PROS:  
-  * CONS: 
+  * PROS: Greater reuse: Granular Functions, Functional Style 
+  * CONS: More Complex, Still has IFs
 
 ### Polymorphism + Type System
 

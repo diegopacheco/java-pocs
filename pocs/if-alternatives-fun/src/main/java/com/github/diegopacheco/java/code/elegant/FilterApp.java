@@ -14,21 +14,22 @@ public class FilterApp {
     }
     private static double simulateTollPrice(String type){
 
-        final Predicate<String> isCar = s -> "car".equals(s.trim());
-        Predicate<String> isMotorhome = s -> "motorhome".equals(s.trim());
-        Predicate<String> isTruck = s -> "truck".equals(s.trim());
-        Predicate<String> isDefault = s -> null==s || "".equals(s.trim());
+        final Predicate<String> isCar = s -> "car".equals(s);
+        final Predicate<String> isMotorhome = s -> "motorhome".equals(s);
+        final Predicate<String> isTruck = s -> "truck".equals(s);
 
         Supplier<Double> carPrice = () -> 6.35;
         Supplier<Double> motorhomePrice = () -> 8.72d;
         Supplier<Double> truckPrice = () -> 12.98d;
         Supplier<Double> defaultPrice = () -> 4.31d;
-        Supplier<Double> zeroPrice = () -> 0d;
+        Supplier<Double> zeroPrice = () -> 0.0d;
 
         Function<String,Supplier<Double>> carFunction = (s) -> isCar.test(s) ? carPrice : zeroPrice;
         Function<String,Supplier<Double>> motorhomeFunction = (s) -> isMotorhome.test(s) ? motorhomePrice : zeroPrice;
         Function<String,Supplier<Double>> truckFunction = (s) -> isTruck.test(s) ? truckPrice : zeroPrice;
 
-        return carFunction.andThen(motorhomeFunction).andThen(truckFunction).apply(type);
+        double result = carFunction.apply(type).get() + motorhomeFunction.apply(type).get() + truckFunction.apply(type).get();
+        return  0d==result ? defaultPrice.get() : result;
     }
+
 }
