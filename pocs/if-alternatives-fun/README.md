@@ -62,5 +62,5 @@ Use the language and proper OO Design
   * PROS: More elegant
   * CONS: A bit more complex, Break the Type System - instanceOf is resolved at runtime
 * Type System + Polymorphism
-  * PROS: 
-  * CONS:  
+  * PROS: Best solution, Simple, OO, Fast, Elegant
+  * CONS: Has the IFs(Factory no way to avoid it) 
