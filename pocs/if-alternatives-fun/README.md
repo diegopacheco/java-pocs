@@ -11,10 +11,11 @@ Basic Branches
  * IFs
  * Switch
  * SCM branches
-Elegant Options
+Generic Options
  * Enums
  * Maps
  * Properties
+Elegant Options
  * IF Objects
  * Functional
  * Composable Decorators
@@ -35,9 +36,7 @@ Polymorphism + Type System
   * PROS: Might be the only solution (lack of BC) 
   * CONS: Harder to maintain, is a bit more obscure 
 
-### Elegant Options
-
-Loose some performance
+### Generic Options
 
 * Enums
   * PROS: Concise, Type System
@@ -48,6 +47,11 @@ Loose some performance
 * Properties:
   * PROS: Generic Code 
   * CONS: Depends on disk now, dont work well for embedded jars (libraries) 
+
+### Elegant Options
+
+Loose some performance
+
 * IF Objects
   * PROS: Concise, Good Code Readability
   * CONS: Uses more memory (more objects)
