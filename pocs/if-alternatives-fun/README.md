@@ -38,12 +38,15 @@ Polymorphism + Type System
 
 Loose some performance
 
-* Maps
-  * PROS: Elegant, compact, concise
-  * CONS: Slower, Breaks type system (Runtime Eval)
 * Enums
   * PROS: Concise, Type System
   * CONS: Break type system (Runtime eval) - Sucks with serialization, DB loads
+* Maps
+  * PROS: Elegant, compact, concise
+  * CONS: Slower, Breaks type system (Runtime Eval)
+* Properties:
+  * PROS: Generic Code 
+  * CONS: Depends on disk now, dont work well for embedded jars (libraries) 
 * IF Objects
   * PROS: Concise, Good Code Readability
   * CONS: Uses more memory (more objects)

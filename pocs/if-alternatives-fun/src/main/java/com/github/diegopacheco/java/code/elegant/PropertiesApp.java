@@ -25,8 +25,8 @@ public class PropertiesApp {
 
     private static double simulateTollPrice(String type) {
         if (null == type || "".equals(type.trim())) {
-            return Double.parseDouble(props.getProperty("price.standard"));
+            return Double.parseDouble(props.getProperty("prices.standard"));
         }
-        return Double.parseDouble(props.getProperty("price." + type));
+        return Double.parseDouble(props.getProperty("prices." + type));
     }
 }
