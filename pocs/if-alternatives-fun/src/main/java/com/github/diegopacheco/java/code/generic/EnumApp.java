@@ -1,4 +1,4 @@
-package com.github.diegopacheco.java.code.elegant;
+package com.github.diegopacheco.java.code.generic;
 
 public class EnumApp {
     public static void main(String[] args) {
@@ -10,7 +10,7 @@ public class EnumApp {
 
         // using valueOf creates weaker type system, push to runtime errors
         // System.out.println("Toll price: for a truck = " + Vehicle.valueOf("null"));    // NPE
-        // System.out.println("Toll price: for a truck = " + Vehicle.valueOf("banana"));  // IllegalArgumentException: No enum constant com.github.diegopacheco.java.code.elegant.EnumApp.Vehicle.banana
+        // System.out.println("Toll price: for a truck = " + Vehicle.valueOf("banana"));  // IllegalArgumentException: No enum constant com.github.diegopacheco.java.code.generic.EnumApp.Vehicle.banana
     }
 
     enum Vehicle{

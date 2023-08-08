@@ -1,4 +1,4 @@
-package com.github.diegopacheco.java.code.elegant;
+package com.github.diegopacheco.java.code.generic;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
