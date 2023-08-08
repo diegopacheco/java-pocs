@@ -5,7 +5,7 @@
 
 ### How to handle decisions?
 
-11 different techniques to handle branches:<br/>
+12 different techniques to handle branches:<br/>
 ```
 Basic Branches
  * IFs
@@ -15,6 +15,7 @@ Generic Options
  * Enums
  * Maps
  * Properties
+ * Reflection
 Elegant Options
  * IF Objects
  * Functional
@@ -46,7 +47,10 @@ Polymorphism + Type System
   * CONS: Slower, Breaks type system (Runtime Eval)
 * Properties:
   * PROS: Generic Code 
-  * CONS: Depends on disk now, dont work well for embedded jars (libraries) 
+  * CONS: Depends on disk now, dont work well for embedded jars (libraries)
+* Reflection
+  * PROS: Generic
+  * CONS: Slower, Obscure, Complex
 
 ### Elegant Options
 
