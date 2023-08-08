@@ -3,6 +3,24 @@
 ./mvnw clean install 
 ```
 
+## Rationale
+
+There are many ways we can handle decisions, from the simple *if* in the 
+code to a generic service with admin interface using a database.
+There are many ways we can express deciions, our decision can be rooted in different schools of tought like:
+* Procedural Style - C language style
+* Object Oriented - DDD, Pure Objects, Elegant Objects
+* Generic - using generic data structures and dynamic tecniques
+
+The tradeoffs go from compile time and type systems to runtime and 
+dynamic programing. Such chooses to some degree are a matter of taste and preference. 
+IMHO Type systems and compilers are better because reduce the 
+amount of test we need todo and increase the feedback loop.
+
+You always need to think if the cost and complexity of the solution is 
+really worth it to use the technique, there is no right or wrong 
+just tradeoffs.
+
 ### How to handle decisions?
 
 12 different techniques to handle branches:<br/>
