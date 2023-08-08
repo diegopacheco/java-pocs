@@ -40,8 +40,8 @@ public class ReflectionApp {
             Method method = cache.get(name);
             if (null==method){
                 String cap = name.substring(0, 1).toUpperCase() + name.substring(1);
-                cache.put(name,instance.getClass().getDeclaredMethod("get" + cap + "Price"));
-                method = cache.get(name);
+                method = instance.getClass().getDeclaredMethod("get" + cap + "Price");
+                cache.put(name,method);
             }
             return method;
         }catch(Exception e){
