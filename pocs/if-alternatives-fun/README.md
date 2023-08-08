@@ -5,15 +5,16 @@
 
 ### How to handle decisions?
 
-10 different techniques to handle branches:<br/>
+11 different techniques to handle branches:<br/>
 ```
 Basic Branches
  * IFs
  * Switch
  * SCM branches
 Elegant Options
- * Maps
  * Enums
+ * Maps
+ * Properties
  * IF Objects
  * Functional
  * Composable Decorators
