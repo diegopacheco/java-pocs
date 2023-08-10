@@ -1,7 +1,6 @@
 package com.github.diegopacheco.java.code.annotation;
 
-import ;import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
+import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -26,7 +25,7 @@ public class AnnotationsApp {
     private class Prices{
         Map<String, Annotation> cache = new ConcurrentHashMap<>();
         public static double getPrice(String alias){
-
+            return 0;
         }
     }
 
