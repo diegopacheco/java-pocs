@@ -6,7 +6,7 @@ Think carefully before applying this techniques like there is no tomorrow!
 <img src="wisdom.jpg" width="550" ></img>
 
 Branches, IFs, Decisions all the same thing. I'm not saying never 
-ever do simple IFs anymore and just do reflections all time. However
+ever do simple IFs anymore and just do reflections all time. However,
 some problems might justify different techniques.
 
 ## Rationale
