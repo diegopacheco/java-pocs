@@ -1,5 +1,10 @@
 package com.github.diegopacheco.java.code.annotation;
 
+import ;import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class AnnotationsApp {
 
     public static void main(String[] args) {
@@ -10,21 +15,23 @@ public class AnnotationsApp {
         System.out.println("Toll price: for a truck = " + simulateTollPrice("truck"));
     }
 
+    @com.github.diegopacheco.java.code.annotation.Prices(
+            prices = {
+                    @Price(alias = "car", value = "6.35", clazz = Prices.class),
+                    @Price(alias = "motorhome", value = "8.72", clazz = Prices.class),
+                    @Price(alias = "truck", value = "12.98", clazz = Prices.class),
+                    @Price(alias = "std", value = "4.31", clazz = Prices.class)
+            }
+    )
+    private class Prices{
+        Map<String, Annotation> cache = new ConcurrentHashMap<>();
+        public static double getPrice(String alias){
+
+        }
+    }
+
     private static double simulateTollPrice(String type){
-        if (null==type || "".equals(type.trim())){
-            return 4.31;
-        }
-        if ("car".equals(type.toLowerCase().trim())){
-            return 6.35d;
-        }
-        if ("motorhome".equals(type.toLowerCase().trim())){
-            return 8.72d;
-        }
-        if ("truck".equals(type.toLowerCase().trim())){
-            return 12.98d;
-        }
-        // bikes, small smart cars, tuk-tuk, whatever...
-        return 4.31;
+       return 0;
     }
 
 }

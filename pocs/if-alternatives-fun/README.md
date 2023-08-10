@@ -1,7 +1,9 @@
-### Build 
-```bash
-./mvnw clean install 
-```
+# IF Alternatives
+
+### Disclaimer
+
+Think carefully before applying this techniques like there is no tomorrow!
+<img src="wisdom.jpg" width="550" ></img>
 
 ## Rationale
 
@@ -23,7 +25,7 @@ just tradeoffs.
 
 ### How to handle decisions?
 
-12 different techniques to handle branches:<br/>
+13 different techniques to handle branches:<br/>
 ```
 Basic Branches
  * IFs
@@ -72,6 +74,12 @@ Polymorphism + Type System
   * PROS: Generic
   * CONS: Slower, Obscure, Complex
 
+### Annotations
+
+* Annotations
+  * PROS: 
+  * CONS: 
+
 ### Elegant Options
 
 Loose some performance
@@ -96,3 +104,9 @@ Use the language and proper OO Design
 * Type System + Polymorphism
   * PROS: Best solution, Simple, OO, Fast, Elegant
   * CONS: Has the IFs(Factory no way to avoid it) 
+
+
+### Build
+```bash
+./mvnw clean install 
+```
