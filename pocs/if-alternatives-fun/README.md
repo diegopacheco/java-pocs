@@ -9,6 +9,8 @@ Branches, IFs, Decisions all the same thing. I'm not saying never
 ever do simple IFs anymore and just do reflections all time. However,
 some problems might justify different techniques and approves.
 
+Check this out: https://francescocirillo.com/products/the-anti-if-campaign
+
 ## Rationale
 
 There are many ways we can handle decisions, from the simple *if* in the 
