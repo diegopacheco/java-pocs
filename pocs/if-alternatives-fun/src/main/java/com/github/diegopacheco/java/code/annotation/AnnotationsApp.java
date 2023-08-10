@@ -1,6 +1,6 @@
 package com.github.diegopacheco.java.code.annotation;
 
-import java.lang.annotation.Annotation;
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -14,7 +14,7 @@ public class AnnotationsApp {
         System.out.println("Toll price: for a truck = " + simulateTollPrice("truck"));
     }
 
-    @com.github.diegopacheco.java.code.annotation.Prices(
+    @Prices(
             prices = {
                     @Price(alias = "car", value = "6.35", clazz = Prices.class),
                     @Price(alias = "motorhome", value = "8.72", clazz = Prices.class),
@@ -22,15 +22,28 @@ public class AnnotationsApp {
                     @Price(alias = "std", value = "4.31", clazz = Prices.class)
             }
     )
-    private class Prices{
-        Map<String, Annotation> cache = new ConcurrentHashMap<>();
-        public static double getPrice(String alias){
-            return 0;
+    private static class PricesTable{
+        Map<String, BigDecimal> cache;
+        PricesTable instance = new PricesTable();
+        Prices prices = Prices.class.getAnnotation(Prices.class);
+        public BigDecimal getPrice(String alias){
+            if (null==cache){
+                 cache = new ConcurrentHashMap<>();
+                 for(Price price : prices.prices()){
+                      cache.put(price.alias(), new BigDecimal(price.value()));
+                 }
+            }
+            BigDecimal result = cache.get(alias);
+            if (null==result){
+                result = cache.get("std");
+            }
+            return result;
         }
     }
 
+    static PricesTable pricesTable = new PricesTable();
     private static double simulateTollPrice(String type){
-       return 0;
+        return pricesTable.getPrice(type).doubleValue();
     }
 
 }
