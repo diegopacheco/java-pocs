@@ -7,7 +7,7 @@ Think carefully before applying this techniques like there is no tomorrow!
 
 Branches, IFs, Decisions all the same thing. I'm not saying never 
 ever do simple IFs anymore and just do reflections all time. However,
-some problems might justify different techniques.
+some problems might justify different techniques and approves.
 
 ## Rationale
 
