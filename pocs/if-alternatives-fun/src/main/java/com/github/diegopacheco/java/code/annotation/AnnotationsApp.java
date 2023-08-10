@@ -24,8 +24,7 @@ public class AnnotationsApp {
     )
     private static class PricesTable{
         Map<String, BigDecimal> cache;
-        PricesTable instance = new PricesTable();
-        Prices prices = Prices.class.getAnnotation(Prices.class);
+        Prices prices = PricesTable.class.getDeclaredAnnotation(Prices.class);
         public BigDecimal getPrice(String alias){
             if (null==cache){
                  cache = new ConcurrentHashMap<>();
@@ -33,11 +32,10 @@ public class AnnotationsApp {
                       cache.put(price.alias(), new BigDecimal(price.value()));
                  }
             }
-            BigDecimal result = cache.get(alias);
-            if (null==result){
-                result = cache.get("std");
+            if (null==alias){
+                return cache.get("std");
             }
-            return result;
+            return cache.getOrDefault(alias,cache.get("std"));
         }
     }
 
