@@ -23,7 +23,7 @@ You always need to think if the cost and complexity of the solution is
 really worth it to use the technique, there is no right or wrong 
 just tradeoffs.
 
-### How to handle decisions?
+### How to handle decisions(ifs) ?
 
 13 different techniques to handle branches:<br/>
 ```
@@ -77,8 +77,8 @@ Polymorphism + Type System
 ### Annotations
 
 * Annotations
-  * PROS: 
-  * CONS: 
+  * PROS: Declarative, Generic - Has IFs but code won't grow.
+  * CONS: More complexity - Cache, Runtime only 
 
 ### Elegant Options
 
