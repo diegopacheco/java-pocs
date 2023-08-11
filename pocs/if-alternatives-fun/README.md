@@ -15,7 +15,7 @@ Check this out: https://francescocirillo.com/products/the-anti-if-campaign
 
 There are many ways we can handle decisions, from the simple *if* in the 
 code to a generic service with admin interface using a database.
-There are many ways we can express deciions, our decision can be rooted in different schools of tought like:
+There are many ways we can express decisions, our decision can be rooted in different schools of tought like:
 * Procedural Style - C language style
 * Object Oriented - DDD, Pure Objects, Elegant Objects
 * Generic - using generic data structures and dynamic tecniques
@@ -54,6 +54,31 @@ Polymorphism + Type System
  * Reflection and InstanceOf
  * Type System + Polymorphism
 ```
+
+## Tradeoffs considerations
+
+* How to handle null and corner cases:
+  * Ignore? do more ifs? push to consumer? fix it in a decorator?
+* Fail Fast vs Fail Safe
+  * Crash / Panic ? 
+  * Monads, Empty Object? Null?
+  * Can you recover?
+  * Cost / Easy Recovery?
+* Exception vs Errors
+  * Checked or Unchecked?
+  * Exception for all?
+  * Multiple? Which ones? Why?
+  * What are you going to do with it? 
+* Rate of Change
+  * Daily? weekly? monthly? quarter? yearly?
+  * Who change it?
+  * Why Change it?
+* Controlled vs Growing Complexity
+  * Code grows as you have more conditions?
+  * How many places you need to change?
+* School of Taught (OOP, FP, Generic, Compile vs Dynamic)
+  * What the team prefers?
+  * Why?
 
 ### Basic Branches
 
