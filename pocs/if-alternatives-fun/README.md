@@ -76,6 +76,10 @@ Polymorphism + Type System
 * Controlled vs Growing Complexity
   * Code grows as you have more conditions?
   * How many places you need to change?
+* Optimizations
+  * RPC? Batch?
+  * Cache? Eager? Lazy? On-Demand? 
+  * Move to a different place (client, server, bff, etc..)
 * School of Taught (OOP, FP, Generic, Compile vs Dynamic)
   * What the team prefers?
   * Why?
