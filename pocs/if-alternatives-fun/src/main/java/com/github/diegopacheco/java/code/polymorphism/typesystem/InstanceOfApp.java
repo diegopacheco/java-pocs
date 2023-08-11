@@ -11,19 +11,19 @@ public class InstanceOfApp {
 
     static class Car{
         public double price(){
-            return 6.35d;
+            return 10.93d;
         }
     }
 
     static class Motorhome{
         public double price(){
-            return 8.72d;
+            return 14.23d;
         }
     }
 
     static class Truck{
         public double price(){
-            return 12.98d;
+            return 17.55d;
         }
     }
 

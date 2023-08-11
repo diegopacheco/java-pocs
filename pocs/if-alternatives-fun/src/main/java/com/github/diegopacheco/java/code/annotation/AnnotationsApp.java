@@ -16,9 +16,9 @@ public class AnnotationsApp {
 
     @Prices(
             prices = {
-                    @Price(alias = "car", value = "6.35", clazz = Prices.class),
-                    @Price(alias = "motorhome", value = "8.72", clazz = Prices.class),
-                    @Price(alias = "truck", value = "12.98", clazz = Prices.class),
+                    @Price(alias = "car", value = "10.93", clazz = Prices.class),
+                    @Price(alias = "motorhome", value = "14.23", clazz = Prices.class),
+                    @Price(alias = "truck", value = "17.55", clazz = Prices.class),
                     @Price(alias = "std", value = "4.31", clazz = Prices.class)
             }
     )

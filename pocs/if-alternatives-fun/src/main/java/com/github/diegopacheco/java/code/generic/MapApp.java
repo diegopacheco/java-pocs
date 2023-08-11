@@ -14,9 +14,9 @@ public class MapApp {
 
     private static Map<String,Double> prices = new ConcurrentHashMap<>();
     static{
-        prices.put("car",6.35d);
-        prices.put("motorhome",8.72d);
-        prices.put("truck",12.98d);
+        prices.put("car",10.93d);
+        prices.put("motorhome",14.23d);
+        prices.put("truck",17.55d);
     }
     private static double simulateTollPrice(String type){
         if (null==type) return 4.31;

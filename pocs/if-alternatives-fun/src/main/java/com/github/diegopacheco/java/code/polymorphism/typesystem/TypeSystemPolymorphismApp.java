@@ -15,19 +15,19 @@ public class TypeSystemPolymorphismApp {
 
     static class Car implements Vehicle{
         public double price(){
-            return 6.35d;
+            return 10.93d;
         }
     }
 
     static class Motorhome implements Vehicle{
         public double price(){
-            return 8.72d;
+            return 14.23d;
         }
     }
 
     static class Truck implements Vehicle{
         public double price(){
-            return 12.98d;
+            return 17.55d;
         }
     }
 

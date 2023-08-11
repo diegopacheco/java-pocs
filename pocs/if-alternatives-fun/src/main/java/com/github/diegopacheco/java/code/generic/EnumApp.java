@@ -14,9 +14,9 @@ public class EnumApp {
     }
 
     enum Vehicle{
-        CAR(6.35d),
-        MOTORHOME(8.72d),
-        TRUCK(12.98d),
+        CAR(10.93d),
+        MOTORHOME(14.23d),
+        TRUCK(17.55d),
         OTHERS(4.31);
 
         private final double price;

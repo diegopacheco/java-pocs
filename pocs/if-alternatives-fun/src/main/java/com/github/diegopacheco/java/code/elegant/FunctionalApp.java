@@ -19,9 +19,9 @@ public class FunctionalApp {
         final Predicate<String> isTruck = s -> "truck".equals(s);
         final Predicate<String> isDefault = s -> null==s || "".equals(s.trim());
 
-        Supplier<Double> carPrice = () -> 6.35;
-        Supplier<Double> motorhomePrice = () -> 8.72d;
-        Supplier<Double> truckPrice = () -> 12.98d;
+        Supplier<Double> carPrice = () -> 10.93d;
+        Supplier<Double> motorhomePrice = () -> 14.23d;
+        Supplier<Double> truckPrice = () -> 17.55d;
         Supplier<Double> defaultPrice = () -> 4.31d;
         Supplier<Double> zeroPrice = () -> 0.0d;
 

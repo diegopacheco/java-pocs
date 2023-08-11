@@ -51,9 +51,9 @@ public class ComposableDecoratorApp {
             new VehiclePrice(
                 new VehiclePrice(
                     new VehiclePrice(
-                        new VehiclePrice(VehiclePrice.defaultToll(),type,"car",6.35),
-                            type,"motorhome",8.72d),
-                                type, "truck", 12.98d),
+                        new VehiclePrice(VehiclePrice.defaultToll(),type,"car",10.93d),
+                            type,"motorhome",14.23d),
+                                type, "truck", 17.55d),
                                     type, null, 4.31),
                                       type, "", 4.31).price();
     }

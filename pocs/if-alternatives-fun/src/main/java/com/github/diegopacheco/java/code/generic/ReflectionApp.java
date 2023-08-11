@@ -15,13 +15,13 @@ public class ReflectionApp {
 
     static class Prices{
         double getCarPrice(){
-            return 6.35d;
+            return 10.93d;
         }
         double getMotorhomePrice(){
-            return 8.72d;
+            return 14.23d;
         }
         double getTruckPrice(){
-            return 12.98d;
+            return 17.55d;
         }
         double getStdPrice(){
             return 4.31d; // bikes, small smart cars, tuk-tuk, whatever...

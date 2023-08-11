@@ -13,9 +13,9 @@ public class SwitchApp {
             return 4.31;
         }
         switch (type){
-            case "car": return 6.35d;
-            case "motorhome": return 8.72d;
-            case "truck": return 12.98d;
+            case "car": return 10.93d;
+            case "motorhome": return 14.23d;
+            case "truck": return 17.55d;
             default: return 4.31; // bikes, small smart cars, tuk-tuk, whatever...
         }
     }

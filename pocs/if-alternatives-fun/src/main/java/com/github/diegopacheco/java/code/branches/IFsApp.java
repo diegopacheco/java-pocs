@@ -14,13 +14,13 @@ public class IFsApp {
             return 4.31;
         }
         if ("car".equals(type.toLowerCase().trim())){
-            return 6.35d;
+            return 10.93d;
         }
         if ("motorhome".equals(type.toLowerCase().trim())){
-            return 8.72d;
+            return 14.23d;
         }
         if ("truck".equals(type.toLowerCase().trim())){
-            return 12.98d;
+            return 17.55d;
         }
         // bikes, small smart cars, tuk-tuk, whatever...
         return 4.31;

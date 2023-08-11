@@ -28,9 +28,9 @@ public class IfObjectApp {
 
     private static double simulateTollPrice(final String type){
         return
-            new ApplyIF("car".equals(type) , 6.35d).eval() +
-            new ApplyIF("motorhome".equals(type) , 8.72d).eval() +
-            new ApplyIF("truck".equals(type) , 12.98d).eval() +
+            new ApplyIF("car".equals(type) , 10.93d).eval() +
+            new ApplyIF("motorhome".equals(type) , 14.23d).eval() +
+            new ApplyIF("truck".equals(type) , 17.55d).eval() +
             new ApplyIF(null==type || "".equals(type) , 4.31).eval();
     }
 }
