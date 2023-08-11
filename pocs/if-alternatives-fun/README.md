@@ -31,7 +31,7 @@ just tradeoffs.
 
 ### How to handle decisions(ifs) ?
 
-13 different techniques to handle branches:<br/>
+14 different techniques to handle branches:<br/>
 ```
 Basic Branches
  * IFs
@@ -44,6 +44,8 @@ Generic Options
  * Reflection
 Annotations
  * Annotations 
+Math
+ * Math  
 Elegant Options
  * IF Objects
  * Functional
@@ -85,6 +87,12 @@ Polymorphism + Type System
 * Annotations
   * PROS: Declarative, Generic - Has IFs but code won't grow.
   * CONS: More complexity - Cache, Runtime only 
+
+### Math
+
+* Math
+  * PROS: Fast - cpu effective, Simple - no ifs, less code
+  * CONS: Can get less obvious if complex math
 
 ### Elegant Options
 
