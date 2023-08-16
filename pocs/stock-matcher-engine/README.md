@@ -5,7 +5,7 @@
 
 ### Rationale
 
-OMG diego you lost your mind, no not really. 
+OMG Diego you lost your mind, no not really. 
 This is quadratic time(for inside for), I know, but this is very useful because allows to think in the worst case scenario.
 
 Let's recap: Single Threaded, no JVM tunning, poorly implemented, no tuning:
