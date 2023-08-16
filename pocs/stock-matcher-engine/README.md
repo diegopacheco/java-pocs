@@ -30,7 +30,8 @@ Matching 100000 events/predicates resulted in: [313618905] match in 231192 ms (3
 4. Simple things, integers instead of strings for symbols, it would speed up things and use less memory. 
 5. More machines with some seeding or light coordination(zookeeper like).
 6. Instead of processing all at once, make continuous processing, as the events arrive you process.
-7. Optimized languages like Go, Rust or Zig.
+7. Optimize the JVM with proper flags for GC and pre-alocate memory
+8. Optimized languages like Go, Rust or Zig.
 
 ### CAP 100 rules
 
@@ -39,7 +40,7 @@ Now we can do:
  * 1M in 1 second
  * 10M in 10 seconds
 
-Again, single machine, still have 6 other optimizations to play.
+Again, single machine, still have 7 other optimizations to play.
 
 ```bash
 >> Benchmarks: CAP 100 rules 
