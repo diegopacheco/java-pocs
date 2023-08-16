@@ -16,10 +16,10 @@ Let's recap: Single Threaded, no JVM tunning, poorly implemented, no tuning:
 
 1. Start filtering the rules by users(uuid, id, hash, whatever).
 2. CAP how many rules a user can have lets say 100 is max.
-3. Use threads and process all this in parallel rather a single thread, is all cpu bound.
-4. We can use integers instead of strings for symbols, it would speed up things and use less memory. 
-5. We can scale to more machines with some seeding or light coordination(zookeper like).
-6. We could use a more optimized language like Go, Rust or Zig.
+3. Use threads and process all this in parallel rather a single thread, is all cpu bound (2 threads per core)
+4. Simple things is, integers instead of strings for symbols, it would speed up things and use less memory. 
+5. More machines with some seeding or light coordination(zookeeper like).
+6. Optimized languages like Go, Rust or Zig.
 
 ### Benchmark
 ```bash
