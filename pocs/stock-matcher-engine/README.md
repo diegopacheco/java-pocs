@@ -3,6 +3,19 @@
 ./mvnw clean install 
 ```
 
+### About it
+
+Stock exchange application written in java 19. 
+Imagine you want to be notified when something happens, some GOOGLE(GOOG) stock went up or down.
+There are some simple rules(Equal, GreaterThan,LessThan) when the stock price change. Fake Data generation techniques are used to generate a lot of data for benchmarks.
+Such solution would be used for Day Trading applications.
+
+### Design
+<div align="center" >
+<img src="UML.drawio.png" width="800" height="800" ></img><br/>
+ **Interfaces was duplicated to make the diagram more clean.
+</div>
+
 ### Rationale
 
 OMG Diego you lost your mind, no not really. 
