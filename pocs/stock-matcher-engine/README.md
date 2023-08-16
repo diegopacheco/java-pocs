@@ -31,3 +31,23 @@ Matching 100000 events/predicates resulted in: [313618905] match in 231192 ms (3
 5. More machines with some seeding or light coordination(zookeeper like).
 6. Instead of processing all at once, make continuous processing, as the events arrive you process.
 7. Optimized languages like Go, Rust or Zig.
+
+### CAP 100 rules
+
+Now we can do:
+ * 100k in 155 ms
+ * 1M in 1 second
+ * 10M in 10 seconds
+
+Again, single machine, still have 6 other optimizations to play.
+
+```bash
+>> Benchmarks: CAP 100 rules 
+Matching 10 events / 100 predicates resulted in: [33] match in 0 ms
+Matching 100 events / 100 predicates resulted in: [253] match in 1 ms
+Matching 1000 events / 100 predicates resulted in: [3229] match in 8 ms
+Matching 10000 events / 100 predicates resulted in: [27412] match in 55 ms
+Matching 100000 events / 100 predicates resulted in: [303540] match in 155 ms
+Matching 1000000 events / 100 predicates resulted in: [3273769] match in 1090 ms
+Matching 10000000 events / 100 predicates resulted in: [30800135] match in 10483 ms
+```

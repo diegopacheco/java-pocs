@@ -12,6 +12,17 @@ import java.util.List;
 
 public class Main {
     public static void main(String args[]) {
+
+        System.out.println(">> Benchmarks: CAP 100 rules ");
+        benchmarkCap(10,100);
+        benchmarkCap(100,100);
+        benchmarkCap(1_000,100);
+        benchmarkCap(10_000,100);
+        benchmarkCap(100_000,100);
+        benchmarkCap(1_000_000,100);
+        benchmarkCap(10_000_000,100);
+
+        System.out.println(">> Benchmarks: NO CAP (rules x events) ");
         benchmark(10);
         benchmark(100);
         benchmark(1_000);
@@ -20,18 +31,22 @@ public class Main {
     }
 
     private static void benchmark(int amount) {
+       benchmarkCap(amount,amount);
+    }
+
+    private static void benchmarkCap(int amountEvents,int amountRules) {
         UserPredicatesGenerator predicatesGenerator = new UserPredicatesGenerator();
-        List<Predicate> predicates = predicatesGenerator.generate(amount);
+        List<Predicate> predicates = predicatesGenerator.generate(amountRules);
 
         EventGenerator eventGenerator = new NasdaqEventGenerator();
-        List<Event> events = eventGenerator.generate(amount);
+        List<Event> events = eventGenerator.generate(amountEvents);
 
         InMemoryMatcher matcher = new InMemoryMatcher(predicates);
 
         Instant start = Instant.now();
         List<MaterializedMatch> matches = matcher.run(events);
         Instant end = Instant.now();
-        System.out.println("Matching " + amount + " events/predicates resulted in: [" + matches.size() +
+        System.out.println("Matching " + amountEvents + " events / " + amountRules + " predicates resulted in: [" + matches.size() +
                 "] match in " + (Duration.between(start,end).toMillis()) + " ms");
     }
 
