@@ -16,6 +16,14 @@ Such solution would be used for Day Trading applications.
  **Interfaces was duplicated to make the diagram more clean.
 </div>
 
+UML in Colors scheme:
+* Green: Interfaces
+* Blue: Predicates (a.k.a rules)
+* Purple: Fake data generation
+* Dark blue: Matching engine
+* Yellow: Raw events
+* Red: Main class, main orchestration of the program and benchmarks
+
 ### Rationale
 
 OMG Diego you lost your mind, no not really. 
