@@ -9,15 +9,16 @@ OMG Diego you lost your mind, no not really.
 This is quadratic time(for inside for), I know, but this is very useful because allows to think in the worst case scenario.
 
 Let's recap: Single Threaded, no JVM tuning, poorly implemented, no tuning, ~10-30% CPU, ~16GB ram:
- * Even on this case 10k events running against 10k rules took only 2 seconds is pretty fast for worst case.
- * Sure 100k starts to get slow, but for something in the background, 3.8 minutes is not bad! :-) We can do better.
+ * Even on this case 10k events running against 10k rules took only 1.8 seconds is pretty fast for worst case(10kx10k).
+ * Sure 100k starts to get slow, but for something in the background, 3.8 minutes is not bad!(100kx100k) :-) 
+ * We can do better, there are opportunities to improve
 
 ### Benchmark
 ```bash
-Matching 10 events/predicates resulted in: [2] match in 0 ms
-Matching 100 events/predicates resulted in: [378] match in 2 ms
-Matching 1000 events/predicates resulted in: [29163] match in 38 ms
-Matching 10000 events/predicates resulted in: [3131126] match in 2052 ms
+Matching 10 events/predicates resulted in: [4] match in 0 ms
+Matching 100 events/predicates resulted in: [242] match in 1 ms
+Matching 1000 events/predicates resulted in: [34640] match in 47 ms
+Matching 10000 events/predicates resulted in: [3143928] match in 1898 ms
 Matching 100000 events/predicates resulted in: [313618905] match in 231192 ms (3.8 minutes)
 ```
 

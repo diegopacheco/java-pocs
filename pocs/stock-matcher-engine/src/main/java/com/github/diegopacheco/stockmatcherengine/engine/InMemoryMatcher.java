@@ -16,7 +16,7 @@ public class InMemoryMatcher implements Matcher{
 
     @Override
     public List<MaterializedMatch> run(List<Event> events){
-        List<MaterializedMatch> materializedMatches = new ArrayList<>(events.size()/2);
+        List<MaterializedMatch> materializedMatches = new ArrayList<>(events.size());
         for(Event event : events){
             for(Predicate predicate : predicates){
                 if (predicate.match(event)){
