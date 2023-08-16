@@ -8,9 +8,9 @@
 OMG Diego you lost your mind, no not really. 
 This is quadratic time(for inside for), I know, but this is very useful because allows to think in the worst case scenario.
 
-Let's recap: Single Threaded, no JVM tunning, poorly implemented, no tuning:
+Let's recap: Single Threaded, no JVM tuning, poorly implemented, no tuning, ~10-30% CPU, ~16GB ram:
  * Even on this case 10k events running against 10k rules took only 2 seconds is pretty fast for worst case.
- * Sure 100k starts to get slow, but for something in the background, 3.8 minutes is not bad! :-) We can do better. 
+ * Sure 100k starts to get slow, but for something in the background, 3.8 minutes is not bad! :-) We can do better.
 
 ### How can we optimize and scale
 
