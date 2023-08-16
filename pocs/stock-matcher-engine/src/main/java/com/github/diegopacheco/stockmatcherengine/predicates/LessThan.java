@@ -17,6 +17,6 @@ public class LessThan implements Predicate{
         if (!symbol.equals(event.symbol())){
             return false;
         }
-        return event.value().compareTo(value) <= 0;
+        return event.value()<=value;
     }
 }

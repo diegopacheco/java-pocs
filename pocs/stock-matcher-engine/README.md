@@ -19,7 +19,9 @@ Let's recap: Single Threaded, no JVM tuning, poorly implemented, no tuning, ~10-
 3. Use thread pool, process all in parallel rather a single thread, is all cpu bound (2 threads per core).
 4. Simple things, integers instead of strings for symbols, it would speed up things and use less memory. 
 5. More machines with some seeding or light coordination(zookeeper like).
-6. Optimized languages like Go, Rust or Zig.
+6. Instead of processing all at once, make continuous processing, as the events arrive you process.
+7. Optimized languages like Go, Rust or Zig.
+
 
 ### Benchmark
 ```bash

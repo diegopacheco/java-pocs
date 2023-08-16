@@ -17,6 +17,6 @@ public class Equal implements Predicate{
         if (!symbol.equals(event.symbol())){
             return false;
         }
-        return value.equals(event.value());
+        return value==event.value();
     }
 }
