@@ -1,7 +1,7 @@
 package com.github.diegopacheco.stockmatcherengine.engine;
 
 import com.github.diegopacheco.stockmatcherengine.event.Event;
-import com.github.diegopacheco.stockmatcherengine.trigger.Predicate;
+import com.github.diegopacheco.stockmatcherengine.predicates.Predicate;
 
 import java.time.Instant;
 

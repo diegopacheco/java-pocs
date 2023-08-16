@@ -1,4 +1,4 @@
-package com.github.diegopacheco.stockmatcherengine.trigger;
+package com.github.diegopacheco.stockmatcherengine.predicates;
 
 import com.github.diegopacheco.stockmatcherengine.event.Event;
 

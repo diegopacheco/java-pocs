@@ -1,4 +1,4 @@
-package com.github.diegopacheco.stockmatcherengine.trigger;
+package com.github.diegopacheco.stockmatcherengine.predicates;
 
 import com.github.diegopacheco.stockmatcherengine.event.Event;
 
@@ -17,7 +17,6 @@ public class GreaterThan implements Predicate{
         if (!symbol.equals(event.symbol())){
             return false;
         }
-        Double stockValue = Double.valueOf(event.value());
-        return stockValue.compareTo(value) >= 0;
+        return event.value().compareTo(value) >= 0;
     }
 }

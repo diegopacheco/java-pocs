@@ -1,9 +1,9 @@
 package com.github.diegopacheco.stockmatcherengine.generators;
 
-import com.github.diegopacheco.stockmatcherengine.trigger.Equal;
-import com.github.diegopacheco.stockmatcherengine.trigger.GreaterThan;
-import com.github.diegopacheco.stockmatcherengine.trigger.LessThan;
-import com.github.diegopacheco.stockmatcherengine.trigger.Predicate;
+import com.github.diegopacheco.stockmatcherengine.predicates.Equal;
+import com.github.diegopacheco.stockmatcherengine.predicates.GreaterThan;
+import com.github.diegopacheco.stockmatcherengine.predicates.LessThan;
+import com.github.diegopacheco.stockmatcherengine.predicates.Predicate;
 
 import java.util.List;
 import java.util.Random;

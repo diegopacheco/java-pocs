@@ -1,10 +1,10 @@
-import com.github.diegopacheco.stockmatcherengine.engine.Matcher;
+import com.github.diegopacheco.stockmatcherengine.engine.InMemoryMatcher;
 import com.github.diegopacheco.stockmatcherengine.engine.MaterializedMatch;
 import com.github.diegopacheco.stockmatcherengine.event.Event;
 import com.github.diegopacheco.stockmatcherengine.generators.EventGenerator;
 import com.github.diegopacheco.stockmatcherengine.generators.NasdaqEventGenerator;
 import com.github.diegopacheco.stockmatcherengine.generators.UserPredicatesGenerator;
-import com.github.diegopacheco.stockmatcherengine.trigger.Predicate;
+import com.github.diegopacheco.stockmatcherengine.predicates.Predicate;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -26,7 +26,7 @@ public class Main {
         EventGenerator eventGenerator = new NasdaqEventGenerator();
         List<Event> events = eventGenerator.generate(amount);
 
-        Matcher matcher = new Matcher(predicates);
+        InMemoryMatcher matcher = new InMemoryMatcher(predicates);
 
         Instant start = Instant.now();
         List<MaterializedMatch> matches = matcher.run(events);
