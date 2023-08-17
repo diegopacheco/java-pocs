@@ -25,13 +25,17 @@ public class ItemResource {
         items.add(new Item(new BigDecimal(10), "Apple"));
         items.add(new Item(new BigDecimal(16), "Pear"));
         items.add(new Item(new BigDecimal(30), "Orange"));
-        return item.data(items);
+        return item.data("items",items);
     }
 
     @GET
-    @Path("{id}")
+    @Path("/{id}")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance get(Integer id) {
-        return item.data("item", "Red Apple");
+        List<Item> items = new ArrayList<>();
+        items.add(new Item(new BigDecimal(10), "Apple"));
+        items.add(new Item(new BigDecimal(16), "Pear"));
+        items.add(new Item(new BigDecimal(30), "Orange"));
+        return item.data("items", items);
     }
 }

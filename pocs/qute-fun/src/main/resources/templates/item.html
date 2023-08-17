@@ -7,13 +7,13 @@
 <body>
     <h1>List of Items</h1>
     <ul>
-        {#for item in items}
+        {#for it in items}
         <li>
-            {item.name}:
-            {#if item.price < 15}
-              {item.price}
+            {it.name}:
+            {#if it.price < 15}
+              {it.price}
             {#else}
-              <del>{item.price}</del> <strong>{item.discountedPrice}</strong>
+              <del>{it.price}</del> <strong>{it.discountedPrice}</strong>
             {/if}
         </li>
         {/for}
