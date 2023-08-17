@@ -53,8 +53,9 @@
                 <configuration>
                     <mainClass>Main</mainClass>
                     <arguments>
-                        <release>19</release>
+                        <release>11</release>
                         <compilerArgs>--enable-preview</compilerArgs>
+                        <compilerArgs>-parameters</compilerArgs>
                     </arguments>
                 </configuration>
             </plugin>
@@ -79,10 +80,13 @@
                 <groupId>${quarkus.platform.group-id}</groupId>
                 <artifactId>${quarkus.platform.artifact-id}</artifactId>
                 <version>${quarkus.platform.version}</version>
+                <extensions>true</extensions>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>install,</goal>
+                            <goal>build</goal>
+                            <goal>generate-code</goal>
+                            <goal>generate-code-tests</goal>
                         </goals>
                     </execution>
                 </executions>
