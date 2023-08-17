@@ -11,7 +11,7 @@ public class ItemsResourceTest {
     @Test
     public void testEndpoint() {
         given()
-                .when().get("/items")
+                .when().get("/item")
                 .then()
                 .statusCode(200)
                 .body(containsString("Apple:"), containsString("<del>30</del> <strong>27.0</strong>"));
