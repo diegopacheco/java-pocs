@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -18,6 +19,13 @@ public class Main{
     capitals.replace("CO","Bolder","Denver");
     System.out.println(capitals.get("CO"));
     System.out.println(capitals.keySet());
+
+    Map<String,String> unmodifiableMap = Collections.unmodifiableMap(capitals);
+    System.out.println(unmodifiableMap.keySet());
+    try{
+      unmodifiableMap.put("CO","South Park");
+    }catch(UnsupportedOperationException e){}
+    System.out.println(capitals.get("CO"));
 
   }
 }
