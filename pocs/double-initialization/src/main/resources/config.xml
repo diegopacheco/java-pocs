@@ -1,8 +1,12 @@
 <?xml version="1.0" ?>
 <configuration version="1.0">
     <dependencies>
-        <downstream id="downstream">
+        <downstream id="downstreamRedis">
             <application id="redis" name="redis" host="127.0.0.1" port="6373">
+            </application>
+        </downstream>
+        <downstream id="downstreamMySQL">
+            <application id="mysql" name="mysql" host="127.0.0.1" port="3003">
             </application>
         </downstream>
     </dependencies>

@@ -1,5 +1,4 @@
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -20,6 +19,11 @@ public class Config implements Closeable {
     private FileInputStream fis;
 
     public Config() {
+        // why no initialize FIS here?
+        // because if fails, the close method would not be called:
+        //   try (Config config = new Config()) {
+        //      // some code...
+        //   }
     }
 
     public void init() {
@@ -46,10 +50,11 @@ public class Config implements Closeable {
             XPath xpath = xPathfactory.newXPath();
             XPathExpression expr = xpath.compile("/configuration/dependencies/downstream");
             NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-            // nodeList.item(0).getChildNodes().item(1).getAttributes().getNamedItem("name")
+            NodeList applications = nodeList.item(0).getChildNodes();
+
             List<String> deps = new ArrayList<>();
             for(int i=0;i<nodeList.getLength();i++){
-                deps.add(nodeList.item(i).getNodeValue());
+                deps.add(applications.item(1).getAttributes().getNamedItem("name").getNodeValue());
             }
 
             return deps;
