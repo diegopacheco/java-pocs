@@ -16,10 +16,15 @@ public class ConfigV2{
 
     private List<String> dependencies = new ArrayList<>();
 
+    //
+    // V2 Implementation:
+    //
     // Has a couple of benefits over previous design
     // XML processing is cached.
-    // We use the FileInputStream and close it so there is not leak
+    // We use the FileInputStream and close it so there is no leak
     // All is done in the constructor.
+    // Resources are completely managed by the object, nothing leaks, the usage is simple.
+    //
     public ConfigV2(){
         try {
             FileInputStream fis = new FileInputStream(
@@ -39,10 +44,9 @@ public class ConfigV2{
             XPathExpression expr = xpath.compile("/configuration/dependencies/downstream");
             NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
 
-            List<String> deps = new ArrayList<>();
             for(int i=0;i<nodeList.getLength();i++){
                 NodeList applications = nodeList.item(i).getChildNodes();
-                deps.add(applications.item(1).getAttributes().getNamedItem("name").getNodeValue());
+                dependencies.add(applications.item(1).getAttributes().getNamedItem("name").getNodeValue());
             }
 
             fis.close();
