@@ -50,10 +50,10 @@ public class Config implements Closeable {
             XPath xpath = xPathfactory.newXPath();
             XPathExpression expr = xpath.compile("/configuration/dependencies/downstream");
             NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-            NodeList applications = nodeList.item(0).getChildNodes();
 
             List<String> deps = new ArrayList<>();
             for(int i=0;i<nodeList.getLength();i++){
+                NodeList applications = nodeList.item(i).getChildNodes();
                 deps.add(applications.item(1).getAttributes().getNamedItem("name").getNodeValue());
             }
 
