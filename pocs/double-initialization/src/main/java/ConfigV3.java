@@ -23,7 +23,7 @@ public class ConfigV3 implements Closeable {
     //
     // V2 was great, but you could not easily test it.
     // V3 receives the FileInputStream, so now we can point to a different file to test it.
-    // We also have the cache as V2 has on the contructor, we can use Try safely now.
+    // We also have the cache as V2 has on the constructor, we can use Try safely now.
     //
     public ConfigV3(FileInputStream fis){
         this.fis = fis;
