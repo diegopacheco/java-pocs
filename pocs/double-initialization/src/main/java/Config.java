@@ -24,6 +24,12 @@ public class Config implements Closeable {
         //   try (Config config = new Config()) {
         //      // some code...
         //   }
+        //
+        //  This means that try with resource expect that line to suceed or in other words constructor need to be ok.
+        //  IF the constructor fails later, there is a leak, the best think todo is make sure there is no leak with proper try/catch
+        //  this make sense to me as the contructor needs to abstract the object creation, double initialization is weired
+        //  IS a form of lazy loading, what if no one call it? this could be a problem if there is a library.
+        //
     }
 
     public void init() {
