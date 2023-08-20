@@ -4,6 +4,10 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,11 +41,15 @@ public class Config implements Closeable {
 
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(fis);
-            NodeList downstream = doc.getElementsByTagName("downstream");
 
+            XPathFactory xPathfactory = XPathFactory.newInstance();
+            XPath xpath = xPathfactory.newXPath();
+            XPathExpression expr = xpath.compile("/configuration/dependencies/downstream");
+            NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+            // nodeList.item(0).getChildNodes().item(1).getAttributes().getNamedItem("name")
             List<String> deps = new ArrayList<>();
-            for(int i=0;i<downstream.getLength();i++){
-                deps.add(downstream.item(i).getNodeValue());
+            for(int i=0;i<nodeList.getLength();i++){
+                deps.add(nodeList.item(i).getNodeValue());
             }
 
             return deps;

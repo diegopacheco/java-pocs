@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <configuration version="1.0">
     <dependencies>
-        <downstream>
-            <application name="redis" host="127.0.0.1" port="6373">
+        <downstream id="downstream">
+            <application id="redis" name="redis" host="127.0.0.1" port="6373">
             </application>
         </downstream>
     </dependencies>
