@@ -6,5 +6,8 @@ public class Main {
             config.init();
             System.out.println("Config Downstream Dependencies: " + config.getDownstreamDependencies());
         }
+
+        ConfigV2 v2 = new ConfigV2();
+        System.out.println("Config Downstream Dependencies: " + v2.getDownstreamDependencies());
     }
 }
