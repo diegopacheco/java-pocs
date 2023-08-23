@@ -27,6 +27,10 @@ public class ObjectMatcherTest {
         assertThat(person, hasProperty("name"));
     }
 
-
+    @Test
+    public void hasPropertyValueTest() {
+        Person person = new Person("Joe", "Joy");
+        assertThat(person, hasProperty("lastName", equalTo("Joy")));
+    }
 
 }
