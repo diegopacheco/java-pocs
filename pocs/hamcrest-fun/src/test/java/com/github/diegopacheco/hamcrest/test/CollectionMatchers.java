@@ -48,4 +48,12 @@ public class CollectionMatchers {
         assertThat(map, hasValue("floripa"));
     }
 
+    @Test
+    public void hasentryTest() {
+        Map<String, String> map = new HashMap<>();
+        map.put("rs", "porto alegre");
+        map.put("sc", "floripa");
+        assertThat(map, hasEntry("rs", "porto alegre"));
+    }
+
 }
