@@ -13,7 +13,7 @@ public class IsEvenMatcher extends TypeSafeMatcher<Integer> {
 
     @Factory
     public static Matcher<Integer> isEvenMatcher() {
-        return new IsevenMatcher();
+        return new IsEvenMatcher();
     }
 
     @Override

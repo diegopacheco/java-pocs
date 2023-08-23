@@ -12,7 +12,7 @@ public class IsOddMatcher extends TypeSafeMatcher<Integer> {
     }
 
     @Factory
-    public static Matcher<Integer> isOddNumber() {
+    public static Matcher<Integer> isOddMatcher() {
         return new IsOddMatcher();
     }
 
