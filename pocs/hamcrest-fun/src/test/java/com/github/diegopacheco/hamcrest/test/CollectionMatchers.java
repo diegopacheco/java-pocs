@@ -2,9 +2,7 @@ package com.github.diegopacheco.hamcrest.test;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -29,9 +27,25 @@ public class CollectionMatchers {
     }
 
     @Test
-    public void hasOneItemOnTheArray() {
+    public void hasOneItemOnTheArrayTest() {
         String[] hamcrestMatchers = { "apple", "bananas", "orka", "black beans" };
         assertThat(hamcrestMatchers, hasItemInArray("black beans"));
+    }
+
+    @Test
+    public void mapHasKeyTest() {
+        Map<String, String> map = new HashMap<>();
+        map.put("rs", "porto alegre");
+        map.put("sc", "floripa");
+        assertThat(map, hasKey("rs"));
+    }
+
+    @Test
+    public void hasValueTest() {
+        Map<String, String> map = new HashMap<>();
+        map.put("rs", "porto alegre");
+        map.put("sc", "floripa");
+        assertThat(map, hasValue("floripa"));
     }
 
 }
