@@ -7,7 +7,7 @@ import java.util.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class CollectionMatchers {
+public class CollectionMatchersTest {
     @Test
     public void emptyListTest() {
         List<String> emptyList = new ArrayList<>();
