@@ -5,15 +5,15 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-public class IsevenMatcher extends TypeSafeMatcher<Integer> {
+public class IsEvenMatcher extends TypeSafeMatcher<Integer> {
 
     public void describeTo(Description description) {
         description.appendText("a even number");
     }
 
     @Factory
-    public static Matcher<Integer> IsevenMatcher() {
-        return new IsOddMatcher();
+    public static Matcher<Integer> isEvenMatcher() {
+        return new IsevenMatcher();
     }
 
     @Override
