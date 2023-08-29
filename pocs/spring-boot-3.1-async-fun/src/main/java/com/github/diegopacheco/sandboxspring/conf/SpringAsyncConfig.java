@@ -1,7 +1,6 @@
 package com.github.diegopacheco.sandboxspring.conf;
 
 import com.github.diegopacheco.sandboxspring.handler.CustomAsyncExceptionHandler;
-import com.github.diegopacheco.sandboxspring.service.DummyService;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
@@ -36,11 +35,6 @@ public class SpringAsyncConfig implements AsyncConfigurer {
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return new CustomAsyncExceptionHandler();
-    }
-
-    @Bean
-    public DummyService getDummyService(){
-        return new DummyService();
     }
 
 }

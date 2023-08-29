@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
@@ -21,7 +22,8 @@ public class HelloController {
 		asyncMethodWithVoidReturnType();
 		asyncMethodWithReturnType();
 		ds.blowIt();
-		return "Greetings from Spring Boot!";
+		ds.blowIt2();
+		return "Greetings from Spring Boot! " + new Date();
 	}
 
 	@Async
