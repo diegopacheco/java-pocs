@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 
 @RestController
 public class HelloController {
@@ -20,8 +21,12 @@ public class HelloController {
 	}
 
 	@Async
-	public void blowIt(){
-		throw new RuntimeException(new IllegalAccessException("Just dont like it"));
+	public CompletableFuture<String> blowIt(){
+		CompletableFuture<String> completableFuture = new CompletableFuture<>();
+		completableFuture.completeAsync( () -> {
+			throw new RuntimeException("Just dont like it");
+		});
+		return completableFuture;
 	}
 
 	@Async
