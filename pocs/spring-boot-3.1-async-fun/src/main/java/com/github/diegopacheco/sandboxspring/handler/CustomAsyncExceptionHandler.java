@@ -1,9 +1,11 @@
 package com.github.diegopacheco.sandboxspring.handler;
 
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
+@Component
 public class CustomAsyncExceptionHandler implements AsyncUncaughtExceptionHandler {
 
     @Override
