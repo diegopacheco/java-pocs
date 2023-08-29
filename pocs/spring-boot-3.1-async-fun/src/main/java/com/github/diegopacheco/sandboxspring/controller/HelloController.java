@@ -1,5 +1,7 @@
 package com.github.diegopacheco.sandboxspring.controller;
 
+import com.github.diegopacheco.sandboxspring.service.DummyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,26 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 
 @RestController
 public class HelloController {
+
+	@Autowired
+	private DummyService ds;
 
 	@RequestMapping("/")
 	public String index() {
 		asyncMethodWithVoidReturnType();
 		asyncMethodWithReturnType();
-		blowIt();
+		ds.blowIt();
 		return "Greetings from Spring Boot!";
-	}
-
-	@Async
-	public CompletableFuture<String> blowIt(){
-		CompletableFuture<String> completableFuture = new CompletableFuture<>();
-		completableFuture.completeAsync( () -> {
-			throw new RuntimeException("Just dont like it");
-		});
-		return completableFuture;
 	}
 
 	@Async
