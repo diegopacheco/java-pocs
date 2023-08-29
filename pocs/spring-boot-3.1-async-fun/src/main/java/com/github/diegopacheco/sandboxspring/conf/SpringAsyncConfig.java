@@ -3,6 +3,7 @@ package com.github.diegopacheco.sandboxspring.conf;
 import com.github.diegopacheco.sandboxspring.handler.CustomAsyncExceptionHandler;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -12,6 +13,7 @@ import java.util.concurrent.Executor;
 
 @Configuration
 @EnableAsync
+@ComponentScan("com.github.diegopacheco.sandboxspring")
 public class SpringAsyncConfig implements AsyncConfigurer {
 
     @Bean(name = "threadPoolTaskExecutor")

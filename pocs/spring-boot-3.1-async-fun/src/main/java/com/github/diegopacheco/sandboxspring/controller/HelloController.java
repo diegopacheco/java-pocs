@@ -15,7 +15,13 @@ public class HelloController {
 	public String index() {
 		asyncMethodWithVoidReturnType();
 		asyncMethodWithReturnType();
+		blowIt();
 		return "Greetings from Spring Boot!";
+	}
+
+	@Async
+	public void blowIt(){
+		throw new RuntimeException(new IllegalAccessException("Just dont like it"));
 	}
 
 	@Async
@@ -40,7 +46,7 @@ public class HelloController {
 			Instant end = Instant.now();
 			CompletableFuture<String> completableFuture = new CompletableFuture<>();
 			completableFuture.completeAsync(() -> "42. Computed in: " + Duration.between(start, end).toMillis() + " ms");
-			throw new IllegalAccessException("Just dont like it");
+			return completableFuture;
 		} catch (Throwable e) {
 			CompletableFuture<String> completableFuture = new CompletableFuture<>();
 			completableFuture.completeExceptionally(e);
