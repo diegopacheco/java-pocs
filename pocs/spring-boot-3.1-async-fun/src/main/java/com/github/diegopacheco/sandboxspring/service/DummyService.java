@@ -29,6 +29,7 @@ public class DummyService {
     * Exception message - I dont like it
     * Method name - blowIt2
     *
+    * However, if this was in the controller: nothing happens.
     * */
     @Async
     public void  blowIt2(){
