@@ -40,8 +40,8 @@ public class HelloController {
 			Instant end = Instant.now();
 			CompletableFuture<String> completableFuture = new CompletableFuture<>();
 			completableFuture.completeAsync(() -> "42. Computed in: " + Duration.between(start, end).toMillis() + " ms");
-			return completableFuture;
-		} catch (final Exception e) {
+			throw new IllegalAccessException("Just dont like it");
+		} catch (Throwable e) {
 			CompletableFuture<String> completableFuture = new CompletableFuture<>();
 			completableFuture.completeExceptionally(e);
 			return completableFuture;
