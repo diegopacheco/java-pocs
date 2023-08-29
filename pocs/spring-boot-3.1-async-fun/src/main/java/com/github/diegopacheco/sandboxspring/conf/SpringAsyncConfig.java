@@ -2,6 +2,7 @@ package com.github.diegopacheco.sandboxspring.conf;
 
 import com.github.diegopacheco.sandboxspring.handler.CustomAsyncExceptionHandler;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.Executor;
 
 @Configuration
-@EnableAsync
+@EnableAsync(mode = AdviceMode.PROXY, proxyTargetClass = true)
 @ComponentScan("com.github.diegopacheco.sandboxspring")
 public class SpringAsyncConfig implements AsyncConfigurer {
 
