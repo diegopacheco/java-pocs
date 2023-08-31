@@ -21,8 +21,8 @@ public class NettySimulation extends Simulation {
     {
         setUp(scn.
                 injectOpen(
-                        constantUsersPerSec(1000).during(60)
+                        constantUsersPerSec(1_000).during(60)
                 )
-        ).protocols(httpProtocol);
+        ).protocols(httpProtocol.shareConnections());
     }
 }
