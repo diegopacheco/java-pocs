@@ -1,14 +1,15 @@
 package com.github.diegopacheco.sandboxspring.controller;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.UUID;
 
 @RestController
-public class HelloController {
+public class UUIDController {
 
 	@RequestMapping("/")
 	public String index() {
-		return "Greetings from Spring Boot!";
+		return UUID.randomUUID().toString();
 	}
 
 }
