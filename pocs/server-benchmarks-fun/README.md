@@ -2,7 +2,7 @@
 
 * Tomcat 10.1
 * Netty 4
-* Undertown
+* Undertow
 * Micronaut
 * Quarkus
 
