@@ -15,26 +15,25 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
                 <configuration>
-                    <release>19</release>
-                    <useIncrementalCompilation>false</useIncrementalCompilation>
-                    <annotationProcessorPaths>
+                    <!-- Uncomment to enable incremental compilation -->
+                    <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
+                    <annotationProcessorPaths combine.children="append">
                         <path>
-                            <groupId>io.micronaut</groupId>
-                            <artifactId>micronaut-inject-java</artifactId>
-                            <version>4.1.2</version>
-                        </path>
-                        <path>
-                            <groupId>io.micronaut</groupId>
-                            <artifactId>micronaut-validation</artifactId>
-                            <version>3.10.1</version>
+                            <groupId>io.micronaut.serde</groupId>
+                            <artifactId>micronaut-serde-processor</artifactId>
+                            <version>2.2.1</version>
+                            <exclusions>
+                                <exclusion>
+                                    <groupId>io.micronaut</groupId>
+                                    <artifactId>micronaut-inject</artifactId>
+                                </exclusion>
+                            </exclusions>
                         </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
-                        <arg>-Amicronaut.processing.group=com.github.diegopacheco.micronaut</arg>
-                        <arg>-Amicronaut.processing.module=demo</arg>
-                        <arg>--enable-preview</arg>
+                        <arg>-Amicronaut.processing.group=example.micronaut</arg>
+                        <arg>-Amicronaut.processing.module=micronautguide</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
@@ -79,6 +78,7 @@
                 <artifactId>micronaut-maven-plugin</artifactId>
                 <version>4.0.5</version>
                 <configuration>
+                    <mainClass>com.github.diegopacheco.micronaut.Main</mainClass>
                     <configFile>aot-jar.properties</configFile>
                 </configuration>
             </plugin>
