@@ -6,7 +6,7 @@ import java.util.UUID;
 @Controller("/")
 public class UUIDController {
 
-    @Get("/")
+    @Get
     public String index() {
         return UUID.randomUUID().toString();
     }
