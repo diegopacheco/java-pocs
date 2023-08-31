@@ -1,3 +1,5 @@
+package com.github.diegopacheco.micronaut;
+
 import io.micronaut.runtime.Micronaut;
 
 public class Main {
