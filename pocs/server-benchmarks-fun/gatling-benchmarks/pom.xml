@@ -10,6 +10,7 @@
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
         <java.version>19</java.version>
+        <gatling.simulation/>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -22,7 +23,7 @@
                 <artifactId>gatling-maven-plugin</artifactId>
                 <version>4.5.0</version>
                 <configuration>
-                    <simulationClass>NettySimulation</simulationClass>
+                    <simulationClass>${gatling.simulation}</simulationClass>
                 </configuration>
             </plugin>
             <plugin>
