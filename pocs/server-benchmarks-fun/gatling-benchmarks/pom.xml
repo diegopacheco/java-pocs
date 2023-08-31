@@ -22,7 +22,7 @@
                 <artifactId>gatling-maven-plugin</artifactId>
                 <version>4.5.0</version>
                 <configuration>
-                    <simulationClass>foo.Bar</simulationClass>
+                    <simulationClass>NettySimulation</simulationClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -42,10 +42,20 @@
     </build>
     <dependencies>
         <dependency>
+            <groupId>io.gatling</groupId>
+            <artifactId>gatling-core-java</artifactId>
+            <version>3.9.5</version>
+        </dependency>
+        <dependency>
             <groupId>io.gatling.highcharts</groupId>
             <artifactId>gatling-charts-highcharts</artifactId>
             <version>3.9.5</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.gatling</groupId>
+            <artifactId>gatling-http-java</artifactId>
+            <version>3.9.5</version>
         </dependency>
     </dependencies>
 </project>
