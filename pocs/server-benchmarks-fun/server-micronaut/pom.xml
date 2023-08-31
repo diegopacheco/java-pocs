@@ -33,32 +33,10 @@
                     </annotationProcessorPaths>
                     <compilerArgs>
                         <arg>-Amicronaut.processing.group=com.github.diegopacheco.micronaut</arg>
-                        <arg>-Amicronaut.processing.module=Main</arg>
+                        <arg>-Amicronaut.processing.module=demo</arg>
                         <arg>--enable-preview</arg>
                     </compilerArgs>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>test-compile</id>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                        <configuration>
-                            <annotationProcessorPaths>
-                                <path>
-                                    <groupId>io.micronaut</groupId>
-                                    <artifactId>micronaut-inject-java</artifactId>
-                                    <version>4.1.2</version>
-                                </path>
-                                <path>
-                                    <groupId>io.micronaut</groupId>
-                                    <artifactId>micronaut-validation</artifactId>
-                                    <version>3.10.1</version>
-                                </path>
-                            </annotationProcessorPaths>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
