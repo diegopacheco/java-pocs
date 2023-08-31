@@ -1,0 +1,10 @@
+{
+  "simulation": "TomcatSimulation",
+  "simulationId": "tomcatsimulation-20230831101829804",
+  "start": 1693477110926,
+  "description": "",
+  "scenarios": ["TomcatSimulation"],
+  "assertions": [
+
+  ]
+}

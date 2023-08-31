@@ -1,0 +1,10 @@
+{
+  "simulation": "MicronautSimulation",
+  "simulationId": "micronautsimulation-20230831102207513",
+  "start": 1693477328739,
+  "description": "",
+  "scenarios": ["MicronautSimulation"],
+  "assertions": [
+
+  ]
+}
