@@ -1,0 +1,10 @@
+{
+  "simulation": "GoSimulation",
+  "simulationId": "gosimulation-20230901071759216",
+  "start": 1693552680482,
+  "description": "",
+  "scenarios": ["GoSimulation"],
+  "assertions": [
+
+  ]
+}
