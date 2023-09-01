@@ -53,7 +53,7 @@ pub fn main() !void {
     var listener = zap.SimpleHttpListener.init(.{
         .port = 3000,
         .on_request = dispatch_routes,
-        .log = true,
+        .log = false,
     });
     try listener.listen();
 
