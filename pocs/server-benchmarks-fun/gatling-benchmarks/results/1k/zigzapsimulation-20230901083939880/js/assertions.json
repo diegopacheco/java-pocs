@@ -1,0 +1,10 @@
+{
+  "simulation": "ZigZapSimulation",
+  "simulationId": "zigzapsimulation-20230901083939880",
+  "start": 1693557581119,
+  "description": "",
+  "scenarios": ["ZigZapSimulation"],
+  "assertions": [
+
+  ]
+}
