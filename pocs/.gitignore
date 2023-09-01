@@ -8,6 +8,12 @@
 node_modules/
 node_modules/*
 
+zig-out/
+zig-out/*
+
+zig-cache/
+zig-cache/*
+
 bazel-bin/*
 bazel-out/*
 bazel-testlogs/*
