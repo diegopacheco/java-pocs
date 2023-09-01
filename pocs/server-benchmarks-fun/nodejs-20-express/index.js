@@ -10,7 +10,7 @@ const v4options = {
   };
 
 app.get('/', (req, res) => {
-  res.send(uuid.v4(v4options))
+  res.send(uuid.v1(v4options))
 })
 
 app.listen(port, () => {
