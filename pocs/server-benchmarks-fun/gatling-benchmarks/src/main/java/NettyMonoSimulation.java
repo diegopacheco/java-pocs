@@ -24,7 +24,7 @@ public class NettyMonoSimulation extends Simulation {
     {
         setUp(scn.
                 injectOpen(
-                        constantUsersPerSec(10_000).during(60)
+                        constantUsersPerSec(1_000).during(60)
                 )
         ).protocols(httpProtocol);
     }
