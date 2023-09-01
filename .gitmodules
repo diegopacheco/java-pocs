@@ -1,3 +1,6 @@
 [submodule "pocs/server-benchmarks-fun/zig-zap/libs/zap"]
 	path = pocs/server-benchmarks-fun/zig-zap/libs/zap
 	url = https://github.com/zigzap/zap.git
+[submodule "pocs/server-benchmarks-fun/zig-zap/libs/zig-uuid"]
+	path = pocs/server-benchmarks-fun/zig-zap/libs/zig-uuid
+	url = https://github.com/dmgk/zig-uuid.git

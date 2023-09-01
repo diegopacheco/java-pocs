@@ -47,6 +47,11 @@ pub fn build(b: *std.Build) void {
     exe.addAnonymousModule("zap", .{
         .source_file = .{ .path = "libs/zap/src/zap.zig" },
     }); 
+    
+    exe.addAnonymousModule("uuid", .{
+        .source_file = .{ .path = "libs/zig-uuid/uuid.zig" },
+    }); 
+
 
     // This declares intent for the executable to be installed into the
     // standard location when the user invokes the "install" step (the default
