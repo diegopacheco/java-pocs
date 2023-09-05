@@ -13,7 +13,7 @@ public class InfinitCounter extends Thread{
                 break;
             }
             silentSleep(1);
-            System.out.println(counter.getAndIncrement());
+            System.out.println(Thread.currentThread().getName() + " - " + counter.getAndIncrement());
         }
     }
 
