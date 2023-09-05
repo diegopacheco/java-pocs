@@ -2,14 +2,14 @@
 public class Main {
     public static void main(String args[]) throws InterruptedException {
         Thread infinitThread = new InfinitCounter();
+        Thread infiniteThread2 = new InfinitCounter();
+
+        infiniteThread2.start();
         infinitThread.start();
         infinitThread.join(); // Never gets interrupted. Remove it and it will.
 
-        Thread stoableThread = new InfinitCounter();
-        stoableThread.start();
-
         Thread.sleep(5000L);
-        stoableThread.interrupt();
+        infiniteThread2.interrupt();
         infinitThread.interrupt();
     }
 }
