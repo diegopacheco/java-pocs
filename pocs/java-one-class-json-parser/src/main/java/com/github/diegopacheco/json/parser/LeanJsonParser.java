@@ -33,7 +33,7 @@ public class LeanJsonParser {
             getJSONObjects(arg);
         }
 
-        public void getJSONObjects(String arg) {
+        private void getJSONObjects(String arg) {
             objects = new HashMap<String, String>();
             if (arg.startsWith(String.valueOf(CURLY_OPEN_BRACKETS)) && arg.endsWith(String.valueOf(CURLY_CLOSE_BRACKETS))) {
 
@@ -57,7 +57,7 @@ public class LeanJsonParser {
             if (objects.isEmpty()) throw new IllegalStateException("Wrong json! Cannot parse it " + arg);
         }
 
-        public StringBuilder replaceCOMMA(StringBuilder arg) {
+        private StringBuilder replaceCOMMA(StringBuilder arg) {
             boolean isJsonArray = false;
             for (int i = 0; i < arg.length(); i++) {
                 char a = arg.charAt(i);
@@ -103,7 +103,7 @@ public class LeanJsonParser {
             getJSONObjects(arg);
         }
 
-        public void getJSONObjects(String arg) {
+        private void getJSONObjects(String arg) {
             objects = new ArrayList<String>();
             if (arg.startsWith(String.valueOf(SQUARE_OPEN_BRACKETS)) && arg.endsWith(String.valueOf(SQUARE_CLOSE_BRACKETS))) {
                 StringBuilder builder = new StringBuilder(arg);
@@ -114,7 +114,7 @@ public class LeanJsonParser {
             }
         }
 
-        public StringBuilder replaceCOMMA(StringBuilder arg) {
+        private StringBuilder replaceCOMMA(StringBuilder arg) {
             boolean isArray = false;
             for (int i = 0; i < arg.length(); i++) {
                 char a = arg.charAt(i);
