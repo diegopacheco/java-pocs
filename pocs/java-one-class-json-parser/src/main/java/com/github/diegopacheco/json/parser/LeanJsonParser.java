@@ -19,15 +19,7 @@ public class LeanJsonParser {
     }
 
     static class JSONObject {
-
-        private final static char specialChar;
-        private final static char commaChar;
         private HashMap<String, String> objects;
-
-        static {
-            specialChar = String.valueOf(SPECIAL).toCharArray()[0];
-            commaChar = String.valueOf(COMMA).toCharArray()[0];
-        }
 
         public JSONObject(String arg) {
             getJSONObjects(arg);
@@ -65,7 +57,7 @@ public class LeanJsonParser {
                 char a = arg.charAt(i);
                 if (isJsonArray) {
                     if (String.valueOf(a).compareTo(String.valueOf(COMMA)) == 0) {
-                        arg.setCharAt(i, specialChar);
+                        arg.setCharAt(i, SPECIAL);
                     }
                 }
                 if (String.valueOf(a).compareTo(String.valueOf(SQUARE_OPEN_BRACKETS)) == 0)
@@ -78,8 +70,7 @@ public class LeanJsonParser {
 
         public String getValue(String key) {
             if (objects != null && !objects.isEmpty()){
-                String result = objects.get(key);
-                return (result!=null) ? result.replace(specialChar, commaChar) : null;
+                return (objects.get(key)!=null) ? objects.get(key).replace(SPECIAL, COMMA) : null;
             }
             return null;
         }
@@ -90,16 +81,7 @@ public class LeanJsonParser {
     }
 
     static class JSONArray {
-
-        private final static char specialChar;
-        private final static char commaChar;
-
         private ArrayList<String> objects;
-
-        static {
-            specialChar = String.valueOf(SPECIAL).toCharArray()[0];
-            commaChar = String.valueOf(COMMA).toCharArray()[0];
-        }
 
         public JSONArray(String arg) {
             getJSONObjects(arg);
@@ -122,7 +104,7 @@ public class LeanJsonParser {
                 char a = arg.charAt(i);
                 if (isArray) {
                     if (String.valueOf(a).compareTo(String.valueOf(COMMA)) == 0) {
-                        arg.setCharAt(i, specialChar);
+                        arg.setCharAt(i, SPECIAL);
                     }
                 }
                 if (String.valueOf(a).compareTo(String.valueOf(CURLY_OPEN_BRACKETS)) == 0)
@@ -134,7 +116,7 @@ public class LeanJsonParser {
         }
 
         public String getObject(int index) {
-            return  (objects != null) ? objects.get(index).replace(specialChar, commaChar) : null;
+            return  (objects != null) ? objects.get(index).replace(SPECIAL, COMMA) : null;
         }
 
         public JSONObject getJSONObject(int index) {
