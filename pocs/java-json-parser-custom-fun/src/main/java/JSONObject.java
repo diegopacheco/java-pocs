@@ -52,14 +52,11 @@ class JSONObject {
 
     // Method 2
     public StringBuilder replaceCOMMA(StringBuilder arg) {
-
         boolean isJsonArray = false;
-
         for (int i = 0; i < arg.length(); i++) {
             char a = arg.charAt(i);
 
             if (isJsonArray) {
-
                 if (String.valueOf(a).compareTo(
                         String.valueOf(CONSTANTS.COMMA))
                         == 0) {
@@ -84,8 +81,7 @@ class JSONObject {
     // Getting json object value by key from hash map
     public String getValue(String key) {
         if (objects != null) {
-            return objects.get(key).replace(specialChar,
-                    commaChar);
+            return objects.get(key).replace(specialChar, commaChar);
         }
         return null;
     }
@@ -94,8 +90,7 @@ class JSONObject {
     // Getting json array by key from hash map
     public JSONArray getJSONArray(String key) {
         if (objects != null)
-            return new JSONArray(
-                    objects.get(key).replace('|', ','));
+            return new JSONArray(objects.get(key).replace('|', ','));
         return null;
     }
 }
