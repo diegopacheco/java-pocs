@@ -1,4 +1,4 @@
-### Lean Json Parser
+### Lean Json "Parser"
 
 * No Dependencies
 * One class
@@ -6,9 +6,8 @@
 
 ### Implementation
 
-* Sucks
 * Not a real parser
-* API sucks
+* API kind of sucks
 
 ### Inspired by
 
