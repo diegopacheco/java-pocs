@@ -11,51 +11,36 @@ public class LeanJsonParser {
     }
 
     static class JSONObject {
-        private HashMap<String, String> objects;
+        private final HashMap<String, String> objects = new HashMap<String, String>();
 
-        public JSONObject(String arg) { getJSONObjects(arg); }
-
-        private void getJSONObjects(String arg) {
+        public JSONObject(String arg) {
             arg = arg.replaceAll("\t","").replaceAll("\n","");
-            objects = new HashMap<String, String>();
             if (arg.startsWith(String.valueOf('{')) && arg.endsWith(String.valueOf('}'))) {
                 StringBuilder builder = replaceCOMMA(new StringBuilder(arg),'[',']');
 
                 for (String objects : builder.toString().split(String.valueOf(','))) {
                     String[] objectValue = objects.split(String.valueOf(':'), 2);
                     if (objectValue.length == 2)
-                        this.objects.put(objectValue[0]
-                                        .replace("'", "")
-                                        .replace("\"", "").trim(),
-                                objectValue[1]
-                                        .replace("'", "")
-                                        .replace("\"", "").trim());
+                        this.objects.put(objectValue[0].replace("'", "").replace("\"", "").trim(),
+                                         objectValue[1].replace("'", "").replace("\"", "").trim());
                 }
             }
             if (objects.isEmpty()) throw new IllegalStateException("Wrong json! Cannot parse it " + arg);
         }
 
         public String getValue(String key) {
-            if (objects != null && !objects.isEmpty()){
-                return (objects.get(key)!=null) ? objects.get(key).replace('|', ',') : null;
-            }
-            return null;
+            return (!objects.isEmpty() && objects.get(key)!=null) ? objects.get(key).replace('|', ',') : null;
         }
 
         public JSONArray getJSONArray(String key) {
-            return (objects != null && !objects.isEmpty()) ? new JSONArray(objects.get(key).replace('|', ','))  : null;
+            return (!objects.isEmpty()) ? new JSONArray(objects.get(key).replace('|', ','))  : null;
         }
     }
 
     static class JSONArray {
-        private ArrayList<String> objects;
+        private final ArrayList<String> objects = new ArrayList<String>();
 
         public JSONArray(String arg) {
-            getJSONObjects(arg);
-        }
-
-        private void getJSONObjects(String arg) {
-            objects = new ArrayList<String>();
             if (arg.startsWith(String.valueOf('[')) && arg.endsWith(String.valueOf(']'))) {
                 StringBuilder builder = replaceCOMMA(new StringBuilder(arg),'{','}');
                 Collections.addAll(objects, builder.toString().split(String.valueOf(',')));
@@ -63,11 +48,11 @@ public class LeanJsonParser {
         }
 
         public String getObject(int index) {
-            return  (objects != null) ? objects.get(index).replace('|',',') : null;
+            return objects.get(index).replace('|',',');
         }
 
         public JSONObject getJSONObject(int index) {
-            return (objects != null) ? new JSONObject(objects.get(index).replace('|', ',')) : null;
+            return new JSONObject(objects.get(index).replace('|', ','));
         }
     }
 
@@ -77,9 +62,7 @@ public class LeanJsonParser {
         boolean isArray = false;
         for (int i = 0; i < builder.length(); i++) {
             char a = builder.charAt(i);
-            if (isArray && a==',') {
-                builder.setCharAt(i,'|');
-            }
+            if (isArray && a==',') builder.setCharAt(i,'|');
             if (a==open)  isArray = true;
             if (a==close) isArray = false;
         }
