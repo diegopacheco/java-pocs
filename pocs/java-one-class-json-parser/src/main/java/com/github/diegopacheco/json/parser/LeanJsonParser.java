@@ -57,8 +57,7 @@ public class LeanJsonParser {
     }
 
     private static StringBuilder replaceCOMMA(StringBuilder builder,char open,char close) {
-        builder.deleteCharAt(0);
-        builder.deleteCharAt(builder.length() - 1);
+        builder.deleteCharAt(0).deleteCharAt(builder.length() - 1);
         boolean isArray = false;
         for (int i = 0; i < builder.length(); i++) {
             char a = builder.charAt(i);

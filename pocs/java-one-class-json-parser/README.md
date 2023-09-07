@@ -2,7 +2,7 @@
 
 * No Dependencies
 * One class
-* 71 lines of code
+* 70 lines of code
 
 ### Implementation
 
