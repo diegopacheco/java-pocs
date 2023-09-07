@@ -5,14 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class LeanJsonParser {
-    private static final char CURLY_OPEN_BRACKETS = '{';
-    private static final char CURLY_CLOSE_BRACKETS = '}';
-    private static final char SQUARE_OPEN_BRACKETS = '[';
-    private static final char SQUARE_CLOSE_BRACKETS = ']';
-    private static final char COLON = ':';
-    private static final char COMMA = ',';
-    private static final char SPECIAL = '|';
-
     public static JSONObject parse(String str){
         if (null==str || str.isEmpty()) throw new IllegalArgumentException("str cannot be null nor empty");
         return new JSONObject(str);
@@ -26,14 +18,11 @@ public class LeanJsonParser {
         private void getJSONObjects(String arg) {
             arg = arg.replaceAll("\t","").replaceAll("\n","");
             objects = new HashMap<String, String>();
-            if (arg.startsWith(String.valueOf(CURLY_OPEN_BRACKETS)) && arg.endsWith(String.valueOf(CURLY_CLOSE_BRACKETS))) {
-                StringBuilder builder = new StringBuilder(arg);
-                builder.deleteCharAt(0);
-                builder.deleteCharAt(builder.length() - 1);
-                builder = replaceCOMMA(builder,SQUARE_OPEN_BRACKETS,SQUARE_CLOSE_BRACKETS);
+            if (arg.startsWith(String.valueOf('{')) && arg.endsWith(String.valueOf('}'))) {
+                StringBuilder builder = replaceCOMMA(new StringBuilder(arg),'[',']');
 
-                for (String objects : builder.toString().split(String.valueOf(COMMA))) {
-                    String[] objectValue = objects.split(String.valueOf(COLON), 2);
+                for (String objects : builder.toString().split(String.valueOf(','))) {
+                    String[] objectValue = objects.split(String.valueOf(':'), 2);
                     if (objectValue.length == 2)
                         this.objects.put(objectValue[0]
                                         .replace("'", "")
@@ -48,7 +37,7 @@ public class LeanJsonParser {
 
         public String getValue(String key) {
             if (objects != null && !objects.isEmpty()){
-                return (objects.get(key)!=null) ? objects.get(key).replace(SPECIAL, COMMA) : null;
+                return (objects.get(key)!=null) ? objects.get(key).replace('|', ',') : null;
             }
             return null;
         }
@@ -67,17 +56,14 @@ public class LeanJsonParser {
 
         private void getJSONObjects(String arg) {
             objects = new ArrayList<String>();
-            if (arg.startsWith(String.valueOf(SQUARE_OPEN_BRACKETS)) && arg.endsWith(String.valueOf(SQUARE_CLOSE_BRACKETS))) {
-                StringBuilder builder = new StringBuilder(arg);
-                builder.deleteCharAt(0);
-                builder.deleteCharAt(builder.length() - 1);
-                builder = replaceCOMMA(builder,CURLY_OPEN_BRACKETS,CURLY_CLOSE_BRACKETS);
-                Collections.addAll(objects, builder.toString().split(String.valueOf(COMMA)));
+            if (arg.startsWith(String.valueOf('[')) && arg.endsWith(String.valueOf(']'))) {
+                StringBuilder builder = replaceCOMMA(new StringBuilder(arg),'{','}');
+                Collections.addAll(objects, builder.toString().split(String.valueOf(',')));
             }
         }
 
         public String getObject(int index) {
-            return  (objects != null) ? objects.get(index).replace(SPECIAL, COMMA) : null;
+            return  (objects != null) ? objects.get(index).replace('|',',') : null;
         }
 
         public JSONObject getJSONObject(int index) {
@@ -85,16 +71,18 @@ public class LeanJsonParser {
         }
     }
 
-    private static StringBuilder replaceCOMMA(StringBuilder arg,char open,char close) {
+    private static StringBuilder replaceCOMMA(StringBuilder builder,char open,char close) {
+        builder.deleteCharAt(0);
+        builder.deleteCharAt(builder.length() - 1);
         boolean isArray = false;
-        for (int i = 0; i < arg.length(); i++) {
-            char a = arg.charAt(i);
-            if (isArray && a==COMMA) {
-                arg.setCharAt(i, SPECIAL);
+        for (int i = 0; i < builder.length(); i++) {
+            char a = builder.charAt(i);
+            if (isArray && a==',') {
+                builder.setCharAt(i,'|');
             }
             if (a==open)  isArray = true;
             if (a==close) isArray = false;
         }
-        return arg;
+        return builder;
     }
 }
