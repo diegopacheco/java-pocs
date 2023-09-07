@@ -2,12 +2,13 @@
 
 * No Dependencies
 * One class
-* 105 lines of code
+* 100 lines of code
 
 ### Implementation
 
 * Sucks
 * Not a real parser
+* API sucks
 
 ### Inspired by
 

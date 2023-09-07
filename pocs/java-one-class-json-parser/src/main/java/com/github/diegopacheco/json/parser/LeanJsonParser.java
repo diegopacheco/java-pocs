@@ -21,20 +21,16 @@ public class LeanJsonParser {
     static class JSONObject {
         private HashMap<String, String> objects;
 
-        public JSONObject(String arg) {
-            getJSONObjects(arg);
-        }
+        public JSONObject(String arg) { getJSONObjects(arg); }
 
         private void getJSONObjects(String arg) {
-            arg = arg.replaceAll("\t","");
-            arg = arg.replaceAll("\n","");
+            arg = arg.replaceAll("\t","").replaceAll("\n","");
             objects = new HashMap<String, String>();
             if (arg.startsWith(String.valueOf(CURLY_OPEN_BRACKETS)) && arg.endsWith(String.valueOf(CURLY_CLOSE_BRACKETS))) {
-
                 StringBuilder builder = new StringBuilder(arg);
                 builder.deleteCharAt(0);
                 builder.deleteCharAt(builder.length() - 1);
-                builder = replaceCOMMA(builder,CURLY_OPEN_BRACKETS,CURLY_CLOSE_BRACKETS);
+                builder = replaceCOMMA(builder,SQUARE_OPEN_BRACKETS,SQUARE_CLOSE_BRACKETS);
 
                 for (String objects : builder.toString().split(String.valueOf(COMMA))) {
                     String[] objectValue = objects.split(String.valueOf(COLON), 2);
@@ -75,7 +71,7 @@ public class LeanJsonParser {
                 StringBuilder builder = new StringBuilder(arg);
                 builder.deleteCharAt(0);
                 builder.deleteCharAt(builder.length() - 1);
-                builder = replaceCOMMA(builder,SQUARE_OPEN_BRACKETS,SQUARE_CLOSE_BRACKETS);
+                builder = replaceCOMMA(builder,CURLY_OPEN_BRACKETS,CURLY_CLOSE_BRACKETS);
                 Collections.addAll(objects, builder.toString().split(String.valueOf(COMMA)));
             }
         }
@@ -89,17 +85,16 @@ public class LeanJsonParser {
         }
     }
 
-    private static StringBuilder replaceCOMMA(StringBuilder arg, char open, char close) {
-        boolean isJsonArray = false;
+    private static StringBuilder replaceCOMMA(StringBuilder arg,char open,char close) {
+        boolean isArray = false;
         for (int i = 0; i < arg.length(); i++) {
             char a = arg.charAt(i);
-            if (isJsonArray && a==COMMA) {
+            if (isArray && a==COMMA) {
                 arg.setCharAt(i, SPECIAL);
             }
-            if (a==open)  isJsonArray = true;
-            if (a==close) isJsonArray = false;
+            if (a==open)  isArray = true;
+            if (a==close) isArray = false;
         }
         return arg;
     }
-
 }
