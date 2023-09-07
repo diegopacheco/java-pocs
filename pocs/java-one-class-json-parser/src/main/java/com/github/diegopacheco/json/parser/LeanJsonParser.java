@@ -34,7 +34,7 @@ public class LeanJsonParser {
                 StringBuilder builder = new StringBuilder(arg);
                 builder.deleteCharAt(0);
                 builder.deleteCharAt(builder.length() - 1);
-                builder = replaceCOMMA(builder);
+                builder = replaceCOMMA(builder,CURLY_OPEN_BRACKETS,CURLY_CLOSE_BRACKETS);
 
                 for (String objects : builder.toString().split(String.valueOf(COMMA))) {
                     String[] objectValue = objects.split(String.valueOf(COLON), 2);
@@ -48,19 +48,6 @@ public class LeanJsonParser {
                 }
             }
             if (objects.isEmpty()) throw new IllegalStateException("Wrong json! Cannot parse it " + arg);
-        }
-
-        private StringBuilder replaceCOMMA(StringBuilder arg) {
-            boolean isJsonArray = false;
-            for (int i = 0; i < arg.length(); i++) {
-                char a = arg.charAt(i);
-                if (isJsonArray && a==COMMA) {
-                    arg.setCharAt(i, SPECIAL);
-                }
-                if (a==SQUARE_OPEN_BRACKETS)  isJsonArray = true;
-                if (a==SQUARE_CLOSE_BRACKETS) isJsonArray = false;
-            }
-            return arg;
         }
 
         public String getValue(String key) {
@@ -88,22 +75,9 @@ public class LeanJsonParser {
                 StringBuilder builder = new StringBuilder(arg);
                 builder.deleteCharAt(0);
                 builder.deleteCharAt(builder.length() - 1);
-                builder = replaceCOMMA(builder);
+                builder = replaceCOMMA(builder,SQUARE_OPEN_BRACKETS,SQUARE_CLOSE_BRACKETS);
                 Collections.addAll(objects, builder.toString().split(String.valueOf(COMMA)));
             }
-        }
-
-        private StringBuilder replaceCOMMA(StringBuilder arg) {
-            boolean isArray = false;
-            for (int i = 0; i < arg.length(); i++) {
-                char a = arg.charAt(i);
-                if (isArray && a==COMMA) {
-                    arg.setCharAt(i, SPECIAL);
-                }
-                if (a==CURLY_OPEN_BRACKETS)  isArray = true;
-                if (a==CURLY_CLOSE_BRACKETS) isArray = false;
-            }
-            return arg;
         }
 
         public String getObject(int index) {
@@ -114,4 +88,18 @@ public class LeanJsonParser {
             return (objects != null) ? new JSONObject(objects.get(index).replace('|', ',')) : null;
         }
     }
+
+    private static StringBuilder replaceCOMMA(StringBuilder arg, char open, char close) {
+        boolean isJsonArray = false;
+        for (int i = 0; i < arg.length(); i++) {
+            char a = arg.charAt(i);
+            if (isJsonArray && a==COMMA) {
+                arg.setCharAt(i, SPECIAL);
+            }
+            if (a==open)  isJsonArray = true;
+            if (a==close) isJsonArray = false;
+        }
+        return arg;
+    }
+
 }
