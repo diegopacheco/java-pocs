@@ -56,8 +56,8 @@ public class LeanJsonParserTest {
         assertNotNull(LeanJsonParser.parse(jsonObject.getValue("batters")));
         assertNotNull(LeanJsonParser.parse(jsonObject.getValue("batters")).getJSONArray("batter"));
         assertNotNull(LeanJsonParser.parse(jsonObject.getValue("batters")).getJSONArray("batter").getObject(0));
-        System.out.println(LeanJsonParser.parse(jsonObject.getValue("batters")).getJSONArray("batter").getObject(0));
-        //assertEquals("Regular",jsonObject.getJSONArray("batters").getJSONObject(0).getValue("type"));
+        assertNotNull((LeanJsonParser.parse(jsonObject.getValue("batters")).getJSONArray("batter").getJSONObject(0).getValue("type")));
+        assertEquals("Regular", LeanJsonParser.parse(jsonObject.getValue("batters")).getJSONArray("batter").getJSONObject(0).getValue("type"));
     }
 
     @Test

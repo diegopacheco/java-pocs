@@ -34,6 +34,8 @@ public class LeanJsonParser {
         }
 
         private void getJSONObjects(String arg) {
+            arg = arg.replaceAll("\t","");
+            arg = arg.replaceAll("\n","");
             objects = new HashMap<String, String>();
             if (arg.startsWith(String.valueOf(CURLY_OPEN_BRACKETS)) && arg.endsWith(String.valueOf(CURLY_CLOSE_BRACKETS))) {
 
