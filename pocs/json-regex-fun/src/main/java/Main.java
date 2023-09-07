@@ -17,10 +17,13 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
+        System.out.println("***********");
+        // works very well
         final String string = "[{\"name\":\"John Doe\",\"url\":\"http://google.com:80/?\",\"type\":42,\"prod\":false}]";
         parseIt(string);
 
+        System.out.println("***********");
+        // dont work well
         final String jsonBig = "{\n" +
                 "    \"glossary\": {\n" +
                 "        \"title\": \"example glossary\",\n" +
