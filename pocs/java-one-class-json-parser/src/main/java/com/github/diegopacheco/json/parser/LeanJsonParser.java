@@ -39,8 +39,7 @@ public class LeanJsonParser {
                 for (String objects : builder.toString().split(String.valueOf(COMMA))) {
                     String[] objectValue = objects.split(String.valueOf(COLON), 2);
                     if (objectValue.length == 2)
-                        this.objects.put(
-                                objectValue[0]
+                        this.objects.put(objectValue[0]
                                         .replace("'", "")
                                         .replace("\"", "").trim(),
                                 objectValue[1]
@@ -55,15 +54,11 @@ public class LeanJsonParser {
             boolean isJsonArray = false;
             for (int i = 0; i < arg.length(); i++) {
                 char a = arg.charAt(i);
-                if (isJsonArray) {
-                    if (String.valueOf(a).compareTo(String.valueOf(COMMA)) == 0) {
-                        arg.setCharAt(i, SPECIAL);
-                    }
+                if (isJsonArray && a==COMMA) {
+                    arg.setCharAt(i, SPECIAL);
                 }
-                if (String.valueOf(a).compareTo(String.valueOf(SQUARE_OPEN_BRACKETS)) == 0)
-                    isJsonArray = true;
-                if (String.valueOf(a).compareTo(String.valueOf(SQUARE_CLOSE_BRACKETS)) == 0)
-                    isJsonArray = false;
+                if (a==SQUARE_OPEN_BRACKETS)  isJsonArray = true;
+                if (a==SQUARE_CLOSE_BRACKETS) isJsonArray = false;
             }
             return arg;
         }
@@ -102,15 +97,11 @@ public class LeanJsonParser {
             boolean isArray = false;
             for (int i = 0; i < arg.length(); i++) {
                 char a = arg.charAt(i);
-                if (isArray) {
-                    if (String.valueOf(a).compareTo(String.valueOf(COMMA)) == 0) {
-                        arg.setCharAt(i, SPECIAL);
-                    }
+                if (isArray && a==COMMA) {
+                    arg.setCharAt(i, SPECIAL);
                 }
-                if (String.valueOf(a).compareTo(String.valueOf(CURLY_OPEN_BRACKETS)) == 0)
-                    isArray = true;
-                if (String.valueOf(a).compareTo(String.valueOf(CURLY_CLOSE_BRACKETS)) == 0)
-                    isArray = false;
+                if (a==CURLY_OPEN_BRACKETS)  isArray = true;
+                if (a==CURLY_CLOSE_BRACKETS) isArray = false;
             }
             return arg;
         }
