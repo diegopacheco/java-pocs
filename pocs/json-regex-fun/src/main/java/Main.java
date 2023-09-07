@@ -47,5 +47,12 @@ public class Main {
                 "    }\n" +
                 "}";
         parseIt(jsonBig);
+        System.out.println("********************************");
+
+        String[] arr = jsonBig.split(",");
+        for(String s: arr){
+            System.out.println("key: " + s);
+        }
+
     }
 }
