@@ -6,7 +6,8 @@ public class Main {
     public static void main(String args[]) {
         poolTryWithResource();
         poolNoTry();
-        wrong();
+        wrongLess();
+        //wrong();
     }
 
     private static void wrong() {
@@ -16,6 +17,20 @@ public class Main {
             Jedis jedis = pool.getResource();
             jedis.set("www" + i, "V" + i);
             System.out.println(jedis.get("www" + i));
+        }
+    }
+
+    private static void wrongLess() {
+        System.out.println("wrong");
+        JedisPool pool = new JedisPool("localhost", 6379);
+        for(int i=0;i<100;i++){
+            try{
+                Jedis jedis = pool.getResource();
+                jedis.set("www" + i, "V" + i);
+                System.out.println(jedis.get("www" + i));
+            }catch(Exception e){
+                System.out.println(e);
+            }
         }
     }
 
