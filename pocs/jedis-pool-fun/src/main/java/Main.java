@@ -1,16 +1,21 @@
-import redis.clients.jedis.HostAndPort;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisCluster;
-
-import java.util.HashSet;
-import java.util.Set;
+import redis.clients.jedis.JedisPooled;
 
 public class Main {
     public static void main(String args[]) {
-        Set<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();
-        jedisClusterNodes.add(new HostAndPort("127.0.0.1", 6379));
-        JedisCluster cluster = new JedisCluster(jedisClusterNodes);
-
-
+        poolTryWithResource();
     }
+
+    private static void poolTryWithResource(){
+        try (JedisPooled pool = new JedisPooled("localhost", 6379)) {
+            pool.set("x", "10");
+            pool.set("y", "20");
+            pool.set("z", "30");
+        }
+        try (JedisPooled pool = new JedisPooled("localhost", 6379)) {
+            System.out.println(pool.get("x"));
+            System.out.println(pool.get("y"));
+            System.out.println(pool.get("z"));
+        }
+    }
+
 }
