@@ -6,7 +6,8 @@ public class Main {
     public static void main(String args[]) {
         poolTryWithResource();
         poolNoTry();
-        wrongLess();
+        right();
+        //wrongLess();
         //wrong();
     }
 
@@ -21,7 +22,7 @@ public class Main {
     }
 
     private static void wrongLess() {
-        System.out.println("wrong");
+        System.out.println("wrongLess");
         JedisPool pool = new JedisPool("localhost", 6379);
         for(int i=0;i<100;i++){
             try{
@@ -30,6 +31,23 @@ public class Main {
                 System.out.println(jedis.get("www" + i));
             }catch(Exception e){
                 System.out.println(e);
+            }
+        }
+    }
+
+    private static void right() {
+        System.out.println("right");
+        JedisPool pool = new JedisPool("localhost", 6379);
+        for(int i=0;i<100;i++){
+            Jedis jedis = null;
+            try{
+                jedis = pool.getResource();
+                jedis.set("www" + i, "V" + i);
+                System.out.println(jedis.get("www" + i));
+            }catch(Exception e){
+                System.out.println(e);
+            }finally{
+                pool.returnResource(jedis);
             }
         }
     }
