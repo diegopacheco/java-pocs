@@ -6,9 +6,9 @@ public class Main {
     public static void main(String args[]) {
         poolTryWithResource();
         poolNoTry();
-        right();
+        //right();
         //wrongLess();
-        //wrong();
+        wrong();
     }
 
     private static void wrong() {
@@ -50,6 +50,7 @@ public class Main {
                 pool.returnResource(jedis);
             }
         }
+        pool.close();
     }
 
     private static void poolNoTry() {
