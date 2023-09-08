@@ -6,7 +6,7 @@ public class Main {
     public static void main(String args[]) {
         poolTryWithResource();
         poolNoTry();
-        //right();
+        right();
         //wrongLess();
         wrong();
     }
