@@ -57,7 +57,7 @@ redis-node-6_1  | [OK] All 16384 slots covered.
 ```
 
 
-### After some chaos engineering
+### After some chaos engineering (chaos 1)
 ```
 *** Stats 
 key : 192.168.32.2:6379 - key 192.168.32.2:6379 has issues
@@ -82,6 +82,47 @@ generateScanHeavyLoad - Error : redis.clients.jedis.exceptions.JedisClusterOpera
 3. ./redis-cluster-check.sh
 4. wait
 5. repeat with another node
+```
+
+### Chaos round 2 (chaos 2)
+```
+❯ docker ps
+CONTAINER ID        IMAGE                       COMMAND                  CREATED             STATUS              PORTS                    NAMES
+b4d47174a8c7        bitnami/redis-cluster:7.2   "/opt/bitnami/script…"   4 minutes ago       Up 4 minutes        0.0.0.0:6376->6379/tcp   redis-cluster_redis-node-6_1
+fb25308487ac        bitnami/redis-cluster:7.2   "/opt/bitnami/script…"   4 minutes ago       Up 4 minutes        0.0.0.0:6372->6379/tcp   redis-cluster_redis-node-2_1
+87d9d7080d39        bitnami/redis-cluster:7.2   "/opt/bitnami/script…"   4 minutes ago       Up 4 minutes        0.0.0.0:6373->6379/tcp   redis-cluster_redis-node-3_1
+c8dfd604e740        bitnami/redis-cluster:7.2   "/opt/bitnami/script…"   4 minutes ago       Up 4 minutes        0.0.0.0:6374->6379/tcp   redis-cluster_redis-node-4_1
+1c595ea56ac6        bitnami/redis-cluster:7.2   "/opt/bitnami/script…"   4 minutes ago       Up 4 minutes        0.0.0.0:6371->6379/tcp   redis-cluster_redis-node-1_1
+40614aaae158        bitnami/redis-cluster:7.2   "/opt/bitnami/script…"   4 minutes ago       Up 4 minutes        0.0.0.0:6375->6379/tcp   redis-cluster_redis-node-5_1
+❯ docker stop fb25308487ac
+fb25308487ac
+❯ docker rm fb25308487ac
+fb25308487ac
+❯ docker stop b4d47174a8c7
+docker rm b4d47174a8c7
+b4d47174a8c7
+❯ docker rm b4d47174a8c7
+b4d47174a8c7
+```
+
+### Java application logs
+```bash
+*** Stats 
+key : 192.168.32.2:6379 -  max-total : 8 active : 0 waiters : 0 borrow : 337707 mean-active-ms : 0 mean-borrow-wait-ms : 0
+key : 192.168.32.3:6379 -  max-total : 8 active : 0 waiters : 0 borrow : 0 mean-active-ms : 0 mean-borrow-wait-ms : 0
+key : 192.168.32.4:6379 -  max-total : 8 active : 1 waiters : 0 borrow : 1636681 mean-active-ms : 0 mean-borrow-wait-ms : 0
+key : 192.168.32.5:6379 -  max-total : 8 active : 0 waiters : 0 borrow : 0 mean-active-ms : 0 mean-borrow-wait-ms : 0
+key : 192.168.32.6:6379 - key 192.168.32.6:6379 has issues
+key : 192.168.32.7:6379 -  max-total : 8 active : 0 waiters : 0 borrow : 107651 mean-active-ms : 0 mean-borrow-wait-ms : 0
+***
+generateBrokenLoad - Error : java.lang.IllegalArgumentException: Cluster mode only supports KEYS command with pattern containing hash-tag ( curly-brackets enclosed string )
+generateBrokenLoad - Error : java.lang.IllegalArgumentException: Cluster mode only supports KEYS command with pattern containing hash-tag ( curly-brackets enclosed string )
+generateBrokenLoad - Error : java.lang.IllegalArgumentException: Cluster mode only supports KEYS command with pattern containing hash-tag ( curly-brackets enclosed string )
+generateSetLoad - Error : redis.clients.jedis.exceptions.JedisClusterOperationException: Cluster retry deadline exceeded.
+generateSetLoad - Error : redis.clients.jedis.exceptions.JedisClusterException: CLUSTERDOWN The cluster is down
+generateSetLoad - Error : redis.clients.jedis.exceptions.JedisClusterException: CLUSTERDOWN The cluster is down
+generateBrokenLoad - Error : java.lang.IllegalArgumentException: Cluster mode only supports KEYS command with pattern containing hash-tag ( curly-brackets enclosed string )
+generateBrokenLoad - Error : java.lang.IllegalArgumentException: Cluster mode only supports KEYS command with pattern containing hash-tag ( curly-brackets enclosed string )
 ```
 
 ### Cluster might be broken
