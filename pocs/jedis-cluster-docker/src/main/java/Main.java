@@ -61,6 +61,16 @@ public class Main {
         }
     }
 
+    private static void generateBokenLoad(int amount) {
+        try {
+            for (int i = 0; i < amount; i++) {
+                jedisCluster.keys("x*");
+            }
+        } catch (Exception e) {
+            System.out.println("generateScanHeavyLoad - Error : " + e);
+        }
+    }
+
     private static void generateScanHeavyLoad(int amount) {
         try {
             ScanParams params = new ScanParams().match("{x}*");
@@ -75,14 +85,16 @@ public class Main {
     public static void main(String args[]) {
         Executors.newScheduledThreadPool(2).scheduleAtFixedRate(() -> {
             generateSetLoad(10_000);
-            jedisCluster.get("x:x1");
+        }, 0, 1, TimeUnit.SECONDS);
+
+        Executors.newScheduledThreadPool(2).scheduleAtFixedRate(() -> {
+            generateBokenLoad(1_000);
         }, 0, 1, TimeUnit.SECONDS);
 
         Executors.newScheduledThreadPool(2).scheduleAtFixedRate(() -> {
             generateScanHeavyLoad(10_000);
         }, 0, 1, TimeUnit.SECONDS);
 
-        Executors.newScheduledThreadPool(1)
-                .scheduleAtFixedRate(Main::runStats, 0, 5, TimeUnit.SECONDS);
+        Executors.newScheduledThreadPool(1).scheduleAtFixedRate(Main::runStats, 0, 5, TimeUnit.SECONDS);
     }
 }
