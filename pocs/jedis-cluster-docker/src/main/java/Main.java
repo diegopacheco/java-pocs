@@ -25,7 +25,8 @@ public class Main{
   private static void runStats(){
     for(String key: Arrays.asList("192.168.32.2:6379","192.168.32.3:6379","192.168.32.4:6379",
             "192.168.32.5:6379","192.168.32.6:6379","192.168.32.7:6379")){
-      System.out.println("key : " + key + " ********************");
+      System.out.println("key : " + key + " ***");
+      System.out.println(" max-total           : " + jedisCluster.getClusterNodes().get(key).getMaxTotal());
       System.out.println(" active              : " + jedisCluster.getClusterNodes().get(key).getNumActive());
       System.out.println(" mean-active-ms      : " + jedisCluster.getClusterNodes().get(key).getMeanActiveTimeMillis());
       System.out.println(" borrow              : " + jedisCluster.getClusterNodes().get(key).getBorrowedCount());
@@ -34,10 +35,15 @@ public class Main{
     }
   }
 
+  private static void generateLoad(int amount){
+    for(int i=0;i<amount;i++){
+      jedisCluster.set("x:x" + i,"value_x_" + i);
+    }
+  }
+
   public static void main(String args[]){
-      jedisCluster.set("x:x1","value_x");
-      jedisCluster.set("x:x1","value_y");
-      jedisCluster.set("x:x1","value_x");
+      runStats();
+      generateLoad(100);
       System.out.println(jedisCluster.get("x:x1"));
       runStats();
   }
