@@ -114,3 +114,7 @@ To fix it - I have to nuke the docker volumes, some volues was attached to docke
 4 - docker volume ls
 5 - repeat
 ```
+
+### Useful Links
+* https://github.com/bitnami/containers/tree/main/bitnami/redis-cluster
+* https://severalnines.com/blog/hash-slot-vs-consistent-hashing-redis/
