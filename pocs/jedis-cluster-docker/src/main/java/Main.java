@@ -61,13 +61,13 @@ public class Main {
         }
     }
 
-    private static void generateBokenLoad(int amount) {
+    private static void generateBrokenLoad(int amount) {
         try {
             for (int i = 0; i < amount; i++) {
                 jedisCluster.keys("x*");
             }
         } catch (Exception e) {
-            System.out.println("generateScanHeavyLoad - Error : " + e);
+            System.out.println("generateBrokenLoad - Error : " + e);
         }
     }
 
@@ -88,7 +88,7 @@ public class Main {
         }, 0, 1, TimeUnit.SECONDS);
 
         Executors.newScheduledThreadPool(2).scheduleAtFixedRate(() -> {
-            generateBokenLoad(1_000);
+            generateBrokenLoad(1_000);
         }, 0, 1, TimeUnit.SECONDS);
 
         Executors.newScheduledThreadPool(2).scheduleAtFixedRate(() -> {
