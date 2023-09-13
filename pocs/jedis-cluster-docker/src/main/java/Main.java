@@ -27,33 +27,48 @@ public class Main {
     }
 
     private static void runStats() {
-        System.out.println("*** Stats ");
-        for (String key : Arrays.asList("192.168.32.2:6379", "192.168.32.3:6379", "192.168.32.4:6379",
-                "192.168.32.5:6379", "192.168.32.6:6379", "192.168.32.7:6379")) {
-            System.out.print("key : " + key + " - ");
-            System.out.print(" max-total : "           + jedisCluster.getClusterNodes().get(key).getMaxTotal());
-            System.out.print(" active : "              + jedisCluster.getClusterNodes().get(key).getNumActive());
-            System.out.print(" mean-active-ms : "      + jedisCluster.getClusterNodes().get(key).getMeanActiveTimeMillis());
-            System.out.print(" borrow : "              + jedisCluster.getClusterNodes().get(key).getBorrowedCount());
-            System.out.print(" mean-borrow-wait-ms : " + jedisCluster.getClusterNodes().get(key).getMeanBorrowWaitTimeMillis());
-            System.out.print(" max-wait-ms : "         + jedisCluster.getClusterNodes().get(key).getMaxWaitMillis());
-            System.out.print("\n");
+        try {
+            System.out.println("*** Stats ");
+            for (String key : Arrays.asList("192.168.32.2:6379", "192.168.32.3:6379", "192.168.32.4:6379",
+                    "192.168.32.5:6379", "192.168.32.6:6379", "192.168.32.7:6379")) {
+                System.out.print("key : " + key + " - ");
+                if (null==jedisCluster.getClusterNodes().get(key)){
+                    System.out.println("key " + key + " has issues");
+                    continue;
+                }
+                System.out.print(" max-total : " + jedisCluster.getClusterNodes().get(key).getMaxTotal());
+                System.out.print(" active : " + jedisCluster.getClusterNodes().get(key).getNumActive());
+                System.out.print(" waiters : " + jedisCluster.getClusterNodes().get(key).getNumWaiters());
+                System.out.print(" borrow : " + jedisCluster.getClusterNodes().get(key).getBorrowedCount());
+                System.out.print(" mean-active-ms : " + jedisCluster.getClusterNodes().get(key).getMeanActiveTimeMillis());
+                System.out.print(" mean-borrow-wait-ms : " + jedisCluster.getClusterNodes().get(key).getMeanBorrowWaitTimeMillis());
+                System.out.print("\n");
+            }
+            System.out.println("***");
+        } catch (Exception e) {
+            System.out.println("runStats - Error : " + e);
         }
-        System.out.println("***");
     }
 
     private static void generateSetLoad(int amount) {
-        ScanParams params = new ScanParams();
-        for (int i = 0; i < amount; i++) {
-            String uuid = UUID.randomUUID().toString();
-            jedisCluster.set("x:x" + i + "-" + uuid, "value_x_" + i + "_" + uuid);
+        try {
+            for (int i = 0; i < amount; i++) {
+                String uuid = UUID.randomUUID().toString();
+                jedisCluster.set("x:x" + i + "-" + uuid, "value_x_" + i + "_" + uuid);
+            }
+        } catch (Exception e) {
+            System.out.println("generateSetLoad - Error : " + e);
         }
     }
 
     private static void generateScanHeavyLoad(int amount) {
-        ScanParams params = new ScanParams();
-        for (int i = 0; i < amount; i++) {
-            jedisCluster.scan("0",params.match("x*"));
+        try {
+            ScanParams params = new ScanParams().match("{x}*");
+            for (int i = 0; i < amount; i++) {
+                jedisCluster.scan("0", params);
+            }
+        } catch (Exception e) {
+            System.out.println("generateScanHeavyLoad - Error : " + e);
         }
     }
 
