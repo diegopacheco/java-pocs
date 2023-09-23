@@ -10,6 +10,8 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
+import io.netty.incubator.channel.uring.IOUringEventLoopGroup;
+
 public final class NettyHttpServer {
     static final boolean SSL = System.getProperty("ssl") != null;
     static final int PORT = Integer.parseInt(System.getProperty("port", SSL? "8443" : "8080"));
@@ -23,6 +25,9 @@ public final class NettyHttpServer {
             sslCtx = null;
         }
         // Configure the server.
+        //EventLoopGroup bossGroup = new IOUringEventLoopGroup(1);
+        //EventLoopGroup workerGroup = new IOUringEventLoopGroup();
+
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
