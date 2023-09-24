@@ -1,4 +1,5 @@
 import com.hellokaton.blade.Blade;
+import com.hellokaton.blade.options.CorsOptions;
 
 import java.io.File;
 
