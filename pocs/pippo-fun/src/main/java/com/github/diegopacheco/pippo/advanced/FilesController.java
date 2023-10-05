@@ -1,3 +1,5 @@
+package com.github.diegopacheco.pippo.advanced;
+
 import ro.pippo.controller.*;
 import ro.pippo.core.FileItem;
 

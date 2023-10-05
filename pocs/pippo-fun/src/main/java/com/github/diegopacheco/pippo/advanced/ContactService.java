@@ -1,3 +1,5 @@
+package com.github.diegopacheco.pippo.advanced;
+
 import java.util.Arrays;
 import java.util.List;
 

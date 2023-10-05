@@ -1,11 +1,10 @@
 package com.github.diegopacheco.pippo.advanced;
 
-import com.github.diegopacheco.pippo.basic.BasicApplication;
 import ro.pippo.core.Pippo;
 
 public class Main {
   public static void main(String args[]){
-    Pippo pippo = new Pippo(new BasicApplication());
+    Pippo pippo = new Pippo(new AdvancedApplication());
     pippo.getServer().setPort(8080);
     System.out.println("Pippo Server running on http://127.0.0.1:8080/");
     pippo.start();

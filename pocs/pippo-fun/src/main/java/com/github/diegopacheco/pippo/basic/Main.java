@@ -1,3 +1,5 @@
+package com.github.diegopacheco.pippo.basic;
+
 import ro.pippo.core.Pippo;
 
 public class Main{

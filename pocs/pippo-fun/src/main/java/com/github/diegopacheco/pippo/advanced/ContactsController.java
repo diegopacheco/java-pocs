@@ -1,3 +1,5 @@
+package com.github.diegopacheco.pippo.advanced;
+
 import ro.pippo.controller.*;
 import ro.pippo.controller.extractor.Header;
 import ro.pippo.controller.extractor.Param;

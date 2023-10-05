@@ -31,7 +31,7 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Contact{" +
+        return "com.github.diegopacheco.pippo.advanced.Contact{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
