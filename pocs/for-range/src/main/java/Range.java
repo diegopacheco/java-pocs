@@ -3,22 +3,33 @@ import java.util.NoSuchElementException;
 
 class Range implements Iterable<Integer> {
 
-    private int limit;
+    private int from=0;
+    private int to;
 
-    public Range(int limit) {
-        this.limit = limit;
+    public Range(int to) {
+        this.to = to;
+        this.from=0;
+    }
+
+    public Range(int from,int to) {
+        this.from=from;
+        this.to = to;
     }
 
     public static Range of(int to){
         return new Range(to);
     }
 
+    public static Range of(int from,int to){
+        return new Range(from,to);
+    }
+
     @Override
     public Iterator<Integer> iterator() {
-        final int max = limit;
+        final int max = to;
         return new Iterator<Integer>() {
 
-            private int current = 0;
+            private int current = from;
 
             @Override
             public boolean hasNext() {
