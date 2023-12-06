@@ -1,16 +1,51 @@
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ *  Outputs:
+ *
+ *  Download done.
+ *  Files in the zip:
+ *    => uscities.csv
+ *    => uscities.xlsx
+ *
+ * */
 public class Main {
     public static void main(String args[]) {
         httpClientV2CallZip();
+        readZipInmemory();
+    }
+
+    private static void readZipInmemory() {
+        System.out.println("Files in the zip: ");
+        ZipArchiveInputStream zip = null;
+        try {
+            zip = new ZipArchiveInputStream(new FileInputStream("cities.zip"));
+            ZipArchiveEntry entry = zip.getNextEntry();
+            while (entry != null) {
+                entry = zip.getNextEntry();
+                if (entry!=null)
+                    System.out.println(" => " + entry);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                zip.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     private static void httpClientV2CallZip() {
@@ -37,7 +72,7 @@ public class Main {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("done.");
+            System.out.println("download done.");
         }
     }
 
