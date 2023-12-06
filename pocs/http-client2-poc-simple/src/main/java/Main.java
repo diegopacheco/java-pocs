@@ -10,17 +10,18 @@ import java.io.InputStream;
 
 public class Main {
     public static void main(String args[]) {
-
+        httpClientV2CallZip();
     }
 
-    private void httpClientV2CallZip() {
+    private static void httpClientV2CallZip() {
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet("https://www.example.com/file.zip");
+        HttpGet httpGet = new HttpGet("https://simplemaps.com/static/data/us-cities/1.77/" +
+                "basic/simplemaps_uscities_basicv1.77.zip");
         try (CloseableHttpResponse response = httpClient.execute(httpGet)) {
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 try (InputStream inputStream = entity.getContent();
-                     FileOutputStream fileOutputStream = new FileOutputStream("file.zip")) {
+                     FileOutputStream fileOutputStream = new FileOutputStream("cities.zip")) {
                     int read;
                     byte[] buffer = new byte[4096];
                     while ((read = inputStream.read(buffer)) != -1) {
