@@ -22,8 +22,7 @@ public class LuhnAlgo {
             }
             return (checkSum != 0 && checkSum % 10 == 0);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException("CC " + ccNumber + " is not valid number!", e);
         }
-        return false;
     }
 }
