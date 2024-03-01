@@ -7,31 +7,25 @@ public class Main{
   }
 
   public static CreditCard getCCType(String ccNumber){
-    String visaRegex        = "^4[0-9]{12}(?:[0-9]{3})?$";
-    String masterRegex      = "^5[1-5][0-9]{14}$";
-    String amexRegex        = "^3[47][0-9]{13}$";
-    String dinersClubrRegex = "^3(?:0[0-5]|[68][0-9])[0-9]{11}$";
-    String discoverRegex    = "^6(?:011|5[0-9]{2})[0-9]{12}$";
-    String jcbRegex         = "^(?:2131|1800|35\\d{3})\\d{11}$";
     String commonRegex      = "^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$";
     try {
       ccNumber = ccNumber.replaceAll("\\D", "");
       if (ccNumber.matches(CreditCard.VISA.getRegex())){
          return CreditCard.VISA;
       }
-      if (ccNumber.matches(masterRegex)){
+      if (ccNumber.matches(CreditCard.MASTER.getRegex())){
         return CreditCard.MASTER;
       }
-      if (ccNumber.matches(amexRegex)){
+      if (ccNumber.matches(CreditCard.AMEX.getRegex())){
         return CreditCard.AMEX;
       }
-      if (ccNumber.matches(dinersClubrRegex)){
+      if (ccNumber.matches(CreditCard.DINER.getRegex())){
         return CreditCard.DINER;
       }
-      if (ccNumber.matches(discoverRegex)){
+      if (ccNumber.matches(CreditCard.DISCOVERY.getRegex())){
         return CreditCard.DISCOVERY;
       }
-      if (ccNumber.matches(jcbRegex)){
+      if (ccNumber.matches(CreditCard.JCB.getRegex())){
         return CreditCard.JCB;
       }
       return CreditCard.OTHER;
