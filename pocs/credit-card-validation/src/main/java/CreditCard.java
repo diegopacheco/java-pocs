@@ -21,8 +21,9 @@ public enum CreditCard {
     public static Optional<CreditCard> discover(String ccNumber){
         try {
             CreditCard cc = CreditCard.OTHER;
-            cc.number = ccNumber;
             ccNumber = ccNumber.replaceAll("\\D", "");
+            cc.number = ccNumber;
+
             if (ccNumber.matches(CreditCard.VISA.regex)){
                 cc.company = CreditCard.VISA.company;
                 return Optional.of(cc);
