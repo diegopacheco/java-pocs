@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.scheduler.Schedulers;
 import reactor.util.context.Context;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -16,6 +18,8 @@ public class ThreadLocalController {
 
     @Autowired
     private MonoService service;
+
+    private ExecutorService es = Executors.newFixedThreadPool(10);
 
     @GetMapping("/")
     public String index() throws Exception {
@@ -27,7 +31,7 @@ public class ThreadLocalController {
         String result = service.
                 sumThreadLocal(10,20).
                 contextWrite(Context.of(ThreadLocalMID.ID,ref.get())).
-                subscribeOn(Schedulers.boundedElastic()).toFuture().get(60L, TimeUnit.SECONDS);
+                subscribeOn(Schedulers.fromExecutor(es)).toFuture().get(60L, TimeUnit.SECONDS);
 
         System.out.println("Controller.Final ID: " + mid);
         return "Mid: " + mid + " Result: " + result;
