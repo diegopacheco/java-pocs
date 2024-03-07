@@ -22,7 +22,7 @@ class FluxMonoCtxApplicationTests {
 	void contextLoads() {}
 
 	//
-	// MID Test -> Service (working 100%)
+	// MID Test -> Service (working 100%) (A)
 	//  I'm calling you passing the context(contextWrite).
 	//  You can read it(Mono.deferContextual)
 	//
@@ -41,8 +41,8 @@ class FluxMonoCtxApplicationTests {
 		assertEquals("30",result);
 	}
 
-	// MID Service -> Test
-	// I call you, but I dont give you context, but I give you a RefCallback.
+	// MID Service -> Test (B)
+	// I call you, but I don't give you context, but I give you a RefCallback.
 	// Now you can give me your Mid.
 	@Test
 	void testNoMidPropagationFromClientButThereIsFromServer() {
