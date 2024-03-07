@@ -1,6 +1,7 @@
 package com.github.diegopacheco.reactor.poc.ctx;
 
 import com.github.diegopacheco.reactor.poc.ctx.config.Mid;
+import com.github.diegopacheco.reactor.poc.ctx.config.ThreadLocalMID;
 import com.github.diegopacheco.reactor.poc.ctx.service.MonoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,22 @@ class FluxMonoCtxApplicationTests {
 				block();
 
 		System.out.println("Test.Final ID: " + ref.get());
+		assertEquals("30",result);
+	}
+
+	// Working with ThreadLocal
+	// I call you and I set the thread local before calling you
+	// But I also set your context using the ThreadLocal.
+	@Test
+	void testCreateMidClientPropagationThreadLocal() {
+		ThreadLocalMID mid = ThreadLocalMID.newMid();
+		System.out.println("Test.mono ID = " + mid);
+		String result = ms.
+				sumThreadLocal(10,20).
+				contextWrite(Context.of(Mid.ID,mid)).
+				block();
+
+		System.out.println("Test.Final ID: " + mid);
 		assertEquals("30",result);
 	}
 

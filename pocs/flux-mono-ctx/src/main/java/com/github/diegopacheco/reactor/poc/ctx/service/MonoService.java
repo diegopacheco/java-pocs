@@ -1,6 +1,7 @@
 package com.github.diegopacheco.reactor.poc.ctx.service;
 
 import com.github.diegopacheco.reactor.poc.ctx.config.Mid;
+import com.github.diegopacheco.reactor.poc.ctx.config.ThreadLocalMID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -56,6 +57,32 @@ public class MonoService {
                     } catch (NoSuchElementException nse) {
                         // client DID NOT pass the MID - creating
                         mid = refCallback.get();
+                        System.out.println("MonoService.create new MID " + mid);
+                    }
+
+                    System.out.println("MonoService.mono ID = " + mid);
+
+                    Mono<String> resultInternal = Mono.just(sum);
+                    log.log("MonoService.after mono ID = ", mid);
+
+                    return resultInternal;
+                });
+        return result;
+    }
+
+    public Mono<String> sumThreadLocal(Integer a, Integer b) {
+
+        String sum = a + b + "";
+
+        Mono<String> result = Mono.
+                deferContextual(ctx -> {
+                    ThreadLocalMID mid = null;
+                    try {
+                        // client passed the MID - propagating
+                        mid = ctx.get(Mid.ID);
+                    } catch (NoSuchElementException nse) {
+                        // client DID NOT pass the MID - creating
+                        mid = ThreadLocalMID.newMid();
                         System.out.println("MonoService.create new MID " + mid);
                     }
 
