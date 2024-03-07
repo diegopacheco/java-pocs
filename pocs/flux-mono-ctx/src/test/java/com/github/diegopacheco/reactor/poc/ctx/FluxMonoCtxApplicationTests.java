@@ -42,19 +42,16 @@ class FluxMonoCtxApplicationTests {
 	}
 
 	// MID Service -> Test
-	// I think it needs to pass a mono down!
+	// I call you, but I dont give you context, but I give you a RefCallback.
+	// Now you can give me your Mid.
 	@Test
 	void testNoMidPropagationFromClientButThereIsFromServer() {
-		AtomicReference<Mid> ref = new AtomicReference<>();
+		final AtomicReference<Mid> ref = new AtomicReference<>();
 
-		Mono<String> caller = Mono.deferContextual( ctx -> {
-					Mid mid = ctx.get(Mid.ID);
-					ref.set(mid);
-					System.out.println("Test.mono ID = " + ref.get());
-					return Mono.just("");
-				});
-		ms.sumWriter(10,20,caller);
-		String result = caller.block();
+		System.out.println("Test.mono ID = " + ref.get());
+		String result = ms.
+				sumRef(10,20, ref).
+				block();
 
 		System.out.println("Test.Final ID: " + ref.get());
 		assertEquals("30",result);

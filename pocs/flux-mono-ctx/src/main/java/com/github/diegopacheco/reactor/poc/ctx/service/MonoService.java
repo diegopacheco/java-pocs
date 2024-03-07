@@ -43,14 +43,31 @@ public class MonoService {
         return result;
     }
 
-    public void sumWriter(Integer a, Integer b, Mono<String> upstreamCallback) {
-        final Mid mid = Mid.newMid();
-        final String sum = a + b + "";
+    public Mono<String> sumRef(Integer a, Integer b, AtomicReference<Mid> refCallback) {
 
-        upstreamCallback.
-            contextWrite(Context.of(Mid.ID, mid)).
-            mergeWith(Mono.just(sum)).
-            blockLast();
+        final String sum = a + b + "";
+        refCallback.set(Mid.newMid());
+
+        Mono<String> result = Mono.
+                deferContextual(ctx -> {
+                    Mid mid = null;
+                    try {
+                        // client passed the MID - propagating
+                        mid = ctx.get(Mid.ID);
+                    } catch (NoSuchElementException nse) {
+                        // client DID NOT pass the MID - creating
+                        mid = refCallback.get();
+                        System.out.println("MonoService.create new MID " + mid);
+                    }
+
+                    System.out.println("MonoService.mono ID = " + mid);
+
+                    Mono<String> resultInternal = Mono.just(sum);
+                    log.log("MonoService.after mono ID = ", mid);
+
+                    return resultInternal;
+                });
+        return result;
     }
 
 }
