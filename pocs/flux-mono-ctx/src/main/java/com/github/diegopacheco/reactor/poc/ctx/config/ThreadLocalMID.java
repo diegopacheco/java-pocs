@@ -6,16 +6,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ThreadLocalMID {
     public static final String ID = "$MID.ID$";
-    private ThreadLocal<Map<String,String>> holder = new ThreadLocal<>();
+    private ThreadLocal<Map<String,String>> holder;
 
     public ThreadLocalMID(){
+        holder = new ThreadLocal<>();
         holder.set(new ConcurrentHashMap<>());
         holder.get().put(ID, UUID.randomUUID().toString());
     }
 
     public static ThreadLocalMID newMid(){
-        ThreadLocalMID mid = new ThreadLocalMID();
-        return mid;
+        return new ThreadLocalMID();
     }
 
     public static ThreadLocalMID fromID(String id){
@@ -25,9 +25,22 @@ public class ThreadLocalMID {
     }
 
     public String getID(){
-        String id =  holder.get().get(ID);
-        if (null==id){
+        Map<String,String> props = holder.get();
+        String id = null;
+        if (props!=null){
+            id = props.get(ID);
+            if (null==id){
+                id = UUID.randomUUID().toString();
+                holder.get().put(ID,id);
+            }
+        }else{
             id = UUID.randomUUID().toString();
+            if (holder==null){
+                holder = new ThreadLocal<>();
+            }
+            if (holder.get()==null){
+                holder.set(new ConcurrentHashMap<>());
+            }
             holder.get().put(ID,id);
         }
         return id;
@@ -35,7 +48,13 @@ public class ThreadLocalMID {
 
     @Override
     public String toString() {
-        String id =  holder.get().get(ID);
+        Map<String,String> props = holder.get();
+        String id = null;
+        if (null==props){
+            id = "<<NOT AVALIABLE>>";
+        }else{
+            id = props.get(ID);
+        }
         return id;
     }
 }
