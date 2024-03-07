@@ -6,19 +6,21 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ThreadLocalMID {
     public static final String ID = "$MID.ID$";
-    private static ThreadLocal<Map<String,String>> holder = new ThreadLocal<>();
+    private ThreadLocal<Map<String,String>> holder = new ThreadLocal<>();
+
+    public ThreadLocalMID(){
+        holder.set(new ConcurrentHashMap<>());
+        holder.get().put(ID, UUID.randomUUID().toString());
+    }
 
     public static ThreadLocalMID newMid(){
         ThreadLocalMID mid = new ThreadLocalMID();
-        holder.set(new ConcurrentHashMap<>());
-        holder.get().put(ID, UUID.randomUUID().toString());
         return mid;
     }
 
     public static ThreadLocalMID fromID(String id){
         ThreadLocalMID mid = new ThreadLocalMID();
-        holder.set(new ConcurrentHashMap<>());
-        holder.get().put(ID, id);
+        mid.holder.get().put(ID, id);
         return mid;
     }
 
