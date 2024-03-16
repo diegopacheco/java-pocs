@@ -1,3 +1,10 @@
+# POC V1
+
+* There is just 1 thread per worker
+* There is no dynamic flow control
+* There is no realtime-metrics
+* Pipeline is the main orchestrator
+
 ## SEDA (Staged Event Driven Architecture)
 
 * Decompose complex event in queues
