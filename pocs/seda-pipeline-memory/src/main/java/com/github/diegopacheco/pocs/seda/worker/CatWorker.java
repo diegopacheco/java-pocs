@@ -32,7 +32,7 @@ public class CatWorker implements Worker{
 
     private String getFact(String event) {
         Random rand = new Random();
-        int seconds = 3 + (rand.nextInt(2) + 20);
+        int seconds = 1 + (rand.nextInt(1) + 2);
         SilentThread.sleep(seconds);
 
         StringBuffer sb = new StringBuffer();
@@ -49,6 +49,7 @@ public class CatWorker implements Worker{
         } catch (Exception e) {
            throw new RuntimeException(e);
         }
-        return sb.toString();
+        return "{ \"requester\": \"" + event + "\", \"result\": " + sb.toString() + "}";
+
     }
 }
