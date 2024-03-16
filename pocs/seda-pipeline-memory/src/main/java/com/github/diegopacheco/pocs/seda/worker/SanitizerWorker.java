@@ -1,7 +1,6 @@
 package com.github.diegopacheco.pocs.seda.worker;
 
 import com.github.diegopacheco.pocs.seda.queue.QueueManager;
-import com.github.diegopacheco.pocs.seda.thread.SilentThread;
 
 public class SanitizerWorker implements Worker {
 
@@ -25,7 +24,6 @@ public class SanitizerWorker implements Worker {
     }
 
     private String sanitize(String event) {
-        SilentThread.sleep(1);
         return event.trim().toLowerCase();
     }
 

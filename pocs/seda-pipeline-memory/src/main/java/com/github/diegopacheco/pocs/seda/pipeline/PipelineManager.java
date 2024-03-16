@@ -28,21 +28,21 @@ public class PipelineManager {
         threads.add(new Thread(w2::run));
         threads.add(new Thread(w3::run));
 
-        RequestGenerator generator = new RequestGenerator();
-        generator.generate(200,queueSanitizer);
-
         System.out.println("**************************");
         System.out.println("*** Quem tem SEDA ? ******");
         System.out.println("**************************");
         System.out.println("* ");
         System.out.println("* Pipeline Manager ");
         System.out.println("* ");
-        System.out.println(" |-------------------|       |-------------------|      |-------------------| ");
-        System.out.println(" |-- sanitizer(W1) --|  ==>  |-- cat(W2) --------|  ==> |-- console(W3) ----| ");
-        System.out.println(" |-------------------|       |-------------------|      |-------------------| ");
+        System.out.println("* |-------------------|       |-------------------|      |-------------------| ");
+        System.out.println("* |-- sanitizer(W1) --|  ==>  |-- cat(W2) --------|  ==> |-- console(W3) ----| ");
+        System.out.println("* |-------------------|       |-------------------|      |-------------------| ");
         System.out.println("* ");
         System.out.println("* STARTED !");
-        System.out.println("* ");
+
+        RequestGenerator generator = new RequestGenerator();
+        generator.generate(500,queueSanitizer);
+        System.out.println("* >>> 500 events generated! ");
 
         for(Thread t: threads){
             t.start();

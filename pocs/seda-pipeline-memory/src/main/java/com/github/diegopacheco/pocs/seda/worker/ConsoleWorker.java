@@ -17,9 +17,8 @@ public class ConsoleWorker implements Worker {
         while (true) {
             String event = inQueue.consume();
             if (null != event) {
-                System.out.println(new Date() + " - event finish pipeline. \n");
+                System.out.println(new Date() + " - event finish pipeline.");
                 System.out.println(event);
-                System.out.println(" ********************* ");
             }
         }
     }
