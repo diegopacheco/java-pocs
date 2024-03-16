@@ -11,4 +11,12 @@ public class SilentThread {
         }
     }
 
+    public static <T> void join(Thread t){
+        try {
+            t.join();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

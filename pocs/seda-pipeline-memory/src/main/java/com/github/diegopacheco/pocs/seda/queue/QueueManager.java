@@ -1,10 +1,13 @@
 package com.github.diegopacheco.pocs.seda.queue;
 
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class QueueManager<T> {
 
-    private final Queue<T> queue;
+    private Queue<T> queue = new ConcurrentLinkedQueue<>();
+
+    public QueueManager(){}
 
     public QueueManager(Queue<T> queue) {
         this.queue = queue;
