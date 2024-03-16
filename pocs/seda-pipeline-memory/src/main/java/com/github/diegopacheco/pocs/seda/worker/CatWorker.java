@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Random;
 
 public class CatWorker implements Worker{
 
@@ -30,7 +31,9 @@ public class CatWorker implements Worker{
     }
 
     private String getFact(String event) {
-        SilentThread.sleep(1);
+        Random rand = new Random();
+        int seconds = 3 + (rand.nextInt(2) + 20);
+        SilentThread.sleep(seconds);
 
         StringBuffer sb = new StringBuffer();
         try {

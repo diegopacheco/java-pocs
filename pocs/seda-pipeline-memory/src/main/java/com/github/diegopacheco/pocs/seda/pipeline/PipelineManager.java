@@ -1,6 +1,7 @@
 package com.github.diegopacheco.pocs.seda.pipeline;
 
 import com.github.diegopacheco.pocs.seda.queue.QueueManager;
+import com.github.diegopacheco.pocs.seda.synthetic.RequestGenerator;
 import com.github.diegopacheco.pocs.seda.thread.SilentThread;
 import com.github.diegopacheco.pocs.seda.worker.CatWorker;
 import com.github.diegopacheco.pocs.seda.worker.ConsoleWorker;
@@ -23,10 +24,29 @@ public class PipelineManager {
         Worker w3 = new ConsoleWorker(queueConsole);
 
         List<Thread> threads = new ArrayList<Thread>();
-        threads.add(new Thread( ()-> w1.run() ));
-        threads.add(new Thread( ()-> w2.run() ));
-        threads.add(new Thread( ()-> w3.run() ));
+        threads.add(new Thread(w1::run));
+        threads.add(new Thread(w2::run));
+        threads.add(new Thread(w3::run));
 
+        RequestGenerator generator = new RequestGenerator();
+        generator.generate(200,queueSanitizer);
+
+        System.out.println("**************************");
+        System.out.println("*** Quem tem SEDA ? ******");
+        System.out.println("**************************");
+        System.out.println("* ");
+        System.out.println("* Pipeline Manager ");
+        System.out.println("* ");
+        System.out.println(" |-------------------|       |-------------------|      |-------------------| ");
+        System.out.println(" |-- sanitizer(W1) --|  ==>  |-- cat(W2) --------|  ==> |-- console(W3) ----| ");
+        System.out.println(" |-------------------|       |-------------------|      |-------------------| ");
+        System.out.println("* ");
+        System.out.println("* STARTED !");
+        System.out.println("* ");
+
+        for(Thread t: threads){
+            t.start();
+        }
         for(Thread t: threads){
             SilentThread.join(t);
         }

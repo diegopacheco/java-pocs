@@ -1,12 +1,13 @@
 package com.github.diegopacheco.pocs.seda.synthetic;
 
 import com.github.diegopacheco.pocs.seda.queue.QueueManager;
+import com.github.diegopacheco.pocs.seda.thread.SilentThread;
 
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class RequesterGenerator {
+public class RequestGenerator {
 
     public <T> void generate(int amount, QueueManager<T> queue){
         IntStream intStream = IntStream.range(0, amount);

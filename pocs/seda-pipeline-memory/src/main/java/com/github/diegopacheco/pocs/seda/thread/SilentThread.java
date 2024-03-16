@@ -5,7 +5,7 @@ public class SilentThread {
     public static void sleep(int timeSeconds){
         try {
             // Simulate some DB call or work that take same time.
-            Thread.sleep(timeSeconds);
+            Thread.sleep(timeSeconds * 1000L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
