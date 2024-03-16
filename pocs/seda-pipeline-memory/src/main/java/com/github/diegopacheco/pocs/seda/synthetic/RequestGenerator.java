@@ -1,7 +1,6 @@
 package com.github.diegopacheco.pocs.seda.synthetic;
 
 import com.github.diegopacheco.pocs.seda.queue.QueueManager;
-import com.github.diegopacheco.pocs.seda.thread.SilentThread;
 
 import java.util.List;
 import java.util.Random;

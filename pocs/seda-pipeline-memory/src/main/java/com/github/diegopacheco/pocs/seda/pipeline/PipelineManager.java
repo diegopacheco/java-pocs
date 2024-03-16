@@ -34,9 +34,9 @@ public class PipelineManager {
         System.out.println("* ");
         System.out.println("* Pipeline Manager ");
         System.out.println("* ");
-        System.out.println("* |-------------------|       |-------------------|      |-------------------| ");
-        System.out.println("* |-- sanitizer(W1) --|  ==>  |-- cat(W2) --------|  ==> |-- console(W3) ----| ");
-        System.out.println("* |-------------------|       |-------------------|      |-------------------| ");
+        System.out.println("*                      |-------------------|                |-------------------|                |-------------------| ");
+        System.out.println("* events --> [in-queue]|-- sanitizer(W1) --|  ==> [in-queue]|-- cat(W2) --------|  ==> [in-queue]|-- console(W3) ----| ");
+        System.out.println("*                      |-------------------|                |-------------------|                |-------------------| ");
         System.out.println("* ");
         System.out.println("* STARTED !");
 
