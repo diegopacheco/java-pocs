@@ -1,7 +1,10 @@
-package com.github.diegopacheco.pocs.seda.worker;
+package com.github.diegopacheco.pocs.seda.pipeline;
 
 import com.github.diegopacheco.pocs.seda.queue.QueueManager;
 import com.github.diegopacheco.pocs.seda.synthetic.RequestGenerator;
+import com.github.diegopacheco.pocs.seda.worker.CatWorker;
+import com.github.diegopacheco.pocs.seda.worker.ConsoleWorker;
+import com.github.diegopacheco.pocs.seda.worker.SanitizerWorker;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ExecutorService;
@@ -10,7 +13,7 @@ import java.util.concurrent.Executors;
 @Component
 public class PipelineManager {
 
-    private static final Integer TOTAL_THREADS_PER_WORKER = 10;
+    private static final Integer TOTAL_THREADS_PER_WORKER = 7;
 
     private static ExecutorService poolSanitizer = Executors.newFixedThreadPool(TOTAL_THREADS_PER_WORKER);
     private static ExecutorService poolCat = Executors.newFixedThreadPool(TOTAL_THREADS_PER_WORKER);
@@ -37,7 +40,7 @@ public class PipelineManager {
         for(int i=1;i<=TOTAL_THREADS_PER_WORKER;i++){
             poolSanitizer.submit(newSanitizerWorker());
             poolCat.submit(newCatWorker());
-            poolCat.submit(newConsoleWorker());
+            poolConsole.submit(newConsoleWorker());
         }
         System.out.println("* Pipeline Manager done provisioned  " + TOTAL_THREADS_PER_WORKER +
                            "  thread pools per worker ");
@@ -53,19 +56,19 @@ public class PipelineManager {
         System.out.println("* >>> " + amount + " events generated! ");
     }
 
-    private Thread newSanitizerWorker(){
+    private Runnable newSanitizerWorker(){
         SanitizerWorker worker = new SanitizerWorker(queueSanitizer,queueCat);
-        return new Thread(worker::run);
+        return worker::run;
     }
 
-    private Thread newCatWorker(){
+    private Runnable newCatWorker(){
         CatWorker worker = new CatWorker(queueCat,queueConsole);
-        return new Thread(worker::run);
+        return worker::run;
     }
 
-    private Thread newConsoleWorker(){
+    private Runnable newConsoleWorker(){
         ConsoleWorker worker = new ConsoleWorker(queueConsole);
-        return new Thread(worker::run);
+        return worker::run;
     }
 
 }
