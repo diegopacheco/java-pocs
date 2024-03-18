@@ -57,8 +57,8 @@
   it would make the whole thing use much less CPU, since no one would be wairing or checking on the queue.
 * It's also possible to have the whole pipeline lazy, just have one
   inbound queue and create the rest ondeamnd. Instead of the worker being polling the queue it could be the wother way around, submit tasks as to a central queue with 1 generic worker like a event loop
-  this thread could be single threaded and one recive a message it would spawn the other workers and submit they tasks this is like
-  the reactor pattern or event loop if you will.
+  this thread could be single threaded and one recive a message it would spawn the other workers and submit they tasks this is like the reactor pattern or event loop if you will. We could doit without the queue* we could just submit to a single thread executor pool, them this worker triggers all other things, no more busy waiting. This pool
+  it would be in the front of the whole pipeline.
 
 ### Build 
 ```bash
