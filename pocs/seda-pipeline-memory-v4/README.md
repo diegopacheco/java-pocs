@@ -55,6 +55,8 @@
   and the PipelineManaher would talk to the queue, them we could make tasks END all the time, and never
   we would have busy waiting or bloking, since arraivals are controlled by PipelineManager in this case
   it would make the whole thing use much less CPU, since no one would be wairing or checking on the queue.
+* It's algo possible to have the whole pipeline lazy, just have one
+  inbound queue and create the rest ondeamnd.
 
 ### Build 
 ```bash
