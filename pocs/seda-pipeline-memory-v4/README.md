@@ -55,8 +55,10 @@
   and the PipelineManaher would talk to the queue, them we could make tasks END all the time, and never
   we would have busy waiting or bloking, since arraivals are controlled by PipelineManager in this case
   it would make the whole thing use much less CPU, since no one would be wairing or checking on the queue.
-* It's algo possible to have the whole pipeline lazy, just have one
-  inbound queue and create the rest ondeamnd.
+* It's also possible to have the whole pipeline lazy, just have one
+  inbound queue and create the rest ondeamnd. Instead of the worker being polling the queue it could be the wother way around, submit tasks as to a central queue with 1 generic worker like a event loop
+  this thread could be single threaded and one recive a message it would spawn the other workers and submit they tasks this is like
+  the reactor pattern or event loop if you will.
 
 ### Build 
 ```bash
