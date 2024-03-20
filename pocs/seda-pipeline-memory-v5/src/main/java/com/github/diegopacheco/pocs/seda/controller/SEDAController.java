@@ -47,18 +47,4 @@ public class SEDAController {
         return  amount + " events generated in " + (end-init) + " ms";
     }
 
-    @RequestMapping("/drain/{poolCode}")
-    public String drain(@PathVariable("poolCode") Integer poolCode) {
-        Queues q = Queues.fromCode(poolCode);
-        seda.drain(q);
-        return "Pool " + q + "drained.";
-    }
-
-    @RequestMapping("/resume/{poolCode}")
-    public String resume(@PathVariable("poolCode") Integer poolCode) {
-        Queues q = Queues.fromCode(poolCode);
-        seda.resume(q);
-        return "Pool " + q + "resume.";
-    }
-
 }

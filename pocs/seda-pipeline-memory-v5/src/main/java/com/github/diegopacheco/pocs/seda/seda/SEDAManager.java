@@ -18,21 +18,6 @@ public class SEDAManager<T> {
     private static ExecutorService poolCat = Executors.newFixedThreadPool(TOTAL_THREADS_PER_WORKER);
     private static ExecutorService poolConsole = Executors.newFixedThreadPool(TOTAL_THREADS_PER_WORKER);
 
-    private static ConcurrentLinkedDeque<Worker> sanitizerWorkers = new ConcurrentLinkedDeque<Worker>();
-    private static ConcurrentLinkedDeque<Worker> catWorkers = new ConcurrentLinkedDeque<Worker>();
-    private static ConcurrentLinkedDeque<Worker> consoleWorkers = new ConcurrentLinkedDeque<Worker>();
-
-    private LinkedBlockingDeque<T> queue = new LinkedBlockingDeque<>();
-    private String name;
-
-    public SEDAManager(String name){
-        this.name = name;
-    }
-
-    public SEDAManager(Queue<T> queue, String name) {
-        this.queue =(LinkedBlockingDeque)queue;
-        this.name = name;
-    }
 
     public void run(){
         System.out.println("**************************");
@@ -76,49 +61,10 @@ public class SEDAManager<T> {
         return new ConsoleWorker((String) event);
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void generate(int amount){
         RequestGenerator generator = new RequestGenerator();
-        generator.generate(amount).forEach(System.out::println);
+        generator.generate(amount).forEach(event -> publish(Queues.SANITIZER_QUEUE, (T)event));
         System.out.println("* >>> " + amount + " events generated! ");
-    }
-
-    public void drain(Queues queues){
-        System.out.println(" PipelineManager draining pool: " + queues);
-        switch (queues){
-            case SANITIZER_QUEUE -> sanitizerWorkers.forEach(Worker::drain);
-            case CAT_QUEUE -> catWorkers.forEach(Worker::drain);
-            case CONOSLE_QUEUE -> consoleWorkers.forEach(Worker::drain);
-        }
-    }
-
-    public void resume(Queues queues){
-        System.out.println(" PipelineManager resume pool: " + queues);
-        switch (queues){
-            case SANITIZER_QUEUE -> reSubmitWorkerToCarriers(sanitizerWorkers,poolSanitizer,newSanitizerWorker());
-            case CAT_QUEUE ->  reSubmitWorkerToCarriers(catWorkers,poolCat,newCatWorker());
-            case CONOSLE_QUEUE -> reSubmitWorkerToCarriers(consoleWorkers,poolConsole,newConsoleWorker());
-        }
-    }
-
-    private void reSubmitWorkerToCarriers(ConcurrentLinkedDeque<Worker> workers,
-                                          ExecutorService executor,
-                                          Worker workerInstance){
-        // recreate worker objects
-        for(int i=1;i<=TOTAL_THREADS_PER_WORKER;i++) {
-            workers.add(workerInstance);
-        }
-
-        // resume workers
-        workers.forEach(Worker::resume);
-
-        // submit to executor
-        for(int i=1;i<=TOTAL_THREADS_PER_WORKER;i++) {
-            executor.submit(workerInstance);
-        }
     }
 
 }

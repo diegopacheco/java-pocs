@@ -6,7 +6,7 @@ import com.github.diegopacheco.pocs.seda.seda.SEDAManager;
 import com.github.diegopacheco.pocs.seda.seda.Queues;
 import com.github.diegopacheco.pocs.seda.thread.SilentThread;
 
-public class SanitizerWorker extends DynamicBaseWorker implements Worker {
+public class SanitizerWorker implements Worker {
 
     private SEDAManager<String> queueManager;
     private Queues next;
@@ -21,16 +21,14 @@ public class SanitizerWorker extends DynamicBaseWorker implements Worker {
 
     @Override
     public void run() {
-        if (isRunning()) {
-            if (null != event) {
-                try {
-                    String sanitizedEvent = sanitize(event);
-                    queueManager.publish(next,sanitizedEvent);
+        if (null != event) {
+            try {
+                String sanitizedEvent = sanitize(event);
+                queueManager.publish(next, sanitizedEvent);
 
-                    MetricsManager.ok(Queues.SANITIZER_QUEUE.name());
-                } catch (Exception e) {
-                    MetricsManager.error(Queues.SANITIZER_QUEUE.name());
-                }
+                MetricsManager.ok(Queues.SANITIZER_QUEUE.name());
+            } catch (Exception e) {
+                MetricsManager.error(Queues.SANITIZER_QUEUE.name());
             }
         }
         System.out.println("Worker[" + this.getClass().getSimpleName() +

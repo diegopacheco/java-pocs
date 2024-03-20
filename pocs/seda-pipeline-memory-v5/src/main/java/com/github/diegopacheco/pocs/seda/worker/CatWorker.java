@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class CatWorker extends DynamicBaseWorker implements Worker {
+public class CatWorker implements Worker {
 
     private SEDAManager<String> queueManager;
     private Queues next;
@@ -26,16 +26,14 @@ public class CatWorker extends DynamicBaseWorker implements Worker {
 
     @Override
     public void run() {
-        if (isRunning()) {
-            if (null != event) {
-                try {
-                    String jsonFactEvent = getFact(event);
-                    queueManager.publish(next, jsonFactEvent);
+        if (null != event) {
+            try {
+                String jsonFactEvent = getFact(event);
+                queueManager.publish(next, jsonFactEvent);
 
-                    MetricsManager.ok(Queues.CAT_QUEUE.name());
-                } catch (Exception e) {
-                    MetricsManager.error(Queues.CAT_QUEUE.name());
-                }
+                MetricsManager.ok(Queues.CAT_QUEUE.name());
+            } catch (Exception e) {
+                MetricsManager.error(Queues.CAT_QUEUE.name());
             }
         }
         System.out.println("Worker[" + this.getClass().getSimpleName() +
