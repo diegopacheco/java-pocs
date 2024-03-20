@@ -1,5 +1,6 @@
 package com.github.diegopacheco.pocs.seda.worker;
 
+import com.github.diegopacheco.pocs.seda.event.Event;
 import com.github.diegopacheco.pocs.seda.ff.FeatureFlagManager;
 import com.github.diegopacheco.pocs.seda.metrics.MetricsManager;
 import com.github.diegopacheco.pocs.seda.seda.SEDAManager;
@@ -16,9 +17,9 @@ public class CatWorker implements Worker {
     private SEDAManager sedaManager;
     private Queues next;
 
-    private String event;
+    private Event<String> event;
 
-    public CatWorker(SEDAManager sedaManager, Queues next, String event) {
+    public CatWorker(SEDAManager sedaManager, Queues next, Event<String> event) {
         this.sedaManager = sedaManager;
         this.next = next;
         this.event = event;
@@ -28,7 +29,7 @@ public class CatWorker implements Worker {
     public void run() {
         if (null != event) {
             try {
-                String jsonFactEvent = getFact(event);
+                Event<String> jsonFactEvent = getFact(event);
                 sedaManager.publish(next, jsonFactEvent);
 
                 MetricsManager.ok(Queues.CAT_QUEUE.name());
@@ -41,14 +42,14 @@ public class CatWorker implements Worker {
                 "] completed. ");
     }
 
-    private String getFact(String event) {
+    private Event<String> getFact(Event<String> event) {
         SilentThread.sleep(FeatureFlagManager.get(FeatureFlagManager.QUEUE_CAT_TIME_BACKPRESSURE_MS));
 
         StringBuffer sb = new StringBuffer();
         try {
             URL url = new URL("https://catfact.ninja/fact?max_length=200");
             URLConnection conn = url.openConnection();
-            conn.setRequestProperty("X-CALLER-HEADER", event);
+            conn.setRequestProperty("X-CALLER-HEADER", event.getContent());
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String inputLine;
             while ((inputLine = br.readLine()) != null) {
@@ -58,7 +59,7 @@ public class CatWorker implements Worker {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return "{ \"requester\": \"" + event + "\", \"result\": " + sb.toString() + "}";
+        return new Event("{ \"requester\": \"" + event + "\", \"result\": " + sb.toString() + "}").addStage("CAT");
 
     }
 

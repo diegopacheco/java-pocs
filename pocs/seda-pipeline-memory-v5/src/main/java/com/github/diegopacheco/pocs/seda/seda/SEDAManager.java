@@ -1,5 +1,6 @@
 package com.github.diegopacheco.pocs.seda.seda;
 
+import com.github.diegopacheco.pocs.seda.event.Event;
 import com.github.diegopacheco.pocs.seda.synthetic.RequestGenerator;
 import com.github.diegopacheco.pocs.seda.worker.CatWorker;
 import com.github.diegopacheco.pocs.seda.worker.ConsoleWorker;
@@ -39,7 +40,7 @@ public class SEDAManager {
                             "  thread pools per worker ");
     }
 
-    public boolean publish(Queues queue,String event){
+    public boolean publish(Queues queue,Event<String> event){
         if (null!=event){
             switch (queue){
                 case SANITIZER_QUEUE -> poolSanitizer.submit(newSanitizerWorker(event));
@@ -51,15 +52,15 @@ public class SEDAManager {
         return false;
     }
 
-    private Worker newSanitizerWorker(String event){
+    private Worker newSanitizerWorker(Event<String> event){
         return new SanitizerWorker(this,Queues.CAT_QUEUE, event);
     }
 
-    private Worker newCatWorker(String event){
+    private Worker newCatWorker(Event<String> event){
         return new CatWorker(this,Queues.CONOSLE_QUEUE, event);
     }
 
-    private Worker newConsoleWorker(String event){
+    private Worker newConsoleWorker(Event<String> event){
         return new ConsoleWorker(event);
     }
 

@@ -1,5 +1,6 @@
 package com.github.diegopacheco.pocs.seda.worker;
 
+import com.github.diegopacheco.pocs.seda.event.Event;
 import com.github.diegopacheco.pocs.seda.ff.FeatureFlagManager;
 import com.github.diegopacheco.pocs.seda.metrics.MetricsManager;
 import com.github.diegopacheco.pocs.seda.seda.SEDAManager;
@@ -11,9 +12,9 @@ public class SanitizerWorker implements Worker {
     private SEDAManager sedaManager;
     private Queues next;
 
-    private String event;
+    private Event<String> event;
 
-    public SanitizerWorker(SEDAManager queueManager, Queues next, String event) {
+    public SanitizerWorker(SEDAManager queueManager, Queues next, Event<String> event) {
         this.sedaManager = queueManager;
         this.next = next;
         this.event = event;
@@ -23,7 +24,7 @@ public class SanitizerWorker implements Worker {
     public void run() {
         if (null != event) {
             try {
-                String sanitizedEvent = sanitize(event);
+                Event<String> sanitizedEvent = sanitize(event);
                 sedaManager.publish(next, sanitizedEvent);
 
                 MetricsManager.ok(Queues.SANITIZER_QUEUE.name());
@@ -36,9 +37,9 @@ public class SanitizerWorker implements Worker {
                 "] completed. ");
     }
 
-    private String sanitize(String event) {
+    private Event<String> sanitize(Event<String> event) {
         SilentThread.sleep(FeatureFlagManager.get(FeatureFlagManager.QUEUE_SANITIZER_TIME_BACKPRESSURE_MS));
-        return event.trim().toLowerCase();
+        return new Event(event.getContent().trim().toLowerCase()).addStage("SANITIZER");
     }
 
 }

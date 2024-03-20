@@ -1,6 +1,6 @@
 package com.github.diegopacheco.pocs.seda.synthetic;
 
-import com.github.diegopacheco.pocs.seda.seda.SEDAManager;
+import com.github.diegopacheco.pocs.seda.event.Event;
 
 import java.util.List;
 import java.util.Random;
@@ -8,9 +8,9 @@ import java.util.stream.IntStream;
 
 public class RequestGenerator {
 
-    public <T> List<String> generate(int amount){
+    public <T> List<Event> generate(int amount){
         IntStream intStream = IntStream.range(0, amount);
-        List<String> events = intStream.mapToObj((i)->name()).toList();
+        List<Event> events = intStream.mapToObj((i)-> new Event(name())).toList();
         return events;
     }
 

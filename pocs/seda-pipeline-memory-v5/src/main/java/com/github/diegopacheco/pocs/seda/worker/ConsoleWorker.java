@@ -1,5 +1,6 @@
 package com.github.diegopacheco.pocs.seda.worker;
 
+import com.github.diegopacheco.pocs.seda.event.Event;
 import com.github.diegopacheco.pocs.seda.ff.FeatureFlagManager;
 import com.github.diegopacheco.pocs.seda.metrics.MetricsManager;
 import com.github.diegopacheco.pocs.seda.seda.Queues;
@@ -9,9 +10,9 @@ import java.util.Date;
 
 public class ConsoleWorker implements Worker {
 
-    private String event;
+    private Event<String> event;
 
-    public ConsoleWorker(String event) {
+    public ConsoleWorker(Event<String> event) {
         this.event = event;
     }
 
