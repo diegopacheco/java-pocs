@@ -2,7 +2,7 @@ package com.github.diegopacheco.pocs.seda.worker;
 
 import com.github.diegopacheco.pocs.seda.ff.FeatureFlagManager;
 import com.github.diegopacheco.pocs.seda.metrics.MetricsManager;
-import com.github.diegopacheco.pocs.seda.queue.Queues;
+import com.github.diegopacheco.pocs.seda.seda.Queues;
 import com.github.diegopacheco.pocs.seda.thread.SilentThread;
 
 import java.util.Date;

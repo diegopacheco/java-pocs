@@ -2,8 +2,8 @@ package com.github.diegopacheco.pocs.seda.worker;
 
 import com.github.diegopacheco.pocs.seda.ff.FeatureFlagManager;
 import com.github.diegopacheco.pocs.seda.metrics.MetricsManager;
-import com.github.diegopacheco.pocs.seda.queue.QueueManager;
-import com.github.diegopacheco.pocs.seda.queue.Queues;
+import com.github.diegopacheco.pocs.seda.seda.SEDAManager;
+import com.github.diegopacheco.pocs.seda.seda.Queues;
 import com.github.diegopacheco.pocs.seda.thread.SilentThread;
 
 import java.io.BufferedReader;
@@ -13,12 +13,12 @@ import java.net.URLConnection;
 
 public class CatWorker extends DynamicBaseWorker implements Worker {
 
-    private QueueManager<String> queueManager;
+    private SEDAManager<String> queueManager;
     private Queues next;
 
     private String event;
 
-    public CatWorker(QueueManager<String> queueManager, Queues next, String event) {
+    public CatWorker(SEDAManager<String> queueManager, Queues next, String event) {
         this.queueManager = queueManager;
         this.next = next;
         this.event = event;

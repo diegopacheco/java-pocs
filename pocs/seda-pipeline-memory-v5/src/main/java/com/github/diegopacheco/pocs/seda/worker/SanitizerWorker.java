@@ -2,18 +2,18 @@ package com.github.diegopacheco.pocs.seda.worker;
 
 import com.github.diegopacheco.pocs.seda.ff.FeatureFlagManager;
 import com.github.diegopacheco.pocs.seda.metrics.MetricsManager;
-import com.github.diegopacheco.pocs.seda.queue.QueueManager;
-import com.github.diegopacheco.pocs.seda.queue.Queues;
+import com.github.diegopacheco.pocs.seda.seda.SEDAManager;
+import com.github.diegopacheco.pocs.seda.seda.Queues;
 import com.github.diegopacheco.pocs.seda.thread.SilentThread;
 
 public class SanitizerWorker extends DynamicBaseWorker implements Worker {
 
-    private QueueManager<String> queueManager;
+    private SEDAManager<String> queueManager;
     private Queues next;
 
     private String event;
 
-    public SanitizerWorker(QueueManager<String> queueManager, Queues next,String event) {
+    public SanitizerWorker(SEDAManager<String> queueManager, Queues next, String event) {
         this.queueManager = queueManager;
         this.next = next;
         this.event = event;

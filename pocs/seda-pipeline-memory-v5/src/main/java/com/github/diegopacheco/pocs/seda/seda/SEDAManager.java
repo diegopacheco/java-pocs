@@ -1,21 +1,16 @@
-package com.github.diegopacheco.pocs.seda.pipeline;
+package com.github.diegopacheco.pocs.seda.seda;
 
-import com.github.diegopacheco.pocs.seda.queue.QueueManager;
-import com.github.diegopacheco.pocs.seda.queue.Queues;
 import com.github.diegopacheco.pocs.seda.synthetic.RequestGenerator;
 import com.github.diegopacheco.pocs.seda.worker.CatWorker;
 import com.github.diegopacheco.pocs.seda.worker.ConsoleWorker;
 import com.github.diegopacheco.pocs.seda.worker.SanitizerWorker;
 import com.github.diegopacheco.pocs.seda.worker.Worker;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.Queue;
+import java.util.concurrent.*;
 
-@Component
-public class PipelineManager {
+public class SEDAManager<T> {
 
     private static final Integer TOTAL_THREADS_PER_WORKER = 3;
 
@@ -23,65 +18,72 @@ public class PipelineManager {
     private static ExecutorService poolCat = Executors.newFixedThreadPool(TOTAL_THREADS_PER_WORKER);
     private static ExecutorService poolConsole = Executors.newFixedThreadPool(TOTAL_THREADS_PER_WORKER);
 
-    private static QueueManager<String> queueSanitizer = new QueueManager<>("queue-sanitizer");
-    private static QueueManager<String> queueCat = new QueueManager<>("queue-cat");
-    private static QueueManager<String> queueConsole = new QueueManager<>("queue-console");
-
     private static ConcurrentLinkedDeque<Worker> sanitizerWorkers = new ConcurrentLinkedDeque<Worker>();
     private static ConcurrentLinkedDeque<Worker> catWorkers = new ConcurrentLinkedDeque<Worker>();
     private static ConcurrentLinkedDeque<Worker> consoleWorkers = new ConcurrentLinkedDeque<Worker>();
+
+    private LinkedBlockingDeque<T> queue = new LinkedBlockingDeque<>();
+    private String name;
+
+    public SEDAManager(String name){
+        this.name = name;
+    }
+
+    public SEDAManager(Queue<T> queue, String name) {
+        this.queue =(LinkedBlockingDeque)queue;
+        this.name = name;
+    }
 
     public void run(){
         System.out.println("**************************");
         System.out.println("*** Quem tem SEDA ? ******");
         System.out.println("**************************");
         System.out.println("* ");
-        System.out.println("* Pipeline Manager ");
+        System.out.println("* SEDA Manager ");
         System.out.println("* ");
         System.out.println("*                      |-------------------|                |-------------------|                |-------------------| ");
-        System.out.println("* events --> [in-queue]|-- sanitizer(W1) --|  ==> [in-queue]|-- cat(W2) --------|  ==> [in-queue]|-- console(W3) ----| ");
+        System.out.println("* events --> [exe-pool]|-- sanitizer(W1) --|  ==> [exe-pool]|-- cat(W2) --------|  ==> [exe-pool]|-- console(W3) ----| ");
         System.out.println("*                      |-------------------|                |-------------------|                |-------------------| ");
         System.out.println("* ");
         System.out.println("* STARTED !");
 
         generate(1);
-        for(int i=1;i<=TOTAL_THREADS_PER_WORKER;i++){
-            Worker w = newSanitizerWorker();
-            sanitizerWorkers.add(w);
-            poolSanitizer.submit(w);
-
-            w = newCatWorker();
-            catWorkers.add(w);
-            poolCat.submit(w);
-
-            w = newConsoleWorker();
-            consoleWorkers.add(w);
-            poolConsole.submit(w);
-        }
-        System.out.println("* Pipeline Manager done provisioned  " + TOTAL_THREADS_PER_WORKER +
-                           "  thread pools per worker ");
+        System.out.println("* SEDA Manager done provisioned  " + TOTAL_THREADS_PER_WORKER +
+                            "  thread pools per worker ");
     }
 
-    public void publish(String event){
-        queueSanitizer.publish(event);
+    public boolean publish(Queues queue,T event){
+        if (null!=event){
+            switch (queue){
+                case SANITIZER_QUEUE -> poolSanitizer.submit(newSanitizerWorker(event));
+                case CAT_QUEUE -> poolCat.submit(newCatWorker(event));
+                case CONOSLE_QUEUE -> poolConsole.submit(new ConsoleWorker((String) event));
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private Worker newSanitizerWorker(T event){
+        return new SanitizerWorker((SEDAManager<String>)this,Queues.CAT_QUEUE, (String) event);
+    }
+
+    private Worker newCatWorker(T event){
+        return new CatWorker((SEDAManager<String>)this,Queues.CONOSLE_QUEUE, (String) event);
+    }
+
+    private Worker newConsoleWorker(T event){
+        return new ConsoleWorker((String) event);
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void generate(int amount){
         RequestGenerator generator = new RequestGenerator();
-        generator.generate(amount,queueSanitizer);
+        generator.generate(amount).forEach(System.out::println);
         System.out.println("* >>> " + amount + " events generated! ");
-    }
-
-    private Worker newSanitizerWorker(){
-        return new SanitizerWorker(queueSanitizer,queueCat);
-    }
-
-    private Worker newCatWorker(){
-        return new CatWorker(queueCat,queueConsole);
-    }
-
-    private Worker newConsoleWorker(){
-        return new ConsoleWorker(queueConsole);
     }
 
     public void drain(Queues queues){

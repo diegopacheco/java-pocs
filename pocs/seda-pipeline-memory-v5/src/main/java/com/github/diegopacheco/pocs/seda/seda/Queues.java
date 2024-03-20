@@ -1,4 +1,4 @@
-package com.github.diegopacheco.pocs.seda.queue;
+package com.github.diegopacheco.pocs.seda.seda;
 
 public enum Queues {
 

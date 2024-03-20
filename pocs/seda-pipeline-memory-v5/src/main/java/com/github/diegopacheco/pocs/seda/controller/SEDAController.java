@@ -2,8 +2,8 @@ package com.github.diegopacheco.pocs.seda.controller;
 
 import com.github.diegopacheco.pocs.seda.ff.FeatureFlagManager;
 import com.github.diegopacheco.pocs.seda.metrics.MetricsManager;
-import com.github.diegopacheco.pocs.seda.pipeline.PipelineManager;
-import com.github.diegopacheco.pocs.seda.queue.Queues;
+import com.github.diegopacheco.pocs.seda.seda.Queues;
+import com.github.diegopacheco.pocs.seda.seda.SEDAManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-public class PipelineController {
+public class SEDAController {
 
     @Autowired
-    PipelineManager pipeline;
+    SEDAManager<String> seda;
 
     @RequestMapping("/")
     public String index() {
@@ -42,7 +42,7 @@ public class PipelineController {
     @RequestMapping("/events/{amount}")
     public String events(@PathVariable("amount") Integer amount){
         long init = System.currentTimeMillis();
-        pipeline.generate(amount);
+        seda.generate(amount);
         long end = System.currentTimeMillis();
         return  amount + " events generated in " + (end-init) + " ms";
     }
@@ -50,14 +50,14 @@ public class PipelineController {
     @RequestMapping("/drain/{poolCode}")
     public String drain(@PathVariable("poolCode") Integer poolCode) {
         Queues q = Queues.fromCode(poolCode);
-        pipeline.drain(q);
+        seda.drain(q);
         return "Pool " + q + "drained.";
     }
 
     @RequestMapping("/resume/{poolCode}")
     public String resume(@PathVariable("poolCode") Integer poolCode) {
         Queues q = Queues.fromCode(poolCode);
-        pipeline.resume(q);
+        seda.resume(q);
         return "Pool " + q + "resume.";
     }
 
