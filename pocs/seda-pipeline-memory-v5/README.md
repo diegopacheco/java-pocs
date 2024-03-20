@@ -1,21 +1,28 @@
 # POC V5
 
 * Spring Boot 3.x Application now
-* Pipeline is the main orchestrator
+* Design was simplified
+* SEDA Manager is the main orchestrator
   * Now managed by Spring
+  * Much more simple now
+* HUGE CPU improvements
+  * No while true / no busy waiting
+  * SEDA pipeline is LAZY
+  * remove double queue - leveraging executors queue
 * Realtime-metrics
   * http://localhost:8080/stat
 * Flow control via time backpressure and feature flags that can be changed dynamically 
   * You can list FF http://localhost:8080/flags
   * Flags can ge changed in realime
-    * i.e: http://localhost:8080/flag/$WORKER_SANITIZER_TIME_BACKPRESSURE_MS/3
+    * i.e: http://localhost:8080/flag/$QUEUE_SANITIZER_TIME_BACKPRESSURE_MS/3
 * Dynamic Thread Management via PipelineManager
-  * 3 Thread Pools per Stage 
+  * 3 Executors Pools per Stage 
   * QueueManager queue data structure has changed to LinkedBlockingDeque
   * Process much faster but uses much more CPU them previous variations v1 and v2
 * Drainable/Resunable behavior via DynamicBaseWorker
   * To drain a poll /drain/{poolCode}
   * To resume a poll /resume/{poolCode}
+  * This feature was removed for now - will come back in the future
 
 ## SEDA (Staged Event Driven Architecture)
 
@@ -50,15 +57,6 @@
 * I did not code a EventMetadata but this could be useful, a class that has timestamp of the event creating 
   and "stamps" of all parts the event travel in the states of the pipeline, it would be usefully 
   for debugging and bookkeeping as well, we could attach metrics to the event this way.
-* There is one big performance optimization that can be done, since PipelineManager controls everything,
-  we could not only send the message to the queue, but make the worker talk to he PipelineManager
-  and the PipelineManaher would talk to the queue, them we could make tasks END all the time, and never
-  we would have busy waiting or bloking, since arraivals are controlled by PipelineManager in this case
-  it would make the whole thing use much less CPU, since no one would be wairing or checking on the queue.
-* It's also possible to have the whole pipeline lazy, just have one
-  inbound queue and create the rest ondeamnd. Instead of the worker being polling the queue it could be the wother way around, submit tasks as to a central queue with 1 generic worker like a event loop
-  this thread could be single threaded and one recive a message it would spawn the other workers and submit they tasks this is like the reactor pattern or event loop if you will. We could doit without the queue* we could just submit to a single thread executor pool, them this worker triggers all other things, no more busy waiting. This pool
-  it would be in the front of the whole pipeline.
 
 ### Build 
 ```bash

@@ -5,11 +5,14 @@ import com.github.diegopacheco.pocs.seda.worker.CatWorker;
 import com.github.diegopacheco.pocs.seda.worker.ConsoleWorker;
 import com.github.diegopacheco.pocs.seda.worker.SanitizerWorker;
 import com.github.diegopacheco.pocs.seda.worker.Worker;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.*;
 
+@Component
 public class SEDAManager {
 
     private static final Integer TOTAL_THREADS_PER_WORKER = 3;
