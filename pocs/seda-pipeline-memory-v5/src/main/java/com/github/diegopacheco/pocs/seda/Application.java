@@ -20,7 +20,7 @@ public class Application {
 	}
 
 	@Autowired
-	SEDAManager<String> seda;
+	SEDAManager seda;
 
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {

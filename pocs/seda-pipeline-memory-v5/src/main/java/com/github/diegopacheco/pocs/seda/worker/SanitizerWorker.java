@@ -8,13 +8,13 @@ import com.github.diegopacheco.pocs.seda.thread.SilentThread;
 
 public class SanitizerWorker implements Worker {
 
-    private SEDAManager<String> queueManager;
+    private SEDAManager sedaManager;
     private Queues next;
 
     private String event;
 
-    public SanitizerWorker(SEDAManager<String> queueManager, Queues next, String event) {
-        this.queueManager = queueManager;
+    public SanitizerWorker(SEDAManager queueManager, Queues next, String event) {
+        this.sedaManager = queueManager;
         this.next = next;
         this.event = event;
     }
@@ -24,7 +24,7 @@ public class SanitizerWorker implements Worker {
         if (null != event) {
             try {
                 String sanitizedEvent = sanitize(event);
-                queueManager.publish(next, sanitizedEvent);
+                sedaManager.publish(next, sanitizedEvent);
 
                 MetricsManager.ok(Queues.SANITIZER_QUEUE.name());
             } catch (Exception e) {

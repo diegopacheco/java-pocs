@@ -10,14 +10,13 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.*;
 
-public class SEDAManager<T> {
+public class SEDAManager {
 
     private static final Integer TOTAL_THREADS_PER_WORKER = 3;
 
     private static ExecutorService poolSanitizer = Executors.newFixedThreadPool(TOTAL_THREADS_PER_WORKER);
     private static ExecutorService poolCat = Executors.newFixedThreadPool(TOTAL_THREADS_PER_WORKER);
     private static ExecutorService poolConsole = Executors.newFixedThreadPool(TOTAL_THREADS_PER_WORKER);
-
 
     public void run(){
         System.out.println("**************************");
@@ -37,7 +36,7 @@ public class SEDAManager<T> {
                             "  thread pools per worker ");
     }
 
-    public boolean publish(Queues queue,T event){
+    public boolean publish(Queues queue,String event){
         if (null!=event){
             switch (queue){
                 case SANITIZER_QUEUE -> poolSanitizer.submit(newSanitizerWorker(event));
@@ -49,21 +48,21 @@ public class SEDAManager<T> {
         return false;
     }
 
-    private Worker newSanitizerWorker(T event){
-        return new SanitizerWorker((SEDAManager<String>)this,Queues.CAT_QUEUE, (String) event);
+    private Worker newSanitizerWorker(String event){
+        return new SanitizerWorker(this,Queues.CAT_QUEUE, event);
     }
 
-    private Worker newCatWorker(T event){
-        return new CatWorker((SEDAManager<String>)this,Queues.CONOSLE_QUEUE, (String) event);
+    private Worker newCatWorker(String event){
+        return new CatWorker(this,Queues.CONOSLE_QUEUE, event);
     }
 
-    private Worker newConsoleWorker(T event){
-        return new ConsoleWorker((String) event);
+    private Worker newConsoleWorker(String event){
+        return new ConsoleWorker(event);
     }
 
     public void generate(int amount){
         RequestGenerator generator = new RequestGenerator();
-        generator.generate(amount).forEach(event -> publish(Queues.SANITIZER_QUEUE, (T)event));
+        generator.generate(amount).forEach(event -> publish(Queues.SANITIZER_QUEUE,event));
         System.out.println("* >>> " + amount + " events generated! ");
     }
 

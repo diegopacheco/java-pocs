@@ -13,13 +13,13 @@ import java.net.URLConnection;
 
 public class CatWorker implements Worker {
 
-    private SEDAManager<String> queueManager;
+    private SEDAManager sedaManager;
     private Queues next;
 
     private String event;
 
-    public CatWorker(SEDAManager<String> queueManager, Queues next, String event) {
-        this.queueManager = queueManager;
+    public CatWorker(SEDAManager sedaManager, Queues next, String event) {
+        this.sedaManager = sedaManager;
         this.next = next;
         this.event = event;
     }
@@ -29,7 +29,7 @@ public class CatWorker implements Worker {
         if (null != event) {
             try {
                 String jsonFactEvent = getFact(event);
-                queueManager.publish(next, jsonFactEvent);
+                sedaManager.publish(next, jsonFactEvent);
 
                 MetricsManager.ok(Queues.CAT_QUEUE.name());
             } catch (Exception e) {

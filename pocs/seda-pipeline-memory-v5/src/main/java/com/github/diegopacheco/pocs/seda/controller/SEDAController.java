@@ -15,7 +15,7 @@ import java.util.Map;
 public class SEDAController {
 
     @Autowired
-    SEDAManager<String> seda;
+    SEDAManager seda;
 
     @RequestMapping("/")
     public String index() {
