@@ -20,7 +20,7 @@ public class ConsoleWorker extends DynamicBaseWorker implements Worker {
         if (isRunning()) {
             if (null != event) {
                 try {
-                    SilentThread.sleep(FeatureFlagManager.get(FeatureFlagManager.WORKER_CONSOLE_TIME_BACKPRESSURE_MS));
+                    SilentThread.sleep(FeatureFlagManager.get(FeatureFlagManager.QUEUE_CONSOLE_TIME_BACKPRESSURE_MS));
                     System.out.println(new Date() + " - event finish pipeline.");
                     System.out.println(event);
 

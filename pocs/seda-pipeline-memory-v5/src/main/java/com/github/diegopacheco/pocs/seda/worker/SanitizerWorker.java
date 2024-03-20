@@ -39,7 +39,7 @@ public class SanitizerWorker extends DynamicBaseWorker implements Worker {
     }
 
     private String sanitize(String event) {
-        SilentThread.sleep(FeatureFlagManager.get(FeatureFlagManager.WORKER_SANITIZER_TIME_BACKPRESSURE_MS));
+        SilentThread.sleep(FeatureFlagManager.get(FeatureFlagManager.QUEUE_SANITIZER_TIME_BACKPRESSURE_MS));
         return event.trim().toLowerCase();
     }
 

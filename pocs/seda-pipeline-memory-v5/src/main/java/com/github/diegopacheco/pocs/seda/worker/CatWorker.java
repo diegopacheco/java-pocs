@@ -44,7 +44,7 @@ public class CatWorker extends DynamicBaseWorker implements Worker {
     }
 
     private String getFact(String event) {
-        SilentThread.sleep(FeatureFlagManager.get(FeatureFlagManager.WORKER_CAT_TIME_BACKPRESSURE_MS));
+        SilentThread.sleep(FeatureFlagManager.get(FeatureFlagManager.QUEUE_CAT_TIME_BACKPRESSURE_MS));
 
         StringBuffer sb = new StringBuffer();
         try {

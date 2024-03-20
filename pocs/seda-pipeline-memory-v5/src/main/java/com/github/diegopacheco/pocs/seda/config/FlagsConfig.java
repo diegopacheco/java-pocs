@@ -9,9 +9,9 @@ public class FlagsConfig {
 
     @PostConstruct
     public void defaults(){
-        FeatureFlagManager.set(FeatureFlagManager.WORKER_SANITIZER_TIME_BACKPRESSURE_MS,0);
-        FeatureFlagManager.set(FeatureFlagManager.WORKER_CAT_TIME_BACKPRESSURE_MS,2);
-        FeatureFlagManager.set(FeatureFlagManager.WORKER_CONSOLE_TIME_BACKPRESSURE_MS,1);
+        FeatureFlagManager.set(FeatureFlagManager.QUEUE_SANITIZER_TIME_BACKPRESSURE_MS,0);
+        FeatureFlagManager.set(FeatureFlagManager.QUEUE_CAT_TIME_BACKPRESSURE_MS,2);
+        FeatureFlagManager.set(FeatureFlagManager.QUEUE_CONSOLE_TIME_BACKPRESSURE_MS,1);
     }
 
 }

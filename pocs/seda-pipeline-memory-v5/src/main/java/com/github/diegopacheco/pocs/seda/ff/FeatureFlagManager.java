@@ -8,9 +8,9 @@ public class FeatureFlagManager {
 
     private static Map<String, Object> flags = new ConcurrentHashMap<>();
 
-    public static final String WORKER_SANITIZER_TIME_BACKPRESSURE_MS = "$WORKER_SANITIZER_TIME_BACKPRESSURE_MS";
-    public static final String WORKER_CAT_TIME_BACKPRESSURE_MS = "$WORKER_CAT_TIME_BACKPRESSURE_MS";
-    public static final String WORKER_CONSOLE_TIME_BACKPRESSURE_MS = "$WORKER_CONSOLE_TIME_BACKPRESSURE_MS";
+    public static final String QUEUE_SANITIZER_TIME_BACKPRESSURE_MS = "$QUEUE_SANITIZER_TIME_BACKPRESSURE_MS";
+    public static final String QUEUE_CAT_TIME_BACKPRESSURE_MS = "$QUEUE_CAT_TIME_BACKPRESSURE_MS";
+    public static final String QUEUE_CONSOLE_TIME_BACKPRESSURE_MS = "$QUEUE_CONSOLE_TIME_BACKPRESSURE_MS";
 
     public static <T> void set(String flag, T value) {
         flags.put(flag, value);
