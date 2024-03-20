@@ -9,6 +9,11 @@
   * No while true / no busy waiting
   * SEDA pipeline is LAZY
   * remove double queue - leveraging executors queue
+* Added Event and EventMetadata 
+  + Now events have "tags" called "stamps"
+  + Stamps are just a map with k/v pairs
+  + Main stamps today is the stage and timestamp
+  + Since is a map we can attach any metadata.
 * Realtime-metrics
   * http://localhost:8080/stat
 * Flow control via time backpressure and feature flags that can be changed dynamically 
@@ -23,6 +28,10 @@
   * To drain a poll /drain/{poolCode}
   * To resume a poll /resume/{poolCode}
   * This feature was removed for now - will come back in the future
+* Metadata CEP-like, another thing I tought was to create stacked stamps with evnts
+  imagine like a email thread where you could see the first email, second email, thrid email.
+  this feature would suck more space because messages it would bigger if we impl dumb
+  but this could be useful for debugging and troubleshooting.
 
 ## SEDA (Staged Event Driven Architecture)
 
@@ -54,9 +63,6 @@
 * I did not implement snapshotting but it would be done
   + track every state of every queue and persist it, there we go.
   + has to process to resume where it stop - external state could goto s3 for instance.
-* I did not code a EventMetadata but this could be useful, a class that has timestamp of the event creating 
-  and "stamps" of all parts the event travel in the states of the pipeline, it would be usefully 
-  for debugging and bookkeeping as well, we could attach metrics to the event this way.
 
 ### Build 
 ```bash
@@ -69,24 +75,22 @@
 *** Quem tem SEDA ? ******
 **************************
 * 
-* Pipeline Manager 
+* SEDA Manager 
 * 
 *                      |-------------------|                |-------------------|                |-------------------| 
-* events --> [in-queue]|-- sanitizer(W1) --|  ==> [in-queue]|-- cat(W2) --------|  ==> [in-queue]|-- console(W3) ----| 
+* events --> [exe-pool]|-- sanitizer(W1) --|  ==> [exe-pool]|-- cat(W2) --------|  ==> [exe-pool]|-- console(W3) ----| 
 *                      |-------------------|                |-------------------|                |-------------------| 
 * 
 * STARTED !
-* >>> 500 events generated! 
-Sat Mar 16 01:59:27 PDT 2024 - event finish pipeline.
-{ "requester": "babyshark_2422", "result": {"fact":"Despite imagery of cats happily drinking milk from saucers, studies indicate that cats are actually lactose intolerant and should avoid it entirely.","length":148}}
-Sat Mar 16 01:59:30 PDT 2024 - event finish pipeline.
-{ "requester": "the_cat_3283", "result": {"fact":"The Cat Fanciers Association (CFA) recognizes 44 breeds of cats.","length":64}}
-Sat Mar 16 01:59:33 PDT 2024 - event finish pipeline.
-{ "requester": "raphaello_635", "result": {"fact":"The way you treat kittens in the early stages of it's life will render it's personality traits later in life.","length":109}}
-Sat Mar 16 01:59:36 PDT 2024 - event finish pipeline.
-{ "requester": "conan_3706", "result": {"fact":"Ailurophile is the word cat lovers are officially called.","length":57}}
-Sat Mar 16 01:59:40 PDT 2024 - event finish pipeline.
-{ "requester": "ryu_3980", "result": {"fact":"There are up to 60 million feral cats in the United States alone.","length":65}}
+* >>> 1 events generated! 
+* SEDA Manager done provisioned  3  thread pools per worker 
+ >> Event{content=raphaello_1504, metadata=EventMetadata{stamps={STAGE=SANITIZER, TIMESTAMP=Wed Mar 20 02:40:41 PDT 2024}}}
+Worker[SanitizerWorker~pool-2-thread-1] completed. 
+ >> Event{content={ "requester": "raphaello_1504", "result": {"fact":"A cat\u2019s back is extremely flexible because it has up to 53 loosely fitting vertebrae. Humans only have 34.","length":106}}, metadata=EventMetadata{stamps={STAGE=CAT, TIMESTAMP=Wed Mar 20 02:40:44 PDT 2024}}}
+Worker[CatWorker~pool-3-thread-1] completed. 
+Wed Mar 20 02:40:45 PDT 2024 - event finish pipeline.
+ >> Event{content={ "requester": "raphaello_1504", "result": {"fact":"A cat\u2019s back is extremely flexible because it has up to 53 loosely fitting vertebrae. Humans only have 34.","length":106}}, metadata=EventMetadata{stamps={STAGE=CONSOLE, TIMESTAMP=Wed Mar 20 02:40:44 PDT 2024}}}
+Worker[ConsoleWorker~pool-4-thread-1] completed. 
 ```
 
 ### Metrics
@@ -113,13 +117,15 @@ http://localhost:8080/flags
 // http://localhost:8080/flags
 
 {
-  "$WORKER_CONSOLE_TIME_BACKPRESSURE_MS": "1",
-  "$WORKER_SANITIZER_TIME_BACKPRESSURE_MS": "0",
-  "$WORKER_CAT_TIME_BACKPRESSURE_MS": "2"
+  "$QUEUE_CONSOLE_TIME_BACKPRESSURE_MS": "1",
+  "$QUEUE_SANITIZER_TIME_BACKPRESSURE_MS": "0",
+  "$QUEUE_CAT_TIME_BACKPRESSURE_MS": "2"
 }
 ```
 
 ### Drain/Resume
+
+PS: This feature was removed on this poc - will come back on the future.
 
 Simple drain/resume impl, when we drain, we wait for current task per worker to finish them each worker
 ends it work by breaking out of the while(true) ending the Runnable task and therefore breaking out of the 

@@ -30,6 +30,7 @@ public class CatWorker implements Worker {
         if (null != event) {
             try {
                 Event<String> jsonFactEvent = getFact(event);
+                System.out.println(" >> " + jsonFactEvent);
                 sedaManager.publish(next, jsonFactEvent);
 
                 MetricsManager.ok(Queues.CAT_QUEUE.name());
@@ -59,7 +60,7 @@ public class CatWorker implements Worker {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return new Event("{ \"requester\": \"" + event + "\", \"result\": " + sb.toString() + "}").addStage("CAT");
+        return new Event("{ \"requester\": \"" + event.getContent() + "\", \"result\": " + sb.toString() + "}").addStage("CAT");
 
     }
 

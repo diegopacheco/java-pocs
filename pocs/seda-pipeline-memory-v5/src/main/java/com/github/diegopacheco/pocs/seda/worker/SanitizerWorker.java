@@ -25,6 +25,7 @@ public class SanitizerWorker implements Worker {
         if (null != event) {
             try {
                 Event<String> sanitizedEvent = sanitize(event);
+                System.out.println(" >> " + sanitizedEvent);
                 sedaManager.publish(next, sanitizedEvent);
 
                 MetricsManager.ok(Queues.SANITIZER_QUEUE.name());
