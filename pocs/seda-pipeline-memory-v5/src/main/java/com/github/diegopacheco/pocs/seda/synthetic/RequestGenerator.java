@@ -8,12 +8,10 @@ import java.util.stream.IntStream;
 
 public class RequestGenerator {
 
-    public <T> void generate(int amount, QueueManager<T> queue){
+    public <T> List<String> generate(int amount, QueueManager<T> queue){
         IntStream intStream = IntStream.range(0, amount);
         List<String> events = intStream.mapToObj((i)->name()).toList();
-        for (String event: events){
-            queue.publish((T)event);
-        }
+        return events;
     }
 
     private String name(){
