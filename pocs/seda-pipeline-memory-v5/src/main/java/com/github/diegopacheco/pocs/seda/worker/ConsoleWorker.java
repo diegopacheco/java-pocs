@@ -20,6 +20,7 @@ public class ConsoleWorker implements Worker {
     public void run() {
         if (null != event) {
             try {
+                event.addStage("CONSOLE");
                 SilentThread.sleep(FeatureFlagManager.get(FeatureFlagManager.QUEUE_CONSOLE_TIME_BACKPRESSURE_MS));
                 System.out.println(new Date() + " - event finish pipeline.");
                 System.out.println(event);
