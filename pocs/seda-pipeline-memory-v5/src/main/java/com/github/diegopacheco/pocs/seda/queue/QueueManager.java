@@ -34,25 +34,25 @@ public class QueueManager<T> {
     public boolean publish(Queues queue,T event){
         if (null!=event){
             switch (queue){
-                case SANITIZER_QUEUE -> poolSanitizer.submit(null);
-                case CAT_QUEUE -> poolCat.submit(null);
-                case CONOSLE_QUEUE -> poolConsole.submit(null);
+                case SANITIZER_QUEUE -> poolSanitizer.submit(newSanitizerWorker(event));
+                case CAT_QUEUE -> poolCat.submit(newCatWorker(event));
+                case CONOSLE_QUEUE -> poolConsole.submit(new ConsoleWorker((String) event));
             }
             return true;
         }
         return false;
     }
 
-    private Worker newSanitizerWorker(String event){
-        return new SanitizerWorker((QueueManager<String>)this,Queues.CAT_QUEUE,event);
+    private Worker newSanitizerWorker(T event){
+        return new SanitizerWorker((QueueManager<String>)this,Queues.CAT_QUEUE, (String) event);
     }
 
-    private Worker newCatWorker(String event){
-        return new CatWorker((QueueManager<String>)this,Queues.CONOSLE_QUEUE,event);
+    private Worker newCatWorker(T event){
+        return new CatWorker((QueueManager<String>)this,Queues.CONOSLE_QUEUE, (String) event);
     }
 
-    private Worker newConsoleWorker(String event){
-        return new ConsoleWorker(event);
+    private Worker newConsoleWorker(T event){
+        return new ConsoleWorker((String) event);
     }
 
     public String getName() {

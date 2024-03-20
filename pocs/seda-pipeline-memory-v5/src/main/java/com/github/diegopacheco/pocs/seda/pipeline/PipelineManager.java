@@ -1,6 +1,7 @@
 package com.github.diegopacheco.pocs.seda.pipeline;
 
 import com.github.diegopacheco.pocs.seda.queue.QueueManager;
+import com.github.diegopacheco.pocs.seda.queue.Queues;
 import com.github.diegopacheco.pocs.seda.synthetic.RequestGenerator;
 import com.github.diegopacheco.pocs.seda.worker.CatWorker;
 import com.github.diegopacheco.pocs.seda.worker.ConsoleWorker;
@@ -83,21 +84,21 @@ public class PipelineManager {
         return new ConsoleWorker(queueConsole);
     }
 
-    public void drain(Pools pool){
-        System.out.println(" PipelineManager draining pool: " + pool);
-        switch (pool){
-            case SANITIZER_POOL -> sanitizerWorkers.forEach(Worker::drain);
-            case CAT_POOL -> catWorkers.forEach(Worker::drain);
-            case CONOSLE_POOL -> consoleWorkers.forEach(Worker::drain);
+    public void drain(Queues queues){
+        System.out.println(" PipelineManager draining pool: " + queues);
+        switch (queues){
+            case SANITIZER_QUEUE -> sanitizerWorkers.forEach(Worker::drain);
+            case CAT_QUEUE -> catWorkers.forEach(Worker::drain);
+            case CONOSLE_QUEUE -> consoleWorkers.forEach(Worker::drain);
         }
     }
 
-    public void resume(Pools pool){
-        System.out.println(" PipelineManager resume pool: " + pool);
-        switch (pool){
-            case SANITIZER_POOL -> reSubmitWorkerToCarriers(sanitizerWorkers,poolSanitizer,newSanitizerWorker());
-            case CAT_POOL ->  reSubmitWorkerToCarriers(catWorkers,poolCat,newCatWorker());
-            case CONOSLE_POOL -> reSubmitWorkerToCarriers(consoleWorkers,poolConsole,newConsoleWorker());
+    public void resume(Queues queues){
+        System.out.println(" PipelineManager resume pool: " + queues);
+        switch (queues){
+            case SANITIZER_QUEUE -> reSubmitWorkerToCarriers(sanitizerWorkers,poolSanitizer,newSanitizerWorker());
+            case CAT_QUEUE ->  reSubmitWorkerToCarriers(catWorkers,poolCat,newCatWorker());
+            case CONOSLE_QUEUE -> reSubmitWorkerToCarriers(consoleWorkers,poolConsole,newConsoleWorker());
         }
     }
 

@@ -3,7 +3,7 @@ package com.github.diegopacheco.pocs.seda.controller;
 import com.github.diegopacheco.pocs.seda.ff.FeatureFlagManager;
 import com.github.diegopacheco.pocs.seda.metrics.MetricsManager;
 import com.github.diegopacheco.pocs.seda.pipeline.PipelineManager;
-import com.github.diegopacheco.pocs.seda.pipeline.Pools;
+import com.github.diegopacheco.pocs.seda.queue.Queues;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,16 +49,16 @@ public class PipelineController {
 
     @RequestMapping("/drain/{poolCode}")
     public String drain(@PathVariable("poolCode") Integer poolCode) {
-        Pools p = Pools.fromCode(poolCode);
-        pipeline.drain(p);
-        return "Pool " + p + "drained.";
+        Queues q = Queues.fromCode(poolCode);
+        pipeline.drain(q);
+        return "Pool " + q + "drained.";
     }
 
     @RequestMapping("/resume/{poolCode}")
     public String resume(@PathVariable("poolCode") Integer poolCode) {
-        Pools p = Pools.fromCode(poolCode);
-        pipeline.resume(p);
-        return "Pool " + p + "resume.";
+        Queues q = Queues.fromCode(poolCode);
+        pipeline.resume(q);
+        return "Pool " + q + "resume.";
     }
 
 }
