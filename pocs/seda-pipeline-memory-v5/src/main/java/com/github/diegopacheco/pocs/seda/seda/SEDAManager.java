@@ -44,7 +44,7 @@ public class SEDAManager {
             switch (queue){
                 case SANITIZER_QUEUE -> poolSanitizer.submit(newSanitizerWorker(event));
                 case CAT_QUEUE -> poolCat.submit(newCatWorker(event));
-                case CONOSLE_QUEUE -> poolConsole.submit(new ConsoleWorker((String) event));
+                case CONOSLE_QUEUE -> poolConsole.submit(newConsoleWorker(event));
             }
             return true;
         }
