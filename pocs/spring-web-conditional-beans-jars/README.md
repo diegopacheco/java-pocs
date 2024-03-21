@@ -2,3 +2,31 @@
 ```bash
 ./mvnw clean install
 ```
+### Tomcat
+pom.xml
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+```
+http://localhost:8080/
+```
+```
+Server running is: TOMCAT
+```
+### Netty
+pom.xml
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-webflux</artifactId>
+</dependency>
+```
+```
+http://localhost:8080/
+```
+```
+Server running is: NETTY
+```

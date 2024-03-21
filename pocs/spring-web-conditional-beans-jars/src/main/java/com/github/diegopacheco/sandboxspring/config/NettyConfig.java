@@ -5,18 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DynamicConfig {
-
+@ConditionalOnClass(name = "reactor.netty.tcp.TcpServer")
+public class NettyConfig {
     @Bean
-    @ConditionalOnClass(name = "org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer")
-    public Server getTomcat(){
-        return Server.TOMCAT;
-    }
-
-    @Bean
-    @ConditionalOnClass(name = "reactor.netty.tcp.TcpServer")
-    public Server getNetty(){
+    public Server getNetty() {
         return Server.NETTY;
     }
-
 }
