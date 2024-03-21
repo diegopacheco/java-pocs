@@ -1,3 +1,9 @@
+## POC
+
+This poc is about @ConditionalOnClass and ConditionalOnMissingClass 
+which allow us to cherry pick intire configuration classes based
+on dependencies being present or absent. This cool but non-obvious.
+
 ### Build
 ```bash
 ./mvnw clean install
