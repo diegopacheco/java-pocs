@@ -53,7 +53,14 @@ public class CatWorker implements Worker {
             System.out.println("Worker[" + this.getClass().getSimpleName() +
                     "~" + Thread.currentThread().getName() +
                     "] BACKPRESSURE - DID NOT RUN. ");
-            pool.submit(this); // re-submit for future retry.
+
+            // Extra 10s as time backpressure to avoid too much CPU on busy waiting.
+            SilentThread.sleep(
+            ((int)FeatureFlagManager.get(
+                      FeatureFlagManager.QUEUE_CAT_TIME_BACKPRESSURE_MS)) * 10);
+
+            // re-submit for future retry.
+            pool.submit(this);
         });
     }
 
