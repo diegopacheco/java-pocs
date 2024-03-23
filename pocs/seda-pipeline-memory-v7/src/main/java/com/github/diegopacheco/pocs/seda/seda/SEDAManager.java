@@ -57,7 +57,7 @@ public class SEDAManager {
     }
 
     private Worker newCatWorker(Event<String> event){
-        return new CatWorker(this,Queues.CONOSLE_QUEUE, event);
+        return new CatWorker(this,poolCat, Queues.CONOSLE_QUEUE, event);
     }
 
     private Worker newConsoleWorker(Event<String> event){

@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.concurrent.ExecutorService;
 
 public class CatWorker implements Worker {
 
@@ -22,10 +23,13 @@ public class CatWorker implements Worker {
 
     private Event<String> event;
 
-    public CatWorker(SEDAManager sedaManager, Queues next, Event<String> event) {
+    private ExecutorService pool;
+
+    public CatWorker(SEDAManager sedaManager, ExecutorService pool,Queues next, Event<String> event) {
         this.sedaManager = sedaManager;
         this.next = next;
         this.event = event;
+        this.pool = pool;
     }
 
     @Override
@@ -49,6 +53,7 @@ public class CatWorker implements Worker {
             System.out.println("Worker[" + this.getClass().getSimpleName() +
                     "~" + Thread.currentThread().getName() +
                     "] BACKPRESSURE - DID NOT RUN. ");
+            pool.submit(this); // re-submit for future retry.
         });
     }
 
