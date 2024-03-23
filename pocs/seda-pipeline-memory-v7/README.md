@@ -1,4 +1,4 @@
-# POC V6
+# POC V7
 
 * Virtual Threads instead of Direct OS Threads.
 * Switch to Netty.

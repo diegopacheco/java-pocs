@@ -1,0 +1,42 @@
+package com.github.diegopacheco.pocs.seda.backpressure;
+
+import java.util.Date;
+import java.util.function.Consumer;
+
+// https://www.geeksforgeeks.org/leaky-bucket-algorithm/
+public class LeakyBucketBackpressure {
+
+    private int numDropsInBucket = 0;
+    private Date timeOfLastDropLeak = null;
+    private final int BUCKET_SIZE_IN_DROPS = 10;
+    private final long DROP_LEAKS_INTERVAL_MS = 2000; // 2 seconds
+
+    public static <T> void runWithBackpressure(LeakyBucketBackpressure bucket, Consumer<T> func){
+        if (bucket.addDropToBucket()) {
+            func.accept(null);
+        }
+    }
+
+    public synchronized boolean addDropToBucket() {
+        Date now = new Date();
+        if (timeOfLastDropLeak != null) {
+            long deltaT = now.getTime() - timeOfLastDropLeak.getTime();
+            long numberToLeak = deltaT / DROP_LEAKS_INTERVAL_MS;
+            if (numberToLeak > 0) {
+                if (numDropsInBucket <= numberToLeak) {
+                    numDropsInBucket = 0;
+                } else {
+                    numDropsInBucket -= (int) numberToLeak;
+                }
+                timeOfLastDropLeak = now;
+            }
+        }
+
+        if (numDropsInBucket < BUCKET_SIZE_IN_DROPS) {
+            numDropsInBucket++;
+            return true; // drop added
+        }
+        return false; // overflow
+    }
+
+}
