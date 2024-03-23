@@ -1,5 +1,6 @@
 # POC V7
 
+* Added proper backpressure with LeakyBucket
 * Virtual Threads instead of Direct OS Threads.
 * Switch to Netty.
 * Spring Boot 3.x Application now
@@ -52,7 +53,6 @@
 
 ### Important things for future POCs
 
-* However the Cat website might not handle the load so we might some other form of backpressure that is not time based some proper algo like leak bucket or other algo.
 * Queues could be externalized to Redis/SQS however it would have more latency to process.
   + Another thing is if you run with 3 instances, you will have everything multiplied by 30, there is where external
     State like redis/sqs helps, but if you need to limit or control runtime still possible to coordinate.

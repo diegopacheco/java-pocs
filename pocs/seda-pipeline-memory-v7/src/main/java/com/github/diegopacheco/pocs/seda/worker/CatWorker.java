@@ -1,5 +1,6 @@
 package com.github.diegopacheco.pocs.seda.worker;
 
+import com.github.diegopacheco.pocs.seda.backpressure.LeakyBucketBackpressure;
 import com.github.diegopacheco.pocs.seda.event.Event;
 import com.github.diegopacheco.pocs.seda.ff.FeatureFlagManager;
 import com.github.diegopacheco.pocs.seda.metrics.MetricsManager;
@@ -14,6 +15,8 @@ import java.net.URLConnection;
 
 public class CatWorker implements Worker {
 
+    private static final LeakyBucketBackpressure buket = new LeakyBucketBackpressure();
+
     private SEDAManager sedaManager;
     private Queues next;
 
@@ -27,20 +30,26 @@ public class CatWorker implements Worker {
 
     @Override
     public void run() {
-        if (null != event) {
-            try {
-                Event<String> jsonFactEvent = getFact(event);
-                System.out.println(" >> " + jsonFactEvent);
-                sedaManager.publish(next, jsonFactEvent);
+        LeakyBucketBackpressure.runWithBackpressure(buket, (x) -> {
+            if (null != event) {
+                try {
+                    Event<String> jsonFactEvent = getFact(event);
+                    System.out.println(" >> " + jsonFactEvent);
+                    sedaManager.publish(next, jsonFactEvent);
 
-                MetricsManager.ok(Queues.CAT_QUEUE.name());
-            } catch (Exception e) {
-                MetricsManager.error(Queues.CAT_QUEUE.name());
+                    MetricsManager.ok(Queues.CAT_QUEUE.name());
+                } catch (Exception e) {
+                    MetricsManager.error(Queues.CAT_QUEUE.name());
+                }
             }
-        }
-        System.out.println("Worker[" + this.getClass().getSimpleName() +
-                "~" + Thread.currentThread().getName() +
-                "] completed. ");
+            System.out.println("Worker[" + this.getClass().getSimpleName() +
+                    "~" + Thread.currentThread().getName() +
+                    "] completed. ");
+        }, (z) -> {
+            System.out.println("Worker[" + this.getClass().getSimpleName() +
+                    "~" + Thread.currentThread().getName() +
+                    "] BACKPRESSURE - DID NOT RUN. ");
+        });
     }
 
     private Event<String> getFact(Event<String> event) {

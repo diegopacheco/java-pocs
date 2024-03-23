@@ -11,9 +11,11 @@ public class LeakyBucketBackpressure {
     private final int BUCKET_SIZE_IN_DROPS = 10;
     private final long DROP_LEAKS_INTERVAL_MS = 2000; // 2 seconds
 
-    public static <T> void runWithBackpressure(LeakyBucketBackpressure bucket, Consumer<T> func){
+    public static <T> void runWithBackpressure(LeakyBucketBackpressure bucket, Consumer<T> func,Consumer<T> fallback){
         if (bucket.addDropToBucket()) {
             func.accept(null);
+        }else{
+            fallback.accept(null);
         }
     }
 
