@@ -9,7 +9,7 @@ public class LeakyBucketBackpressure {
     private int numDropsInBucket = 0;
     private Date timeOfLastDropLeak = null;
     private final int DROPS = 10;
-    private final long PER_SECONDS = 1000; // 2 seconds
+    private final long PER_SECONDS = 3000; // 3 seconds
 
     public static <T> void runWithBackpressure(LeakyBucketBackpressure bucket, Consumer<T> func,Consumer<T> fallback){
         if (bucket.addDropToBucket()) {
@@ -36,6 +36,7 @@ public class LeakyBucketBackpressure {
 
         if (numDropsInBucket < DROPS) {
             numDropsInBucket++;
+            timeOfLastDropLeak = now;
             return true; // drop added
         }
         return false; // overflow
