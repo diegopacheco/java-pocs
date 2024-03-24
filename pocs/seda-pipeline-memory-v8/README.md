@@ -182,9 +182,9 @@ Total [0] workers pending per queue: CAT_QUEUE
 Total [1] workers pending per queue: CONSOLE_QUEUE
 ```
 IF you goto the filesystem you will see the json representation of the workers that are pending.
-The filename is QUEUE + @ + UUID for the worker/event
+The filename is QUEUE + _$_ + UUID for the worker/event
 ```
-❯ cat target/snapshot/CONSOLE_QUEUE@0b789902-5ce1-48fe-977b-9cb61063e81c
+❯ cat target/snapshot/CONSOLE_QUEUE_$_0b789902-5ce1-48fe-977b-9cb61063e81c
 {
   "context": {
     "sedaManager": {},

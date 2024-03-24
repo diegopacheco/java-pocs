@@ -80,4 +80,9 @@ public class CatWorker implements Worker {
 
     }
 
+    // Not ideal - just did to be able to ignore the POOL while snapshoting
+    // better solution will the worker tell what he wants to snapshot
+    public WorkerContext getContext() {
+        return context;
+    }
 }

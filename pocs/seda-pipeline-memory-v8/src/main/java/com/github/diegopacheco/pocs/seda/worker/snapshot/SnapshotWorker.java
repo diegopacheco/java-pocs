@@ -1,6 +1,7 @@
 package com.github.diegopacheco.pocs.seda.worker.snapshot;
 
 import com.github.diegopacheco.pocs.seda.seda.Queues;
+import com.github.diegopacheco.pocs.seda.worker.CatWorker;
 import com.github.diegopacheco.pocs.seda.worker.Worker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,7 +36,13 @@ public class SnapshotWorker implements Worker {
                 Worker worker = (Worker) processes.get(queue).get(workerID);
                 if (null!=worker){
                     try{
-                        String json = gson.toJson(worker);
+                        String json = null;
+                        if (worker instanceof CatWorker){
+                            json = gson.toJson( ((CatWorker)worker).getContext() );
+                        }else{
+                            json = gson.toJson(worker);
+                        }
+
                         persist(queue + "_$_" + workerID.toString(),json);
                     }catch(Exception e){
                         System.out.println("Could not perform snapshot " + e);
