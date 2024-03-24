@@ -34,8 +34,12 @@ public class SnapshotWorker implements Worker {
             for (UUID workerID : processes.get(queue).keySet()) {
                 Worker worker = (Worker) processes.get(queue).get(workerID);
                 if (null!=worker){
-                    String json = gson.toJson(worker);
-                    persist(queue + "$" + workerID.toString(),json);
+                    try{
+                        String json = gson.toJson(worker);
+                        persist(queue + "_$_" + workerID.toString(),json);
+                    }catch(Exception e){
+                        System.out.println("Could not perform snapshot " + e);
+                    }
                 }
             }
         }
