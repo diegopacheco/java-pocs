@@ -33,6 +33,11 @@ public class SanitizerWorker implements Worker {
                 "] completed. ");
     }
 
+    @Override
+    public Event<?> getEvent() {
+        return context.getEvent();
+    }
+
     private Event<String> sanitize(Event<String> event) {
         SilentThread.sleep(FeatureFlagManager.get(FeatureFlagManager.QUEUE_SANITIZER_TIME_BACKPRESSURE_MS));
         return new Event(event.getContent().trim().toLowerCase()).addStage("SANITIZER");

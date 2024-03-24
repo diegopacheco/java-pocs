@@ -59,6 +59,11 @@ public class CatWorker implements Worker {
         });
     }
 
+    @Override
+    public Event<?> getEvent() {
+        return context.getEvent();
+    }
+
     private Event<String> getFact(Event<String> event) {
         SilentThread.sleep(FeatureFlagManager.get(FeatureFlagManager.QUEUE_CAT_TIME_BACKPRESSURE_MS));
 
@@ -80,9 +85,4 @@ public class CatWorker implements Worker {
 
     }
 
-    // Not ideal - just did to be able to ignore the POOL while snapshoting
-    // better solution will the worker tell what he wants to snapshot
-    public WorkerContext getContext() {
-        return context;
-    }
 }

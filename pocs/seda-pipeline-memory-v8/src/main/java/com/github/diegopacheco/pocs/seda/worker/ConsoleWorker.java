@@ -1,5 +1,6 @@
 package com.github.diegopacheco.pocs.seda.worker;
 
+import com.github.diegopacheco.pocs.seda.event.Event;
 import com.github.diegopacheco.pocs.seda.ff.FeatureFlagManager;
 import com.github.diegopacheco.pocs.seda.metrics.MetricsManager;
 import com.github.diegopacheco.pocs.seda.seda.Queues;
@@ -33,5 +34,10 @@ public class ConsoleWorker implements Worker {
                     "~" + Thread.currentThread().getName() +
                     "] completed. ");
         }
+    }
+
+    @Override
+    public Event<?> getEvent() {
+        return context.getEvent();
     }
 }

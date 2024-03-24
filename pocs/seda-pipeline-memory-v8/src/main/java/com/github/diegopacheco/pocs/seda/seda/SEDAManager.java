@@ -15,6 +15,8 @@ public class SEDAManager {
 
     private static final Integer TOTAL_THREADS_PER_WORKER = 3;
 
+    private static final Integer SNAPSHOTTING_INTERVAL_SEC = 30;
+
     private static ExecutorService poolSanitizer = Executors.newFixedThreadPool(TOTAL_THREADS_PER_WORKER, Thread.ofVirtual().factory());
     private static ExecutorService poolCat = Executors.newFixedThreadPool(TOTAL_THREADS_PER_WORKER, Thread.ofVirtual().factory());
     private static ExecutorService poolConsole = Executors.newFixedThreadPool(TOTAL_THREADS_PER_WORKER, Thread.ofVirtual().factory());
@@ -39,7 +41,7 @@ public class SEDAManager {
         processes.put(Queues.SANITIZER_QUEUE,new ConcurrentHashMap<>());
         processes.put(Queues.CAT_QUEUE,new ConcurrentHashMap<>());
         processes.put(Queues.CONSOLE_QUEUE,new ConcurrentHashMap<>());
-        poolSnapshoting.scheduleAtFixedRate(new SnapshotWorker(processes),0, 1,TimeUnit.SECONDS);
+        poolSnapshoting.scheduleAtFixedRate(new SnapshotWorker(processes),0, SNAPSHOTTING_INTERVAL_SEC,TimeUnit.SECONDS);
 
         generate(1);
         System.out.println("* SEDA Manager done provisioned  " + TOTAL_THREADS_PER_WORKER +

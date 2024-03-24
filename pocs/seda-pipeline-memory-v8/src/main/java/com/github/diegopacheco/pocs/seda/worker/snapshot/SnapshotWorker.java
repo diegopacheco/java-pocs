@@ -1,7 +1,7 @@
 package com.github.diegopacheco.pocs.seda.worker.snapshot;
 
+import com.github.diegopacheco.pocs.seda.event.Event;
 import com.github.diegopacheco.pocs.seda.seda.Queues;
-import com.github.diegopacheco.pocs.seda.worker.CatWorker;
 import com.github.diegopacheco.pocs.seda.worker.Worker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,14 +36,8 @@ public class SnapshotWorker implements Worker {
                 Worker worker = (Worker) processes.get(queue).get(workerID);
                 if (null!=worker){
                     try{
-                        String json = null;
-                        if (worker instanceof CatWorker){
-                            json = gson.toJson( ((CatWorker)worker).getContext() );
-                        }else{
-                            json = gson.toJson(worker);
-                        }
-
-                        persist(queue + "_$_" + workerID.toString(),json);
+                        String json = gson.toJson(worker.getEvent());
+                        persist(queue + "_@_" + workerID.toString(),json);
                     }catch(Exception e){
                         System.out.println("Could not perform snapshot " + e);
                     }
@@ -51,7 +45,6 @@ public class SnapshotWorker implements Worker {
             }
         }
     }
-
     private void persist(String fileName, String content) {
         String path = null;
         try {
@@ -68,6 +61,11 @@ public class SnapshotWorker implements Worker {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Event<?> getEvent() {
+        throw new UnsupportedOperationException("I'm a snapshotting worker not an event worker");
     }
 
 }

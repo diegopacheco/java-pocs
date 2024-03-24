@@ -178,25 +178,19 @@ we are persistent every single worker per queue.
 You will see on the logs, how many pending messages/workers are per queue:
 ```
 Total [0] workers pending per queue: SANITIZER_QUEUE
-Total [0] workers pending per queue: CAT_QUEUE
+Total [1] workers pending per queue: CAT_QUEUE
 Total [1] workers pending per queue: CONSOLE_QUEUE
 ```
 IF you goto the filesystem you will see the json representation of the workers that are pending.
-The filename is QUEUE + _$_ + UUID for the worker/event
+The filename is QUEUE + _@_ + UUID for the worker/event
 ```
-❯ cat target/snapshot/CONSOLE_QUEUE_$_0b789902-5ce1-48fe-977b-9cb61063e81c
+❯ cat target/snapshot/CAT_QUEUE_@_04fefe4e-5112-4f0c-b551-465ff37301a5
 {
-  "context": {
-    "sedaManager": {},
-    "next": "END",
-    "event": {
-      "content": "{ \"requester\": \"splinter_4888\", \"result\": {\"fact\":\"Cats, especially older cats, do get cancer. Many times this disease can be treated successfully.\",\"length\":96}}",
-      "metadata": {
-        "stamps": {
-          "STAGE": "CONSOLE",
-          "TIMESTAMP": "Sun Mar 24 00:28:24 PDT 2024"
-        }
-      }
+  "content": "babyshark_2961",
+  "metadata": {
+    "stamps": {
+      "STAGE": "SANITIZER",
+      "TIMESTAMP": "Sun Mar 24 00:51:54 PDT 2024"
     }
   }
 }%
