@@ -45,6 +45,10 @@ public class SnapshotWorker implements Worker {
         String path = null;
         try {
             path = new File(".").getCanonicalPath() + "/target/snapshot/";
+            if (!new File(path).exists()){
+                new File(path).createNewFile();
+            }
+
             BufferedWriter writer = new BufferedWriter(new FileWriter(path + fileName));
             writer.write(content);
             writer.close();
