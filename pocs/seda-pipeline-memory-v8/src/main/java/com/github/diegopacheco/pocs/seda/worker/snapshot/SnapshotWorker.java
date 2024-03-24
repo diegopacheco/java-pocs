@@ -35,7 +35,7 @@ public class SnapshotWorker implements Worker {
                 Worker worker = (Worker) processes.get(queue).get(workerID);
                 if (null!=worker){
                     String json = gson.toJson(worker);
-                    persist(queue+"_"+workerID.toString(),json);
+                    persist(queue+"@"+workerID.toString(),json);
                 }
             }
         }
@@ -46,8 +46,9 @@ public class SnapshotWorker implements Worker {
         try {
             path = new File(".").getCanonicalPath() + "/target/snapshot/";
             if (!new File(path).exists()){
-                new File(path).createNewFile();
+                new File(path).mkdirs();
             }
+            new File(path + fileName).createNewFile();
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(path + fileName));
             writer.write(content);

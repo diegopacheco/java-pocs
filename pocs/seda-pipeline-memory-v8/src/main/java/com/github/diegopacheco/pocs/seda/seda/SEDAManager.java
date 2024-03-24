@@ -39,7 +39,7 @@ public class SEDAManager {
         processes.put(Queues.SANITIZER_QUEUE,new ConcurrentHashMap<>());
         processes.put(Queues.CAT_QUEUE,new ConcurrentHashMap<>());
         processes.put(Queues.CONSOLE_QUEUE,new ConcurrentHashMap<>());
-        poolSnapshoting.scheduleAtFixedRate(new SnapshotWorker(processes),0, 2,TimeUnit.SECONDS);
+        poolSnapshoting.scheduleAtFixedRate(new SnapshotWorker(processes),0, 1,TimeUnit.SECONDS);
 
         generate(1);
         System.out.println("* SEDA Manager done provisioned  " + TOTAL_THREADS_PER_WORKER +

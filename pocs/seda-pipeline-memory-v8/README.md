@@ -170,3 +170,37 @@ Sun Mar 17 21:04:58 PDT 2024 - event finish pipeline.
 { "requester": "donatello_2053", "result": {"fact":"Cats dislike citrus scent.","length":26}}
 
 ```
+
+### Snapshotting
+
+Every 30s there is a dedicated worker using a single core for virtual threads, where
+we are persistent every single worker per queue.
+You will see on the logs, how many pending messages/workers are per queue:
+```
+Total [0] workers pending per queue: SANITIZER_QUEUE
+Total [0] workers pending per queue: CAT_QUEUE
+Total [1] workers pending per queue: CONSOLE_QUEUE
+```
+IF you goto the filesystem you will see the json representation of the workers that are pending.
+The filename is QUEUE + @ + UUID for the worker/event
+```
+❯ cat target/snapshot/CONSOLE_QUEUE@0b789902-5ce1-48fe-977b-9cb61063e81c
+{
+  "context": {
+    "sedaManager": {},
+    "next": "END",
+    "event": {
+      "content": "{ \"requester\": \"splinter_4888\", \"result\": {\"fact\":\"Cats, especially older cats, do get cancer. Many times this disease can be treated successfully.\",\"length\":96}}",
+      "metadata": {
+        "stamps": {
+          "STAGE": "CONSOLE",
+          "TIMESTAMP": "Sun Mar 24 00:28:24 PDT 2024"
+        }
+      }
+    }
+  }
+}%
+```
+I did not code the restore process but since the QUEUE and ID are being persistent
+is easier to check if that ID/queue was processed on not just check the `processes` map
+on the `SEDAManager` if they dont exist was already processed, so it can be ignored.
