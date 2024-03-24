@@ -33,8 +33,10 @@ public class SnapshotWorker implements Worker {
                     "] workers pending per queue: " + queue);
             for (UUID workerID : processes.get(queue).keySet()) {
                 Worker worker = (Worker) processes.get(queue).get(workerID);
-                String json = gson.toJson(worker);
-                persist(queue+"_"+workerID.toString(),json);
+                if (null!=worker){
+                    String json = gson.toJson(worker);
+                    persist(queue+"_"+workerID.toString(),json);
+                }
             }
         }
     }
