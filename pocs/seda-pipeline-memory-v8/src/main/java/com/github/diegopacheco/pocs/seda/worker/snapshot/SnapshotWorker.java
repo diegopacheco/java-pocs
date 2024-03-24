@@ -35,7 +35,7 @@ public class SnapshotWorker implements Worker {
                 Worker worker = (Worker) processes.get(queue).get(workerID);
                 if (null!=worker){
                     String json = gson.toJson(worker);
-                    persist(queue+"@"+workerID.toString(),json);
+                    persist(queue + "$" + workerID.toString(),json);
                 }
             }
         }
