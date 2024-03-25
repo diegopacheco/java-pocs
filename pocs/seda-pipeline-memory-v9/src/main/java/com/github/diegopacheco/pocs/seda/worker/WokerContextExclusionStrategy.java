@@ -5,11 +5,12 @@ import com.google.gson.FieldAttributes;
 import java.util.Arrays;
 import java.util.List;
 
-public class ExclusionStrategy implements com.google.gson.ExclusionStrategy {
+public class WokerContextExclusionStrategy implements com.google.gson.ExclusionStrategy {
 
     private List<String> ignoreFields = Arrays.asList(new String[]{
             "sedaManager",
             "completionHandler"});
+
     @Override
     public boolean shouldSkipField(FieldAttributes fieldAttributes) {
         if (ignoreFields.contains(fieldAttributes.getName()))
