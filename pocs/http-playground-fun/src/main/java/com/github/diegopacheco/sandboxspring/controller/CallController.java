@@ -5,10 +5,8 @@ import okhttp3.*;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.io.IOException;
-
 @RestController
-public class HelloController {
+public class CallController {
 
 	@RequestMapping("/")
 	public String index() {
