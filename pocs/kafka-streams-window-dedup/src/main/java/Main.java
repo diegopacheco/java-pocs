@@ -25,10 +25,12 @@ public class Main{
     KStream<String, String> source = builder.stream(inputTopic);
     Pattern pattern = Pattern.compile("\\W+", Pattern.UNICODE_CHARACTER_CLASS);
 
+    TimeWindows tumblingWindows = TimeWindows.ofSizeWithNoGrace(Duration.ofSeconds(30));
+
     KTable<Windowed<String>, String> deduplicated = source
             .flatMapValues(value -> Arrays.asList(pattern.split(value.toLowerCase())))
             .groupBy((key, word) -> word)
-            .windowedBy(TimeWindows.of(Duration.ofSeconds(30)))
+            .windowedBy(tumblingWindows)
             .reduce((value1, value2) -> value1); // Deduplicate by keeping the first occurrence
 
     deduplicated.toStream()
