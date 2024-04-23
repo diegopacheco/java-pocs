@@ -18,3 +18,15 @@ Zookeeper: zookeeper-3.4.14 <BR/>
 
 ### Result
 <img src="result-working.png" />
+
+### Things to keep in mind
+
+* Make sure the window is not too big to avoid memory issues (30 seems fine)
+* Make sure the window is not too small to avoid loosing events (30 seems fine)
+* Make sure the dedup key is a good one, in this case we are using the word itself(great one)
+
+### Whats next?
+
+* Configure different overalaps to avoid (loosing events in different windows)
+* Make the program shutdown when the window it's done (maybe write the data in Redis)
+* Observability, publish metrics on whats going on in the background
