@@ -6,6 +6,8 @@
         </Console>
     </Appenders>
     <Loggers>
+        <Logger name="org.apache.kafka" level="INFO" />
+        <Logger name="org.apache.kafka.streams" level="INFO" />
         <Logger name="org.apache.kafka.streams.processor.internals.StreamThread" level="INFO" />
         <Logger name="org.apache.kafka.common.telemetry.internals.TelemetryReporter" level="INFO" />
         <Root level="INFO">
