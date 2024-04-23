@@ -27,6 +27,7 @@ Zookeeper: zookeeper-3.4.14 <BR/>
 
 ### Whats next?
 
+* Make sure the window is aggregating events by timestamp(ordering)
 * Configure different overalaps to avoid (loosing events in different windows)
 * Make the program shutdown when the window it's done (maybe write the data in Redis)
 * Observability, publish metrics on whats going on in the background
