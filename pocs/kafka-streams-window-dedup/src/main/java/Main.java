@@ -1,11 +1,11 @@
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
+import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
-import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.KTable;
-import org.apache.kafka.streams.kstream.Produced;
+import org.apache.kafka.streams.kstream.*;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 import java.util.regex.Pattern;
@@ -24,15 +24,16 @@ public class Main{
     final StreamsBuilder builder = new StreamsBuilder();
     KStream<String, String> source = builder.stream(inputTopic);
     Pattern pattern = Pattern.compile("\\W+", Pattern.UNICODE_CHARACTER_CLASS);
-    KTable<String, Long> wordCounts = source
+
+    KTable<Windowed<String>, String> deduplicated = source
             .flatMapValues(value -> Arrays.asList(pattern.split(value.toLowerCase())))
             .groupBy((key, word) -> word)
-            .count();
+            .windowedBy(TimeWindows.of(Duration.ofSeconds(30)))
+            .reduce((value1, value2) -> value1); // Deduplicate by keeping the first occurrence
 
-    wordCounts.toStream().foreach( (w,c) -> System.out.println("word: " + w + " -> " + c) );
-
-    wordCounts.toStream()
-            .to("outputTopic", Produced.with(Serdes.String(), Serdes.Long()));
+    deduplicated.toStream()
+            .map((key, value) -> new KeyValue<>(key.key(), value))
+            .to("outputTopic", Produced.with(Serdes.String(), Serdes.String()));
 
     final KafkaStreams streams = new KafkaStreams(builder.build(), streamsConfiguration);
     streams.start();
