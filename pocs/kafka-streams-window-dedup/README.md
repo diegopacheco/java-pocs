@@ -19,8 +19,15 @@ Zookeeper: zookeeper-3.4.14 <BR/>
 ### Result
 <img src="result-working.png" />
 
+### Delivery Semathics
+
+* At least once: The same event can be delivered more than once.
+* At most once: The event can be delivered only once.
+* Exactly once: The event is delivered only once. (harder and more expensive)
+
 ### Things to keep in mind
 
+* Make sure the code deliver the delivery semathics you need.
 * Make sure the window is not too big to avoid memory issues (30 seems fine)
 * Make sure the window is not too small to avoid loosing events (30 seems fine)
 * Make sure the dedup key is a good one, in this case we are using the word itself(great one)
