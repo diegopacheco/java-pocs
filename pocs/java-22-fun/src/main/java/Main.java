@@ -7,5 +7,6 @@ public class Main{
     StreamGatherers.run();
     StatementBeforeSuper.run();
     ClassFileAPI.run();
+    VectorApi.run();
   }
 }
