@@ -1,3 +1,4 @@
+import com.github.diegopacheco.j22.jeps.StatementBeforeSuper;
 import com.github.diegopacheco.j22.jeps.StreamGatherers;
 import com.github.diegopacheco.j22.jeps.StringTemplates;
 import com.github.diegopacheco.j22.jeps.UnnamedVariablePatterns;
@@ -7,5 +8,6 @@ public class Main{
     UnnamedVariablePatterns.run();
     StringTemplates.run();
     StreamGatherers.run();
+    StatementBeforeSuper.run();
   }
 }
