@@ -13,7 +13,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.13.0</version>
                 <configuration>
                     <release>22</release>
                     <compilerArgs>
@@ -26,7 +26,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -37,8 +37,9 @@
                 <configuration>
                     <mainClass>Main</mainClass>
                     <arguments>
-                        <release>22</release>
-                        <compilerArgs>--enable-preview</compilerArgs>
+                        <argument>--enable-preview</argument>
+                        <argument>--add-modules</argument>
+                        <argument>jdk.incubator.vector</argument>
                     </arguments>
                 </configuration>
             </plugin>

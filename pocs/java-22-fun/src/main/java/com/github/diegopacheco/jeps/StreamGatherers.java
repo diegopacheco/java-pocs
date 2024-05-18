@@ -1,4 +1,4 @@
-package com.github.diegopacheco.j22.jeps;
+package com.github.diegopacheco.jeps;
 
 import java.util.stream.Stream;
 

@@ -1,12 +1,11 @@
-import com.github.diegopacheco.j22.jeps.*;
+import com.github.diegopacheco.jeps.*;
 
-public class Main{
-  public static void main(String args[]){
+// 463: Implicitly Declared Classes and Instance Main Methods (Second Preview)
+void main(){
     UnnamedVariablePatterns.run();
     StringTemplates.run();
     StreamGatherers.run();
     StatementBeforeSuper.run();
     ClassFileAPI.run();
     VectorApi.run();
-  }
 }

@@ -1,4 +1,4 @@
-module com.github.diegopacheco.j22.jeps {
+module com.github.diegopacheco.jeps {
     requires org.apache.commons.io;
     requires jdk.incubator.vector;
 }

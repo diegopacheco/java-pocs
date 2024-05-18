@@ -1,4 +1,4 @@
-package com.github.diegopacheco.j22.jeps;
+package com.github.diegopacheco.jeps;
 
 import jdk.incubator.vector.FloatVector;
 import jdk.incubator.vector.VectorSpecies;
