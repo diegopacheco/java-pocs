@@ -20,6 +20,10 @@
 457: Class-File API (Preview)
 ```
 
+463: Implicitly Declared Classes and Instance Main Methods (Second Preview)
+* Works on IntelliJ IDEA
+* Does not seem to be working on exec-maven-plugin 3.2.0
+
 ### Build 
 ```bash
 ./mvnw clean install 
