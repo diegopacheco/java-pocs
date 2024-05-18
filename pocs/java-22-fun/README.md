@@ -12,7 +12,7 @@
 ## Extensions to multithreaded code
 462: Structured Concurrency (Second Preview)
 464: Scoped Values (Second Preview)
-****
+
 ## Performance and Infra
 423: Region Pinning for G1
 454: Foreign Function & Memory API
