@@ -3,7 +3,7 @@
 ```
 ## Core language extensions and updates
 456: Unnamed Variables & Patterns
-****459: String Templates (Second Preview)
+459: String Templates (Second Preview)
 447: Statements before super(…) (Preview)
 461: Stream Gatherers (Preview)
 463: Implicitly Declared Classes and Instance Main Methods (Second Preview)
