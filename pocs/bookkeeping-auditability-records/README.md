@@ -26,3 +26,20 @@ User 1, system, day 9, occur, charges 100$
 User 1, system, day 10, occur, charges 100$
 User 1, checkout 10 PM, total 1000$
 ```
+
+### Rationale
+
+This poc show how we can create a simple Event-Driven bookkeeping system.
+Such system uses a hotel as example. We are capturing all meaniful events the user do.
+There are many applications for it such as:
+* Analytics
+* Fraud Detection
+* Customer Marketing and pos-sales offerings
+* Auditability for support troubleshooting
+
+### Design
+
+* Everything is event based
+* Data is stored in memory for sake of POC but there is a great fit with Kafka or RabittMQ for instance.
+* Event Storage could fit well in Cassandra or S3
+

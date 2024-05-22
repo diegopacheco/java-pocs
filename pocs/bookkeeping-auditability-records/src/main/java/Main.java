@@ -1,5 +1,7 @@
 import com.github.diegopacheco.bookkeeping.bookkeeping.Entry;
 import com.github.diegopacheco.bookkeeping.bookkeeping.UserLog;
+import com.github.diegopacheco.bookkeeping.events.SignUpEvent;
+
 import java.util.LinkedHashSet;
 import java.util.UUID;
 
@@ -8,7 +10,16 @@ public class Main{
 
     UserLog userLog = new UserLog();
     UUID idUser1 = UUID.randomUUID();
+
+    SignUpEvent event1 = SignUpEvent.builder()
+            .withUserId(idUser1)
+            .withEventDescription("User 1, signed up in the hotel website")
+            .build();
+
     userLog.log(idUser1,"User 1, signed up in the hotel website");
+
+
+
     userLog.log(idUser1,"User 1, system, day 1, occur, charges 100$");
     userLog.log(idUser1,"User 1, book a master suite for 10 nights");
     userLog.log(idUser1,"User 1, night 1, order a bottle of wine");

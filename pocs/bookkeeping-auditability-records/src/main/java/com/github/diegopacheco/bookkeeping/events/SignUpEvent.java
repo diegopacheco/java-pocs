@@ -48,4 +48,33 @@ public class SignUpEvent {
     public int hashCode() {
         return Objects.hash(userId, timestamp, eventDescription);
     }
+
+    public static Builder builder(){
+        return new Builder();
+    }
+
+    public static class Builder {
+        private UUID userId;
+        private Instant timestamp;
+        private String eventDescription;
+
+        public Builder withUserId(UUID userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public Builder withTimestamp(Instant timestamp) {
+            this.timestamp = timestamp;
+            return this;
+        }
+
+        public Builder withEventDescription(String eventDescription) {
+            this.eventDescription = eventDescription;
+            return this;
+        }
+
+        public SignUpEvent build() {
+            return new SignUpEvent(userId, timestamp, eventDescription);
+        }
+    }
 }
