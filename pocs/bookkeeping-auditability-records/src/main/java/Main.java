@@ -18,7 +18,7 @@ public class Main{
 
     userLog.log(idUser1,"User 1, signed up in the hotel website");
 
-    
+
 
     userLog.log(idUser1,"User 1, system, day 1, occur, charges 100$");
     userLog.log(idUser1,"User 1, book a master suite for 10 nights");

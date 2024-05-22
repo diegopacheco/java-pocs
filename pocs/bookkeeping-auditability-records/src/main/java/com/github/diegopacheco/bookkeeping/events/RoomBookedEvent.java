@@ -66,4 +66,52 @@ public class RoomBookedEvent {
     public int hashCode() {
         return Objects.hash(userId, numberOfNights, room, total, timestamp, eventDescription);
     }
+
+    public static RoomBookedEventBuilder builder() {
+        return new RoomBookedEventBuilder();
+    }
+
+    public static class RoomBookedEventBuilder {
+        private UUID userId;
+        private Integer numberOfNights;
+        private String room;
+        private BigDecimal total;
+        private Instant timestamp;
+        private String eventDescription;
+
+        public RoomBookedEventBuilder withUserId(UUID userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public RoomBookedEventBuilder withNumberOfNights(Integer numberOfNights) {
+            this.numberOfNights = numberOfNights;
+            return this;
+        }
+
+        public RoomBookedEventBuilder withRoom(String room) {
+            this.room = room;
+            return this;
+        }
+
+        public RoomBookedEventBuilder withTotal(BigDecimal total) {
+            this.total = total;
+            return this;
+        }
+
+        public RoomBookedEventBuilder withTimestamp(Instant timestamp) {
+            this.timestamp = timestamp;
+            return this;
+        }
+
+        public RoomBookedEventBuilder withEventDescription(String eventDescription) {
+            this.eventDescription = eventDescription;
+            return this;
+        }
+
+        public RoomBookedEvent build() {
+            return new RoomBookedEvent(userId, numberOfNights, room, total, timestamp, eventDescription);
+        }
+    }
+
 }
