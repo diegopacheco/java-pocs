@@ -43,3 +43,14 @@ There are many applications for it such as:
 * Data is stored in memory for sake of POC but there is a great fit with Kafka or RabittMQ for instance.
 * Event Storage could fit well in Cassandra or S3
 
+### Tradeoffs
+
+##### NoSQL
+
+Having a bookkeeping system under a NoSQL database will scale and we can make it cost efficient.
+However, unpredictable queries will be harder. Schema evolution is easier.
+
+##### Relational
+
+Relational db will be more expensive and harder to deal with historical data, will require archiving and some operations and automation.
+However, to query unpredictable data will be easier. Schema evolution is harder.
