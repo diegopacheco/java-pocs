@@ -12,13 +12,16 @@ public class RoomServiceOrderedEvent implements Event {
     private BigDecimal total;
     private Instant timestamp;
     private String eventDescription;
+    private String service;
 
-    public RoomServiceOrderedEvent(UUID userId, String room, BigDecimal total, Instant timestamp, String eventDescription) {
+    public RoomServiceOrderedEvent(UUID userId, String room, BigDecimal total, Instant timestamp,
+                                   String eventDescription, String service) {
         this.userId = userId;
         this.room = room;
         this.total = total;
         this.timestamp = timestamp;
         this.eventDescription = eventDescription;
+        this.service = service;
     }
 
     public UUID getUserId() {
@@ -36,6 +39,9 @@ public class RoomServiceOrderedEvent implements Event {
     public String getEventDescription() {
         return eventDescription;
     }
+    public String getService() {
+        return service;
+    }
 
     @Override
     public String toString() {
@@ -45,6 +51,7 @@ public class RoomServiceOrderedEvent implements Event {
                 ", total=" + total +
                 ", timestamp=" + timestamp +
                 ", eventDescription='" + eventDescription + '\'' +
+                ", service='" + service + '\'' +
                 '}';
     }
 
@@ -53,12 +60,12 @@ public class RoomServiceOrderedEvent implements Event {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RoomServiceOrderedEvent that = (RoomServiceOrderedEvent) o;
-        return Objects.equals(userId, that.userId) && Objects.equals(room, that.room) && Objects.equals(total, that.total) && Objects.equals(timestamp, that.timestamp) && Objects.equals(eventDescription, that.eventDescription);
+        return Objects.equals(userId, that.userId) && Objects.equals(room, that.room) && Objects.equals(total, that.total) && Objects.equals(timestamp, that.timestamp) && Objects.equals(eventDescription, that.eventDescription) && Objects.equals(service, that.service);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, room, total, timestamp, eventDescription);
+        return Objects.hash(userId, room, total, timestamp, eventDescription, service);
     }
 
     public static Builder builder(){
@@ -71,6 +78,7 @@ public class RoomServiceOrderedEvent implements Event {
         private BigDecimal total;
         private Instant timestamp;
         private String eventDescription;
+        private String service;
 
         public Builder withUserId(UUID userId) {
             this.userId = userId;
@@ -92,13 +100,18 @@ public class RoomServiceOrderedEvent implements Event {
             return this;
         }
 
+        public Builder withService(String service) {
+            this.service = service;
+            return this;
+        }
+
         public Builder withEventDescription(String eventDescription) {
             this.eventDescription = eventDescription;
             return this;
         }
 
         public RoomServiceOrderedEvent build(){
-            return new RoomServiceOrderedEvent(userId, room, total, timestamp, eventDescription);
+            return new RoomServiceOrderedEvent(userId, room, total, timestamp, eventDescription,service);
         }
     }
 

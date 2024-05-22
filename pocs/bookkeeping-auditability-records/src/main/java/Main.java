@@ -1,7 +1,12 @@
 import com.github.diegopacheco.bookkeeping.bookkeeping.Entry;
 import com.github.diegopacheco.bookkeeping.bookkeeping.UserLog;
+import com.github.diegopacheco.bookkeeping.events.DailyFeeEvent;
+import com.github.diegopacheco.bookkeeping.events.RoomBookedEvent;
+import com.github.diegopacheco.bookkeeping.events.RoomServiceOrderedEvent;
 import com.github.diegopacheco.bookkeeping.events.SignUpEvent;
 
+import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.UUID;
 
@@ -16,11 +21,44 @@ public class Main {
                 .withEventDescription("User 1, signed up in the hotel website")
                 .build());
 
-        userLog.log(idUser1, "User 1, system, day 1, occur, charges 100$");
-        userLog.log(idUser1, "User 1, book a master suite for 10 nights");
-        userLog.log(idUser1, "User 1, night 1, order a bottle of wine");
-        userLog.log(idUser1, "User 1, system, day 2, occur, charges 100$");
-        userLog.log(idUser1, "User 1, night 2, order caviar");
+        userLog.log(idUser1, DailyFeeEvent.builder()
+                .withUserId(idUser1)
+                .withTimestamp(Instant.now())
+                .withValue(BigDecimal.valueOf(100.0))
+                .withEventDescription("User 1, system, day 1, occur, charges 100$")
+                .build());
+
+        userLog.log(idUser1, RoomBookedEvent.builder()
+                .withUserId(idUser1)
+                .withTimestamp(Instant.now())
+                .withRoom("M-1001")
+                .withTotal(BigDecimal.valueOf(10000.0))
+                .withEventDescription("User 1, book a master suite for 10 nights")
+                .build());
+
+        userLog.log(idUser1, RoomServiceOrderedEvent.builder()
+                .withUserId(idUser1)
+                .withTimestamp(Instant.now())
+                .withService("Food/Drinks")
+                .withTotal(BigDecimal.valueOf(100.0))
+                .withEventDescription("User 1, night 1, order a bottle of wine")
+                .build());
+
+        userLog.log(idUser1, DailyFeeEvent.builder()
+                .withUserId(idUser1)
+                .withTimestamp(Instant.now())
+                .withValue(BigDecimal.valueOf(100.0))
+                .withEventDescription("User 1, system, day 2, occur, charges 100$")
+                .build());
+
+        userLog.log(idUser1, RoomServiceOrderedEvent.builder()
+                .withUserId(idUser1)
+                .withTimestamp(Instant.now())
+                .withService("Food/Drinks")
+                .withTotal(BigDecimal.valueOf(358.25))
+                .withEventDescription("User 1, night 2, order caviar")
+                .build());
+
         userLog.log(idUser1, "User 1, system, day 3, occur, charges 100$");
         userLog.log(idUser1, "User 1, night 3, ask for room service");
         userLog.log("User 2, signed up in the hotel website");
