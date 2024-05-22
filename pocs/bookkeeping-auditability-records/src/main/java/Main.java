@@ -96,8 +96,21 @@ public class Main {
                 .withEventDescription("User 1, day 4, schedule a wake up call 8:00 for night 10")
                 .build());
 
-        userLog.log(idUser1, "User 1, system, day 5, occur, charges 100$");
-        userLog.log(idUser1, "User 1, day 5, ask for a late check out");
+        userLog.log(idUser1, DailyFeeEvent.builder()
+                .withUserId(idUser1)
+                .withTimestamp(Instant.now().plus(5, ChronoUnit.DAYS))
+                .withValue(BigDecimal.valueOf(100.0))
+                .withEventDescription("User 1, system, day 5, occur, charges 100$")
+                .build());
+
+        userLog.log(idUser1, RoomServiceOrderedEvent.builder()
+                .withUserId(idUser1)
+                .withTimestamp(Instant.now().plus(5, ChronoUnit.DAYS))
+                .withService("LateCheckOut")
+                .withTotal(BigDecimal.valueOf(150.00))
+                .withEventDescription("User 1, day 5, ask for a late check out")
+                .build());
+
         userLog.log(idUser1, "User 1, system, day 6, occur, charges 100$");
         userLog.log(idUser1, "User 1, day 6, order extra towels");
         userLog.log(idUser1, "User 1, system, day 7, occur, charges 100$");
