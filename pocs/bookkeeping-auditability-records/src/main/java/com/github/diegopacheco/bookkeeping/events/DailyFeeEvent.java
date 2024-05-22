@@ -5,7 +5,7 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
-public class DailyFeeEvent {
+public class DailyFeeEvent implements Event {
 
     private UUID userId;
     private BigDecimal value;

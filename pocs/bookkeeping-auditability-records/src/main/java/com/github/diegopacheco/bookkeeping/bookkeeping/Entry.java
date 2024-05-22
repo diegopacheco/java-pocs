@@ -1,27 +1,29 @@
 package com.github.diegopacheco.bookkeeping.bookkeeping;
 
+import com.github.diegopacheco.bookkeeping.events.Event;
+
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
 public class Entry{
     private UUID id;
-    private String event;
+    private Event event;
     private Instant timestamp;
 
-    public Entry(UUID id,String event) {
+    public Entry(UUID id,Event event) {
         this.id = id;
         this.timestamp = Instant.now();
         this.event = event;
     }
 
-    public Entry(String event) {
+    public Entry(Event event) {
         this.id = UUID.randomUUID();
         this.timestamp = Instant.now();
         this.event = event;
     }
 
-    public Entry(UUID id, String event, Instant timestamp) {
+    public Entry(UUID id, Event event, Instant timestamp) {
         this.id = id;
         this.event = event;
         this.timestamp = timestamp;
@@ -30,7 +32,7 @@ public class Entry{
     public UUID getId() {
         return id;
     }
-    public String getEvent() {
+    public Event getEvent() {
         return event;
     }
     public Instant getTimestamp() {

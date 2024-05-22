@@ -5,7 +5,7 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
-public class CheckedOutEvent {
+public class CheckedOutEvent implements Event {
 
     private UUID userId;
     private BigDecimal total;

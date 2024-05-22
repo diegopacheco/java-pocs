@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
-public class SignUpEvent {
+public class SignUpEvent implements Event {
 
     private UUID userId;
     private Instant timestamp;

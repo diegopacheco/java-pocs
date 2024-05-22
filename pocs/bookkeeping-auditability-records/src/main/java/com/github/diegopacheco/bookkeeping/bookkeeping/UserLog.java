@@ -1,5 +1,7 @@
 package com.github.diegopacheco.bookkeeping.bookkeeping;
 
+import com.github.diegopacheco.bookkeeping.events.Event;
+
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.UUID;
@@ -9,13 +11,13 @@ public class UserLog implements Bookkeeping {
 
     private static Map<UUID, LinkedHashSet<Entry>> entries = new ConcurrentHashMap<>();
 
-    public void log(String event){
+    public void log(Event event){
         LinkedHashSet<Entry> entry = new LinkedHashSet<>();
         entry.add(new Entry(event));
         entries.put(UUID.randomUUID(),entry);
     }
 
-    public void log(UUID id,String event){
+    public void log(UUID id,Event event){
         LinkedHashSet<Entry> entry = new LinkedHashSet<>();
         if (entries.containsKey(id)){
             entry = entries.get(id);

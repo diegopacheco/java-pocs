@@ -5,7 +5,7 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
-public class RoomBookedEvent {
+public class RoomBookedEvent implements Event {
 
     private UUID userId;
     private Integer numberOfNights;

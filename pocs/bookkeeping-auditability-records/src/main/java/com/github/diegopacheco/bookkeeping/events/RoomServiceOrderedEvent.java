@@ -5,7 +5,7 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
-public class RoomServiceOrderedEvent {
+public class RoomServiceOrderedEvent implements Event {
 
     private UUID userId;
     private String room;
