@@ -54,4 +54,40 @@ public class DailyFeeEvent {
     public int hashCode() {
         return Objects.hash(userId, value, timestamp, eventDescription);
     }
+
+    public static DailyFeeEventBuilder builder() {
+        return new DailyFeeEventBuilder();
+    }
+
+    public static class DailyFeeEventBuilder {
+        private UUID userId;
+        private BigDecimal value;
+        private Instant timestamp;
+        private String eventDescription;
+
+        public DailyFeeEventBuilder withUserId(UUID userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public DailyFeeEventBuilder withValue(BigDecimal value) {
+            this.value = value;
+            return this;
+        }
+
+        public DailyFeeEventBuilder withTimestamp(Instant timestamp) {
+            this.timestamp = timestamp;
+            return this;
+        }
+
+        public DailyFeeEventBuilder withEventDescription(String eventDescription) {
+            this.eventDescription = eventDescription;
+            return this;
+        }
+
+        public DailyFeeEvent build() {
+            return new DailyFeeEvent(userId, value, timestamp, eventDescription);
+        }
+    }
+
 }
