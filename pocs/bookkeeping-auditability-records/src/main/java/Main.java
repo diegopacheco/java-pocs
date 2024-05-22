@@ -7,6 +7,7 @@ import com.github.diegopacheco.bookkeeping.events.SignUpEvent;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.LinkedHashSet;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ public class Main {
 
         UserLog userLog = new UserLog();
         UUID idUser1 = UUID.randomUUID();
+        UUID idUser2 = UUID.randomUUID();
 
         userLog.log(idUser1, SignUpEvent.builder()
                 .withUserId(idUser1)
@@ -53,17 +55,47 @@ public class Main {
 
         userLog.log(idUser1, RoomServiceOrderedEvent.builder()
                 .withUserId(idUser1)
-                .withTimestamp(Instant.now())
+                .withTimestamp(Instant.now().plus(2, ChronoUnit.DAYS))
                 .withService("Food/Drinks")
                 .withTotal(BigDecimal.valueOf(358.25))
                 .withEventDescription("User 1, night 2, order caviar")
                 .build());
 
-        userLog.log(idUser1, "User 1, system, day 3, occur, charges 100$");
-        userLog.log(idUser1, "User 1, night 3, ask for room service");
-        userLog.log("User 2, signed up in the hotel website");
-        userLog.log(idUser1, "User 1, system, day 4, occur, charges 100$");
-        userLog.log(idUser1, "User 1, day 4, schedule a wake up call 8:00 for night 10");
+        userLog.log(idUser1, DailyFeeEvent.builder()
+                .withUserId(idUser1)
+                .withTimestamp(Instant.now().plus(3, ChronoUnit.DAYS))
+                .withValue(BigDecimal.valueOf(100.0))
+                .withEventDescription("User 1, system, day 3, occur, charges 100$")
+                .build());
+
+        userLog.log(idUser1, RoomServiceOrderedEvent.builder()
+                .withUserId(idUser1)
+                .withTimestamp(Instant.now().plus(3, ChronoUnit.DAYS))
+                .withService("Food/Drinks")
+                .withTotal(BigDecimal.valueOf(12.00))
+                .withEventDescription("User 1, night 3, order french fries")
+                .build());
+
+        userLog.log(idUser2, SignUpEvent.builder()
+                .withUserId(idUser2)
+                .withEventDescription("User 2, signed up in the hotel website")
+                .build());
+
+        userLog.log(idUser1, DailyFeeEvent.builder()
+                .withUserId(idUser1)
+                .withTimestamp(Instant.now().plus(4, ChronoUnit.DAYS))
+                .withValue(BigDecimal.valueOf(100.0))
+                .withEventDescription("User 1, system, day 4, occur, charges 100$")
+                .build());
+
+        userLog.log(idUser1, RoomServiceOrderedEvent.builder()
+                .withUserId(idUser1)
+                .withTimestamp(Instant.now().plus(4, ChronoUnit.DAYS))
+                .withService("WakeUpCall")
+                .withTotal(BigDecimal.valueOf(358.25))
+                .withEventDescription("User 1, day 4, schedule a wake up call 8:00 for night 10")
+                .build());
+
         userLog.log(idUser1, "User 1, system, day 5, occur, charges 100$");
         userLog.log(idUser1, "User 1, day 5, ask for a late check out");
         userLog.log(idUser1, "User 1, system, day 6, occur, charges 100$");
