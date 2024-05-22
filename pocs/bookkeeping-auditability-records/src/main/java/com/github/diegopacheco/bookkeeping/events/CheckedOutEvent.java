@@ -60,4 +60,46 @@ public class CheckedOutEvent {
     public int hashCode() {
         return Objects.hash(userId, total, timestamp, eventDescription, room);
     }
+
+    public static CheckedOutEventBuilder builder() {
+        return new CheckedOutEventBuilder();
+    }
+
+    public static class CheckedOutEventBuilder {
+        private UUID userId;
+        private BigDecimal total;
+        private Instant timestamp;
+        private String eventDescription;
+        private String room;
+
+        public CheckedOutEventBuilder withUserId(UUID userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public CheckedOutEventBuilder withTotal(BigDecimal total) {
+            this.total = total;
+            return this;
+        }
+
+        public CheckedOutEventBuilder withTimestamp(Instant timestamp) {
+            this.timestamp = timestamp;
+            return this;
+        }
+
+        public CheckedOutEventBuilder withEventDescription(String eventDescription) {
+            this.eventDescription = eventDescription;
+            return this;
+        }
+
+        public CheckedOutEventBuilder withRoom(String room) {
+            this.room = room;
+            return this;
+        }
+
+        public CheckedOutEvent build() {
+            return new CheckedOutEvent(userId, total, timestamp, eventDescription, room);
+        }
+    }
+
 }
