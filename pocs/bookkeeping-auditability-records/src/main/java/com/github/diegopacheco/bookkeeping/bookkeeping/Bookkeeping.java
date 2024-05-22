@@ -1,4 +1,4 @@
-package com.github.diegopacheco.bookkeeping;
+package com.github.diegopacheco.bookkeeping.bookkeeping;
 
 import java.util.LinkedHashSet;
 import java.util.Map;

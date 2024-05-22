@@ -1,4 +1,4 @@
-package com.github.diegopacheco.bookkeeping;
+package com.github.diegopacheco.bookkeeping.bookkeeping;
 
 import java.time.Instant;
 import java.util.Objects;

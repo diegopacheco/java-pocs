@@ -1,5 +1,5 @@
-import com.github.diegopacheco.bookkeeping.Entry;
-import com.github.diegopacheco.bookkeeping.UserLog;
+import com.github.diegopacheco.bookkeeping.bookkeeping.Entry;
+import com.github.diegopacheco.bookkeeping.bookkeeping.UserLog;
 import java.util.LinkedHashSet;
 import java.util.UUID;
 
