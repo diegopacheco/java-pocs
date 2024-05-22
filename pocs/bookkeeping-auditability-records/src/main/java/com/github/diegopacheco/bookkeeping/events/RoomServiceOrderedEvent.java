@@ -60,4 +60,46 @@ public class RoomServiceOrderedEvent {
     public int hashCode() {
         return Objects.hash(userId, room, total, timestamp, eventDescription);
     }
+
+    public static Builder builder(){
+        return new Builder();
+    }
+
+    public static class Builder {
+        private UUID userId;
+        private String room;
+        private BigDecimal total;
+        private Instant timestamp;
+        private String eventDescription;
+
+        public Builder withUserId(UUID userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public Builder withRoom(String room) {
+            this.room = room;
+            return this;
+        }
+
+        public Builder withTotal(BigDecimal total) {
+            this.total = total;
+            return this;
+        }
+
+        public Builder withTimestamp(Instant timestamp) {
+            this.timestamp = timestamp;
+            return this;
+        }
+
+        public Builder withEventDescription(String eventDescription) {
+            this.eventDescription = eventDescription;
+            return this;
+        }
+
+        public RoomServiceOrderedEvent build(){
+            return new RoomServiceOrderedEvent(userId, room, total, timestamp, eventDescription);
+        }
+    }
+
 }
