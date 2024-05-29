@@ -37,7 +37,7 @@ public class ConnectionRefresher implements ApplicationContextAware {
     @Scheduled(fixedRate = 1000)
     public void refresh() throws Exception {
         if (!done) {
-            System.out.println("Refreshing connection... TX manager: " + txManager + " - DS: " + ds);
+            System.out.println("Refreshing connections... TX manager: " + txManager + " - DS: " + ds);
             traceConnections();
 
             ds.getHikariPoolMXBean().softEvictConnections();
@@ -45,6 +45,7 @@ public class ConnectionRefresher implements ApplicationContextAware {
             System.out.println("Connection soft evicted!");
 
             /*
+            // Dangerous
             DefaultListableBeanFactory bf = (DefaultListableBeanFactory)ctx.getAutowireCapableBeanFactory();
             DefaultListableBeanFactory defaultListableBeanFactory = bf;
             defaultListableBeanFactory.removeBeanDefinition("transactionManager");
@@ -57,6 +58,10 @@ public class ConnectionRefresher implements ApplicationContextAware {
             System.out.println("Connection refreshed!");
             traceConnections();
         }
+        traceDS();
+    }
+
+    private void traceDS(){
         System.out.println("*** TX manager: " + txManager + " - DS: " + ds);
         System.out.println(" Active connections : " + ds.getHikariPoolMXBean().getActiveConnections());
         System.out.println(" Idle connections   : " + ds.getHikariPoolMXBean().getIdleConnections());
@@ -64,6 +69,7 @@ public class ConnectionRefresher implements ApplicationContextAware {
     }
 
     private void traceConnections(){
+        traceDS();
         List<Connection> connectionList = new ArrayList<>(10);
         for (int i = 0; i < 10; i++) {
             Connection con = null;
@@ -75,6 +81,7 @@ public class ConnectionRefresher implements ApplicationContextAware {
             System.out.println(con);
             connectionList.add(con);
         }
+        traceDS();
         for (Connection con : connectionList) {
             try {
                 con.close();
@@ -82,6 +89,7 @@ public class ConnectionRefresher implements ApplicationContextAware {
                 throw new RuntimeException(e);
             }
         }
+        traceDS();
     }
 
     @Override
