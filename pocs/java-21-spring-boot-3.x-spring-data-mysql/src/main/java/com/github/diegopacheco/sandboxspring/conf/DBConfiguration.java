@@ -8,7 +8,6 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import javax.sql.DataSource;
 
 @Configuration
@@ -18,6 +17,7 @@ public class DBConfiguration {
 
     @Bean
     public DataSource getDataSource(){
+        System.out.println("New DataSource requested...");
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl( "jdbc:mysql://127.0.0.1:3325/person" );
         config.setUsername( "root" );
@@ -31,6 +31,7 @@ public class DBConfiguration {
 
     @Bean(name = "transactionManager")
     public PlatformTransactionManager txManager() {
+        System.out.println("New TXManager requested...");
         return new DataSourceTransactionManager(getDataSource());
     }
 

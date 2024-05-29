@@ -25,7 +25,11 @@ public class ConnectionRefresher {
             done = true;
             System.out.println("Connection refreshed!");
         }
-        System.out.println("TX manager: " + txManager + " - DS: " + ds);
+        System.out.println("*** TX manager: " + txManager + " - DS: " + ds);
+        System.out.println(" Active connections : " + ds.getHikariPoolMXBean().getActiveConnections());
+        System.out.println(" Idle connections   : " + ds.getHikariPoolMXBean().getIdleConnections());
+        System.out.println(" Total connections  : " + ds.getHikariPoolMXBean().getTotalConnections());
+
     }
 
 }
