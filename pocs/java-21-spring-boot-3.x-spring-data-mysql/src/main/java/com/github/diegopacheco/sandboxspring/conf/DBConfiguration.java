@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 @EnableScheduling
 public class DBConfiguration {
 
-    @Bean
+    @Bean(name = "dataSource")
     public DataSource getDataSource(){
         System.out.println("New DataSource requested...");
         HikariConfig config = new HikariConfig();

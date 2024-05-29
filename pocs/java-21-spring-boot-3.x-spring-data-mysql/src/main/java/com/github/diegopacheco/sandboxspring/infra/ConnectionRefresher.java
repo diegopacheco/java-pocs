@@ -13,6 +13,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import java.sql.SQLException;
+
 @Component
 public class ConnectionRefresher implements ApplicationContextAware {
 
@@ -30,9 +32,13 @@ public class ConnectionRefresher implements ApplicationContextAware {
     private boolean done = false;
 
     @Scheduled(fixedRate = 1000)
-    public void refresh(){
+    public void refresh() throws Exception {
         if (!done){
             System.out.println("Refreshing connection... TX manager: " + txManager + " - DS: " + ds);
+            for(int i=0;i<10;i++) {
+               System.out.println(ds.getConnection());
+            }
+
             ds.getHikariPoolMXBean().softEvictConnections();
             done = true;
             System.out.println("Connection soft evicted!");
@@ -45,7 +51,12 @@ public class ConnectionRefresher implements ApplicationContextAware {
             txManager = (PlatformTransactionManager) defaultListableBeanFactory.getBean("transactionManager");
             */
 
+            txManager = (PlatformTransactionManager) ctx.getBean("transactionManager");
+            ds = (HikariDataSource) ctx.getBean("dataSource");
             System.out.println("Connection refreshed!");
+            for(int i=0;i<10;i++) {
+                System.out.println(ds.getConnection());
+            }
         }
         System.out.println("*** TX manager: " + txManager + " - DS: " + ds);
         System.out.println(" Active connections : " + ds.getHikariPoolMXBean().getActiveConnections());
