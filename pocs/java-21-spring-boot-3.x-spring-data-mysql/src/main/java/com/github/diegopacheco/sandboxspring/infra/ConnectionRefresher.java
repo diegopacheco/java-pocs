@@ -57,6 +57,7 @@ public class ConnectionRefresher implements ApplicationContextAware {
             ds = (HikariDataSource) ctx.getBean("dataSource");
             System.out.println("Connection refreshed!");
             traceConnections();
+            traceConnections();
         }
         traceDS();
     }
