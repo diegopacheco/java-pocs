@@ -13,7 +13,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ConnectionRefresher implements ApplicationContextAware {
@@ -33,11 +36,9 @@ public class ConnectionRefresher implements ApplicationContextAware {
 
     @Scheduled(fixedRate = 1000)
     public void refresh() throws Exception {
-        if (!done){
+        if (!done) {
             System.out.println("Refreshing connection... TX manager: " + txManager + " - DS: " + ds);
-            for(int i=0;i<10;i++) {
-               System.out.println(ds.getConnection());
-            }
+            traceConnections();
 
             ds.getHikariPoolMXBean().softEvictConnections();
             done = true;
@@ -54,14 +55,33 @@ public class ConnectionRefresher implements ApplicationContextAware {
             txManager = (PlatformTransactionManager) ctx.getBean("transactionManager");
             ds = (HikariDataSource) ctx.getBean("dataSource");
             System.out.println("Connection refreshed!");
-            for(int i=0;i<10;i++) {
-                System.out.println(ds.getConnection());
-            }
+            traceConnections();
         }
         System.out.println("*** TX manager: " + txManager + " - DS: " + ds);
         System.out.println(" Active connections : " + ds.getHikariPoolMXBean().getActiveConnections());
         System.out.println(" Idle connections   : " + ds.getHikariPoolMXBean().getIdleConnections());
         System.out.println(" Total connections  : " + ds.getHikariPoolMXBean().getTotalConnections());
+    }
+
+    private void traceConnections(){
+        List<Connection> connectionList = new ArrayList<>(10);
+        for (int i = 0; i < 10; i++) {
+            Connection con = null;
+            try {
+                con = ds.getConnection();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println(con);
+            connectionList.add(con);
+        }
+        for (Connection con : connectionList) {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override
