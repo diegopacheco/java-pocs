@@ -29,7 +29,6 @@ public class ConnectionRefresher {
         System.out.println(" Active connections : " + ds.getHikariPoolMXBean().getActiveConnections());
         System.out.println(" Idle connections   : " + ds.getHikariPoolMXBean().getIdleConnections());
         System.out.println(" Total connections  : " + ds.getHikariPoolMXBean().getTotalConnections());
-
     }
 
 }
