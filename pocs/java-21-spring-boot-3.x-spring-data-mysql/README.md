@@ -209,5 +209,10 @@ Option B
 0. Should be a for loop for 10(total number of connection onf the pool)
 1. Wrap the JDBC driver just for testing
 2. Create a custom interceptor by extending the class and capture the IDs of the underlying JDBC connection. first list must be unique.
-2. Second and thrird capture sohuld have the same ids, the order does not matter.
+2. Second and third capture should have the same ids, the order does not matter.
 
+Option C
+
+0. Same assumptions as the other options but - here we will use reflection
+1. This is how we can get the IDS `((HikariProxyConnection)ds.getConnection()).delegate.toString().split("@")[1]`
+2. Store it compare and profit
