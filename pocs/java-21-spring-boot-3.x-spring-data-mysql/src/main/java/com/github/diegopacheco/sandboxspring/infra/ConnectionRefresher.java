@@ -37,12 +37,14 @@ public class ConnectionRefresher implements ApplicationContextAware {
             done = true;
             System.out.println("Connection soft evicted!");
 
+            /*
             DefaultListableBeanFactory bf = (DefaultListableBeanFactory)ctx.getAutowireCapableBeanFactory();
             DefaultListableBeanFactory defaultListableBeanFactory = bf;
-
             defaultListableBeanFactory.removeBeanDefinition("transactionManager");
-            defaultListableBeanFactory.registerSingleton("transactionManager", configuration.txManager());
+            defaultListableBeanFactory.registerSingleton("transactionManager", configuration.txManager()); // No bean named 'transactionManager' available
             txManager = (PlatformTransactionManager) defaultListableBeanFactory.getBean("transactionManager");
+            */
+
             System.out.println("Connection refreshed!");
         }
         System.out.println("*** TX manager: " + txManager + " - DS: " + ds);
