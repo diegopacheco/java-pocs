@@ -34,7 +34,7 @@ public class ConnectionRefresher implements ApplicationContextAware {
 
     private boolean done = false;
 
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 5000)
     public void refresh() throws Exception {
         if (!done) {
             System.out.println("Refreshing connections... TX manager: " + txManager + " - DS: " + ds);
