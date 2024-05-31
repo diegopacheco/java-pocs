@@ -12,10 +12,15 @@ Java version: 21.0.2, vendor: Amazon.com Inc., runtime: /home/diego/.sdkman/cand
 Default locale: en_US, platform encoding: UTF-8
 OS name: "linux", version: "6.2.0-1009-lowlatency", arch: "amd64", family: "unix"
 ```
+JUnit:
+```
+5.10.2
+```
 Maven plugins
 ```
 maven-compiler-plugin: 3.13.0
 exec-maven-plugin: 3.3.0
+
 ```
 
 ### Aggregated Report
