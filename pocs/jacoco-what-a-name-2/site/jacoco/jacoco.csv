@@ -1,0 +1,4 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+jacoco-what-a-name,default,Main,7,0,0,0,3,0,2,0,2,0
+jacoco-what-a-name,com.github.diegopacheco.javapocs.calculator.v2,CalculatorV2,11,0,0,0,5,0,5,0,5,0
+jacoco-what-a-name,com.github.diegopacheco.javapocs.calculator.v1,CalculatorV1,0,19,0,0,0,5,0,5,0,5
