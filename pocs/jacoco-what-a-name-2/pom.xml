@@ -56,6 +56,18 @@
                         </goals>
                     </execution>
                     <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <formats>
+                                <format>HTML</format>
+                            </formats>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>report-v1</id>
                         <phase>verify</phase>
                         <goals>
