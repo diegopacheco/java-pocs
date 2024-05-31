@@ -20,7 +20,7 @@ Maven plugins
 ```
 maven-compiler-plugin: 3.13.0
 exec-maven-plugin: 3.3.0
-
+maven-surefire-plugin: 3.2.5
 ```
 
 ### Aggregated Report
