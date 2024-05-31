@@ -15,7 +15,7 @@ OS name: "linux", version: "6.2.0-1009-lowlatency", arch: "amd64", family: "unix
 Maven plugins
 ```
 maven-compiler-plugin: 3.13.0
-
+exec-maven-plugin: 3.3.0
 ```
 
 ### Aggregated Report
