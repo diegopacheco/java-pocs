@@ -7,8 +7,12 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.MySQLContainer;
-
-import java.sql.*;
+import java.lang.reflect.Field;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Map;
 
 public class MySQLUsingJDBCTest {
 
@@ -17,6 +21,11 @@ public class MySQLUsingJDBCTest {
 
     @BeforeAll
     static void startDb() throws SQLException {
+        System.out.println("Setting up podman env");
+        Map<String, String> newEnv = getModifiableEnvironmentMap();
+        newEnv.put("DOCKER_HOST", "unix:///run/user/1000/podman/podman.sock");
+        newEnv.put("TESTCONTAINERS_RYUK_DISABLED", "true");
+
         mysql.start();
         String url = mysql.getJdbcUrl();
         String user = mysql.getUsername();
@@ -39,7 +48,7 @@ public class MySQLUsingJDBCTest {
         config.addDataSourceProperty("prepStmtCacheSize", "250");
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
-        try(HikariDataSource ds = new HikariDataSource(config)){
+        try (HikariDataSource ds = new HikariDataSource(config)) {
 
             try (Connection conn = ds.getConnection();
                  Statement stmt = conn.createStatement();
@@ -91,6 +100,19 @@ public class MySQLUsingJDBCTest {
             }
         }
 
+    }
+
+    private static Map<String, String> getModifiableEnvironmentMap() {
+        try {
+            Map<String, String> unmodifiableEnv = System.getenv();
+            Class<?> cl = unmodifiableEnv.getClass();
+            Field field = cl.getDeclaredField("m");
+            field.setAccessible(true);
+            Map<String, String> modifiableEnv = (Map<String, String>) field.get(unmodifiableEnv);
+            return modifiableEnv;
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to access writable environment variable map.");
+        }
     }
 
 }
