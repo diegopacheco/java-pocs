@@ -19,3 +19,9 @@ Order of Events:
 4. When it evits it first close a connection and them create a new one.
   * `com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection`
   * `com.zaxxer.hikari.pool.PoolBase.newConnection`
+
+### 3CP0 Notes
+TODO
+
+### DBCP2 Notes
+TODO
