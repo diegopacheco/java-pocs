@@ -1,5 +1,6 @@
 package com.github.diegopacheco.cpparty.conf;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,16 @@ public class DBConfiguration {
         config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
         HikariDataSource ds = new HikariDataSource( config );
         return ds;
+    }
+
+    //@Bean(name="3cp0DataSource")
+    public DataSource get3cp0DataSource(){
+        System.out.println("New 3cp0 DataSource requested...");
+        ComboPooledDataSource cpds = new ComboPooledDataSource();
+        cpds.setJdbcUrl( "jdbc:mysql://127.0.0.1:3325/person" );
+        cpds.setUser("root");
+        cpds.setPassword("pass");
+        return cpds;
     }
 
     @Bean(name = "transactionManager")
