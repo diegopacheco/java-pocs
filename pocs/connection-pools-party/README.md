@@ -25,7 +25,7 @@ Order of Events:
   * `com.zaxxer.hikari.pool.PoolBase.newConnection`
 
 ### 3CP0 Notes
-TODO
+* No soft evict operation
 
 ### DBCP2 Notes
-TODO
+* No soft evict operation
