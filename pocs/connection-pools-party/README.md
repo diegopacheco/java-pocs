@@ -25,7 +25,8 @@ Order of Events:
   * `com.zaxxer.hikari.pool.PoolBase.newConnection`
 
 ### 3CP0 Notes
-* No soft evict operation
+* https://www.mchange.com/projects/c3p0/apidocs/com/mchange/v2/c3p0/management/PooledDataSourceManagerMBean.html
+* https://www.mchange.com/projects/c3p0/apidocs/com/mchange/v2/c3p0/management/C3P0RegistryManagerMBean.html
 
 ### DBCP2 Notes
 * No soft evict operation
