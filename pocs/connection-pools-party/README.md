@@ -2,8 +2,8 @@
 ```bash
 ./mvnw clean install 
 ```
-### Hikari Notes
 
+### Hikari Notes
 `ds.getHikariPoolMXBean().softEvictConnections();`
 
 Key Classes and methods:
