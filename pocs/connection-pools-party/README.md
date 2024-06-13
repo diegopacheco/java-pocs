@@ -7,10 +7,14 @@
 `ds.getHikariPoolMXBean().softEvictConnections();`
 
 Key Classes and methods:
- * com.zaxxer.hikari.pool.HikariPool.PoolEntryCreator.call
- * com.zaxxer.hikari.pool.HikariPool.createPoolEntry
- * com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection
-  * com.zaxxer.hikari.pool.PoolBase.newConnection
+* com.zaxxer.hikari.pool.HikariPool.softEvictConnections
+  * com.zaxxer.hikari.pool.HikariPool.softEvictConnection
+    * com.zaxxer.hikari.pool.HikariPool.closeConnection
+      * com.zaxxer.hikari.pool.PoolBase.quietlyCloseConnection (set network timeout 1.5s)
+    * com.zaxxer.hikari.pool.HikariPool.fillPool
+      * com.zaxxer.hikari.pool.HikariPool.PoolEntryCreator.call
+        * com.zaxxer.hikari.pool.HikariPool.createPoolEntry
+          * com.zaxxer.hikari.pool.PoolBase.newConnection
 
 Order of Events:
 1. First it mark to close the connection
