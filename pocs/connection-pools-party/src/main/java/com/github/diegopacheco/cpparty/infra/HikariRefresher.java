@@ -38,18 +38,14 @@ public class HikariRefresher implements ApplicationContextAware {
             System.out.println("Refreshing connections... TX manager: " + txManager + " - DS: " + ds);
             traceConnections();
 
+            ds.setUsername("root");
+            ds.setPassword("pass");
+            // java.lang.IllegalStateException: The configuration of the pool is sealed once started. Use HikariConfigMXBean for runtime changes.
+            //ds.setJdbcUrl("jdbc:mysql://127.0.0.1:3325/person");
+
             ds.getHikariPoolMXBean().softEvictConnections();
             done = true;
             System.out.println("Connection soft evicted!");
-
-            /*
-            // Dangerous
-            DefaultListableBeanFactory bf = (DefaultListableBeanFactory)ctx.getAutowireCapableBeanFactory();
-            DefaultListableBeanFactory defaultListableBeanFactory = bf;
-            defaultListableBeanFactory.removeBeanDefinition("transactionManager");
-            defaultListableBeanFactory.registerSingleton("transactionManager", configuration.txManager()); // No bean named 'transactionManager' available
-            txManager = (PlatformTransactionManager) defaultListableBeanFactory.getBean("transactionManager");
-            */
 
             txManager = (PlatformTransactionManager) ctx.getBean("transactionManager");
             ds = (HikariDataSource) ctx.getBean("dataSource");
@@ -60,14 +56,14 @@ public class HikariRefresher implements ApplicationContextAware {
         traceDS();
     }
 
-    private void traceDS(){
+    private void traceDS() {
         System.out.println("*** TX manager: " + txManager + " - DS: " + ds);
         System.out.println(" Active connections : " + ds.getHikariPoolMXBean().getActiveConnections());
         System.out.println(" Idle connections   : " + ds.getHikariPoolMXBean().getIdleConnections());
         System.out.println(" Total connections  : " + ds.getHikariPoolMXBean().getTotalConnections());
     }
 
-    private void traceConnections(){
+    private void traceConnections() {
         traceDS();
         List<Connection> connectionList = new ArrayList<>(10);
         for (int i = 0; i < 10; i++) {
