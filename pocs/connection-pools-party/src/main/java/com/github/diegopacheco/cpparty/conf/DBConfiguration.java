@@ -3,6 +3,9 @@ package com.github.diegopacheco.cpparty.conf;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.apache.commons.dbcp2.*;
+import org.apache.commons.pool2.ObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -39,6 +42,17 @@ public class DBConfiguration {
         cpds.setUser("root");
         cpds.setPassword("pass");
         return cpds;
+    }
+
+    //@Bean(name="DbcpDataSource")
+    public DataSource getDbcpDtaSource(){
+        System.out.println("New DBCP DataSource requested...");
+        ConnectionFactory cf = new DriverManagerConnectionFactory("jdbc:mysql://127.0.0.1:3325/person", null);
+        PoolableConnectionFactory poolCF =  new PoolableConnectionFactory(cf, null);
+        ObjectPool<PoolableConnection> connectionPool =  new GenericObjectPool<>(poolCF);
+        poolCF.setPool(connectionPool);
+        PoolingDataSource<PoolableConnection> dataSource = new PoolingDataSource<>(connectionPool);
+        return dataSource;
     }
 
     @Bean(name = "transactionManager")
