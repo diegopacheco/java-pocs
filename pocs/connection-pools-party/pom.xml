@@ -36,7 +36,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>Application</mainClass>
+                    <mainClass>com.github.diegopacheco.cpparty.Application</mainClass>
                     <arguments>
                         <release>21</release>
                         <compilerArgs>--enable-preview</compilerArgs>

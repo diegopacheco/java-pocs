@@ -1,3 +1,5 @@
+package com.github.diegopacheco.cpparty;
+
 import com.github.diegopacheco.cpparty.dao.DBLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
