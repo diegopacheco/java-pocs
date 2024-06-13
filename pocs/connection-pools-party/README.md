@@ -29,3 +29,11 @@ Order of Events:
 
 ### DBCP2 Notes
 * No soft evict operation
+
+### Interesting Reading
+
+Bad Behavior: Handling Database Down <br/>
+https://github.com/brettwooldridge/HikariCP/wiki/Bad-Behavior:-Handling-Database-Down
+
+Hikari Configuration <br/>
+https://github.com/brettwooldridge/HikariCP?tab=readme-ov-file#gear-configuration-knobs-baby
