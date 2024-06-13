@@ -29,7 +29,7 @@ Order of Events:
 * https://www.mchange.com/projects/c3p0/apidocs/com/mchange/v2/c3p0/management/C3P0RegistryManagerMBean.html
 
 ### DBCP2 Notes
-* No soft evict operation
+* https://commons.apache.org/proper/commons-dbcp/api-2.7.0/org/apache/commons/dbcp2/BasicDataSource.html#evict--
 
 ### Interesting Reading
 
