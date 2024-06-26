@@ -105,6 +105,60 @@ public class HikariConfigAdapter extends HikariConfig {
     }
 
     @Override
+    public void setMaxLifetime(long maxLifetimeMs) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setMaxLifetime() called.");
+        realConfig.setMaxLifetime(maxLifetimeMs);
+    }
+
+    @Override
+    public int getMaximumPoolSize() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getMaximumPoolSize() called.");
+        return realConfig.getMaximumPoolSize();
+    }
+
+    @Override
+    public void setMaximumPoolSize(int maxPoolSize) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setMaximumPoolSize() called.");
+        realConfig.setMaximumPoolSize(maxPoolSize);
+    }
+
+    @Override
+    public int getMinimumIdle() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getMinimumIdle() called.");
+        return realConfig.getMinimumIdle();
+    }
+
+    @Override
+    public void setMinimumIdle(int minIdle) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setMinimumIdle() called.");
+        super.setMinimumIdle(minIdle);
+    }
+
+    @Override
+    public void setPassword(String password) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setPassword() called.");
+        realConfig.setPassword(password);
+    }
+
+    @Override
+    public void setUsername(String username) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setUsername() called.");
+        realConfig.setUsername(username);
+    }
+
+    @Override
+    public long getValidationTimeout() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getValidationTimeout() called.");
+        return realConfig.getValidationTimeout();
+    }
+
+    @Override
+    public void setValidationTimeout(long validationTimeoutMs) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setValidationTimeout() called.");
+        realConfig.setValidationTimeout(validationTimeoutMs);
+    }
+
+    @Override
     public void validate() {
         System.out.println("[HikariConfigAdapter]HikariConfigAdapter.validate() called.");
         realConfig.validate();
