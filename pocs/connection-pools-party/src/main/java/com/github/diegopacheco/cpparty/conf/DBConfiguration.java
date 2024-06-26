@@ -17,7 +17,6 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -83,15 +82,13 @@ public class DBConfiguration {
     }
 
     @Bean(name = "transactionManager")
-    @Qualifier("dataSourceHikari")
-    public PlatformTransactionManager txManager(DataSource ds) {
+    public PlatformTransactionManager txManager(@Qualifier("dataSourceHikari") DataSource ds) {
         System.out.println("New TXManager requested...");
         return new DataSourceTransactionManager(ds);
     }
 
     @Bean
-    @Qualifier("dataSourceHikari")
-    public JdbcTemplate getJDTemplate(DataSource ds){
+    public JdbcTemplate getJDBCTemplate(@Qualifier("dataSourceHikari") DataSource ds){
         System.out.println("New JdbcTemplate requested...");
         return new JdbcTemplate(ds);
     }
