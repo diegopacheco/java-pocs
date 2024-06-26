@@ -52,7 +52,7 @@ public class DBConfiguration {
     }
 
     @Bean(name = "dataSourceDBCP")
-    public DataSource getDbcpDtaSource(GenericObjectPool<PoolableConnection> connectionPool){
+    public PoolingDataSource<PoolableConnection> getDbcpDtaSource(GenericObjectPool<PoolableConnection> connectionPool){
         System.out.println("New DBCP DataSource requested...");
         PoolingDataSource<PoolableConnection> dataSource = new PoolingDataSource<>(connectionPool);
         return dataSource;
