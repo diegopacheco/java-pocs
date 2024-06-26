@@ -1,6 +1,5 @@
 package com.github.diegopacheco.cpparty.infra;
 
-
 import com.github.diegopacheco.cpparty.conf.DBConfiguration;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.BeansException;
@@ -10,13 +9,12 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Component
+@Component
 public class HikariRefresher implements ApplicationContextAware {
 
     ApplicationContext ctx;

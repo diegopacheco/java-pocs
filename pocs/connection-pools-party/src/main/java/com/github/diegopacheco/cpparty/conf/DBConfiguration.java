@@ -4,12 +4,12 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.commons.dbcp2.*;
-import org.apache.commons.pool2.ObjectPool;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.PooledObjectState;
 import org.apache.commons.pool2.impl.EvictionConfig;
 import org.apache.commons.pool2.impl.EvictionPolicy;
 import org.apache.commons.pool2.impl.GenericObjectPool;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -25,7 +25,7 @@ import java.util.Properties;
 @EnableScheduling
 public class DBConfiguration {
 
-    //@Bean(name = "dataSource")
+    @Bean(name = "dataSourceHikari")
     public DataSource getDataSource(){
         System.out.println("New DataSource requested...");
         HikariConfig config = new HikariConfig();
@@ -39,7 +39,7 @@ public class DBConfiguration {
         return ds;
     }
 
-    //@Bean(name = "dataSource")
+    @Bean(name = "dataSourceC3P0")
     public DataSource get3cp0DataSource(){
         System.out.println("New 3cp0 DataSource requested...");
         ComboPooledDataSource cpds = new ComboPooledDataSource();
@@ -49,7 +49,7 @@ public class DBConfiguration {
         return cpds;
     }
 
-    @Bean(name = "dataSource")
+    @Bean(name = "dataSourceDBCP")
     public DataSource getDbcpDtaSource(GenericObjectPool<PoolableConnection> connectionPool){
         System.out.println("New DBCP DataSource requested...");
         PoolingDataSource<PoolableConnection> dataSource = new PoolingDataSource<>(connectionPool);
@@ -82,9 +82,10 @@ public class DBConfiguration {
     }
 
     @Bean(name = "transactionManager")
-    public PlatformTransactionManager txManager() {
+    @Qualifier("dataSourceHikari")
+    public PlatformTransactionManager txManager(DataSource ds) {
         System.out.println("New TXManager requested...");
-        return new DataSourceTransactionManager(getDataSource());
+        return new DataSourceTransactionManager(ds);
     }
 
 }

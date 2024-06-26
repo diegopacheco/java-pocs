@@ -11,7 +11,6 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;

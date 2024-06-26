@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Component
+@Component
 public class C3P0Refresher implements ApplicationContextAware {
 
     ApplicationContext ctx;
