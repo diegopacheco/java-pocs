@@ -1,5 +1,6 @@
 package com.github.diegopacheco.cpparty.conf;
 
+import com.github.diegopacheco.cpparty.adapter.HikariConfigAdapter;
 import com.github.diegopacheco.cpparty.adapter.HikariDSAdapter;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.zaxxer.hikari.HikariConfig;
@@ -41,7 +42,7 @@ public class DBConfiguration {
         config.addDataSourceProperty( "cachePrepStmts" , "true" );
         config.addDataSourceProperty( "prepStmtCacheSize" , "250" );
         config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
-        HikariDataSource ds = new HikariDataSource( config );
+        HikariDataSource ds = new HikariDataSource( new HikariConfigAdapter(config));
         return new HikariDSAdapter(ds);
     }
 
