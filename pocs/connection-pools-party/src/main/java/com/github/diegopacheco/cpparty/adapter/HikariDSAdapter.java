@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.HikariPoolMXBean;
 import javax.sql.DataSource;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
@@ -35,9 +36,33 @@ public class HikariDSAdapter extends HikariDataSource implements DataSource {
         return realDS.getJdbcUrl();
     }
 
+    private boolean toggle = false;
+
+    public void toggle(){
+        toggle = !toggle;
+    }
+
     @Override
     public Connection getConnection() throws SQLException {
         System.out.println("[HikariDSAdapter]HikariDSAdapter.getConnection() called.");
+
+        try{
+            Field sealed = realDS.getClass().getSuperclass().getDeclaredField("sealed");
+            sealed.setAccessible(true);
+            sealed.set(realDS,false);
+
+            if (toggle){
+                realDS.setUsername("root1-wrong-user");
+            }else{
+                realDS.setUsername("root");
+            }
+            realDS.setPassword("pass");
+            realDS.setJdbcUrl("jdbc:mysql://127.0.0.1:3325/person");
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         return realDS.getConnection();
     }
 
