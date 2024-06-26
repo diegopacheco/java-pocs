@@ -1,5 +1,6 @@
 package com.github.diegopacheco.cpparty.infra;
 
+import com.github.diegopacheco.cpparty.adapter.HikariDSAdapter;
 import com.github.diegopacheco.cpparty.conf.DBConfiguration;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.BeansException;
@@ -9,6 +10,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,8 +41,12 @@ public class HikariRefresher implements ApplicationContextAware {
 
             ds.setUsername("root");
             ds.setPassword("pass");
+
             // java.lang.IllegalStateException: The configuration of the pool is sealed once started. Use HikariConfigMXBean for runtime changes.
             //ds.setJdbcUrl("jdbc:mysql://127.0.0.1:3325/person");
+
+            // force error - uncomment and an error will happen - this is good.
+            // ((HikariDSAdapter)ds).toggle();
 
             ds.getHikariPoolMXBean().softEvictConnections();
             done = true;
