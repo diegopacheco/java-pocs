@@ -1,0 +1,60 @@
+kariProxyConnection@1212243535 wrapping com.mysql.cj.jdbc.ConnectionImpl@7ec08115
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+2024-06-25T22:23:41.132-07:00 ERROR 3208700 --- [   scheduling-1] o.s.s.s.TaskUtils$LoggingErrorHandler    : Unexpected error occurred in scheduled task
+
+java.lang.RuntimeException: java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30001ms (total=1, active=1, idle=0, waiting=0)
+	at com.github.diegopacheco.cpparty.infra.HikariRefresher.traceConnections(HikariRefresher.java:72) ~[classes/:na]
+	at com.github.diegopacheco.cpparty.infra.HikariRefresher.refresh(HikariRefresher.java:37) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.runInternal(ScheduledMethodRunnable.java:130) ~[spring-context-6.1.8.jar:6.1.8]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.lambda$run$2(ScheduledMethodRunnable.java:124) ~[spring-context-6.1.8.jar:6.1.8]
+	at io.micrometer.observation.Observation.observe(Observation.java:499) ~[micrometer-observation-1.13.0.jar:1.13.0]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:124) ~[spring-context-6.1.8.jar:6.1.8]
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54) ~[spring-context-6.1.8.jar:6.1.8]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:358) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30001ms (total=1, active=1, idle=0, waiting=0)
+	at com.zaxxer.hikari.pool.HikariPool.createTimeoutException(HikariPool.java:686) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:179) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:144) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:99) ~[HikariCP-5.1.0.jar:na]
+	at com.github.diegopacheco.cpparty.adapter.HikariDSAdapter.getConnection(HikariDSAdapter.java:56) ~[classes/:na]
+	at com.github.diegopacheco.cpparty.infra.HikariRefresher.traceConnections(HikariRefresher.java:70) ~[classes/:na]
+	... 14 common frames omitted
+Caused by: java.sql.SQLException: Access denied for user 'root1'@'172.17.0.1' (using password: YES)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129) ~[mysql-connector-java-8.0.27.jar:8.0.27]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.27.jar:8.0.27]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:828) ~[mysql-connector-java-8.0.27.jar:8.0.27]
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:448) ~[mysql-connector-java-8.0.27.jar:8.0.27]
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241) ~[mysql-connector-java-8.0.27.jar:8.0.27]
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198) ~[mysql-connector-java-8.0.27.jar:8.0.27]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:137) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:360) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:724) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:703) ~[HikariCP-5.1.0.jar:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	... 3 common frames omitted
+
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@75839695 - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n11gfj14vvtix|6cceb281, dataSourceName -> z8kfsxb4n11gfj14vvtix|6cceb281 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@75839695 - DS: org.apache.commons.dbcp2.PoolingDataSource@56f9de3b
+ Active connections : 0
+ Idle connections   : 7
+Refreshing connections... TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@75839695 - DS: HikariDataSource (null)
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@75839695 - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 1
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 1
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
