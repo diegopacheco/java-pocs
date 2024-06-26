@@ -25,7 +25,7 @@ import java.util.Properties;
 @EnableScheduling
 public class DBConfiguration {
 
-    @Bean(name = "dataSourceHikari")
+    @Bean(name = "dataSource")
     public DataSource getDataSource(){
         System.out.println("New DataSource requested...");
         HikariConfig config = new HikariConfig();
@@ -81,14 +81,16 @@ public class DBConfiguration {
         return connectionPool;
     }
 
+    // default to Hikari DS
     @Bean(name = "transactionManager")
-    public PlatformTransactionManager txManager(@Qualifier("dataSourceHikari") DataSource ds) {
+    public PlatformTransactionManager txManager(@Qualifier("dataSource") DataSource ds) {
         System.out.println("New TXManager requested...");
         return new DataSourceTransactionManager(ds);
     }
 
+    // default to Hikari DS
     @Bean
-    public JdbcTemplate getJDBCTemplate(@Qualifier("dataSourceHikari") DataSource ds){
+    public JdbcTemplate getJDBCTemplate(@Qualifier("dataSource") DataSource ds){
         System.out.println("New JdbcTemplate requested...");
         return new JdbcTemplate(ds);
     }
