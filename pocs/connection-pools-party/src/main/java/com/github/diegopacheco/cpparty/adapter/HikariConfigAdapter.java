@@ -1,6 +1,7 @@
 package com.github.diegopacheco.cpparty.adapter;
 
 import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.metrics.MetricsTrackerFactory;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -198,6 +199,192 @@ public class HikariConfigAdapter extends HikariConfig {
     public void addDataSourceProperty(String propertyName, Object value) {
         System.out.println("[HikariConfigAdapter]HikariConfigAdapter.addDataSourceProperty() called.");
         realConfig.addDataSourceProperty(propertyName, value);
+    }
+
+    @Override
+    public String getDataSourceJNDI() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getDataSourceJNDI() called.");
+        return realConfig.getDataSourceJNDI();
+    }
+
+    @Override
+    public void setDataSourceJNDI(String jndiDataSource) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setDataSourceJNDI() called.");
+        realConfig.setDataSourceJNDI(jndiDataSource);
+    }
+
+    @Override
+    public void setDataSourceProperties(Properties dsProperties) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setDataSourceProperties() called.");
+        realConfig.setDataSourceProperties(dsProperties);
+    }
+
+    @Override
+    public String getDriverClassName() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getDriverClassName() called.");
+        return realConfig.getDriverClassName();
+    }
+
+    @Override
+    public void setDriverClassName(String driverClassName) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setDriverClassName() called.");
+        realConfig.setDriverClassName(driverClassName);
+    }
+
+    @Override
+    public void setJdbcUrl(String jdbcUrl) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setJdbcUrl() called.");
+        realConfig.setJdbcUrl(jdbcUrl);
+    }
+
+    @Override
+    public boolean isAutoCommit() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.isAutoCommit() called.");
+        return realConfig.isAutoCommit();
+    }
+
+    @Override
+    public void setAutoCommit(boolean isAutoCommit) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setAutoCommit() called.");
+        realConfig.setAutoCommit(isAutoCommit);
+    }
+
+    @Override
+    public boolean isAllowPoolSuspension() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.isAllowPoolSuspension() called.");
+        return realConfig.isAllowPoolSuspension();
+    }
+
+    @Override
+    public void setAllowPoolSuspension(boolean isAllowPoolSuspension) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setAllowPoolSuspension() called.");
+        realConfig.setAllowPoolSuspension(isAllowPoolSuspension);
+    }
+
+    @Override
+    public long getInitializationFailTimeout() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getInitializationFailTimeout() called.");
+        return realConfig.getInitializationFailTimeout();
+    }
+
+    @Override
+    public void setInitializationFailTimeout(long initializationFailTimeout) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setInitializationFailTimeout() called.");
+        realConfig.setInitializationFailTimeout(initializationFailTimeout);
+    }
+
+    @Override
+    public boolean isIsolateInternalQueries() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.isIsolateInternalQueries() called.");
+        return realConfig.isIsolateInternalQueries();
+    }
+
+    @Override
+    public void setIsolateInternalQueries(boolean isolate) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setIsolateInternalQueries() called.");
+        realConfig.setIsolateInternalQueries(isolate);
+    }
+
+    @Override
+    public MetricsTrackerFactory getMetricsTrackerFactory() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getMetricsTrackerFactory() called.");
+        return realConfig.getMetricsTrackerFactory();
+    }
+
+    @Override
+    public void setMetricsTrackerFactory(MetricsTrackerFactory metricsTrackerFactory) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setMetricsTrackerFactory() called.");
+        realConfig.setMetricsTrackerFactory(metricsTrackerFactory);
+    }
+
+    @Override
+    public Object getMetricRegistry() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getMetricRegistry() called.");
+        return realConfig.getMetricRegistry();
+    }
+
+    @Override
+    public void setMetricRegistry(Object metricRegistry) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setMetricRegistry() called.");
+        realConfig.setMetricRegistry(metricRegistry);
+    }
+
+    @Override
+    public Object getHealthCheckRegistry() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getHealthCheckRegistry() called.");
+        return realConfig.getHealthCheckRegistry();
+    }
+
+    @Override
+    public void setHealthCheckRegistry(Object healthCheckRegistry) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setHealthCheckRegistry() called.");
+        realConfig.setHealthCheckRegistry(healthCheckRegistry);
+    }
+
+    @Override
+    public Properties getHealthCheckProperties() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getHealthCheckProperties() called.");
+        return realConfig.getHealthCheckProperties();
+    }
+
+    @Override
+    public void setHealthCheckProperties(Properties healthCheckProperties) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setHealthCheckProperties() called.");
+        realConfig.setHealthCheckProperties(healthCheckProperties);
+    }
+
+    @Override
+    public void addHealthCheckProperty(String key, String value) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.addHealthCheckProperty() called.");
+        realConfig.addHealthCheckProperty(key, value);
+    }
+
+    @Override
+    public long getKeepaliveTime() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getKeepaliveTime() called.");
+        return realConfig.getKeepaliveTime();
+    }
+
+    @Override
+    public void setKeepaliveTime(long keepaliveTimeMs) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setKeepaliveTime() called.");
+        realConfig.setKeepaliveTime(keepaliveTimeMs);
+    }
+
+    @Override
+    public boolean isReadOnly() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.isReadOnly() called.");
+        return realConfig.isReadOnly();
+    }
+
+    @Override
+    public void setReadOnly(boolean readOnly) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setReadOnly() called.");
+        realConfig.setReadOnly(readOnly);
+    }
+
+    @Override
+    public boolean isRegisterMbeans() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.isRegisterMbeans() called.");
+        return realConfig.isRegisterMbeans();
+    }
+
+    @Override
+    public void setRegisterMbeans(boolean register) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setRegisterMbeans() called.");
+        realConfig.setRegisterMbeans(register);
+    }
+
+    @Override
+    public String getPoolName() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getPoolName() called.";
+        return realConfig.getPoolName();
+    }
+
+    @Override
+    public void setPoolName(String poolName) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setPoolName() called."
+        realConfig.setPoolName(poolName);
     }
 
     @Override
