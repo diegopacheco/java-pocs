@@ -1,0 +1,502 @@
+/home/diego/.sdkman/candidates/java/21.0.2-amzn/bin/java --enable-preview -javaagent:/home/diego/.local/share/JetBrains/Toolbox/apps/intellij-idea-community-edition/lib/idea_rt.jar=40535:/home/diego/.local/share/JetBrains/Toolbox/apps/intellij-idea-community-edition/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /home/diego/git/diegopacheco/java-pocs/pocs/connection-pools-party/target/classes:/home/diego/.m2/repository/org/springframework/boot/spring-boot-starter-webflux/3.3.0/spring-boot-starter-webflux-3.3.0.jar:/home/diego/.m2/repository/org/springframework/boot/spring-boot-starter/3.3.0/spring-boot-starter-3.3.0.jar:/home/diego/.m2/repository/org/springframework/boot/spring-boot/3.3.0/spring-boot-3.3.0.jar:/home/diego/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.3.0/spring-boot-autoconfigure-3.3.0.jar:/home/diego/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.3.0/spring-boot-starter-logging-3.3.0.jar:/home/diego/.m2/repository/ch/qos/logback/logback-classic/1.5.6/logback-classic-1.5.6.jar:/home/diego/.m2/repository/ch/qos/logback/logback-core/1.5.6/logback-core-1.5.6.jar:/home/diego/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.23.1/log4j-to-slf4j-2.23.1.jar:/home/diego/.m2/repository/org/slf4j/jul-to-slf4j/2.0.13/jul-to-slf4j-2.0.13.jar:/home/diego/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/home/diego/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/home/diego/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.3.0/spring-boot-starter-json-3.3.0.jar:/home/diego/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.17.1/jackson-databind-2.17.1.jar:/home/diego/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.17.1/jackson-annotations-2.17.1.jar:/home/diego/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.17.1/jackson-core-2.17.1.jar:/home/diego/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.17.1/jackson-datatype-jdk8-2.17.1.jar:/home/diego/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.17.1/jackson-datatype-jsr310-2.17.1.jar:/home/diego/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.17.1/jackson-module-parameter-names-2.17.1.jar:/home/diego/.m2/repository/org/springframework/boot/spring-boot-starter-reactor-netty/3.3.0/spring-boot-starter-reactor-netty-3.3.0.jar:/home/diego/.m2/repository/io/projectreactor/netty/reactor-netty-http/1.1.19/reactor-netty-http-1.1.19.jar:/home/diego/.m2/repository/io/netty/netty-codec-http/4.1.110.Final/netty-codec-http-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-common/4.1.110.Final/netty-common-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-buffer/4.1.110.Final/netty-buffer-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-transport/4.1.110.Final/netty-transport-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-codec/4.1.110.Final/netty-codec-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-handler/4.1.110.Final/netty-handler-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-codec-http2/4.1.110.Final/netty-codec-http2-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-resolver-dns/4.1.110.Final/netty-resolver-dns-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-resolver/4.1.110.Final/netty-resolver-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-codec-dns/4.1.110.Final/netty-codec-dns-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-resolver-dns-native-macos/4.1.110.Final/netty-resolver-dns-native-macos-4.1.110.Final-osx-x86_64.jar:/home/diego/.m2/repository/io/netty/netty-resolver-dns-classes-macos/4.1.110.Final/netty-resolver-dns-classes-macos-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-transport-native-epoll/4.1.110.Final/netty-transport-native-epoll-4.1.110.Final-linux-x86_64.jar:/home/diego/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.110.Final/netty-transport-native-unix-common-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-transport-classes-epoll/4.1.110.Final/netty-transport-classes-epoll-4.1.110.Final.jar:/home/diego/.m2/repository/io/projectreactor/netty/reactor-netty-core/1.1.19/reactor-netty-core-1.1.19.jar:/home/diego/.m2/repository/io/netty/netty-handler-proxy/4.1.110.Final/netty-handler-proxy-4.1.110.Final.jar:/home/diego/.m2/repository/io/netty/netty-codec-socks/4.1.110.Final/netty-codec-socks-4.1.110.Final.jar:/home/diego/.m2/repository/org/springframework/spring-web/6.1.8/spring-web-6.1.8.jar:/home/diego/.m2/repository/org/springframework/spring-beans/6.1.8/spring-beans-6.1.8.jar:/home/diego/.m2/repository/org/springframework/spring-webflux/6.1.8/spring-webflux-6.1.8.jar:/home/diego/.m2/repository/io/projectreactor/reactor-core/3.6.6/reactor-core-3.6.6.jar:/home/diego/.m2/repository/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar:/home/diego/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.3.0/spring-boot-starter-actuator-3.3.0.jar:/home/diego/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.3.0/spring-boot-actuator-autoconfigure-3.3.0.jar:/home/diego/.m2/repository/org/springframework/boot/spring-boot-actuator/3.3.0/spring-boot-actuator-3.3.0.jar:/home/diego/.m2/repository/io/micrometer/micrometer-observation/1.13.0/micrometer-observation-1.13.0.jar:/home/diego/.m2/repository/io/micrometer/micrometer-commons/1.13.0/micrometer-commons-1.13.0.jar:/home/diego/.m2/repository/io/micrometer/micrometer-jakarta9/1.13.0/micrometer-jakarta9-1.13.0.jar:/home/diego/.m2/repository/io/micrometer/micrometer-core/1.13.0/micrometer-core-1.13.0.jar:/home/diego/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.1/HdrHistogram-2.2.1.jar:/home/diego/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/home/diego/.m2/repository/org/springframework/boot/spring-boot-starter-data-jdbc/3.3.0/spring-boot-starter-data-jdbc-3.3.0.jar:/home/diego/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.3.0/spring-boot-starter-jdbc-3.3.0.jar:/home/diego/.m2/repository/org/springframework/spring-jdbc/6.1.8/spring-jdbc-6.1.8.jar:/home/diego/.m2/repository/org/springframework/data/spring-data-jdbc/3.3.0/spring-data-jdbc-3.3.0.jar:/home/diego/.m2/repository/org/springframework/data/spring-data-relational/3.3.0/spring-data-relational-3.3.0.jar:/home/diego/.m2/repository/com/github/jsqlparser/jsqlparser/4.6/jsqlparser-4.6.jar:/home/diego/.m2/repository/org/springframework/data/spring-data-commons/3.3.0/spring-data-commons-3.3.0.jar:/home/diego/.m2/repository/org/springframework/spring-tx/6.1.8/spring-tx-6.1.8.jar:/home/diego/.m2/repository/org/springframework/spring-context/6.1.8/spring-context-6.1.8.jar:/home/diego/.m2/repository/org/springframework/spring-aop/6.1.8/spring-aop-6.1.8.jar:/home/diego/.m2/repository/org/springframework/spring-expression/6.1.8/spring-expression-6.1.8.jar:/home/diego/.m2/repository/org/springframework/spring-core/6.1.8/spring-core-6.1.8.jar:/home/diego/.m2/repository/org/springframework/spring-jcl/6.1.8/spring-jcl-6.1.8.jar:/home/diego/.m2/repository/org/apache/logging/log4j/log4j-api/2.20.0/log4j-api-2.20.0.jar:/home/diego/.m2/repository/org/apache/logging/log4j/log4j-core/2.20.0/log4j-core-2.20.0.jar:/home/diego/.m2/repository/mysql/mysql-connector-java/8.0.27/mysql-connector-java-8.0.27.jar:/home/diego/.m2/repository/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4.jar:/home/diego/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/home/diego/.m2/repository/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar:/home/diego/.m2/repository/org/apache/commons/commons-dbcp2/2.12.0/commons-dbcp2-2.12.0.jar:/home/diego/.m2/repository/org/apache/commons/commons-pool2/2.12.0/commons-pool2-2.12.0.jar:/home/diego/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/home/diego/.m2/repository/com/mchange/c3p0/0.10.1/c3p0-0.10.1.jar:/home/diego/.m2/repository/com/mchange/mchange-commons-java/0.3.1/mchange-commons-java-0.3.1.jar com.github.diegopacheco.cpparty.Application
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.0)
+
+2024-06-25T22:40:40.025-07:00  INFO 3212382 --- [           main] c.g.diegopacheco.cpparty.Application     : Starting Application using Java 21.0.2 with PID 3212382 (/mnt/e35d88d4-42b9-49ea-bf29-c4c3b018d429/diego/git/diegopacheco/java-pocs/pocs/connection-pools-party/target/classes started by diego in /mnt/e35d88d4-42b9-49ea-bf29-c4c3b018d429/diego/git/diegopacheco/java-pocs/pocs/connection-pools-party)
+2024-06-25T22:40:40.029-07:00  INFO 3212382 --- [           main] c.g.diegopacheco.cpparty.Application     : No active profile set, falling back to 1 default profile: "default"
+2024-06-25T22:40:41.205-07:00  INFO 3212382 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-06-25T22:40:41.368-07:00  INFO 3212382 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 157 ms. Found 1 JDBC repository interface.
+New DataSource requested...
+[HikariConfigAdapter]HikariConfigAdapter.validate() called.
+[HikariConfigAdapter]HikariConfigAdapter.copyStateTo() called.
+[HikariConfigAdapter]HikariConfigAdapter.getPoolName() called.
+2024-06-25T22:40:41.947-07:00  INFO 3212382 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-06-25T22:40:42.523-07:00  INFO 3212382 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7d66e544
+[HikariConfigAdapter]HikariConfigAdapter.getPoolName() called.
+2024-06-25T22:40:42.525-07:00  INFO 3212382 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+New JdbcTemplate requested...
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+New TXManager requested...
+New 3cp0 DataSource requested...
+2024-06-25T22:40:43.875-07:00  INFO 3212382 --- [g-Init-Reporter] com.mchange.v2.log.MLog                  : MLog clients using slf4j logging.
+2024-06-25T22:40:44.315-07:00  INFO 3212382 --- [           main] com.mchange.v2.c3p0.C3P0Registry         : Initializing c3p0-0.10.1 [built 2024-05-07T13:49:12.919880Z; debug? true; trace: 5]
+New DBCP DataSource requested...
+[HikariDSAdapter]HikariDSAdapter.isWrapperFor() called.
+2024-06-25T22:40:45.652-07:00  INFO 3212382 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+[HikariDSAdapter]HikariDSAdapter.isWrapperFor() called.
+2024-06-25T22:40:46.011-07:00  INFO 3212382 --- [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
+2024-06-25T22:40:46.031-07:00  INFO 3212382 --- [           main] c.g.diegopacheco.cpparty.Application     : Started Application in 6.456 seconds (process running for 6.9)
+Spring Boot 3.3.0 up and running!
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+Refreshing connections... TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+2024-06-25T22:40:46.071-07:00  INFO 3212382 --- [   scheduling-1] c.m.v.c.i.AbstractPoolBackedDataSource   : Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, attemptResurrectOnCheckin -> false, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionIsValidTimeout -> 0, connectionTesterClassName -> null, contextClassLoaderSource -> caller, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> null, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:mysql://127.0.0.1:3325/person, markSessionBoundaries -> always, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 15, maxStatements -> 0, maxStatementsPerConnection -> 0, minPoolSize -> 3, numHelperThreads -> 3, preferredTestQuery -> null, privilegeSpawnedThreads -> false, properties -> {password=******, user=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, taskRunnerFactoryClassName -> com.mchange.v2.c3p0.impl.DefaultTaskRunnerFactory, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {} ]
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+ Active connections : 0
+ Idle connections   : 0
+ Total connections  : 0
+com.mchange.v2.c3p0.impl.NewProxyConnection@29b84008 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@19bcf1bb]
+com.mchange.v2.c3p0.impl.NewProxyConnection@94ac995 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@629970b4]
+com.mchange.v2.c3p0.impl.NewProxyConnection@73fb1ae1 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@2ca2636a]
+com.mchange.v2.c3p0.impl.NewProxyConnection@2a4d0381 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@14a383b]
+com.mchange.v2.c3p0.impl.NewProxyConnection@6370c72 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@4424563e]
+com.mchange.v2.c3p0.impl.NewProxyConnection@4ffa035f [wrapping: com.mysql.cj.jdbc.ConnectionImpl@7110d24e]
+com.mchange.v2.c3p0.impl.NewProxyConnection@7a5a8454 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@65a580bb]
+com.mchange.v2.c3p0.impl.NewProxyConnection@1a446d02 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@3412323a]
+com.mchange.v2.c3p0.impl.NewProxyConnection@6adb40b3 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@53ce1c97]
+com.mchange.v2.c3p0.impl.NewProxyConnection@55d264a4 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@65bc7875]
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 10
+ Idle connections   : 1
+ Total connections  : 11
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 11
+ Total connections  : 11
+Connection soft evicted!
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 0
+ Total connections  : 0
+com.mchange.v2.c3p0.impl.NewProxyConnection@69e788fe [wrapping: com.mysql.cj.jdbc.ConnectionImpl@20097c29]
+com.mchange.v2.c3p0.impl.NewProxyConnection@5fd6722c [wrapping: com.mysql.cj.jdbc.ConnectionImpl@aa3b150]
+com.mchange.v2.c3p0.impl.NewProxyConnection@76bdd6aa [wrapping: com.mysql.cj.jdbc.ConnectionImpl@1a968d43]
+com.mchange.v2.c3p0.impl.NewProxyConnection@6f8af378 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@771a60a5]
+DB Loader done.
+com.mchange.v2.c3p0.impl.NewProxyConnection@101a11df [wrapping: com.mysql.cj.jdbc.ConnectionImpl@28b32197]
+com.mchange.v2.c3p0.impl.NewProxyConnection@15e591fa [wrapping: com.mysql.cj.jdbc.ConnectionImpl@5531ee70]
+com.mchange.v2.c3p0.impl.NewProxyConnection@2b635e20 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@123070f7]
+com.mchange.v2.c3p0.impl.NewProxyConnection@529b6c60 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@6338ba4d]
+com.mchange.v2.c3p0.impl.NewProxyConnection@78c9acdf [wrapping: com.mysql.cj.jdbc.ConnectionImpl@713827ca]
+com.mchange.v2.c3p0.impl.NewProxyConnection@53a6bce8 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@66bc4d17]
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 10
+ Idle connections   : 0
+ Total connections  : 10
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 10
+ Idle connections   : 0
+ Total connections  : 10
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 8
+ Idle connections   : 4
+ Total connections  : 10
+com.mchange.v2.c3p0.impl.NewProxyConnection@2102544f [wrapping: com.mysql.cj.jdbc.ConnectionImpl@5531ee70]
+com.mchange.v2.c3p0.impl.NewProxyConnection@43f5c47d [wrapping: com.mysql.cj.jdbc.ConnectionImpl@713827ca]
+com.mchange.v2.c3p0.impl.NewProxyConnection@77e8194a [wrapping: com.mysql.cj.jdbc.ConnectionImpl@66bc4d17]
+com.mchange.v2.c3p0.impl.NewProxyConnection@72751541 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@6338ba4d]
+com.mchange.v2.c3p0.impl.NewProxyConnection@5d6e56c8 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@123070f7]
+com.mchange.v2.c3p0.impl.NewProxyConnection@6faa94c1 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@28b32197]
+com.mchange.v2.c3p0.impl.NewProxyConnection@73912372 [wrapping: com.mysql.cj.jdbc.ConnectionImpl@771a60a5]
+com.mchange.v2.c3p0.impl.NewProxyConnection@74784fb [wrapping: com.mysql.cj.jdbc.ConnectionImpl@1a968d43]
+com.mchange.v2.c3p0.impl.NewProxyConnection@168b818b [wrapping: com.mysql.cj.jdbc.ConnectionImpl@aa3b150]
+com.mchange.v2.c3p0.impl.NewProxyConnection@1105904d [wrapping: com.mysql.cj.jdbc.ConnectionImpl@20097c29]
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 10
+ Idle connections   : 0
+ Total connections  : 10
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 9
+ Idle connections   : 2
+ Total connections  : 10
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 8
+ Idle connections   : 2
+ Total connections  : 10
+Refreshing connections... TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 0
+1044061, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+1960278918, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+1732671379, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+602434457, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+1952601801, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+453612882, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+206127495, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 7
+ Idle connections   : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+Connection soft evicted!
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 4
+435309877, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+754128319, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+623684552, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+424112881, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+1712272357, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+637436694, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+997421793, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 7
+ Idle connections   : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+1782886570, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+1491442177, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+61169708, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+593620675, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+1827658725, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+414081515, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+815978194, URL=jdbc:mysql://127.0.0.1:3325/person, MySQL Connector/J
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 7
+ Idle connections   : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+Refreshing connections... TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 10
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 10
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+HikariProxyConnection@471413235 wrapping com.mysql.cj.jdbc.ConnectionImpl@7d66e544
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+HikariProxyConnection@64503963 wrapping com.mysql.cj.jdbc.ConnectionImpl@53072f91
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+HikariProxyConnection@502206017 wrapping com.mysql.cj.jdbc.ConnectionImpl@54e9e6b9
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+HikariProxyConnection@359970855 wrapping com.mysql.cj.jdbc.ConnectionImpl@7f6576bf
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+HikariProxyConnection@438170132 wrapping com.mysql.cj.jdbc.ConnectionImpl@15a03c0
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+HikariProxyConnection@836707916 wrapping com.mysql.cj.jdbc.ConnectionImpl@65db6e46
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+HikariProxyConnection@279166395 wrapping com.mysql.cj.jdbc.ConnectionImpl@41b6e86c
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+HikariProxyConnection@152263504 wrapping com.mysql.cj.jdbc.ConnectionImpl@3704bd6a
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+HikariProxyConnection@986157140 wrapping com.mysql.cj.jdbc.ConnectionImpl@4c44fae8
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+HikariProxyConnection@1604252139 wrapping com.mysql.cj.jdbc.ConnectionImpl@4d63e89f
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 10
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 10
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 10
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 10
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+Connection soft evicted!
+Connection refreshed!
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+[HikariDSAdapter]HikariDSAdapter.getConnection() called.
+2024-06-25T22:41:16.511-07:00 ERROR 3212382 --- [   scheduling-1] o.s.s.s.TaskUtils$LoggingErrorHandler    : Unexpected error occurred in scheduled task
+
+java.lang.RuntimeException: java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30000ms (total=0, active=0, idle=0, waiting=0)
+	at com.github.diegopacheco.cpparty.infra.HikariRefresher.traceConnections(HikariRefresher.java:79) ~[classes/:na]
+	at com.github.diegopacheco.cpparty.infra.HikariRefresher.refresh(HikariRefresher.java:58) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.runInternal(ScheduledMethodRunnable.java:130) ~[spring-context-6.1.8.jar:6.1.8]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.lambda$run$2(ScheduledMethodRunnable.java:124) ~[spring-context-6.1.8.jar:6.1.8]
+	at io.micrometer.observation.Observation.observe(Observation.java:499) ~[micrometer-observation-1.13.0.jar:1.13.0]
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:124) ~[spring-context-6.1.8.jar:6.1.8]
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54) ~[spring-context-6.1.8.jar:6.1.8]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:358) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30000ms (total=0, active=0, idle=0, waiting=0)
+	at com.zaxxer.hikari.pool.HikariPool.createTimeoutException(HikariPool.java:686) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:179) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:144) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:99) ~[HikariCP-5.1.0.jar:na]
+	at com.github.diegopacheco.cpparty.adapter.HikariDSAdapter.getConnection(HikariDSAdapter.java:66) ~[classes/:na]
+	at com.github.diegopacheco.cpparty.infra.HikariRefresher.traceConnections(HikariRefresher.java:77) ~[classes/:na]
+	... 14 common frames omitted
+Caused by: java.sql.SQLException: Access denied for user 'root1-wrong-user'@'172.17.0.1' (using password: YES)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129) ~[mysql-connector-java-8.0.27.jar:8.0.27]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.27.jar:8.0.27]
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:828) ~[mysql-connector-java-8.0.27.jar:8.0.27]
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:448) ~[mysql-connector-java-8.0.27.jar:8.0.27]
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:241) ~[mysql-connector-java-8.0.27.jar:8.0.27]
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198) ~[mysql-connector-java-8.0.27.jar:8.0.27]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:137) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:360) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:461) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:724) ~[HikariCP-5.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:703) ~[HikariCP-5.1.0.jar:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	... 3 common frames omitted
+
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: com.mchange.v2.c3p0.ComboPooledDataSource[ identityToken -> z8kfsxb4n1o36m19qszmw|34f23816, dataSourceName -> z8kfsxb4n1o36m19qszmw|34f23816 ]
+ Active connections : 0
+ Idle connections   : 12
+ Total connections  : 12
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: org.apache.commons.dbcp2.PoolingDataSource@6068ebb2
+ Active connections : 0
+ Idle connections   : 7
+*** TX manager: org.springframework.jdbc.datasource.DataSourceTransactionManager@3ba3f40d - DS: HikariDataSource (null)
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Active connections : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Idle connections   : 0
+[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.
+ Total connections  : 0
+
+Process finished with exit code 130 (interrupted by signal 2:SIGINT)
