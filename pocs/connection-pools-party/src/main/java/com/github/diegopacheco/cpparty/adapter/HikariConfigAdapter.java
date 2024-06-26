@@ -453,6 +453,7 @@ public class HikariConfigAdapter extends HikariConfig {
     public void copyStateTo(HikariConfig other) {
         System.out.println("[HikariConfigAdapter]HikariConfigAdapter.copyStateTo() called.");
         realConfig.copyStateTo(other);
+        other = this;
     }
 
     @Override
