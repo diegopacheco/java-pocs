@@ -18,6 +18,24 @@ public class HikariDSAdapter extends HikariDataSource implements DataSource {
     }
 
     @Override
+    public String getUsername() {
+        System.out.println("[HikariDSAdapter]HikariDSAdapter.getUsername() called.");
+        return realDS.getUsername();
+    }
+
+    @Override
+    public String getPassword() {
+        System.out.println("[HikariDSAdapter]HikariDSAdapter.getPassword() called.");
+        return realDS.getPassword();
+    }
+
+    @Override
+    public String getJdbcUrl() {
+        System.out.println("[HikariDSAdapter]HikariDSAdapter.getJdbcUrl() called.");
+        return realDS.getJdbcUrl();
+    }
+
+    @Override
     public Connection getConnection() throws SQLException {
         System.out.println("[HikariDSAdapter]HikariDSAdapter.getConnection() called.");
         return realDS.getConnection();
