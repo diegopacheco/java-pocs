@@ -2,7 +2,6 @@ package com.github.diegopacheco.cpparty.adapter;
 
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.HikariPoolMXBean;
-
 import javax.sql.DataSource;
 import java.io.PrintWriter;
 import java.sql.Connection;
