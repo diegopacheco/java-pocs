@@ -1,6 +1,7 @@
 package com.github.diegopacheco.cpparty.adapter;
 
 import com.zaxxer.hikari.HikariDataSource;
+import com.zaxxer.hikari.HikariPoolMXBean;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;
@@ -70,4 +71,11 @@ public class HikariDSAdapter extends HikariDataSource implements DataSource {
         System.out.println("[HikariDSAdapter]HikariDSAdapter.isWrapperFor() called.");
         return realDS.isWrapperFor(iface);
     }
+
+    @Override
+    public HikariPoolMXBean getHikariPoolMXBean() {
+        System.out.println("[HikariDSAdapter]HikariDSAdapter.getHikariPoolMXBean() called.");
+        return realDS.getHikariPoolMXBean();
+    }
+
 }

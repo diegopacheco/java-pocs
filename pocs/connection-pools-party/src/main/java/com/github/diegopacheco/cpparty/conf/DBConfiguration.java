@@ -11,9 +11,11 @@ import org.apache.commons.pool2.impl.EvictionConfig;
 import org.apache.commons.pool2.impl.EvictionPolicy;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -29,6 +31,7 @@ public class DBConfiguration {
 
     @Primary
     @Bean(name = "dataSource")
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON) // Singleton is the default, but I just want to be explicit
     public DataSource getDataSource(){
         System.out.println("New DataSource requested...");
         HikariConfig config = new HikariConfig();
