@@ -12,6 +12,7 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -25,6 +26,7 @@ import java.util.Properties;
 @EnableScheduling
 public class DBConfiguration {
 
+    @Primary
     @Bean(name = "dataSource")
     public DataSource getDataSource(){
         System.out.println("New DataSource requested...");
@@ -40,7 +42,7 @@ public class DBConfiguration {
     }
 
     @Bean(name = "dataSourceC3P0")
-    public DataSource get3cp0DataSource(){
+    public ComboPooledDataSource get3cp0DataSource(){
         System.out.println("New 3cp0 DataSource requested...");
         ComboPooledDataSource cpds = new ComboPooledDataSource();
         cpds.setJdbcUrl( "jdbc:mysql://127.0.0.1:3325/person" );
