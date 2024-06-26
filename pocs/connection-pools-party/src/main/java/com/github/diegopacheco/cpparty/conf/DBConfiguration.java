@@ -12,6 +12,7 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -86,6 +87,13 @@ public class DBConfiguration {
     public PlatformTransactionManager txManager(DataSource ds) {
         System.out.println("New TXManager requested...");
         return new DataSourceTransactionManager(ds);
+    }
+
+    @Bean
+    @Qualifier("dataSourceHikari")
+    public JdbcTemplate getJDTemplate(DataSource ds){
+        System.out.println("New JdbcTemplate requested...");
+        return new JdbcTemplate(ds);
     }
 
 }
