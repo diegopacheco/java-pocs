@@ -5,6 +5,8 @@ import com.zaxxer.hikari.metrics.MetricsTrackerFactory;
 
 import javax.sql.DataSource;
 import java.util.Properties;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 
 public class HikariConfigAdapter extends HikariConfig {
 
@@ -377,14 +379,80 @@ public class HikariConfigAdapter extends HikariConfig {
 
     @Override
     public String getPoolName() {
-        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getPoolName() called.";
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getPoolName() called.");
         return realConfig.getPoolName();
     }
 
     @Override
     public void setPoolName(String poolName) {
-        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setPoolName() called."
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setPoolName() called.");
         realConfig.setPoolName(poolName);
+    }
+
+    @Override
+    public ScheduledExecutorService getScheduledExecutor() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getScheduledExecutor() called.");
+        return realConfig.getScheduledExecutor();
+    }
+
+    @Override
+    public void setScheduledExecutor(ScheduledExecutorService executor) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setScheduledExecutor() called.");
+        realConfig.setScheduledExecutor(executor);
+    }
+
+    @Override
+    public String getTransactionIsolation() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getTransactionIsolation() called.");
+        return realConfig.getTransactionIsolation();
+    }
+
+    @Override
+    public String getSchema() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getSchema() called.");
+        return realConfig.getSchema();
+    }
+
+    @Override
+    public void setSchema(String schema) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setSchema() called.");
+        realConfig.setSchema(schema);
+    }
+
+    @Override
+    public String getExceptionOverrideClassName() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getExceptionOverrideClassName() called.");
+        return realConfig.getExceptionOverrideClassName();
+    }
+
+    @Override
+    public void setExceptionOverrideClassName(String exceptionOverrideClassName) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setExceptionOverrideClassName() called.");
+        realConfig.setExceptionOverrideClassName(exceptionOverrideClassName);
+    }
+
+    @Override
+    public void setTransactionIsolation(String isolationLevel) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setTransactionIsolation() called.");
+        realConfig.setTransactionIsolation(isolationLevel);
+    }
+
+    @Override
+    public ThreadFactory getThreadFactory() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getThreadFactory() called.");
+        return realConfig.getThreadFactory();
+    }
+
+    @Override
+    public void setThreadFactory(ThreadFactory threadFactory) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setThreadFactory() called.");
+        realConfig.setThreadFactory(threadFactory);
+    }
+
+    @Override
+    public void copyStateTo(HikariConfig other) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.copyStateTo() called.");
+        realConfig.copyStateTo(other);
     }
 
     @Override
