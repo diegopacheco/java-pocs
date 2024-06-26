@@ -159,6 +159,48 @@ public class HikariConfigAdapter extends HikariConfig {
     }
 
     @Override
+    public String getConnectionTestQuery() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getConnectionTestQuery() called.");
+        return realConfig.getConnectionTestQuery();
+    }
+
+    @Override
+    public void setConnectionTestQuery(String connectionTestQuery) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setConnectionTestQuery() called.");
+        realConfig.setConnectionTestQuery(connectionTestQuery);
+    }
+
+    @Override
+    public String getConnectionInitSql() {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.getConnectionInitSql() called.");
+        return realConfig.getConnectionInitSql();
+    }
+
+    @Override
+    public void setConnectionInitSql(String connectionInitSql) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setConnectionInitSql() called.");
+        realConfig.setConnectionInitSql(connectionInitSql);
+    }
+
+    @Override
+    public void setDataSource(DataSource dataSource) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setDataSource() called.");
+        realConfig.setDataSource(dataSource);
+    }
+
+    @Override
+    public void setDataSourceClassName(String className) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.setDataSourceClassName() called.");
+        realConfig.setDataSourceClassName(className);
+    }
+
+    @Override
+    public void addDataSourceProperty(String propertyName, Object value) {
+        System.out.println("[HikariConfigAdapter]HikariConfigAdapter.addDataSourceProperty() called.");
+        realConfig.addDataSourceProperty(propertyName, value);
+    }
+
+    @Override
     public void validate() {
         System.out.println("[HikariConfigAdapter]HikariConfigAdapter.validate() called.");
         realConfig.validate();
