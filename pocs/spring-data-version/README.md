@@ -104,4 +104,5 @@ org.springframework.dao.OptimisticLockingFailureException: Optimistic lock excep
 Optimistic Locking in JPA (here is JDBC but idea is the same) <BR/>
 https://www.baeldung.com/jpa-optimistic-locking
 
-
+Optimistic Locking by using @Version annotation <BR/>
+https://medium.com/@taha.topal.7/optimistic-locking-by-using-version-annotation-2d45239fb065
