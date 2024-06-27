@@ -106,3 +106,13 @@ https://www.baeldung.com/jpa-optimistic-locking
 
 Optimistic Locking by using @Version annotation <BR/>
 https://medium.com/@taha.topal.7/optimistic-locking-by-using-version-annotation-2d45239fb065
+
+Optimistic vs Pessimistic Locking <BR/>
+https://stackoverflow.com/questions/129329/optimistic-vs-pessimistic-locking
+
+### Options
+
+* Retry: Need to run select again, might need to merge data.
+* Use Pessimist Locking (better consistency but more performance impact) could lead to deadlocks.
+* Not using locking - can result in dirty reads (consistency issues) 
+* Serialize updates via queue (DE-DUP)
