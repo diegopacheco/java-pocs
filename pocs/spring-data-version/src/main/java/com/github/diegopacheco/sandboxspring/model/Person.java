@@ -2,6 +2,7 @@ package com.github.diegopacheco.sandboxspring.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
+import org.springframework.data.relational.core.mapping.Column;
 
 import java.util.Objects;
 
@@ -13,7 +14,8 @@ public class Person {
     private String lastName;
 
     @Version
-    private Integer version;
+    @Column("version")
+    private int version = 0;
 
     public Person() {
         super();
