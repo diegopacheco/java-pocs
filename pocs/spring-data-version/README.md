@@ -98,3 +98,10 @@ org.springframework.dao.OptimisticLockingFailureException: Optimistic lock excep
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
 ```
+
+### Recommended Readings
+<BR/>
+Optimistic Locking in JPA (here is JDBC but idea is the same) <BR/>
+https://www.baeldung.com/jpa-optimistic-locking
+
+
