@@ -4,6 +4,8 @@ import com.github.diegopacheco.sandboxspring.dao.PersonRepository;
 import com.github.diegopacheco.sandboxspring.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class PersonService {
         return result;
     }
 
+    @Transactional
     public void save(Person p){
         repository.save(p);
     }

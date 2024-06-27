@@ -4,6 +4,8 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
@@ -21,6 +23,11 @@ public class DBConfiguration {
         config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
         HikariDataSource ds = new HikariDataSource( config );
         return ds;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(DataSource ds) {
+        return new DataSourceTransactionManager(ds);
     }
 
 }
