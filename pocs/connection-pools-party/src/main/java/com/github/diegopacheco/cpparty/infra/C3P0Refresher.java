@@ -1,7 +1,9 @@
 package com.github.diegopacheco.cpparty.infra;
 
 import com.github.diegopacheco.cpparty.conf.DBConfiguration;
+import com.mchange.v2.c3p0.AbstractComboPooledDataSource;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mchange.v2.c3p0.PooledDataSource;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -24,7 +26,8 @@ public class C3P0Refresher implements ApplicationContextAware {
     private PlatformTransactionManager txManager;
 
     @Autowired
-    private ComboPooledDataSource ds;
+    //private PooledDataSource ds;
+    private AbstractComboPooledDataSource ds;
 
     @Autowired
     private DBConfiguration configuration;
@@ -41,7 +44,7 @@ public class C3P0Refresher implements ApplicationContextAware {
             ds.softReset("root","pass");
 
             done = true;
-            System.out.println("Connection soft evicted!");
+            System.out.println("C3P0 Pool - Connections soft evicted!");
 
             traceConnections();
             traceConnections();
