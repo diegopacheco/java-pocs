@@ -32,7 +32,12 @@ public class PersonController {
 			@PathVariable("ln") String lastName,
 			@PathVariable("vr") Integer version )
 	{
-		Person p = new Person(id,firstName, lastName,version);
+		Person p = null;
+		if (null==id || id==0)
+			p = new Person(firstName, lastName);
+		else
+			p = new Person(id,firstName, lastName,version);
+
 		service.save(p);
 		return "Person saved!";
 	}
