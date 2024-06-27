@@ -1,8 +1,11 @@
 package com.github.diegopacheco.cpparty.conf;
 
+import com.github.diegopacheco.cpparty.adapter.C3P0DSAdapter;
 import com.github.diegopacheco.cpparty.adapter.HikariConfigAdapter;
 import com.github.diegopacheco.cpparty.adapter.HikariDSAdapter;
+import com.mchange.v2.c3p0.AbstractComboPooledDataSource;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mchange.v2.c3p0.PooledDataSource;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.commons.dbcp2.*;
@@ -23,6 +26,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 @Configuration
@@ -47,15 +51,20 @@ public class DBConfiguration {
     }
 
     @Bean(name = "dataSourceC3P0")
-    public ComboPooledDataSource get3cp0DataSource(){
+    public AbstractComboPooledDataSource get3cp0DataSource() throws PropertyVetoException {
         System.out.println("New 3cp0 DataSource requested...");
         ComboPooledDataSource cpds = new ComboPooledDataSource();
         cpds.setJdbcUrl( "jdbc:mysql://127.0.0.1:3325/person" );
         cpds.setUser("root");
         cpds.setPassword("pass");
+        cpds.setDriverClass("com.mysql.cj.jdbc.Driver");
+
+        // not working
+        //return new C3P0DSAdapter(cpds);
         return cpds;
     }
 
+    // Apache DBCP 2
     @Bean(name = "dataSourceDBCP")
     public PoolingDataSource<PoolableConnection> getDbcpDtaSource(GenericObjectPool<PoolableConnection> connectionPool){
         System.out.println("New DBCP DataSource requested...");
@@ -63,6 +72,7 @@ public class DBConfiguration {
         return dataSource;
     }
 
+    // Apache DBCP 2
     @Bean
     public GenericObjectPool<PoolableConnection> getDbcpPool() {
         Properties props = new Properties();
