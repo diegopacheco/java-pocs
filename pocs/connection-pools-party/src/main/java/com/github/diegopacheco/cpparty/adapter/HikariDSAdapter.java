@@ -51,6 +51,7 @@ public class HikariDSAdapter extends HikariDataSource implements DataSource {
             sealed.setAccessible(true);
             sealed.set(realDS,false);
 
+            // if toggle is true - simulate error on user.
             if (toggle){
                 realDS.setUsername("root1-wrong-user");
             }else{
@@ -63,7 +64,20 @@ public class HikariDSAdapter extends HikariDataSource implements DataSource {
             e.printStackTrace();
         }
 
-        return realDS.getConnection();
+        try{
+            return realDS.getConnection();
+        }catch(Exception e){
+            System.out.println("Credentials does not work - refresh! ");
+
+            // simulate get thr fresh right credentials....
+            realDS.setUsername("root");
+            realDS.setPassword("pass");
+            realDS.setJdbcUrl("jdbc:mysql://127.0.0.1:3325/person");
+
+            // get rid of the error
+            toggle();
+            return realDS.getConnection();
+        }
     }
 
     @Override

@@ -46,7 +46,7 @@ public class HikariRefresher implements ApplicationContextAware {
             //ds.setJdbcUrl("jdbc:mysql://127.0.0.1:3325/person");
 
             // force error - uncomment and an error will happen - this is good.
-            // ((HikariDSAdapter)ds).toggle();
+            ((HikariDSAdapter)ds).toggle();
 
             ds.getHikariPoolMXBean().softEvictConnections();
             done = true;
