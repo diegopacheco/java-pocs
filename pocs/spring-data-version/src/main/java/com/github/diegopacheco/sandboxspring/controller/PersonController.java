@@ -25,13 +25,14 @@ public class PersonController {
 		return service.getAllPeople();
 	}
 
-	@RequestMapping("/save/{id}/{fn}/{ln}")
+	@RequestMapping("/save/{id}/{fn}/{ln}/{vr}")
 	public String savePerson(
 			@PathVariable("id") Long id,
 			@PathVariable("fn") String firstName,
-			@PathVariable("ln") String lastName)
+			@PathVariable("ln") String lastName,
+			@PathVariable("vr") Integer version )
 	{
-		Person p = new Person(id,firstName, lastName);
+		Person p = new Person(id,firstName, lastName,version);
 		service.save(p);
 		return "Person saved!";
 	}

@@ -2,14 +2,15 @@ package com.github.diegopacheco.sandboxspring.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 
 import java.util.Objects;
 
-public class Person {
+public class Person implements Persistable<Long> {
 
     @Id
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
 
@@ -17,8 +18,25 @@ public class Person {
     @Column("version")
     private int version = 0;
 
+    @Override
+    public boolean isNew() {
+        return null==id;
+    }
+
+    @Override
+    public Long getId() {
+        return this.id;
+    }
+
     public Person() {
         super();
+    }
+
+    public Person(long id, String firstName, String lastName,Integer version) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.version = version;
     }
 
     public Person(long id, String firstName, String lastName) {
@@ -32,9 +50,6 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public long getId() {
-        return this.id;
-    }
     public void setId(long id) {
         this.id = id;
     }
