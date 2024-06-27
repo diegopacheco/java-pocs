@@ -110,6 +110,17 @@ https://medium.com/@taha.topal.7/optimistic-locking-by-using-version-annotation-
 Optimistic vs Pessimistic Locking <BR/>
 https://stackoverflow.com/questions/129329/optimistic-vs-pessimistic-locking
 
+### Optimistic vs Pessimistic Locking
+
+Optimistic Locking
+ * Assume nothing will change
+ * Good when chance of conflict is very low
+ * Usually more efficient and better performance
+
+Pessimist Locking
+ * Anticipate collisions will happen
+ * Good when small tables + there are many concurrent updates
+
 ### Options
 
 * Retry: Need to run select again, might need to merge data.
