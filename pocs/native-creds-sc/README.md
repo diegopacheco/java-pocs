@@ -285,7 +285,7 @@ Calling decryption. Result: SpringRocks
 
 ### Running container with native image
 ```
-❯ docker run diego/nativesc:V1
+❯ docker run diego/nativesc:V1 -p 8080:8080
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
