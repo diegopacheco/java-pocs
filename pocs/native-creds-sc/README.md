@@ -257,24 +257,21 @@ Calling decryption. Result: SpringRocks
 ### Build container using native image
 ```
 ❯ ./build-docker.sh
-[+] Building 1.8s (7/7) FINISHED                                                                                                                              docker:default
+[+] Building 0.5s (10/10) FINISHED                                                                                                                            docker:default
  => [internal] load build definition from Dockerfile                                                                                                                    0.0s
- => => transferring dockerfile: 106B                                                                                                                                    0.0s
+ => => transferring dockerfile: 187B                                                                                                                                    0.0s
  => [internal] load metadata for docker.io/library/alpine:3.14                                                                                                          0.4s
  => [internal] load .dockerignore                                                                                                                                       0.0s
  => => transferring context: 2B                                                                                                                                         0.0s
- => [1/2] FROM docker.io/library/alpine:3.14@sha256:0f2d5c38dd7a4f4f733e688e3a6733cb5ab1ac6e3cb4603a5dd564e5bfb80eed                                                    0.5s
- => => resolve docker.io/library/alpine:3.14@sha256:0f2d5c38dd7a4f4f733e688e3a6733cb5ab1ac6e3cb4603a5dd564e5bfb80eed                                                    0.0s
- => => sha256:0f2d5c38dd7a4f4f733e688e3a6733cb5ab1ac6e3cb4603a5dd564e5bfb80eed 1.64kB / 1.64kB                                                                          0.0s
- => => sha256:71859b0c62df47efaeae4f93698b56a8dddafbf041778fd668bbd1ab45a864f8 528B / 528B                                                                              0.0s
- => => sha256:9e179bacf43c4d3428d57cf459799ba0285b901945f9eccb17b6da056d3532c7 1.47kB / 1.47kB                                                                          0.0s
- => => sha256:f7dab3ab2d6ec29aa28769bec35331fb485b5837501b1e8556413d8b5a79c9c8 2.83MB / 2.83MB                                                                          0.3s
- => => extracting sha256:f7dab3ab2d6ec29aa28769bec35331fb485b5837501b1e8556413d8b5a79c9c8                                                                               0.1s
- => [internal] load build context                                                                                                                                       0.6s
- => => transferring context: 88.51MB                                                                                                                                    0.6s
- => [2/2] COPY target/native-creds-sc app                                                                                                                               0.2s
- => exporting to image                                                                                                                                                  0.5s
- => => exporting layers                                                                                                                                                 0.5s
- => => writing image sha256:6241194adfe806d7ee9debfca33d0d89b00dfa8997f332ad594534a12efb9665                                                                            0.0s
- => => naming to docker.io/diego/nativesc                                                                                                                               0.0s
+ => [1/5] FROM docker.io/library/alpine:3.14@sha256:0f2d5c38dd7a4f4f733e688e3a6733cb5ab1ac6e3cb4603a5dd564e5bfb80eed                                                    0.0s
+ => [internal] load build context                                                                                                                                       0.0s
+ => => transferring context: 72B                                                                                                                                        0.0s
+ => CACHED [2/5] RUN mkdir -p /app/                                                                                                                                     0.0s
+ => CACHED [3/5] WORKDIR /app                                                                                                                                           0.0s
+ => CACHED [4/5] COPY ./target/native-creds-sc /app/nativesc                                                                                                            0.0s
+ => CACHED [5/5] RUN chmod +x /app/nativesc                                                                                                                             0.0s
+ => exporting to image                                                                                                                                                  0.0s
+ => => exporting layers                                                                                                                                                 0.0s
+ => => writing image sha256:ed1e8b91065485e84b012f9c679882b9d9c878bff3045100637d0497f33b6332                                                                            0.0s
+ => => naming to docker.io/diego/nativesc                                                                                                                               0.0s                                                                                                                     0.0s                                                                                                                             0.0s
 ```
