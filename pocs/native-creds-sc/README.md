@@ -301,3 +301,9 @@ Calling decryption. Result: SpringRocks
 2024-06-28T08:07:35.513Z  INFO 1 --- [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
 2024-06-28T08:07:35.514Z  INFO 1 --- [           main] c.g.d.sandboxspring.Application          : Started Application in 0.115 seconds (process running for 0.122)
 ```
+
+### Startup memory
+```
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O       BLOCK I/O       PIDS
+88d8ee2287ad   priceless_wozniak   0.00%     36.29MiB / 62.65GiB   0.06%     5.52kB / 0B   106kB / 102kB   6
+```
