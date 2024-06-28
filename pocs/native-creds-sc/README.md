@@ -229,3 +229,27 @@ total 131M
 4,0K drwxrwxr-x  3 diego diego 4,0K jun 28 00:10 spring-aot
 4,0K drwxrwxr-x  2 diego diego 4,0K jun 28 00:10 test-classes
 ```
+
+### Run native boot up
+```
+❯ ./run-native.sh
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.0)
+
+2024-06-28T00:17:15.225-07:00  INFO 3662317 --- [           main] c.g.d.sandboxspring.Application          : Starting AOT-processed Application using Java 21 with PID 3662317 (/mnt/e35d88d4-42b9-49ea-bf29-c4c3b018d429/diego/git/diegopacheco/java-pocs/pocs/native-creds-sc/target/native-creds-sc started by diego in /mnt/e35d88d4-42b9-49ea-bf29-c4c3b018d429/diego/git/diegopacheco/java-pocs/pocs/native-creds-sc)
+2024-06-28T00:17:15.225-07:00  INFO 3662317 --- [           main] c.g.d.sandboxspring.Application          : No active profile set, falling back to 1 default profile: "default"
+2024-06-28T00:17:15.290-07:00  INFO 3662317 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2024-06-28T00:17:15.321-07:00  INFO 3662317 --- [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
+2024-06-28T00:17:15.322-07:00  INFO 3662317 --- [           main] c.g.d.sandboxspring.Application          : Started Application in 0.116 seconds (process running for 0.123)
+```
+```
+❯ ./test.sh
+Calling encryption. Result: IRKwUdOejKXhsQqDD+1QYA==
+Calling decryption. Result: SpringRocks
+```
