@@ -5,7 +5,7 @@ FROM ubuntu:latest
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 ENV SDKMAN_DIR /root/.sdkman
-RUN apt-get update && apt-get install -y curl zip unzip
+RUN apt-get update && apt-get install -y curl zip unzip libc6
 RUN curl -s "https://get.sdkman.io" | bash
 RUN curl -s "https://get.sdkman.io" | bash
 RUN chmod a+x "$SDKMAN_DIR/bin/sdkman-init.sh"
