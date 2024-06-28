@@ -257,21 +257,28 @@ Calling decryption. Result: SpringRocks
 ### Build container using native image
 ```
 ❯ ./build-docker.sh
-[+] Building 0.5s (10/10) FINISHED                                                                                                                            docker:default
+[+] Building 84.9s (17/17) FINISHED                                                                                                                           docker:default
  => [internal] load build definition from Dockerfile                                                                                                                    0.0s
- => => transferring dockerfile: 187B                                                                                                                                    0.0s
- => [internal] load metadata for docker.io/library/alpine:3.14                                                                                                          0.4s
+ => => transferring dockerfile: 834B                                                                                                                                    0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:latest                                                                                                        0.0s
  => [internal] load .dockerignore                                                                                                                                       0.0s
  => => transferring context: 2B                                                                                                                                         0.0s
- => [1/5] FROM docker.io/library/alpine:3.14@sha256:0f2d5c38dd7a4f4f733e688e3a6733cb5ab1ac6e3cb4603a5dd564e5bfb80eed                                                    0.0s
  => [internal] load build context                                                                                                                                       0.0s
  => => transferring context: 72B                                                                                                                                        0.0s
- => CACHED [2/5] RUN mkdir -p /app/                                                                                                                                     0.0s
- => CACHED [3/5] WORKDIR /app                                                                                                                                           0.0s
- => CACHED [4/5] COPY ./target/native-creds-sc /app/nativesc                                                                                                            0.0s
- => CACHED [5/5] RUN chmod +x /app/nativesc                                                                                                                             0.0s
- => exporting to image                                                                                                                                                  0.0s
- => => exporting layers                                                                                                                                                 0.0s
- => => writing image sha256:ed1e8b91065485e84b012f9c679882b9d9c878bff3045100637d0497f33b6332                                                                            0.0s
- => => naming to docker.io/diego/nativesc                                                                                                                               0.0s                                                                                                                     0.0s                                                                                                                             0.0s
+ => CACHED [ 1/12] FROM docker.io/library/ubuntu:latest                                                                                                                 0.0s
+ => [ 2/12] RUN rm /bin/sh && ln -s /bin/bash /bin/sh                                                                                                                   0.3s
+ => [ 3/12] RUN apt-get update && apt-get install -y curl zip unzip                                                                                                    15.5s
+ => [ 4/12] RUN curl -s "https://get.sdkman.io" | bash                                                                                                                  3.5s 
+ => [ 5/12] RUN curl -s "https://get.sdkman.io" | bash                                                                                                                  1.1s 
+ => [ 6/12] RUN chmod a+x "/root/.sdkman/bin/sdkman-init.sh"                                                                                                            0.3s 
+ => [ 7/12] RUN set -x     && echo "sdkman_auto_answer=true" > /root/.sdkman/etc/config     && echo "sdkman_auto_selfupdate=false" >> /root/.sdkman/etc/config     &&   0.3s 
+ => [ 8/12] RUN source "/root/.sdkman/bin/sdkman-init.sh" && sdk install java 21-graalce                                                                               59.3s 
+ => [ 9/12] RUN mkdir -p /app/                                                                                                                                          0.3s 
+ => [10/12] WORKDIR /app                                                                                                                                                0.1s 
+ => [11/12] ADD ./target/native-creds-sc /app/                                                                                                                          0.3s 
+ => [12/12] RUN chmod +x /app/native-creds-sc                                                                                                                           0.4s 
+ => exporting to image                                                                                                                                                  3.4s 
+ => => exporting layers                                                                                                                                                 3.4s 
+ => => writing image sha256:6b3f443540f634139bc9ed6890868bb88d990b0025afe17c721fce3abbdce258                                                                            0.0s
+ => => naming to docker.io/diego/nativesc:V1                                                                                                                            0.0s                                                                                                                           0.0s                                                                                                                     0.0s                                                                                                                             0.0s
 ```
