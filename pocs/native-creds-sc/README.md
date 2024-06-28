@@ -304,6 +304,20 @@ Calling decryption. Result: SpringRocks
 
 ### Startup memory
 ```
+docker stats
+```
+```
 CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O       BLOCK I/O       PIDS
 88d8ee2287ad   priceless_wozniak   0.00%     36.29MiB / 62.65GiB   0.06%     5.52kB / 0B   106kB / 102kB   6
+```
+
+### Using the Application
+```
+❯ ./test-container-native.sh
+Calling encryption. Result: sUsXwtpjcTMPQed2ZoJbcg==
+Calling decryption. Result: SpringRocks
+```
+```
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O       PIDS
+88d8ee2287ad   priceless_wozniak   0.00%     46.92MiB / 62.65GiB   0.07%     7.86kB / 821B   106kB / 102kB   8
 ```
