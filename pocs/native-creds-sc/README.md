@@ -282,3 +282,22 @@ Calling decryption. Result: SpringRocks
  => => writing image sha256:6b3f443540f634139bc9ed6890868bb88d990b0025afe17c721fce3abbdce258                                                                            0.0s
  => => naming to docker.io/diego/nativesc:V1                                                                                                                            0.0s                                                                                                                           0.0s                                                                                                                     0.0s                                                                                                                             0.0s
 ```
+
+### Running container with native image
+```
+❯ docker run diego/nativesc:V1
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.0)
+
+2024-06-28T08:07:35.420Z  INFO 1 --- [           main] c.g.d.sandboxspring.Application          : Starting AOT-processed Application using Java 21 with PID 1 (/work/application started by root in /work)
+2024-06-28T08:07:35.420Z  INFO 1 --- [           main] c.g.d.sandboxspring.Application          : No active profile set, falling back to 1 default profile: "default"
+2024-06-28T08:07:35.482Z  INFO 1 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2024-06-28T08:07:35.513Z  INFO 1 --- [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
+2024-06-28T08:07:35.514Z  INFO 1 --- [           main] c.g.d.sandboxspring.Application          : Started Application in 0.115 seconds (process running for 0.122)
+```
