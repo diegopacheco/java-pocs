@@ -11,6 +11,7 @@ import org.apache.hc.core5.util.Timeout;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.ExtractingResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
@@ -42,7 +43,9 @@ public class RestConfig {
 
     @Bean
     public RestTemplate restTemplate() {
-        return new RestTemplate(new HttpComponentsClientHttpRequestFactory(httpClient()));
+        RestTemplate rt = new RestTemplate(new HttpComponentsClientHttpRequestFactory(httpClient()));
+        rt.setErrorHandler(new ExtractingResponseErrorHandler());
+        return rt;
     }
 
 }
