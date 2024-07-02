@@ -5,6 +5,7 @@ import org.apache.hc.client5.http.impl.DefaultHttpRequestRetryStrategy;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
+import org.apache.hc.core5.http.io.SocketConfig;
 import org.apache.hc.core5.util.TimeValue;
 import org.apache.hc.core5.util.Timeout;
 import org.springframework.context.annotation.Bean;
@@ -20,10 +21,14 @@ public class RestConfig {
         var connectionManager = PoolingHttpClientConnectionManagerBuilder.create()
                 .setMaxConnPerRoute(1)
                 .setMaxConnTotal(1)
+                .setDefaultSocketConfig(
+                        SocketConfig.custom().setSoTimeout(Timeout.ofSeconds(1)).build()
+                )
                 .build();
 
         var reqConfig = RequestConfig.custom()
                 //.setConnectionRequestTimeout(Timeout.ofSeconds(10))
+                //.setConnectTimeout(Timeout.ofSeconds(1))
                 .build();
 
         return HttpClients.custom()
