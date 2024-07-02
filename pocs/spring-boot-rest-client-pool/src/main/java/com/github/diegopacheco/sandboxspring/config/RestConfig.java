@@ -22,7 +22,7 @@ public class RestConfig {
                 .setMaxConnPerRoute(1)
                 .setMaxConnTotal(1)
                 .setDefaultSocketConfig(
-                        SocketConfig.custom().setSoTimeout(Timeout.ofSeconds(1)).build()
+                        SocketConfig.custom().setSoTimeout(Timeout.ofSeconds(2)).build()
                 )
                 .build();
 
