@@ -21,9 +21,10 @@ public class RestConfig {
         var connectionManager = PoolingHttpClientConnectionManagerBuilder.create()
                 .setMaxConnPerRoute(1)
                 .setMaxConnTotal(1)
+                /*
                 .setDefaultSocketConfig(
                         SocketConfig.custom().setSoTimeout(Timeout.ofSeconds(2)).build()
-                )
+                )*/
                 .build();
 
         var reqConfig = RequestConfig.custom()
@@ -35,7 +36,7 @@ public class RestConfig {
                 .setRetryStrategy(new DefaultHttpRequestRetryStrategy(3, TimeValue.ofSeconds(1)))
                 .setConnectionManager(connectionManager)
                 .setDefaultRequestConfig(reqConfig)
-                .setConnectionManagerShared(true)
+                //.setConnectionManagerShared(true)
                 .build();
     }
 
