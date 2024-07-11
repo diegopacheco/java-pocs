@@ -10,7 +10,7 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
-@Component
+//@Component
 public class CustomHeaderLoggingFilter implements WebFilter {
     private static final Logger logger = LogManager.getLogger(CustomHeaderLoggingFilter.class);
 

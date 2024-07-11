@@ -4,7 +4,7 @@
         <RollingFile name="AccessLog" fileName="logs/access_log.log"
                      filePattern="logs/access_log.%d{yyyy-MM-dd}.log">
             <PatternLayout>
-                <pattern>%d{YYYY-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg HEADER: %X{MYHEADER} %n</pattern>
+                <pattern>%d{YYYY-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg %n</pattern>
             </PatternLayout>
             <Policies>
                 <TimeBasedTriggeringPolicy />
@@ -28,7 +28,7 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="org.springframework.web.server.adapter.HttpWebHandlerAdapter" level="DEBUG" additivity="true">
+        <Logger name="reactor.netty.http.server.AccessLog" level="DEBUG" additivity="false">
             <AppenderRef ref="AccessLog"/>
         </Logger>
         <Root level="INFO">
