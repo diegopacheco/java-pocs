@@ -5,7 +5,7 @@
     <appender name="ACCESS_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/access_log.log</file>
         <encoder>
-            <pattern>%date{YYYY-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg X-FORWARDED-FOR: %X{X-FORWARDED-FOR} CH: %X{CUSTOM-HEADER-Z} %n</pattern>
+            <pattern>%date{YYYY-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg %n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logs/access_log.%d{yyyy-MM-dd}.log</fileNamePattern>
@@ -32,7 +32,7 @@
     </appender>
 
     <!-- Logger for Access Logs -->
-    <logger name="org.springframework.web.server.adapter.HttpWebHandlerAdapter" level="DEBUG" additivity="true">
+    <logger name="reactor.netty.http.server.AccessLog" level="DEBUG" additivity="true">
         <appender-ref ref="ACCESS_LOG"/>
     </logger>
 
