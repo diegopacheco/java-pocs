@@ -7,6 +7,10 @@ so there is some magic to disable the endpoint when running in prod.
 
 Is possible to pass parameters to the batch job via the geenric rest controller `BatchController`. Some extra infra might still needed in order to mock or setup other dependencies but this by it self make it way more testable.
 
+<center>
+    <img src="overview.png" alt="overview" width="800"/>
+</center>
+
 ### Build
 ```bash
 ./mvnw clean install
