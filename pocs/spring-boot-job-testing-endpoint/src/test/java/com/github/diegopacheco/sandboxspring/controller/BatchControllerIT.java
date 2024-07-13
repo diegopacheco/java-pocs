@@ -2,26 +2,26 @@ package com.github.diegopacheco.sandboxspring.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
+@WebFluxTest(BatchController.class)
 public class BatchControllerIT {
 
     @Autowired
-    private MockMvc mockMvc;
+    private WebTestClient webTestClient;
 
     @Test
-    public void testTaskUUIDGeneration() throws Exception {
-        mockMvc.perform(get("/batch/3"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("UUID")));
+    public void testTaskUUIDGeneration() {
+        webTestClient.get().uri("/batch/uuid/3")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(String.class).value(content -> {
+                    assertTrue(content.length() > 0);
+                    assertTrue(content.contains("true"));
+                });
     }
 
 }
