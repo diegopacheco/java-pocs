@@ -1,15 +1,24 @@
 package com.github.diegopacheco.sandboxspring.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TestingFlagManager {
+public class TestingFlagManager implements EnvironmentAware {
 
-    @Value("#{environment.getActiveProfiles()[0]}")
     private String activeProfile;
-
     private int amount = 10;
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        String[] profiles = environment.getActiveProfiles();
+        if (profiles.length > 0) {
+            activeProfile = profiles[0];
+        } else {
+            activeProfile = "default";
+        }
+    }
 
     public boolean isNonProd() {
         return !"prod".equals(activeProfile);
