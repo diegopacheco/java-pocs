@@ -5,8 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ *   Add to avoid watnings:
+ *   -XX:+EnableDynamicAgentLoading -Djdk.instrument.traceUsage=true)
+ */
 @WebFluxTest(BatchController.class)
 public class BatchControllerIT {
 
@@ -19,7 +24,7 @@ public class BatchControllerIT {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(String.class).value(content -> {
-                    assertTrue(content.length() > 0);
+                    assertFalse(content.isEmpty());
                     assertTrue(content.contains("true"));
                 });
     }
