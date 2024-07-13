@@ -126,3 +126,10 @@ fa2e5499-ad3a-4aa8-abab-2aa9b35039ef
 
 Process finished with exit code 0
 ```
+
+### Options for State Injection
+
+* Feature Flags / Test Flags
+* Rest Controller parameters
+* State Injection System / Service 
+* Database
