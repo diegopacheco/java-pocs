@@ -129,7 +129,25 @@ Process finished with exit code 0
 
 ### Options for State Injection
 
-* Feature Flags / Test Flags
-* Rest Controller parameters
-* State Injection System / Service 
-* Database
+Goals
+ * Centralize as much as possible (FeatureFlag Class)
+ * Mix Test and Production code as little as possible
+ * Avoid code duplication as much as possible
+ * Pass parameters for what need to change
+ * Return data to allow assertions
+
+Options
+* Option #1 - Feature Flags / Test Flags
+  * Per attribute/variable
+  * Per class
+  * Might sound messy but is the best options because could all be abstracted by the FF class.
+* Option #2 - Rest Controller parameters
+  * Might require to pass down the line to service/repository
+* Option #3 - External State Injection System / Service (Mock/Proxy)
+  * One way or another
+  * Ideally centralized and less places and times as possible
+* Option #4 - Database
+  * kind of clear for code perspective but has serious isolation issues.
+* Option #5 - Different Routing
+  * Different Service/Repository
+  * The issue is that could duplicate code and be harder to mantain but a bit cleanner.  
