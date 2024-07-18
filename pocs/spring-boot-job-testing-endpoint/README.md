@@ -164,3 +164,5 @@ Options
 * The key is to have a way to pass parameters to the system.
 * The key is to have a way to return data to allow assertions.
 * This way is just like any other RPC endpoint testing.
+* Some async programing and queues might require it own instrumentation/framework in order to make it work.
+* It all depends where we want the complexity to live but is a good practice to have it in the code.
