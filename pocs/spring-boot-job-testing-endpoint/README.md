@@ -130,13 +130,15 @@ Process finished with exit code 0
 ### Options for State Injection
 
 Goals
- * Centralize as much as possible (FeatureFlag Class)
- * Mix Test and Production code as little as possible
- * Avoid code duplication as much as possible
- * Pass parameters for what need to change
- * Return data to allow assertions
+
+* Centralize as much as possible (FeatureFlag Class)
+* Mix Test and Production code as little as possible
+* Avoid code duplication as much as possible
+* Pass parameters for what need to change
+* Return data to allow assertions
 
 Options
+
 * Option #1 - Feature Flags / Test Flags
   * Per attribute/variable
   * Per class
@@ -151,4 +153,14 @@ Options
   * Database might sound like a good idea because is separated from the code but is not.
 * Option #5 - Different Routing
   * Different Service/Repository
-  * The issue is that could duplicate code and be harder to mantain but a bit cleanner.  
+  * The issue is that could duplicate code and be harder to mantain but a bit cleanner.
+
+## Notes on Induction
+
+* Inducing spesific states is a good way to test the system.
+* As much as could feel wrong because is in the middle of the code is actually a good practice.
+* Because it allow integration tests and exploratory testing(QA) is easier.
+* The key is to have a way to turn it off in production.
+* The key is to have a way to pass parameters to the system.
+* The key is to have a way to return data to allow assertions.
+* This way is just like any other RPC endpoint testing.
