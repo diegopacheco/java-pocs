@@ -148,6 +148,7 @@ Options
   * Ideally centralized and less places and times as possible
 * Option #4 - Database
   * kind of clear for code perspective but has serious isolation issues.
+  * Database might sound like a good idea because is separated from the code but is not.
 * Option #5 - Different Routing
   * Different Service/Repository
   * The issue is that could duplicate code and be harder to mantain but a bit cleanner.  
