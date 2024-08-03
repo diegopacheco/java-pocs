@@ -1,0 +1,6 @@
+123456;johndoe;23;yes
+654321;janedoe;25;no
+234234;mariadoe;30;yes
+353423;brunodoe;40;no
+959429;ramondoe;67;yes
+959429;ramondoe;67;yes
