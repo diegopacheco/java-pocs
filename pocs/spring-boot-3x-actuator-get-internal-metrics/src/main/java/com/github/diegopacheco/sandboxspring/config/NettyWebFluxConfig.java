@@ -1,19 +1,16 @@
 package com.github.diegopacheco.sandboxspring.config;
 
-import org.springframework.boot.web.embedded.netty.NettyReactiveWebServerFactory;
-import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.boot.web.embedded.netty.NettyServerCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import reactor.netty.channel.MicrometerChannelMetricsRecorder;
 
 @Configuration
 public class NettyWebFluxConfig {
 
     @Bean
-    public WebServerFactoryCustomizer<NettyReactiveWebServerFactory> getWebServerFactoryCustomizer() {
-        WebServerFactoryCustomizer<NettyReactiveWebServerFactory> customizer = factory -> {
-            factory.setPort(8080);
-        };
-        return customizer;
+    public NettyServerCustomizer nettyServerCustomizer() {
+        return httpServer -> httpServer.metrics(true, () -> new MicrometerChannelMetricsRecorder("MY_SERVICE", "MY_SERVICE"));
     }
 
 }
