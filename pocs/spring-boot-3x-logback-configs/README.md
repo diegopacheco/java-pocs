@@ -9,6 +9,7 @@
 * Log rotate via `ch.qos.logback.core.rolling.RollingFileAppender`
 * Default Spring profile `local` or what you pass `./run.sh dev`
 * Actuator shutdown endpoint and graceful shutdown `curl http://localhost:8080/actuator/shutdown -x POST`
+* Async file appender to improve performance `ch.qos.logback.classic.AsyncAppender`
 
 ### Result
 
