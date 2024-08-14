@@ -184,9 +184,7 @@ mvn rewrite:run
   /mnt/e/d/gi/d/java-pocs/p/open-r/migrated/spring-petclinic-migration   master !22 
 ```
 
-
-
-
 ### Results
 
-Compare `original` and `migrated` folder.
+* Compare `original` and `migrated` folder.
+* Full diff in `migrated/results` folder.
