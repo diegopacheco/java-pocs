@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Date;
-
-import org.junit.Assert;
 
 /**
  * Integration test of the Service and the Repository layer.

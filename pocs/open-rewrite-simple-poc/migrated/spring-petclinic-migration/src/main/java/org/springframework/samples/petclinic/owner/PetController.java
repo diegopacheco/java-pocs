@@ -23,9 +23,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import javax.inject.Inject;
 import javax.validation.Valid;
-import java.util.Collection;
 
 /**
  * @author Juergen Hoeller
