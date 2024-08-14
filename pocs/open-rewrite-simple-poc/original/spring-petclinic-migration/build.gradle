@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.3'
+    implementation 'jakarta.inject:jakarta.inject-api:1.0.3'
+    implementation platform('org.springframework.boot:spring-boot-starter-parent:2.1.18.RELEASE')
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation ('org.thymeleaf:thymeleaf-spring4:3.0.15.RELEASE') {
+        force = true
+    }
+    implementation ('org.springframework.boot:spring-boot-starter-thymeleaf') {
+        exclude(group: 'nz.net.ultraq.thymeleaf', module: 'thymeleaf-layout-dialect')
+    }
+    implementation 'javax.cache:cache-api'
+    implementation 'org.ehcache:ehcache:3.2.2'
+    implementation 'org.webjars:webjars-locator:0.45'
+    implementation 'org.webjars:jquery:2.2.4'
+    implementation 'org.webjars:jquery-ui:1.11.4'
+    implementation 'org.webjars:bootstrap:3.3.6'
+    runtimeOnly 'org.hsqldb:hsqldb:2.3.5'
+    runtimeOnly 'mysql:mysql-connector-java:5.1.42'
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation platform('org.springframework.boot:spring-boot-starter-test')
+    testImplementation 'junit:junit'
+    testImplementation 'org.mockito:mockito-core'
+    testImplementation 'org.springframework:spring-test'
+    testImplementation 'org.springframework.boot:spring-boot-test'
+    testImplementation 'org.springframework.boot:spring-boot-test-autoconfigure'
+    testImplementation 'org.hamcrest:hamcrest-library'
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'com.jayway.jsonpath:json-path'
+}
+
+group = 'org.springframework.samples'
+version = '1.5.1'
+description = 'petclinic'
+sourceCompatibility = '11'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
