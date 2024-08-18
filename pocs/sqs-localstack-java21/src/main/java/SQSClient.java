@@ -73,7 +73,11 @@ public class SQSClient {
         try {
             GetQueueUrlRequest getQueueUrlRequest = GetQueueUrlRequest.builder().queueName(queue).build();
             String queueUrl = sqsClient.getQueueUrl(getQueueUrlRequest).queueUrl();
-            ReceiveMessageRequest receiveMessageRequest = ReceiveMessageRequest.builder().queueUrl(queueUrl).maxNumberOfMessages(10).waitTimeSeconds(20).build();
+            ReceiveMessageRequest receiveMessageRequest = ReceiveMessageRequest.builder().queueUrl(queueUrl).
+                    maxNumberOfMessages(10). // max 10 messages
+                    waitTimeSeconds(20). // long polling
+                    build();
+
             ReceiveMessageResponse receiveMessageResponse = sqsClient.receiveMessage(receiveMessageRequest);
             if (!receiveMessageResponse.messages().isEmpty()) {
                 System.out.println("Read total messages: " + receiveMessageResponse.messages().size());
