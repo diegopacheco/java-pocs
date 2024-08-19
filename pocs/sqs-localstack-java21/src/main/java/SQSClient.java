@@ -26,6 +26,7 @@ public class SQSClient {
                 }).build();
     }
 
+    // looks like localstack does not support this attributes
     public Map<String, Integer> getQueueStats(String queueName) {
         try {
             GetQueueUrlRequest getQueueUrlRequest = GetQueueUrlRequest.builder().queueName(queueName).build();
