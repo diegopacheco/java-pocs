@@ -4,7 +4,6 @@ import software.amazon.awssdk.core.client.config.ClientOverrideConfiguration;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.*;
-
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,11 +37,10 @@ public class SQSClient {
                     .build();
 
             GetQueueAttributesResponse getQueueAttributesResponse = sqsClient.getQueueAttributes(getQueueAttributesRequest);
-
             Map<String, Integer> stats = new HashMap<>();
-            stats.put("ApproximateNumberOfMessages", Integer.parseInt(getQueueAttributesResponse.attributes().getOrDefault("ApproximateNumberOfMessages","0")));
-            stats.put("ApproximateNumberOfMessagesNotVisible", Integer.parseInt(getQueueAttributesResponse.attributes().getOrDefault("ApproximateNumberOfMessagesNotVisible","0")));
-            stats.put("ApproximateNumberOfMessagesDelayed", Integer.parseInt(getQueueAttributesResponse.attributes().getOrDefault("ApproximateNumberOfMessagesDelayed","0")));
+            stats.put("ApproximateNumberOfMessages", getFromAttributes("ApproximateNumberOfMessages",getQueueAttributesResponse));
+            stats.put("ApproximateNumberOfMessagesNotVisible", getFromAttributes("ApproximateNumberOfMessagesNotVisible",getQueueAttributesResponse));
+            stats.put("ApproximateNumberOfMessagesDelayed", getFromAttributes("ApproximateNumberOfMessagesDelayed",getQueueAttributesResponse));
 
             return stats;
         } catch (SqsException e) {
@@ -54,6 +52,13 @@ public class SQSClient {
         }
     }
 
+    private Integer getFromAttributes(String key,GetQueueAttributesResponse getQueueAttributesResponse){
+        String result = getQueueAttributesResponse.attributes().get(QueueAttributeName.fromValue(key));
+        if (null==result || result.isEmpty()){
+            return 0;
+        }
+        return Integer.parseInt(result);
+    }
 
     public SendMessageResponse sendMessage(String queueName, String message) {
         try {
@@ -117,6 +122,26 @@ public class SQSClient {
                 return message.getContent();
             }
             return null;
+        } catch (SqsException e) {
+            System.err.println("SQS error: " + e.awsErrorDetails().errorMessage());
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void purgeQueue(String queueName) {
+        try {
+            GetQueueUrlRequest getQueueUrlRequest = GetQueueUrlRequest.builder().queueName(queueName).build();
+            String queueUrl = sqsClient.getQueueUrl(getQueueUrlRequest).queueUrl();
+
+            PurgeQueueRequest purgeQueueRequest = PurgeQueueRequest.builder().queueUrl(queueUrl).build();
+            sqsClient.purgeQueue(purgeQueueRequest);
+            System.out.println("Queue purged successfully.");
+        } catch (PurgeQueueInProgressException e) {
+            System.err.println("Purge already in progress: " + e.awsErrorDetails().errorMessage());
+            throw new RuntimeException(e);
         } catch (SqsException e) {
             System.err.println("SQS error: " + e.awsErrorDetails().errorMessage());
             throw new RuntimeException(e);
