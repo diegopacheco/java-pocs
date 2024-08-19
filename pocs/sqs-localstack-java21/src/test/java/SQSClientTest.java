@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import software.amazon.awssdk.services.sqs.model.SendMessageResponse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -10,14 +11,18 @@ public class SQSClientTest {
         SendMessageResponse res = sqsClient.sendMessage("test-queue", "Hello, world!");
         System.out.println("Message ID: " + res.messageId());
         assertNotNull(res.messageId());
+        System.out.println("Stats: " + sqsClient.getQueueStats("test-queue"));
         sqsClient.readMessage("test-queue");
+        System.out.println("Stats: " + sqsClient.getQueueStats("test-queue"));
     }
 
     @Test
     public void testReadMessage() {
         SQSClient sqsClient = new SQSClient();
         sqsClient.sendMessage("test-queue", "Hello, world!");
+        System.out.println("Stats: " + sqsClient.getQueueStats("test-queue"));
         String message = sqsClient.readMessage("test-queue");
+        System.out.println("Stats: " + sqsClient.getQueueStats("test-queue"));
         System.out.println("Message: " + message);
         assertNotNull(message);
     }
@@ -39,11 +44,13 @@ public class SQSClientTest {
                 e.printStackTrace();
             }
         }
+        System.out.println("Stats: " + sqsClient.getQueueStats("test-queue"));
         for (int i = 0; i <100; i++) {
             String message = sqsClient.readMessage("test-queue");
             System.out.println("Message: " + message);
             assertNotNull(message);
         }
+        System.out.println("Stats: " + sqsClient.getQueueStats("test-queue"));
     }
 
     @Test
@@ -69,6 +76,7 @@ public class SQSClientTest {
             System.out.println("Message: " + message);
             assertNotNull(message);
         }
+        System.out.println("Stats: " + sqsClient.getQueueStats("test-queue"));
     }
 
     @Test
@@ -88,9 +96,19 @@ public class SQSClientTest {
                 e.printStackTrace();
             }
         }
+        System.out.println("Stats: " + sqsClient.getQueueStats("test-queue"));
         String message = sqsClient.readMessages10Timeout("test-queue");
         System.out.println("Message: " + message);
         assertNotNull(message);
+        System.out.println("Stats: " + sqsClient.getQueueStats("test-queue"));
+    }
+
+    @AfterAll
+    public static void tearDown() {
+        SQSClient sqsClient = new SQSClient();
+        System.out.println("Stats: " + sqsClient.getQueueStats("test-queue"));
+        sqsClient.purgeQueue("test-queue");
+        System.out.println("Stats: " + sqsClient.getQueueStats("test-queue"));
     }
 
 }
