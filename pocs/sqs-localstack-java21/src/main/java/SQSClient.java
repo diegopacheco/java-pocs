@@ -6,6 +6,8 @@ import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.*;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SQSClient {
     private SqsClient sqsClient;
@@ -24,10 +26,37 @@ public class SQSClient {
                 }).build();
     }
 
+    public Map<String, Integer> getQueueStats(String queueName) {
+        try {
+            GetQueueUrlRequest getQueueUrlRequest = GetQueueUrlRequest.builder().queueName(queueName).build();
+            String queueUrl = sqsClient.getQueueUrl(getQueueUrlRequest).queueUrl();
+
+            GetQueueAttributesRequest getQueueAttributesRequest = GetQueueAttributesRequest.builder()
+                    .queueUrl(queueUrl)
+                    .attributeNamesWithStrings("ApproximateNumberOfMessages", "ApproximateNumberOfMessagesNotVisible", "ApproximateNumberOfMessagesDelayed")
+                    .build();
+
+            GetQueueAttributesResponse getQueueAttributesResponse = sqsClient.getQueueAttributes(getQueueAttributesRequest);
+
+            Map<String, Integer> stats = new HashMap<>();
+            stats.put("ApproximateNumberOfMessages", Integer.parseInt(getQueueAttributesResponse.attributes().getOrDefault("ApproximateNumberOfMessages","0")));
+            stats.put("ApproximateNumberOfMessagesNotVisible", Integer.parseInt(getQueueAttributesResponse.attributes().getOrDefault("ApproximateNumberOfMessagesNotVisible","0")));
+            stats.put("ApproximateNumberOfMessagesDelayed", Integer.parseInt(getQueueAttributesResponse.attributes().getOrDefault("ApproximateNumberOfMessagesDelayed","0")));
+
+            return stats;
+        } catch (SqsException e) {
+            System.err.println("SQS error: " + e.awsErrorDetails().errorMessage());
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public SendMessageResponse sendMessage(String queueName, String message) {
         try {
             String jsonMessage = gson.toJson(new Message(message));
-            System.out.println("Sending message: " + jsonMessage + " - queue: " + queueName);
 
             CreateQueueRequest createQueueRequest = CreateQueueRequest.builder().queueName(queueName).build();
             sqsClient.createQueue(createQueueRequest);

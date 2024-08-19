@@ -63,6 +63,7 @@ public class SQSClientTest {
                 e.printStackTrace();
             }
         }
+        System.out.println("Stats: " + sqsClient.getQueueStats("test-queue"));
         for (int i = 0; i <1; i++) {
             String message = sqsClient.readMessage("test-queue");
             System.out.println("Message: " + message);
