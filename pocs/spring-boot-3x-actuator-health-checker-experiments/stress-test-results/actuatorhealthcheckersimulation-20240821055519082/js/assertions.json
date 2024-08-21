@@ -1,0 +1,10 @@
+{
+  "simulation": "ActuatorHealthCheckerSimulation",
+  "simulationId": "actuatorhealthcheckersimulation-20240821055519082",
+  "start": 1724219719756,
+  "description": "",
+  "scenarios": ["ActuatorHealthCheckerSimulation"],
+  "assertions": [
+
+  ]
+}
