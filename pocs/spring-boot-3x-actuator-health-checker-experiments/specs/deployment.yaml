@@ -18,3 +18,13 @@ spec:
           imagePullPolicy: IfNotPresent # to avoid pulling the image from the registry
           ports:
             - containerPort: 8080
+          env:
+            - name: TAG
+              value: "spring-boot-webflux-3x"
+          resources:
+            limits:
+              memory: "4096Mi"
+              cpu: "4095m"
+            requests:
+              memory: "4096Mi"
+              cpu: "4095m"
