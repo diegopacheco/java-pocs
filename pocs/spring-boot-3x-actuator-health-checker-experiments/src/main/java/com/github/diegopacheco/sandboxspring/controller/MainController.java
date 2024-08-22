@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.UUID;
 
 @RestController
-public class HelloController {
+public class MainController {
 
 	@RequestMapping("/")
 	public String index() {
@@ -15,17 +15,27 @@ public class HelloController {
 	}
 
 	@RequestMapping("/slow/{time}")
-	public String slowOneSec(@PathVariable(value = "time") String time) {
+	public String slowMs(@PathVariable(value = "time") String time) {
+		long start = System.currentTimeMillis();
 		if (null == time || time.isEmpty()) {
 			time = "1";
 		}
+
 		sleep(Integer.parseInt(time));
-		return UUID.randomUUID().toString();
+		String result = UUID.randomUUID().toString();
+		long end = System.currentTimeMillis();
+
+		return """
+           {
+               "result": "%s",
+               "time": "%s ms"
+           }""".formatted(result, (end - start));
+
 	}
 
 	private void sleep(int time) {
 		try {
-			Thread.sleep(time * 1000);
+			Thread.sleep(time);
 		} catch (InterruptedException e) {}
 	}
 

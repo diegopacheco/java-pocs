@@ -41,7 +41,7 @@ import java.util.UUID;
  *   }
  * }
  */
-@Component
+//@Component
 public class CustomHealthCheckIndicator implements HealthIndicator {
 
     private boolean running = System.getProperty("health.running", "true").equals("true");
