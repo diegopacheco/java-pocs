@@ -597,3 +597,85 @@ while running gatling...
     }
   ]
 ```
+
+### All metrics avlaiable
+
+```
+// 20240822003115
+// http://localhost:8080/actuator/metrics
+
+{
+  "names": [
+    "MY_SERVICE.connections.total",
+    "MY_SERVICE.data.received",
+    "MY_SERVICE.data.sent",
+    "application.ready.time",
+    "application.started.time",
+    "disk.free",
+    "disk.total",
+    "executor",
+    "executor.active",
+    "executor.completed",
+    "executor.idle",
+    "executor.pool.core",
+    "executor.pool.max",
+    "executor.pool.size",
+    "executor.queue.remaining",
+    "executor.queued",
+    "executor.scheduled.once",
+    "executor.scheduled.repetitively",
+    "http.server.requests",
+    "http.server.requests.active",
+    "jvm.buffer.count",
+    "jvm.buffer.memory.used",
+    "jvm.buffer.total.capacity",
+    "jvm.classes.loaded",
+    "jvm.classes.unloaded",
+    "jvm.compilation.time",
+    "jvm.gc.concurrent.phase.time",
+    "jvm.gc.live.data.size",
+    "jvm.gc.max.data.size",
+    "jvm.gc.memory.allocated",
+    "jvm.gc.memory.promoted",
+    "jvm.gc.overhead",
+    "jvm.gc.pause",
+    "jvm.info",
+    "jvm.memory.committed",
+    "jvm.memory.max",
+    "jvm.memory.usage.after.gc",
+    "jvm.memory.used",
+    "jvm.threads.daemon",
+    "jvm.threads.live",
+    "jvm.threads.peak",
+    "jvm.threads.started",
+    "jvm.threads.states",
+    "logback.events",
+    "process.cpu.time",
+    "process.cpu.usage",
+    "process.files.max",
+    "process.files.open",
+    "process.start.time",
+    "process.uptime",
+    "reactor.netty.bytebuf.allocator.active.direct.memory",
+    "reactor.netty.bytebuf.allocator.active.heap.memory",
+    "reactor.netty.bytebuf.allocator.chunk.size",
+    "reactor.netty.bytebuf.allocator.direct.arenas",
+    "reactor.netty.bytebuf.allocator.heap.arenas",
+    "reactor.netty.bytebuf.allocator.normal.cache.size",
+    "reactor.netty.bytebuf.allocator.small.cache.size",
+    "reactor.netty.bytebuf.allocator.threadlocal.caches",
+    "reactor.netty.bytebuf.allocator.used.direct.memory",
+    "reactor.netty.bytebuf.allocator.used.heap.memory",
+    "reactor.netty.eventloop.pending.tasks",
+    "reactor.netty.ioWorkerCount",
+    "reactor.netty.pool.maxConnections",
+    "reactor.netty.udp.ioThreadCount",
+    "system.cpu.count",
+    "system.cpu.usage",
+    "system.load.average.1m"
+  ]
+}
+```
+
+looks like metrics are missing https://projectreactor.io/docs/netty/release/reference/index.html#_metrics_4
+
