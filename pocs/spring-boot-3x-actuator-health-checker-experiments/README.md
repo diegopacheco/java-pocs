@@ -503,6 +503,14 @@ L#232 -> HandlerResult result = new HandlerResult(this, value, returnType, bindi
 * io.netty.channel.AbstractChannelHandlerContext
 * reactor.netty.http.server.HttpTrafficHandler
 
+Some findings
+* when call a non-reactive health checker, springs wrap the code into a common reactor pool `Schedulers.boundedElastic()` but it would require a crazy amount of call for this to be a bottleneck.
+* Spring regular controllers dont have the same behavior they use the class `InvocableHandlerMethod` which does a smarter thing and return on `return Mono.just(result);` which wont goto a pool or create threads.
+* I run a bunch of gatling and look all metrics on grafana - could not find any obvious queue
+* However, I need to say that `executor_queue_remaining_tasks` is pretty high `2Bil` which dont match with other metrics...
+* Spring boot already expose metrics of the jvm to prometheus but we need extra code for Java HttpCleint, Database, Redis or any external service/driver
+* Everything seems pretty flat in netty metrics.
+
 ### Reactor Netty Metrics
 
 * http://localhost:8080/actuator/metrics/reactor.netty.ioWorkerCount - 4 
@@ -679,3 +687,259 @@ while running gatling...
 
 looks like metrics are missing https://projectreactor.io/docs/netty/release/reference/index.html#_metrics_4
 
+### Http Client Observability
+
+Necessary. Does not happen by default.
+
+1. Dependency
+```xml
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-java11</artifactId>
+</dependency>
+```
+2. Instrument
+```
+@Configuration
+public class HttpClientConfig {
+
+    private final MeterRegistry meterRegistry;
+
+    public HttpClientConfig(MeterRegistry meterRegistry) {
+        this.meterRegistry = meterRegistry;
+    }
+
+    @Bean
+    public HttpClient getInstrumentedClient(){
+        HttpClient client = MicrometerHttpClient.instrumentationBuilder(httpClient(), meterRegistry).build();
+        return client;
+    }
+
+    private HttpClient httpClient() {
+        HttpClient client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .build();
+        return client;
+    }
+
+}
+```
+
+* http://localhost:8080/actuator/metrics
+```
+    ...
+    "http.client.requests",
+    "http.server.requests",
+    "http.server.requests.active",
+    ...
+```
+
+* http://localhost:8080/actuator/metrics/http.client.requests 
+```
+// 20240822211511
+// http://localhost:8080/actuator/metrics/http.client.requests
+{
+  "name": "http.client.requests",
+  "description": "Timer for JDK's HttpClient",
+  "baseUnit": "seconds",
+  "measurements": [
+    {
+      "statistic": "COUNT",
+      "value": 3.0
+    },
+    {
+      "statistic": "TOTAL_TIME",
+      "value": 0.700752736
+    },
+    {
+      "statistic": "MAX",
+      "value": 0.519812763
+    }
+  ],
+  "availableTags": [
+    {
+      "tag": "method",
+      "values": [
+        "GET"
+      ]
+    },
+    {
+      "tag": "uri",
+      "values": [
+        "UNKNOWN"
+      ]
+    },
+    {
+      "tag": "outcome",
+      "values": [
+        "SUCCESS"
+      ]
+    },
+    {
+      "tag": "status",
+      "values": [
+        "200"
+      ]
+    }
+  ]
+}
+```
+
+* http://localhost:8080/actuator/metrics/http.server.requests
+```
+// 20240822211528
+// http://localhost:8080/actuator/metrics/http.server.requests
+{
+  "name": "http.server.requests",
+  "baseUnit": "seconds",
+  "measurements": [
+    {
+      "statistic": "COUNT",
+      "value": 11.0
+    },
+    {
+      "statistic": "TOTAL_TIME",
+      "value": 0.9164599259999999
+    },
+    {
+      "statistic": "MAX",
+      "value": 0.56078926
+    }
+  ],
+  "availableTags": [
+    {
+      "tag": "exception",
+      "values": [
+        "NoResourceFoundException",
+        "none"
+      ]
+    },
+    {
+      "tag": "method",
+      "values": [
+        "GET"
+      ]
+    },
+    {
+      "tag": "error",
+      "values": [
+        "NoResourceFoundException",
+        "none"
+      ]
+    },
+    {
+      "tag": "uri",
+      "values": [
+        "/actuator/metrics/{requiredMetricName}",
+        "/actuator",
+        "/fact",
+        "/actuator/metrics",
+        "/**"
+      ]
+    },
+    {
+      "tag": "outcome",
+      "values": [
+        "CLIENT_ERROR",
+        "SUCCESS"
+      ]
+    },
+    {
+      "tag": "status",
+      "values": [
+        "404",
+        "200"
+      ]
+    }
+  ]
+}
+```
+
+* http://localhost:8080/actuator/metrics/http.server.requests.active
+```
+// 20240822211542
+// http://localhost:8080/actuator/metrics/http.server.requests.active
+{
+  "name": "http.server.requests.active",
+  "baseUnit": "seconds",
+  "measurements": [
+    {
+      "statistic": "ACTIVE_TASKS",
+      "value": 1.0
+    },
+    {
+      "statistic": "DURATION",
+      "value": 0.002152613
+    }
+  ],
+  "availableTags": [
+    {
+      "tag": "exception",
+      "values": [
+        "none"
+      ]
+    },
+    {
+      "tag": "method",
+      "values": [
+        "GET"
+      ]
+    },
+    {
+      "tag": "uri",
+      "values": [
+        "UNKNOWN"
+      ]
+    },
+    {
+      "tag": "outcome",
+      "values": [
+        "SUCCESS"
+      ]
+    },
+    {
+      "tag": "status",
+      "values": [
+        "200"
+      ]
+    }
+  ]
+}
+```
+
+### Micrometer notes
+
+* https://docs.micrometer.io/micrometer/reference/reference/jvm.html
+* https://docs.micrometer.io/micrometer/reference/reference/system.html
+It's not necessary - it's already integrated with spring.
+
+### Grafana / Prometheus Metrics
+
+Actuator Prometheus metrics <br/>
+<img src="images/sb-metrics-1.png" width="60%"/>
+<br/>
+
+Prometheus UI metrics <br/>
+<img src="images/prometheus-sb-metrics-1.png" width="60%"/>
+<br/>
+
+Grafana / Prometheus / SB Metrics 1 <br/>
+<img src="images/grafana-prometheus-sb-metrics-1.png" width="60%"/>
+<br/>
+
+Grafana / Prometheus / SB Metrics 2 <br/>
+<img src="images/grafana-prometheus-sb-metrics-2.png" width="60%"/>
+<br/>
+
+Grafana / Prometheus / SB Metrics 3 <br/>
+<img src="images/grafana-prometheus-sb-metrics-3.png" width="60%"/>
+<br/>
+
+Grafana / Prometheus / SB Metrics 4 <br/>
+<img src="images/grafana-prometheus-sb-metrics-4.png" width="60%"/>
+<br/>
+
+Grafana / Prometheus / SB Metrics 5 <br/>
+<img src="images/grafana-prometheus-sb-metrics-5.png" width="60%"/>
+<br/>
