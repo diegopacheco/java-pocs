@@ -1,5 +1,7 @@
 package com.github.diegopacheco.sandboxspring.controller;
 
+import com.github.diegopacheco.sandboxspring.drivers.CatFactsDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +10,9 @@ import java.util.UUID;
 
 @RestController
 public class MainController {
+
+	@Autowired
+	private CatFactsDriver catFactDriver;
 
 	@RequestMapping("/")
 	public String index() {
@@ -30,7 +35,11 @@ public class MainController {
                "result": "%s",
                "time": "%s ms"
            }""".formatted(result, (end - start));
+	}
 
+	@RequestMapping("/fact")
+	public String fact(){
+		return catFactDriver.getFact();
 	}
 
 	private void sleep(int time) {
