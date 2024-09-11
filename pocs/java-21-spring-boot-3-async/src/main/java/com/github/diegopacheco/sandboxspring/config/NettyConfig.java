@@ -22,7 +22,7 @@ public class NettyConfig {
 
        // LoopResources loopResources = LoopResources.create("http", 2 * Runtime.getRuntime().availableProcessors(), true);
 
-        IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(100);
+        IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(50);
 
         //EpollEventLoopGroup loopResources = new EpollEventLoopGroup(17 * Runtime.getRuntime().availableProcessors());
 
