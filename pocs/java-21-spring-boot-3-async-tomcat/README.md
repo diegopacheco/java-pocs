@@ -107,3 +107,62 @@ Percentage of the requests served within a certain time (ms)
   99%   5011
  100%   6104 (longest request)
 ```
+
+### Stress Date (No Block, No Mono, No Pool)
+
+```
+ab -n 60000 -c 1000 http://localhost:8080/mono-date
+```
+* Default configs on tomcat - no customization.
+* Default JVM configs - optimizations.
+* ulimit -n 65535 (client/stress and server)
+* server using jvm args:
+```
+-XX:+UseZGC \
+-Xms8G \
+-Xmx8G \
+-XX:MaxGCPauseMillis=200 \
+-XX:+UseStringDeduplication \
+-XX:+OptimizeStringConcat \
+-XX:+UseCompressedOops \
+-XX:+AlwaysPreTouch \
+-XX:+UseNUMA \
+-XX:+DisableExplicitGC
+```
+```
+Server Software:        
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /noblock-date
+Document Length:        28 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   6.123 seconds
+Complete requests:      60000
+Failed requests:        0
+Total transferred:      9660000 bytes
+HTML transferred:       1680000 bytes
+Requests per second:    9798.43 [#/sec] (mean)
+Time per request:       102.057 [ms] (mean)
+Time per request:       0.102 [ms] (mean, across all concurrent requests)
+Transfer rate:          1540.57 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   53 128.2     40    1113
+Processing:     4   47  15.7     49     107
+Waiting:        4   34  12.6     34      89
+Total:         11  100 130.7     93    1153
+
+Percentage of the requests served within a certain time (ms)
+  50%     93
+  66%     97
+  75%    101
+  80%    103
+  90%    109
+  95%    113
+  98%    122
+  99%   1104
+ 100%   1153 (longest request)
+```

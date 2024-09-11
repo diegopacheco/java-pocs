@@ -2,6 +2,7 @@ package com.github.diegopacheco.sandboxspring.controller;
 
 import com.github.diegopacheco.sandboxspring.service.AsyncDateService;
 import com.github.diegopacheco.sandboxspring.service.BlockDateService;
+import com.github.diegopacheco.sandboxspring.service.NoBlockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,9 @@ public class HelloController {
 	@Autowired
 	private BlockDateService blockService;
 
+	@Autowired
+	private NoBlockService noBlockService;
+
 	@RequestMapping("/")
 	public String index() {
 		return "Greetings from Spring Boot!";
@@ -31,6 +35,11 @@ public class HelloController {
 	@GetMapping("/block-date")
 	public String executeBlockTask() {
 		return blockService.getDateBlock();
+	}
+
+	@GetMapping("/noblock-date")
+	public String executeNoBlockTask() {
+		return noBlockService.getDate();
 	}
 
 }
