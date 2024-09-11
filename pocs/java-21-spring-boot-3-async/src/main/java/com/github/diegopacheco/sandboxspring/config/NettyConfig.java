@@ -4,6 +4,7 @@ import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.epoll.Epoll;
 import io.netty.channel.epoll.EpollEventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.incubator.channel.uring.IOUringEventLoopGroup;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,15 +21,17 @@ public class NettyConfig {
     //@Bean
     public HttpServer httpServer() {
 
-       // LoopResources loopResources = LoopResources.create("http", 2 * Runtime.getRuntime().availableProcessors(), true);
+        //LoopResources loopResources = LoopResources.create("http", 48, true);
 
-        IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(50);
+        //IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(48);
 
-        //EpollEventLoopGroup loopResources = new EpollEventLoopGroup(17 * Runtime.getRuntime().availableProcessors());
+        //EpollEventLoopGroup loopResources = new EpollEventLoopGroup(48);
+
+        NioEventLoopGroup loopResources = new NioEventLoopGroup(24);
 
         return HttpServer.create()
                 .runOn(loopResources)
-                .option(ChannelOption.SO_BACKLOG, 1024)
+                .option(ChannelOption.SO_BACKLOG, 128)
                 .option(ChannelOption.TCP_FASTOPEN, 1024)
                 .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
                 .childOption(ChannelOption.SO_KEEPALIVE, true)
