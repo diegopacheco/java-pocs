@@ -186,7 +186,7 @@ Percentage of the requests served within a certain time (ms)
 ```
 
 
-### Stress Date (Block Block, No Mono, No Pool)
+### Stress Date (NO Block, No Mono, No Pool) -1 
 
 ```
 ab -n 60000 -c 1000 http://localhost:8080/mono-date
@@ -230,4 +230,123 @@ Percentage of the requests served within a certain time (ms)
   98%    346
   99%    385
  100%    479 (longest request)
+```
+
+### Stress Date (No Block, Mono, Pool) - 2
+
+```
+ab -n 60000 -c 1000 http://localhost:8080/mono-date
+```
+* Default configs on netty - no customization.
+* Default JVM configs - optimizations.
+* ulimit -n 65535 (client/stress and server)
+* server using jvm args:
+```
+-XX:+UseZGC \
+-Xms8G \
+-Xmx8G \
+-XX:MaxGCPauseMillis=200 \
+-XX:+UseStringDeduplication \
+-XX:+OptimizeStringConcat \
+-XX:+UseCompressedOops \
+-XX:+AlwaysPreTouch \
+-XX:+UseNUMA \
+-XX:+DisableExplicitGC
+```
+```
+Server Software:        
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /mono-noblock-date
+Document Length:        28 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   6.752 seconds
+Complete requests:      60000
+Failed requests:        0
+Total transferred:      6420000 bytes
+HTML transferred:       1680000 bytes
+Requests per second:    8886.63 [#/sec] (mean)
+Time per request:       112.529 [ms] (mean)
+Time per request:       0.113 [ms] (mean, across all concurrent requests)
+Transfer rate:          928.58 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   42   9.9     43      64
+Processing:    14   68  26.9     64     259
+Waiting:       10   52  29.8     49     258
+Total:         60  110  19.9    107     279
+
+Percentage of the requests served within a certain time (ms)
+  50%    107
+  66%    111
+  75%    114
+  80%    116
+  90%    122
+  95%    131
+  98%    177
+  99%    227
+ 100%    279 (longest request)
+
+```
+
+### Stress Date (No Block, No Mono, No Pool) - 3
+
+```
+ab -n 60000 -c 1000 http://localhost:8080/mono-date
+```
+* Default configs on netty - no customization.
+* Default JVM configs - optimizations.
+* ulimit -n 65535 (client/stress and server)
+* server using jvm args:
+```
+-XX:+UseZGC \
+-Xms8G \
+-Xmx8G \
+-XX:MaxGCPauseMillis=200 \
+-XX:+UseStringDeduplication \
+-XX:+OptimizeStringConcat \
+-XX:+UseCompressedOops \
+-XX:+AlwaysPreTouch \
+-XX:+UseNUMA \
+-XX:+DisableExplicitGC
+```
+```
+Server Software:        
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /noblock-date
+Document Length:        28 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   6.737 seconds
+Complete requests:      60000
+Failed requests:        0
+Total transferred:      6420000 bytes
+HTML transferred:       1680000 bytes
+Requests per second:    8905.89 [#/sec] (mean)
+Time per request:       112.285 [ms] (mean)
+Time per request:       0.112 [ms] (mean, across all concurrent requests)
+Transfer rate:          930.60 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   44  10.0     45      66
+Processing:    14   65  21.1     61     215
+Waiting:       10   50  23.8     42     215
+Total:         62  109  15.0    106     238
+
+Percentage of the requests served within a certain time (ms)
+  50%    106
+  66%    111
+  75%    113
+  80%    115
+  90%    122
+  95%    129
+  98%    150
+  99%    186
+ 100%    238 (longest request)
 ```
