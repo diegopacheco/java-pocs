@@ -27,7 +27,7 @@ public class NettyConfig {
 
         //EpollEventLoopGroup loopResources = new EpollEventLoopGroup(48);
 
-        NioEventLoopGroup loopResources = new NioEventLoopGroup(24);
+        NioEventLoopGroup loopResources = new NioEventLoopGroup(250);
 
         return HttpServer.create()
                 .runOn(loopResources)
