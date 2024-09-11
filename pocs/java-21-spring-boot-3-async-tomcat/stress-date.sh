@@ -2,7 +2,7 @@
 
 #wrk -t500 -c500 -d1m -R10000 http://localhost:8080/async-task
 
-ab -n 60000 -c 1000 http://localhost:8080/noblock-date
+ab -n 100000 -c 5000 http://localhost:8080/noblock-date
 
 #
 #DURATION=60

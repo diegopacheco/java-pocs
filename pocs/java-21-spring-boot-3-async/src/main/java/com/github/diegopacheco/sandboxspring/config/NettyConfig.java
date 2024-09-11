@@ -22,22 +22,20 @@ public class NettyConfig {
 
        // LoopResources loopResources = LoopResources.create("http", 2 * Runtime.getRuntime().availableProcessors(), true);
 
-        //IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(10 * Runtime.getRuntime().availableProcessors());
+        IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(100);
 
         //EpollEventLoopGroup loopResources = new EpollEventLoopGroup(17 * Runtime.getRuntime().availableProcessors());
 
-        /*
         return HttpServer.create()
                 .runOn(loopResources)
-                .option(ChannelOption.SO_BACKLOG, 8192)
+                .option(ChannelOption.SO_BACKLOG, 1024)
                 .option(ChannelOption.TCP_FASTOPEN, 1024)
                 .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
                 .childOption(ChannelOption.SO_KEEPALIVE, true)
                 .childOption(ChannelOption.TCP_NODELAY, true)
                 .childOption(ChannelOption.SO_RCVBUF, 1 * 1024 * 1024)  // 1 MB receive buffer
                 .childOption(ChannelOption.SO_SNDBUF, 1 * 1024 * 1024); // 1 MB send buffer
-         */
-        return null;
+        //return null;
     }
 
 }
