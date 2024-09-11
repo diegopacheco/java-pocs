@@ -138,3 +138,96 @@ Percentage of the requests served within a certain time (ms)
   99%  10005
  100%  17007 (longest request)
 ```
+
+### Stress Mono (Block Block)
+
+```
+ab -n 60000 -c 1000 http://localhost:8080/mono-date
+```
+* Default configs on netty - no customization.
+* Default JVM configs - optimizations.
+```
+Server Software:        
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /mono-noblock-date
+Document Length:        28 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   9.616 seconds
+Complete requests:      60000
+Failed requests:        0
+Total transferred:      6420000 bytes
+HTML transferred:       1680000 bytes
+Requests per second:    6239.73 [#/sec] (mean)
+Time per request:       160.263 [ms] (mean)
+Time per request:       0.160 [ms] (mean, across all concurrent requests)
+Transfer rate:          652.00 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   48  18.9     54      88
+Processing:    17  109  65.5     89     432
+Waiting:       11   92  71.0     70     429
+Total:         73  157  51.2    143     454
+
+Percentage of the requests served within a certain time (ms)
+  50%    143
+  66%    152
+  75%    159
+  80%    165
+  90%    201
+  95%    279
+  98%    360
+  99%    391
+ 100%    454 (longest request)
+
+```
+
+
+### Stress Date (Block Block, No Mono, No Pool)
+
+```
+ab -n 60000 -c 1000 http://localhost:8080/mono-date
+```
+* Default configs on netty - no customization.
+* Default JVM configs - optimizations.
+* ulimit -n 65535 (client/stress)
+```
+Server Software:        
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /noblock-date
+Document Length:        28 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   9.392 seconds
+Complete requests:      60000
+Failed requests:        0
+Total transferred:      6420000 bytes
+HTML transferred:       1680000 bytes
+Requests per second:    6388.62 [#/sec] (mean)
+Time per request:       156.528 [ms] (mean)
+Time per request:       0.157 [ms] (mean, across all concurrent requests)
+Transfer rate:          667.56 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   41  21.5     50      90
+Processing:    13  113  68.6     87     452
+Waiting:       11   98  74.0     69     451
+Total:         74  153  54.0    137     479
+
+Percentage of the requests served within a certain time (ms)
+  50%    137
+  66%    147
+  75%    156
+  80%    166
+  90%    208
+  95%    282
+  98%    346
+  99%    385
+ 100%    479 (longest request)
+```
