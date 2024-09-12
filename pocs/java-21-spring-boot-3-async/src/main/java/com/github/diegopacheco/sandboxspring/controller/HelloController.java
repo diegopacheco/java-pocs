@@ -38,7 +38,7 @@ public class HelloController {
 		return asyncService.getDateAsync();
 	}
 
-	@GetMapping("/mono-date")
+	@GetMapping("/stress-benchmark-02")
 	public Mono<String> executeMonoTask() {
 		return asyncMonoService.getDateAsync().subscribeOn(Schedulers.boundedElastic());
 	}

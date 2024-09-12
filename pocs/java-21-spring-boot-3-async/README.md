@@ -7,10 +7,10 @@
 ### Summary
 
 ```
-Block Mono          -> RPS
-Block Scheduler     -> 99.77 RPS
-Non-Blocking Mono   -> RPS 
-Non-Blocking NoMono -> RPS
+Blocking Mono          -> 117.80 RPS
+Blocking Scheduler     -> 99.77 RPS
+Non-Blocking Mono      -> RPS 
+Non-Blocking NoMono    -> RPS
 ```
 <br/>
 
@@ -149,4 +149,131 @@ Percentage of the requests served within a certain time (ms)
   98%  10009
   99%  10012
  100%  10292 (longest request)
+```
+
+### Benchmark 02: Stress Mono Date Blocking Schedulers.boundedElastic()
+
+Stress Test Config:
+```bash
+ab -n 60000 -c 1000 http://localhost:8080/stress-benchmark-02
+```
+Code:
+```
+Controller -> @GetMapping("/stress-benchmark-02")
+Service    -> AsyncMonoService.getDateAsync().subscribeOn(Schedulers.boundedElastic())
+```
+Impl:
+````java
+public Mono<String> getDateAsync() {
+    return Mono.fromCallable( () -> {
+        try {
+            // Simulate a long-running task
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return new Date().toString();
+    });
+}
+````
+Specs
+
+Server JVM
+```
+-XX:+UseZGC \
+-Xms8G \
+-Xmx8G \
+-XX:MaxGCPauseMillis=200 \
+-XX:+UseStringDeduplication \
+-XX:+OptimizeStringConcat \
+-XX:+UseCompressedOops \
+-XX:+AlwaysPreTouch \
+-XX:+UseNUMA \
+-XX:+DisableExplicitGC
+```
+Client/Stress:
+```
+ulimit -n 65535
+```
+Server:
+```
+ulimit -n 65535
+```
+Scheduler(Schedulers.boundedElastic()) Config:
+```
+Queue Size: 100 000
+TTL: 60 seconds
+size: 10 * Runtime.getRuntime().availableProcessors() // 120 in my machine
+```
+Netty Config:
+```java
+@Bean
+public HttpServer httpServer() {
+    IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(48);
+    return HttpServer.create()
+            .runOn(loopResources)
+            .option(ChannelOption.SO_BACKLOG, 128)
+            .option(ChannelOption.TCP_FASTOPEN, 1024)
+            .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
+            .childOption(ChannelOption.SO_KEEPALIVE, true)
+            .childOption(ChannelOption.TCP_NODELAY, true)
+            .childOption(ChannelOption.SO_RCVBUF, 1 * 1024 * 1024)  // 1 MB receive buffer
+            .childOption(ChannelOption.SO_SNDBUF, 1 * 1024 * 1024); // 1 MB send buffer
+}
+```
+Results:
+```
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 6000 requests
+Completed 12000 requests
+Completed 18000 requests
+Completed 24000 requests
+Completed 30000 requests
+Completed 36000 requests
+Completed 42000 requests
+Completed 48000 requests
+Completed 54000 requests
+Completed 60000 requests
+Finished 60000 requests
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /stress-benchmark-02
+Document Length:        28 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   509.341 seconds
+Complete requests:      60000
+Failed requests:        0
+Total transferred:      6420000 bytes
+HTML transferred:       1680000 bytes
+Requests per second:    117.80 [#/sec] (mean)
+Time per request:       8489.009 [ms] (mean)
+Time per request:       8.489 [ms] (mean, across all concurrent requests)
+Transfer rate:          12.31 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    2   4.1      1      41
+Processing:  1004 8275 1062.8   8001   18008
+Waiting:     1004 8274 1062.8   8001   18006
+Total:       1046 8277 1061.0   8003   18012
+
+Percentage of the requests served within a certain time (ms)
+  50%   8003
+  66%   8005
+  75%   8059
+  80%   9000
+  90%   9003
+  95%   9006
+  98%  11003
+  99%  13004
+ 100%  18012 (longest request)
 ```
