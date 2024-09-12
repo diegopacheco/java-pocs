@@ -48,7 +48,7 @@ public class HelloController {
 		return noBlockService.getDateAsync().subscribeOn(Schedulers.boundedElastic());
 	}
 
-	@GetMapping("/noblock-date")
+	@GetMapping("/stress-benchmark-04")
 	public String executeNoBlockTask() {
 		return noBlockService.getDate();
 	}
