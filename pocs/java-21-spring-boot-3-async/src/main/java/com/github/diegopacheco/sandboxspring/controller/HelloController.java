@@ -43,7 +43,7 @@ public class HelloController {
 		return asyncMonoService.getDateAsync().subscribeOn(Schedulers.boundedElastic());
 	}
 
-	@GetMapping("/mono-noblock-date")
+	@GetMapping("/stress-benchmark-03")
 	public Mono<String> executeMonoNoBlockTask() {
 		return noBlockService.getDateAsync().subscribeOn(Schedulers.boundedElastic());
 	}
