@@ -9,6 +9,7 @@
 ```
 Blocking Mono Scheduler(BE)      -> 117.80 RPS
 Blocking @Async Scheduler        -> 99.77 RPS
+Blocking NoMono NoScheduler      -> 11.99 RPS
 Non-Blocking Mono Scheduler(BE)  -> 9109.52 RPS 
 Non-Blocking NoMono NoScheduler  -> 7462.38 RPS
 ```
@@ -519,4 +520,132 @@ Percentage of the requests served within a certain time (ms)
   98%   1583
   99%   1637
  100%   1763 (longest request)
+```
+
+### Benchmark 05: Stress Blocking NoMono NoScheduler Date
+
+Stress Test Config:
+```bash
+ab -n 60000 -c 1000 http://localhost:8080/stress-benchmark-05
+```
+Code:
+```
+Controller -> @GetMapping("/stress-benchmark-05")
+Service    -> BlockService.getDateBlock();
+```
+Impl:
+````java
+public String getDateBlock() {
+    // Simulate a long-running task
+    try {
+        Thread.sleep(1000);
+    } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+    }
+    return new Date().toString();
+}
+````
+Specs
+
+Server JVM
+```
+-XX:+UseZGC \
+-Xms8G \
+-Xmx8G \
+-XX:MaxGCPauseMillis=200 \
+-XX:+UseStringDeduplication \
+-XX:+OptimizeStringConcat \
+-XX:+UseCompressedOops \
+-XX:+AlwaysPreTouch \
+-XX:+UseNUMA \
+-XX:+DisableExplicitGC
+```
+Client/Stress:
+```
+ulimit -n 65535
+```
+Server:
+```
+ulimit -n 65535
+```
+NO Schedulers
+```
+NONE
+```
+Netty Config:
+```java
+@Bean
+public HttpServer httpServer() {
+    IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(48);
+    return HttpServer.create()
+            .runOn(loopResources)
+            .option(ChannelOption.SO_BACKLOG, 128)
+            .option(ChannelOption.TCP_FASTOPEN, 1024)
+            .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
+            .childOption(ChannelOption.SO_KEEPALIVE, true)
+            .childOption(ChannelOption.TCP_NODELAY, true)
+            .childOption(ChannelOption.SO_RCVBUF, 1 * 1024 * 1024)  // 1 MB receive buffer
+            .childOption(ChannelOption.SO_SNDBUF, 1 * 1024 * 1024); // 1 MB send buffer
+}
+```
+OS TCP queues
+```
+Netty - recv-Q: 987, send-q: 40000
+```
+Results:
+```
+❯ ./stress-benchmark-05.sh
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 6000 requests
+Completed 12000 requests
+Completed 18000 requests
+Completed 24000 requests
+Completed 30000 requests
+Completed 36000 requests
+Completed 42000 requests
+Completed 48000 requests
+Completed 54000 requests
+Completed 60000 requests
+Finished 60000 requests
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /stress-benchmark-05
+Document Length:        28 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   5005.869 seconds
+Complete requests:      60000
+Failed requests:        0
+Total transferred:      6420000 bytes
+HTML transferred:       1680000 bytes
+Requests per second:    11.99 [#/sec] (mean)
+Time per request:       83431.158 [ms] (mean)
+Time per request:       83.431 [ms] (mean, across all concurrent requests)
+Transfer rate:          1.25 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   4.9      0      53
+Processing:  1209 82724 5647.7  83076   84135
+Waiting:     1005 82720 5685.2  83076   84134
+Total:       1209 82725 5643.0  83077   84153
+
+Percentage of the requests served within a certain time (ms)
+  50%  83077
+  66%  83095
+  75%  84075
+  80%  84075
+  90%  84077
+  95%  84079
+  98%  84083
+  99%  84087
+ 100%  84153 (longest request)
 ```

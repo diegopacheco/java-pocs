@@ -8,6 +8,7 @@ import java.util.concurrent.CompletableFuture;
 
 @Service
 public class AsyncDateService {
+
     @Async("taskExecutor")
     public CompletableFuture<String> getDateAsync() {
         // Simulate a long-running task
@@ -18,4 +19,18 @@ public class AsyncDateService {
         }
         return CompletableFuture.completedFuture(new Date().toString());
     }
+
+    @Async("taskExecutor")
+    public CompletableFuture<String> getDateAsyncReallyAsync() {
+        return CompletableFuture.supplyAsync(() -> {
+            // Simulate a long-running task
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            return new Date().toString();
+        });
+    }
+
 }

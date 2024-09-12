@@ -53,9 +53,14 @@ public class HelloController {
 		return noBlockService.getDate();
 	}
 
-	@GetMapping("/block-date")
+	@GetMapping("/stress-benchmark-05")
 	public String executeBlockTask() {
 		return blockService.getDateBlock();
+	}
+
+	@GetMapping("/stress-benchmark-06")
+	public CompletableFuture<String> executeAsyncReallyTask() {
+		return asyncService.getDateAsyncReallyAsync();
 	}
 
 }
