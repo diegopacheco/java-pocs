@@ -33,7 +33,7 @@ public class HelloController {
 		return "Greetings from Spring Boot!";
 	}
 
-	@GetMapping("/async-async-task")
+	@GetMapping("/stress-benchmark-01")
 	public CompletableFuture<String> executeAsyncTask() {
 		return asyncService.getDateAsync();
 	}
