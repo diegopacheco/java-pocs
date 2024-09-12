@@ -10,7 +10,7 @@
 Blocking Mono Scheduler(BE)      -> 117.80 RPS
 Blocking @Async Scheduler        -> 99.77 RPS
 Blocking NoMono NoScheduler      -> 11.99 RPS
-Blocking @Async Scheduler FJCP   -> RPS
+Blocking @Async Scheduler FJCP   -> 10.99 RPS
 Non-Blocking Mono Scheduler(BE)  -> 9109.52 RPS 
 Non-Blocking NoMono NoScheduler  -> 7462.38 RPS
 ```
@@ -722,5 +722,58 @@ public HttpServer httpServer() {
 ```
 Results:
 ```
+❯ ./stress-benchmark-06.sh
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
 
+Benchmarking localhost (be patient)
+Completed 6000 requests
+Completed 12000 requests
+Completed 18000 requests
+Completed 24000 requests
+Completed 30000 requests
+Completed 36000 requests
+Completed 42000 requests
+Completed 48000 requests
+Completed 54000 requests
+Completed 60000 requests
+Finished 60000 requests
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /stress-benchmark-06
+Document Length:        28 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   5457.153 seconds
+Complete requests:      60000
+Failed requests:        0
+Total transferred:      6420000 bytes
+HTML transferred:       1680000 bytes
+Requests per second:    10.99 [#/sec] (mean)
+Time per request:       90952.550 [ms] (mean)
+Time per request:       90.953 [ms] (mean, across all concurrent requests)
+Transfer rate:          1.15 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   4.4      0      43
+Processing:  1013 90174 99071.3  86015 4341772
+Waiting:     1013 90173 99071.3  86014 4341772
+Total:       1056 90174 99071.0  86015 4341772
+
+Percentage of the requests served within a certain time (ms)
+  50%  86015
+  66%  89012
+  75%  90016
+  80%  91017
+  90%  96015
+  95%  100018
+  98%  100020
+  99%  112018
+ 100%  4341772 (longest request)
 ```
