@@ -10,6 +10,7 @@
 Blocking Mono Scheduler(BE)      -> 117.80 RPS
 Blocking @Async Scheduler        -> 99.77 RPS
 Blocking NoMono NoScheduler      -> 11.99 RPS
+Blocking @Async Scheduler FJCP   -> RPS
 Non-Blocking Mono Scheduler(BE)  -> 9109.52 RPS 
 Non-Blocking NoMono NoScheduler  -> 7462.38 RPS
 ```
@@ -648,4 +649,78 @@ Percentage of the requests served within a certain time (ms)
   98%  84083
   99%  84087
  100%  84153 (longest request)
+```
+
+### Benchmark 06: Stress @Async Blocking Scheduler Async ForkJoin.commonPool() Date
+
+Stress Test Config:
+```bash
+ab -n 60000 -c 1000 http://localhost:8080/stress-benchmark-06
+```
+Code:
+```
+Controller -> @GetMapping("/stress-benchmark-06")
+Service    -> AsyncService.getDateAsyncReallyAsync();
+```
+Impl:
+````java
+@Async("taskExecutor")
+public CompletableFuture<String> getDateAsyncReallyAsync() {
+    return CompletableFuture.supplyAsync(() -> {
+        // Simulate a long-running task
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return new Date().toString();
+    });
+}
+````
+Specs
+
+Server JVM
+```
+-XX:+UseZGC \
+-Xms8G \
+-Xmx8G \
+-XX:MaxGCPauseMillis=200 \
+-XX:+UseStringDeduplication \
+-XX:+OptimizeStringConcat \
+-XX:+UseCompressedOops \
+-XX:+AlwaysPreTouch \
+-XX:+UseNUMA \
+-XX:+DisableExplicitGC
+```
+Client/Stress:
+```
+ulimit -n 65535
+```
+Server:
+```
+ulimit -n 65535
+```
+NO Schedulers
+```
+NONE
+```
+Netty Config:
+```java
+@Bean
+public HttpServer httpServer() {
+    IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(48);
+    return HttpServer.create()
+            .runOn(loopResources)
+            .option(ChannelOption.SO_BACKLOG, 128)
+            .option(ChannelOption.TCP_FASTOPEN, 1024)
+            .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
+            .childOption(ChannelOption.SO_KEEPALIVE, true)
+            .childOption(ChannelOption.TCP_NODELAY, true)
+            .childOption(ChannelOption.SO_RCVBUF, 1 * 1024 * 1024)  // 1 MB receive buffer
+            .childOption(ChannelOption.SO_SNDBUF, 1 * 1024 * 1024); // 1 MB send buffer
+}
+```
+Results:
+```
+
 ```
