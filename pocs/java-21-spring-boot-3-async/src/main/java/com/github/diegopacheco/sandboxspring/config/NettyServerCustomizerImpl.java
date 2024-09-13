@@ -14,6 +14,10 @@ public class NettyServerCustomizerImpl implements NettyServerCustomizer {
      * check so max con -> sysctl net.core.somaxconn
      * sudo sysctl -w net.core.somaxconn=4096
      * sudo sh -c 'echo "net.core.somaxconn=4096" >> /etc/sysctl.conf'
+     *
+     * sysctl net.ipv4.tcp_rmem
+     * sysctl net.ipv4.tcp_wmem
+     * sysctl net.ipv4.tcp_congestion_control
      */
     @Override
     public HttpServer apply(HttpServer httpServer) {
