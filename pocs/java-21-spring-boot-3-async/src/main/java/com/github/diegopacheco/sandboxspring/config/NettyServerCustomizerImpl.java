@@ -7,6 +7,9 @@ import org.springframework.boot.web.embedded.netty.NettyServerCustomizer;
 import org.springframework.context.annotation.Configuration;
 import reactor.netty.http.server.HttpServer;
 
+/**
+ * Not used in benchmarks
+ */
 @Configuration
 public class NettyServerCustomizerImpl implements NettyServerCustomizer {
 
