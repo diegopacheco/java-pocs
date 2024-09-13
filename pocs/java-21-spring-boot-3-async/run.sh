@@ -2,6 +2,13 @@
 
 ulimit -n 65535
 
+# GC Options
+#  -XX:+UseZGC
+#  -XX:+UseG1GC
+#  -XX:+UseShenandoahGC
+#  -XX:+UseParallelGC
+#  -XX:+UseEpsilonGC -XX:+UnlockExperimentalVMOptions
+
 ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="\
   -XX:+UseZGC \
   -Xms8G \
