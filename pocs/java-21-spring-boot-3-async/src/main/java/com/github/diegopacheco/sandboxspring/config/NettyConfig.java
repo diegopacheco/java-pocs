@@ -23,11 +23,11 @@ public class NettyConfig {
 
         //LoopResources loopResources = LoopResources.create("http", 48, true);
 
-        IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(48);
+        //IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(48);
 
-        //EpollEventLoopGroup loopResources = new EpollEventLoopGroup(48);
+        EpollEventLoopGroup loopResources = new EpollEventLoopGroup(48);
 
-        //NioEventLoopGroup loopResources = new NioEventLoopGroup(250);
+        //NioEventLoopGroup loopResources = new NioEventLoopGroup(48);
 
         return HttpServer.create()
                 .runOn(loopResources)

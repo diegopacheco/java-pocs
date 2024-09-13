@@ -777,3 +777,87 @@ Percentage of the requests served within a certain time (ms)
   99%  112018
  100%  4341772 (longest request)
 ```
+
+#### Extras
+
+##### Netty Event Loops
+
+Stress Test Config:
+```bash
+ab -n 60000 -c 1000 -s 60 http://localhost:8080/stress-benchmark-03
+```
+Code:
+```
+Controller -> @GetMapping("/stress-benchmark-03")
+Service    -> NoBlockService.getDateAsync().subscribeOn(Schedulers.boundedElastic());
+```
+Impl:
+````java
+public Mono<String> getDateAsync() {
+    return Mono.fromCallable( () -> {
+        return new Date().toString();
+    });
+}
+````
+Specs
+
+Server JVM
+```
+-XX:+UseZGC \
+-Xms8G \
+-Xmx8G \
+-XX:MaxGCPauseMillis=200 \
+-XX:+UseStringDeduplication \
+-XX:+OptimizeStringConcat \
+-XX:+UseCompressedOops \
+-XX:+AlwaysPreTouch \
+-XX:+UseNUMA \
+-XX:+DisableExplicitGC
+```
+Client/Stress:
+```
+ulimit -n 65535
+```
+Server:
+```
+ulimit -n 65535
+```
+Netty Config:
+```java
+@Bean
+public HttpServer httpServer() {
+    return HttpServer.create()
+            .runOn(loopResources)
+            .option(ChannelOption.SO_BACKLOG, 128)
+            .option(ChannelOption.TCP_FASTOPEN, 1024)
+            .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
+            .childOption(ChannelOption.SO_KEEPALIVE, true)
+            .childOption(ChannelOption.TCP_NODELAY, true)
+            .childOption(ChannelOption.SO_RCVBUF, 1 * 1024 * 1024)  // 1 MB receive buffer
+            .childOption(ChannelOption.SO_SNDBUF, 1 * 1024 * 1024); // 1 MB send buffer
+}
+```
+
+IOUringEventLoopGroup
+```java
+IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(48);
+```
+```
+Requests per second:    9109.52 [#/sec] (mean)
+```
+
+NioEventLoopGroup
+```java
+NioEventLoopGroup loopResources = new NioEventLoopGroup(48)
+```
+```
+Requests per second:    8771.94 [#/sec] (mean)
+```
+
+EpollEventLoopGroup
+```java
+EpollEventLoopGroup loopResources = new EpollEventLoopGroup(48);
+```
+```
+Requests per second:    8959.57 [#/sec] (mean)
+```
