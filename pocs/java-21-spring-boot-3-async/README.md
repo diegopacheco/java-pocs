@@ -848,7 +848,7 @@ Requests per second:    9109.52 [#/sec] (mean)
 
 NioEventLoopGroup
 ```java
-NioEventLoopGroup loopResources = new NioEventLoopGroup(48)
+NioEventLoopGroup loopResources = new NioEventLoopGroup(48);
 ```
 ```
 Requests per second:    8771.94 [#/sec] (mean)
@@ -860,4 +860,135 @@ EpollEventLoopGroup loopResources = new EpollEventLoopGroup(48);
 ```
 ```
 Requests per second:    8959.57 [#/sec] (mean)
+```
+
+##### JVM GC
+
+Stress Test Config:
+```bash
+ab -n 60000 -c 1000 -s 60 http://localhost:8080/stress-benchmark-03
+```
+Code:
+```
+Controller -> @GetMapping("/stress-benchmark-03")
+Service    -> NoBlockService.getDateAsync().subscribeOn(Schedulers.boundedElastic());
+```
+Impl:
+````java
+public Mono<String> getDateAsync() {
+    return Mono.fromCallable( () -> {
+        return new Date().toString();
+    });
+}
+````
+Specs
+
+Client/Stress:
+```
+ulimit -n 65535
+```
+Server:
+```
+ulimit -n 65535
+```
+Netty Config:
+```java
+@Bean
+public HttpServer httpServer() {
+    IOUringEventLoopGroup loopResources = new IOUringEventLoopGroup(48);
+    return HttpServer.create()
+            .runOn(loopResources)
+            .option(ChannelOption.SO_BACKLOG, 128)
+            .option(ChannelOption.TCP_FASTOPEN, 1024)
+            .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
+            .childOption(ChannelOption.SO_KEEPALIVE, true)
+            .childOption(ChannelOption.TCP_NODELAY, true)
+            .childOption(ChannelOption.SO_RCVBUF, 1 * 1024 * 1024)  // 1 MB receive buffer
+            .childOption(ChannelOption.SO_SNDBUF, 1 * 1024 * 1024); // 1 MB send buffer
+}
+```
+
+ZGC
+```
+-XX:+UseZGC \
+-Xms8G \
+-Xmx8G \
+-XX:MaxGCPauseMillis=200 \
+-XX:+UseStringDeduplication \
+-XX:+OptimizeStringConcat \
+-XX:+UseCompressedOops \
+-XX:+AlwaysPreTouch \
+-XX:+UseNUMA \
+-XX:+DisableExplicitGC
+```
+```
+Requests per second:    9109.52 [#/sec] (mean)
+```
+
+G1
+```
+-XX:+UseG1GC \
+-Xms8G \
+-Xmx8G \
+-XX:MaxGCPauseMillis=200 \
+-XX:+UseStringDeduplication \
+-XX:+OptimizeStringConcat \
+-XX:+UseCompressedOops \
+-XX:+AlwaysPreTouch \
+-XX:+UseNUMA \
+-XX:+DisableExplicitGC
+```
+```
+Requests per second:    4740.74 [#/sec] (mean)
+```
+
+Shenandoah
+```
+-XX:+UseShenandoahGC \
+-Xms8G \
+-Xmx8G \
+-XX:MaxGCPauseMillis=200 \
+-XX:+UseStringDeduplication \
+-XX:+OptimizeStringConcat \
+-XX:+UseCompressedOops \
+-XX:+AlwaysPreTouch \
+-XX:+UseNUMA \
+-XX:+DisableExplicitGC
+```
+```
+Requests per second:    8037.97 [#/sec] (mean)
+```
+
+Parallel
+```
+-XX:+UseParallelGC \
+-Xms8G \
+-Xmx8G \
+-XX:MaxGCPauseMillis=200 \
+-XX:+UseStringDeduplication \
+-XX:+OptimizeStringConcat \
+-XX:+UseCompressedOops \
+-XX:+AlwaysPreTouch \
+-XX:+UseNUMA \
+-XX:+DisableExplicitGC
+```
+```
+Requests per second:    7897.80 [#/sec] (mean)
+```
+
+Epsilon
+```
+-XX:+UnlockExperimentalVMOptions \
+-XX:+UseEpsilonGC \
+-Xms8G \
+-Xmx8G \
+-XX:MaxGCPauseMillis=200 \
+-XX:+OptimizeStringConcat \
+-XX:+UseCompressedOops \
+-XX:+AlwaysPreTouch \
+-XX:+UseNUMA \
+-XX:+DisableExplicitGC
+```
+```
+Requests per second:    8595.45 [#/sec] (mean)
 ```
