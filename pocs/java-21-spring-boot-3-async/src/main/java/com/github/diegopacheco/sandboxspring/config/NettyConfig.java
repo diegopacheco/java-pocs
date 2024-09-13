@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import reactor.netty.http.server.HttpServer;
 import reactor.netty.resources.LoopResources;
 
-@Configuration
+//@Configuration
 public class NettyConfig {
 
     public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class NettyConfig {
 
         return HttpServer.create()
                 .runOn(loopResources)
-                .option(ChannelOption.SO_BACKLOG, 128)
+                .option(ChannelOption.SO_BACKLOG, 4096)
                 .option(ChannelOption.TCP_FASTOPEN, 1024)
                 .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
                 .childOption(ChannelOption.SO_KEEPALIVE, true)
