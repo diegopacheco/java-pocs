@@ -4,15 +4,42 @@
 ./mvnw clean install
 ```
 
+
+### Hardware
+
+```
+❯ neofetch
+            .-/+oossssoo+/-.               diego@4winds 
+        `:+ssssssssssssssssss+:`           ------------ 
+      -+ssssssssssssssssssyyssss+-         OS: Ubuntu 22.04.4 LTS x86_64 
+    .ossssssssssssssssssdMMMNysssso.       Host: Avell G1555 MUV / A62 MUV Standard 
+   /ssssssssssshdmmNNmmyNMMMMhssssss/      Kernel: 6.2.0-1009-lowlatency 
+  +ssssssssshmydMMMMMMMNddddyssssssss+     Uptime: 9 days, 20 hours, 54 mins 
+ /sssssssshNMMMyhhyyyyhmNMMMNhssssssss/    Packages: 4483 (dpkg), 274 (brew), 7 (flatpak), 43 (snap) 
+.ssssssssdMMMNhsssssssssshNMMMdssssssss.   Shell: zsh 5.8.1 
++sssshhhyNMMNyssssssssssssyNMMMysssssss+   Resolution: 3840x2160 
+ossyNMMMNyMMhsssssssssssssshmmmhssssssso   DE: GNOME 42.9 
+ossyNMMMNyMMhsssssssssssssshmmmhssssssso   WM: Mutter 
++sssshhhyNMMNyssssssssssssyNMMMysssssss+   WM Theme: Adwaita 
+.ssssssssdMMMNhsssssssssshNMMMdssssssss.   Theme: Yaru-blue [GTK2/3] 
+ /sssssssshNMMMyhhyyyyhdNMMMNhssssssss/    Icons: Yaru-blue [GTK2/3] 
+  +sssssssssdmydMMMMMMMMddddyssssssss+     Terminal: gnome-terminal 
+   /ssssssssssshdmNNNNmyNMMMMhssssss/      CPU: Intel i7-9750H (12) @ 4.500GHz 
+    .ossssssssssssssssssdMMMNysssso.       GPU: Intel CoffeeLake-H GT2 [UHD Graphics 630] 
+      -+sssssssssssssssssyyyssss+-         GPU: NVIDIA GeForce GTX 1660 Ti Mobile 
+        `:+ssssssssssssssssss+:`           Memory: 53173MiB / 64150MiB 
+            .-/+oossssoo+/-.
+```
+
 ### Summary
 
 ```
-Blocking Mono Scheduler(BE)      -> 117.80 RPS
-Blocking @Async Scheduler        -> 99.77 RPS
-Blocking NoMono NoScheduler      -> 11.99 RPS
-Blocking @Async Scheduler FJCP   -> 10.99 RPS
-Non-Blocking Mono Scheduler(BE)  -> 9109.52 RPS 
-Non-Blocking NoMono NoScheduler  -> 7462.38 RPS
+Blocking Mono Scheduler(BE)      -> 117.80  RPS (Benchmark 02)
+Blocking @Async Scheduler        -> 99.77   RPS (Benchmark 01)
+Blocking NoMono NoScheduler      -> 11.99   RPS (Benchmark 05)
+Blocking @Async Scheduler FJCP   -> 10.99   RPS (Benchmark 06)
+Non-Blocking Mono Scheduler(BE)  -> 9109.52 RPS (benchmark 03) 
+Non-Blocking NoMono NoScheduler  -> 7462.38 RPS (benchmark 04)
 ```
 <br/>
 
