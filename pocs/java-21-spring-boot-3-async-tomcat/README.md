@@ -33,11 +33,11 @@ ossyNMMMNyMMhsssssssssssssshmmmhssssssso   WM: Mutter
 ### Summary
 
 ```
-Blocking Mono Scheduler(BE)      ->  118.97 RPS (Benchmark 02)
-Blocking @Async Scheduler        ->  99.76  RPS (Benchmark 01)
-Blocking NoMono NoScheduler      ->  199.06 RPS (Benchmark 05)
-Blocking @Async Scheduler FJCP   ->  11.00 RPS (Benchmark 06)
-Non-Blocking Mono Scheduler(BE)  ->  4234.59 RPS (benchmark 03) 
+Blocking Mono Scheduler(BE)      ->  118.97  RPS (Benchmark 02)
+Blocking @Async Scheduler        ->  99.76   RPS (Benchmark 01)
+Blocking NoMono NoScheduler      ->  199.06  RPS (Benchmark 05)
+Blocking @Async Scheduler FJCP   ->  11.00   RPS (Benchmark 06)
+Non-Blocking Mono Scheduler(BE)  ->  8731.17 RPS (benchmark 03) 
 Non-Blocking NoMono NoScheduler  ->  9376.80 RPS (benchmark 04)
 ```
 <br/>
@@ -368,33 +368,34 @@ Document Path:          /stress-benchmark-03
 Document Length:        28 bytes
 
 Concurrency Level:      2000
-Time taken for tests:   14.169 seconds
+Time taken for tests:   6.872 seconds
 Complete requests:      60000
 Failed requests:        0
 Total transferred:      9660000 bytes
 HTML transferred:       1680000 bytes
-Requests per second:    4234.59 [#/sec] (mean)
-Time per request:       472.301 [ms] (mean)
-Time per request:       0.236 [ms] (mean, across all concurrent requests)
-Transfer rate:          665.79 [Kbytes/sec] received
+Requests per second:    8731.17 [#/sec] (mean)
+Time per request:       229.064 [ms] (mean)
+Time per request:       0.115 [ms] (mean, across all concurrent requests)
+Transfer rate:          1372.77 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0  200 173.4    135    1401
-Processing:    13  264 154.8    195     666
-Waiting:       11  193 118.3    152     488
-Total:         14  464 275.9    452    1842
+Connect:        0  112 276.8     77    3157
+Processing:    12  111  29.3    107     748
+Waiting:       10   82  29.5     75     705
+Total:         29  223 281.1    188    3507
 
 Percentage of the requests served within a certain time (ms)
-  50%    452
-  66%    654
-  75%    690
-  80%    708
-  90%    760
-  95%    810
-  98%   1211
-  99%   1272
- 100%   1842 (longest request)
+  50%    188
+  66%    198
+  75%    205
+  80%    210
+  90%    221
+  95%    234
+  98%   1160
+  99%   1230
+ 100%   3507 (longest request)
+
 ```
 
 ### Benchmark 04: Stress Non-Blocking NoMono NoScheduler Date
@@ -786,7 +787,7 @@ ZGC
 -XX:+DisableExplicitGC
 ```
 ```
-Requests per second:    4234.59 [#/sec] (mean)
+Requests per second:    8731.17 [#/sec] (mean)
 ```
 
 G1
@@ -803,7 +804,7 @@ G1
 -XX:+DisableExplicitGC
 ```
 ```
-
+Requests per second:    8077.45 [#/sec] (mean)
 ```
 
 Shenandoah
@@ -820,7 +821,7 @@ Shenandoah
 -XX:+DisableExplicitGC
 ```
 ```
-
+Requests per second:    7929.54 [#/sec] (mean)
 ```
 
 Parallel
@@ -837,7 +838,7 @@ Parallel
 -XX:+DisableExplicitGC
 ```
 ```
-
+Requests per second:    8578.92 [#/sec] (mean)
 ```
 
 Epsilon
@@ -854,5 +855,5 @@ Epsilon
 -XX:+DisableExplicitGC
 ```
 ```
-
+Requests per second:    8161.42 [#/sec] (mean)
 ```
