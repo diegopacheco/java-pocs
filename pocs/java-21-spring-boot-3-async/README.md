@@ -1019,3 +1019,7 @@ Epsilon
 ```
 Requests per second:    8595.45 [#/sec] (mean)
 ```
+
+### Optimization Reverse Funnel
+
+<img src="optimization-reverse-funnel.png" width="80%" />
