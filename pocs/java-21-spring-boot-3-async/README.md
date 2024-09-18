@@ -1023,3 +1023,10 @@ Requests per second:    8595.45 [#/sec] (mean)
 ### Optimization Reverse Funnel
 
 <img src="optimization-reverse-funnel.png" width="80%" />
+
+Important classes
+* https://github.com/netty/netty/blob/2b7de5a50bb3feb1a351dcd1ce1da9474ae256ae/transport/src/main/java/io/netty/channel/socket/DefaultServerSocketChannelConfig.java#L45
+* https://github.com/netty/netty/blob/2b7de5a50bb3feb1a351dcd1ce1da9474ae256ae/common/src/main/java/io/netty/util/NetUtil.java#L170
+* https://github.com/netty/netty/blob/2b7de5a50bb3feb1a351dcd1ce1da9474ae256ae/transport/src/main/java/io/netty/channel/nio/NioEventLoopGroup.java#L151
+* https://github.com/netty/netty/blob/2b7de5a50bb3feb1a351dcd1ce1da9474ae256ae/common/src/main/java/io/netty/util/concurrent/SingleThreadEventExecutor.java#L50
+
