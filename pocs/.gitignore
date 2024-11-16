@@ -9,6 +9,8 @@ bazel-out
 bazel-bin
 bazel-testlogs
 bazel-*-bazel
+.ijwb/
+.metals/
 
 node_modules/
 node_modules/*
