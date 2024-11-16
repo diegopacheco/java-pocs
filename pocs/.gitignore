@@ -5,6 +5,11 @@
 *.so
 *.so.o
 
+bazel-out
+bazel-bin
+bazel-testlogs
+bazel-*-bazel
+
 node_modules/
 node_modules/*
 
