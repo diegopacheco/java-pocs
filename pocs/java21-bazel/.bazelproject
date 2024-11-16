@@ -1,0 +1,10 @@
+directories:
+  .
+
+targets:
+  //:ProjectRunner
+
+additional_languages:
+  java
+
+bazel_binary: /home/linuxbrew/.linuxbrew/bin/bazel

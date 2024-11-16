@@ -1,0 +1,13 @@
+load("@rules_java//java:defs.bzl", "java_binary", "java_runtime")
+
+package(default_visibility = ["//visibility:public"])
+
+java_binary(
+    name = "ProjectRunner",
+    srcs = glob(["src/main/java/com/github/diegopacheco/javabazel/ProjectRunner.java"]),
+)
+
+java_runtime(
+    name = "java21_runtime",
+    java_home = "@remote_java21//:jdk-21",
+)

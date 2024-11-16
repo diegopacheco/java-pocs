@@ -1,0 +1,21 @@
+#load("@bazel_tools//tools/jdk:local_java_repository.bzl", "local_java_repository")
+# Can be used with --java_runtime_version=additionaljdk, --java_runtime_version=11 or --java_runtime_version=additionaljdk_11
+#local_java_repository(
+#    name = "java21",
+#    java_home = "/home/diego/.sdkman/candidates/java/current",
+#    version = "21",
+#)
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "remote_java21",
+    build_file_content = """
+filegroup(
+    name = "jdk-21",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    strip_prefix = "jdk-21.0.4",
+    urls = ["https://download.oracle.com/java/21/archive/jdk-21.0.4_linux-x64_bin.tar.gz"],
+)
