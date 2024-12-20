@@ -17,14 +17,12 @@ public class MathVisitor extends MathOperationsBaseVisitor<Integer> {
 
     @Override
     public Integer visitExpr(ExprContext ctx) {
-        int result = visit(ctx.term());
+        int result = visit(ctx.getChild(0));
         for (int i = 1; i < ctx.getChildCount(); i += 2) {
-            if (ctx.getChild(i).getText().equals("plus")) {
+            if (ctx.getChild(i).getText().equals("plus") || ctx.getChild(i).getText().equals("add")) {
                 result += visit(ctx.getChild(i + 1));
             } else if (ctx.getChild(i).getText().equals("minus")) {
                 result -= visit(ctx.getChild(i + 1));
-            } else if (ctx.getChild(i).getText().equals("add")) {
-                result += visit(ctx.getChild(i + 1));
             }
         }
         return result;
@@ -32,7 +30,7 @@ public class MathVisitor extends MathOperationsBaseVisitor<Integer> {
 
     @Override
     public Integer visitTerm(com.github.diegopacheco.javaplayground.dsl.generated.MathOperationsParser.TermContext ctx) {
-        int result = visit(ctx.factor());
+        int result = visit(ctx.getChild(0));
         for (int i = 1; i < ctx.getChildCount(); i += 2) {
             if (ctx.getChild(i).getText().equals("multiply by")) {
                 result *= visit(ctx.getChild(i + 1));
