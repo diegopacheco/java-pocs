@@ -6,13 +6,23 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 public class Main{
-  public static void main(String[] args){
-    String input = "1 plus 10\n200 divided by 200\n500 plus 10 minus 1\n20 multiply by 2 add 25";
+
+  private static void eval(String input){
+    System.out.println("Eval init... ");
     MathOperationsLexer lexer = new MathOperationsLexer(CharStreams.fromString(input));
     CommonTokenStream tokens = new CommonTokenStream(lexer);
     MathOperationsParser parser = new MathOperationsParser(tokens);
     ParseTree tree = parser.prog();
     MathVisitor visitor = new MathVisitor();
     visitor.visit(tree);
+    System.out.println("Eval end. ");
+  }
+
+  public static void main(String[] args) {
+    eval("1 plus 10\n" + // should be 11
+              "200 divided by 200\n" + // should be 1
+              "500 plus 10 minus 1\n" + // should be 509
+              "20 multiply by 2 plus 25"); // should be 65
+    eval("10 plus 10 add 6"); // should be 26
   }
 }
