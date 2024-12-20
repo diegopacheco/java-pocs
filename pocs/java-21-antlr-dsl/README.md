@@ -32,3 +32,13 @@
 [INFO] Finished at: 2024-12-20T00:27:12-08:00
 [INFO] ------------------------------------------------------------------------
 ```
+
+### Result
+
+```
+Input: 10 plus 10 Result == 20
+Input: 200 divided by 200 Result == 1
+Input: 500 plus 10 minus 1 Result == 509
+Input: 20 multiply by 2 plus 25 Result == 65
+Input: 10 plus 10 add 6 Result == 26
+```

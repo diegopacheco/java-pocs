@@ -23,5 +23,6 @@ public class Main{
     eval("500 plus 10 minus 1");
     eval("20 multiply by 2 plus 25");
     eval("10 plus 10 add 6");
+    eval("10 plus 2 add 6 plus 2");
   }
 }
