@@ -1,6 +1,5 @@
 package com.github.diegopacheco.javaplayground.dsl;
 
-
 import com.github.diegopacheco.javaplayground.dsl.generated.*;
 import com.github.diegopacheco.javaplayground.dsl.generated.MathOperationsParser.ExprContext;
 import com.github.diegopacheco.javaplayground.dsl.generated.MathOperationsParser.ProgContext;
@@ -8,10 +7,12 @@ import com.github.diegopacheco.javaplayground.dsl.generated.MathOperationsParser
 public class MathVisitor extends MathOperationsBaseVisitor<Integer> {
     @Override
     public Integer visitProg(ProgContext ctx) {
+        int result = 0;
         for (ExprContext expr : ctx.expr()) {
-            System.out.println(visit(expr));
+            result = visit(expr);
+            System.out.println(result);
         }
-        return 0;
+        return result;
     }
 
     @Override
