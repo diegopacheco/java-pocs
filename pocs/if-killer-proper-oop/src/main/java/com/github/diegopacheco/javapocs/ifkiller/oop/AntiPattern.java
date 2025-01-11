@@ -1,0 +1,30 @@
+package com.github.diegopacheco.javapocs.ifkiller.oop;
+
+import java.util.Optional;
+
+public class AntiPattern {
+
+    enum Source{
+        Brazil,
+        Argentina,
+        Guiana
+    }
+
+    enum Destination{
+        Portuguese,
+        Spanish,
+        French
+    }
+
+    public Optional<String> getMapping(String source){
+        if (source.equals(Source.Brazil.name())){
+            return Optional.of(Destination.Portuguese.name());
+        } else if (source.equals(Source.Argentina.name())){
+            return Optional.of(Destination.Spanish.name());
+        } else if (source.equals(Source.Guiana.name())){
+            return Optional.of(Destination.French.name());
+        }
+        return Optional.empty();
+    }
+
+}
