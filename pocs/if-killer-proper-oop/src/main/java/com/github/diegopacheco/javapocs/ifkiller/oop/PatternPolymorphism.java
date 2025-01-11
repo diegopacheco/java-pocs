@@ -2,6 +2,15 @@ package com.github.diegopacheco.javapocs.ifkiller.oop;
 
 import java.util.Optional;
 
+/**
+ * Here we are using proper OOP via Polymorphism to avoid the use of if/else.
+ * Another way to see this is that we are in fact using the Strategy Pattern.
+ * Here we are letting the compiler do the work for us, we are not using if/else.
+ *
+ * Recommend take a look here: https://github.com/diegopacheco/java-pocs/tree/master/pocs/if-alternatives-fun
+ *
+ * Could we savage the enums if we had another field language there, yes but enums still suck avoid them.
+ */
 public class PatternPolymorphism {
 
     interface Speaker{

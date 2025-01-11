@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Here we are using Better Data Structures, in order to avoid IFs and leaking.
+ * Map already can hold mappings, so we can avoid IFs.
+ *
+ * Recommend take a look here: https://github.com/diegopacheco/java-pocs/tree/master/pocs/if-alternatives-fun
+ */
 public class PatternDataStructure {
 
     final Map<String,String> countries = new HashMap<>();
