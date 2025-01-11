@@ -27,4 +27,11 @@ public class AntiPattern {
         return Optional.empty();
     }
 
+    public static void main(String[] args) {
+        AntiPattern ap = new AntiPattern();
+        System.out.println(ap.getMapping(Source.Brazil.name()));
+        System.out.println(ap.getMapping(Source.Argentina.name()));
+        System.out.println(ap.getMapping(Source.Guiana.name()));
+    }
+
 }
