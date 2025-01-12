@@ -24,7 +24,7 @@
 ### Why Enums Sucks? (Java 8 version)
 
 1. Enums are not OO, very often lead to procedural code(people need todo IFs and 
-propagate code to many places rather than center on a class).
+propagate code to many places rather than center on a class). Enums are not really that different them anemic model, getters/setters and DTO (which force the consumer to do the logic).
 2. Enums are not flexible, you can't extend to do sub-typing. Can't do a proper TypeSystem with them.
 3. Enums has fixed set of values cannot be changed at runtime.
 4. Enums can have awful serialization/deserialization nasty issues, what if you try to load a value from DB is not present on enum? 
