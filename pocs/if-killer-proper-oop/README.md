@@ -21,7 +21,7 @@
 2. When you see duplicated code but just 1-2 things are changing.
 3. When you see a lot of procedural code.
 
-### Why Enums Sucks?
+### Why Enums Sucks? (Java 8 version)
 
 1. Enums are not OO, very often lead to procedural code(people need todo IFs and 
 propagate code to many places rather than center on a class).
