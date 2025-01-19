@@ -21,6 +21,11 @@ public class AnonymizingPreparedStatement implements PreparedStatement {
     }
 
     @Override
+    public ResultSet executeQuery(String sql) throws SQLException {
+        return new AnonymizingResultSet(preparedStatement.executeQuery(sql));
+    }
+
+    @Override
     public int executeUpdate() throws SQLException {
         return preparedStatement.executeUpdate();
     }
@@ -288,11 +293,6 @@ public class AnonymizingPreparedStatement implements PreparedStatement {
     @Override
     public void setNClob(int parameterIndex, Reader reader) throws SQLException {
         preparedStatement.setNClob(parameterIndex, reader);
-    }
-
-    @Override
-    public ResultSet executeQuery(String sql) throws SQLException {
-        return new AnonymizingResultSet(preparedStatement.executeQuery(sql));
     }
 
     @Override

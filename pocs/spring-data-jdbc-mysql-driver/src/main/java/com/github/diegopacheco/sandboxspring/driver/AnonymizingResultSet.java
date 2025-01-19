@@ -26,6 +26,16 @@ public class AnonymizingResultSet implements ResultSet {
     }
 
     @Override
+    public Object getObject(int columnIndex) throws SQLException {
+        return resultSet.getObject(columnIndex);
+    }
+
+    @Override
+    public Object getObject(String columnLabel) throws SQLException {
+        return resultSet.getObject(columnLabel);
+    }
+
+    @Override
     public boolean next() throws SQLException {
         return resultSet.next();
     }
@@ -213,16 +223,6 @@ public class AnonymizingResultSet implements ResultSet {
     @Override
     public ResultSetMetaData getMetaData() throws SQLException {
         return resultSet.getMetaData();
-    }
-
-    @Override
-    public Object getObject(int columnIndex) throws SQLException {
-        return resultSet.getObject(columnIndex);
-    }
-
-    @Override
-    public Object getObject(String columnLabel) throws SQLException {
-        return resultSet.getObject(columnLabel);
     }
 
     @Override
