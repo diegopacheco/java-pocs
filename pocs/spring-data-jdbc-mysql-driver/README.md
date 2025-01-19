@@ -48,38 +48,38 @@ public class DBConfiguration {
 ### Result
 
 ```
-// 20250119012047
+// 20250119021147
 // http://localhost:8080/all
 
 [
   {
     "id": 1,
-    "firstName": "****",
+    "firstName": "**ctor",
     "lastName": "****"
   },
   {
     "id": 2,
-    "firstName": "****",
-    "lastName": "****"
+    "firstName": "*ante",
+    "lastName": "*********"
   },
   {
     "id": 3,
-    "firstName": "****",
-    "lastName": "****"
+    "firstName": "**efan",
+    "lastName": "*****"
   },
   {
     "id": 4,
-    "firstName": "****",
-    "lastName": "****"
+    "firstName": "*scar",
+    "lastName": "*****"
   },
   {
     "id": 5,
-    "firstName": "****",
-    "lastName": "****"
+    "firstName": "*iego",
+    "lastName": "*******"
   },
   {
     "id": 6,
-    "firstName": "****",
+    "firstName": "**ctor",
     "lastName": "****"
   },
   ...
