@@ -17,7 +17,7 @@ public class AnonymizingCatalog {
     }
 
     public void addAnonymizingField(String tableKey,String fieldName){
-        anonymizingFields.put(tableKey,fieldName);
+        anonymizingFields.put(tableKey.toLowerCase(),fieldName.toLowerCase());
     }
 
     public boolean isAnonymizingField(String tableKey,String fieldName){
