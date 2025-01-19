@@ -16,16 +16,6 @@ public class AnonymizingResultSet implements ResultSet {
     }
 
     @Override
-    public String getString(String columnLabel) throws SQLException {
-        String value = resultSet.getString(columnLabel);
-        if ("first_name".equalsIgnoreCase(columnLabel) || "last_name".equalsIgnoreCase(columnLabel)) {
-            System.out.println("[AnonymizingResultSet] Anonymizing " + columnLabel);
-            return "*".repeat(value.length());
-        }
-        return value;
-    }
-
-    @Override
     public Object getObject(int columnIndex) throws SQLException {
         String tableName = this.getMetaData().getTableName(columnIndex);
         String columnName = this.getMetaData().getColumnName(columnIndex);
@@ -33,11 +23,12 @@ public class AnonymizingResultSet implements ResultSet {
             System.out.println("[AnonymizingResultSet] Anonymizing " + columnName);
             return AnonymizingCatalog.getInstance().applyStrategy(resultSet.getString(columnIndex), tableName, columnName);
         }
-        if ("first_name".equalsIgnoreCase(columnName) || "last_name".equalsIgnoreCase(columnName)) {
-            System.out.println("[AnonymizingResultSet] Anonymizing " + columnName);
-            return "*".repeat(resultSet.getString(columnIndex).length());
-        }
         return resultSet.getObject(columnIndex);
+    }
+
+    @Override
+    public String getString(String columnLabel) throws SQLException {
+        return resultSet.getString(columnLabel);
     }
 
     @Override
