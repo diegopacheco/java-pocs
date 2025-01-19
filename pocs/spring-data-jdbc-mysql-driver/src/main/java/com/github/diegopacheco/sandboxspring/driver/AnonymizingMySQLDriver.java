@@ -8,6 +8,7 @@ public class AnonymizingMySQLDriver implements Driver {
     static {
         try {
             DriverManager.registerDriver(new AnonymizingMySQLDriver());
+            System.out.println("[AnonymizingMySQLDriver] ***** registered!");
         } catch (SQLException e) {
             throw new RuntimeException("Failed to register AnonymizingMySQLDriver", e);
         }
@@ -16,6 +17,7 @@ public class AnonymizingMySQLDriver implements Driver {
     private final Driver mysqlDriver = new com.mysql.cj.jdbc.Driver();
 
     public AnonymizingMySQLDriver() throws SQLException {
+        System.out.println("[AnonymizingMySQLDriver] ***** created!");
     }
 
     @Override
