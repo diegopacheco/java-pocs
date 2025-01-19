@@ -17,10 +17,10 @@ public class AnonymizingCatalog {
     }
 
     public void addAnonymizingField(String tableKey,String fieldName){
-        anonymizingFields.put(tableKey.toLowerCase()+fieldName.toLowerCase(),true);
+        anonymizingFields.put(tableKey.toLowerCase()+"."+fieldName.toLowerCase(),true);
     }
 
     public boolean isAnonymizingField(String tableKey,String fieldName){
-        return anonymizingFields.containsKey(tableKey+fieldName);
+        return anonymizingFields.containsKey(tableKey+"."+fieldName);
     }
 }
