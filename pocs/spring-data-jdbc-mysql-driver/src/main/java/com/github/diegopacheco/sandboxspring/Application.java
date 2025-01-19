@@ -25,7 +25,7 @@ public class Application {
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
-			System.out.println("Spring Boot 2.5.6 up and running! ");
+			System.out.println("Spring Boot 3.4.1 up and running! ");
 			loder.insertData();
 			System.out.println("DB Loader done. ");
 		};
