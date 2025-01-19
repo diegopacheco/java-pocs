@@ -17,7 +17,7 @@ public class AnonymizingScanner {
     @EventListener
     public void handleContextRefresh(ContextRefreshedEvent event) {
         Reflections reflections = new Reflections(new ConfigurationBuilder()
-                .forPackages("com.github.diegopacheco.sandboxspring") // specify your base package
+                .forPackages("com.github.diegopacheco.sandboxspring")
                 .addScanners(new FieldAnnotationsScanner()));
 
         Set<Field> fields = reflections.getFieldsAnnotatedWith(Anonymizing.class);
