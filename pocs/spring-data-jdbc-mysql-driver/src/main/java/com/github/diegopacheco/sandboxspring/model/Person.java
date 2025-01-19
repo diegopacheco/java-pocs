@@ -9,10 +9,10 @@ public class Person {
     @Id
     private long id;
 
-    @Anonymizing
+    @Anonymizing(dbFieldName = "first_name")
     private String firstName;
 
-    @Anonymizing
+    @Anonymizing(dbFieldName = "last_name")
     private String lastName;
 
     public Person() {
