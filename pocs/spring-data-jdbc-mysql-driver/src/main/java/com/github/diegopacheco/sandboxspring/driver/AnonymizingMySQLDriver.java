@@ -22,6 +22,7 @@ public class AnonymizingMySQLDriver implements Driver {
 
     @Override
     public Connection connect(String url, Properties info) throws SQLException {
+        System.out.println("[AnonymizingMySQLDriver] ***** connect called!");
         return new AnonymizingConnection(mysqlDriver.connect(url, info));
     }
 

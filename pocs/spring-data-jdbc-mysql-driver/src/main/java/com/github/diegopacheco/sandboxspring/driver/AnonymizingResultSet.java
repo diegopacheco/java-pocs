@@ -19,6 +19,7 @@ public class AnonymizingResultSet implements ResultSet {
     public String getString(String columnLabel) throws SQLException {
         String value = resultSet.getString(columnLabel);
         if ("first_name".equalsIgnoreCase(columnLabel) || "last_name".equalsIgnoreCase(columnLabel)) {
+            System.out.println("[AnonymizingResultSet] Anonymizing " + columnLabel);
             return "****";
         }
         return value;
