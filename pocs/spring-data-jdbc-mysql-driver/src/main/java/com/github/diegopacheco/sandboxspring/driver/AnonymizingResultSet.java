@@ -27,10 +27,15 @@ public class AnonymizingResultSet implements ResultSet {
 
     @Override
     public Object getObject(int columnIndex) throws SQLException {
+        String tableName = this.getMetaData().getTableName(columnIndex);
         String columnName = this.getMetaData().getColumnName(columnIndex);
+        if (AnonymizingCatalog.getInstance().isAnonymizingField(tableName, columnName)) {
+            System.out.println("[AnonymizingResultSet] Anonymizing " + columnName);
+            return "******";
+        }
         if ("first_name".equalsIgnoreCase(columnName) || "last_name".equalsIgnoreCase(columnName)) {
             System.out.println("[AnonymizingResultSet] Anonymizing " + columnName);
-            return "****";
+            return "******";
         }
         return resultSet.getObject(columnIndex);
     }

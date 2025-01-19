@@ -1,5 +1,6 @@
 package com.github.diegopacheco.sandboxspring.model;
 
+import com.github.diegopacheco.sandboxspring.driver.Anonymizing;
 import org.springframework.data.annotation.Id;
 import java.util.Objects;
 
@@ -7,7 +8,11 @@ public class Person {
 
     @Id
     private long id;
+
+    @Anonymizing
     private String firstName;
+
+    @Anonymizing
     private String lastName;
 
     public Person() {
