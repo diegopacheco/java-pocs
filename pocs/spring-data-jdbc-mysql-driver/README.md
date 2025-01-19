@@ -18,11 +18,12 @@ PROS:
 * POC
 * JDBC Driver extension
 * Custom annotations
-* Cool enum as factory but with proper OO implementation
+* Self-contained, internal enum as factory with proper OO implementation (not stored in DB)
 
 CONS:
 
-* Not secure, data still plaintext in the DB
+* Not 100% secure, data still plaintext in the DB
+* No access control, anyone can decide if put or not @Anonymizing
 
 ### Build
 
