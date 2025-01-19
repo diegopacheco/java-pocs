@@ -18,7 +18,7 @@ public enum AnonymizingStrategy {
     private static class StarApplication implements AnonymizingApplication {
         @Override
         public String execute(String value) {
-            return value.repeat(value.length());
+            return "*".repeat(value.length());
         }
     }
 
@@ -28,7 +28,8 @@ public enum AnonymizingStrategy {
             if (null==value || value.length() <= 4) {
                 return "";
             }
-            return value.substring(value.length() - 4);
+            int len = value.length() - 4;
+            return "*".repeat(len) + value.substring(value.length() - 4);
         }
     }
 
