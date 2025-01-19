@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class AnonymizingCatalog {
 
-    private final Map<String, Boolean> anonymizingFields = new HashMap<>();
+    private final Map<String, Anonymizing> anonymizingFields = new HashMap<>();
     private static AnonymizingCatalog instance = null;
     private AnonymizingCatalog(){}
 
@@ -16,11 +16,15 @@ public class AnonymizingCatalog {
         return instance;
     }
 
-    public void addAnonymizingField(String tableKey,String fieldName){
-        anonymizingFields.put(tableKey.toLowerCase()+"."+fieldName.toLowerCase(),true);
+    public void addAnonymizingField(String tableKey,String fieldName,Anonymizing anonymizing){
+        anonymizingFields.put(tableKey.toLowerCase()+"."+fieldName.toLowerCase(),anonymizing);
     }
 
     public boolean isAnonymizingField(String tableKey,String fieldName){
         return anonymizingFields.containsKey(tableKey+"."+fieldName);
+    }
+
+    public Anonymizing getAnonymizing(String tableKey,String fieldName){
+        return anonymizingFields.get(tableKey+"."+fieldName);
     }
 }

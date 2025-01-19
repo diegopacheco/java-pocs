@@ -9,4 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Anonymizing {
     String dbFieldName();
+    AnonymizingStrategy strategy() default AnonymizingStrategy.STAR;
 }
