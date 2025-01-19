@@ -20,13 +20,18 @@ public class AnonymizingResultSet implements ResultSet {
         String value = resultSet.getString(columnLabel);
         if ("first_name".equalsIgnoreCase(columnLabel) || "last_name".equalsIgnoreCase(columnLabel)) {
             System.out.println("[AnonymizingResultSet] Anonymizing " + columnLabel);
-            return "****";
+            return "*".repeat(value.length());
         }
         return value;
     }
 
     @Override
     public Object getObject(int columnIndex) throws SQLException {
+        String columnName = this.getMetaData().getColumnName(columnIndex);
+        if ("first_name".equalsIgnoreCase(columnName) || "last_name".equalsIgnoreCase(columnName)) {
+            System.out.println("[AnonymizingResultSet] Anonymizing " + columnName);
+            return "****";
+        }
         return resultSet.getObject(columnIndex);
     }
 
