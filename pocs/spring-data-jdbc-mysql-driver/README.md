@@ -1,3 +1,27 @@
+## Rationale
+
+I was have some fune playing with some idea with is:
+
+* Anonymizing data in the application layer
+* Don't touch the DB
+* Have startegies: Star, Last4 and Empty
+* Use a custom JDBC Driver to do the magic
+* Use Spring Boot with Spring Data JDBC and MySQL
+
+The main idea here is that when the application reads data,there is custom annotation `@Anonymizing` that will be used to anonymize the data. The anonymization will be done in the application layer and the DB will not be touched.
+Driver is only for MySQL, if it's a different DB would require more code.
+
+PROS:
+
+* Fun
+* POC
+* Custom annotations
+* Cool enum as factory but with proper OO implementation
+
+CONS:
+
+* Not secure, data still plaintext in the DB
+
 ### Build
 
 ```bash
