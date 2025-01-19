@@ -24,7 +24,13 @@ public class AnonymizingCatalog {
         return anonymizingFields.containsKey(tableKey+"."+fieldName);
     }
 
-    public Anonymizing getAnonymizing(String tableKey,String fieldName){
-        return anonymizingFields.get(tableKey+"."+fieldName);
+    public String applyStrategy(String value, String tableKey,String fieldName){
+        Anonymizing anonymizing = anonymizingFields.get(tableKey+"."+fieldName);
+        if (null==anonymizing){
+            return value;
+        }
+
+        AnonymizingStrategy strategy = anonymizing.strategy();
+        return strategy.getApplication().execute(value);
     }
 }

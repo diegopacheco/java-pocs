@@ -25,7 +25,7 @@ public class AnonymizingScanner {
             Class<?> declaringClass = field.getDeclaringClass();
             Anonymizing anonymizing = field.getAnnotation(Anonymizing.class);
             String dbFieldName = anonymizing.dbFieldName();
-            AnonymizingCatalog.getInstance().addAnonymizingField(declaringClass.getSimpleName(), dbFieldName);
+            AnonymizingCatalog.getInstance().addAnonymizingField(declaringClass.getSimpleName(), dbFieldName,anonymizing);
         }
     }
 }

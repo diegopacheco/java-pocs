@@ -31,11 +31,11 @@ public class AnonymizingResultSet implements ResultSet {
         String columnName = this.getMetaData().getColumnName(columnIndex);
         if (AnonymizingCatalog.getInstance().isAnonymizingField(tableName, columnName)) {
             System.out.println("[AnonymizingResultSet] Anonymizing " + columnName);
-            return "******";
+            return AnonymizingCatalog.getInstance().applyStrategy(resultSet.getString(columnIndex), tableName, columnName);
         }
         if ("first_name".equalsIgnoreCase(columnName) || "last_name".equalsIgnoreCase(columnName)) {
             System.out.println("[AnonymizingResultSet] Anonymizing " + columnName);
-            return "******";
+            return "*".repeat(resultSet.getString(columnIndex).length());
         }
         return resultSet.getObject(columnIndex);
     }
