@@ -19,7 +19,7 @@ public class DBConfiguration {
         config.addDataSourceProperty( "cachePrepStmts" , "true" );
         config.addDataSourceProperty( "prepStmtCacheSize" , "250" );
         config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
-        config.setDriverClassName("com.github.diegopacheco.sandboxspring.driver.AnonymizingMySQLDriver");
+        config.setDriverClassName("com.github.diegopacheco.sandboxspring.driver.infra.AnonymizingMySQLDriver");
         return new HikariDataSource( config );
     }
 

@@ -1,4 +1,6 @@
-package com.github.diegopacheco.sandboxspring.driver;
+package com.github.diegopacheco.sandboxspring.driver.infra;
+
+import com.github.diegopacheco.sandboxspring.driver.AnonymizingCatalog;
 
 import java.io.InputStream;
 import java.io.Reader;

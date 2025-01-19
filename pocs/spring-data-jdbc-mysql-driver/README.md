@@ -1,20 +1,22 @@
 ## Rationale
 
-I was have some fune playing with some idea with is:
+I was having some fun playing with some idea with is:
 
 * Anonymizing data in the application layer
 * Don't touch the DB
-* Have startegies: Star, Last4 and Empty
+* Have strategies: Star, Last4, Empty and Null
 * Use a custom JDBC Driver to do the magic
 * Use Spring Boot with Spring Data JDBC and MySQL
 
 The main idea here is that when the application reads data,there is custom annotation `@Anonymizing` that will be used to anonymize the data. The anonymization will be done in the application layer and the DB will not be touched.
-Driver is only for MySQL, if it's a different DB would require more code.
+Driver is only for MySQL, if it's a different DB would require more code. This approach
+is like I'm providing a view of data which is anonymized.
 
 PROS:
 
 * Fun
 * POC
+* JDBC Driver extension
 * Custom annotations
 * Cool enum as factory but with proper OO implementation
 
@@ -62,7 +64,7 @@ public class DBConfiguration {
         config.addDataSourceProperty( "cachePrepStmts" , "true" );
         config.addDataSourceProperty( "prepStmtCacheSize" , "250" );
         config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
-        config.setDriverClassName("com.github.diegopacheco.sandboxspring.driver.AnonymizingMySQLDriver");
+        config.setDriverClassName("com.github.diegopacheco.sandboxspring.driver.infra.AnonymizingMySQLDriver");
         return new HikariDataSource( config );
     }
 

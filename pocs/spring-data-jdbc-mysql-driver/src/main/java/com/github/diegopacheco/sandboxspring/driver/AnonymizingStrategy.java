@@ -4,6 +4,7 @@ public enum AnonymizingStrategy {
 
     STAR(new StarApplication()),
     EMPTY(new EmptyApplication()),
+    NULL(new NullApplication()),
     LAST4(new Last4Application());
 
     private final AnonymizingApplication application;
@@ -37,6 +38,13 @@ public enum AnonymizingStrategy {
         @Override
         public String execute(String value) {
             return "";
+        }
+    }
+
+    private static class NullApplication implements AnonymizingApplication {
+        @Override
+        public String execute(String value) {
+            return null;
         }
     }
 }

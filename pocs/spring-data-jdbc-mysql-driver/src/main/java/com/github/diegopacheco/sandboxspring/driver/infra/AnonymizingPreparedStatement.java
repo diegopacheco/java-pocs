@@ -1,4 +1,4 @@
-package com.github.diegopacheco.sandboxspring.driver;
+package com.github.diegopacheco.sandboxspring.driver.infra;
 
 import java.io.InputStream;
 import java.io.Reader;
