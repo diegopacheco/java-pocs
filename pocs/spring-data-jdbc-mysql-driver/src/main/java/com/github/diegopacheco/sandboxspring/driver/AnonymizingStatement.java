@@ -86,7 +86,7 @@ public class AnonymizingStatement implements Statement {
 
     @Override
     public ResultSet getResultSet() throws SQLException {
-        return statement.getResultSet();
+        return new AnonymizingResultSet(statement.getResultSet());
     }
 
     @Override

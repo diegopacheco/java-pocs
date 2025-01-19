@@ -32,7 +32,6 @@ public class AnonymizingConnection implements Connection {
         return new AnonymizingPreparedStatement(connection.prepareStatement(sql));
     }
 
-
     @Override
     public Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
         return new AnonymizingStatement(connection.createStatement(resultSetType, resultSetConcurrency, resultSetHoldability));
