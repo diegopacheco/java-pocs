@@ -19,7 +19,7 @@ public class AnonymizingConnection implements Connection {
 
     @Override
     public PreparedStatement prepareStatement(String sql) throws SQLException {
-        return connection.prepareStatement(sql);
+        return new AnonymizingPreparedStatement(connection.prepareStatement(sql));
     }
 
     @Override
