@@ -11,8 +11,7 @@ public class AnonymizingStatement implements Statement {
 
     @Override
     public ResultSet executeQuery(String sql) throws SQLException {
-        ResultSet rs = statement.executeQuery(sql);
-        return new AnonymizingResultSet(rs);
+        return new AnonymizingResultSet(statement.executeQuery(sql));
     }
 
     @Override
