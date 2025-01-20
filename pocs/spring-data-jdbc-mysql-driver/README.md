@@ -31,6 +31,21 @@ CONS:
 ./mvnw clean install
 ```
 
+### Tests
+
+```bash
+./run-mysql-5.7-docker.sh
+./mvnw clean install
+```
+
+```
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO]
+```
+
 ### Mapping
 
 Person.java
