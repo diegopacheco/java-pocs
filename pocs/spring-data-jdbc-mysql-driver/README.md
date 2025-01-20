@@ -4,7 +4,7 @@ I was having some fun playing with some idea with is:
 
 * Anonymizing data in the application layer
 * Don't touch the DB
-* Have strategies: Star, Last4, Empty and Null
+* Have strategies: Star, Last4, Empty, Null and RandomNumber
 * Use a custom JDBC Driver to do the magic
 * Use Spring Boot with Spring Data JDBC and MySQL
 
