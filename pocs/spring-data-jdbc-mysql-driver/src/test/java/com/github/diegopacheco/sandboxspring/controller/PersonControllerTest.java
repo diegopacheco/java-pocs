@@ -49,9 +49,9 @@ public class PersonControllerTest {
     public void testGetAllThePeople() throws Exception {
         mockMvc.perform(get("/all"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[*].id").value(containsInAnyOrder(1, 2, 3, 4, 5, 6)))
-                .andExpect(jsonPath("$[*].firstName").value(containsInAnyOrder("*iego", "", "**ctor", "*ante", "**efan", "*scar")))
-                .andExpect(jsonPath("$[*].lastName").value(containsInAnyOrder("*******", "***", "****", "*********", "*****")));
+                .andExpect(jsonPath("$[*].id").value(hasItems(1, 2, 3, 4, 5, 6)))
+                .andExpect(jsonPath("$[*].firstName").value(hasItems("*iego", "", "**ctor", "*ante", "**efan", "*scar")))
+                .andExpect(jsonPath("$[*].lastName").value(hasItems("*******", "***", "****", "*********", "*****")));
     }
 
 }
