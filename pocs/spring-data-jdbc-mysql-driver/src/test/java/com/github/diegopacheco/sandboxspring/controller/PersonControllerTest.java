@@ -1,5 +1,4 @@
 package com.github.diegopacheco.sandboxspring.controller;
-
 import com.github.diegopacheco.sandboxspring.model.Person;
 import com.github.diegopacheco.sandboxspring.service.PersonService;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(PersonController.class)
+/**
+ *  Dont forget to run ./run-mysql-5.7-docker.sh first.
+ */
+@SpringBootTest
+@AutoConfigureMockMvc
 public class PersonControllerTest {
 
     @Autowired
@@ -44,14 +48,21 @@ public class PersonControllerTest {
     @Test
     public void testGetAllThePeople() throws Exception {
         List<Person> people = Arrays.asList(
-                new Person(1, "John", "Doe"),
-                new Person(2, "Jane", "Doe")
+                new Person(1, "Victor", "****"),
+                new Person(2, "Dante", "*********"),
+                new Person(3, "Stefan", "*****"),
+                new Person(4, "Oscar", "*****"),
+                new Person(5, "Diego", "*******")
         );
 
         when(personService.getAllPeople()).thenReturn(people);
 
         mockMvc.perform(get("/all"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[{'id':1,'firstName':'John','lastName':'Doe'},{'id':2,'firstName':'Jane','lastName':'Doe'}]"));
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("\"id\":1,\"firstName\":\"Victor\",\"lastName\":\"****\"")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("\"id\":2,\"firstName\":\"Dante\",\"lastName\":\"*********\"")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("\"id\":3,\"firstName\":\"Stefan\",\"lastName\":\"*****\"")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("\"id\":4,\"firstName\":\"Oscar\",\"lastName\":\"*****\"")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("\"id\":5,\"firstName\":\"Diego\",\"lastName\":\"*******\"")));
     }
 }
