@@ -47,9 +47,9 @@ public class PersonControllerTest {
     public void testGetAllThePeople() throws Exception {
         mockMvc.perform(get("/all"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[*].id").value(org.hamcrest.Matchers.hasItems(1, 2, 3, 4, 5)))
-                .andExpect(jsonPath("$[*].firstName").value(hasItems("**ctor", "*ante", "**efan", "*scar", "*iego")))
-                .andExpect(jsonPath("$[*].lastName").value(hasItems("****", "*********", "*****", "*****", "*******")));
+                .andExpect(jsonPath("$[*].id").value(hasItems(1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17)))
+                .andExpect(jsonPath("$[*].firstName").value(hasItems("*iego", "", "**ctor", "*ante", "**efan", "*scar")))
+                .andExpect(jsonPath("$[*].lastName").value(hasItems("*******", "***", "****", "*********", "*****")));
     }
 
 }
