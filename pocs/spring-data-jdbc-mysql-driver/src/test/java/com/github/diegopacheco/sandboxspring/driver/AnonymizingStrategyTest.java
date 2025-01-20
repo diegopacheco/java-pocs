@@ -39,4 +39,11 @@ public class AnonymizingStrategyTest {
         assert result.length()==10;
     }
 
+    @Test
+    public void testIdentityApplication(){
+        AnonymizingStrategy strategy = AnonymizingStrategy.IDENTITY;
+        String result = strategy.getApplication().execute("1234567890");
+        assert result.equals("1234567890");
+    }
+
 }
