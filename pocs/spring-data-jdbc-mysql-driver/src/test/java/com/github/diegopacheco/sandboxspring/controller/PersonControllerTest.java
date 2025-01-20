@@ -13,7 +13,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasItems;
+
 
 /**
  *  Dont forget to run ./run-mysql-5.7-docker.sh first.
@@ -47,9 +49,9 @@ public class PersonControllerTest {
     public void testGetAllThePeople() throws Exception {
         mockMvc.perform(get("/all"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[*].id").value(hasItems(1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17)))
-                .andExpect(jsonPath("$[*].firstName").value(hasItems("*iego", "", "**ctor", "*ante", "**efan", "*scar")))
-                .andExpect(jsonPath("$[*].lastName").value(hasItems("*******", "***", "****", "*********", "*****")));
+                .andExpect(jsonPath("$[*].id").value(containsInAnyOrder(1, 2, 3, 4, 5, 6)))
+                .andExpect(jsonPath("$[*].firstName").value(containsInAnyOrder("*iego", "", "**ctor", "*ante", "**efan", "*scar")))
+                .andExpect(jsonPath("$[*].lastName").value(containsInAnyOrder("*******", "***", "****", "*********", "*****")));
     }
 
 }
