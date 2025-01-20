@@ -16,6 +16,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.hamcrest.Matchers.hasItems;
 
 /**
  *  Dont forget to run ./run-mysql-5.7-docker.sh first.
@@ -48,20 +50,20 @@ public class PersonControllerTest {
     @Test
     public void testGetAllThePeople() throws Exception {
         List<Person> people = Arrays.asList(
-                new Person(1, "Victor", "****"),
-                new Person(2, "Dante", "*********"),
-                new Person(3, "Stefan", "*****"),
-                new Person(4, "Oscar", "*****"),
-                new Person(5, "Diego", "*******")
+                new Person(1, "**ctor", "****"),
+                new Person(2, "*ante", "*********"),
+                new Person(3, "**efan", "*****"),
+                new Person(4, "*scar", "*****"),
+                new Person(5, "*iego", "*******")
         );
 
         when(personService.getAllPeople()).thenReturn(people);
 
         mockMvc.perform(get("/all"))
                 .andExpect(status().isOk())
-                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$[*].id").value(org.hamcrest.Matchers.contains(1, 2, 3, 4, 5)))
-                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$[*].firstName").value(org.hamcrest.Matchers.containsInAnyOrder("Victor", "Dante", "Stefan", "Oscar", "Diego")))
-                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$[*].lastName").value(org.hamcrest.Matchers.containsInAnyOrder("****", "*********", "*****", "*****", "*******")));
+                .andExpect(jsonPath("$[*].id").value(org.hamcrest.Matchers.hasItems(1, 2, 3, 4, 5)))
+                .andExpect(jsonPath("$[*].firstName").value(hasItems("**ctor", "*ante", "**efan", "*scar", "*iego")))
+                .andExpect(jsonPath("$[*].lastName").value(hasItems("****", "*********", "*****", "*****", "*******")));
     }
 
 }
