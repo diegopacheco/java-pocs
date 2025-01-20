@@ -1,3 +1,5 @@
+# Anonymizing Data
+
 ## Rationale
 
 I was having some fun playing with some idea with is:
@@ -183,3 +185,11 @@ http://localhost:8080/all
   },
   ...
 ```
+
+### Related POCs
+
+* Why Enums Suck? https://github.com/diegopacheco/java-pocs/tree/master/pocs/if-killer-proper-oop
+* IF Alternatives https://github.com/diegopacheco/java-pocs/tree/master/pocs/if-alternatives-fun
+* Driver Observability https://github.com/diegopacheco/java-pocs/tree/master/pocs/hibernate-5-jdbc-driver-observability
+* Spring Data Version https://github.com/diegopacheco/java-pocs/tree/master/pocs/spring-data-version
+* Data Corruption https://github.com/diegopacheco/java-pocs/tree/master/pocs/data-corruption-threads
