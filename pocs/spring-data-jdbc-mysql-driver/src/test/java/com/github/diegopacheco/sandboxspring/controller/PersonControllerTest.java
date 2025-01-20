@@ -1,5 +1,4 @@
 package com.github.diegopacheco.sandboxspring.controller;
-import com.github.diegopacheco.sandboxspring.model.Person;
 import com.github.diegopacheco.sandboxspring.service.PersonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import java.util.Arrays;
-import java.util.List;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -49,16 +45,6 @@ public class PersonControllerTest {
 
     @Test
     public void testGetAllThePeople() throws Exception {
-        List<Person> people = Arrays.asList(
-                new Person(1, "**ctor", "****"),
-                new Person(2, "*ante", "*********"),
-                new Person(3, "**efan", "*****"),
-                new Person(4, "*scar", "*****"),
-                new Person(5, "*iego", "*******")
-        );
-
-        when(personService.getAllPeople()).thenReturn(people);
-
         mockMvc.perform(get("/all"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[*].id").value(org.hamcrest.Matchers.hasItems(1, 2, 3, 4, 5)))
