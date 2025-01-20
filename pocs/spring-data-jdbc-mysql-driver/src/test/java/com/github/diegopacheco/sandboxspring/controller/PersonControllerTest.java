@@ -59,10 +59,9 @@ public class PersonControllerTest {
 
         mockMvc.perform(get("/all"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("\"id\":1,\"firstName\":\"Victor\",\"lastName\":\"****\"")))
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("\"id\":2,\"firstName\":\"Dante\",\"lastName\":\"*********\"")))
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("\"id\":3,\"firstName\":\"Stefan\",\"lastName\":\"*****\"")))
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("\"id\":4,\"firstName\":\"Oscar\",\"lastName\":\"*****\"")))
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("\"id\":5,\"firstName\":\"Diego\",\"lastName\":\"*******\"")));
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$[*].id").value(org.hamcrest.Matchers.contains(1, 2, 3, 4, 5)))
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$[*].firstName").value(org.hamcrest.Matchers.containsInAnyOrder("Victor", "Dante", "Stefan", "Oscar", "Diego")))
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$[*].lastName").value(org.hamcrest.Matchers.containsInAnyOrder("****", "*********", "*****", "*****", "*******")));
     }
+
 }
