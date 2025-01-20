@@ -15,9 +15,8 @@ public class AnonymizingCatalogTest {
     @Test
     public void testIsAnonymizingField() {
         AnonymizingCatalog catalog = AnonymizingCatalog.getInstance();
-        assertFalse(catalog.isAnonymizingField("person", "last_name"));
+        assertFalse(catalog.isAnonymizingField("person", "email"));
     }
-
 
     @Test
     public void testApplyStrategy() {
