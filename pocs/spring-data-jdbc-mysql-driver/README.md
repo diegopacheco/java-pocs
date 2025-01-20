@@ -4,7 +4,7 @@ I was having some fun playing with some idea with is:
 
 * Anonymizing data in the application layer
 * Don't touch the DB
-* Have strategies: Star, Last4, Empty, Null and RandomNumber
+* Have strategies: Star, Last4, Empty, Null, RandomNumber and Identity
 * Use a custom JDBC Driver to do the magic
 * Use Spring Boot with Spring Data JDBC and MySQL
 
@@ -18,7 +18,7 @@ PROS:
 * POC
 * JDBC Driver extension
 * Custom annotations
-* Self-contained, internal enum as factory with proper OO implementation (not stored in DB)
+* Internal Self-contained enum as factory with proper OO implementation (not stored in DB)
 
 CONS:
 
