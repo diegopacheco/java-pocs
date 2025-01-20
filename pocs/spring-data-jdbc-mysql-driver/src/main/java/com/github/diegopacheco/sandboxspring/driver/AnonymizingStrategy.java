@@ -5,7 +5,8 @@ public enum AnonymizingStrategy {
     STAR(new StarApplication()),
     EMPTY(new EmptyApplication()),
     NULL(new NullApplication()),
-    LAST4(new Last4Application());
+    LAST4(new Last4Application()),
+    RAMDOM_NUMBER(new RamdomNumberApplication());
 
     private final AnonymizingApplication application;
 
@@ -45,6 +46,19 @@ public enum AnonymizingStrategy {
         @Override
         public String execute(String value) {
             return null;
+        }
+    }
+
+    private static class RamdomNumberApplication implements AnonymizingApplication {
+        public String execute(String value) {
+            if (null==value) {
+                return "";
+            }
+            StringBuilder result = new StringBuilder();
+            for(int i=0;i<value.length();i++){
+                result.append((int) (Math.random() * 10));
+            }
+            return result.toString();
         }
     }
 }

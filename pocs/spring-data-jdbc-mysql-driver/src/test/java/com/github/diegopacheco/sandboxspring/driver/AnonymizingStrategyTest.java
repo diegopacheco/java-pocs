@@ -32,4 +32,11 @@ public class AnonymizingStrategyTest {
         assert result==null;
     }
 
+    @Test
+    public void testRamdomNumberApplication(){
+        AnonymizingStrategy strategy = AnonymizingStrategy.RAMDOM_NUMBER;
+        String result = strategy.getApplication().execute("1234567890");
+        assert result.length()==10;
+    }
+
 }
