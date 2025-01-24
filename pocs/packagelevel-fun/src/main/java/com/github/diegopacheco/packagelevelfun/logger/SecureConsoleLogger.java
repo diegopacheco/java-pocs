@@ -10,13 +10,13 @@ public class SecureConsoleLogger {
 
     private static final Map<String,String> restrictedFields = new ConcurrentHashMap<>();
 
-    SecureConsoleLogger(){
+    static{
         restrictedFields.put("password","**********");
         restrictedFields.put("ssn","###-##-####");
-        restrictedFields.put("creditCard","####-####-####-####");
+        restrictedFields.put("creditcard","####-####-####-####");
         restrictedFields.put("email","*****@*****");
-        restrictedFields.put("firstName","*****");
-        restrictedFields.put("lastName","*****");
+        restrictedFields.put("firstname","*****");
+        restrictedFields.put("lastname","*****");
         restrictedFields.put("name","*****");
     }
 
@@ -24,16 +24,17 @@ public class SecureConsoleLogger {
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
         List<RuntimeInfo> runtimeInfoList = extractRuntimeInfo(stackTraceElements);
 
-        for(RuntimeInfo runtimeInfo : runtimeInfoList){
+        for (RuntimeInfo runtimeInfo : runtimeInfoList) {
+            // Simple Fuzzy matching going on here
             String methodName = runtimeInfo.getMethodName();
-            // need revert this logic methodname needs to be in restrictedFields
-
-            
-
-            restrictedFields.keySet().stream().
-                    filter(methodName::contains).
-                    findFirst().
-                    ifPresent(restrictedKey -> data.put(restrictedKey, restrictedFields.get(restrictedKey)));
+            if (null!=methodName && !methodName.isEmpty()){
+                methodName = methodName.trim().toLowerCase();
+            }
+            for (String key : restrictedFields.keySet()) {
+                if (methodName.contains(key)) {
+                    data.put(key, restrictedFields.get(key));
+                }
+            }
         }
 
         System.out.println(MessageFormat.format("[DEBUG]: {0}", data));
@@ -68,7 +69,7 @@ public class SecureConsoleLogger {
             if (clazz.getPackage().isAnnotationPresent(com.github.diegopacheco.packagelevelfun.annotation.SecureLogging.class)){
                 return true;
             }
-        } catch (ClassNotFoundException e) {}
+        } catch (ClassNotFoundException _) {}
         return false;
     }
 
