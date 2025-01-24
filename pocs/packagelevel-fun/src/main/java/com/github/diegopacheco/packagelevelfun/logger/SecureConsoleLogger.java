@@ -49,8 +49,8 @@ public class SecureConsoleLogger {
                 String packageName = className.substring(0, lastDotIndex);
                 String simpleClassName = className.substring(lastDotIndex + 1);
                 String methodName = element.getMethodName();
-
-                runtimeInfoList.add(new RuntimeInfo(packageName, simpleClassName, methodName,isSecure(className)));
+                Boolean isSecure = isSecure(className);
+                runtimeInfoList.add(new RuntimeInfo(packageName, simpleClassName, methodName,isSecure));
             } else {
                 // Handle the case where there is no package name
                 String methodName = element.getMethodName();
