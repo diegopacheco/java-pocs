@@ -62,7 +62,7 @@ public class SecureConsoleLogger {
         return runtimeInfoList;
     }
 
-    private static Boolean isSecure(String className){
+    static Boolean isSecure(String className){
         try {
             Class<?> clazz = Class.forName(className);
             if(clazz.isAnnotationPresent(com.github.diegopacheco.packagelevelfun.annotation.SecureLogging.class)){

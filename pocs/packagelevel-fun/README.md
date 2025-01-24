@@ -5,6 +5,13 @@
 
 ### Result
 
+package-info.java
+```
+@SecureLogging
+package com.github.diegopacheco.packagelevelfun.dao;
+```
+
+Running the main class:
 ```
 [DEBUG]: {name=*****}
 [DEBUG]: {ssn=###-##-####}
