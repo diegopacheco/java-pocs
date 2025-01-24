@@ -1,6 +1,8 @@
 package com.github.diegopacheco.packagelevelfun.logger;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -20,9 +22,10 @@ public class SecureConsoleLogger {
 
     public static void debugPrint(Map<String,String> data){
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-        String callerClass = stackTraceElements[2].getClassName();
+        List<RuntimeInfo> runtimeInfoList = extractRuntimeInfo(stackTraceElements);
+
         try {
-            Class<?> clazz = Class.forName(callerClass);
+            Class<?> clazz = Class.forName("");
             if(clazz.isAnnotationPresent(com.github.diegopacheco.packagelevelfun.annotation.SecureLogging.class)){
                 for(Map.Entry<String,String> entry : data.entrySet()){
                     if(restrictedFields.containsKey(entry.getKey())){
@@ -33,6 +36,25 @@ public class SecureConsoleLogger {
         } catch (ClassNotFoundException e) {}
 
         System.out.println(MessageFormat.format("[DEBUG]: {0}", data));
+    }
+
+    public static List<RuntimeInfo> extractRuntimeInfo(StackTraceElement[] stackTraceElements) {
+        List<RuntimeInfo> runtimeInfoList = new ArrayList<>();
+        for (StackTraceElement element : stackTraceElements) {
+            String className = element.getClassName();
+            int lastDotIndex = className.lastIndexOf('.');
+            if (lastDotIndex != -1) {
+                String packageName = className.substring(0, lastDotIndex);
+                String simpleClassName = className.substring(lastDotIndex + 1);
+                String methodName = element.getMethodName();
+                runtimeInfoList.add(new RuntimeInfo(packageName, simpleClassName, methodName));
+            } else {
+                // Handle the case where there is no package name
+                String methodName = element.getMethodName();
+                runtimeInfoList.add(new RuntimeInfo("", className, methodName));
+            }
+        }
+        return runtimeInfoList;
     }
 
 }
