@@ -18,7 +18,7 @@ public class SecureConsoleLogger {
         restrictedFields.put("name","*****");
     }
 
-    public static void debug(Map<String,String> data){
+    public static void debugPrint(Map<String,String> data){
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
         String callerClass = stackTraceElements[2].getClassName();
         try {

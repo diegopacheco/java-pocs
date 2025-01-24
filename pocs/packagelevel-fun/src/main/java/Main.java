@@ -17,6 +17,6 @@ public class Main{
     data.put("ssn",salesDao.getBestSalesManSSN());
     data.put("email",userEmailDao.getEmail("1"));
 
-    SecureConsoleLogger.debug(data);
+    SecureConsoleLogger.debugPrint(data);
   }
 }
