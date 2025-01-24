@@ -27,6 +27,7 @@ This POC shows:
 * How to use Package Object with Annotations
 * How to read info from runtime/stack
 * Simple Fuzzy Matching
+* Structured Logging by design to force introspection
 
 ### Pros
 
