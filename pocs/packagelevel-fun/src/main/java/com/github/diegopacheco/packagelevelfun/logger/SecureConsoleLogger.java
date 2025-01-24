@@ -26,10 +26,14 @@ public class SecureConsoleLogger {
 
         for(RuntimeInfo runtimeInfo : runtimeInfoList){
             String methodName = runtimeInfo.getMethodName();
-            String restrictedKey = restrictedFields.keySet().stream().filter(k -> methodName.contains(k)).findFirst().orElse(null);
-            if(restrictedKey!=null){
-                data.put(restrictedKey,restrictedFields.get(restrictedKey));
-            }
+            // need revert this logic methodname needs to be in restrictedFields
+
+            
+
+            restrictedFields.keySet().stream().
+                    filter(methodName::contains).
+                    findFirst().
+                    ifPresent(restrictedKey -> data.put(restrictedKey, restrictedFields.get(restrictedKey)));
         }
 
         System.out.println(MessageFormat.format("[DEBUG]: {0}", data));

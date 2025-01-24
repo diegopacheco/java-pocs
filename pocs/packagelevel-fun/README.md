@@ -19,3 +19,10 @@ This POC shows:
 
 1. So far solution is complex and expensive, it would be better of on a startup or agent level solution.
 2. It's a bit implicit and non-obvious
+
+### Future Ideas of improvement
+
+1. Add cache for stacktrace
+2. Pre-process method names on start
+3. Create a proxy rather than a Logger class
+4. Move it to agentic-level
