@@ -35,11 +35,12 @@ public class SecureConsoleLoggerTest {
 
         assertNotNull(runtimeInfoList);
         assertFalse(runtimeInfoList.isEmpty());
+        assertEquals(1, runtimeInfoList.size());
 
         RuntimeInfo firstElement = runtimeInfoList.get(0);
-        assertEquals("com.github.diegopacheco.packagelevelfun.logger", firstElement.getPackageName());
-        assertEquals("SecureConsoleLogger", firstElement.getClassName());
-        assertEquals("debugPrint", firstElement.getMethodName());
+        assertEquals("com.github.diegopacheco.packagelevelfun.dao", firstElement.getPackageName());
+        assertEquals("PersonDAO", firstElement.getClassName());
+        assertEquals("getPersonName", firstElement.getMethodName());
     }
 
     @Test
