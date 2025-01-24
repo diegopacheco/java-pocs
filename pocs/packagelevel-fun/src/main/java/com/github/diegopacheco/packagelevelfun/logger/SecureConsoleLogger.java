@@ -24,18 +24,13 @@ public class SecureConsoleLogger {
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
         List<RuntimeInfo> runtimeInfoList = extractRuntimeInfo(stackTraceElements);
 
-        try {
-            for(RuntimeInfo runtimeInfo : runtimeInfoList){
-                Class<?> clazz = Class.forName(runtimeInfo.getPackageName() + "." + runtimeInfo.getClassName());
-                if(clazz.isAnnotationPresent(com.github.diegopacheco.packagelevelfun.annotation.SecureLogging.class)){
-                    for(Map.Entry<String,String> entry : data.entrySet()){
-                        if(restrictedFields.containsKey(entry.getKey())){
-                            data.put(entry.getKey(),restrictedFields.get(entry.getKey()));
-                        }
-                    }
-                }
+        for(RuntimeInfo runtimeInfo : runtimeInfoList){
+            String methodName = runtimeInfo.getMethodName();
+            String restrictedKey = restrictedFields.keySet().stream().filter(k -> methodName.contains(k)).findFirst().orElse(null);
+            if(restrictedKey!=null){
+                data.put(restrictedKey,restrictedFields.get(restrictedKey));
             }
-        } catch (ClassNotFoundException e) {}
+        }
 
         System.out.println(MessageFormat.format("[DEBUG]: {0}", data));
     }
@@ -50,12 +45,11 @@ public class SecureConsoleLogger {
                 String simpleClassName = className.substring(lastDotIndex + 1);
                 String methodName = element.getMethodName();
                 Boolean isSecure = isSecure(className);
-                runtimeInfoList.add(new RuntimeInfo(packageName, simpleClassName, methodName,isSecure));
+                if (isSecure){
+                    runtimeInfoList.add(new RuntimeInfo(packageName, simpleClassName, methodName,isSecure));
+                }
             } else {
-                // Handle the case where there is no package name
-                String methodName = element.getMethodName();
-                Boolean isSecure = false;
-                runtimeInfoList.add(new RuntimeInfo("", className, methodName,isSecure));
+                // no package name, very likely main - do nothing.
             }
         }
         return runtimeInfoList;
