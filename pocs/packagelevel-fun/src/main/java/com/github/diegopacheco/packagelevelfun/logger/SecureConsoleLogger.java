@@ -21,24 +21,25 @@ public class SecureConsoleLogger {
     }
 
     public static void debugPrint(Map<String,String> data){
+        Map<String, String> mutableData = new ConcurrentHashMap<>(data);
+
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
         List<RuntimeInfo> runtimeInfoList = extractRuntimeInfo(stackTraceElements);
 
         for (RuntimeInfo runtimeInfo : runtimeInfoList) {
             // Simple Fuzzy matching going on here
             String methodName = runtimeInfo.getMethodName();
-            if (null!=methodName && !methodName.isEmpty()){
+            if (null != methodName && !methodName.isEmpty()) {
                 methodName = methodName.trim().toLowerCase();
-                methodName = methodName.replace("get","");
+                methodName = methodName.replace("get", "");
             }
             for (String key : restrictedFields.keySet()) {
                 if (methodName.contains(key)) {
-                    data.put(key, restrictedFields.get(key));
+                    mutableData.put(key, restrictedFields.get(key));
                 }
             }
         }
-
-        System.out.println(MessageFormat.format("[DEBUG]: {0}", data));
+        System.out.println(MessageFormat.format("[DEBUG]: {0}", mutableData));
     }
 
     public static List<RuntimeInfo> extractRuntimeInfo(StackTraceElement[] stackTraceElements) {

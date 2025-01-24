@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class PersonDAO {
     public String getPersonName(){
-        String name = "Diego Pacheco";
+        String name = "John Doe";
         SecureConsoleLogger.debugPrint(Map.of("name",name));
         return name;
     }

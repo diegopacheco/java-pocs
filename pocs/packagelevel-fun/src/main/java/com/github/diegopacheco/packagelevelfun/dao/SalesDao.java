@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class SalesDao {
     public String getBestSalesManSSN(){
-        String ssn = "123-45-6789";
+        String ssn = "000-00-0000";
         SecureConsoleLogger.debugPrint(Map.of("ssn",ssn));
         return ssn;
     }

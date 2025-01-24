@@ -3,6 +3,15 @@
 ./mvnw clean install 
 ```
 
+### Result
+
+```
+[DEBUG]: {name=*****}
+[DEBUG]: {ssn=###-##-####}
+[DEBUG]: {email=*****@*****}
+[DEBUG]: {name=John Doe, email=mail1@gmail.com, ssn=000-00-0000}
+```
+
 ### Rationale
 
 Trying to show usage of Package objects in Java.
