@@ -25,11 +25,13 @@ public class SecureConsoleLogger {
         List<RuntimeInfo> runtimeInfoList = extractRuntimeInfo(stackTraceElements);
 
         try {
-            Class<?> clazz = Class.forName("");
-            if(clazz.isAnnotationPresent(com.github.diegopacheco.packagelevelfun.annotation.SecureLogging.class)){
-                for(Map.Entry<String,String> entry : data.entrySet()){
-                    if(restrictedFields.containsKey(entry.getKey())){
-                        data.put(entry.getKey(),restrictedFields.get(entry.getKey()));
+            for(RuntimeInfo runtimeInfo : runtimeInfoList){
+                Class<?> clazz = Class.forName(runtimeInfo.getPackageName() + "." + runtimeInfo.getClassName());
+                if(clazz.isAnnotationPresent(com.github.diegopacheco.packagelevelfun.annotation.SecureLogging.class)){
+                    for(Map.Entry<String,String> entry : data.entrySet()){
+                        if(restrictedFields.containsKey(entry.getKey())){
+                            data.put(entry.getKey(),restrictedFields.get(entry.getKey()));
+                        }
                     }
                 }
             }
@@ -47,14 +49,29 @@ public class SecureConsoleLogger {
                 String packageName = className.substring(0, lastDotIndex);
                 String simpleClassName = className.substring(lastDotIndex + 1);
                 String methodName = element.getMethodName();
-                runtimeInfoList.add(new RuntimeInfo(packageName, simpleClassName, methodName));
+
+                runtimeInfoList.add(new RuntimeInfo(packageName, simpleClassName, methodName,isSecure(className)));
             } else {
                 // Handle the case where there is no package name
                 String methodName = element.getMethodName();
-                runtimeInfoList.add(new RuntimeInfo("", className, methodName));
+                Boolean isSecure = false;
+                runtimeInfoList.add(new RuntimeInfo("", className, methodName,isSecure));
             }
         }
         return runtimeInfoList;
+    }
+
+    private static Boolean isSecure(String className){
+        try {
+            Class<?> clazz = Class.forName(className);
+            if(clazz.isAnnotationPresent(com.github.diegopacheco.packagelevelfun.annotation.SecureLogging.class)){
+                return true;
+            }
+            if (clazz.getPackage().isAnnotationPresent(com.github.diegopacheco.packagelevelfun.annotation.SecureLogging.class)){
+                return true;
+            }
+        } catch (ClassNotFoundException e) {}
+        return false;
     }
 
 }
