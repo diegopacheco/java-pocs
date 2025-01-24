@@ -29,6 +29,7 @@ public class SecureConsoleLogger {
             String methodName = runtimeInfo.getMethodName();
             if (null!=methodName && !methodName.isEmpty()){
                 methodName = methodName.trim().toLowerCase();
+                methodName = methodName.replace("get","");
             }
             for (String key : restrictedFields.keySet()) {
                 if (methodName.contains(key)) {
