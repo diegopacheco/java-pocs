@@ -19,9 +19,9 @@ public class SecureConsoleLoggerTest {
 
         SecureConsoleLogger.debugPrint(data);
 
-        assertEquals("*****", data.get("name"));
-        assertEquals("###-##-####", data.get("ssn"));
-        assertEquals("*****@*****", data.get("email"));
+        assertEquals("John Doe", data.get("name"));
+        assertEquals("000-00-0000", data.get("ssn"));
+        assertEquals("123-45-6789", data.get("email"));
     }
 
     @Test

@@ -36,6 +36,7 @@ This POC shows:
 
 1. So far solution is complex and expensive, it would be better off on a startup or agent level solution.
 2. It's a bit implicit and non-obvious
+3. Hard to test because consider the runtime packages and stack
 
 ### Future Ideas of improvement
 
