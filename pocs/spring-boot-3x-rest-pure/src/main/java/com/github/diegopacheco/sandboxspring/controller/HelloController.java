@@ -1,7 +1,9 @@
 package com.github.diegopacheco.sandboxspring.controller;
 
 import com.github.diegopacheco.sandboxspring.contract.v1.GreetingContract;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -26,7 +28,7 @@ public class HelloController implements GreetingContract {
 		return langs.getOrDefault(langName, langs.get("en"));
 	}
 
-	//  http://localhost:8080/find?langName=it
+	// curl -i http://localhost:8080/find\?langName\=it
 	@Override
 	@GetMapping("/find")
 	public String findGreetingLanguage(@RequestParam(value = "langName") String lang) {
@@ -34,6 +36,13 @@ public class HelloController implements GreetingContract {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Language not found");
 		}
 		return langs.get(lang);
+	}
+
+	@ExceptionHandler(ResponseStatusException.class)
+	public ResponseEntity<Object> handleNotFoundException(ResponseStatusException ex) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("version", "V1");
+		return new ResponseEntity<>(ex.getReason(), headers, ex.getStatusCode());
 	}
 
 }
