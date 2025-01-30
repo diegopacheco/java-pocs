@@ -31,6 +31,8 @@ public class HelloController implements GreetingContract {
 	// curl -i http://localhost:8080/find\?langName\=it
 	@Override
 	@GetMapping("/find")
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
 	public String findGreetingLanguage(@RequestParam(value = "langName") String lang) {
 		if (!langs.containsKey(lang)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Language not found");
