@@ -21,8 +21,10 @@ public class CustomHeaderAdvice implements ResponseBodyAdvice<Object> {
                                   Class selectedConverterType,
                                   ServerHttpRequest request,
                                   ServerHttpResponse response) {
-        if (null != response.getHeaders()){
+        try {
             response.getHeaders().add("version", "V1");
+        } catch (UnsupportedOperationException e) {
+            // Handle the case where headers are unmodifiable
         }
         return body;
     }
