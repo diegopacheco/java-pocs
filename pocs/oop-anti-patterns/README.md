@@ -46,3 +46,10 @@ You make decisions everyday, you decide what classes do you create, they names, 
 2. Enums
 3. POJOs
 4. Delegation
+
+### Related POCs/Repos
+
+* https://github.com/diegopacheco/Elegant.Objects
+* https://github.com/diegopacheco/Elegant.Objects.vol.2
+* https://github.com/diegopacheco/java-pocs/tree/master/pocs/if-killer-proper-oop
+* https://github.com/diegopacheco/java-pocs/tree/master/pocs/if-alternatives-fun
