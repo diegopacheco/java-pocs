@@ -468,4 +468,65 @@ Tests failed: 0
 
 1. Add more Patterns
 2. Add more tests
-3. Remove Duplicated Code
+3. Improve limitations (accept Strings equals, multiple stmts, multiline comments)
+
+### Refactoring Notes
+
+#### V1 (took 4h to get it done)
+
+* 2 classes: 
+  * `LiquidUnitTests` - Class that runs the migration and tests
+  * `LiquidUnitRollbackTests` - Class that runs the rollback and tests
+* Code was duplicated from src/main/java to src/test/java
+* Lots of duplications
+* Lots of methods throwing exceptions
+* DB Config/Reading was duplicated
+
+Summary:
+```
+LiquidUnitTests : 253 LoC
+LiquidUnitRollbackTests : 365 LoC
+```
+
+Original Code: https://github.com/diegopacheco/java-pocs/tree/before-liquidunit-refactoring/pocs/liquid-unit-poc/src/main/java/com/github/diegopacheco/liquidunit
+
+V1: Method using Copilot/Sonnet 3.7 LLM in a `Vibe Code` it could not be 100% vibe code because AI got stuck several times and could not troubleshoot problems and would get stuck forever on same point so consider 80% vibe code.
+
+#### V2 (took 3h to get it done)
+
+* No more code duplication
+* Tests are the source of truth at : LiquidUnitRollbackTests and LiquidUnitTests Tests now extend this both classes and do nothing.
+* Remove throws Exception
+* DB Config/Reading is abstracted and centralized by the DAO
+* Better separation of concerns
+* Using Java Records :-)
+* Created the following concerns:
+  * DAO: `DatabaseDAO` - Class that handles all the database operations
+  * Liquibase: `LiquibaseService` - Class that handles all the liquibase operations
+  * Parser: `SQLTestsParser` - Class that handles all the SQL parsing operations for SQL test Assertions
+  * Parser:  `SQLRollbackParser` - Class that handles all the SQL parsing operations for SQL Rollback Test Generations
+  * Execution.Engine: `LiquidUnitTests` - Class that handles the execution of the migrations and tests
+  * Execution.Engine: `LiquidUnitRollbackTests` - Class that handles the execution of the rollbacks and generated tests
+* Test the Code that generate and run tests: 
+  * 11 Unit Tests for the `SQLTestsParser` code
+  * 11 Unit Tests for the `SQLRollbackParser` code
+  * 9 Integration Tests for `DatabaseMigrationDAO` code
+  * 4 Unit Tests (with mocks sorry) for the `LiquibaseService` code
+* Total 45 tests
+
+Summary:
+```
+LiquidUnitTests : 88 LoC (65% less code) 
+LiquidUnitRollbackTests : 159 LoC (56% less code)
+```
+<BR/>
+Note on Order: 
+Usually `@Order` is a bad thing, I would not do this if was not a POC
+because make the tests more fragile, here it would be better split this project in more projects
+them it would be easier to do somethings and have parallelism and isolation.
+
+V2: Method here was NO AI LLM for the Refactoring, only use AI to help with tests of the tests. That part was smooth and pretty good.
+
+### Summary on AI LLM
+
+Took me 4h to get it working and 3h to fix it to make it decent. So LLM is not linear improvement it's useful but far from perfect and good to prototype and get something working but still need spend almost same ammount of code to Refactor and make it decent.
