@@ -1,5 +1,6 @@
 package com.github.diegopacheco.liquidunit;
 
+import com.github.diegopacheco.liquidunit.dao.DatabaseMigrationDAO;
 import liquibase.Contexts;
 import liquibase.LabelExpression;
 import liquibase.Liquibase;
@@ -30,56 +31,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class LiquidUnitTests {
 
-    private static String MYSQL_HOST;
-    private static int MYSQL_PORT;
-    private static String MYSQL_DB;
-    private static String MYSQL_USER;
-    private static String MYSQL_PASSWORD;
+    private static DatabaseMigrationDAO dao = new DatabaseMigrationDAO();
 
     // expect: <number>
     private static final Pattern ASSERTION_PATTERN = Pattern.compile("--\\s*(?:expect|expect:|expects|expected|result|returns|should|is|equals|equal|eq|==|count|value|val|check|assert)\\s*:?\\s*(\\d+)\\s*");
 
-    private static Connection conn = null;
-
-    static {
-        try {
-            Properties properties = new Properties();
-            FileInputStream input = new FileInputStream("src/main/resources/application.properties");
-            properties.load(input);
-            input.close();
-            MYSQL_HOST = properties.getProperty("db.host", "127.0.0.1");
-            MYSQL_PORT = Integer.parseInt(properties.getProperty("db.port", "3306"));
-            MYSQL_DB = properties.getProperty("db.database", "profile");
-            MYSQL_USER = properties.getProperty("db.user", "root");
-            MYSQL_PASSWORD = properties.getProperty("db.password", "pass");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static Connection getConnection() throws Exception {
-        if (null==conn) {
-            String url = String.format("jdbc:mysql://%s:%d/%s", MYSQL_HOST, MYSQL_PORT, MYSQL_DB);
-            conn = DriverManager.getConnection(url, MYSQL_USER, MYSQL_PASSWORD);
-        }
-        return conn;
-    }
-
     @BeforeAll
     public static void setupDatabase() throws Exception {
-        Connection conn = getConnection();
-        try (Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate("DROP DATABASE IF EXISTS " + MYSQL_DB);
-            stmt.executeUpdate("CREATE DATABASE " + MYSQL_DB);
-            System.out.println("Database reset complete");
-        }
+        dao.cleanupDatabase();
     }
 
     @AfterAll
     public static void closeDatabase() throws Exception {
-        if (null!=conn) {
-            conn.close();
-        }
+        dao.close();
     }
 
     @TestFactory
@@ -115,7 +79,7 @@ public class LiquidUnitTests {
             throw new IOException("Missing one of the required SQL files in " + migrationDir);
         }
 
-        Connection connection = getConnection();
+        Connection connection = DatabaseMigrationDAO.getConnection();
         try {
             Database database = DatabaseFactory.getInstance()
                     .findCorrectDatabaseImplementation(new JdbcConnection(connection));
