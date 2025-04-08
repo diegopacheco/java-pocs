@@ -470,6 +470,14 @@ Tests failed: 0
 2. Add more tests
 3. Improve limitations (accept Strings equals, multiple stmts, multiline comments)
 
+# PLOT TWIST
+
+So far you taught this POC was just about Testing and Databases.
+Well it's true, all good things about Database Migration Testing, automation, testing rollbacks, testing being generated, using advanced junit 5 features and liquibase with code all good.
+BUT... PLOT TWIST... Well it's also about AI/LLMs.
+Read this part now...
+<img src="plottwist.jpg" />
+
 ### Refactoring Notes
 
 #### V1 (took 4h to get it done)
@@ -489,6 +497,8 @@ LiquidUnitRollbackTests : 365 LoC
 ```
 
 Original Code: https://github.com/diegopacheco/java-pocs/tree/before-liquidunit-refactoring/pocs/liquid-unit-poc/src/main/java/com/github/diegopacheco/liquidunit
+
+#### 🏁 V1 Method Summary
 
 V1: Method using Copilot/Sonnet 3.7 LLM in a `Vibe Code` it could not be 100% vibe code because AI got stuck several times and could not troubleshoot problems and would get stuck forever on same point so consider 80% vibe code.
 
@@ -520,13 +530,33 @@ LiquidUnitTests : 88 LoC (65% less code)
 LiquidUnitRollbackTests : 159 LoC (56% less code)
 ```
 <BR/>
+
 Note on Order: 
 Usually `@Order` is a bad thing, I would not do this if was not a POC
 because make the tests more fragile, here it would be better split this project in more projects
-them it would be easier to do somethings and have parallelism and isolation.
+them it would be easier to do something's and have parallelism and isolation.
+
+#### 🏁 V2 Method Summary
 
 V2: Method here was NO AI LLM for the Refactoring, only use AI to help with tests of the tests. That part was smooth and pretty good.
 
-### Summary on AI LLM
+### Summary on AI LLM Experiment
 
-Took me 4h to get it working and 3h to fix it to make it decent. So LLM is not linear improvement it's useful but far from perfect and good to prototype and get something working but still need spend almost same ammount of code to Refactor and make it decent.
+Took me 4h to get it working and 3h to fix it to make it "decent". So LLM is not linear improvement it's useful but far from perfect and good to prototype and get something working but still need spend almost same amount of code to Refactor and make it decent.
+LLM/Copilot is created to start something and an idea out to do some `Discovery` and `Prototyping` but not to finish a project in a scalable and proper way.
+It really struggled and cannot create decent structure that scale, that a human need to do. The "Vibe Code" generate is full of problems and took a lot of time to fix and put in a proper structure and make less bad.
+Also need to call out that sucks troubleshooting and debug problems.
+
+What LLM are good:
+* Autocomplete
+* Migrations
+* Generating Tests
+ 
+What LLM Suck:
+* Generate Scalable code with proper Design and Architecture
+* Troubleshooting and Debugging problems
+
+Recommend video to Watch (AI Driving Force)
+https://www.youtube.com/watch?v=UTX5Ij5Snfg&t=1839s&ab_channel=DiegoPacheco
+
+Again if we dont know what we doing how we will know someone is lying to us? How do we know AI is producing good code? Only if we do better we must RAISE THE BAR.
