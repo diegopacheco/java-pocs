@@ -560,3 +560,48 @@ Recommend video to Watch (AI Driving Force)
 https://www.youtube.com/watch?v=UTX5Ij5Snfg&t=1839s&ab_channel=DiegoPacheco
 
 Again if we dont know what we doing how we will know someone is lying to us? How do we know AI is producing good code? Only if we do better we must RAISE THE BAR.
+
+### Plot Twist (Again)
+
+https://github.com/diegopacheco/java-pocs/tree/ai-refactored-liquidunit/pocs/liquid-unit-poc
+
+### AI Refactoring
+
+Prompt 
+```
+could you refactor this file and create proper structure, proper architecture and desing,
+make sure you do your best and make sure the structure is scalable and proper for decent
+software engineering to mantain it over time. Do it for: LiquidUnitTests and LiquidUnitRollbackTests
+```
+
+Diego Pacheco Architecture/Design Review - Feedback on AI Refactor:
+
+0. Great AI did all that in `15min`, the slow part of me copying the code.
+1. At a "Glance" looks good, there is structure, multiple classes, but just in the surface, the design and architecture is pretty bad.
+2. Good news the build pass when I run `mvn clean install`
+3. I see AI created a class to extend the Tests and remove duplication between code/tests 
+however just for 1 file `LiquidUnitTests`  - AI completely miss the other file which is `LiquidUnitRollbackTests`.
+4. The most naive thing is that I had a main class and ai did not even touch it, so is my code that still running
+AI did all this refactoring but ai code is not being called because is my old main class still (face plan)
+5.The names of packages suck. `core` has nothing that is core, it has configs and database access code.
+5. There is a package named `junit` which sucks because this is not junit this is an execution engine that uses junit, AI got this wrong.
+6. There is a folder called `migrations` that one is not that bad, as name make sense.
+7. There is another one called `cli` which has the main method there and that's not obvious. Maven will not read from there, AI did not told me to change my pom.xml
+in Fact like I said, AI completely ignore the Main class I had and that still active. 
+8. DatabaseConnector does very little, that class is very weak. AI never mentioned anything about connection pool or proper connection management in fact AI original code still uses DriverManager which sucks. 
+9. LiquidUnitConfig has security anti-patterns, it has the `password` in clear text hardcoded in `2 places`.
+10. LiquidUnitRollbackTests is not bad. This one good job.
+11. LiquidUnitTests is not bad as well. This one good job.
+12. MigrationExecutor AI is doing imports that are never use, this is wrong.
+13. MigrationExecutor has database access code, AI is not doing proper SOC(Separation of Concerns) here. Wrong and BAD!
+14. MigrationExecutor uses `FileSystemResourceAccessor` which is deprecated, wrong, AI did not even botter to update it.
+15. MigrationExecutor AI did not get rid of all duplicated code, and methods pass parameters that are not necessary.
+16. MigrationExecutor AI is doing `currentQuery.length() > 0` where it should be `!currentQuery.isEmpty()`
+17. MigrationExecutor AI is doing lots of necessary else statements, code should be simplified AI did not simplify the code.
+18. MigrationExecutor has SQL and DAO code here, and it should not be here again SOC.
+19. LiquidUnitConfig is completely wrong, this class is not necessary, only DAO need this information.
+20. DatabaseConnector is not even a proper Singleton, does not even properly prevent multiple connections to be opened.
+21. CLI class has a `initilize` method that is not necessary, this should be removed. This is CORBA? Come on AI this is not even proper OOP. Objects have this little thing called constructors. 
+22. NO Unit Tests - Where is Tests fot the Code AI?
+22. No Integration Tests - Where is Tests fot the Code AI?
+23. Overall is pretty bad - I would need spend hours again to fix this and make it decent. 
