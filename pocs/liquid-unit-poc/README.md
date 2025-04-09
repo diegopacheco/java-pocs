@@ -563,27 +563,38 @@ Again if we dont know what we doing how we will know someone is lying to us? How
 
 ### Plot Twist (Again)
 
+<img src="surprised-pikachu.gif" />
+<img src="surprised-pikachu.gif" />
+
+So I did a V3 Method using AI to refactor the code.
+I asked AI(Github Copilot using Sonnet 3.7) to refactor the code.
+Here is what AI did <BR/>
 https://github.com/diegopacheco/java-pocs/tree/ai-refactored-liquidunit/pocs/liquid-unit-poc
 
-### AI Refactoring
+### AI Refactoring Summary
 
-Prompt 
+🖹 Prompt
 ```
-could you refactor this file and create proper structure, proper architecture and desing,
+could you refactor this file and create proper structure, proper architecture and design,
 make sure you do your best and make sure the structure is scalable and proper for decent
 software engineering to mantain it over time. Do it for: LiquidUnitTests and LiquidUnitRollbackTests
 ```
 
 Diego Pacheco Architecture/Design Review - Feedback on AI Refactor:
 
-0. Great AI did all that in `15min`, the slow part of me copying the code.
-1. At a "Glance" looks good, there is structure, multiple classes, but just in the surface, the design and architecture is pretty bad.
+PROS
+
+1. Great AI did all that in `15min`, the slow part of me copying the code.
 2. Good news the build pass when I run `mvn clean install`
-3. I see AI created a class to extend the Tests and remove duplication between code/tests 
+
+CONS
+
+1. At a "Glance" looks good, there is structure, multiple classes, but just in the surface, the design and architecture is pretty bad.
+2. I see AI created a class to extend the Tests and remove duplication between code/tests 
 however just for 1 file `LiquidUnitTests`  - AI completely miss the other file which is `LiquidUnitRollbackTests`.
-4. The most naive thing is that I had a main class and ai did not even touch it, so is my code that still running
-AI did all this refactoring but ai code is not being called because is my old main class still (face plan)
-5.The names of packages suck. `core` has nothing that is core, it has configs and database access code.
+3. The most naive thing is that I had a main class and ai did not even touch it, so is my code that still running
+AI did all this refactoring but ai code is not being called because is my old main class still (face plan).
+4. The names of packages suck. `core` has nothing that is core, it has configs and database access code.
 5. There is a package named `junit` which sucks because this is not junit this is an execution engine that uses junit, AI got this wrong.
 6. There is a folder called `migrations` that one is not that bad, as name make sense.
 7. There is another one called `cli` which has the main method there and that's not obvious. Maven will not read from there, AI did not told me to change my pom.xml
@@ -605,3 +616,14 @@ in Fact like I said, AI completely ignore the Main class I had and that still ac
 22. NO Unit Tests - Where is Tests fot the Code AI?
 22. No Integration Tests - Where is Tests fot the Code AI?
 23. Overall is pretty bad - I would need spend hours again to fix this and make it decent. 
+
+You probably thinking, OH but what if you do a different prompt, or what if you give more instructions. Well
+we need acknowledge that is the `Human` telling all this things to AI, and if we dont tell, AI wont know and wont do for us.
+IF the human does not all this things, AI will fool you, that's why we need to do better.
+Rember this is a lot of things going on like this (All over SV):
+
+<img src="artisan.jpg" width=800 />
+
+https://www.sfchronicle.com/tech/article/artisan-stop-hiring-humans-billboards-19976095.php
+
+Maybe is time to value people, and do better, prove our value again.
