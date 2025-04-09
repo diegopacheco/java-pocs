@@ -617,10 +617,10 @@ in Fact like I said, AI completely ignore the Main class I had and that still ac
 22. No Integration Tests - Where is Tests fot the Code AI?
 23. Overall is pretty bad - I would need spend hours again to fix this and make it decent. 
 
-You probably thinking, OH but what if you do a different prompt, or what if you give more instructions. Well
-we need acknowledge that is the `Human` telling all this things to AI, and if we dont tell, AI wont know and wont do for us.
-IF the human does not all this things, AI will fool you, that's why we need to do better.
-Rember this is a lot of things going on like this (All over SV):
+You're probably thinking, OH but what if you do a different prompt, or what if you give more instructions. Well
+we need acknowledge that is the `Human` telling all these things to AI, and if we don't tell, AI won't know and won't do for us.
+IF the human does not KNOW all these things, AI will fool you, that's why we need to do better.
+Remember this is a lot of things going on like this (All over SV):
 
 <img src="artisan.jpg" width=800 />
 
