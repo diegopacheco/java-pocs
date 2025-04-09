@@ -627,3 +627,5 @@ AI is interesting, can be good, but not all things are good. Remember this is a 
 https://www.sfchronicle.com/tech/article/artisan-stop-hiring-humans-billboards-19976095.php
 
 Maybe is time to value people, and do better, prove our value again.
+
+PS: The company on the billboard it's a startup, and they are hiring people :-).
