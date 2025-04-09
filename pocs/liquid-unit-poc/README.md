@@ -620,7 +620,7 @@ in Fact like I said, AI completely ignore the Main class I had and that still ac
 You're probably thinking, OH but what if you do a different prompt, or what if you give more instructions. Well
 we need acknowledge that is the `Human` telling all these things to AI, and if we don't tell, AI won't know and won't do for us.
 IF the human does not KNOW all these things, AI will fool you, that's why we need to do better.
-Remember this is a lot of things going on like this (All over SV):
+AI is interesting, can be good, but not all things are good. Remember this is a lot of things going on like this (All over SV):
 
 <img src="artisan.jpg" width=800 />
 
