@@ -38,7 +38,7 @@ There is no shame here, we all do things we not suppose to do, we all have bad h
 
 ### Have you ever stop to think that...
 
-You make decisions everyday, you decide what classes do you create, they names, they resposabilities, how they "talk" to each other, have you ever tought how can you make sure your abstractions are good? Or if you are just adding more complexity?
+You make decisions every day, you decide what classes do you create, they names, they resposabilities, how they "talk" to each other, have you ever tought how can you make sure your abstractions are good? Or if you are just adding more complexity?
 
 ### Anti-Patterns (Code Examples)
 
@@ -46,6 +46,8 @@ You make decisions everyday, you decide what classes do you create, they names, 
 2. Enums
 3. POJOs
 4. Delegation
+5. Boolean Flags
+6. Magic Numbers
 
 ### Related POCs/Repos
 
