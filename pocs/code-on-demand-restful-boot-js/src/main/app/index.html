@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>On-Demand Car Loader</title>
+    <style>
+        body {
+          font-family: sans-serif;
+          padding: 20px;
+        }
+        #car-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+          gap: 10px;
+          margin-top: 20px;
+        }
+        .car-tile {
+          background-color: #f9f9f9;
+          border: 1px solid #ccc;
+          padding: 10px;
+          text-align: center;
+          border-radius: 5px;
+        }
+        #load-btn {
+          padding: 10px 20px;
+          font-size: 12px;
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h3>Car Loader</h3>
+<button id="load-btn">Load Next Car</button>
+<div id="car-grid"></div>
+
+<script src="http://localhost:8080/cars/script"></script>
+<script>
+    const button = document.getElementById('load-btn');
+    const grid = document.getElementById('car-grid');
+
+    function addCarToGrid(car) {
+      if (!car || car.error) {
+        alert('No more cars to load.');
+        button.disabled = true;
+        return;
+      }
+      const div = document.createElement('div');
+      div.className = 'car-tile';
+      div.textContent = car.name;
+      grid.appendChild(div);
+    }
+
+    button.addEventListener('click', () => {
+      CarLoader.getNext().then(addCarToGrid);
+    });
+</script>
+</body>
+</html>
