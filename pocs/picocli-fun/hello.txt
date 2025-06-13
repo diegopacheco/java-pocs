@@ -1,0 +1,4 @@
+hello
+java 23
+pico cli
+done.
