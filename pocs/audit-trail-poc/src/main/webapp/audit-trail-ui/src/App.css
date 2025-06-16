@@ -1,0 +1,120 @@
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.audit-controls {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.audit-button {
+  padding: 10px 15px;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.audit-button:disabled {
+  background-color: #8891ff;
+  cursor: not-allowed;
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
+}
+
+.search-container textarea {
+  flex-grow: 1;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.search-button {
+  padding: 5px 15px;
+  background-color: #535bf2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-button:disabled {
+  background-color: #8891ff;
+  cursor: not-allowed;
+}
+
+.audit-grid {
+  margin: 20px auto;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.audit-grid table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.audit-grid th, .audit-grid td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.audit-grid th {
+  background-color: #9cb0f0;
+}
+
+.audit-grid tr:nth-child(even) {
+  background-color: #bcc5e1;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+  margin-top: 20px;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
