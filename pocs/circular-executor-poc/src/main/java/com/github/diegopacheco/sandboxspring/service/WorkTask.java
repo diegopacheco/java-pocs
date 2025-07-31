@@ -44,7 +44,8 @@ public class WorkTask implements Callable<Object> {
         System.out.println(header + " calling some bad service takes time to be successful");
         Thread.sleep(3000);
 
-        isSuccess = Math.random() < 0.01;
+        // 10% chance of success
+        isSuccess = Math.random() < 0.10;
         System.out.println(header + " isSuccess? " + isSuccess);
         if (isSuccess){
             result = new Date();
