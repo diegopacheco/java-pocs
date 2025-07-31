@@ -24,9 +24,12 @@ public class CircularServiceCaller {
                 return null;
             }
         }, ex).thenAccept(result -> {
-            if (result == null) {
-                System.out.println("Not done yet, so we will add to the queue and try again...");
+            WorkTask wt = (WorkTask)result;
+            if (wt.getResult()==null) {
+                System.out.println("> Not done yet, so we will add to the queue and try again...");
                 enqueueWork(task);
+            } else{
+                System.out.println("> Done! Result: " + wt.getResult());
             }
         });
         return true;

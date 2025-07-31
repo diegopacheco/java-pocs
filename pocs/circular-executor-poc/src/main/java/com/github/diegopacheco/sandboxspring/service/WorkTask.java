@@ -6,7 +6,7 @@ import java.util.concurrent.Callable;
 
 public class WorkTask implements Callable<Object> {
 
-    private long enterTheQueueTS;
+    private long enterTheQueueTS = System.currentTimeMillis();
     private int attempts;
     private boolean isSuccess;
     private Object result;
@@ -38,15 +38,19 @@ public class WorkTask implements Callable<Object> {
 
     @Override
     public Object call() throws Exception {
-        System.out.println("calling some bad service takes time to be successful");
+        String threadName = Thread.currentThread().getName();
+        String header = ">>> " + threadName + " attempts: " + attempts;
+
+        System.out.println(header + " calling some bad service takes time to be successful");
         Thread.sleep(3000);
 
         isSuccess = Math.random() < 0.01;
-        System.out.println("isSuccess: " + isSuccess);
+        System.out.println(header + " isSuccess? " + isSuccess);
         if (isSuccess){
-            return new Date();
-        } else{
-            return null;
+            result = new Date();
+        } else {
+            attempts++;
         }
+        return this;
     }
 }
