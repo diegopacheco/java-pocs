@@ -1,8 +1,12 @@
 package com.github.diegopacheco.sandboxspring.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class WorkTask implements Callable<Object> {
 
@@ -10,6 +14,9 @@ public class WorkTask implements Callable<Object> {
     private int attempts;
     private boolean isSuccess;
     private Object result;
+
+    @Autowired
+    private ExecutorService ex;
 
     public WorkTask(){}
 
@@ -52,6 +59,15 @@ public class WorkTask implements Callable<Object> {
         } else {
             attempts++;
         }
+        printExecutorStats(ex);
         return this;
+    }
+
+    private void printExecutorStats(ExecutorService ex) {
+        if (ex instanceof ThreadPoolExecutor) {
+            ThreadPoolExecutor tpe = (ThreadPoolExecutor) ex;
+            System.out.println(">>> Metrics - Active tasks: " + tpe.getActiveCount());
+            System.out.println(">>> Metrics - Queue size: " + tpe.getQueue().size());
+        }
     }
 }
