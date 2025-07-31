@@ -1,10 +1,12 @@
 package com.github.diegopacheco.sandboxspring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 
+@Service
 public class CircularServiceCaller {
 
     @Autowired
