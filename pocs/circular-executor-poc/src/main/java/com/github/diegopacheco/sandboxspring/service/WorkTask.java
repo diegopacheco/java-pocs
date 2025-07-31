@@ -1,9 +1,6 @@
 package com.github.diegopacheco.sandboxspring.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.Date;
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -14,13 +11,15 @@ public class WorkTask implements Callable<Object> {
     private int attempts;
     private boolean isSuccess;
     private Object result;
-
-    @Autowired
     private ExecutorService ex;
 
     public WorkTask(){}
 
-    public WorkTask(long enterTheQueueTS, int attempts, boolean isSuccess, Map<String, String> result) {
+    public WorkTask(ExecutorService ex) {
+        this.ex = ex;
+    }
+
+    public WorkTask(long enterTheQueueTS, int attempts, boolean isSuccess, Object result) {
         this.enterTheQueueTS = enterTheQueueTS;
         this.attempts = attempts;
         this.isSuccess = isSuccess;

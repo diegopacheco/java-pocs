@@ -6,11 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.lang.reflect.Executable;
+import java.util.concurrent.ExecutorService;
+
 @RestController
 public class WorkController {
 
 	@Autowired
 	CircularServiceCaller serviceCaller;
+
+	@Autowired
+	ExecutorService es;
 
 	@RequestMapping("/")
 	public String index() {
@@ -19,7 +25,7 @@ public class WorkController {
 
 	@RequestMapping("/work")
 	public String work() {
-		serviceCaller.enqueueWork(new WorkTask());
+		serviceCaller.enqueueWork(new WorkTask(es));
 		return "OK";
 	}
 
