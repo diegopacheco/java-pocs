@@ -39,6 +39,8 @@ public class WorkTask implements Callable<Object> {
     @Override
     public Object call() throws Exception {
         System.out.println("calling some bad service takes time to be successful");
+        Thread.sleep(3000);
+
         isSuccess = Math.random() < 0.01;
         System.out.println("isSuccess: " + isSuccess);
         if (isSuccess){
