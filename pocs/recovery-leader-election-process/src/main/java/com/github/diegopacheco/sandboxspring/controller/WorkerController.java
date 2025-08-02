@@ -43,5 +43,11 @@ public class WorkerController {
 		return Arrays.toString(splitter.getFullDB().toArray());
 	}
 
+	@RequestMapping("/clean")
+	public String clean() {
+		dataGenerationService.cleanUP();
+		return "done";
+	}
+
 }
 

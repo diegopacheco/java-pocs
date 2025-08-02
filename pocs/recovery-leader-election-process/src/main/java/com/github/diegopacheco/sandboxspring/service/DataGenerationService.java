@@ -22,4 +22,11 @@ public class DataGenerationService {
         return true;
     }
 
+    public boolean cleanUP(){
+        redis.del("db");
+        redis.del("slots");
+        System.out.println("Cleaned up db and slots keys.");
+        return true;
+    }
+
 }
