@@ -30,7 +30,7 @@ public class LeaderElectionService {
     public void initElection(){
         System.out.println(">> Starting Leader Election from this Slot: " + slotHolder.getSlot() + " port: " + serverPort);
 
-        redis.hset("slots", slotHolder.getSlot().toString(), "active");
+        redis.set("slot:" + slotHolder.getSlot(), "active", SetArgs.Builder.ex(300));
         System.out.println(">> Register my slot in redis DONE");
 
         System.out.println(">>> Generating 10 ids for db");
