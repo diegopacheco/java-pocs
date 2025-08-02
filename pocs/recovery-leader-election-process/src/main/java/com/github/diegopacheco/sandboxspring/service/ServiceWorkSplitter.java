@@ -19,16 +19,16 @@ public class ServiceWorkSplitter {
             return false;
         }
 
-        var slots = redis.hgetall("slots");
-        int partitions = slots.size();
-        if (slots.isEmpty()) {
+        List<String> slotKeys = redis.keys("slot:*");
+        if (slotKeys.isEmpty()) {
             System.out.println("No slots found in Redis. Cannot split work.");
             return false;
         }
 
+        int partitions = slotKeys.size();
         for (String id : ids) {
-            int slotIndex = id.hashCode() % partitions;
-            String slotKey = "slot:" + slotIndex;
+            int slotIndex = Math.abs(id.hashCode()) % partitions;
+            String slotKey = slotKeys.get(slotIndex);
 
             String currentIds = redis.hget(slotKey, "ids");
             if (currentIds == null) {
@@ -39,7 +39,6 @@ public class ServiceWorkSplitter {
                 currentIds += ",";
             }
             currentIds += id;
-
             redis.hset(slotKey, "ids", currentIds);
         }
         return true;
