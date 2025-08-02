@@ -3,7 +3,6 @@ package com.github.diegopacheco.sandboxspring.service;
 import io.lettuce.core.api.sync.RedisCommands;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -29,24 +28,23 @@ public class ServiceWorkSplitter {
         for (String id : ids) {
             int slotIndex = Math.abs(id.hashCode()) % partitions;
             String slotKey = slotKeys.get(slotIndex);
-
-            String currentIds = redis.hget(slotKey, "ids");
+            String idsKey = slotKey + ":ids";
+            String currentIds = redis.get(idsKey);
             if (currentIds == null) {
                 currentIds = "";
             }
-
             if (!currentIds.isEmpty()) {
                 currentIds += ",";
             }
             currentIds += id;
-            redis.hset(slotKey, "ids", currentIds);
+            redis.set(idsKey, currentIds);
         }
         return true;
     }
 
     public List<String> getMyWorkIDS(String slot){
-        String mySlotKey = "slot:" + slot;
-        String myIds = redis.hget(mySlotKey, "ids");
+        String idsKey = "slot:" + slot + ":ids";
+        String myIds = redis.get(idsKey);
         if (myIds != null && !myIds.isEmpty()) {
             return List.of(myIds.split(","));
         } else {
@@ -71,5 +69,4 @@ public class ServiceWorkSplitter {
         }
         return List.of(fullDB.toString().split("\n"));
     }
-
 }
