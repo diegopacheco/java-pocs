@@ -1,6 +1,7 @@
 package com.github.diegopacheco.sandboxspring.service;
 
 import com.github.diegopacheco.sandboxspring.conf.SlotHolder;
+import io.lettuce.core.SetArgs;
 import io.lettuce.core.api.sync.RedisCommands;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ public class LeaderElectionService {
         System.out.println(">>> Generating 10 ids for db");
         dataGenerationService.generate(10);
 
-        Boolean lockAcquired = redis.set("LOCK", slotHolder.getSlot().toString(), SetArgs.Builder.nx().ex(300));
-        if (lockAcquired) {
+        String lockAcquired = redis.set("LOCK", slotHolder.getSlot().toString(), SetArgs.Builder.nx().ex(300));
+        if (null!=lockAcquired && lockAcquired.equals(slotHolder.getSlot().toString())) {
 
             System.out.println("Lock acquired by slot: " + slotHolder.getSlot() + " I'm the leader");
             System.out.println(">> Starting split work...");
