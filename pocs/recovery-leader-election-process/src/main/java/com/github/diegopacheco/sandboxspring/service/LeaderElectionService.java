@@ -32,11 +32,11 @@ public class LeaderElectionService {
         redis.hset("slots", slotHolder.getSlot().toString(), "active");
         System.out.println(">> Register my slot in redis DONE");
 
+        System.out.println(">>> Generating 10 ids for db");
+        dataGenerationService.generate(10);
+
         Boolean lockAcquired = redis.setnx("LOCK", slotHolder.getSlot().toString());
         if (lockAcquired) {
-
-            System.out.println(">>> Generating 30 ids for db");
-            dataGenerationService.generate(30);
 
             System.out.println("Lock acquired by slot: " + slotHolder.getSlot() + " I'm the leader");
             System.out.println(">> Starting split work...");
