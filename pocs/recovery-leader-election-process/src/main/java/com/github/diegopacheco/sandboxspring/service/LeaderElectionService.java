@@ -16,7 +16,7 @@ public class LeaderElectionService {
     @Autowired
     RedisCommands<String,String> redis;
 
-    @Value("${SERVER_PORT:${server.port}}")
+    @Value("${SERVER_PORT:${server.port:8080}}")
     private String serverPort;
 
     @PostConstruct
