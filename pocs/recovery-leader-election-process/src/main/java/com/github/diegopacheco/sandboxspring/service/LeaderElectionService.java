@@ -31,19 +31,19 @@ public class LeaderElectionService {
         System.out.println(">> Starting Leader Election from this Slot: " + slotHolder.getSlot() + " port: " + serverPort);
 
         redis.set("slot:" + slotHolder.getSlot(), "active", SetArgs.Builder.ex(300));
-        System.out.println(">> Register my slot in redis DONE");redis.set("slot:" + slotHolder.getSlot(), "active", SetArgs.Builder.ex(300));
+        System.out.println(">> Register my slot in redis DONE");
 
         System.out.println(">>> Generating 10 ids for db");
         dataGenerationService.generate(10);
 
-        String lockAcquired = redis.set("LOCK", slotHolder.getSlot().toString(), SetArgs.Builder.nx().ex(300));
-        if (null!=lockAcquired && lockAcquired.equals(slotHolder.getSlot().toString())) {
-
+        String result = redis.set("LOCK", slotHolder.getSlot().toString(), SetArgs.Builder.nx().ex(300));
+        if ("OK".equals(result)) {
             System.out.println("Lock acquired by slot: " + slotHolder.getSlot() + " I'm the leader");
+
             System.out.println(">> Starting split work...");
             splitter.splitWork();
-
             System.out.println(">> Work split DONE");
+
             System.out.println(">> Releasing lock...");
             redis.del("LOCK");
             System.out.println(">> Lock released");
@@ -54,7 +54,7 @@ public class LeaderElectionService {
 
             System.out.println(">> Getting my IDs from slot: " + slotHolder.getSlot());
             String mySlotKey = "slot:" + slotHolder.getSlot();
-            String myIds = redis.hget(mySlotKey, "ids");
+            String myIds = redis.get(mySlotKey + ":ids");
             if (myIds != null && !myIds.isEmpty()) {
                 System.out.println(">> My IDs: " + myIds);
             } else {
