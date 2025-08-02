@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7.2
+    ports:
+      - "6379:6379"
+  instance_app_1:
+    image: spring-boot-app:latest
+    environment:
+      - SERVER_PORT=8081
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+  instance_app_2:
+    image: spring-boot-app:latest
+    environment:
+      - SERVER_PORT=8082
+    ports:
+      - "8082:8082"
+    depends_on:
+      - redis
+  instance_app_3:
+    image: spring-boot-app:latest
+    environment:
+      - SERVER_PORT=8083
+    ports:
+      - "8083:8083"
+    depends_on:
+      - redis
