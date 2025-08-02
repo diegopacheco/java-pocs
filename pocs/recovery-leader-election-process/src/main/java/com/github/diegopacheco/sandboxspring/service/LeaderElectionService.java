@@ -36,29 +36,30 @@ public class LeaderElectionService {
         System.out.println(">>> Generating 10 ids for db");
         dataGenerationService.generate(10);
 
-        String result = redis.set("LOCK", slotHolder.getSlot().toString(), SetArgs.Builder.nx().ex(300));
+        String result = redis.set("LOCK", slotHolder.getSlot().toString(), SetArgs.Builder.nx().ex(60));
         if ("OK".equals(result)) {
-            System.out.println("Lock acquired by slot: " + slotHolder.getSlot() + " I'm the leader");
+            System.out.println("==> Lock acquired by slot: " + slotHolder.getSlot() + " I'm the leader");
 
-            System.out.println(">> Starting split work...");
+            System.out.println("==>  Starting split work...");
             splitter.splitWork();
-            System.out.println(">> Work split DONE");
+            System.out.println("==>  Work split DONE");
+            System.out.println("==>  Leader Work DONE");
 
-            System.out.println(">> Releasing lock...");
-            redis.del("LOCK");
-            System.out.println(">> Lock released");
+            //System.out.println(">> Releasing lock...");
+            //redis.del("LOCK");
+            //System.out.println(">> Lock released");
         } else {
-            System.out.println("Lock NOT acquired. Another slot is leader.");
-            System.out.println(">> Waiting for leader to finish work...");
+            System.out.println("<< Lock NOT acquired. Another slot is leader.");
+            System.out.println("<< Waiting for leader to finish work...");
             silentSleep(15);
 
-            System.out.println(">> Getting my IDs from slot: " + slotHolder.getSlot());
+            System.out.println("<< Getting my IDs from slot: " + slotHolder.getSlot());
             String mySlotKey = "slot:" + slotHolder.getSlot();
             String myIds = redis.get(mySlotKey + ":ids");
             if (myIds != null && !myIds.isEmpty()) {
-                System.out.println(">> My IDs: " + myIds);
+                System.out.println("<< My IDs: " + myIds);
             } else {
-                System.out.println(">> No IDs found for my slot: " + slotHolder.getSlot());
+                System.out.println("<< No IDs found for my slot: " + slotHolder.getSlot());
             }
         }
     }
