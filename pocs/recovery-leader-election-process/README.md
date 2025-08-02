@@ -1,3 +1,8 @@
+## Rationale
+
+The idea here is to just have fun with a dumb leader election with redis and 3 instances of spring boot application.
+Proper leader election is a complex topic, but this example is just to show how it can be done in a simple way.
+
 ### Build
 
 ```bash
@@ -123,3 +128,10 @@ instance_app_1-1  | Spring Boot 3.5.x working!
 7) "slot:de61043d-4a6d-4314-a283-7bd5f054ea0b"
 127.0.0.1:6379> 
 ```
+
+### Endpoints
+
+* /generate -> Generates 10 ids on the key `db`
+* /db -> Return the whole list of ids that need to be recovered and split on key `db`
+* /ids -> After Leader election and split, here will be ids of the given service
+* /clean -> Cleans the `db`,`slots` and `LOCK` key
