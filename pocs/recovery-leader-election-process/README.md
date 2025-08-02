@@ -7,6 +7,11 @@
 ### Result
 
 ```bash
+./build.sh
+./start.sh
+```
+
+```bash
 ❯ ./start.sh
 [+] Running 4/4
  ✔ Container recovery-leader-election-process-redis-1           Created                                                                                             0.0s 
@@ -102,6 +107,10 @@ instance_app_1-1  | Spring Boot 3.5.x working!
 ```
 
 ### Redis
+
+```bash
+./redis-cli-docker.sh
+```
 
 ```bash
 127.0.0.1:6379> keys *
