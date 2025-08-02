@@ -4,6 +4,8 @@ import io.lettuce.core.api.sync.RedisCommands;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ServiceWorkSplitter {
 
@@ -41,6 +43,17 @@ public class ServiceWorkSplitter {
             redis.hset(slotKey, "ids", currentIds);
         }
         return true;
+    }
+
+    public List<String> getMyWorkIDS(String slot){
+        String mySlotKey = "slot:" + slot;
+        String myIds = redis.hget(mySlotKey, "ids");
+        if (myIds != null && !myIds.isEmpty()) {
+            return List.of(myIds.split(","));
+        } else {
+            System.out.println("No IDs found for my slot: " + slot);
+            return List.of();
+        }
     }
 
 }
