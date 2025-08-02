@@ -49,7 +49,7 @@ public class LeaderElectionService {
         } else {
             System.out.println("Lock NOT acquired. Another slot is leader.");
             System.out.println(">> Waiting for leader to finish work...");
-            silentSleep(10);
+            silentSleep(15);
 
             System.out.println(">> Getting my IDs from slot: " + slotHolder.getSlot());
             String mySlotKey = "slot:" + slotHolder.getSlot();
