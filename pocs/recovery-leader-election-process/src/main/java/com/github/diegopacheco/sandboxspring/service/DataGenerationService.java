@@ -25,7 +25,8 @@ public class DataGenerationService {
     public boolean cleanUP(){
         redis.del("db");
         redis.del("slots");
-        System.out.println("Cleaned up db and slots keys.");
+        redis.del("LOCK");
+        System.out.println("Cleaned up: LOCL,db and slots keys.");
         return true;
     }
 
