@@ -13,9 +13,9 @@ public class ServiceWorkSplitter {
     RedisCommands<String,String> redis;
 
     public boolean splitWork() {
-        var ids = redis.hkeys("ids");
+        var ids = redis.hkeys("db");
         if (ids == null || ids.isEmpty()) {
-            System.out.println("No IDs found in Redis. Cannot split work.");
+            System.out.println("No DB found in Redis. Cannot split work.");
             return false;
         }
 

@@ -35,7 +35,7 @@ public class LeaderElectionService {
         System.out.println(">>> Generating 10 ids for db");
         dataGenerationService.generate(10);
 
-        Boolean lockAcquired = redis.setnx("LOCK", slotHolder.getSlot().toString());
+        Boolean lockAcquired = redis.set("LOCK", slotHolder.getSlot().toString(), SetArgs.Builder.nx().ex(300));
         if (lockAcquired) {
 
             System.out.println("Lock acquired by slot: " + slotHolder.getSlot() + " I'm the leader");
