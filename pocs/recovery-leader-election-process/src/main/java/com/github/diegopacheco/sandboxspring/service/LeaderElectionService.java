@@ -22,6 +22,9 @@ public class LeaderElectionService {
     @Autowired
     ServiceWorkSplitter splitter;
 
+    @Autowired
+    DataGenerationService dataGenerationService;
+
     @PostConstruct
     public void initElection(){
         System.out.println(">> Starting Leader Election from this Slot: " + slotHolder.getSlot() + " port: " + serverPort);
@@ -31,6 +34,10 @@ public class LeaderElectionService {
 
         Boolean lockAcquired = redis.setnx("LOCK", slotHolder.getSlot().toString());
         if (lockAcquired) {
+
+            System.out.println(">>> Generating 30 ids for db");
+            dataGenerationService.generate(30);
+
             System.out.println("Lock acquired by slot: " + slotHolder.getSlot() + " I'm the leader");
             System.out.println(">> Starting split work...");
             splitter.splitWork();
