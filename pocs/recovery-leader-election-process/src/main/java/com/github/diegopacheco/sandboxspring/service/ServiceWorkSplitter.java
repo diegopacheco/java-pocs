@@ -56,4 +56,21 @@ public class ServiceWorkSplitter {
         }
     }
 
+    public List<String> getFullDB(){
+        List<String> ids = redis.hkeys("ids");
+        if (ids == null || ids.isEmpty()) {
+            System.out.println("No IDs found in Redis.");
+            return List.of();
+        }
+
+        StringBuilder fullDB = new StringBuilder();
+        for (String id : ids) {
+            String data = redis.hget("ids", id);
+            if (data != null) {
+                fullDB.append(id).append(":").append(data).append("\n");
+            }
+        }
+        return List.of(fullDB.toString().split("\n"));
+    }
+
 }

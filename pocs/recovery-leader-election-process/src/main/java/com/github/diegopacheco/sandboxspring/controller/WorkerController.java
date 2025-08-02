@@ -38,5 +38,10 @@ public class WorkerController {
 		return Arrays.toString(splitter.getMyWorkIDS(slotHolder.getSlot().toString()).toArray());
 	}
 
+	@RequestMapping("/db")
+	public String db() {
+		return Arrays.toString(splitter.getFullDB().toArray());
+	}
+
 }
 
