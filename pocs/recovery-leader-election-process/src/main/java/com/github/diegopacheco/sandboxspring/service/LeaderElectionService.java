@@ -45,9 +45,6 @@ public class LeaderElectionService {
             System.out.println("==>  Work split DONE");
             System.out.println("==>  Leader Work DONE");
 
-            //System.out.println(">> Releasing lock...");
-            //redis.del("LOCK");
-            //System.out.println(">> Lock released");
         } else {
             System.out.println("<< Lock NOT acquired. Another slot is leader.");
             System.out.println("<< Waiting for leader to finish work...");
@@ -67,8 +64,7 @@ public class LeaderElectionService {
     private void silentSleep(long ms) {
         try {
             Thread.sleep(ms * 1000);
-        } catch (Exception e) {
-        }
+        } catch (Exception _) {}
     }
 
 }
