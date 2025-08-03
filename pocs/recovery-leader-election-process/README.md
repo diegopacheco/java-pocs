@@ -5,6 +5,12 @@ Proper leader election is a complex topic, but this example is just to show how 
 
 <img src="arch.png" width="600" alt="Architecture"/>
 
+Even being a dumb poc there are some interesting techniques going here like:
+* Make same spring boot app rung in 3 different instance in docker-compose (changing port with SERVER_PORT)
+* Detect if application is running in a container or not
+* Advanced usage of redis like hashes and locks.
+* Slots logic.
+
 How proper leader election would look like?
 * Zookeeper can be used for leader election, but it is a complex solution.
 * Apache Curator is a library that can be used to simplify Zookeeper usage.
