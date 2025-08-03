@@ -5,6 +5,17 @@ Proper leader election is a complex topic, but this example is just to show how 
 
 <img src="arch.png" width="600" alt="Architecture"/>
 
+It works like this, the 3 instances will create a slot, which is unique random UUID (called slot).
+The slot will be store in redis with the pattern `slot:<UUID>`. After that because this is POC each node will insert 10 ramdom
+UUID on the db which is a key `db` in redis which is a hash. This UUID are just a symbol for some work that needs to be done.
+Such work can be loaded into queue/executor that will process the work. The idea of the leader eleectio here is becase we 
+dont want all 3 instance doing the same work, we need a coordination in this case the leader, which will do:
+ * Split the work in across all slots, right now just 3 but the algo is generic.
+ * Store the split result in a key in redis being with the pattern `slot:<UUID>:ids`
+
+Once the leader is done(other inctances are waiting for 15 seconds) they will try to fetch they own
+ids by querying the key `slot:<UUID>:ids` where `<UUID>` is the slot that they created.
+
 Even being a dumb poc there are some interesting techniques going here like:
 * Make same spring boot app rung in 3 different instance in docker-compose (changing port with SERVER_PORT)
 * Detect if application is running in a container or not
