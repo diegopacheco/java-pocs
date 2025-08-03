@@ -11,7 +11,9 @@ public class RedisConf {
 
     @Bean
     public RedisClient redisClient() {
-        return RedisClient.create("redis://redis:6379");
+        String redisHost = System.getProperty("redis.host",
+                isRunningInDocker() ? "redis" : "localhost");
+        return RedisClient.create("redis://" + redisHost + ":6379");
     }
 
     @Bean
@@ -22,6 +24,12 @@ public class RedisConf {
     @Bean
     public RedisCommands<String, String> redisCommands(StatefulRedisConnection<String, String> connection) {
         return connection.sync();
+    }
+
+    private boolean isRunningInDocker() {
+        return System.getenv("DOCKER_CONTAINER") != null ||
+                System.getProperty("java.class.path").contains("app.war") ||
+                new java.io.File("/.dockerenv").exists();
     }
 
 }
