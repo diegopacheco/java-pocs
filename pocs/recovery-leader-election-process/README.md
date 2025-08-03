@@ -7,17 +7,17 @@ Proper leader election is a complex topic, but this example is just to show how 
 
 It works like this, the 3 instances will create a slot, which is unique random UUID (called slot).
 The slot will be store in redis with the pattern `slot:<UUID>`. After that because this is POC each node will insert 10 ramdom
-UUID on the db which is a key `db` in redis which is a hash. This UUID are just a symbol for some work that needs to be done.
-Such work can be loaded into queue/executor that will process the work. The idea of the leader eleectio here is becase we 
+UUID on the db which is a key `db` in redis which is a hash. This UUID is just a symbol for some work that needs to be done.
+Such work can be loaded into queue/executor that will process the work. The idea of the leader election here is because we 
 dont want all 3 instance doing the same work, we need a coordination in this case the leader, which will do:
  * Split the work in across all slots, right now just 3 but the algo is generic.
  * Store the split result in a key in redis being with the pattern `slot:<UUID>:ids`
 
-Once the leader is done(other inctances are waiting for 15 seconds) they will try to fetch they own
+Once the leader is done(other instances are waiting for 15 seconds) they will try to fetch they own
 ids by querying the key `slot:<UUID>:ids` where `<UUID>` is the slot that they created.
 
 This solution is for fun, it has issues like:
-* IF Redis is down, the leader election will not work. But one node will fetch all the data(db).
+* IF Redis is down, the leader election will not work.
 * I did not test this algo with chaos and I don't think is bulletproof Only which a lot of testing to know.
 * After the lock, the issue is that the other nodes are waiting to be time based, it would be better to wait for the LOCK key to be done
 or another clear signal that the leader is done.
