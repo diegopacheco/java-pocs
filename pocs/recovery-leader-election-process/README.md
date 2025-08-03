@@ -2,6 +2,10 @@
 
 The idea here is to just have fun with a dumb leader election with redis and 3 instances of spring boot application.
 Proper leader election is a complex topic, but this example is just to show how it can be done in a simple way.
+This POC is necessary because this is a `Recovery` process, imagine you have queue/worker/batch system that crashed, and 
+you want load data from db to continue, but you don't want all instances doing that otherwise you will create duplicates.
+You also don't want just one machine doing because will create a bottleneck and won't have fairness. Ideal world it would to have
+a coordinator/leader that split that work across all instances and them they can continue in parallel.
 
 <img src="arch.png" width="600" alt="Architecture"/>
 
