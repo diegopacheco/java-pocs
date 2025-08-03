@@ -26,7 +26,7 @@ or another clear signal that the leader is done.
 * Only once the lock is gone a new leader election could happen, but this scenario can create some bugs just use your imagination. 
 
 Even being a dumb poc there are some interesting techniques going here like:
-* Make same spring boot app rung in 3 different instance in docker-compose (changing port with SERVER_PORT)
+* Make same spring boot app run in 3 different instance in docker-compose (changing port with SERVER_PORT)
 * Detect if application is running in a container or not
 * Advanced usage of redis like hashes and locks.
 * Slots logic.
