@@ -16,6 +16,15 @@ dont want all 3 instance doing the same work, we need a coordination in this cas
 Once the leader is done(other inctances are waiting for 15 seconds) they will try to fetch they own
 ids by querying the key `slot:<UUID>:ids` where `<UUID>` is the slot that they created.
 
+This solution is for fun, it has issues like:
+* IF Redis is down, the leader election will not work. But one node will fetch all the data(db).
+* I did not test this algo with chaos and I don't think is bulletproof Only which a lot of testing to know.
+* After the lock, the issue is that the other nodes are waiting to be time based, it would be better to wait for the LOCK key to be done
+or another clear signal that the leader is done.
+* Everytime a new machine/instance bootup the same code will run, them split will happen again if `db` is not cleaned.
+* IF machines/instances fail before this process finish lock still be alive for up to 60 seconds, which is the time to live of the lock.
+* Only once the lock is gone a new leader election could happen, but this scenario can create some bugs just use your imagination. 
+
 Even being a dumb poc there are some interesting techniques going here like:
 * Make same spring boot app rung in 3 different instance in docker-compose (changing port with SERVER_PORT)
 * Detect if application is running in a container or not
