@@ -3,6 +3,8 @@
 The idea here is to just have fun with a dumb leader election with redis and 3 instances of spring boot application.
 Proper leader election is a complex topic, but this example is just to show how it can be done in a simple way.
 
+<img src="arch.png" width="600" alt="Architecture"/>
+
 How proper leader election would look like?
 * Zookeeper can be used for leader election, but it is a complex solution.
 * Apache Curator is a library that can be used to simplify Zookeeper usage.
