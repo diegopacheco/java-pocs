@@ -4,7 +4,7 @@
  	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.0</version>
+		<version>3.5.5</version>
 	</parent>
   <groupId>com.github.diegopacheco.javapocs</groupId>
   <artifactId>java-21-spring-boot-3-mysql-partition</artifactId>
@@ -23,6 +23,15 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
+      <scope>runtime</scope>
     </dependency>
    <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -45,4 +54,3 @@
 		</plugins>
 	</build>
 </project>
-
