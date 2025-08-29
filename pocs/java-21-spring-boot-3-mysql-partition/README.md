@@ -32,7 +32,7 @@ PARTITION BY LIST  COLUMNS(name_first_char)
 
 ### Partition Evidence
 
-<link href="PARTITIONING_EVIDENCE.md" rel="import"/>
+<a href="https://github.com/diegopacheco/java-pocs/blob/master/pocs/java-21-spring-boot-3-mysql-partition/PARTITIONING_EVIDENCE.md">Partitioning Evidence</a>
 
 ```bash
 ./test-partition.sh
