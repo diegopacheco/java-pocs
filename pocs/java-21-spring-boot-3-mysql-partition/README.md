@@ -1,3 +1,44 @@
+# MySQL Partitioning (9x)
+
+  ✅ Complete MySQL 9.0 Partitioning Reference
+
+  Partition Types Covered:
+  1. RANGE - Value-based ranges with LESS THAN
+  2. LIST - Discrete value lists with IN clauses
+  3. HASH - Automatic hash-based distribution
+  4. KEY - MySQL's internal hash function
+  5. RANGE COLUMNS - Multi-column or non-integer ranges
+  6. LIST COLUMNS - Multi-column or non-integer lists (used in this poc)
+
+  Advanced Features:
+  - Subpartitioning - Composite partitioning (RANGE/LIST + HASH/KEY)
+  - Generated Columns - Full support (as used in your implementation)
+  - 27 Supported Functions - Complete list for partition expressions
+
+  Storage Engine Support:
+  - InnoDB (recommended) - Full feature support
+  - MyISAM - Full support but no transactions
+  - Memory - HASH/KEY only
+  - Archive - Basic support
+
+  Management Operations:
+  - ADD, DROP, REORGANIZE partitions
+  - ANALYZE, CHECK, OPTIMIZE, REPAIR partitions
+  - TRUNCATE partition data
+  - Information Schema queries
+
+  MySQL 9 Enhancements:
+  - Enhanced JSON support in partitioning
+  - Improved partition pruning algorithms
+  - Better generated column integration
+  - Performance Schema integration
+
+  Key Limitations:
+  - 8192 max partitions per table
+  - Unique/Primary keys must include partition columns
+  - Limited foreign key support across partitions
+
+
 ### Build
 
 ```bash
