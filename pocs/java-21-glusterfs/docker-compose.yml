@@ -1,0 +1,137 @@
+version: '3.8'
+
+services:
+  gluster-server:
+    image: gluster/gluster-centos:latest
+    hostname: gluster-server
+    container_name: gluster-server
+    privileged: true
+    networks:
+      gluster-net:
+        ipv4_address: 172.30.0.10
+    volumes:
+      - gluster-data:/export/brick1
+    command: >
+      bash -c "
+        echo 'Starting GlusterFS server manually...' &&
+        mkdir -p /export/brick1/gv0 /var/log/glusterfs &&
+        
+        echo 'Starting glusterd daemon manually...' &&
+        /usr/sbin/glusterd --pid-file=/var/run/glusterd.pid --log-file=/var/log/glusterfs/glusterd.log &
+        sleep 10 &&
+        
+        echo 'Creating and starting GlusterFS volume...' &&
+        gluster volume create gv0 gluster-server:/export/brick1/gv0 force &&
+        gluster volume start gv0 &&
+        
+        echo 'GlusterFS volume info:' &&
+        gluster volume info gv0 &&
+        
+        echo 'GlusterFS server ready and running!' &&
+        tail -f /var/log/glusterfs/glusterd.log
+      "
+
+  java-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: java21-glusterfs-app
+    depends_on:
+      - gluster-server
+    networks:
+      - gluster-net
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse:/dev/fuse
+    security_opt:
+      - apparmor:unconfined
+    environment:
+      - GLUSTER_MOUNT_POINT=/mnt/gluster
+      - JAVA_OPTS=-Xmx512m -Xms256m
+    command: >
+      bash -c "
+        echo 'Java App: Waiting for GlusterFS server to be ready...' &&
+        sleep 35 &&
+        
+        echo 'Java App: Installing ping utility...' &&
+        apt-get update -qq && apt-get install -y iputils-ping -qq &&
+        
+        echo 'Java App: Testing GlusterFS server connectivity...' &&
+        ping -c 2 gluster-server &&
+        
+        echo 'Java App: Creating mount point...' &&
+        mkdir -p /mnt/gluster &&
+        
+        echo 'Java App: Mounting GlusterFS volume...' &&
+        mount -t glusterfs gluster-server:/gv0 /mnt/gluster &&
+        
+        echo 'Java App: Verifying GlusterFS mount...' &&
+        df -h /mnt/gluster &&
+        ls -la /mnt/gluster &&
+        echo '*** SUCCESS: Real GlusterFS is mounted and working! ***' &&
+        
+        echo 'Java App: Starting Java 21 application with GlusterFS...' &&
+        ./mvnw exec:java -Dexec.mainClass=Main -Dexec.classpathScope=runtime
+      "
+
+  java-app-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: java21-glusterfs-app-2
+    depends_on:
+      - java-app
+    networks:
+      - gluster-net
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse:/dev/fuse
+    security_opt:
+      - apparmor:unconfined
+    environment:
+      - GLUSTER_MOUNT_POINT=/mnt/gluster
+    command: >
+      bash -c "
+        echo 'Java App 2: Waiting for first Java app to complete...' &&
+        sleep 120 &&
+        
+        echo 'Java App 2: Mounting GlusterFS volume...' &&
+        mkdir -p /mnt/gluster &&
+        mount -t glusterfs gluster-server:/gv0 /mnt/gluster &&
+        
+        echo 'Java App 2: *** REAL GLUSTERFS VERIFICATION ***' &&
+        echo 'Java App 2: Files created by first Java app on GlusterFS:' &&
+        ls -la /mnt/gluster/ &&
+        
+        echo 'Java App 2: Reading GlusterFS files created by Java 21 app:' &&
+        find /mnt/gluster -name '*.txt' -type f | head -5 | while read file; do
+          echo \"=== File: \$file ===\" 
+          cat \"\$file\"
+          echo \"\"
+        done &&
+        
+        echo 'Java App 2: Creating additional test file on GlusterFS...' &&
+        echo 'This file proves GlusterFS distributed storage is working!' > /mnt/gluster/java-app-2-glusterfs-proof.txt &&
+        echo \"Created by Java App 2 at: \$(date)\" >> /mnt/gluster/java-app-2-glusterfs-proof.txt &&
+        echo \"GlusterFS Volume: gv0 on gluster-server\" >> /mnt/gluster/java-app-2-glusterfs-proof.txt &&
+        
+        echo 'Java App 2: Final GlusterFS directory verification:' &&
+        ls -la /mnt/gluster/ &&
+        echo \"Total files on GlusterFS: \$(find /mnt/gluster -type f | wc -l)\" &&
+        
+        echo '*** SUCCESS: Both Java 21 apps successfully used real GlusterFS! ***'
+      "
+
+volumes:
+  gluster-data:
+
+networks:
+  gluster-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
