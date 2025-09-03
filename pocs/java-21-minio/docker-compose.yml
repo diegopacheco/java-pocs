@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    networks:
+      - app-network
+
+  java-app:
+    build: .
+    container_name: java-app
+    depends_on:
+      minio:
+        condition: service_healthy
+    networks:
+      - app-network
+
+volumes:
+  minio_data:
+
+networks:
+  app-network:
+    driver: bridge
