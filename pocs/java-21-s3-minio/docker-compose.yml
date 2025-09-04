@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      - MINIO_ROOT_USER=test
+      - MINIO_ROOT_PASSWORD=test12345
+    ports:
+      - "8000:9000"   
+      - "5000:9001"   
+    networks:
+      - minio-network
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  java-app:
+    build: .
+    container_name: java-s3-app
+    environment:
+      - MINIO_ENDPOINT=http://minio:9000
+      - MINIO_ACCESS_KEY=test
+      - MINIO_SECRET_KEY=test12345
+    depends_on:
+      minio:
+        condition: service_healthy
+    networks:
+      - minio-network
+    restart: unless-stopped
+
+volumes:
+  minio_data:
+
+networks:
+  minio-network:
+    driver: bridge
