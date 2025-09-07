@@ -32,6 +32,8 @@ public class UserController {
             User user = userService.createUser(name, email, address);
             return new ResponseEntity<>(user, HttpStatus.CREATED);
         } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error creating user: " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -66,6 +68,8 @@ public class UserController {
             User user = userService.updateUser(id, name, email, address);
             return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error updating user: " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
@@ -76,6 +80,8 @@ public class UserController {
             userService.deleteUser(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error deleting user: " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

@@ -1,6 +1,7 @@
 package com.github.diegopacheco.javapocs.codeorg.ddd.domain.user;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -28,6 +29,16 @@ public class User {
     public User() {
     }
     
+    @PersistenceCreator
+    public User(String id, String name, String email, String address, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+    
     public User(UserId id, String name, Email email, Address address) {
         this.id = Objects.requireNonNull(id, "User ID cannot be null").value();
         this.name = Objects.requireNonNull(name, "Name cannot be null");
@@ -38,7 +49,13 @@ public class User {
     }
     
     public static User create(String name, Email email, Address address) {
-        return new User(UserId.generate(), name, email, address);
+        User user = new User();
+        user.name = Objects.requireNonNull(name, "Name cannot be null");
+        user.email = Objects.requireNonNull(email, "Email cannot be null").value();
+        user.address = address != null ? address.value() : null;
+        user.createdAt = LocalDateTime.now();
+        user.updatedAt = LocalDateTime.now();
+        return user;
     }
     
     public void updateName(String newName) {
