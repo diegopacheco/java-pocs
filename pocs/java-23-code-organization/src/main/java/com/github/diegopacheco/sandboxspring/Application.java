@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@ComponentScan("com.github.diegopacheco.sandboxspring")
+@ComponentScan({"com.github.diegopacheco.sandboxspring", "com.github.diegopacheco.javapocs.codeorg.ddd"})
 public class Application {
 
 	public static void main(String[] args) {
