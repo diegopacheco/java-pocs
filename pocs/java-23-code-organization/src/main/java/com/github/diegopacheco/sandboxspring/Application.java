@@ -14,7 +14,6 @@ import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
     "com.github.diegopacheco.javapocs.codeorg.ddd"
 })
 @EnableAutoConfiguration
-@EnableJdbcRepositories(basePackages = "com.github.diegopacheco.javapocs.codeorg.ddd.infrastructure.persistence")
 public class Application {
 
 	public static void main(String[] args) {
