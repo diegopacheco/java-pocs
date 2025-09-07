@@ -7,10 +7,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+    "com.github.diegopacheco.sandboxspring", 
+    "com.github.diegopacheco.javapocs.codeorg.ddd"
+})
 @EnableAutoConfiguration
-@ComponentScan({"com.github.diegopacheco.sandboxspring", "com.github.diegopacheco.javapocs.codeorg.ddd"})
+@EnableJdbcRepositories(basePackages = "com.github.diegopacheco.javapocs.codeorg.ddd.infrastructure.persistence")
 public class Application {
 
 	public static void main(String[] args) {
