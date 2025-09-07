@@ -9,7 +9,7 @@
   <groupId>com.github.diegopacheco.javapocs</groupId>
   <artifactId>java-23-code-organization</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <properties>
     <maven.compiler.source>23</maven.compiler.source>
     <maven.compiler.target>23</maven.compiler.target>

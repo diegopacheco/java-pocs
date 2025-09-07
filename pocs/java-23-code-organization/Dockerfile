@@ -8,6 +8,6 @@ RUN ./mvnw clean package -DskipTests
 
 FROM eclipse-temurin:23-jre-alpine
 WORKDIR /app
-COPY --from=build /app/target/*.war app.war
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-CMD ["java", "-jar", "app.war"]
+CMD ["java", "-jar", "app.jar"]
