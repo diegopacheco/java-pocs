@@ -13,3 +13,7 @@ This is a test so experiment different ways or organizing a codebase for a servi
 #### DDD
 
 * Take a look on the package `com.github.diegopacheco.javapocs.codeorg.ddd`
+
+### Future Ideas
+
+* Add more styles like Hexagonal, Layered, Feature Sliced, etc.
