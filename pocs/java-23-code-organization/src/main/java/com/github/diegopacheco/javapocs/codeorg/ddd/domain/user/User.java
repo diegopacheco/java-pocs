@@ -50,6 +50,7 @@ public class User {
     
     public static User create(String name, Email email, Address address) {
         User user = new User();
+        user.id = UserId.generate().value();
         user.name = Objects.requireNonNull(name, "Name cannot be null");
         user.email = Objects.requireNonNull(email, "Email cannot be null").value();
         user.address = address != null ? address.value() : null;
