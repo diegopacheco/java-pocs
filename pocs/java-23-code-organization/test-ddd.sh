@@ -89,7 +89,7 @@ make_request "GET" "$BASE_URL/transactions/user/$USER_ID/type/debit" "" "Get Deb
 make_request "GET" "$BASE_URL/transactions/type/credit" "" "Get All Credit Transactions"
 make_request "GET" "$BASE_URL/transactions/type/debit" "" "Get All Debit Transactions"
 make_request "GET" "$BASE_URL/transactions" "" "Get All Transactions"
-make_request "PUT" "$BASE_URL/transactions/$CREDIT_TRANSACTION_ID/notes" '{"notes":"Updated deposit note"}' "Update Transaction Notes"
+make_request "PUT" "$BASE_URL/transactions/${CREDIT_TRANSACTION_ID}notes" '{"notes":"Updated deposit note"}' "Update Transaction Notes"
 
 echo
 echo "🔧 Testing More Complex Scenarios"
@@ -102,7 +102,7 @@ echo "Created second user with ID: $USER2_ID"
 
 make_request "POST" "$BASE_URL/transactions/credit" "{\"userId\":\"$USER2_ID\",\"amount\":200.00,\"notes\":\"Second user deposit\"}" "Create Credit for Second User"
 make_request "POST" "$BASE_URL/transactions/debit" "{\"userId\":\"$USER2_ID\",\"amount\":50.00,\"notes\":\"Second user purchase\"}" "Create Debit for Second User"
-make_request "GET" "$BASE_URL/transactions/user/$USER2_ID/balance" "" "Get Second User Balance"
+make_request "GET" "$BASE_URL/transactions/user/${USER2_ID}balance" "" "Get Second User Balance"
 
 pref2_response=$(make_request "POST" "$BASE_URL/preferences" "{\"userId\":\"$USER2_ID\",\"isActive\":false,\"solVersion\":\"0.9.0\"}" "Create Preference for Second User")
 PREFERENCE2_ID=$(extract_id "$pref2_response")
