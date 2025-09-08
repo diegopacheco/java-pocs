@@ -28,13 +28,20 @@ make_request() {
         response=$(curl -s -X $method "$url")
     fi
     
-    echo "   Response: $response"
-    echo "$response"
+    # Format response with jq and limit arrays to 1 record
+    if echo "$response" | jq . >/dev/null 2>&1; then
+        formatted_response=$(echo "$response" | jq 'if type == "array" then .[0:1] else . end')
+        echo "   Response: $formatted_response"
+    else
+        echo "   Response: $response"
+    fi
+
+    # echo "$response"
 }
 
 extract_id() {
     local json=$1
-    echo "$json" | grep -o '"id":"[^"]*"' | cut -d'"' -f4
+    echo "$json" | jq -r '.id // empty' 2>/dev/null || echo "$json" | grep -o '"id":"[^"]*"' | cut -d'"' -f4
 }
 
 echo
@@ -48,7 +55,7 @@ echo "Created user with ID: $USER_ID"
 
 make_request "GET" "$BASE_URL/users/$USER_ID" "" "Get User by ID"
 make_request "GET" "$BASE_URL/users/email/john.doe@example.com" "" "Get User by Email"
-make_request "GET" "$BASE_URL/users" "" "Get All Users"
+make_request "GET" "$BASE_URL/users" "" "Get All Users (limited to 1)"
 make_request "PUT" "$BASE_URL/users/$USER_ID" '{"name":"John Smith","address":"456 Oak Ave"}' "Update User"
 
 echo
@@ -61,10 +68,10 @@ PREFERENCE_ID=$(extract_id "$pref_response")
 echo "Created preference with ID: $PREFERENCE_ID"
 
 make_request "GET" "$BASE_URL/preferences/$PREFERENCE_ID" "" "Get Preference by ID"
-make_request "GET" "$BASE_URL/preferences/user/$USER_ID" "" "Get Preferences by User ID"
-make_request "GET" "$BASE_URL/preferences/active" "" "Get Active Preferences"
-make_request "GET" "$BASE_URL/preferences/inactive" "" "Get Inactive Preferences"
-make_request "GET" "$BASE_URL/preferences" "" "Get All Preferences"
+make_request "GET" "$BASE_URL/preferences/user/$USER_ID" "" "Get Preferences by User ID (limited to 1)"
+make_request "GET" "$BASE_URL/preferences/active" "" "Get Active Preferences (limited to 1)"
+make_request "GET" "$BASE_URL/preferences/inactive" "" "Get Inactive Preferences (limited to 1)"
+make_request "GET" "$BASE_URL/preferences" "" "Get All Preferences (limited to 1)"
 make_request "PUT" "$BASE_URL/preferences/$PREFERENCE_ID" '{"isActive":false,"solVersion":"2.0.0"}' "Update Preference"
 
 echo
@@ -82,14 +89,14 @@ DEBIT_TRANSACTION_ID=$(extract_id "$debit_response")
 echo "Created debit transaction with ID: $DEBIT_TRANSACTION_ID"
 
 make_request "GET" "$BASE_URL/transactions/$CREDIT_TRANSACTION_ID" "" "Get Transaction by ID"
-make_request "GET" "$BASE_URL/transactions/user/$USER_ID" "" "Get Transactions by User ID"
+make_request "GET" "$BASE_URL/transactions/user/$USER_ID" "" "Get Transactions by User ID (limited to 1)"
 make_request "GET" "$BASE_URL/transactions/user/$USER_ID/balance" "" "Get User Balance"
-make_request "GET" "$BASE_URL/transactions/user/$USER_ID/type/credit" "" "Get Credit Transactions for User"
-make_request "GET" "$BASE_URL/transactions/user/$USER_ID/type/debit" "" "Get Debit Transactions for User"
-make_request "GET" "$BASE_URL/transactions/type/credit" "" "Get All Credit Transactions"
-make_request "GET" "$BASE_URL/transactions/type/debit" "" "Get All Debit Transactions"
-make_request "GET" "$BASE_URL/transactions" "" "Get All Transactions"
-make_request "PUT" "$BASE_URL/transactions/${CREDIT_TRANSACTION_ID}notes" '{"notes":"Updated deposit note"}' "Update Transaction Notes"
+make_request "GET" "$BASE_URL/transactions/user/$USER_ID/type/credit" "" "Get Credit Transactions for User (limited to 1)"
+make_request "GET" "$BASE_URL/transactions/user/$USER_ID/type/debit" "" "Get Debit Transactions for User (limited to 1)"
+make_request "GET" "$BASE_URL/transactions/type/credit" "" "Get All Credit Transactions (limited to 1)"
+make_request "GET" "$BASE_URL/transactions/type/debit" "" "Get All Debit Transactions (limited to 1)"
+make_request "GET" "$BASE_URL/transactions" "" "Get All Transactions (limited to 1)"
+make_request "PUT" "$BASE_URL/transactions/${CREDIT_TRANSACTION_ID}/notes" '{"notes":"Updated deposit note"}' "Update Transaction Notes"
 
 echo
 echo "🔧 Testing More Complex Scenarios"
@@ -102,12 +109,11 @@ echo "Created second user with ID: $USER2_ID"
 
 make_request "POST" "$BASE_URL/transactions/credit" "{\"userId\":\"$USER2_ID\",\"amount\":200.00,\"notes\":\"Second user deposit\"}" "Create Credit for Second User"
 make_request "POST" "$BASE_URL/transactions/debit" "{\"userId\":\"$USER2_ID\",\"amount\":50.00,\"notes\":\"Second user purchase\"}" "Create Debit for Second User"
-make_request "GET" "$BASE_URL/transactions/user/${USER2_ID}balance" "" "Get Second User Balance"
+make_request "GET" "$BASE_URL/transactions/user/${USER2_ID}/balance" "" "Get Second User Balance"
 
 pref2_response=$(make_request "POST" "$BASE_URL/preferences" "{\"userId\":\"$USER2_ID\",\"isActive\":false,\"solVersion\":\"0.9.0\"}" "Create Preference for Second User")
 PREFERENCE2_ID=$(extract_id "$pref2_response")
 
-make_request "GET" "$BASE_URL/users" "" "Get All Users (should show both)"
-make_request "GET" "$BASE_URL/preferences/active" "" "Get All Active Preferences"
-make_request "GET" "$BASE_URL/preferences/inactive" "" "Get All Inactive Preferences"
-
+make_request "GET" "$BASE_URL/users" "" "Get All Users (limited to 1)"
+make_request "GET" "$BASE_URL/preferences/active" "" "Get All Active Preferences (limited to 1)"
+make_request "GET" "$BASE_URL/preferences/inactive" "" "Get All Inactive Preferences (limited to 1)"
