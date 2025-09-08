@@ -23,7 +23,14 @@ public class UserRepositoryImpl implements UserRepository {
     
     @Override
     public User save(User user) {
-        return springDataUserRepository.save(user);
+        if (user.getId() != null && !springDataUserRepository.existsById(user.getId())) {
+            springDataUserRepository.insertUser(user.getId(), user.getName(), user.getEmail().value(), 
+                user.getAddress() != null ? user.getAddress().value() : null, 
+                user.getCreatedAt(), user.getUpdatedAt());
+            return user;
+        } else {
+            return springDataUserRepository.save(user);
+        }
     }
     
     @Override
