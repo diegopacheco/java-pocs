@@ -23,18 +23,25 @@ make_request() {
     
     if [ -n "$data" ]; then
         echo "   Data: $data"
-        response=$(curl -s -X $method -H "Content-Type: application/json" -d "$data" "$url")
+        response=$(curl -s -w "|||HTTP_STATUS:%{http_code}" -X $method -H "Content-Type: application/json" -d "$data" "$url")
+        http_status=$(echo "$response" | grep -o "HTTP_STATUS:[0-9]*" | cut -d: -f2)
+        response_body=$(echo "$response" | sed 's/|||HTTP_STATUS:[0-9]*$//')
     else
-        response=$(curl -s -X $method "$url")
+        response=$(curl -s -w "|||HTTP_STATUS:%{http_code}" -X $method "$url")
+        http_status=$(echo "$response" | grep -o "HTTP_STATUS:[0-9]*" | cut -d: -f2)
+        response_body=$(echo "$response" | sed 's/|||HTTP_STATUS:[0-9]*$//')
     fi
-    
-    # Format response with jq and limit arrays to 1 record
-    if echo "$response" | jq . >/dev/null 2>&1; then
-        formatted_response=$(echo "$response" | jq 'if type == "array" then .[0:1] else . end')
+
+    echo "   HTTP Status: $http_status"
+
+    if [ -n "$response_body" ] && echo "$response_body" | jq . >/dev/null 2>&1; then
+        formatted_response=$(echo "$response_body" | jq 'if type == "array" then .[0:1] else . end')
         echo "   Response: $formatted_response"
     else
-        echo "   Response: $response"
+        echo "   Response: $response_body"
     fi
+
+    echo "$response_body"
 }
 
 extract_id() {
@@ -55,8 +62,9 @@ echo
 echo "🔧 Testing User Management"
 echo "=========================="
 
+TIMESTAMP=$(date +%s)
 echo "Creating user..."
-user_response=$(make_request "POST" "$BASE_URL/users" '{"name":"John Doe","email":"john.doe@example.com","address":"123 Main St"}' "Create User")
+user_response=$(make_request "POST" "$BASE_URL/users" "{\"name\":\"John Doe ${TIMESTAMP}\",\"email\":\"john.doe.${TIMESTAMP}@example.com\",\"address\":\"123 Main St\"}" "Create User")
 USER_ID=$(extract_id "$user_response")
 echo "Created user with ID: $USER_ID"
 
@@ -76,7 +84,7 @@ echo "==============================="
 
 PREF_USER_ID="$USER_ID"
 if [ -z "$PREF_USER_ID" ] || [ "$PREF_USER_ID" = "null" ]; then
-    PREF_USER_ID="u001"  # Use a known existing user ID
+    PREF_USER_ID="u001"
 fi
 
 echo "Creating preference..."
@@ -115,7 +123,6 @@ debit_response=$(make_request "POST" "$BASE_URL/transactions/debit" "{\"userId\"
 DEBIT_TRANSACTION_ID=$(extract_id "$debit_response")
 echo "Created debit transaction with ID: $DEBIT_TRANSACTION_ID"
 
-# Only make requests if we have valid IDs
 if [ -n "$CREDIT_TRANSACTION_ID" ] && [ "$CREDIT_TRANSACTION_ID" != "null" ]; then
     make_request "GET" "$BASE_URL/transactions/$CREDIT_TRANSACTION_ID" "" "Get Transaction by ID"
     make_request "PUT" "$BASE_URL/transactions/$CREDIT_TRANSACTION_ID/notes" '{"notes":"Updated deposit note"}' "Update Transaction Notes"
@@ -136,7 +143,7 @@ echo "🔧 Testing More Complex Scenarios"
 echo "=================================="
 
 echo "Creating second user..."
-user2_response=$(make_request "POST" "$BASE_URL/users" '{"name":"Jane Smith","email":"jane.smith@example.com","address":"789 Pine St"}' "Create Second User")
+user2_response=$(make_request "POST" "$BASE_URL/users" "{\"name\":\"Jane Smith ${TIMESTAMP}\",\"email\":\"jane.smith.${TIMESTAMP}@example.com\",\"address\":\"789 Pine St\"}" "Create Second User")
 USER2_ID=$(extract_id "$user2_response")
 echo "Created second user with ID: $USER2_ID"
 
