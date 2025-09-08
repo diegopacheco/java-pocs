@@ -46,7 +46,6 @@ make_request() {
 
 extract_id() {
     local json=$1
-    echo "DEBUG: Extracting ID from: $json" >&2
     if echo "$json" | jq . >/dev/null 2>&1; then
         id=$(echo "$json" | jq -r 'if type == "array" then .[0].id else .id end // empty' 2>/dev/null)
         if [ -n "$id" ] && [ "$id" != "null" ]; then
@@ -69,6 +68,8 @@ USER_ID=$(extract_id "$user_response")
 echo "Created user with ID: $USER_ID"
 
 if [ -n "$USER_ID" ] && [ "$USER_ID" != "null" ]; then
+    echo "Waiting for user to be committed to database..."
+    sleep 1
     make_request "GET" "$BASE_URL/users/$USER_ID" "" "Get User by ID"
     make_request "PUT" "$BASE_URL/users/$USER_ID" '{"name":"John Smith","address":"456 Oak Ave"}' "Update User"
 else
