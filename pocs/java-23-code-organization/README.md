@@ -1,6 +1,6 @@
 # Rationale
 
-This is a test so experiment different ways or organizing a codebase for a service.
+This is a test to experiment different ways or organizing a codebase for a service.
 
 ### Build
 
