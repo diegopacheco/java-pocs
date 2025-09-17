@@ -33,3 +33,7 @@ Java version: 25
 [INFO] Finished at: 2025-09-16T22:16:49-07:00
 [INFO] ------------------------------------------------------------------------
 ```
+
+### Java 25 on IntelliJ
+
+<img src="intellij-java-25.png" />
