@@ -72,3 +72,37 @@ Method                                                          Samples Percent
 --------------------------------------------------------------- ------- -------
 java.lang.invoke.MemberName.asSpecial()                               1 100.00%
 ```
+
+### Mkethod Timing
+
+```
+❯ ./jfr-method-timing.sh
+=== JFR Method Timing & Tracing ===
+Method Timing - measuring constructor performance:
+[0.158s][info][jfr,startup] Started recording 1. No limit specified, using maxsize=250MB as default.
+[0.158s][info][jfr,startup]
+[0.158s][info][jfr,startup] Use jcmd 37967 JFR.dump name=1 to copy recording data to file.
+Age: 25, Department: Engineering
+
+No events found for 'Method Timing'.
+Method Tracing - tracking all constructors:
+./jfr-method-timing.sh: line 13: init: No such file or directory
+jfr view: could not open file /Users/diegopacheco/Documents/git/diegopacheco/java-pocs/pocs/java-25-playground-features/trace.jfr (No such file or directory)
+Combined Timing & Tracing - all methods in target class:
+[0.192s][info][jfr,startup] Started recording 1. No limit specified, using maxsize=250MB as default.
+[0.192s][info][jfr,startup]
+[0.192s][info][jfr,startup] Use jcmd 37971 JFR.dump name=1 to copy recording data to file.
+Age: 25, Department: Engineering
+
+                                                     Method Timing
+
+Timed Method                                                         Invocations Minimum Time Average Time Maximum Time
+-------------------------------------------------------------------- ----------- ------------ ------------ ------------
+com.github.diegopacheco.java25.features.FlexibleConstructorBodies...           1  1.100000 ms  1.100000 ms  1.100000 ms
+com.github.diegopacheco.java25.features.FlexibleConstructorBodies...           0          N/A          N/A          N/A
+jfr view: Could not find a view or an event type named method-trace
+JFR files created:
+-rw-r--r--@ 1 diegopacheco  staff  391075 Sep 17 00:31 combined.jfr
+-rw-r--r--@ 1 diegopacheco  staff  408869 Sep 16 23:57 cpu-profile.jfr
+-rw-r--r--@ 1 diegopacheco  staff  391426 Sep 17 00:31 timing.jfr
+```
