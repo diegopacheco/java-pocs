@@ -17,7 +17,11 @@
                 <configuration>
                     <source>25</source>
                     <target>25</target>
-                    <compilerArgs>--enable-preview</compilerArgs>
+                    <compilerArgs>
+                        <arg>--enable-preview</arg>
+                        <arg>--add-modules</arg>
+                        <arg>jdk.incubator.vector</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -36,6 +40,11 @@
                     <arguments>
                         <argument>--enable-preview</argument>
                     </arguments>
+                    <options>
+                        <option>--add-modules</option>
+                        <option>jdk.incubator.vector</option>
+                        <option>--enable-preview</option>
+                    </options>
                 </configuration>
             </plugin>
             <plugin>
