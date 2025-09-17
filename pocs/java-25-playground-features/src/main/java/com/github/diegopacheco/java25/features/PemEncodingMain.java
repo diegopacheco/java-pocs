@@ -1,154 +1,164 @@
 package com.github.diegopacheco.java25.features;
 
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
+import java.security.spec.*;
 import java.util.Base64;
-import java.util.List;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.PBEParameterSpec;
 
 /*
- * Pem Encoding (JEP 470)
+ * PEM Encoding (JEP 470)
  * https://openjdk.org/jeps/470
+ *
+ * This demonstrates the new PemEncoder and PemDecoder concepts
+ * introduced in Java 25 for handling PEM format encoding/decoding
+ *
+ * Note: Since PemEncoder/PemDecoder classes are not yet available in this build,
+ * we simulate their functionality to show how they would work.
  */
 public class PemEncodingMain {
 
     public static void main(String[] args) {
-        System.out.println("=== Java 25 PEM Encoding Examples (JEP 470) ===\n");
+        System.out.println("=== Java 25 PEM Encoding Concepts (JEP 470) ===\n");
+
         try {
-            basicPemExample();
-            certificateExample();
-            privateKeyExample();
-            multiplePemExample();
+            basicPemConcepts();
+            certificatePemConcepts();
+            privateKeyPemConcepts();
+            encryptedPrivateKeyConcepts();
+            customPemRecordConcepts();
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private static void basicPemExample() {
-        System.out.println("1. Basic PEM Encoding/Decoding Example:");
+    private static void basicPemConcepts() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        System.out.println("1. Basic PEM Encoding/Decoding Concepts:");
         System.out.println("----------------------------------------");
 
-        byte[] data = "Hello, Java 25 PEM encoding!".getBytes();
-        String pemEncoded = Base64.getMimeEncoder(64, "\n".getBytes())
-                .encodeToString(data);
-
-        String pemFormatted = "-----BEGIN MESSAGE-----\n" +
-                             pemEncoded + "\n" +
-                             "-----END MESSAGE-----";
-
-        System.out.println("Original data: " + new String(data));
-        System.out.println("PEM encoded:\n" + pemFormatted);
-
-        String base64Content = pemFormatted
-                .replace("-----BEGIN MESSAGE-----", "")
-                .replace("-----END MESSAGE-----", "")
-                .replaceAll("\\s", "");
-
-        byte[] decoded = Base64.getDecoder().decode(base64Content);
-        System.out.println("Decoded data: " + new String(decoded));
-        System.out.println();
-    }
-
-    private static void certificateExample() throws NoSuchAlgorithmException {
-        System.out.println("2. Certificate PEM Example:");
-        System.out.println("---------------------------");
-
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
         keyGen.initialize(2048);
         KeyPair keyPair = keyGen.generateKeyPair();
 
-        byte[] publicKeyBytes = keyPair.getPublic().getEncoded();
-        String publicKeyPem = formatAsPem("PUBLIC KEY", publicKeyBytes);
-
-        System.out.println("Public Key PEM format:");
+        String publicKeyPem = encodeToPem("PUBLIC KEY", keyPair.getPublic().getEncoded());
+        System.out.println("Public Key PEM (simulated PemEncoder):");
         System.out.println(publicKeyPem);
 
-        String base64PublicKey = extractBase64Content(publicKeyPem);
-        byte[] decodedPublicKey = Base64.getDecoder().decode(base64PublicKey);
+        byte[] decodedBytes = decodeFromPem(publicKeyPem);
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(decodedBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        PublicKey decodedPublicKey = keyFactory.generatePublic(keySpec);
 
-        System.out.println("Original key length: " + publicKeyBytes.length + " bytes");
-        System.out.println("Decoded key length: " + decodedPublicKey.length + " bytes");
-        System.out.println("Keys match: " + java.util.Arrays.equals(publicKeyBytes, decodedPublicKey));
+        System.out.println("Original algorithm: " + keyPair.getPublic().getAlgorithm());
+        System.out.println("Decoded algorithm: " + decodedPublicKey.getAlgorithm());
+        System.out.println("Keys match: " + keyPair.getPublic().equals(decodedPublicKey));
         System.out.println();
     }
 
-    private static void privateKeyExample() throws NoSuchAlgorithmException {
-        System.out.println("3. Private Key PEM Example:");
-        System.out.println("---------------------------");
+    private static void certificatePemConcepts() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        System.out.println("2. Certificate PEM Concepts:");
+        System.out.println("----------------------------");
+
+        KeyPairGenerator keyGen = KeyPairGenerator.getInstance("EC");
+        keyGen.initialize(256);
+        KeyPair keyPair = keyGen.generateKeyPair();
+
+        String publicKeyPem = encodeToPem("PUBLIC KEY", keyPair.getPublic().getEncoded());
+        System.out.println("EC Public Key PEM (simulated):");
+        System.out.println(publicKeyPem);
+
+        byte[] decodedBytes = decodeFromPem(publicKeyPem);
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(decodedBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("EC");
+        PublicKey decodedKey = keyFactory.generatePublic(keySpec);
+
+        System.out.println("Key algorithm: " + decodedKey.getAlgorithm());
+        System.out.println("Key format: " + decodedKey.getFormat());
+        System.out.println();
+    }
+
+    private static void privateKeyPemConcepts() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        System.out.println("3. Private Key PEM Concepts:");
+        System.out.println("----------------------------");
+
+        KeyPairGenerator keyGen = KeyPairGenerator.getInstance("Ed25519");
+        KeyPair keyPair = keyGen.generateKeyPair();
+
+        String privateKeyPem = encodeToPem("PRIVATE KEY", keyPair.getPrivate().getEncoded());
+        System.out.println("Ed25519 Private Key PEM (first 300 chars):");
+        System.out.println(privateKeyPem.substring(0, Math.min(300, privateKeyPem.length())) + "...");
+
+        byte[] decodedBytes = decodeFromPem(privateKeyPem);
+        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(decodedBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("Ed25519");
+        PrivateKey decodedPrivateKey = keyFactory.generatePrivate(keySpec);
+
+        System.out.println("Key algorithm: " + decodedPrivateKey.getAlgorithm());
+        System.out.println("Key format: " + decodedPrivateKey.getFormat());
+        System.out.println("Keys match: " + keyPair.getPrivate().equals(decodedPrivateKey));
+        System.out.println();
+    }
+
+    private static void encryptedPrivateKeyConcepts() throws GeneralSecurityException {
+        System.out.println("4. Encrypted Private Key Concepts:");
+        System.out.println("----------------------------------");
 
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
         keyGen.initialize(2048);
         KeyPair keyPair = keyGen.generateKeyPair();
 
-        byte[] privateKeyBytes = keyPair.getPrivate().getEncoded();
-        String privateKeyPem = formatAsPem("PRIVATE KEY", privateKeyBytes);
-
-        System.out.println("Private Key PEM format (first 500 chars):");
-        System.out.println(privateKeyPem.substring(0, Math.min(500, privateKeyPem.length())) + "...");
-
-        System.out.println("Key algorithm: " + keyPair.getPrivate().getAlgorithm());
-        System.out.println("Key format: " + keyPair.getPrivate().getFormat());
-        System.out.println("Key size: " + privateKeyBytes.length + " bytes");
+        char[] password = "mySecretPassword".toCharArray();
+        String unencryptedPem = encodeToPem("PRIVATE KEY", keyPair.getPrivate().getEncoded());
+        System.out.println("Unencrypted Private Key PEM (first 200 chars):");
+        System.out.println(unencryptedPem.substring(0, Math.min(200, unencryptedPem.length())) + "...");
         System.out.println();
     }
 
-    private static void multiplePemExample() {
-        System.out.println("4. Multiple PEM Objects Example:");
-        System.out.println("--------------------------------");
+    private static void customPemRecordConcepts() {
+        System.out.println("5. Custom PemRecord Concepts:");
+        System.out.println("-----------------------------");
 
-        String cert1 = formatAsPem("CERTIFICATE", "MIICert1Data".getBytes());
-        String cert2 = formatAsPem("CERTIFICATE", "MIICert2Data".getBytes());
-        String key = formatAsPem("PRIVATE KEY", "MIIPrivateKeyData".getBytes());
+        String customType = "CUSTOM OBJECT";
+        String customContent = "VGhpcyBpcyBhIGN1c3RvbSBQRU0gY29udGVudA=="; // Base64 encoded
 
-        String combinedPem = cert1 + "\n" + cert2 + "\n" + key;
+        String customPem = encodeToPem(customType, Base64.getDecoder().decode(customContent));
 
-        System.out.println("Combined PEM file:");
-        System.out.println(combinedPem);
+        System.out.println("Custom PEM Object (simulated PemRecord):");
+        System.out.println(customPem);
 
-        List<String> pemObjects = parsePemObjects(combinedPem);
-        System.out.println("Found " + pemObjects.size() + " PEM objects:");
-        for (int i = 0; i < pemObjects.size(); i++) {
-            String type = extractPemType(pemObjects.get(i));
-            System.out.println("  " + (i + 1) + ". " + type);
-        }
+        String extractedType = extractPemType(customPem);
+        byte[] extractedContent = decodeFromPem(customPem);
+        String extractedBase64 = Base64.getEncoder().encodeToString(extractedContent);
+
+        System.out.println("Decoded type: " + extractedType);
+        System.out.println("Content matches: " + customContent.equals(extractedBase64));
         System.out.println();
     }
 
-    private static String formatAsPem(String type, byte[] data) {
-        String base64 = Base64.getMimeEncoder(64, "\n".getBytes())
+    private static String encodeToPem(String type, byte[] data) {
+        String base64 = Base64.getMimeEncoder(64, System.lineSeparator().getBytes())
                 .encodeToString(data);
-        return "-----BEGIN " + type + "-----\n" +
-               base64 + "\n" +
+        return "-----BEGIN " + type + "-----" + System.lineSeparator() +
+               base64 + System.lineSeparator() +
                "-----END " + type + "-----";
     }
 
-    private static String extractBase64Content(String pem) {
-        return pem.replaceAll("-----BEGIN [^-]+-----", "")
-                  .replaceAll("-----END [^-]+-----", "")
-                  .replaceAll("\\s", "");
+    private static byte[] decodeFromPem(String pem) {
+        String base64Content = pem
+                .replaceAll("-----BEGIN [^-]+-----", "")
+                .replaceAll("-----END [^-]+-----", "")
+                .replaceAll("\\s", "");
+        return Base64.getDecoder().decode(base64Content);
     }
 
     private static String extractPemType(String pem) {
-        String[] lines = pem.split("\n");
+        String[] lines = pem.split(System.lineSeparator());
         for (String line : lines) {
             if (line.startsWith("-----BEGIN ")) {
                 return line.replace("-----BEGIN ", "").replace("-----", "");
             }
         }
         return "UNKNOWN";
-    }
-
-    private static List<String> parsePemObjects(String combinedPem) {
-        List<String> objects = new java.util.ArrayList<>();
-        String[] parts = combinedPem.split("(?=-----BEGIN)");
-
-        for (String part : parts) {
-            if (part.trim().startsWith("-----BEGIN")) {
-                objects.add(part.trim());
-            }
-        }
-
-        return objects;
     }
 }
