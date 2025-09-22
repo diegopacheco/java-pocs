@@ -18,28 +18,39 @@ public class PulsarConsumerService {
 
     @PostConstruct
     public void init() {
-        try {
-            Consumer<byte[]> consumer = pulsarClient.newConsumer()
-                    .topic("test-topic")
-                    .subscriptionName("test-subscription")
-                    .subscribe();
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Consumer<byte[]> consumer = pulsarClient.newConsumer()
+                            .topic("test-topic")
+                            .subscriptionName("test-subscription")
+                            .subscribe();
 
-            new Thread(() -> {
-                while (true) {
+                    System.out.println("Pulsar consumer connected successfully!");
+
+                    while (true) {
+                        try {
+                            Message<byte[]> message = consumer.receive();
+                            String messageContent = new String(message.getData());
+                            System.out.println("Received message: " + messageContent);
+                            receivedMessages.add(messageContent);
+                            consumer.acknowledge(message);
+                        } catch (PulsarClientException e) {
+                            System.out.println("Error receiving message: " + e.getMessage());
+                            break;
+                        }
+                    }
+                } catch (PulsarClientException e) {
+                    System.out.println("Pulsar consumer failed to connect: " + e.getMessage() + ". Retrying in 5 seconds...");
                     try {
-                        Message<byte[]> message = consumer.receive();
-                        String messageContent = new String(message.getData());
-                        System.out.println("Received message: " + messageContent);
-                        receivedMessages.add(messageContent);
-                        consumer.acknowledge(message);
-                    } catch (PulsarClientException e) {
-                        e.printStackTrace();
+                        Thread.sleep(5000);
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                        break;
                     }
                 }
-            }).start();
-        } catch (PulsarClientException e) {
-            throw new RuntimeException("Failed to create consumer", e);
-        }
+            }
+        }).start();
     }
 
     public List<String> getReceivedMessages() {

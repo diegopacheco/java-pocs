@@ -17,7 +17,9 @@ public class PulsarProducerService {
                 .topic(topic)
                 .create()) {
             producer.send(message.getBytes());
+            System.out.println("Message sent successfully: " + message);
         } catch (PulsarClientException e) {
+            System.out.println("Failed to send message: " + e.getMessage());
             throw new RuntimeException("Failed to send message", e);
         }
     }

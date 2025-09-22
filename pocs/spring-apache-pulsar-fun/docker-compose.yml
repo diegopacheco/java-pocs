@@ -1,22 +1,19 @@
-version: '3.8'
-
 services:
   pulsar:
-    image: apachepulsar/pulsar:latest
+    image: apachepulsar/pulsar:3.3.2
     container_name: pulsar
-    command: bin/pulsar standalone
+    command: sh -c "bin/apply-config-from-env.py conf/standalone.conf && bin/pulsar standalone"
     ports:
       - "6650:6650"
       - "8080:8080"
     environment:
-      - PULSAR_MEM="-Xms512m -Xmx512m -XX:MaxDirectMemorySize=256m"
-    volumes:
-      - pulsar_data:/pulsar/data
+      PULSAR_MEM: "-Xms512m -Xmx1g"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/admin/v2/clusters"]
       interval: 30s
       timeout: 10s
-      retries: 5
+      retries: 10
+      start_period: 30s
 
   spring-app:
     build: .
