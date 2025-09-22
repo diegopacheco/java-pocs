@@ -1,0 +1,20 @@
+server:
+  port: 8090
+
+spring:
+  pulsar:
+    client:
+      service-url: pulsar://localhost:6650
+    admin:
+      service-url: http://localhost:8080
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  pulsar:
+    client:
+      service-url: pulsar://pulsar:6650
+    admin:
+      service-url: http://pulsar:8080
