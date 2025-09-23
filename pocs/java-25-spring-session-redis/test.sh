@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Testing Spring Session functionality..."
+echo "Testing Spring Session with Redis functionality..."
 
 echo "Creating session with key=username, value=john"
 curl -X POST "http://localhost:8080/session?key=username&value=john" -c cookies.txt
@@ -16,6 +16,10 @@ curl -X POST "http://localhost:8080/session?key=role&value=admin" -b cookies.txt
 echo ""
 echo "Getting session value for key=role"
 curl -X GET "http://localhost:8080/session?key=role" -b cookies.txt
+
+echo ""
+echo "Getting detailed session info using Spring Session Repository:"
+curl -X GET "http://localhost:8080/session/info" -b cookies.txt
 
 echo ""
 echo "Listing all active sessions in Redis:"
