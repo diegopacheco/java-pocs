@@ -1,6 +1,6 @@
 services:
   supabase-db:
-    image: postgres:15.1-alpine
+    image: postgres:15.8-alpine
     container_name: supabase-db
     command: postgres -c wal_level=logical -c max_replication_slots=10 -c max_wal_senders=10
     environment:
@@ -21,7 +21,7 @@ services:
       start_period: 5s
 
   supabase-realtime:
-    image: supabase/realtime:v2.47.6
+    image: supabase/realtime:v2.34.47
     container_name: supabase-realtime
     depends_on:
       supabase-db:
@@ -55,7 +55,7 @@ services:
       - supabase-network
 
   supabase-rest:
-    image: postgrest/postgrest:v12.0.1
+    image: postgrest/postgrest:v12.2.12
     container_name: supabase-rest
     depends_on:
       supabase-db:
@@ -72,7 +72,7 @@ services:
       - supabase-network
 
   supabase-auth:
-    image: supabase/gotrue:v2.143.0
+    image: supabase/gotrue:v2.177.0
     container_name: supabase-auth
     depends_on:
       supabase-db:
@@ -104,7 +104,7 @@ services:
       - supabase-network
 
   supabase-storage:
-    image: supabase/storage-api:v0.40.4
+    image: supabase/storage-api:v1.25.7
     container_name: supabase-storage
     depends_on:
       supabase-db:
@@ -138,7 +138,7 @@ services:
       - supabase-network
 
   supabase-meta:
-    image: supabase/postgres-meta:v0.68.0
+    image: supabase/postgres-meta:v0.91.0
     container_name: supabase-meta
     depends_on:
       supabase-db:
@@ -156,7 +156,7 @@ services:
       - supabase-network
 
   supabase-studio:
-    image: supabase/studio:20240729-ce42139
+    image: supabase/studio:2025.06.30-sha-6f5982d
     container_name: supabase-studio
     environment:
       SUPABASE_URL: http://localhost:3000
