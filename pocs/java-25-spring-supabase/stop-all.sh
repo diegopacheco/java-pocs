@@ -6,7 +6,7 @@ docker-compose down
 echo "Removing containers, networks, and volumes..."
 docker-compose down -v
 
-echo "Cleaning up unused Docker resources..."
-docker system prune -f
+echo "Cleaning up unused Podman resources..."
+podman system prune -f
 
 echo "All services stopped and cleaned up."
