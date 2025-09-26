@@ -145,20 +145,44 @@ services:
     networks:
       - supabase-network
 
+  supabase-meta:
+    image: supabase/postgres-meta:v0.68.0
+    container_name: supabase-meta
+    depends_on:
+      - supabase-db
+    environment:
+      PG_META_PORT: 8080
+      PG_META_DB_HOST: supabase-db
+      PG_META_DB_PORT: 5432
+      PG_META_DB_NAME: postgres
+      PG_META_DB_USER: postgres
+      PG_META_DB_PASSWORD: postgres
+    ports:
+      - "8082:8080"
+    networks:
+      - supabase-network
+
   supabase-studio:
     image: supabase/studio:20240729-ce42139
     container_name: supabase-studio
     environment:
-      SUPABASE_URL: http://supabase-kong:8000
-      SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
-      STUDIO_PG_META_URL: http://supabase-rest:3000
-      LOGFLARE_API_KEY: your-api-key
-      LOGFLARE_URL: http://supabase-analytics:4000
+      SUPABASE_URL: http://localhost:3000
+      SUPABASE_REST_URL: http://supabase-rest:3000
+      SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZUiOiJhbm9uIiwiZXhwIjoxOTgzODEyOTk2fQ.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
+      SUPABASE_SERVICE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU
+      STUDIO_PG_META_URL: http://supabase-meta:8080
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: supabase-db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      OPENAI_API_KEY: ""
     ports:
       - "3001:3000"
     depends_on:
       - supabase-rest
-      - supabase-kong
+      - supabase-db
+      - supabase-meta
     networks:
       - supabase-network
 
