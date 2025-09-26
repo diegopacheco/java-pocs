@@ -101,12 +101,15 @@ services:
       DB_NAME: postgres
       DB_SSL: "false"
       API_JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters-long
-      FLY_ALLOC_ID: fly123
-      FLY_APP_NAME: realtime
       SECRET_KEY_BASE: UpNVntn3cDxHJpq99YMc1T1AQgQpc8kfYTuRgBiYa15BLrx8en4CX3qDkSS6wI4l
       ERL_AFLAGS: -proto_dist inet_tcp
       ENABLE_TAILSCALE: "false"
       DNS_NODES: "''"
+      REPLICATION_MODE: RLS
+      REPLICATION_POLL_INTERVAL: 300
+      SECURE_CHANNELS: "false"
+      SLOT_NAME: supabase_realtime_rls
+      TEMPORARY_SLOT: "true"
     ports:
       - "4000:4000"
     networks:
@@ -168,6 +171,7 @@ services:
     environment:
       SUPABASE_URL: http://localhost:3000
       SUPABASE_REST_URL: http://supabase-rest:3000
+      SUPABASE_REALTIME_URL: ws://supabase-realtime:4000/socket/websocket
       SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZUiOiJhbm9uIiwiZXhwIjoxOTgzODEyOTk2fQ.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
       SUPABASE_SERVICE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU
       STUDIO_PG_META_URL: http://supabase-meta:8080
