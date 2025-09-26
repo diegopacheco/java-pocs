@@ -19,6 +19,7 @@ docker-compose ps
 
 echo "Application should be running at:"
 echo "- Spring Boot App: http://localhost:8080"
+echo "- Supabase Studio UI: http://localhost:3001"
 echo "- Supabase REST API: http://localhost:3000"
 echo "- Supabase Auth: http://localhost:9999"
 echo "- Supabase Realtime: http://localhost:4000"

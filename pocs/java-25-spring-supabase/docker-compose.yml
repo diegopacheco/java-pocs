@@ -145,6 +145,23 @@ services:
     networks:
       - supabase-network
 
+  supabase-studio:
+    image: supabase/studio:20240729-ce42139
+    container_name: supabase-studio
+    environment:
+      SUPABASE_URL: http://supabase-kong:8000
+      SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
+      STUDIO_PG_META_URL: http://supabase-rest:3000
+      LOGFLARE_API_KEY: your-api-key
+      LOGFLARE_URL: http://supabase-analytics:4000
+    ports:
+      - "3001:3000"
+    depends_on:
+      - supabase-rest
+      - supabase-kong
+    networks:
+      - supabase-network
+
   voting-app:
     build: .
     container_name: voting-app
