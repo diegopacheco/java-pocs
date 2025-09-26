@@ -2,6 +2,7 @@ services:
   supabase-db:
     image: postgres:15.1-alpine
     container_name: supabase-db
+    command: postgres -c wal_level=logical -c max_replication_slots=10 -c max_wal_senders=10
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
@@ -13,86 +14,21 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - supabase-network
-
-  supabase-kong:
-    image: kong:2.8.1-alpine
-    container_name: supabase-kong
-    environment:
-      KONG_DATABASE: "off"
-      KONG_DECLARATIVE_CONFIG: /var/lib/kong/kong.yml
-      KONG_DNS_ORDER: LAST,A,CNAME
-      KONG_PLUGINS: request-transformer,cors,key-auth,acl,basic-auth
-      KONG_NGINX_PROXY_PROXY_BUFFER_SIZE: 160k
-      KONG_NGINX_PROXY_PROXY_BUFFERS: 64 160k
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./kong/kong.yml:/var/lib/kong/kong.yml
-    depends_on:
-      - supabase-auth
-      - supabase-rest
-      - supabase-realtime
-    networks:
-      - supabase-network
-
-  supabase-auth:
-    image: supabase/gotrue:v2.143.0
-    container_name: supabase-auth
-    depends_on:
-      - supabase-db
-    environment:
-      GOTRUE_API_HOST: 0.0.0.0
-      GOTRUE_API_PORT: 9999
-      API_EXTERNAL_URL: http://localhost:8000
-      GOTRUE_DB_DRIVER: postgres
-      GOTRUE_DB_DATABASE_URL: postgres://postgres:postgres@supabase-db:5432/postgres?search_path=auth
-      GOTRUE_SITE_URL: http://localhost:3000
-      GOTRUE_URI_ALLOW_LIST: ""
-      GOTRUE_DISABLE_SIGNUP: "false"
-      GOTRUE_JWT_ADMIN_ROLES: service_role
-      GOTRUE_JWT_AUD: authenticated
-      GOTRUE_JWT_DEFAULT_GROUP_NAME: authenticated
-      GOTRUE_JWT_EXP: 3600
-      GOTRUE_JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters-long
-      GOTRUE_EXTERNAL_EMAIL_ENABLED: "true"
-      GOTRUE_MAILER_AUTOCONFIRM: "false"
-      GOTRUE_SMTP_ADMIN_EMAIL: admin@localhost
-      GOTRUE_SMTP_HOST: supabase-mail
-      GOTRUE_SMTP_PORT: 2500
-      GOTRUE_SMTP_USER: fake_mail_user
-      GOTRUE_SMTP_PASS: fake_mail_password
-      GOTRUE_SMTP_SENDER_NAME: fake_sender
-      GOTRUE_MAILER_URLPATHS_INVITE: /auth/v1/verify
-      GOTRUE_MAILER_URLPATHS_CONFIRMATION: /auth/v1/verify
-      GOTRUE_MAILER_URLPATHS_RECOVERY: /auth/v1/verify
-      GOTRUE_MAILER_URLPATHS_EMAIL_CHANGE: /auth/v1/verify
-    ports:
-      - "9999:9999"
-    networks:
-      - supabase-network
-
-  supabase-rest:
-    image: postgrest/postgrest:v12.0.1
-    container_name: supabase-rest
-    depends_on:
-      - supabase-db
-    environment:
-      PGRST_DB_URI: postgres://postgres:postgres@supabase-db:5432/postgres
-      PGRST_DB_SCHEMAS: public
-      PGRST_DB_ANON_ROLE: anon
-      PGRST_JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters-long
-      PGRST_DB_USE_LEGACY_GUCS: "false"
-    ports:
-      - "3000:3000"
-    networks:
-      - supabase-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      retries: 5
+      start_period: 5s
 
   supabase-realtime:
-    image: supabase/realtime:v2.25.50
+    image: supabase/realtime:v2.47.6
     container_name: supabase-realtime
     depends_on:
-      - supabase-db
+      supabase-db:
+        condition: service_healthy
     environment:
+      APP_NAME: realtime
+      REGION: local
       PORT: 4000
       DB_HOST: supabase-db
       DB_PORT: 5432
@@ -110,8 +46,60 @@ services:
       SECURE_CHANNELS: "false"
       SLOT_NAME: supabase_realtime_rls
       TEMPORARY_SLOT: "true"
+      RLIMIT_NOFILE: 1048576
+      TENANT_ID: localhost
+      PROJECT_REF: localhost
     ports:
       - "4000:4000"
+    networks:
+      - supabase-network
+
+  supabase-rest:
+    image: postgrest/postgrest:v12.0.1
+    container_name: supabase-rest
+    depends_on:
+      supabase-db:
+        condition: service_healthy
+    environment:
+      PGRST_DB_URI: postgres://postgres:postgres@supabase-db:5432/postgres
+      PGRST_DB_SCHEMAS: public
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters-long
+      PGRST_DB_USE_LEGACY_GUCS: "false"
+    ports:
+      - "3000:3000"
+    networks:
+      - supabase-network
+
+  supabase-auth:
+    image: supabase/gotrue:v2.143.0
+    container_name: supabase-auth
+    depends_on:
+      supabase-db:
+        condition: service_healthy
+    environment:
+      GOTRUE_API_HOST: 0.0.0.0
+      GOTRUE_API_PORT: 9999
+      API_EXTERNAL_URL: http://localhost:8000
+      GOTRUE_DB_DRIVER: postgres
+      GOTRUE_DB_DATABASE_URL: postgres://postgres:postgres@supabase-db:5432/postgres?search_path=auth
+      GOTRUE_SITE_URL: http://localhost:3000
+      GOTRUE_DISABLE_SIGNUP: "false"
+      GOTRUE_JWT_ADMIN_ROLES: service_role
+      GOTRUE_JWT_AUD: authenticated
+      GOTRUE_JWT_DEFAULT_GROUP_NAME: authenticated
+      GOTRUE_JWT_EXP: 3600
+      GOTRUE_JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters-long
+      GOTRUE_EXTERNAL_EMAIL_ENABLED: "true"
+      GOTRUE_MAILER_AUTOCONFIRM: "false"
+      GOTRUE_SMTP_ADMIN_EMAIL: admin@localhost
+      GOTRUE_SMTP_HOST: supabase-mail
+      GOTRUE_SMTP_PORT: 2500
+      GOTRUE_SMTP_USER: fake_mail_user
+      GOTRUE_SMTP_PASS: fake_mail_password
+      GOTRUE_SMTP_SENDER_NAME: fake_sender
+    ports:
+      - "9999:9999"
     networks:
       - supabase-network
 
@@ -119,10 +107,11 @@ services:
     image: supabase/storage-api:v0.40.4
     container_name: supabase-storage
     depends_on:
-      - supabase-db
+      supabase-db:
+        condition: service_healthy
     environment:
-      ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
-      SERVICE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU
+      ANON_KEY: ${SUPABASE_ANON_KEY}
+      SERVICE_KEY: ${SUPABASE_SERVICE_KEY}
       POSTGREST_URL: http://supabase-rest:3000
       PGRST_JWT_SECRET: super-secret-jwt-token-with-at-least-32-characters-long
       DATABASE_URL: postgres://postgres:postgres@supabase-db:5432/postgres
@@ -133,7 +122,7 @@ services:
       REGION: stub
       GLOBAL_S3_BUCKET: stub
     ports:
-      - "5000:5000"
+      - "5001:5000"
     volumes:
       - supabase-storage:/var/lib/storage
     networks:
@@ -152,7 +141,8 @@ services:
     image: supabase/postgres-meta:v0.68.0
     container_name: supabase-meta
     depends_on:
-      - supabase-db
+      supabase-db:
+        condition: service_healthy
     environment:
       PG_META_PORT: 8080
       PG_META_DB_HOST: supabase-db
@@ -172,15 +162,14 @@ services:
       SUPABASE_URL: http://localhost:3000
       SUPABASE_REST_URL: http://supabase-rest:3000
       SUPABASE_REALTIME_URL: ws://supabase-realtime:4000/socket/websocket
-      SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZUiOiJhbm9uIiwiZXhwIjoxOTgzODEyOTk2fQ.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
-      SUPABASE_SERVICE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY}
+      SUPABASE_SERVICE_KEY: ${SUPABASE_SERVICE_KEY}
       STUDIO_PG_META_URL: http://supabase-meta:8080
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST: supabase-db
       POSTGRES_PORT: 5432
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
-      OPENAI_API_KEY: ""
     ports:
       - "3001:3000"
     depends_on:
@@ -190,18 +179,39 @@ services:
     networks:
       - supabase-network
 
+  supabase-kong:
+    image: kong:2.8.1-alpine
+    container_name: supabase-kong
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /var/lib/kong/kong.yml
+      KONG_DNS_ORDER: LAST,A,CNAME
+      KONG_PLUGINS: request-transformer,cors,key-auth,acl,basic-auth
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./kong/kong.yml:/var/lib/kong/kong.yml
+    depends_on:
+      - supabase-auth
+      - supabase-rest
+      - supabase-realtime
+    networks:
+      - supabase-network
+
   voting-app:
     build: .
     container_name: voting-app
     depends_on:
-      - supabase-db
-      - supabase-rest
+      supabase-db:
+        condition: service_healthy
+      supabase-rest:
+        condition: service_started
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://supabase-db:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
       SUPABASE_URL: http://supabase-rest:3000
-      SUPABASE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
+      SUPABASE_KEY: ${SUPABASE_ANON_KEY}
     ports:
       - "8080:8080"
     networks:
