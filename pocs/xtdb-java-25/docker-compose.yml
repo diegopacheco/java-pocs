@@ -1,0 +1,12 @@
+services:
+  xtdb:
+    image: juxt/xtdb-standalone-rocksdb:1.24.4
+    ports:
+      - "3000:3000"
+    environment:
+      - XTDB_HTTP_SERVER_PORT=3000
+    volumes:
+      - xtdb-data:/var/lib/xtdb
+
+volumes:
+  xtdb-data:
