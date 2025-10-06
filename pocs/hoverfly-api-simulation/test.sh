@@ -31,8 +31,8 @@ curl -4 -x http://127.0.0.1:8500 http://api.test.com/users/2
 echo ""
 echo ""
 
-echo "Test 3: POST /users via proxy"
-curl -4 -x http://127.0.0.1:8500 -X POST http://api.test.com/users -H "Content-Type: application/json" -d '{"name":"Test User"}'
+echo "Test 3: POST /users via proxy (empty body)"
+curl -4 -x http://127.0.0.1:8500 -X POST http://api.test.com/users
 echo ""
 echo ""
 
