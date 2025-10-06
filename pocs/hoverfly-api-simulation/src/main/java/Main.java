@@ -49,26 +49,29 @@ public class Main {
 
         testSimulationWithProxy("localhost", hoverflyProxyPort);
 
-        System.out.println("\nPress Ctrl+C to stop...");
+        System.out.println("\nHoverfly is running. Press Ctrl+C to stop...");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("\nStopping Hoverfly...");
             hoverfly.close();
         }));
 
-        while (true) {
+        Object lock = new Object();
+        synchronized (lock) {
             try {
-                Thread.sleep(1000);
+                lock.wait();
             } catch (InterruptedException e) {
-                break;
+                System.out.println("Application interrupted");
             }
         }
     }
 
     private static void testSimulationWithProxy(String proxyHost, int proxyPort) {
         System.out.println("\nTesting simulation with proxy:");
-        try (CloseableHttpClient client = HttpClients.custom()
+        CloseableHttpClient client = null;
+        try {
+            client = HttpClients.custom()
                 .setProxy(new HttpHost(proxyHost, proxyPort))
-                .build()) {
+                .build();
             HttpGet request = new HttpGet("http://api.test.com/users/1");
             try (CloseableHttpResponse response = client.execute(request)) {
                 String body = EntityUtils.toString(response.getEntity());
@@ -76,6 +79,13 @@ public class Main {
             }
         } catch (Exception e) {
             System.err.println("Test failed: " + e.getMessage());
+        } finally {
+            if (client != null) {
+                try {
+                    client.close();
+                } catch (Exception e) {
+                }
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-podman compose down
-podman system prune -f
+pkill -f "exec:java"
+echo "Stopped Hoverfly application"

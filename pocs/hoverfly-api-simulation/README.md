@@ -23,7 +23,30 @@ The POC simulates the following endpoints:
 
 ## Running the Application
 
-### Using Scripts
+### Local (Recommended)
+
+```bash
+./mvnw exec:java -Dexec.mainClass="Main"
+```
+
+The application will start Hoverfly and keep running.
+
+Wait for the message: `Hoverfly is running. Press Ctrl+C to stop...`
+
+Then in another terminal, test manually:
+```bash
+curl -4 -x http://127.0.0.1:8500 http://api.test.com/users/1
+curl -4 -x http://127.0.0.1:8500 http://api.test.com/users/2
+```
+
+Note: Use `-4` flag and `127.0.0.1` because Hoverfly binds to IPv4 only.
+
+Or use the test script (waits for Hoverfly to be ready):
+```bash
+./test.sh
+```
+
+### Using Docker (Optional)
 
 ```bash
 ./run.sh
@@ -35,18 +58,10 @@ This will:
 - Initialize Hoverfly in simulation mode
 - Show application logs
 
-### Stopping
+To stop:
 
 ```bash
 ./stop.sh
-```
-
-### Testing
-
-Run the test script to verify Hoverfly is working:
-
-```bash
-./test.sh
 ```
 
 ## How It Works
@@ -88,21 +103,47 @@ curl -x http://localhost:8500 http://api.test.com/users/2
 ./mvnw clean install
 ```
 
-## Result
+## Test Results
 
-The application works locally. Docker port forwarding with Podman has connectivity issues.
-Use local testing for demonstration:
-
+Terminal 1:
 ```bash
-./mvnw exec:java -Dexec.mainClass="Main" &
-sleep 5
-curl -x http://localhost:8500 http://api.test.com/users/1
-curl -x http://localhost:8500 http://api.test.com/users/2
-pkill -f "exec:java"
+./mvnw exec:java -Dexec.mainClass="Main"
 ```
 
 Output:
 ```
+Hoverfly started in simulation mode
+Admin UI: http://localhost:8888
+Proxy Port: 8500
+
+Simulated endpoints (use proxy):
+  GET  http://api.test.com/users/1 (via proxy localhost:8500)
+  GET  http://api.test.com/users/2 (via proxy localhost:8500)
+  POST http://api.test.com/users (via proxy localhost:8500)
+
+Testing simulation with proxy:
+Response: {"id":1,"name":"John Doe","email":"john@test.com"}
+
+Hoverfly is running. Press Ctrl+C to stop...
+```
+
+Terminal 2:
+```bash
+./test.sh
+```
+
+Output:
+```
+Waiting for Hoverfly to be ready...
+Hoverfly is ready!
+
+Testing Hoverfly API Simulation...
+
+Test 1: GET /users/1 via proxy
 {"id":1,"name":"John Doe","email":"john@test.com"}
+
+Test 2: GET /users/2 via proxy
 {"id":2,"name":"Jane Smith","email":"jane@test.com"}
+
+All tests completed!
 ```
