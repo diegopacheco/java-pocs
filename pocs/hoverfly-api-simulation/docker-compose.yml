@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8888:8888"
+      - "8500:8500"
+    environment:
+      - HOVERFLY_ADMIN_PORT=8888
+      - HOVERFLY_PROXY_PORT=8500
