@@ -134,6 +134,7 @@ Terminal 2:
 
 Output:
 ```
+❯ ./test.sh
 Waiting for Hoverfly to be ready...
 Hoverfly is ready!
 
@@ -144,6 +145,13 @@ Test 1: GET /users/1 via proxy
 
 Test 2: GET /users/2 via proxy
 {"id":2,"name":"Jane Smith","email":"jane@test.com"}
+
+Test 3: POST /users via proxy (empty body)
+{"id":3,"name":"New User","email":"newuser@test.com"}
+
+Test 4: Check Hoverfly Admin API (first 10 lines)
+{"data":{"pairs":[{"request":{"path":[{"matcher":"exact","value":"/users/1"}],"method":[{"matcher":"exact","value":"GET"}],"destination":[{"matcher":"exact","value":"api.test.com"}],"scheme":[{"matcher":"exact","value":"http"}],"body":[{"matcher":"exact","value":""}],"query":{}},"response":{"status":200,"body":"{\"id\":1,\"name\":\"John Doe\",\"email\":\"john@test.com\"}","encodedBody":false,"headers":{"Content-Type":["application/json"]},"templated":true}},{"request":{"path":[{"matcher":"exact","value":"/users/2"}],"method":[{"matcher":"exact","value":"GET"}],"destination":[{"matcher":"exact","value":"api.test.com"}],"scheme":[{"matcher":"exact","value":"http"}],"body":[{"matcher":"exact","value":""}],"query":{}},"response":{"status":200,"body":"{\"id\":2,\"name\":\"Jane Smith\",\"email\":\"jane@test.com\"}","encodedBody":false,"headers":{"Content-Type":["application/json"]},"templated":true}},{"request":{"path":[{"matcher":"exact","value":"/users"}],"method":[{"matcher":"exact","value":"POST"}],"destination":[{"matcher":"exact","value":"api.test.com"}],"scheme":[{"matcher":"exact","value":"http"}],"body":[{"matcher":"exact","value":""}],"query":{}},"response":{"status":201,"body":"{\"id\":3,\"name\":\"New User\",\"email\":\"newuser@test.com\"}","encodedBody":false,"headers":{"Content-Type":["application/json"]},"templated":true}}],"globalActions":{"delays":[],"delaysLogNormal":[]}},"meta":{"schemaVersion":"v5.2","hoverflyVersion":"v1.9.1","timeExported":"2025-10-05T21:39:34-07:00"}}
+
 
 All tests completed!
 ```
