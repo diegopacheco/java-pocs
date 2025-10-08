@@ -94,5 +94,3 @@ podman restart debezium-cdc-fun_kafka_1
 2. Debezium captures database changes via PostgreSQL WAL
 3. Changes are streamed to Kafka topic `dbserver1.public.data_events`
 4. Go consumer reads and prints CDC events from Kafka
-
-
