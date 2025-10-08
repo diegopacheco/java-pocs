@@ -1,0 +1,78 @@
+services:
+  zookeeper:
+    image: quay.io/debezium/zookeeper:3.0
+    ports:
+      - "2181:2181"
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=2181
+      - ZOOKEEPER_TICK_TIME=2000
+    networks:
+      - cdc-network
+  kafka:
+    image: quay.io/debezium/kafka:3.0
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+    restart: on-failure
+    networks:
+      - cdc-network
+  postgres:
+    image: postgres:17-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=cdcdb
+    command: ["postgres", "-c", "wal_level=logical"]
+    networks:
+      - cdc-network
+  debezium:
+    image: quay.io/debezium/connect:3.0
+    ports:
+      - "8083:8083"
+    depends_on:
+      - kafka
+      - postgres
+    environment:
+      - BOOTSTRAP_SERVERS=kafka:9092
+      - GROUP_ID=1
+      - CONFIG_STORAGE_TOPIC=my_connect_configs
+      - OFFSET_STORAGE_TOPIC=my_connect_offsets
+      - STATUS_STORAGE_TOPIC=my_connect_statuses
+    restart: on-failure
+    networks:
+      - cdc-network
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/cdcdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    restart: on-failure
+    networks:
+      - cdc-network
+  go-consumer:
+    build:
+      context: ./go-consumer
+      dockerfile: Dockerfile
+    depends_on:
+      - kafka
+      - debezium
+    networks:
+      - cdc-network
+networks:
+  cdc-network:
+    driver: bridge

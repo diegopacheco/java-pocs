@@ -1,0 +1,10 @@
+target/
+*.log
+.git/
+.gitignore
+README.md
+run.sh
+stop.sh
+test.sh
+docker-compose.yml
+go-consumer/
