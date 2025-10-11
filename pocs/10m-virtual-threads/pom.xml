@@ -5,8 +5,8 @@
   <artifactId>10m-virtual-threads</artifactId>
   <version>1.0-SNAPSHOT</version>
   <properties>
-    <maven.compiler.source>19</maven.compiler.source>
-    <maven.compiler.target>19</maven.compiler.target>
+    <maven.compiler.source>25</maven.compiler.source>
+    <maven.compiler.target>25</maven.compiler.target>
   </properties>
   <build>
     <plugins>
@@ -15,7 +15,7 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.11.0</version>
           <configuration>
-              <release>19</release>
+              <release>25</release>
               <compilerArgs>--enable-preview</compilerArgs>
           </configuration>
       </plugin>
@@ -33,7 +33,7 @@
         <configuration>
             <mainClass>Main</mainClass>
             <arguments>
-                <release>19</release>
+                <release>25</release>
                 <compilerArgs>--enable-preview</compilerArgs>
             </arguments>
         </configuration>
