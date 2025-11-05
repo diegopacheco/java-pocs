@@ -20,6 +20,8 @@ public abstract class AbstractRedisTest {
 
     @BeforeAll
     static void startRedis() {
+        long startTime = System.currentTimeMillis();
+
         log.info("========================================");
         log.info("STARTING REDIS CONTAINER");
         log.info("Container ID: {}", REDIS_CONTAINER.getContainerId());
@@ -28,10 +30,14 @@ public abstract class AbstractRedisTest {
 
         REDIS_CONTAINER.start();
 
+        long endTime = System.currentTimeMillis();
+        long duration = endTime - startTime;
+
         log.info("========================================");
         log.info("REDIS CONTAINER STARTED");
         log.info("Container ID: {}", REDIS_CONTAINER.getContainerId());
         log.info("Running: {}", REDIS_CONTAINER.isRunning());
+        log.info("TIME TAKEN: {} ms", duration);
         log.info("========================================");
 
         String address = REDIS_CONTAINER.getHost();
