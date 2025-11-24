@@ -1,4 +1,4 @@
 #!/bin/bash
 ./start.sh
-./mvnw spring-boot:run
+mvn spring-boot:run
 

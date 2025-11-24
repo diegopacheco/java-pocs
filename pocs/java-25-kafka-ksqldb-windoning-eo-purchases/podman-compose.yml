@@ -26,7 +26,7 @@ services:
     depends_on:
       - kafka
     ports:
-      - "8081:8081"
+      - "8085:8081"
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka:29092
