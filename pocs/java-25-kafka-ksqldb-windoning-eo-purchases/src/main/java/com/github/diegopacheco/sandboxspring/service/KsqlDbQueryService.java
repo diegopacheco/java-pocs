@@ -5,6 +5,8 @@ import com.github.diegopacheco.sandboxspring.model.Purchase;
 import io.confluent.ksql.api.client.Client;
 import io.confluent.ksql.api.client.ClientOptions;
 import io.confluent.ksql.api.client.Row;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,22 +69,25 @@ public class KsqlDbQueryService {
             List<Row> rows = ksqlClient.executeQuery(query).get();
             if (!rows.isEmpty()) {
                 Row row = rows.get(0);
-                List<Map<String, Object>> purchasesList = (List<Map<String, Object>>) row.getValue("PURCHASES");
-                List<Purchase> purchases = new ArrayList<>();
-                int startIndex = Math.max(0, purchasesList.size() - 20);
-                for (int i = startIndex; i < purchasesList.size(); i++) {
-                    Map<String, Object> purchaseMap = purchasesList.get(i);
-                    Purchase purchase = new Purchase();
-                    purchase.setPurchaseId((String) purchaseMap.get("PURCHASEID"));
-                    purchase.setUserId(userId);
-                    purchase.setProductName((String) purchaseMap.get("PRODUCTNAME"));
-                    purchase.setProductType((String) purchaseMap.get("PRODUCTTYPE"));
-                    purchase.setValue(new BigDecimal(purchaseMap.get("VALUE").toString()));
-                    purchase.setQuantity((Integer) purchaseMap.get("QUANTITY"));
-                    purchase.setTotal(new BigDecimal(purchaseMap.get("TOTAL").toString()));
-                    purchases.add(purchase);
+                Object purchasesObj = row.getValue("PURCHASES");
+                if (purchasesObj instanceof JsonArray) {
+                    JsonArray purchasesArray = (JsonArray) purchasesObj;
+                    List<Purchase> purchases = new ArrayList<>();
+                    int startIndex = Math.max(0, purchasesArray.size() - 20);
+                    for (int i = startIndex; i < purchasesArray.size(); i++) {
+                        JsonObject purchaseObj = purchasesArray.getJsonObject(i);
+                        Purchase purchase = new Purchase();
+                        purchase.setPurchaseId(purchaseObj.getString("PURCHASEID"));
+                        purchase.setUserId(userId);
+                        purchase.setProductName(purchaseObj.getString("PRODUCTNAME"));
+                        purchase.setProductType(purchaseObj.getString("PRODUCTTYPE"));
+                        purchase.setValue(new BigDecimal(purchaseObj.getValue("VALUE").toString()));
+                        purchase.setQuantity(purchaseObj.getInteger("QUANTITY"));
+                        purchase.setTotal(new BigDecimal(purchaseObj.getValue("TOTAL").toString()));
+                        purchases.add(purchase);
+                    }
+                    return purchases;
                 }
-                return purchases;
             }
             return new ArrayList<>();
         } catch (Exception e) {

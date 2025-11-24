@@ -1,13 +1,19 @@
 ### Build
 
 ```bash
-./mvnw clean install
+mvn clean package
 ```
 
 ### Run
 
 ```bash
 ./start.sh
+./init-ksql.sh
+mvn spring-boot:run
+```
+
+Or use the combined script:
+```bash
 ./run.sh
 ```
 
@@ -20,22 +26,30 @@
 /history/{id} -> Get purchase history for a user if exists
 ```
 
+### Technology Stack
+
+This application uses **ksqlDB** instead of Kafka Streams for stream processing. ksqlDB provides:
+- SQL-based stream processing
+- Built-in state stores
+- Exactly-once semantics
+- Materialized views via tables
+
 ### Exactly-Once Semantics Configuration
 
 This application is configured for exactly-once semantics (EOS) to guarantee that each message is processed exactly once with no duplicates or data loss.
 
 #### Purchase Deduplication
 
-Each purchase has a unique `purchaseId` (UUID). Kafka Streams uses a stateful aggregation to deduplicate purchases.
+Each purchase has a unique `purchaseId` (UUID). ksqlDB uses a table with primary key to deduplicate purchases.
 
 **How it works:**
 
 1. Each Purchase is assigned a unique UUID `purchaseId` when created
-2. The stream is re-keyed by `purchaseId` (instead of `userId`)
-3. Kafka Streams groups by `purchaseId` and uses `reduce((oldValue, newValue) -> oldValue)`
-4. The reduce operation keeps only the **first occurrence** of each `purchaseId`
-5. The stream is re-keyed back to `userId` for downstream processing (total debt, history)
-6. The `purchase-dedup-store` maintains the materialized view of unique purchases
+2. `PURCHASES_STREAM` reads from the Kafka topic with `purchaseId` as the key
+3. `PURCHASES_DEDUP` table groups by `purchaseId` and uses `LATEST_BY_OFFSET()`
+4. The table keeps only the **latest occurrence** of each `purchaseId`
+5. `USER_TOTAL_DEBT` and `USER_PURCHASE_HISTORY` tables aggregate from the deduped table
+6. ksqlDB maintains materialized views that can be queried via pull queries
 
 This ensures that even if the same purchase message is sent multiple times to Kafka (due to retries, duplicate API calls, etc.), it will only be counted once in the total debt calculation and appear once in the purchase history.
 
@@ -44,7 +58,7 @@ This ensures that even if the same purchase message is sent multiple times to Ka
 - No duplicate debt accumulation from the same purchase
 - Idempotent purchase processing regardless of message retries
 - Protection against accidental duplicate API calls
-- Leverages Kafka Streams native deduplication with exactly-once guarantees
+- Leverages ksqlDB native deduplication with exactly-once guarantees
 
 #### Producer Configuration
 
@@ -74,19 +88,21 @@ spring.kafka.consumer.isolation-level=read_committed
 
 **isolation-level=read_committed**: Consumer will only read committed messages, ignoring uncommitted transactional messages.
 
-#### Kafka Streams Configuration
+#### ksqlDB Configuration
 
-```properties
-spring.kafka.streams.properties.processing.guarantee=exactly_once_v2
-spring.kafka.streams.properties.replication.factor=1
-spring.kafka.streams.properties.num.standby.replicas=0
+ksqlDB is configured in `podman-compose.yml`:
+
+```yaml
+KSQL_PROCESSING_GUARANTEE: exactly_once_v2
+KSQL_KSQL_STREAMS_REPLICATION_FACTOR: 1
+KSQL_KSQL_INTERNAL_TOPIC_REPLICAS: 1
 ```
 
-**processing.guarantee=exactly_once_v2**: Enables exactly-once semantics v2 for Kafka Streams, which uses transactions to guarantee exactly-once processing.
+**KSQL_PROCESSING_GUARANTEE=exactly_once_v2**: Enables exactly-once semantics v2 for ksqlDB, which uses transactions to guarantee exactly-once processing.
 
-**replication.factor=1**: Set to 1 for single broker setup. Use 3+ in production.
+**KSQL_KSQL_STREAMS_REPLICATION_FACTOR=1**: Set to 1 for single broker setup. Use 3+ in production.
 
-**num.standby.replicas=0**: No standby replicas for single broker. Use 1+ in production for fault tolerance.
+**KSQL_KSQL_INTERNAL_TOPIC_REPLICAS=1**: Internal topic replicas for single broker. Use 3+ in production for fault tolerance.
 
 #### How It Works
 
@@ -94,7 +110,7 @@ spring.kafka.streams.properties.num.standby.replicas=0
 
 2. **Transactional Writes**: Producer commits messages atomically across multiple partitions using transactions.
 
-3. **Kafka Streams EOS v2**: Uses transactions to atomically read from input topics, process, update state stores, and write to output topics.
+3. **ksqlDB EOS v2**: Uses transactions to atomically read from input topics, process, update materialized tables, and write to output topics.
 
 4. **Read Committed Consumer**: Only reads messages that have been successfully committed in a transaction.
 
@@ -106,13 +122,27 @@ spring.kafka.streams.properties.num.standby.replicas=0
 
 #### Production Considerations
 
-For production environments, update these settings:
+For production environments, update ksqlDB settings in `podman-compose.yml`:
 
-```properties
-spring.kafka.streams.properties.replication.factor=3
-spring.kafka.streams.properties.num.standby.replicas=1
+```yaml
+KSQL_KSQL_STREAMS_REPLICATION_FACTOR: 3
+KSQL_KSQL_INTERNAL_TOPIC_REPLICAS: 3
+KSQL_KSQL_SINK_REPLICAS: 3
 ```
 
 And ensure Kafka brokers have:
 - `transaction.state.log.replication.factor=3`
 - `transaction.state.log.min.isr=2`
+
+### ksqlDB Schema
+
+The application uses the following ksqlDB objects defined in `init-ksqldb.sql`:
+
+```sql
+PURCHASES_STREAM        - Source stream from Kafka purchases topic
+PURCHASES_DEDUP         - Table that deduplicates by purchaseId
+USER_TOTAL_DEBT         - Table with SUM(total) aggregated by userId
+USER_PURCHASE_HISTORY   - Table with COLLECT_LIST(purchases) by userId
+```
+
+These are created automatically by running `./init-ksql.sh` after starting the containers.
