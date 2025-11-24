@@ -58,42 +58,40 @@ public class PurchaseStreamProcessor {
                     }
                 });
 
-        dedupedPurchases
-                .groupByKey(Grouped.with(Serdes.String(), Serdes.String()))
-                .aggregate(
-                        () -> "0.0",
-                        (userId, purchaseJson, currentTotal) -> {
-                            try {
-                                JsonNode node = objectMapper.readTree(purchaseJson);
-                                BigDecimal total = new BigDecimal(node.get("total").asText());
-                                BigDecimal current = new BigDecimal(currentTotal);
-                                return current.add(total).toString();
-                            } catch (Exception e) {
-                                return currentTotal;
-                            }
-                        },
-                        Materialized.as(STORE_NAME)
-                );
+        var groupedByUser = dedupedPurchases.groupByKey(Grouped.with(Serdes.String(), Serdes.String()));
 
-        dedupedPurchases
-                .groupByKey(Grouped.with(Serdes.String(), Serdes.String()))
-                .aggregate(
-                        () -> "[]",
-                        (userId, purchaseJson, historyJson) -> {
-                            try {
-                                List<String> history = objectMapper.readValue(historyJson,
-                                    objectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
-                                history.add(purchaseJson);
-                                if (history.size() > MAX_HISTORY) {
-                                    history.remove(0);
-                                }
-                                return objectMapper.writeValueAsString(history);
-                            } catch (Exception e) {
-                                return historyJson;
-                            }
-                        },
-                        Materialized.as(HISTORY_STORE_NAME)
-                );
+        groupedByUser.aggregate(
+                () -> "0.0",
+                (userId, purchaseJson, currentTotal) -> {
+                    try {
+                        JsonNode node = objectMapper.readTree(purchaseJson);
+                        BigDecimal total = new BigDecimal(node.get("total").asText());
+                        BigDecimal current = new BigDecimal(currentTotal);
+                        return current.add(total).toString();
+                    } catch (Exception e) {
+                        return currentTotal;
+                    }
+                },
+                Materialized.as(STORE_NAME)
+        );
+
+        groupedByUser.aggregate(
+                () -> "[]",
+                (userId, purchaseJson, historyJson) -> {
+                    try {
+                        List<String> history = objectMapper.readValue(historyJson,
+                            objectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
+                        history.add(purchaseJson);
+                        if (history.size() > MAX_HISTORY) {
+                            history.remove(0);
+                        }
+                        return objectMapper.writeValueAsString(history);
+                    } catch (Exception e) {
+                        return historyJson;
+                    }
+                },
+                Materialized.as(HISTORY_STORE_NAME)
+        );
     }
 
     public BigDecimal getTotalDebt(String userId) {
