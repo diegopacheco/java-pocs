@@ -34,6 +34,11 @@ public class KafkaConfig {
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProps.put(ProducerConfig.ACKS_CONFIG, "all");
+        configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
+        configProps.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 5);
+        configProps.put(ProducerConfig.RETRIES_CONFIG, Integer.MAX_VALUE);
+        configProps.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "purchase-tx-" + System.currentTimeMillis());
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
@@ -49,6 +54,9 @@ public class KafkaConfig {
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, org.apache.kafka.common.serialization.Serdes.String().getClass().getName());
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, org.apache.kafka.common.serialization.Serdes.String().getClass().getName());
+        props.put(StreamsConfig.PROCESSING_GUARANTEE_CONFIG, StreamsConfig.EXACTLY_ONCE_V2);
+        props.put(StreamsConfig.REPLICATION_FACTOR_CONFIG, 1);
+        props.put(StreamsConfig.NUM_STANDBY_REPLICAS_CONFIG, 0);
         return new KafkaStreamsConfiguration(props);
     }
 }
