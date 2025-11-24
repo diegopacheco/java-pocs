@@ -1,4 +1,5 @@
 #!/bin/bash
+
 podman-compose up -d
 echo "Waiting for Kafka to be ready..."
 sleep 5
