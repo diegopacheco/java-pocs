@@ -22,6 +22,7 @@ import java.util.List;
 public class PurchaseStreamProcessor {
     private static final String STORE_NAME = "user-total-debt-store";
     private static final String HISTORY_STORE_NAME = "user-purchase-history-store";
+    private static final String DEDUP_STORE_NAME = "purchase-dedup-store";
     private static final int MAX_HISTORY = 20;
     private final ObjectMapper objectMapper;
     private final StreamsBuilderFactoryBean streamsBuilderFactoryBean;
@@ -36,7 +37,42 @@ public class PurchaseStreamProcessor {
         KStream<String, String> purchases = streamsBuilder.stream("purchases",
                 Consumed.with(Serdes.String(), Serdes.String()));
 
-        purchases
+        KStream<String, String> dedupedPurchases = purchases
+                .transformValues(() -> new org.apache.kafka.streams.kstream.ValueTransformer<String, String>() {
+                    private org.apache.kafka.streams.processor.ProcessorContext context;
+                    private org.apache.kafka.streams.state.KeyValueStore<String, String> dedupStore;
+
+                    @Override
+                    @SuppressWarnings("unchecked")
+                    public void init(org.apache.kafka.streams.processor.ProcessorContext context) {
+                        this.context = context;
+                        this.dedupStore = context.getStateStore(DEDUP_STORE_NAME);
+                    }
+
+                    @Override
+                    public String transform(String purchaseJson) {
+                        try {
+                            JsonNode node = objectMapper.readTree(purchaseJson);
+                            String purchaseId = node.get("purchaseId").asText();
+
+                            if (dedupStore.get(purchaseId) != null) {
+                                return null;
+                            }
+
+                            dedupStore.put(purchaseId, "processed");
+                            return purchaseJson;
+                        } catch (Exception e) {
+                            return purchaseJson;
+                        }
+                    }
+
+                    @Override
+                    public void close() {
+                    }
+                }, DEDUP_STORE_NAME)
+                .filter((key, value) -> value != null);
+
+        dedupedPurchases
                 .groupByKey(Grouped.with(Serdes.String(), Serdes.String()))
                 .aggregate(
                         () -> "0.0",
@@ -53,7 +89,7 @@ public class PurchaseStreamProcessor {
                         Materialized.as(STORE_NAME)
                 );
 
-        purchases
+        dedupedPurchases
                 .groupByKey(Grouped.with(Serdes.String(), Serdes.String()))
                 .aggregate(
                         () -> "[]",
@@ -72,6 +108,14 @@ public class PurchaseStreamProcessor {
                         },
                         Materialized.as(HISTORY_STORE_NAME)
                 );
+
+        streamsBuilder.addStateStore(
+                org.apache.kafka.streams.state.Stores.keyValueStoreBuilder(
+                        org.apache.kafka.streams.state.Stores.persistentKeyValueStore(DEDUP_STORE_NAME),
+                        Serdes.String(),
+                        Serdes.String()
+                )
+        );
     }
 
     public BigDecimal getTotalDebt(String userId) {

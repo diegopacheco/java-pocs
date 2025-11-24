@@ -3,6 +3,7 @@ package com.github.diegopacheco.sandboxspring.model;
 import java.math.BigDecimal;
 
 public class Purchase {
+    private String purchaseId;
     private String userId;
     private String productName;
     private String productType;
@@ -13,13 +14,22 @@ public class Purchase {
     public Purchase() {
     }
 
-    public Purchase(String userId, String productName, String productType, BigDecimal value, int quantity) {
+    public Purchase(String purchaseId, String userId, String productName, String productType, BigDecimal value, int quantity) {
+        this.purchaseId = purchaseId;
         this.userId = userId;
         this.productName = productName;
         this.productType = productType;
         this.value = value;
         this.quantity = quantity;
         this.total = value.multiply(BigDecimal.valueOf(quantity));
+    }
+
+    public String getPurchaseId() {
+        return purchaseId;
+    }
+
+    public void setPurchaseId(String purchaseId) {
+        this.purchaseId = purchaseId;
     }
 
     public String getUserId() {

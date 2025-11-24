@@ -24,6 +24,26 @@
 
 This application is configured for exactly-once semantics (EOS) to guarantee that each message is processed exactly once with no duplicates or data loss.
 
+#### Purchase Deduplication
+
+Each purchase has a unique `purchaseId` (UUID). Kafka Streams uses a persistent state store to track processed purchase IDs and filter out duplicates.
+
+**How it works:**
+
+1. Each Purchase is assigned a unique UUID `purchaseId` when created
+2. Kafka Streams maintains a `purchase-dedup-store` that tracks all seen purchase IDs
+3. Before processing a purchase, the stream checks if the purchaseId exists in the store
+4. If the purchase ID already exists, the purchase is filtered out (not processed)
+5. If the purchase ID is new, it is added to the store and the purchase is processed
+
+This ensures that even if the same purchase message is sent multiple times to Kafka (due to retries, duplicate API calls, etc.), it will only be counted once in the total debt calculation and appear once in the purchase history.
+
+**Benefits:**
+
+- No duplicate debt accumulation from the same purchase
+- Idempotent purchase processing regardless of message retries
+- Protection against accidental duplicate API calls
+
 #### Producer Configuration
 
 ```properties

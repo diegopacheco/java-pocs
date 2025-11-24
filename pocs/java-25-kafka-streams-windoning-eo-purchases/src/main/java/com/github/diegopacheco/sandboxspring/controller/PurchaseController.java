@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 @RestController
 public class PurchaseController {
@@ -37,12 +38,13 @@ public class PurchaseController {
     @GetMapping("/generate/{count}/{id}")
     public Map<String, Object> generate(@PathVariable int count, @PathVariable String id) {
         for (int i = 0; i < count; i++) {
+            String purchaseId = UUID.randomUUID().toString();
             String productName = PRODUCT_NAMES[random.nextInt(PRODUCT_NAMES.length)];
             String productType = PRODUCT_TYPES[random.nextInt(PRODUCT_TYPES.length)];
             BigDecimal value = BigDecimal.valueOf(10 + random.nextDouble() * 990).setScale(2, RoundingMode.HALF_UP);
             int quantity = 1 + random.nextInt(5);
 
-            Purchase purchase = new Purchase(id, productName, productType, value, quantity);
+            Purchase purchase = new Purchase(purchaseId, id, productName, productType, value, quantity);
             purchaseProducer.sendPurchase(purchase);
         }
 
@@ -65,29 +67,23 @@ public class PurchaseController {
 
     @GetMapping("/duplicate/{count}/{id}")
     public Map<String, Object> duplicate(@PathVariable int count, @PathVariable String id) {
-        BigDecimal totalDebt = purchaseStreamProcessor.getTotalDebt(id);
-
-        if (totalDebt.compareTo(BigDecimal.ZERO) == 0) {
-            Map<String, Object> response = new HashMap<>();
-            response.put("error", "No purchases found for user");
-            response.put("userId", id);
-            return response;
-        }
-
+        String purchaseId = UUID.randomUUID().toString();
         String productName = PRODUCT_NAMES[0];
         String productType = PRODUCT_TYPES[0];
         BigDecimal value = BigDecimal.valueOf(50.00);
         int quantity = 2;
 
         for (int i = 0; i < count; i++) {
-            Purchase purchase = new Purchase(id, productName, productType, value, quantity);
+            Purchase purchase = new Purchase(purchaseId, id, productName, productType, value, quantity);
             purchaseProducer.sendPurchase(purchase);
         }
 
         Map<String, Object> response = new HashMap<>();
         response.put("userId", id);
-        response.put("duplicatesCreated", count);
+        response.put("purchaseId", purchaseId);
+        response.put("duplicatesSent", count);
         response.put("status", "success");
+        response.put("note", "All duplicates use same purchaseId - only 1 will be processed");
         return response;
     }
 
