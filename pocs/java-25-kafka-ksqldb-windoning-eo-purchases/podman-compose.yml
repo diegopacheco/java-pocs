@@ -48,6 +48,12 @@ services:
       KSQL_KSQL_STREAMS_REPLICATION_FACTOR: 1
       KSQL_KSQL_INTERNAL_TOPIC_REPLICAS: 1
       KSQL_KSQL_SINK_REPLICAS: 1
+      KSQL_HEAP_OPTS: "-Xms512M -Xmx1G"
+    healthcheck:
+      test: curl -f http://localhost:8088/info || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 30
   ksqldb-cli:
     image: confluentinc/ksqldb-cli:0.29.0
     depends_on:

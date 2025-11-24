@@ -47,43 +47,46 @@ public class KsqlDbQueryService {
 
     public BigDecimal getTotalDebt(String userId) {
         try {
-            String query = "SELECT totalDebt FROM user_total_debt WHERE userId = '" + userId + "';";
+            String query = "SELECT TOTALDEBT FROM USER_TOTAL_DEBT WHERE USERID = '" + userId + "';";
             List<Row> rows = ksqlClient.executeQuery(query).get();
             if (!rows.isEmpty()) {
                 Row row = rows.get(0);
-                return row.getDecimal("totalDebt");
+                BigDecimal total = row.getDecimal("TOTALDEBT");
+                return total != null ? total : BigDecimal.ZERO;
             }
             return BigDecimal.ZERO;
         } catch (Exception e) {
+            e.printStackTrace();
             return BigDecimal.ZERO;
         }
     }
 
     public List<Purchase> getPurchaseHistory(String userId) {
         try {
-            String query = "SELECT purchases FROM user_purchase_history WHERE userId = '" + userId + "';";
+            String query = "SELECT PURCHASES FROM USER_PURCHASE_HISTORY WHERE USERID = '" + userId + "';";
             List<Row> rows = ksqlClient.executeQuery(query).get();
             if (!rows.isEmpty()) {
                 Row row = rows.get(0);
-                List<Map<String, Object>> purchasesList = (List<Map<String, Object>>) row.getValue("purchases");
+                List<Map<String, Object>> purchasesList = (List<Map<String, Object>>) row.getValue("PURCHASES");
                 List<Purchase> purchases = new ArrayList<>();
                 int startIndex = Math.max(0, purchasesList.size() - 20);
                 for (int i = startIndex; i < purchasesList.size(); i++) {
                     Map<String, Object> purchaseMap = purchasesList.get(i);
                     Purchase purchase = new Purchase();
-                    purchase.setPurchaseId((String) purchaseMap.get("purchaseId"));
+                    purchase.setPurchaseId((String) purchaseMap.get("PURCHASEID"));
                     purchase.setUserId(userId);
-                    purchase.setProductName((String) purchaseMap.get("productName"));
-                    purchase.setProductType((String) purchaseMap.get("productType"));
-                    purchase.setValue(new BigDecimal(purchaseMap.get("value").toString()));
-                    purchase.setQuantity((Integer) purchaseMap.get("quantity"));
-                    purchase.setTotal(new BigDecimal(purchaseMap.get("total").toString()));
+                    purchase.setProductName((String) purchaseMap.get("PRODUCTNAME"));
+                    purchase.setProductType((String) purchaseMap.get("PRODUCTTYPE"));
+                    purchase.setValue(new BigDecimal(purchaseMap.get("VALUE").toString()));
+                    purchase.setQuantity((Integer) purchaseMap.get("QUANTITY"));
+                    purchase.setTotal(new BigDecimal(purchaseMap.get("TOTAL").toString()));
                     purchases.add(purchase);
                 }
                 return purchases;
             }
             return new ArrayList<>();
         } catch (Exception e) {
+            e.printStackTrace();
             return new ArrayList<>();
         }
     }
