@@ -10,18 +10,15 @@ import org.springframework.stereotype.Service;
 public class PurchaseProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final ObjectMapper objectMapper;
-    private final PurchaseHistory purchaseHistory;
     private static final String TOPIC = "purchases";
 
-    public PurchaseProducer(KafkaTemplate<String, String> kafkaTemplate, PurchaseHistory purchaseHistory) {
+    public PurchaseProducer(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
         this.objectMapper = new ObjectMapper();
-        this.purchaseHistory = purchaseHistory;
     }
 
     public void sendPurchase(Purchase purchase) {
         try {
-            purchaseHistory.addPurchase(purchase);
             String message = objectMapper.writeValueAsString(purchase);
             kafkaTemplate.send(TOPIC, purchase.getUserId(), message);
         } catch (JsonProcessingException e) {

@@ -1,7 +1,6 @@
 package com.github.diegopacheco.sandboxspring.controller;
 
 import com.github.diegopacheco.sandboxspring.model.Purchase;
-import com.github.diegopacheco.sandboxspring.service.PurchaseHistory;
 import com.github.diegopacheco.sandboxspring.service.PurchaseProducer;
 import com.github.diegopacheco.sandboxspring.service.PurchaseStreamProcessor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +18,6 @@ import java.util.Random;
 public class PurchaseController {
     private final PurchaseProducer purchaseProducer;
     private final PurchaseStreamProcessor purchaseStreamProcessor;
-    private final PurchaseHistory purchaseHistory;
     private final Random random = new Random();
 
     private static final String[] PRODUCT_NAMES = {
@@ -31,10 +29,9 @@ public class PurchaseController {
             "Electronics", "Accessories", "Computing", "Audio", "Display"
     };
 
-    public PurchaseController(PurchaseProducer purchaseProducer, PurchaseStreamProcessor purchaseStreamProcessor, PurchaseHistory purchaseHistory) {
+    public PurchaseController(PurchaseProducer purchaseProducer, PurchaseStreamProcessor purchaseStreamProcessor) {
         this.purchaseProducer = purchaseProducer;
         this.purchaseStreamProcessor = purchaseStreamProcessor;
-        this.purchaseHistory = purchaseHistory;
     }
 
     @GetMapping("/generate/{count}/{id}")
@@ -96,7 +93,7 @@ public class PurchaseController {
 
     @GetMapping("/history/{id}")
     public Map<String, Object> getHistory(@PathVariable String id) {
-        List<Purchase> history = purchaseHistory.getHistory(id);
+        List<Purchase> history = purchaseStreamProcessor.getPurchaseHistory(id);
         Map<String, Object> response = new HashMap<>();
         response.put("userId", id);
         response.put("purchaseCount", history.size());
