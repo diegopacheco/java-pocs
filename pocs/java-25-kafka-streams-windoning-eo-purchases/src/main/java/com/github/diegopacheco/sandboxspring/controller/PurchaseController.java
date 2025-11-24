@@ -1,6 +1,7 @@
 package com.github.diegopacheco.sandboxspring.controller;
 
 import com.github.diegopacheco.sandboxspring.model.Purchase;
+import com.github.diegopacheco.sandboxspring.service.PurchaseHistory;
 import com.github.diegopacheco.sandboxspring.service.PurchaseProducer;
 import com.github.diegopacheco.sandboxspring.service.PurchaseStreamProcessor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -17,6 +19,7 @@ import java.util.Random;
 public class PurchaseController {
     private final PurchaseProducer purchaseProducer;
     private final PurchaseStreamProcessor purchaseStreamProcessor;
+    private final PurchaseHistory purchaseHistory;
     private final Random random = new Random();
 
     private static final String[] PRODUCT_NAMES = {
@@ -28,9 +31,10 @@ public class PurchaseController {
             "Electronics", "Accessories", "Computing", "Audio", "Display"
     };
 
-    public PurchaseController(PurchaseProducer purchaseProducer, PurchaseStreamProcessor purchaseStreamProcessor) {
+    public PurchaseController(PurchaseProducer purchaseProducer, PurchaseStreamProcessor purchaseStreamProcessor, PurchaseHistory purchaseHistory) {
         this.purchaseProducer = purchaseProducer;
         this.purchaseStreamProcessor = purchaseStreamProcessor;
+        this.purchaseHistory = purchaseHistory;
     }
 
     @GetMapping("/generate/{count}/{id}")
@@ -87,6 +91,16 @@ public class PurchaseController {
         response.put("userId", id);
         response.put("duplicatesCreated", count);
         response.put("status", "success");
+        return response;
+    }
+
+    @GetMapping("/history/{id}")
+    public Map<String, Object> getHistory(@PathVariable String id) {
+        List<Purchase> history = purchaseHistory.getHistory(id);
+        Map<String, Object> response = new HashMap<>();
+        response.put("userId", id);
+        response.put("purchaseCount", history.size());
+        response.put("purchases", history);
         return response;
     }
 }
