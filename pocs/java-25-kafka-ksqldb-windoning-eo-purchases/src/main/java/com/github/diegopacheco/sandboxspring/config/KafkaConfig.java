@@ -30,7 +30,7 @@ public class KafkaConfig {
         configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
         configProps.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 5);
         configProps.put(ProducerConfig.RETRIES_CONFIG, Integer.MAX_VALUE);
-        configProps.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "purchase-tx-" + System.currentTimeMillis());
+        configProps.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "purchase-producer");
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 

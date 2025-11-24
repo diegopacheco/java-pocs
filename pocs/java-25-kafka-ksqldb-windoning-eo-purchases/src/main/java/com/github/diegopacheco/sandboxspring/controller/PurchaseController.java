@@ -38,11 +38,12 @@ public class PurchaseController {
     @GetMapping("/generate/{count}/{id}")
     public Map<String, Object> generate(@PathVariable int count, @PathVariable String id) {
         for (int i = 0; i < count; i++) {
-            String purchaseId = UUID.randomUUID().toString();
             String productName = PRODUCT_NAMES[random.nextInt(PRODUCT_NAMES.length)];
             String productType = PRODUCT_TYPES[random.nextInt(PRODUCT_TYPES.length)];
             BigDecimal value = BigDecimal.valueOf(10 + random.nextDouble() * 990).setScale(2, RoundingMode.HALF_UP);
             int quantity = 1 + random.nextInt(5);
+
+            String purchaseId = generateDeterministicPurchaseId(id, productName, value, quantity);
 
             Purchase purchase = new Purchase(purchaseId, id, productName, productType, value, quantity);
             purchaseProducer.sendPurchase(purchase);
@@ -95,5 +96,32 @@ public class PurchaseController {
         response.put("purchaseCount", history.size());
         response.put("purchases", history);
         return response;
+    }
+
+    @GetMapping("/idempotent-test/{userId}/{product}/{value}/{qty}")
+    public Map<String, Object> idempotentTest(@PathVariable String userId,
+                                               @PathVariable String product,
+                                               @PathVariable BigDecimal value,
+                                               @PathVariable int qty) {
+        String purchaseId = generateDeterministicPurchaseId(userId, product, value, qty);
+        BigDecimal total = value.multiply(BigDecimal.valueOf(qty));
+
+        Purchase purchase = new Purchase(purchaseId, userId, product, "Test", value, qty);
+        purchaseProducer.sendPurchase(purchase);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("userId", userId);
+        response.put("purchaseId", purchaseId);
+        response.put("product", product);
+        response.put("value", value);
+        response.put("quantity", qty);
+        response.put("total", total);
+        response.put("note", "Same parameters will generate same purchaseId - deduplication happens in ksqlDB");
+        return response;
+    }
+
+    private String generateDeterministicPurchaseId(String userId, String productName, BigDecimal value, int quantity) {
+        String composite = userId + "-" + productName + "-" + value.toPlainString() + "-" + quantity;
+        return UUID.nameUUIDFromBytes(composite.getBytes()).toString();
     }
 }
