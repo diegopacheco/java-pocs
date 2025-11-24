@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Animation</title>
+    <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.2/dist/svg.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+        #drawing {
+            border: 2px solid #333;
+            margin: 20px 0;
+            background-color: #000;
+        }
+        input[type=text] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dragon Animation with SVG.js</h1>
+    <input type="text" value="DRAGON" placeholder="Enter text">
+    <div id="drawing"></div>
+
+    <script>
+        var input = document.querySelector('input[type=text]')
+        var draw = SVG().addTo('#drawing').viewbox(0, 0, 300, 140)
+        var text = draw.text(function(add) {
+            add.tspan(input.value)
+        }).fill('#ff6600').font({ size: 20, family: 'Arial', weight: 'bold' })
+
+        textPath = text.path('M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80')
+
+        textPath.animate(1000).ease('<>')
+            .plot('M10 80 C 40 150, 65 150, 95 80 S 150 10, 180 80')
+            .loop(true, true)
+
+        input.addEventListener('keyup', updateText(textPath))
+
+        function updateText(textPath) {
+            return function() {
+                textPath.tspan(this.value)
+            }
+        }
+    </script>
+</body>
+</html>
