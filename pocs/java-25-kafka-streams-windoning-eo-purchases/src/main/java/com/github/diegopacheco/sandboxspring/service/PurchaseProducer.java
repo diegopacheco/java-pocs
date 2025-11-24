@@ -18,11 +18,13 @@ public class PurchaseProducer {
     }
 
     public void sendPurchase(Purchase purchase) {
-        try {
-            String message = objectMapper.writeValueAsString(purchase);
-            kafkaTemplate.send(TOPIC, purchase.getUserId(), message);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Failed to serialize purchase", e);
-        }
+        kafkaTemplate.executeInTransaction(operations -> {
+            try {
+                String message = objectMapper.writeValueAsString(purchase);
+                return operations.send(TOPIC, purchase.getUserId(), message);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException("Failed to serialize purchase", e);
+            }
+        });
     }
 }
