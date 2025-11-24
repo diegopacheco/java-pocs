@@ -15,6 +15,12 @@
     <maven.compiler.target>25</maven.compiler.target>
     <java.version>25</java.version>
   </properties>
+  <repositories>
+		<repository>
+			<id>confluent</id>
+			<url>https://packages.confluent.io/maven/</url>
+		</repository>
+	</repositories>
   <dependencies>
   		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -29,8 +35,9 @@
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.kafka</groupId>
-			<artifactId>kafka-streams</artifactId>
+			<groupId>io.confluent.ksql</groupId>
+			<artifactId>ksqldb-api-client</artifactId>
+			<version>7.5.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

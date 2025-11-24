@@ -2,7 +2,7 @@ package com.github.diegopacheco.sandboxspring.controller;
 
 import com.github.diegopacheco.sandboxspring.model.Purchase;
 import com.github.diegopacheco.sandboxspring.service.PurchaseProducer;
-import com.github.diegopacheco.sandboxspring.service.PurchaseStreamProcessor;
+import com.github.diegopacheco.sandboxspring.service.KsqlDbQueryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @RestController
 public class PurchaseController {
     private final PurchaseProducer purchaseProducer;
-    private final PurchaseStreamProcessor purchaseStreamProcessor;
+    private final KsqlDbQueryService ksqlDbQueryService;
     private final Random random = new Random();
 
     private static final String[] PRODUCT_NAMES = {
@@ -30,9 +30,9 @@ public class PurchaseController {
             "Electronics", "Accessories", "Computing", "Audio", "Display"
     };
 
-    public PurchaseController(PurchaseProducer purchaseProducer, PurchaseStreamProcessor purchaseStreamProcessor) {
+    public PurchaseController(PurchaseProducer purchaseProducer, KsqlDbQueryService ksqlDbQueryService) {
         this.purchaseProducer = purchaseProducer;
-        this.purchaseStreamProcessor = purchaseStreamProcessor;
+        this.ksqlDbQueryService = ksqlDbQueryService;
     }
 
     @GetMapping("/generate/{count}/{id}")
@@ -57,7 +57,7 @@ public class PurchaseController {
 
     @GetMapping("/total/{id}")
     public Map<String, Object> getTotal(@PathVariable String id) {
-        BigDecimal total = purchaseStreamProcessor.getTotalDebt(id);
+        BigDecimal total = ksqlDbQueryService.getTotalDebt(id);
         Map<String, Object> response = new HashMap<>();
         response.put("userId", id);
         response.put("totalDebt", total);
@@ -89,7 +89,7 @@ public class PurchaseController {
 
     @GetMapping("/history/{id}")
     public Map<String, Object> getHistory(@PathVariable String id) {
-        List<Purchase> history = purchaseStreamProcessor.getPurchaseHistory(id);
+        List<Purchase> history = ksqlDbQueryService.getPurchaseHistory(id);
         Map<String, Object> response = new HashMap<>();
         response.put("userId", id);
         response.put("purchaseCount", history.size());
