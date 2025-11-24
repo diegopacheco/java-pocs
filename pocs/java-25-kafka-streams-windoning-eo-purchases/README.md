@@ -26,15 +26,16 @@ This application is configured for exactly-once semantics (EOS) to guarantee tha
 
 #### Purchase Deduplication
 
-Each purchase has a unique `purchaseId` (UUID). Kafka Streams uses a persistent state store to track processed purchase IDs and filter out duplicates.
+Each purchase has a unique `purchaseId` (UUID). Kafka Streams uses a stateful aggregation to deduplicate purchases.
 
 **How it works:**
 
 1. Each Purchase is assigned a unique UUID `purchaseId` when created
-2. Kafka Streams maintains a `purchase-dedup-store` that tracks all seen purchase IDs
-3. Before processing a purchase, the stream checks if the purchaseId exists in the store
-4. If the purchase ID already exists, the purchase is filtered out (not processed)
-5. If the purchase ID is new, it is added to the store and the purchase is processed
+2. The stream is re-keyed by `purchaseId` (instead of `userId`)
+3. Kafka Streams groups by `purchaseId` and uses `reduce((oldValue, newValue) -> oldValue)`
+4. The reduce operation keeps only the **first occurrence** of each `purchaseId`
+5. The stream is re-keyed back to `userId` for downstream processing (total debt, history)
+6. The `purchase-dedup-store` maintains the materialized view of unique purchases
 
 This ensures that even if the same purchase message is sent multiple times to Kafka (due to retries, duplicate API calls, etc.), it will only be counted once in the total debt calculation and appear once in the purchase history.
 
@@ -43,6 +44,7 @@ This ensures that even if the same purchase message is sent multiple times to Ka
 - No duplicate debt accumulation from the same purchase
 - Idempotent purchase processing regardless of message retries
 - Protection against accidental duplicate API calls
+- Leverages Kafka Streams native deduplication with exactly-once guarantees
 
 #### Producer Configuration
 
