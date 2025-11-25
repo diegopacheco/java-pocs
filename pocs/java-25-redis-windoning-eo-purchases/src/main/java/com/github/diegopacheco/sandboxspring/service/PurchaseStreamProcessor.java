@@ -125,6 +125,8 @@ public class PurchaseStreamProcessor {
             Purchase purchase = objectMapper.readValue(purchaseJson, Purchase.class);
             String purchaseId = purchase.getPurchaseId();
             String dedupKey = DEDUP_PREFIX + purchaseId;
+            String totalDebtKey = TOTAL_DEBT_PREFIX + userId;
+            String historyKey = HISTORY_PREFIX + userId;
 
             boolean success = false;
             int maxRetries = 100;
@@ -143,6 +145,10 @@ public class PurchaseStreamProcessor {
 
                     redisCommands.multi();
                     redisCommands.setex(dedupKey, DEDUP_TTL_SECONDS, "1");
+                    redisCommands.incrbyfloat(totalDebtKey, purchase.getTotal().doubleValue());
+                    redisCommands.lpush(historyKey, purchaseJson);
+                    redisCommands.ltrim(historyKey, 0, MAX_HISTORY - 1);
+                    redisCommands.xack(STREAM_KEY, CONSUMER_GROUP, message.getId());
 
                     TransactionResult result = redisCommands.exec();
 
@@ -152,9 +158,8 @@ public class PurchaseStreamProcessor {
                         continue;
                     }
 
-                    updateTotalDebtAtomic(userId, purchase);
-                    updateHistoryAtomic(userId, purchase);
-                    redisCommands.xack(STREAM_KEY, CONSUMER_GROUP, message.getId());
+                    totalDebtCache.remove(userId);
+                    historyCache.remove(userId);
                     success = true;
 
                 } catch (Exception e) {
@@ -167,53 +172,6 @@ public class PurchaseStreamProcessor {
             }
         } catch (Exception e) {
             System.err.println("Error processing message: " + e.getMessage());
-        }
-    }
-
-    private void updateTotalDebtAtomic(String userId, Purchase purchase) {
-        String key = TOTAL_DEBT_PREFIX + userId;
-        redisCommands.incrbyfloat(key, purchase.getTotal().doubleValue());
-        totalDebtCache.remove(userId);
-    }
-
-    private void updateHistoryAtomic(String userId, Purchase purchase) {
-        try {
-            String key = HISTORY_PREFIX + userId;
-            String purchaseJson = objectMapper.writeValueAsString(purchase);
-
-            boolean success = false;
-            int maxRetries = 100;
-            int retries = 0;
-
-            while (!success && retries < maxRetries) {
-                try {
-                    redisCommands.watch(key);
-
-                    redisCommands.multi();
-                    redisCommands.lpush(key, purchaseJson);
-                    redisCommands.ltrim(key, 0, MAX_HISTORY - 1);
-
-                    TransactionResult result = redisCommands.exec();
-
-                    if (result.wasDiscarded()) {
-                        retries++;
-                        Thread.sleep(10);
-                        continue;
-                    }
-
-                    historyCache.remove(userId);
-                    success = true;
-
-                } catch (Exception e) {
-                    redisCommands.discard();
-                    retries++;
-                    if (retries >= maxRetries) {
-                        throw e;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("Error updating history: " + e.getMessage());
         }
     }
 
