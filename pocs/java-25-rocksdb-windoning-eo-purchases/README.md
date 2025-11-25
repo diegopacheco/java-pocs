@@ -21,15 +21,15 @@ mvn clean install
 
 ### RocksDB Embedded Implementation
 
-This application uses embedded RocksDB for local persistence with exactly-once semantics for purchase deduplication and aggregation.
+This application uses embedded RocksDB with **TransactionDB** for local persistence with true exactly-once semantics for purchase deduplication and aggregation.
 
 #### Architecture
 
-The application uses three separate RocksDB databases:
+The application uses a single TransactionDB with three column families:
 
-1. **Deduplication Database**: Stores unique purchases by purchaseId
-2. **Total Debt Database**: Maintains running totals per userId
-3. **History Database**: Keeps the last 20 purchases per userId
+1. **Deduplication Column Family**: Stores unique purchases by purchaseId
+2. **Total Debt Column Family**: Maintains running totals per userId
+3. **History Column Family**: Keeps the last 20 purchases per userId
 
 #### Purchase Deduplication
 
@@ -38,12 +38,16 @@ Each purchase has a unique `purchaseId` (UUID). RocksDB is used to ensure idempo
 **How it works:**
 
 1. Each Purchase is assigned a unique UUID `purchaseId` when created
-2. Before processing, check if `purchaseId` exists in the dedup database
-3. If exists, skip processing (duplicate detected)
-4. If not exists, store in dedup database and process
-5. Processing updates both total debt and history databases atomically
+2. Begin RocksDB transaction with sync writes enabled
+3. Check if `purchaseId` exists in dedup column family
+4. If exists, rollback transaction (duplicate detected)
+5. If not exists, within the SAME transaction:
+   - Write to dedup column family
+   - Update total debt in total-debt column family
+   - Update history in history column family
+6. Commit transaction atomically
 
-This ensures that even if the same purchase is submitted multiple times (due to retries or duplicate API calls), it will only be counted once in the total debt calculation and appear once in the purchase history.
+This ensures that even if the same purchase is submitted multiple times (due to retries or duplicate API calls), it will only be counted once in the total debt calculation and appear once in the purchase history. All writes happen atomically or not at all.
 
 **Benefits:**
 
@@ -52,6 +56,8 @@ This ensures that even if the same purchase is submitted multiple times (due to 
 - Protection against accidental duplicate API calls
 - Embedded database with no external dependencies
 - Fast local reads and writes
+- **True ACID transactions** across all operations
+- **No race conditions** - all operations are atomic
 
 #### RocksDB Configuration
 
@@ -59,36 +65,42 @@ This ensures that even if the same purchase is submitted multiple times (due to 
 rocksdb.data.path=./rocksdb-data
 ```
 
-**rocksdb.data.path**: Directory where RocksDB stores its data files. Three subdirectories are created:
-- `dedup/`: Purchase deduplication store
-- `total-debt/`: User total debt aggregation
-- `history/`: User purchase history (last 20 purchases)
+**rocksdb.data.path**: Directory where RocksDB stores its data files. A single transactional database with three column families:
+- `dedup`: Purchase deduplication store
+- `total-debt`: User total debt aggregation
+- `history`: User purchase history (last 20 purchases)
 
 #### Database Operations
 
-**Write Operations:**
-- Atomic write to deduplication store
-- Atomic write to total debt store (read-modify-write)
-- Atomic write to history store (read-modify-write with windowing)
+**Write Operations (Single ACID Transaction):**
+1. Begin transaction with sync writes
+2. Check deduplication column family
+3. Write to deduplication column family
+4. Read-modify-write total debt column family
+5. Read-modify-write history column family (with windowing)
+6. Commit transaction atomically
 
 **Read Operations:**
-- Total debt: Direct key-value lookup by userId
-- Purchase history: Direct key-value lookup by userId returning JSON array
+- Total debt: Direct key-value lookup by userId from total-debt column family
+- Purchase history: Direct key-value lookup by userId from history column family
 
 #### Implementation Details
 
-**PurchaseStorage**: Handles deduplication check and delegates to processor
-**PurchaseProcessor**: Updates total debt and history atomically
-**RocksDBConfig**: Creates and manages three separate RocksDB instances
+**PurchaseStorage**: Handles all transactional operations - deduplication, total debt aggregation, and history updates in a single ACID transaction
+**PurchaseProcessor**: Delegates to PurchaseStorage for reads
+**RocksDBConfig**: Creates and manages TransactionDB with three column families
 
 #### Exactly-Once Guarantees
 
-RocksDB provides exactly-once semantics through:
+RocksDB TransactionDB provides true exactly-once semantics through:
 
-1. **Deduplication**: Check-before-write pattern prevents duplicate processing
-2. **Atomic Operations**: Each database operation is atomic
-3. **Synchronous Writes**: All writes are committed immediately
-4. **No Network Failures**: Embedded database eliminates network partition issues
+1. **ACID Transactions**: All operations (dedup check, total update, history update) happen atomically within a single transaction
+2. **Optimistic Concurrency Control**: Transactions use optimistic locking to prevent conflicts
+3. **Synchronous Writes**: Transactions commit with sync=true for durability
+4. **Rollback on Duplicates**: If duplicate detected, entire transaction rolls back
+5. **No Race Conditions**: Check-and-write happens atomically - impossible for two concurrent requests with same purchaseId to both commit
+6. **No Network Failures**: Embedded database eliminates network partition issues
+7. **Write-Ahead Log (WAL)**: Ensures durability even on crashes
 
 #### Production Considerations
 
