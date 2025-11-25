@@ -92,11 +92,16 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.module</groupId>
-			<artifactId>jackson-module-scala_2.13</artifactId>
-			<version>2.15.3</version>
-		</dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <artifactId>jackson-module-scala_2.13</artifactId>
+      <version>2.15.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>9.6</version>
+    </dependency>
    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -108,7 +113,7 @@
         </exclusion>
       </exclusions>
     </dependency>
-  </dependencies>
+    </dependencies>
 	<build>
 		<plugins>
 			<plugin>
@@ -120,7 +125,28 @@
 					</jvmArguments>
 				</configuration>
 			</plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>agent-jar</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <classifier>agent</classifier>
+              <archive>
+                <manifestEntries>
+                  <Premain-Class>com.github.diegopacheco.sandboxspring.agent.SubjectCompatAgent</Premain-Class>
+                  <Agent-Class>com.github.diegopacheco.sandboxspring.agent.SubjectCompatAgent</Agent-Class>
+                  <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                  <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                </manifestEntries>
+              </archive>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 		</plugins>
 	</build>
 </project>
-
