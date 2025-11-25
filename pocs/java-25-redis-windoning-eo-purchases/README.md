@@ -26,93 +26,122 @@ This application is configured for exactly-once semantics (EOS) to guarantee tha
 
 #### Purchase Deduplication
 
-Each purchase has a unique `purchaseId` (UUID). Kafka Streams uses a stateful aggregation to deduplicate purchases.
+Each purchase has a unique `purchaseId` (UUID). Redis Streams consumer groups with optimistic locking are used to deduplicate purchases.
 
 **How it works:**
 
 1. Each Purchase is assigned a unique UUID `purchaseId` when created
-2. The stream is re-keyed by `purchaseId` (instead of `userId`)
-3. Kafka Streams groups by `purchaseId` and uses `reduce((oldValue, newValue) -> oldValue)`
-4. The reduce operation keeps only the **first occurrence** of each `purchaseId`
-5. The stream is re-keyed back to `userId` for downstream processing (total debt, history)
-6. The `purchase-dedup-store` maintains the materialized view of unique purchases
+2. Redis Streams consumer groups track message processing with XREADGROUP
+3. WATCH command provides optimistic locking on deduplication keys
+4. MULTI/EXEC transactions ensure atomic deduplication check and state updates
+5. Deduplication keys use SETEX with 24-hour TTL to prevent unbounded growth
+6. XACK confirms successful message processing
+7. Pending message recovery with XCLAIM handles consumer failures
 
-This ensures that even if the same purchase message is sent multiple times to Kafka (due to retries, duplicate API calls, etc.), it will only be counted once in the total debt calculation and appear once in the purchase history.
+This ensures that even if the same purchase message is sent multiple times to Redis Streams (due to retries, duplicate API calls, etc.), it will only be counted once in the total debt calculation and appear once in the purchase history.
 
 **Benefits:**
 
 - No duplicate debt accumulation from the same purchase
 - Idempotent purchase processing regardless of message retries
 - Protection against accidental duplicate API calls
-- Leverages Kafka Streams native deduplication with exactly-once guarantees
+- Automatic recovery from consumer failures via pending message processing
+- TTL on deduplication keys prevents memory leaks
 
-#### Producer Configuration
+#### Redis Streams Consumer Group Configuration
 
-```properties
-spring.kafka.producer.acks=all
-spring.kafka.producer.properties.enable.idempotence=true
-spring.kafka.producer.properties.max.in.flight.requests.per.connection=5
-spring.kafka.producer.properties.retries=2147483647
-spring.kafka.producer.transaction-id-prefix=purchase-tx-
+**Consumer Group**: `purchase-processor-group`
+
+**Consumer Name**: `processor-1`
+
+**Processing Mode**: XREADGROUP with automatic offset tracking
+
+Redis Streams consumer groups automatically track message offsets and provide exactly-once delivery semantics within the group. Messages are delivered to only one consumer in the group, and the offset is managed by Redis.
+
+#### Atomic Operations
+
+**Deduplication with Optimistic Locking:**
+```
+WATCH dedup:{purchaseId}
+GET dedup:{purchaseId}
+MULTI
+SETEX dedup:{purchaseId} 86400 "1"
+EXEC
 ```
 
-**acks=all**: All in-sync replicas must acknowledge the write before it is considered successful.
+WATCH ensures that if another consumer processes the same purchaseId concurrently, the transaction will fail and retry, preventing duplicates.
 
-**enable.idempotence=true**: Producer will ensure that exactly one copy of each message is written to the stream, even with retries.
-
-**max.in.flight.requests.per.connection=5**: Maximum number of unacknowledged requests per connection. Works with idempotence.
-
-**retries=MAX_VALUE**: Producer will retry indefinitely on transient failures.
-
-**transaction-id-prefix**: Enables transactional writes for atomic multi-partition writes.
-
-#### Consumer Configuration
-
-```properties
-spring.kafka.consumer.isolation-level=read_committed
+**Atomic Debt Updates:**
+```
+INCRBYFLOAT total:{userId} {amount}
 ```
 
-**isolation-level=read_committed**: Consumer will only read committed messages, ignoring uncommitted transactional messages.
+INCRBYFLOAT is an atomic operation that eliminates read-modify-write race conditions. No locks or transactions needed.
 
-#### Kafka Streams Configuration
-
-```properties
-spring.kafka.streams.properties.processing.guarantee=exactly_once_v2
-spring.kafka.streams.properties.replication.factor=1
-spring.kafka.streams.properties.num.standby.replicas=0
+**Atomic History Updates:**
+```
+WATCH history:{userId}
+MULTI
+LPUSH history:{userId} {purchaseJson}
+LTRIM history:{userId} 0 19
+EXEC
 ```
 
-**processing.guarantee=exactly_once_v2**: Enables exactly-once semantics v2 for Kafka Streams, which uses transactions to guarantee exactly-once processing.
+WATCH with MULTI/EXEC ensures atomic list updates even with concurrent consumers.
 
-**replication.factor=1**: Set to 1 for single broker setup. Use 3+ in production.
+#### Message Acknowledgment
 
-**num.standby.replicas=0**: No standby replicas for single broker. Use 1+ in production for fault tolerance.
+**XACK**: Messages are acknowledged only after successful processing and state updates.
+
+**Pending Message Recovery**: XPENDING and XCLAIM automatically recover messages from failed consumers.
 
 #### How It Works
 
-1. **Idempotent Producer**: Prevents duplicate messages on retry by assigning sequence numbers to each message batch.
+1. **Producer**: Uses XADD to append messages to Redis Stream atomically.
 
-2. **Transactional Writes**: Producer commits messages atomically across multiple partitions using transactions.
+2. **Consumer Group**: XREADGROUP reads messages with automatic offset management.
 
-3. **Kafka Streams EOS v2**: Uses transactions to atomically read from input topics, process, update state stores, and write to output topics.
+3. **Optimistic Locking**: WATCH detects concurrent modifications and retries transactions.
 
-4. **Read Committed Consumer**: Only reads messages that have been successfully committed in a transaction.
+4. **Atomic Updates**: MULTI/EXEC transactions ensure all-or-nothing state changes.
+
+5. **Deduplication TTL**: SETEX with 24-hour expiration prevents memory bloat.
+
+6. **Message Acknowledgment**: XACK confirms processing, removing from pending list.
+
+7. **Failure Recovery**: XCLAIM reclaims pending messages from dead consumers.
 
 #### Tradeoffs
 
-**Benefits**: No duplicate processing, no data loss, atomic updates across topics and state stores.
+**Benefits**: No duplicate processing, no data loss, atomic updates, automatic failure recovery, bounded memory usage.
 
-**Costs**: Slightly higher latency, lower throughput, increased disk usage for transaction logs.
+**Costs**: Retry overhead on transaction conflicts, slightly higher latency for WATCH/MULTI/EXEC, pending message processing overhead.
 
 #### Production Considerations
 
-For production environments, update these settings:
+For production environments:
 
 ```properties
-spring.kafka.streams.properties.replication.factor=3
-spring.kafka.streams.properties.num.standby.replicas=1
+redis.host=redis-cluster-endpoint
+redis.port=6379
 ```
 
-And ensure Kafka brokers have:
-- `transaction.state.log.replication.factor=3`
-- `transaction.state.log.min.isr=2`
+Deploy multiple consumer instances with different consumer names in the same group for horizontal scaling:
+- `processor-1`
+- `processor-2`
+- `processor-3`
+
+Configure Redis persistence:
+- Enable AOF (Append-Only File) for durability
+- Use Redis Sentinel or Redis Cluster for high availability
+- Set appropriate `maxmemory-policy` (e.g., `noeviction`)
+
+Adjust TTL based on business requirements:
+```java
+private static final int DEDUP_TTL_SECONDS = 86400;
+```
+
+Monitor pending messages:
+```
+XPENDING purchases purchase-processor-group
+```
