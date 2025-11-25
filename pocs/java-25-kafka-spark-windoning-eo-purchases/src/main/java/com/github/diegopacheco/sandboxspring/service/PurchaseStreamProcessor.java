@@ -128,8 +128,7 @@ public class PurchaseStreamProcessor {
             if (historyQuery != null) {
                 historyQuery.stop();
             }
-        } catch (TimeoutException e) {
-            e.printStackTrace();
+        } catch (TimeoutException | IllegalStateException e) {
         }
     }
 
