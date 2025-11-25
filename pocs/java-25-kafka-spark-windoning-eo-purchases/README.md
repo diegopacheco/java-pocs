@@ -9,7 +9,7 @@
 ## Rationale
 
 This project demonstrates how to implement a purchase 
-processing system using Kafka Streams with exactly-once 
+processing system using Spark with exactly-once 
 semantics (EOS). It showcases how to handle duplicate 
 purchase events gracefully, ensuring that each purchase is 
 processed exactly once, even in the presence of retries or 
