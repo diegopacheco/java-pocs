@@ -1016,3 +1016,5 @@ Block cache entry stats(count,size,portion): Misc(1,0.00 KB,0%)
 2025/11/24-21:31:53.885369 6097989632 [tions/cf_options.cc:1223]                  blob_file_starting_level: 0
 2025/11/24-21:31:53.885370 6097989632 [tions/cf_options.cc:1227]                    prepopulate_blob_cache: disable
 2025/11/24-21:31:53.885371 6097989632 [tions/cf_options.cc:1229]                    last_level_temperature: 0
+2025/11/24-21:34:37.013587 6137769984 [/db_impl/db_impl.cc:500] Shutdown: canceling all background work
+2025/11/24-21:34:37.013909 6137769984 [/db_impl/db_impl.cc:709] Shutdown complete
