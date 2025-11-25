@@ -21,6 +21,8 @@ public class SparkConfig {
         Configuration hadoopConf = new Configuration();
         hadoopConf.set("hadoop.security.authentication", "simple");
         hadoopConf.set("hadoop.security.authorization", "false");
+        hadoopConf.set("fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem");
+        hadoopConf.set("fs.file.impl.disable.cache", "true");
         UserGroupInformation.setConfiguration(hadoopConf);
 
         SparkConf sparkConf = new SparkConf()
@@ -31,7 +33,9 @@ public class SparkConfig {
                 .set("spark.sql.streaming.stateStore.providerClass", "org.apache.spark.sql.execution.streaming.state.HDFSBackedStateStoreProvider")
                 .set("spark.hadoop.security.authentication", "simple")
                 .set("spark.hadoop.fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem")
-                .set("spark.hadoop.fs.file.impl.disable.cache", "true");
+                .set("spark.hadoop.fs.file.impl.disable.cache", "true")
+                .set("spark.hadoop.validateOutputSpecs", "false")
+                .set("spark.hadoop.fs.permissions.umask-mode", "000");
 
         return SparkSession.builder()
                 .config(sparkConf)
