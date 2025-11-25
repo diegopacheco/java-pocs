@@ -29,7 +29,9 @@ public class SparkConfig {
                 .set("spark.sql.streaming.checkpointLocation", "/tmp/spark-checkpoint")
                 .set("spark.sql.adaptive.enabled", "true")
                 .set("spark.sql.streaming.stateStore.providerClass", "org.apache.spark.sql.execution.streaming.state.HDFSBackedStateStoreProvider")
-                .set("spark.hadoop.security.authentication", "simple");
+                .set("spark.hadoop.security.authentication", "simple")
+                .set("spark.hadoop.fs.file.impl", "org.apache.hadoop.fs.RawLocalFileSystem")
+                .set("spark.hadoop.fs.file.impl.disable.cache", "true");
 
         return SparkSession.builder()
                 .config(sparkConf)
