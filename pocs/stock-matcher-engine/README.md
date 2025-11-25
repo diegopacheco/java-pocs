@@ -1,3 +1,19 @@
+## Related POCS
+
+- [1. Java Pure Memory - Stock Engine](https://github.com/diegopacheco/java-pocs/tree/master/pocs/stock-matcher-engine)
+- [2. Java 25, Kafka, Kafka-Streams](https://github.com/diegopacheco/java-pocs/tree/master/pocs/java-25-kafka-streams-windoning-eo-purchases)
+- [3. Java 25, Kafka, KsqlDB](https://github.com/diegopacheco/java-pocs/tree/master/pocs/java-25-kafka-ksqldb-windoning-eo-purchases)
+- [4. Java 25, RocksDB](https://github.com/diegopacheco/java-pocs/tree/master/pocs/java-25-rocksdb-windoning-eo-purchases)
+- [5. Java 25, Redis and Redis Streams](https://github.com/diegopacheco/java-pocs/tree/master/pocs/java-25-redis-windoning-eo-purchases)
+
+## Rationale
+
+- Build an intentionally naive in-memory matcher in Java 19 to explore baseline costs for stock alerting.
+- Keep a quadratic events x rules pass to measure worst-case latency before adding filtering or indexes.
+- Use synthetic Nasdaq-like data to benchmark CPU and memory without external dependencies.
+- Provide a reference point for future optimizations: rule caps, parallelism, better data structures or languages.
+- Serve as a teaching toy for discussing complexity and scaling trade-offs in streaming/trading workloads.
+
 ### Build 
 ```bash
 ./mvnw clean install 
@@ -23,16 +39,6 @@ UML in Colors scheme:
 * Dark blue: Matching engine
 * Yellow: Raw events
 * Red: Main class, main orchestration of the program and benchmarks
-
-### Rationale
-
-OMG Diego you lost your mind, no not really. 
-This is quadratic time(for inside for), I know, but this is very useful because allows to think in the worst case scenario.
-
-Let's recap: Single Threaded, no JVM tuning, poorly implemented, no tuning, ~10-30% CPU, ~16GB ram:
- * Even on this case 10k events running against 10k rules took only 1.8 seconds is pretty fast for worst case(10kx10k).
- * Sure 100k starts to get slow, but for something in the background, 3.8 minutes is not bad!(100kx100k) :-) 
- * We can do better, there are opportunities to improve
 
 ### Benchmark
 ```bash
