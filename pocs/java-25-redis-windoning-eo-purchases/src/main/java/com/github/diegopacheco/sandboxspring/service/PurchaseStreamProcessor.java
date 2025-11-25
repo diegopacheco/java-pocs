@@ -12,20 +12,17 @@ import io.lettuce.core.models.stream.PendingMessages;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class PurchaseStreamProcessor {
     private static final String STREAM_KEY = "purchases";
     private static final String CONSUMER_GROUP = "purchase-processor-group";
     private static final String CONSUMER_NAME = "processor-1";
-    private static final String OFFSET_KEY = "offset:" + CONSUMER_NAME;
     private static final String TOTAL_DEBT_PREFIX = "total:";
     private static final String HISTORY_PREFIX = "history:";
     private static final String DEDUP_PREFIX = "dedup:";
@@ -34,15 +31,11 @@ public class PurchaseStreamProcessor {
 
     private final RedisCommands<String, String> redisCommands;
     private final ObjectMapper objectMapper;
-    private final Map<String, BigDecimal> totalDebtCache;
-    private final Map<String, List<Purchase>> historyCache;
     private volatile boolean running = true;
 
     public PurchaseStreamProcessor(RedisCommands<String, String> redisCommands) {
         this.redisCommands = redisCommands;
         this.objectMapper = new ObjectMapper();
-        this.totalDebtCache = new ConcurrentHashMap<>();
-        this.historyCache = new ConcurrentHashMap<>();
     }
 
     @PostConstruct
@@ -91,6 +84,7 @@ public class PurchaseStreamProcessor {
                     CONSUMER_GROUP
             );
         } catch (RedisBusyException e) {
+            System.out.println("Error initializeConsumerGroup " + e);
         }
     }
 
@@ -114,6 +108,7 @@ public class PurchaseStreamProcessor {
                 processMessageWithTransaction(message);
             }
         } catch (Exception e) {
+            System.err.println("Error processing pending messages: " + e.getMessage());
         }
     }
 
@@ -148,7 +143,6 @@ public class PurchaseStreamProcessor {
                     redisCommands.incrbyfloat(totalDebtKey, purchase.getTotal().doubleValue());
                     redisCommands.lpush(historyKey, purchaseJson);
                     redisCommands.ltrim(historyKey, 0, MAX_HISTORY - 1);
-                    redisCommands.xack(STREAM_KEY, CONSUMER_GROUP, message.getId());
 
                     TransactionResult result = redisCommands.exec();
 
@@ -158,8 +152,7 @@ public class PurchaseStreamProcessor {
                         continue;
                     }
 
-                    totalDebtCache.remove(userId);
-                    historyCache.remove(userId);
+                    redisCommands.xack(STREAM_KEY, CONSUMER_GROUP, message.getId());
                     success = true;
 
                 } catch (Exception e) {
@@ -176,22 +169,12 @@ public class PurchaseStreamProcessor {
     }
 
     public BigDecimal getTotalDebt(String userId) {
-        if (totalDebtCache.containsKey(userId)) {
-            return totalDebtCache.get(userId);
-        }
-
         String key = TOTAL_DEBT_PREFIX + userId;
         String total = redisCommands.get(key);
-        BigDecimal debt = total != null ? new BigDecimal(total) : BigDecimal.ZERO;
-        totalDebtCache.put(userId, debt);
-        return debt;
+        return total != null ? new BigDecimal(total) : BigDecimal.ZERO;
     }
 
     public List<Purchase> getPurchaseHistory(String userId) {
-        if (historyCache.containsKey(userId)) {
-            return historyCache.get(userId);
-        }
-
         try {
             String key = HISTORY_PREFIX + userId;
             List<String> purchaseJsonList = redisCommands.lrange(key, 0, -1);
@@ -203,7 +186,6 @@ public class PurchaseStreamProcessor {
             }
 
             Collections.reverse(purchases);
-            historyCache.put(userId, purchases);
             return purchases;
         } catch (Exception e) {
             return new ArrayList<>();
