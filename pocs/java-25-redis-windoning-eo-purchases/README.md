@@ -1,3 +1,20 @@
+## Related POCS
+
+- [1. Java Pure Memory - Stock Engine](https://github.com/diegopacheco/java-pocs/tree/master/pocs/stock-matcher-engine)
+- [2. Java 25, Kafka, Kafka-Streams](https://github.com/diegopacheco/java-pocs/tree/master/pocs/java-25-kafka-streams-windoning-eo-purchases)
+- [3. Java 25, Kafka, KsqlDB](https://github.com/diegopacheco/java-pocs/tree/master/pocs/java-25-kafka-ksqldb-windoning-eo-purchases)
+- [4. Java 25, RocksDB](https://github.com/diegopacheco/java-pocs/tree/master/pocs/java-25-rocksdb-windoning-eo-purchases)
+- [5. Java 25, Redis and Redis Streams](https://github.com/diegopacheco/java-pocs/tree/master/pocs/java-25-redis-windoning-eo-purchases)
+
+## Rationale
+
+This project demonstrates how to implement a purchase 
+processing system using Redis with exactly-once 
+semantics (EOS). It showcases how to handle duplicate 
+purchase events gracefully, ensuring that each purchase is 
+processed exactly once, even in the presence of retries or 
+duplicate messages.
+
 ### Build
 
 ```bash
