@@ -96,6 +96,8 @@ Flink provides exactly-once semantics through checkpointing and state management
 
 **Fault Tolerance**: Flink can restore from the last successful checkpoint in case of failures.
 
+**State Sharing**: This implementation uses static ConcurrentHashMap to share state between Flink operators and Spring REST endpoints. In production, use Flink Queryable State or external state store (Redis, database) for distributed deployments.
+
 #### How It Works
 
 1. **Idempotent Producer**: Prevents duplicate messages on retry by assigning sequence numbers to each message batch.
@@ -121,6 +123,23 @@ For production environments:
 - Set appropriate checkpoint interval based on throughput
 - Configure parallelism based on workload
 - Use distributed state backend storage (HDFS, S3)
+- Replace static ConcurrentHashMap with:
+  - Flink Queryable State for direct state queries
+  - External state store (Redis, database) for multi-instance deployments
+  - REST API from Flink TaskManager for state access
 - Ensure Kafka brokers have proper replication:
   - `transaction.state.log.replication.factor=3`
   - `transaction.state.log.min.isr=2`
+
+#### Implementation Notes
+
+**Embedded Flink**: This implementation runs Flink embedded within the Spring Boot application using `StreamExecutionEnvironment.getExecutionEnvironment()`. The Flink job runs in a separate thread started by `@PostConstruct`.
+
+**State Management**: State is maintained in two places:
+1. Flink keyed state (MapState, ValueState) for fault tolerance and recovery
+2. Static ConcurrentHashMap for REST endpoint queries (single-instance deployment only)
+
+**Limitations**:
+- Single instance deployment only (static maps are not distributed)
+- Not suitable for horizontal scaling without external state store
+- State queries are eventually consistent (small delay between Flink processing and map updates)
