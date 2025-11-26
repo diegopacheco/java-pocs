@@ -1,8 +1,9 @@
 package com.github.diegopacheco.sandboxspring.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Purchase {
+public class Purchase implements Serializable {
     private String purchaseId;
     private String userId;
     private String productName;

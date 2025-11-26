@@ -4,14 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.diegopacheco.sandboxspring.model.Purchase;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
-import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.common.state.MapState;
 import org.apache.flink.api.common.state.MapStateDescriptor;
 import org.apache.flink.api.common.state.ValueState;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
-import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.connector.kafka.source.KafkaSource;
 import org.apache.flink.connector.kafka.source.enumerator.initializer.OffsetsInitializer;
@@ -21,22 +19,21 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
-public class PurchaseStreamProcessor {
+public class PurchaseStreamProcessor implements Serializable {
     private static final int MAX_HISTORY = 20;
-    private final ObjectMapper objectMapper = new ObjectMapper();
-    private final Map<String, BigDecimal> totalDebtStore = new ConcurrentHashMap<>();
-    private final Map<String, List<Purchase>> historyStore = new ConcurrentHashMap<>();
-    private final Map<String, Purchase> dedupStore = new ConcurrentHashMap<>();
+    private static final Map<String, BigDecimal> totalDebtStore = new ConcurrentHashMap<>();
+    private static final Map<String, List<Purchase>> historyStore = new ConcurrentHashMap<>();
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
-    private StreamExecutionEnvironment env;
+    private transient StreamExecutionEnvironment env;
 
     @PostConstruct
     public void init() {
@@ -68,16 +65,31 @@ public class PurchaseStreamProcessor {
                 .fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
 
         DataStream<Purchase> parsedPurchases = purchases
-                .map(json -> objectMapper.readValue(json, Purchase.class))
+                .map(new ParsePurchaseFunction())
                 .returns(Purchase.class);
 
         DataStream<Purchase> dedupedPurchases = parsedPurchases
                 .keyBy(Purchase::getPurchaseId)
-                .map(new DeduplicationFunction());
+                .map(new DeduplicationFunction())
+                .filter(p -> p != null);
 
         dedupedPurchases
                 .keyBy(Purchase::getUserId)
-                .map(new TotalDebtFunction(totalDebtStore, historyStore));
+                .map(new TotalDebtFunction());
+    }
+
+    public static class ParsePurchaseFunction extends RichMapFunction<String, Purchase> {
+        private transient ObjectMapper objectMapper;
+
+        @Override
+        public void open(Configuration parameters) {
+            objectMapper = new ObjectMapper();
+        }
+
+        @Override
+        public Purchase map(String json) throws Exception {
+            return objectMapper.readValue(json, Purchase.class);
+        }
     }
 
     public static class DeduplicationFunction extends RichMapFunction<Purchase, Purchase> {
@@ -106,13 +118,6 @@ public class PurchaseStreamProcessor {
     public static class TotalDebtFunction extends RichMapFunction<Purchase, Purchase> {
         private transient ValueState<BigDecimal> totalDebtState;
         private transient MapState<String, Purchase> historyState;
-        private final Map<String, BigDecimal> totalDebtStore;
-        private final Map<String, List<Purchase>> historyStore;
-
-        public TotalDebtFunction(Map<String, BigDecimal> totalDebtStore, Map<String, List<Purchase>> historyStore) {
-            this.totalDebtStore = totalDebtStore;
-            this.historyStore = historyStore;
-        }
 
         @Override
         public void open(Configuration parameters) {
