@@ -20,7 +20,7 @@ Open http://localhost:8080
 
 ### Result
 
-<img src="result-prime.png" width="600" />
+<img src="prime-results.png" width="600" />
 
 ```
 Prime Discovery Chat application with:
