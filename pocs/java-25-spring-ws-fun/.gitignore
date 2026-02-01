@@ -106,3 +106,7 @@ hs_err_pid*
 
 # End of https://www.gitignore.io/api/java,eclipse
 
+node_modules/
+.backend.pid
+frontend/bun.lockb
+

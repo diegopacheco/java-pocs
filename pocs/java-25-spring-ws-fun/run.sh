@@ -1,4 +1,8 @@
-
 #!/bin/bash
-./mvnw exec:java -Dexec.mainClass="Main" -Dexec.classpathScope=runtime
-
+cd frontend
+bun install
+bun run build
+cd ..
+./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="--enable-preview" &
+echo $! > .backend.pid
+echo "Backend started on http://localhost:8080"
