@@ -4,6 +4,7 @@ import './index.css'
 interface PrimeNumber {
   value: number
   timestamp: number
+  isNew?: boolean
 }
 
 interface ChatMessage {
@@ -41,9 +42,14 @@ function App() {
     primeWs.onmessage = (event) => {
       const data = JSON.parse(event.data)
       if (data.type === 'history') {
-        setPrimes(data.primes)
+        setPrimes(data.primes.map((p: PrimeNumber) => ({ ...p, isNew: false })))
       } else {
-        setPrimes(prev => [...prev, data])
+        setPrimes(prev => [...prev, { ...data, isNew: true }])
+        setTimeout(() => {
+          setPrimes(prev => prev.map(p =>
+            p.value === data.value ? { ...p, isNew: false } : p
+          ))
+        }, 600)
       }
     }
 
@@ -133,7 +139,7 @@ function App() {
           <div className="prime-count">Total: {primes.length}</div>
           <div className="prime-list">
             {primes.map((p, i) => (
-              <span key={i} className="prime-item">{p.value}</span>
+              <span key={i} className={`prime-item ${p.isNew ? 'new' : ''}`}>{p.value}</span>
             ))}
             <div ref={primesEndRef} />
           </div>
