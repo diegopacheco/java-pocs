@@ -6,6 +6,8 @@ There are 2 scripts, one to run the application in non-prod environment, and one
 
 The testing interface `/product-create` only work for environment with with are NOT `prod`.
 
+<img src="testing-interfaces.png" width="600" />
+
 ### Build
 
 ```bash
