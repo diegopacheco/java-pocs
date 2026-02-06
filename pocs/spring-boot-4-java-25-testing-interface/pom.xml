@@ -4,7 +4,7 @@
  	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.0</version>
+		<version>4.0.2</version>
 	</parent>
   <groupId>com.github.diegopacheco.javapocs</groupId>
   <artifactId>spring-boot-4-java-25-testing-interface</artifactId>
@@ -45,4 +45,3 @@
 		</plugins>
 	</build>
 </project>
-
