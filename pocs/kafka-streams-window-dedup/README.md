@@ -7,6 +7,18 @@ Java: 21 <BR/>
 Kafka: kafka_2.13-3.6.2 <BR/>
 Zookeeper: zookeeper-3.4.14 <BR/>
 
+### KAFKA POC Testing
+
+1. Update KAFKA_HOME variable in [consumer-results.sh](consumer-results.sh) [consumer-inputs.sh](consumer-inputs.sh) and [produce-message-kafka.sh](produce-message-kafka.sh) with your KAFKA home path installation
+2. If you are using Podman https://podman.io/ replace the line `docker-compose up --force-recreate` in [run-kafka-cluster.sh](run-kafka-cluster.sh) to `podman compose up --force-recreate`
+3. Run run-kafka-cluster.sh
+4. After Kafka cluster gets ready, run  [run.sh](run.sh) [consumer-results.sh](consumer-results.sh)
+5. At the end run [produce-message-kafka.sh](produce-message-kafka.sh) it should produce the same logs you can see in the picture below
+
+Note:
+- [consumer-inputs.sh](consumer-inputs.sh) listens to Kafka inputTopic topic
+- [consumer-results.sh](consumer-results.sh) listens to Kafka outputTopic topic
+
 ### KafkaStream Code
 ```java
   KTable<Windowed<String>, String> deduplicated = source
