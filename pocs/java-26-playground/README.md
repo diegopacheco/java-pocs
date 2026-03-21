@@ -17,16 +17,14 @@
 
 AOT Object Caching Feature (JEP 516):
   Stores objects in GC-agnostic format using logical indices
-  Works with any garbage collector (not just G1)
-  Current GC: G1 Young Generation, G1 Concurrent GC, G1 Old Generation
-  Usage: java -XX:AOTCacheOutput=app.aot -cp app.jar App
+  Works with any garbage collector (not just G1)                                                                                                        Current GC: G1 Young Generation, G1 Concurrent GC, G1 Old Generation                                                                                  Usage: java -XX:AOTCacheOutput=app.aot -cp app.jar App
 
 G1 GC Throughput Improvement (JEP 522):
   Second card table reduces synchronization overhead
   5-15% throughput improvement for reference-heavy workloads
   Max Memory: 30688 MB
   Total Memory: 32 MB
-  Free Memory: 28 MB
+  Free Memory: 29 MB
   Available Processors: 16
 
 HTTP/3 Response Status: 200
@@ -34,8 +32,7 @@ HTTP/3 Protocol Version: HTTP_3
 
 PEM Encoded Public Key:
 -----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...
-PEM Encoded Private Key:
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...PEM Encoded Private Key:
 -----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAAS...
 Decoded Public Key Algorithm: RSA
@@ -68,15 +65,15 @@ Primitive Pattern Matching:
     Value 42 fits in a byte: 42
     Value 7 fits in a byte: 7
 
-Final Field Reflection Feature (JEP 500):
-  Original number of strings: 6
+Final Field Reflection Feature (JEP 500):                                                                                                               Original number of strings: 6
+WARNING: Final field numberOfStrings in class FinalFieldReflectionFeature$Guitar has been mutated reflectively by class FinalFieldReflectionFeature in unnamed module @17c1bced (file:/Users/diegopacheco/git/diegopacheco/java-pocs/pocs/java-26-playground/target/classes/)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
   After reflection mutation: 12
   WARNING: Final field was mutated via reflection (JDK 26 warns about this)
-
 Applet API Removal (JEP 504):
   Removed: java.applet package
   Removed: javax.swing.JApplet
   Removed: java.beans.AppletInitializer
-  Reason: Browser plugin support ended, security concerns
-  Status: java.applet.Applet successfully removed
+  Reason: Browser plugin support ended, security concerns                                                                                               Status: java.applet.Applet successfully removed
 ```
