@@ -1,4 +1,3 @@
 
 #!/bin/bash
-./mvnw exec:java -Dexec.mainClass="Main" -Dexec.classpathScope=runtime
-
+./mvnw clean compile -q && java --enable-preview -cp target/classes:$(./mvnw dependency:build-classpath -q -DincludeScope=runtime -Dmdep.outputFile=/dev/stdout) Main
