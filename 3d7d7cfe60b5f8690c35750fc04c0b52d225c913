@@ -1,0 +1,46 @@
+pocs/java-26-playground/src/main/java/Main.java
+  9feb60b2b58c5ccc 3-30
+pocs/java-26-playground/src/main/java/FinalFieldReflectionFeature.java
+  9feb60b2b58c5ccc 1-30
+pocs/java-26-playground/run.sh
+  9feb60b2b58c5ccc 3
+pocs/java-26-playground/src/main/java/LazyConstantsFeature.java
+  9feb60b2b58c5ccc 1-26
+pocs/java-26-playground/src/main/java/PrimitivePatternFeature.java
+  9feb60b2b58c5ccc 1-49
+pocs/java-26-playground/src/main/java/G1GcThroughputFeature.java
+  9feb60b2b58c5ccc 1-18
+pocs/java-26-playground/src/main/java/StructuredConcurrencyFeature.java
+  9feb60b2b58c5ccc 1-33
+pocs/java-26-playground/src/main/java/AotCachingFeature.java
+  9feb60b2b58c5ccc 1-18
+pocs/java-26-playground/README.md
+  9feb60b2b58c5ccc 1,4,7,9-10,12-14,16-30,32-33,35-82
+pocs/java-26-playground/src/main/java/AppletApiRemovalFeature.java
+  9feb60b2b58c5ccc 1-21
+pocs/java-26-playground/src/main/java/PemEncodingsFeature.java
+  9feb60b2b58c5ccc 1-32
+pocs/java-26-playground/src/main/java/Http3ClientFeature.java
+  9feb60b2b58c5ccc 1-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.17",
+  "base_commit_sha": "3d7d7cfe60b5f8690c35750fc04c0b52d225c913",
+  "prompts": {
+    "9feb60b2b58c5ccc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aa7c2c7e-1a96-42b8-8f4b-417306803197",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 413,
+      "total_deletions": 19,
+      "accepted_lines": 401,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/86bc3141f9824cac3ad88842092b31169c1531180ba7a55905a95e33db703105"
+    }
+  }
+}
