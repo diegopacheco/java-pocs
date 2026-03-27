@@ -1,0 +1,84 @@
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/es/IndexService.java
+  fbea3ca64bbc24fb 1-105
+pocs/java-25-spring-boot-4-elastich-search-indexes/README.md
+  fbea3ca64bbc24fb 1-216
+pocs/java-25-spring-boot-4-elastich-search-indexes/build.gradle
+  fbea3ca64bbc24fb 1-45
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/config/WindowStateInitializer.java
+  fbea3ca64bbc24fb 1-44
+pocs/java-25-spring-boot-4-elastich-search-indexes/dashboard/src/index.css
+  fbea3ca64bbc24fb 1-8
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/test/resources/application.properties
+  fbea3ca64bbc24fb 1-3
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/controller/SearchController.java
+  fbea3ca64bbc24fb 1-44
+pocs/java-25-spring-boot-4-elastich-search-indexes/settings.gradle
+  fbea3ca64bbc24fb 1
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/controller/DashboardController.java
+  fbea3ca64bbc24fb 1-26
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/es/RotateService.java
+  fbea3ca64bbc24fb 1-136
+pocs/java-25-spring-boot-4-elastich-search-indexes/run-gradle-tests.sh
+  fbea3ca64bbc24fb 1-2
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/controller/RotateController.java
+  fbea3ca64bbc24fb 1-27
+pocs/java-25-spring-boot-4-elastich-search-indexes/run.sh
+  fbea3ca64bbc24fb 1-6
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/resources/application.properties
+  fbea3ca64bbc24fb 1-3
+pocs/java-25-spring-boot-4-elastich-search-indexes/start.sh
+  fbea3ca64bbc24fb 1-8
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/config/ElasticsearchConfig.java
+  fbea3ca64bbc24fb 1-22
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/es/SearchService.java
+  fbea3ca64bbc24fb 1-101
+pocs/java-25-spring-boot-4-elastich-search-indexes/dashboard/src/main.tsx
+  fbea3ca64bbc24fb 3-4,7-14,17-19
+pocs/java-25-spring-boot-4-elastich-search-indexes/dashboard/src/App.tsx
+  fbea3ca64bbc24fb 1-2,4-66,68-138,140-159,161-169,171-173,175-177,179-256,258-377,379-661
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/config/CorsConfig.java
+  fbea3ca64bbc24fb 1-25
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/test/java/com/github/diegopacheco/es/ElasticsearchIntegrationTest.java
+  fbea3ca64bbc24fb 1-164
+pocs/java-25-spring-boot-4-elastich-search-indexes/design-doc.md
+  fbea3ca64bbc24fb 1-334
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/controller/IndexController.java
+  fbea3ca64bbc24fb 1-62
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/model/Document.java
+  fbea3ca64bbc24fb 1-11
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/es/DashboardService.java
+  fbea3ca64bbc24fb 1-79
+pocs/java-25-spring-boot-4-elastich-search-indexes/test.sh
+  fbea3ca64bbc24fb 1-57
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/Application.java
+  fbea3ca64bbc24fb 1-11
+pocs/java-25-spring-boot-4-elastich-search-indexes/src/main/java/com/github/diegopacheco/es/es/WindowState.java
+  fbea3ca64bbc24fb 1-20
+pocs/java-25-spring-boot-4-elastich-search-indexes/stop.sh
+  fbea3ca64bbc24fb 1-2
+pocs/java-25-spring-boot-4-elastich-search-indexes/feed.sh
+  fbea3ca64bbc24fb 1-29
+pocs/java-25-spring-boot-4-elastich-search-indexes/podman-compose.yaml
+  fbea3ca64bbc24fb 1-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.19",
+  "base_commit_sha": "aa4693f74eae5afa07b7d8b4d0a2792d10629d7e",
+  "prompts": {
+    "fbea3ca64bbc24fb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5f23faf3-e63c-4c62-beef-a74b6e6b030e",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>",
+      "messages": [],
+      "total_additions": 3288,
+      "total_deletions": 1132,
+      "accepted_lines": 2270,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/e70fe6aaaf23eb78455dae8c4bac6a835aa11cdb4d1ea5334c15273e2934360e"
+    }
+  }
+}
