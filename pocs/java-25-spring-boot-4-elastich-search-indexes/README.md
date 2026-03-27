@@ -23,6 +23,28 @@ Full architecture, component details, rotation rules, and dashboard specs: [desi
 | Podman | latest |
 | Testcontainers | 1.20.4 |
 
+## Dashboard
+
+Open http://localhost:5173 after `./run.sh`.
+
+### Dashboard after rotation with search results
+
+![Dashboard with search results](index-mgmt-es-result-1.png)
+
+Full dashboard view after a rotation. Left column shows the Gantt-style sliding window (NOW + 3 projected days with DEL/NEW markers), the current window range, and the indexes table with doc counts, sizes, and health. Right column shows wildcard search results across all window indexes, each result displaying title, content, tags, and the source index badge.
+
+### JSON document modal with syntax coloring
+
+![JSON modal](index-mgmt-es-result-2.png)
+
+Clicking any search result opens a modal with the full Elasticsearch document rendered as syntax-colored JSON. Keys in blue, string values in green, numbers in yellow, timestamps highlighted. The modal can be closed with ESC or clicking outside.
+
+### Clickable index name loading docs into search
+
+![Clickable index search](index-mgmt-es-result-3.png)
+
+Clicking an index name on the left table loads all documents from that specific index into the search area on the right. A blue banner shows which index is being filtered, with a "clear" link to reset. The search results show documents only from the selected index.
+
 ## Architecture
 
 ```
@@ -140,28 +162,6 @@ Calls every API endpoint: create, search, delete, dashboard, retention, rotate.
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/api/rotate/{date}` | POST | Create index, feed data, migrate + delete expired indexes |
-
-## Dashboard
-
-Open http://localhost:5173 after `./run.sh`.
-
-### Dashboard after rotation with search results
-
-![Dashboard with search results](index-mgmt-es-result-1.png)
-
-Full dashboard view after a rotation. Left column shows the Gantt-style sliding window (NOW + 3 projected days with DEL/NEW markers), the current window range, and the indexes table with doc counts, sizes, and health. Right column shows wildcard search results across all window indexes, each result displaying title, content, tags, and the source index badge.
-
-### JSON document modal with syntax coloring
-
-![JSON modal](index-mgmt-es-result-2.png)
-
-Clicking any search result opens a modal with the full Elasticsearch document rendered as syntax-colored JSON. Keys in blue, string values in green, numbers in yellow, timestamps highlighted. The modal can be closed with ESC or clicking outside.
-
-### Clickable index name loading docs into search
-
-![Clickable index search](index-mgmt-es-result-3.png)
-
-Clicking an index name on the left table loads all documents from that specific index into the search area on the right. A blue banner shows which index is being filtered, with a "clear" link to reset. The search results show documents only from the selected index.
 
 ### Two-Column Layout
 
