@@ -1,0 +1,56 @@
+pocs/java-25-hibernate-8-poc/src/main/java/com/github/diegopacheco/sandboxspring/controller/PersonController.java
+  s_d183a3b312fde6::t_c362380ee1537b 1-62
+pocs/java-25-hibernate-8-poc/src/test/java/com/github/diegopacheco/sandboxspring/PersonApiTests.java
+  s_d183a3b312fde6::t_7b53983b284116 4,7-9,18-19,21-27,30-33,39-42,47-50,55-58,63-69,74,79-88
+  s_d183a3b312fde6::t_25cb5c37e7937a 1-3,5-6,10-17,20,28-29,34-38,43-46,51-54,59-62,70-73,75-78,89-90
+pocs/java-25-hibernate-8-poc/src/main/java/com/github/diegopacheco/sandboxspring/DataInitializer.java
+  s_d183a3b312fde6::t_186f864e5233c1 1-31
+pocs/java-25-hibernate-8-poc/compose.yaml
+  s_d183a3b312fde6::t_066fde97c93825 1-13
+pocs/java-25-hibernate-8-poc/pom.xml
+  s_d183a3b312fde6::t_45d7e33cceda3e 19
+  s_d183a3b312fde6::t_a0595c833d260a 36-45
+  s_d183a3b312fde6::t_a0ab102c6ad061 4-6,8-18,24-35,46-70
+  s_d183a3b312fde6::t_98ff28747389fb 7
+pocs/java-25-hibernate-8-poc/README.md
+  s_d183a3b312fde6::t_912f0d70b43e1c 1-40,42-52,86-137,139-149,151-152
+  s_d183a3b312fde6::t_65cf440e1f9e00 150
+  s_d183a3b312fde6::t_e8cbe9f23f397a 138
+  s_d183a3b312fde6::t_fd679b1c4c3b80 41
+  s_d183a3b312fde6::t_32308d034eac2c 53-85
+pocs/java-25-hibernate-8-poc/src/main/java/com/github/diegopacheco/sandboxspring/service/PersonService.java
+  s_d183a3b312fde6::t_7bd51eb366d632 1-19,21-23,25-27,29-31,33-35,37-39,42-43
+  s_d183a3b312fde6::t_2d70ed0fe58e07 20,24,28,32,36,40-41
+pocs/java-25-hibernate-8-poc/start.sh
+  s_d183a3b312fde6::t_ae8e812abd41d9 1-17
+pocs/java-25-hibernate-8-poc/src/main/java/com/github/diegopacheco/sandboxspring/config/HibernateConfig.java
+  s_d183a3b312fde6::t_ce6924caff06fd 27-29,33,38-39
+  s_d183a3b312fde6::t_555484b6fec23a 1-26,30-32,34-37,40-47
+pocs/java-25-hibernate-8-poc/src/main/java/com/github/diegopacheco/sandboxspring/model/Person.java
+  s_d183a3b312fde6::t_1af6cd98bbfcf5 1-50
+pocs/java-25-hibernate-8-poc/stop.sh
+  s_d183a3b312fde6::t_8617fca2e491c2 1-6
+pocs/java-25-hibernate-8-poc/src/main/resources/application.properties
+  s_d183a3b312fde6::t_310d312e7fe295 2,4-7
+  s_d183a3b312fde6::t_6bac9ae87abc52 3
+  s_d183a3b312fde6::t_348a28513c0134 8
+pocs/java-25-hibernate-8-poc/test.sh
+  s_d183a3b312fde6::t_64440de33f2e04 1-16
+  s_d183a3b312fde6::t_a7b807b7a52902 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "df43a6b6960cddaffdde363f3eead6d2b6d855bc",
+  "prompts": {},
+  "sessions": {
+    "s_d183a3b312fde6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d206a5e9-6cb5-4fbd-9d06-ef3c5dd1d624",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
