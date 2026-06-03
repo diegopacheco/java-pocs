@@ -1,0 +1,13 @@
+services:
+  mysql:
+    image: docker.io/library/mysql:9.7.0
+    container_name: hibernate8-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: peopledb
+    ports:
+      - "3306:3306"
+    volumes:
+      - hibernate8-mysql-data:/var/lib/mysql
+volumes:
+  hibernate8-mysql-data:
