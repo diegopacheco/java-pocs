@@ -1,0 +1,130 @@
+pocs/java-25-replay-traffic-poc/traffic-proxy/src/main/java/com/github/diegopacheco/proxy/ControlApi.java
+  s_679d9660612aa2::t_b65586025300ab 1-161
+pocs/java-25-replay-traffic-poc/traffic-proxy/.mvn/wrapper/maven-wrapper.properties
+  s_679d9660612aa2::t_7d66934687754a 1-2
+pocs/java-25-replay-traffic-poc/bookstore-service/mvnw
+  s_679d9660612aa2::t_7d66934687754a 1-310
+pocs/java-25-replay-traffic-poc/ui/src/router.tsx
+  s_679d9660612aa2::t_9fea26fc981c31 1-55
+pocs/java-25-replay-traffic-poc/ui/src/routes/dashboard.tsx
+  s_679d9660612aa2::t_b563c7671b086e 1-90
+pocs/java-25-replay-traffic-poc/ui/.gitignore
+  s_679d9660612aa2::t_2cffcf4336ef68 1-4
+pocs/java-25-replay-traffic-poc/ui/src/lib/api.ts
+  s_679d9660612aa2::t_f0525545558f78 1-73
+pocs/java-25-replay-traffic-poc/bookstore-service/.mvn/wrapper/maven-wrapper.properties
+  s_679d9660612aa2::t_7d66934687754a 1-2
+pocs/java-25-replay-traffic-poc/ui/package.json
+  s_679d9660612aa2::t_c58b4d478df078 1-7,9,11-26
+  s_679d9660612aa2::t_746d4e4aab559f 8,10
+pocs/java-25-replay-traffic-poc/ui/vite.config.ts
+  s_679d9660612aa2::t_b0533dd7a8854e 1-10
+pocs/java-25-replay-traffic-poc/ui/src/env.d.ts
+  s_679d9660612aa2::t_7ece8635b188ee 1-7
+pocs/java-25-replay-traffic-poc/bookstore-service/src/main/java/com/github/diegopacheco/bookstore/service/BookService.java
+  s_679d9660612aa2::t_64de9418ee4655 1-41
+pocs/java-25-replay-traffic-poc/bookstore-service/src/main/java/com/github/diegopacheco/bookstore/model/Book.java
+  s_679d9660612aa2::t_b56bbd2755bfbf 68
+  s_679d9660612aa2::t_e2a1b03f1e581d 3
+  s_679d9660612aa2::t_60adecdcb84875 1-2,4-67,69-77
+pocs/java-25-replay-traffic-poc/ui/src/styles.css
+  s_679d9660612aa2::t_09d947c867a949 1,13-27,29-69,71-93,95-111,114-120,122-180,182-185,187-200,202-209,211-234,236-239,241-295,297-356,358-360,362-364,366-369,371-373,375-377,379-381,383-401,403-413,416-429,431-444,446-503,505-518,520-524,526-530,532-536,538-550
+  s_679d9660612aa2::t_4e3d2d530893ec 2-12,28,70,94,112-113,121,181,186,201,210,235,240,296,357,361,365,370,374,378,382,402,414-415,430,445,504,519,525,531,537
+pocs/java-25-replay-traffic-poc/bookstore-service/src/main/java/com/github/diegopacheco/bookstore/dao/BookRepository.java
+  s_679d9660612aa2::t_1fb5c65fc79f09 1-9
+pocs/java-25-replay-traffic-poc/traffic-proxy/mvnw
+  s_679d9660612aa2::t_7d66934687754a 1-310
+pocs/java-25-replay-traffic-poc/ui/index.html
+  s_679d9660612aa2::t_4163d84826724c 1-12
+pocs/java-25-replay-traffic-poc/traffic-proxy/src/main/java/com/github/diegopacheco/proxy/TrafficLog.java
+  s_679d9660612aa2::t_00dcb3096c301e 1-65
+pocs/java-25-replay-traffic-poc/traffic-proxy/mvnw.cmd
+  s_679d9660612aa2::t_7d66934687754a 1-182
+pocs/java-25-replay-traffic-poc/ui/tsconfig.json
+  s_679d9660612aa2::t_90f184d543af29 17
+  s_679d9660612aa2::t_2a9b1ee7491b16 19
+  s_679d9660612aa2::t_ba3f1ec3e8a158 1-16,18,20
+pocs/java-25-replay-traffic-poc/.gitignore
+  s_679d9660612aa2::t_d6884772e2eef8 1-7
+pocs/java-25-replay-traffic-poc/bookstore-service/src/main/resources/schema.sql
+  s_679d9660612aa2::t_bb27f5234cb9e9 1-7
+pocs/java-25-replay-traffic-poc/ui/src/routes/logs.tsx
+  s_679d9660612aa2::t_ad94a598a57931 1
+  s_679d9660612aa2::t_553bc4979cd3fa 2-30,32-80
+  s_679d9660612aa2::t_7294bea03fec0e 31
+pocs/java-25-replay-traffic-poc/ui/src/routes/replay.tsx
+  s_679d9660612aa2::t_90b361b883e0fb 1-53
+pocs/java-25-replay-traffic-poc/traffic-proxy/src/main/java/com/github/diegopacheco/proxy/ProxyHandler.java
+  s_679d9660612aa2::t_ea09ff51458fce 1-110
+pocs/java-25-replay-traffic-poc/traffic-proxy/src/test/java/com/github/diegopacheco/proxy/LogFormatTest.java
+  s_679d9660612aa2::t_3bd4f93b613b29 1-43
+pocs/java-25-replay-traffic-poc/stop.sh
+  s_679d9660612aa2::t_a0593be643525c 1-11
+pocs/java-25-replay-traffic-poc/ui/src/components.tsx
+  s_679d9660612aa2::t_87c2f94fffeac1 1-38
+pocs/java-25-replay-traffic-poc/bookstore-service/src/main/resources/application.properties
+  s_679d9660612aa2::t_f2d91ee59a4921 1-3,5-19
+  s_679d9660612aa2::t_884f7560234e5e 4
+pocs/java-25-replay-traffic-poc/start.sh
+  s_679d9660612aa2::t_d335fbdb71b24a 1-49
+pocs/java-25-replay-traffic-poc/README.md
+  h_8e2c3875396153 8
+  s_679d9660612aa2::t_6c1c57a5656382 1-7,9-86
+pocs/java-25-replay-traffic-poc/traffic-proxy/src/main/java/com/github/diegopacheco/proxy/TrafficGenerator.java
+  s_679d9660612aa2::t_cb64ec492d2fac 1-84
+pocs/java-25-replay-traffic-poc/bookstore-service/pom.xml
+  s_679d9660612aa2::t_56e2848fe45591 1-55
+pocs/java-25-replay-traffic-poc/bookstore-service/src/main/resources/data.sql
+  s_679d9660612aa2::t_5b14a1bdf0ab9c 1-5
+pocs/java-25-replay-traffic-poc/bookstore-service/src/test/java/com/github/diegopacheco/bookstore/BookServiceTest.java
+  s_679d9660612aa2::t_7a8f4a2d73ff1f 1-57
+pocs/java-25-replay-traffic-poc/traffic-proxy/src/main/java/com/github/diegopacheco/proxy/LogEntry.java
+  s_679d9660612aa2::t_67f54ea0513bba 1-42
+pocs/java-25-replay-traffic-poc/bookstore-service/src/main/java/com/github/diegopacheco/bookstore/controller/BookController.java
+  s_679d9660612aa2::t_e0d4559738360b 1-57
+pocs/java-25-replay-traffic-poc/bookstore-service/.mvn/wrapper/MavenWrapperDownloader.java
+  s_679d9660612aa2::t_7d66934687754a 1-117
+pocs/java-25-replay-traffic-poc/traffic-proxy/pom.xml
+  s_679d9660612aa2::t_a199b8e6680bee 1-41
+pocs/java-25-replay-traffic-poc/bookstore-service/mvnw.cmd
+  s_679d9660612aa2::t_7d66934687754a 1-182
+pocs/java-25-replay-traffic-poc/bookstore-service/src/main/java/com/github/diegopacheco/bookstore/Application.java
+  s_679d9660612aa2::t_c24c5f863e01f9 1-13
+pocs/java-25-replay-traffic-poc/test.sh
+  s_679d9660612aa2::t_898e086364f239 1-24
+pocs/java-25-replay-traffic-poc/ui/src/main.tsx
+  s_679d9660612aa2::t_5588980b550713 1-18
+pocs/java-25-replay-traffic-poc/infra/compose.yaml
+  s_679d9660612aa2::t_7cea6e1ff466df 1-14
+pocs/java-25-replay-traffic-poc/traffic-proxy/src/main/java/com/github/diegopacheco/proxy/Json.java
+  s_679d9660612aa2::t_cd13d175fb418e 1-226
+pocs/java-25-replay-traffic-poc/traffic-proxy/src/main/java/com/github/diegopacheco/proxy/ProxyApplication.java
+  s_679d9660612aa2::t_40c89bee72cbfc 1-61
+pocs/java-25-replay-traffic-poc/traffic-proxy/.mvn/wrapper/MavenWrapperDownloader.java
+  s_679d9660612aa2::t_7d66934687754a 1-117
+pocs/java-25-replay-traffic-poc/traffic-proxy/src/main/java/com/github/diegopacheco/proxy/Stats.java
+  s_679d9660612aa2::t_258607abd0d229 1-51
+pocs/java-25-replay-traffic-poc/traffic-proxy/src/main/java/com/github/diegopacheco/proxy/Replayer.java
+  s_679d9660612aa2::t_b6dd39a163a7f9 1-67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "7577539ae39a486893e092e20b15fa635788b241",
+  "prompts": {},
+  "humans": {
+    "h_8e2c3875396153": {
+      "author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_679d9660612aa2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "78cdfe91-ee02-4fe7-b9f7-53b01f2206b5",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
