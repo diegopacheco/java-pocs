@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 700" font-family="'Caveat','Comic Sans MS',cursive">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&amp;display=swap');</style>
+    <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5b5b66"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="980" height="700" fill="#fdfdf7"/>
+  <text x="490" y="52" font-size="42" font-weight="700" text-anchor="middle" fill="#2e2e38">ArchUnit guards the layers</text>
+  <text x="490" y="84" font-size="22" text-anchor="middle" fill="#8a8a94">Java 25 · Spring Boot 4.0.6 · Spring Data JPA · HikariCP · MySQL (podman)</text>
+
+  <g filter="url(#wobble)">
+    <rect x="360" y="120" width="260" height="78" rx="14" fill="#cfe8ff" stroke="#3a3a44" stroke-width="2.5"/>
+    <rect x="360" y="248" width="260" height="78" rx="14" fill="#d8f5d0" stroke="#3a3a44" stroke-width="2.5"/>
+    <rect x="360" y="376" width="260" height="78" rx="14" fill="#ffe6b3" stroke="#3a3a44" stroke-width="2.5"/>
+    <rect x="360" y="504" width="260" height="78" rx="14" fill="#f3d4f0" stroke="#3a3a44" stroke-width="2.5"/>
+
+    <rect x="700" y="248" width="220" height="78" rx="14" fill="#ffd9d2" stroke="#3a3a44" stroke-width="2.5"/>
+    <rect x="700" y="504" width="220" height="78" rx="14" fill="#e7e2ff" stroke="#3a3a44" stroke-width="2.5"/>
+  </g>
+
+  <g font-size="27" font-weight="700" fill="#2e2e38" text-anchor="middle">
+    <text x="490" y="155">PersonController</text>
+    <text x="490" y="283">PersonService</text>
+    <text x="490" y="411">PersonRepository</text>
+    <text x="490" y="539">MySQL 9.4</text>
+    <text x="810" y="283">Person (model)</text>
+    <text x="810" y="539">PersistenceConfig</text>
+  </g>
+  <g font-size="18" fill="#5b5b66" text-anchor="middle">
+    <text x="490" y="180">controller package · @RestController</text>
+    <text x="490" y="308">service package · @Service</text>
+    <text x="490" y="436">dao package · @Repository (interface)</text>
+    <text x="490" y="564">HikariCP pool · podman-compose</text>
+    <text x="810" y="308">depends on no layer</text>
+    <text x="810" y="564">config package · @Configuration</text>
+  </g>
+
+  <g stroke="#5b5b66" stroke-width="2.5" fill="none" marker-end="url(#arrow)" filter="url(#wobble)">
+    <path d="M490 198 L490 246"/>
+    <path d="M490 326 L490 374"/>
+    <path d="M490 454 L490 502"/>
+    <path d="M700 543 C640 543 600 470 545 456"/>
+  </g>
+  <g font-size="17" fill="#2e2e38" text-anchor="middle">
+    <text x="565" y="228">calls</text>
+    <text x="565" y="356">calls</text>
+    <text x="565" y="484">JPA / SQL</text>
+    <text x="640" y="500">builds DataSource</text>
+  </g>
+
+  <g stroke="#9aa0aa" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#arrow)">
+    <path d="M620 159 C690 175 730 215 760 246"/>
+    <path d="M620 287 L698 287"/>
+    <path d="M620 415 C680 400 720 350 745 326"/>
+  </g>
+  <text x="700" y="200" font-size="15" fill="#9aa0aa" text-anchor="middle">use model</text>
+
+  <g filter="url(#wobble)">
+    <rect x="40" y="120" width="280" height="462" rx="18" fill="none" stroke="#e0533d" stroke-width="3" stroke-dasharray="3 7"/>
+  </g>
+  <text x="180" y="150" font-size="24" font-weight="700" fill="#e0533d" text-anchor="middle">ArchUnit rules</text>
+  <g font-size="18" fill="#2e2e38">
+    <text x="62" y="190">✓ stereotype → right package</text>
+    <text x="62" y="222">✓ package → right stereotype</text>
+    <text x="62" y="254">✓ *Service / *Controller naming</text>
+    <text x="62" y="286">✓ *Repository / *Config naming</text>
+    <text x="62" y="318">✓ Ctrl → Svc → DAO only</text>
+    <text x="62" y="350">✓ model depends on nothing</text>
+    <text x="62" y="382">✓ no package cycles</text>
+    <text x="62" y="414">✓ repositories are interfaces</text>
+    <text x="62" y="446">✓ no @Autowired fields</text>
+    <text x="62" y="478">✓ no System.out / err</text>
+    <text x="62" y="510">✓ no generic exceptions</text>
+    <text x="62" y="542">✓ no java.util.logging / Joda</text>
+  </g>
+
+  <g stroke="#e0533d" stroke-width="2" stroke-dasharray="4 5" fill="none" opacity="0.6">
+    <path d="M320 222 L358 222"/>
+    <path d="M320 318 L420 318"/>
+    <path d="M320 414 L358 414"/>
+  </g>
+</svg>

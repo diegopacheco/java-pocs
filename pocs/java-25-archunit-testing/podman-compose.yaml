@@ -1,0 +1,10 @@
+services:
+  mysql:
+    image: mysql:9.4.0
+    container_name: archunit-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_DATABASE=archunit
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=caching_sha2_password
