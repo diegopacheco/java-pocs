@@ -78,12 +78,15 @@ function shellQuote(value: string): string {
 }
 
 export function toCurl(entry: Entry): string {
-  const parts = [`curl -X ${entry.method}`, shellQuote(`${PROXY}${entry.path}`)]
+  const isDelete = entry.method === 'DELETE'
+  const flags = isDelete ? '-iX' : '-sX'
+  const parts = [`curl ${flags} ${entry.method}`, shellQuote(`${PROXY}${entry.path}`)]
   if (entry.reqBody && entry.reqBody.trim() !== '') {
     parts.push(`-H ${shellQuote('Content-Type: application/json')}`)
     parts.push(`-d ${shellQuote(entry.reqBody)}`)
   }
-  return parts.join(' ')
+  const cmd = parts.join(' ')
+  return isDelete ? cmd : `${cmd} | jq .`
 }
 
 export const getStats = () => jsonGet<Stats>('/api/stats')
