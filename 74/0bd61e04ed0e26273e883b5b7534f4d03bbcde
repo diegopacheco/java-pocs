@@ -1,0 +1,28 @@
+pocs/java-25-replay-traffic-poc/ui/src/lib/api.ts
+  s_679d9660612aa2::t_0d594f59001245 39-44,52
+pocs/java-25-replay-traffic-poc/ui/src/styles.css
+  s_679d9660612aa2::t_d17a3c70a5ca16 543-566
+pocs/java-25-replay-traffic-poc/traffic-proxy/src/main/java/com/github/diegopacheco/proxy/Replayer.java
+  s_679d9660612aa2::t_63b9d135505bb8 8,15-16,30,46-47,53-55,59-62,72,76-89
+pocs/java-25-replay-traffic-poc/README.md
+  s_679d9660612aa2::t_a66be98626f072 20-27,30-61,104
+pocs/java-25-replay-traffic-poc/ui/src/routes/replay.tsx
+  s_679d9660612aa2::t_90a96a2c716232 49-65
+  s_679d9660612aa2::t_791bfd307bf768 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "740bd61e04ed0e26273e883b5b7534f4d03bbcde",
+  "prompts": {},
+  "sessions": {
+    "s_679d9660612aa2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "78cdfe91-ee02-4fe7-b9f7-53b01f2206b5",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
