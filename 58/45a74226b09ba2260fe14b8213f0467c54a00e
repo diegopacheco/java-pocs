@@ -1,0 +1,29 @@
+pocs/java-25-replay-traffic-poc/ui/src/styles.css
+  s_dd463f48b8161d::t_378cff70bb3bb9 464-486
+pocs/java-25-replay-traffic-poc/ui/src/lib/api.ts
+  s_dd463f48b8161d::t_184a87c356a151 2
+  s_dd463f48b8161d::t_f357027d55c606 76-88
+pocs/java-25-replay-traffic-poc/ui/src/components.tsx
+  s_dd463f48b8161d::t_e5ade23f82bbfe 1-25
+pocs/java-25-replay-traffic-poc/ui/src/routes/logs.tsx
+  s_dd463f48b8161d::t_6219701b8b4d51 22
+  s_dd463f48b8161d::t_713ff97ab5ebfc 9-10
+pocs/java-25-replay-traffic-poc/ui/src/env.d.ts
+  s_dd463f48b8161d::t_bff37f88e77684 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "5845a74226b09ba2260fe14b8213f0467c54a00e",
+  "prompts": {},
+  "sessions": {
+    "s_dd463f48b8161d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "045731ff-10f3-41b6-bf41-4effa9915732",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
