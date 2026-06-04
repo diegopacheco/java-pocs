@@ -1,0 +1,20 @@
+pocs/java-25-replay-traffic-poc/ui/src/lib/api.ts
+  s_98ece3c65ddaac::t_a2286cc3bb61c7 88
+  s_98ece3c65ddaac::t_28e7ed56172354 81-83,89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "b48fc812c69fb5c3908430cd6223ac45fb9bf56d",
+  "prompts": {},
+  "sessions": {
+    "s_98ece3c65ddaac": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5c3fa6c5-3292-443c-b5ec-e0f8b4e47244",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
