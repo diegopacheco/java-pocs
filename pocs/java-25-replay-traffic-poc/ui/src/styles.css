@@ -540,6 +540,30 @@ tbody tr:nth-child(odd) {
   color: var(--amber);
 }
 
+.failures {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.failures li {
+  display: grid;
+  grid-template-columns: 64px 200px 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--panel-2);
+}
+
+.failures .cell-body {
+  max-width: none;
+}
+
 @media (max-width: 880px) {
   .grid {
     grid-template-columns: 1fr;

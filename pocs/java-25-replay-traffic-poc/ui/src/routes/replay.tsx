@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { getStats, replay } from '../lib/api'
-import { Bars } from '../components'
+import { Bars, StatusBadge } from '../components'
 
 function Counter({ label, value, accent }: { label: string; value: number; accent?: string }) {
   return (
@@ -46,6 +46,23 @@ export default function Replay() {
             <h4>replayed responses by status</h4>
             <Bars data={r.byStatus} kind="status" />
           </section>
+          {r.failures.length > 0 && (
+            <section className="card">
+              <h4>failures ({r.failed})</h4>
+              <ul className="failures">
+                {r.failures.map((f, i) => (
+                  <li key={i}>
+                    <StatusBadge status={f.status} />
+                    <code className="cell-path">GET {f.path}</code>
+                    <span className="cell-body">{f.detail}</span>
+                  </li>
+                ))}
+              </ul>
+              {r.failed > r.failures.length && (
+                <p className="muted">…and {r.failed - r.failures.length} more</p>
+              )}
+            </section>
+          )}
         </>
       )}
     </div>

@@ -36,6 +36,12 @@ export interface GenResult {
   byStatus: Record<string, number>
 }
 
+export interface Failure {
+  path: string
+  status: number | string
+  detail: string
+}
+
 export interface ReplayResult {
   totalInLog: number
   skippedWrites: number
@@ -43,6 +49,7 @@ export interface ReplayResult {
   succeeded: number
   failed: number
   byStatus: Record<string, number>
+  failures: Failure[]
 }
 
 async function jsonGet<T>(path: string): Promise<T> {

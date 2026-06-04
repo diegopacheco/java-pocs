@@ -17,16 +17,48 @@ UI drives and visualizes it.
   updates when it already exists.
 - **ui** — Bun + Vite + React 19, wired with TanStack Router, Query and Table.
 
+## How it flows
+
+![How traffic flows](docs/architecture.png)
+
+The proxy sits in the request path and records both directions; the backend
+never knows it is there. Replay reads the same file back and only re-issues the
+safe verb (`GET`), so it can never mutate data.
+
 ## The three tabs
 
-- **Dashboard** — live counters for traffic seen at the proxy and at the
-  backend, broken down by method and status. A button generates real traffic;
-  pick `GET`, `PUT` or `DELETE` and a count.
-- **Traffic Log** — the contents of `traffic.log` in a table, filterable by
-  `GET` / `PUT` / `DELETE`.
-- **Replay** — replays the captured log against the backend. Only `GET` is
-  replayed; `PUT` and `DELETE` are skipped so replaying never changes data.
-  Shows counters and a status breakdown of the replayed responses.
+### Dashboard
+
+![Dashboard](docs/dashboard.png)
+
+- Pick a method (`GET` / `PUT` / `DELETE`) and a count, then **Generate traffic**
+  fires that many real requests through the proxy into the book store.
+- The **Proxy** and **Backend** panels are live counters (refreshed about every
+  1.5s), broken down by method and by status code.
+- The two totals track each other because every proxied call reaches the
+  backend; the split is what lets you spot forwarding failures.
+- The footer shows how many lines are in `traffic.log` and where it lives.
+
+### Traffic Log
+
+![Traffic Log](docs/traffic-log.png)
+
+- The actual contents of `traffic.log`, newest first.
+- Filter by `ALL` / `GET` / `PUT` / `DELETE`.
+- Each row carries time, method, path, status, latency in ms, and a preview of
+  the response body — the same data the replay reads back.
+
+### Replay
+
+![Replay](docs/replay.png)
+
+- **Replay GET traffic** reads `traffic.log` and re-issues each request to the
+  backend. `PUT` and `DELETE` are skipped, so a replay never mutates data.
+- Counters show how much was in the log, how many GETs were replayed, and how
+  many succeeded, failed, or were skipped as writes.
+- Anything that did not return 2xx is listed at the bottom with its path,
+  status, and response detail — a replayed `GET /books/41` returning `404`
+  means that id was deleted (or never created) since it was captured.
 
 ## Requirements
 
@@ -53,19 +85,6 @@ Then open http://localhost:5173.
 | Book store      | 8080 |
 | MySQL           | 3309 |
 
-## How it flows
-
-```
-UI ──generate──▶ control API ──▶ proxy :8000 ──▶ book store :8080 ──▶ MySQL
-                                   │
-                                   └─ appends every call to traffic.log
-UI ──replay──▶ control API ──reads traffic.log, GET only──▶ book store :8080
-```
-
-The proxy is in the request path and records both directions; the backend never
-knows it is there. Replay reads the same file back and only re-issues the safe
-verb.
-
 ## Config
 
 Everything is read from the environment with working defaults — nothing is
@@ -82,5 +101,6 @@ bookstore-service/   Spring Boot 4 + Spring Data JDBC + MySQL
 traffic-proxy/       JDK-only recording proxy + control API
 ui/                  React 19 + TanStack dashboard
 infra/compose.yaml   MySQL 9
+docs/                diagram and screenshots used in this README
 start.sh stop.sh test.sh
 ```
