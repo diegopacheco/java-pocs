@@ -1,0 +1,72 @@
+pocs/java-25-archunit-testing/gradle/wrapper/gradle-wrapper.properties
+  s_35c04faab59e5e::t_c1c1b7c9440f27 1-7
+pocs/java-25-archunit-testing/.gitignore
+  s_35c04faab59e5e::t_3283761872ab12 1-2
+pocs/java-25-archunit-testing/gradlew
+  s_35c04faab59e5e::t_c1c1b7c9440f27 1-251
+pocs/java-25-archunit-testing/src/main/java/com/github/diegopacheco/archunit/model/Person.java
+  s_35c04faab59e5e::t_84130507d2aa44 1-71
+pocs/java-25-archunit-testing/src/main/java/com/github/diegopacheco/archunit/dao/PersonRepository.java
+  s_35c04faab59e5e::t_63a88e4bea23e9 1-12
+pocs/java-25-archunit-testing/src/test/java/com/github/diegopacheco/archunit/arch/DependencyRulesTest.java
+  s_35c04faab59e5e::t_50c299193a9afc 1-14,16-21,23-27,29-33,35-38
+  s_35c04faab59e5e::t_423fb7236d8ce7 15,22,28,34
+pocs/java-25-archunit-testing/stop.sh
+  s_35c04faab59e5e::t_b2a014cae4c8ac 1-2
+pocs/java-25-archunit-testing/src/test/java/com/github/diegopacheco/archunit/arch/PackageConventionTest.java
+  s_35c04faab59e5e::t_ad7f2ebeedd723 1-18,20-24,26-30,32-36,38-42,44-48,50-53
+  s_35c04faab59e5e::t_113bdee6bd334a 19,25,31,37,43,49
+pocs/java-25-archunit-testing/README.md
+  s_35c04faab59e5e::t_9cdae9a7a00f5d 1-152
+pocs/java-25-archunit-testing/settings.gradle
+  s_35c04faab59e5e::t_0e9a348ae5570f 1
+pocs/java-25-archunit-testing/src/main/java/com/github/diegopacheco/archunit/controller/PersonController.java
+  s_35c04faab59e5e::t_d23d1c50a83b7f 1-37
+pocs/java-25-archunit-testing/src/test/java/com/github/diegopacheco/archunit/arch/LayeredArchitectureTest.java
+  s_35c04faab59e5e::t_04192e28ff9b6d 14
+  s_35c04faab59e5e::t_db7425dc4c50b0 1-13,15-23
+pocs/java-25-archunit-testing/src/test/java/com/github/diegopacheco/archunit/arch/NamingConventionTest.java
+  s_35c04faab59e5e::t_30adacf9a721ea 1-18,20-24,26-30,32-36,38-42
+  s_35c04faab59e5e::t_9347fb94aa2406 19,25,31,37
+pocs/java-25-archunit-testing/start.sh
+  s_35c04faab59e5e::t_2bd525db6336eb 1-7
+pocs/java-25-archunit-testing/run.sh
+  s_35c04faab59e5e::t_f96ac372a195ec 1-4
+pocs/java-25-archunit-testing/src/main/java/com/github/diegopacheco/archunit/Application.java
+  s_35c04faab59e5e::t_355efab6676cd4 1-12
+pocs/java-25-archunit-testing/src/main/java/com/github/diegopacheco/archunit/service/PersonService.java
+  s_35c04faab59e5e::t_dc931252046c16 1-28
+pocs/java-25-archunit-testing/src/test/java/com/github/diegopacheco/archunit/arch/CodingRulesTest.java
+  s_35c04faab59e5e::t_ca1b7a21c5a990 21,26,32,38,42,46,50
+  s_35c04faab59e5e::t_5283c6f4f6963d 1-20,22-25,27-31,33-37,39-41,43-45,47-49,51-52
+pocs/java-25-archunit-testing/src/main/java/com/github/diegopacheco/archunit/config/PersistenceConfig.java
+  s_35c04faab59e5e::t_bc3829526ebf00 1-38
+pocs/java-25-archunit-testing/src/main/resources/application.properties
+  s_35c04faab59e5e::t_38fd959a00fce2 1-8
+pocs/java-25-archunit-testing/podman-compose.yaml
+  s_35c04faab59e5e::t_76ebb18b2df478 1-10
+pocs/java-25-archunit-testing/test.sh
+  s_35c04faab59e5e::t_cdbd64c894aa33 1-11
+pocs/java-25-archunit-testing/gradlew.bat
+  s_35c04faab59e5e::t_c1c1b7c9440f27 1-94
+pocs/java-25-archunit-testing/build.gradle
+  s_35c04faab59e5e::t_61ee054e8566b8 1-39
+pocs/java-25-archunit-testing/printscreens/architecture.svg
+  s_35c04faab59e5e::t_89102b72b39f07 1-88
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "e892c8851db02229d3e984346795fcae3a9fd233",
+  "prompts": {},
+  "sessions": {
+    "s_35c04faab59e5e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c76f6ef8-1803-489b-a260-d8e057f7ec86",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
