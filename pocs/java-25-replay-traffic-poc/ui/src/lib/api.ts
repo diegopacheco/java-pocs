@@ -1,4 +1,5 @@
 const BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:8001'
+const PROXY = import.meta.env.VITE_PROXY_URL ?? 'http://localhost:8000'
 
 export interface Side {
   total: number
@@ -70,6 +71,19 @@ async function jsonPost<T>(path: string, body?: unknown): Promise<T> {
     throw new Error(`POST ${path} -> ${res.status}`)
   }
   return res.json() as Promise<T>
+}
+
+function shellQuote(value: string): string {
+  return `'${value.replace(/'/g, `'\\''`)}'`
+}
+
+export function toCurl(entry: Entry): string {
+  const parts = [`curl -X ${entry.method}`, shellQuote(`${PROXY}${entry.path}`)]
+  if (entry.reqBody && entry.reqBody.trim() !== '') {
+    parts.push(`-H ${shellQuote('Content-Type: application/json')}`)
+    parts.push(`-d ${shellQuote(entry.reqBody)}`)
+  }
+  return parts.join(' ')
 }
 
 export const getStats = () => jsonGet<Stats>('/api/stats')

@@ -1,3 +1,28 @@
+import { useState } from 'react'
+
+export function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false)
+  const onCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text)
+    } catch {
+      const ta = document.createElement('textarea')
+      ta.value = text
+      document.body.appendChild(ta)
+      ta.select()
+      document.execCommand('copy')
+      document.body.removeChild(ta)
+    }
+    setCopied(true)
+    setTimeout(() => setCopied(false), 1200)
+  }
+  return (
+    <button className={`copy-btn ${copied ? 'copied' : ''}`} onClick={onCopy} title="copy curl command">
+      {copied ? 'copied' : 'copy'}
+    </button>
+  )
+}
+
 export function MethodBadge({ method }: { method: string }) {
   return <span className={`badge method ${method.toLowerCase()}`}>{method}</span>
 }

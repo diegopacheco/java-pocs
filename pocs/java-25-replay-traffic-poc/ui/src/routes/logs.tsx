@@ -6,8 +6,8 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { getLog, type Entry } from '../lib/api'
-import { MethodBadge, StatusBadge } from '../components'
+import { getLog, toCurl, type Entry } from '../lib/api'
+import { CopyButton, MethodBadge, StatusBadge } from '../components'
 
 const FILTERS = ['ALL', 'GET', 'PUT', 'DELETE']
 const col = createColumnHelper<Entry>()
@@ -19,6 +19,7 @@ const columns = [
   col.accessor('status', { header: 'status', cell: (c) => <StatusBadge status={c.getValue()} /> }),
   col.accessor('durationMs', { header: 'ms', cell: (c) => <span className="muted">{c.getValue()}</span> }),
   col.accessor('respBody', { header: 'response', cell: (c) => <span className="cell-body">{c.getValue()}</span> }),
+  col.display({ id: 'curl', header: 'curl', cell: (c) => <CopyButton text={toCurl(c.row.original)} /> }),
 ]
 
 export default function Logs() {

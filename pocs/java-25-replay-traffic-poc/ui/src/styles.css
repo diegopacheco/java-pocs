@@ -461,6 +461,29 @@ tbody tr:nth-child(odd) {
   font-size: 12px;
 }
 
+.copy-btn {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  transition: all 0.15s ease;
+}
+
+.copy-btn:hover {
+  color: var(--text);
+  border-color: var(--blue);
+}
+
+.copy-btn.copied {
+  background: rgba(26, 127, 55, 0.12);
+  border-color: rgba(26, 127, 55, 0.45);
+  color: var(--green);
+}
+
 .empty {
   text-align: center;
   color: var(--muted);
