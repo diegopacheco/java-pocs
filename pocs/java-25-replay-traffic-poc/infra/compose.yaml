@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: docker.io/library/mysql:9.2
+    container_name: bookstore-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: bookstore
+    ports:
+      - "3309:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-ppass"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
