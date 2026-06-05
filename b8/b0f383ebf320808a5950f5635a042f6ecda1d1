@@ -1,0 +1,26 @@
+pocs/java-25-slack-clone/design-doc.md
+  s_0db4dae9b03a7d::t_7e022bf45d9387 252-254
+  s_0db4dae9b03a7d::t_eef9f0b1a10879 317-321
+  s_0db4dae9b03a7d::t_1799070c770737 404,406-408
+  s_0db4dae9b03a7d::t_9393f788f1471d 327
+  s_0db4dae9b03a7d::t_d57f1926d9c9b2 231,239-243
+  s_0db4dae9b03a7d::t_02b14cba40b82c 266-281
+  s_0db4dae9b03a7d::t_8e65df3d63eff2 202-223
+  s_0db4dae9b03a7d::t_a5ff167898109e 304
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "b8b0f383ebf320808a5950f5635a042f6ecda1d1",
+  "prompts": {},
+  "sessions": {
+    "s_0db4dae9b03a7d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "27b04c90-d6d2-4d7e-a405-40e5930544da",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
