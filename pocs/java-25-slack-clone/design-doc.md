@@ -58,12 +58,12 @@ realtime layer is a raw WebSocket handler with a hand-rolled subscription regist
 flowchart LR
   subgraph Browser
     UI[React 19 SPA<br/>Vite build]
-    WS1[STOMP client]
+    WS1[Native WebSocket client]
   end
 
   subgraph Backend[Spring Boot 4.0.6 - Java 25]
     REST[REST Controllers]
-    WSB[WebSocket / STOMP broker]
+    WSB[WebSocket handler<br/>+ subscription registry]
     SVC[Domain Services]
     JDBC[Spring Data JDBC repos]
     FILES[Media storage service]
@@ -73,7 +73,7 @@ flowchart LR
   VOL[/media volume/]
 
   UI -- HTTP/JSON --> REST
-  WS1 -- ws:// STOMP --> WSB
+  WS1 -- ws:// JSON frames --> WSB
   REST --> SVC
   WSB --> SVC
   SVC --> JDBC --> DB
@@ -104,6 +104,7 @@ erDiagram
   USERS {
     bigint id PK
     text username UK
+    text password_hash
     text display_name
     text avatar_url
     timestamptz created_at
@@ -172,7 +173,7 @@ com.slackclone
   message/       MessageController, MessageService, MessageRepository, Message, Attachment
   notification/  NotificationController, NotificationService, NotificationRepository, Notification
   media/         MediaController, MediaStorageService
-  realtime/      RealtimeBroadcaster (wraps SimpMessagingTemplate), destinations
+  realtime/      ChatWebSocketHandler, RealtimeRegistry, HandshakeAuthInterceptor, frame DTOs
 ```
 
 ### REST API
