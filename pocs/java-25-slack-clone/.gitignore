@@ -1,0 +1,5 @@
+backend/build/
+backend/.gradle/
+frontend/node_modules/
+frontend/dist/
+media/

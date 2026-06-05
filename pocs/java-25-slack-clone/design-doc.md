@@ -35,6 +35,7 @@ locally through Podman with `start.sh` / `stop.sh`.
 | Language (backend) | Java | 25 |
 | Framework | Spring Boot | 4.0.6 |
 | Persistence | Spring Data JDBC | (Spring Boot managed) |
+| Connection pool | HikariCP (explicitly tuned) | (Spring Boot managed) |
 | Realtime | Spring WebSocket (raw, `TextWebSocketHandler`) | (Spring Boot managed) |
 | Database | PostgreSQL | 17 |
 | Build | Gradle (Kotlin DSL) | wrapper |
@@ -285,6 +286,11 @@ only.
 Schema created from `src/main/resources/schema.sql` on startup (Spring Boot runs it
 against Postgres). No Flyway/Liquibase to stay within the library budget; if the
 schema later needs versioned migrations, Flyway is the drop-in upgrade.
+
+Connection pooling is **HikariCP** (Spring Boot's default with `spring-boot-starter-data-jdbc`,
+no extra dependency). It is tuned explicitly in `application.yml`: `maximum-pool-size`,
+`minimum-idle`, `connection-timeout`, `max-lifetime`, and a `pool-name`, so the pool
+behaviour is declared rather than left implicit.
 
 ## 8. Frontend Design
 

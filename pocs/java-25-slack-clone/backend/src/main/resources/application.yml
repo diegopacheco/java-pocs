@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: slack-clone
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/slackclone}
+    username: ${SPRING_DATASOURCE_USERNAME:slack}
+    password: ${SPRING_DATASOURCE_PASSWORD:slack}
+    hikari:
+      pool-name: slack-clone-pool
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 10000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  sql:
+    init:
+      mode: always
+  jackson:
+    default-property-inclusion: non_null
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 12MB
+
+server:
+  port: 8080
+
+app:
+  media-dir: ${APP_MEDIA_DIR:./media}
+  cors-origins: ${APP_CORS_ORIGINS:http://localhost:5173,http://localhost:3000}
+  max-upload-bytes: 10485760
