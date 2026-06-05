@@ -1,0 +1,236 @@
+pocs/java-25-slack-clone/frontend/src/features/messages/ChannelView.tsx
+  s_0db4dae9b03a7d::t_402c87c8495ee0 1-48
+pocs/java-25-slack-clone/backend/settings.gradle.kts
+  s_0db4dae9b03a7d::t_a462293759b05c 1
+pocs/java-25-slack-clone/.gitignore
+  s_0db4dae9b03a7d::t_a40897b56fcf68 1-5
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/message/MessageRepository.java
+  s_0db4dae9b03a7d::t_d172f8ce06f7bf 1-11
+pocs/java-25-slack-clone/frontend/src/features/channels/WelcomeView.tsx
+  s_0db4dae9b03a7d::t_d7fd891f4085e2 1-15
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/channel/ChannelController.java
+  s_0db4dae9b03a7d::t_544c60a604a078 1-53
+pocs/java-25-slack-clone/frontend/src/components/Button.tsx
+  s_0db4dae9b03a7d::t_569274aef2378d 1-11
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/message/MessageDto.java
+  s_0db4dae9b03a7d::t_cdfae008a2f450 1-15
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/message/Message.java
+  s_0db4dae9b03a7d::t_d051f1e2d62d72 1-18
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/channel/ChannelMemberRepository.java
+  s_0db4dae9b03a7d::t_eb53124fda5822 1-15
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/config/AppCorsFilter.java
+  s_0db4dae9b03a7d::t_66ae5f29e841a1 1-31
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/message/MessageService.java
+  s_0db4dae9b03a7d::t_84ebab64929c31 1-153
+pocs/java-25-slack-clone/frontend/src/components/Dialog.tsx
+  s_0db4dae9b03a7d::t_d95be52de82a81 1-23
+pocs/java-25-slack-clone/frontend/src/features/messages/useRealtime.ts
+  s_0db4dae9b03a7d::t_79aed046003fb2 1-30
+pocs/java-25-slack-clone/frontend/src/features/notifications/useNotifications.ts
+  s_0db4dae9b03a7d::t_9b20d7e22b6e23 1-29
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/auth/SessionRepository.java
+  s_0db4dae9b03a7d::t_ef99c19f56289d 1-8
+pocs/java-25-slack-clone/frontend/src/main.tsx
+  s_0db4dae9b03a7d::t_7b910ca40b3698 1-16
+pocs/java-25-slack-clone/backend/build.gradle.kts
+  s_0db4dae9b03a7d::t_742070765e2464 1-32
+  s_0db4dae9b03a7d::t_a3346051621ed2 33-36
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/config/WebConfig.java
+  s_0db4dae9b03a7d::t_546b9953bf08f1 1-34
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/channel/ChannelDto.java
+  s_0db4dae9b03a7d::t_dd3575d6105c69 1-13
+pocs/java-25-slack-clone/frontend/src/styles/tokens.css
+  s_0db4dae9b03a7d::t_664071ecdda1ea 1-36
+pocs/java-25-slack-clone/frontend/src/features/channels/useChannels.ts
+  s_0db4dae9b03a7d::t_a69a809980c869 1-65
+pocs/java-25-slack-clone/design-doc.md
+  s_0db4dae9b03a7d::t_bc3d3b31b6b9dc 38
+  s_0db4dae9b03a7d::t_5737757769b1fc 290-294
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/user/User.java
+  s_0db4dae9b03a7d::t_4d072ed6249a44 1-15
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/auth/PasswordHasher.java
+  s_0db4dae9b03a7d::t_7ea9d3c7969eda 1-54
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/realtime/OutboundFrame.java
+  s_0db4dae9b03a7d::t_4b3f6f676df84c 1-19
+pocs/java-25-slack-clone/frontend/src/components/Avatar.tsx
+  s_0db4dae9b03a7d::t_ac4ee197b47fa2 1-38
+pocs/java-25-slack-clone/test.sh
+  s_0db4dae9b03a7d::t_c0ad278039fb1c 1-46
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/Application.java
+  s_0db4dae9b03a7d::t_232d8f1dd7fbe1 1-11
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/config/JdbcConfig.java
+  s_0db4dae9b03a7d::t_03f5e0539d021b 1-36
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/realtime/HandshakeAuthInterceptor.java
+  s_0db4dae9b03a7d::t_621b829d1d4398 1-47
+pocs/java-25-slack-clone/frontend/src/features/notifications/NotificationPanel.tsx
+  s_0db4dae9b03a7d::t_43db940d661439 1-55
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/channel/ChannelRepository.java
+  s_0db4dae9b03a7d::t_efc74191173cfc 1-19
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/auth/CurrentUserArgumentResolver.java
+  s_0db4dae9b03a7d::t_360c9195d9c992 1-24
+pocs/java-25-slack-clone/frontend/src/lib/queryClient.ts
+  s_0db4dae9b03a7d::t_38777d655fc592 1-11
+pocs/java-25-slack-clone/stop.sh
+  s_0db4dae9b03a7d::t_14f0103dca3d8e 1-4
+pocs/java-25-slack-clone/frontend/nginx.conf
+  s_0db4dae9b03a7d::t_46ae2cac497017 1-33
+pocs/java-25-slack-clone/frontend/src/lib/cache.ts
+  s_0db4dae9b03a7d::t_a0a7b5b6a4538c 6-23
+  s_0db4dae9b03a7d::t_5d555301631c8d 1-5,24
+pocs/java-25-slack-clone/frontend/src/components/EmptyState.tsx
+  s_0db4dae9b03a7d::t_6e6a25dc99f1c2 1-19
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/user/UserController.java
+  s_0db4dae9b03a7d::t_a452b29bae7dc5 1-37
+pocs/java-25-slack-clone/frontend/tsconfig.json
+  s_0db4dae9b03a7d::t_234a343acc44ad 1-21
+pocs/java-25-slack-clone/frontend/index.html
+  s_0db4dae9b03a7d::t_0b49514f87dde1 1-12
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/auth/CurrentUser.java
+  s_0db4dae9b03a7d::t_f3a7d3aa85db27 1-11
+pocs/java-25-slack-clone/frontend/src/lib/apiClient.ts
+  s_0db4dae9b03a7d::t_513fea1386b3a0 58
+  s_0db4dae9b03a7d::t_a7276358eecd84 12-18,31
+  s_0db4dae9b03a7d::t_fa656c6d0cb617 1-11,19-30,32-57,59-61
+pocs/java-25-slack-clone/frontend/src/features/auth/RegisterView.tsx
+  s_0db4dae9b03a7d::t_676ec9de39a777 1-80
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/auth/AuthResponse.java
+  s_0db4dae9b03a7d::t_f98cde7706ca9a 1-4
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/realtime/RealtimeRegistry.java
+  s_0db4dae9b03a7d::t_65744d6558269c 1-11,13-56,58-71
+  s_0db4dae9b03a7d::t_8324ae71118731 12
+  s_0db4dae9b03a7d::t_13912d235b5c5c 57
+pocs/java-25-slack-clone/frontend/src/features/channels/StartDmDialog.tsx
+  s_0db4dae9b03a7d::t_6d19b0499efdaf 1-37
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/auth/AuthFilter.java
+  s_0db4dae9b03a7d::t_85abb296d33655 1-10,14-15,18-71
+  s_0db4dae9b03a7d::t_bba975885667b7 11-13,16-17
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/message/MessageController.java
+  s_0db4dae9b03a7d::t_6176914e012cc4 1-39
+pocs/java-25-slack-clone/frontend/vite.config.ts
+  s_0db4dae9b03a7d::t_a7808429df1149 1-16
+pocs/java-25-slack-clone/frontend/src/lib/youtube.ts
+  s_0db4dae9b03a7d::t_10e8e52f29b2dd 1-24
+pocs/java-25-slack-clone/frontend/src/features/channels/BrowseChannelsDialog.tsx
+  s_0db4dae9b03a7d::t_64a4d91b2c7228 1-36
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/auth/AuthUser.java
+  s_0db4dae9b03a7d::t_8f411fbc1f341a 1-4
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/channel/ChannelService.java
+  s_0db4dae9b03a7d::t_ee976c5905f279 1-129
+pocs/java-25-slack-clone/frontend/src/styles/globals.css
+  s_0db4dae9b03a7d::t_46060ada0b01b4 1-363,384-911
+  s_0db4dae9b03a7d::t_cdbd57349173e8 364-383
+pocs/java-25-slack-clone/frontend/src/vite-env.d.ts
+  s_0db4dae9b03a7d::t_219816c2ac6680 1
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/user/UserRepository.java
+  s_0db4dae9b03a7d::t_86f48d460d4779 1-10
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/auth/AuthController.java
+  s_0db4dae9b03a7d::t_f5b6c357e4a383 1-2,4-20,22-25,27-35
+  s_0db4dae9b03a7d::t_5b5c070fd81802 3
+  s_0db4dae9b03a7d::t_79fd0a21eb448f 21
+  s_0db4dae9b03a7d::t_6e06c9aeefcf76 26
+pocs/java-25-slack-clone/frontend/src/types/api.ts
+  s_0db4dae9b03a7d::t_af97ac9df8f748 1-76
+pocs/java-25-slack-clone/backend/src/main/resources/schema.sql
+  s_0db4dae9b03a7d::t_1318c5f351467b 2
+  s_0db4dae9b03a7d::t_ee1fa67c5b16d7 1,3-63
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/message/Attachment.java
+  s_0db4dae9b03a7d::t_44a0a477a94063 1-17
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/realtime/ChatWebSocketHandler.java
+  s_0db4dae9b03a7d::t_a786306b5353ed 1-8,10-60
+  s_0db4dae9b03a7d::t_53c41b42ae0f93 9
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/auth/Session.java
+  s_0db4dae9b03a7d::t_d59a3e50682a2c 1-13
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/message/AttachmentInput.java
+  s_0db4dae9b03a7d::t_28e8299fc0d452 1-4
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/config/WebSocketConfig.java
+  s_0db4dae9b03a7d::t_203542b215478b 1-28
+pocs/java-25-slack-clone/frontend/src/components/Spinner.tsx
+  s_0db4dae9b03a7d::t_f461253d5ee71d 1-8
+pocs/java-25-slack-clone/frontend/src/features/messages/MessageComposer.tsx
+  s_0db4dae9b03a7d::t_06d2cfc6881195 1-113
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/realtime/InboundFrame.java
+  s_0db4dae9b03a7d::t_2f071686147b6d 1-7
+pocs/java-25-slack-clone/frontend/src/lib/time.ts
+  s_0db4dae9b03a7d::t_aef95dc60f11c0 1-7
+pocs/java-25-slack-clone/frontend/src/features/messages/MessageList.tsx
+  s_0db4dae9b03a7d::t_1f6d356403bbc6 1-62
+pocs/java-25-slack-clone/frontend/src/features/notifications/NotificationBell.tsx
+  s_0db4dae9b03a7d::t_f906c7909588c9 1-19
+pocs/java-25-slack-clone/backend/src/main/resources/application.yml
+  s_0db4dae9b03a7d::t_afb2391fa8d030 1-19,24-31
+  s_0db4dae9b03a7d::t_346e230447764c 20-23
+pocs/java-25-slack-clone/frontend/src/features/channels/Sidebar.tsx
+  s_0db4dae9b03a7d::t_0f320b5076263f 1-34,36-39,44-112
+  s_0db4dae9b03a7d::t_77d35b9aadc1da 35,40-43
+pocs/java-25-slack-clone/frontend/src/app/AppLayout.tsx
+  s_0db4dae9b03a7d::t_269b6d5765449c 1-15
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/notification/Notification.java
+  s_0db4dae9b03a7d::t_125c9a01f92cb2 1-18
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/channel/Channel.java
+  s_0db4dae9b03a7d::t_2cdbb9f7f27bb2 1-18
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/channel/DmController.java
+  s_0db4dae9b03a7d::t_509bd6994f7b4b 1-24
+pocs/java-25-slack-clone/frontend/src/lib/auth.ts
+  s_0db4dae9b03a7d::t_ab42c473da2c5d 1-30
+pocs/java-25-slack-clone/frontend/src/lib/wsClient.ts
+  s_0db4dae9b03a7d::t_b9d96ecdfc8189 1-92
+pocs/java-25-slack-clone/frontend/src/app/router.tsx
+  s_0db4dae9b03a7d::t_d8589b4a99363a 1-58
+pocs/java-25-slack-clone/frontend/src/features/auth/useAuth.ts
+  s_0db4dae9b03a7d::t_eb938acb618564 1-18
+pocs/java-25-slack-clone/frontend/package.json
+  s_0db4dae9b03a7d::t_3954bf20a9d48f 1-26
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/notification/NotificationService.java
+  s_0db4dae9b03a7d::t_91c0a878c577af 1-86
+pocs/java-25-slack-clone/frontend/src/features/messages/MessageItem.tsx
+  s_0db4dae9b03a7d::t_bae4a5ef5e5199 1-35
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/config/HealthController.java
+  s_0db4dae9b03a7d::t_a0fb84af4a5c4f 1-14
+pocs/java-25-slack-clone/frontend/Containerfile
+  s_0db4dae9b03a7d::t_2d968d93ffa8a2 1-4
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/auth/AuthService.java
+  s_0db4dae9b03a7d::t_5d8fa0edf0d947 1-48
+pocs/java-25-slack-clone/podman-compose.yml
+  s_0db4dae9b03a7d::t_70a0832e142dd5 1-47
+pocs/java-25-slack-clone/README.md
+  s_0db4dae9b03a7d::t_003e6b19af57be 1-148
+pocs/java-25-slack-clone/start.sh
+  s_0db4dae9b03a7d::t_b23350ef70f916 1-31
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/notification/NotificationDto.java
+  s_0db4dae9b03a7d::t_ffb38ca5b94929 1-15
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/notification/NotificationRepository.java
+  s_0db4dae9b03a7d::t_5c9bef0cccfa77 1-11
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/channel/ChannelMember.java
+  s_0db4dae9b03a7d::t_d4a5491f075c01 1-17
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/notification/NotificationController.java
+  s_0db4dae9b03a7d::t_fcbad0b19d0db9 1-36
+pocs/java-25-slack-clone/frontend/src/features/channels/CreateChannelDialog.tsx
+  s_0db4dae9b03a7d::t_82b5c0790afafa 1-82
+pocs/java-25-slack-clone/frontend/src/lib/mentions.tsx
+  s_0db4dae9b03a7d::t_afb3416354fbe6 1-16
+pocs/java-25-slack-clone/backend/Containerfile
+  s_0db4dae9b03a7d::t_1a877fb999e70d 1-5
+pocs/java-25-slack-clone/frontend/src/features/auth/LoginView.tsx
+  s_0db4dae9b03a7d::t_af3bf5feff38b0 1-74
+pocs/java-25-slack-clone/backend/src/main/java/com/slackclone/message/AttachmentDto.java
+  s_0db4dae9b03a7d::t_134f1fdf046726 1-4
+pocs/java-25-slack-clone/frontend/src/features/messages/useMessages.ts
+  s_0db4dae9b03a7d::t_84a03efe3a3606 1-10,12-13,15-29
+  s_0db4dae9b03a7d::t_f0b221e00f62b3 11,14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "8414d1afe7008696fa9c49d8715d41219d7a0c49",
+  "prompts": {},
+  "sessions": {
+    "s_0db4dae9b03a7d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "27b04c90-d6d2-4d7e-a405-40e5930544da",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
