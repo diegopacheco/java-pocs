@@ -199,16 +199,28 @@ com.slackclone
 History pagination is cursor-based (`before=<message_id>`), newest-first, so loading
 older history is O(limit) and stable under concurrent writes.
 
-### Realtime (STOMP)
+### Realtime (raw WebSocket)
 
-- Endpoint: `/ws` (SockJS fallback optional).
-- Destinations:
-  - `/topic/channel.{channelId}` — new/edited messages for a channel or DM.
-  - `/user/queue/notifications` — per-user notification push (Spring user destination).
-- Subscription is authorized: a client may only subscribe to channel topics it is a
-  member of (checked in a `ChannelInterceptor`).
-- The server never trusts the client to broadcast. Clients send via REST; only the
-  backend publishes to topics through `SimpMessagingTemplate`.
+A single `TextWebSocketHandler` at `/ws`. No STOMP, no broker — the routing and
+subscription bookkeeping are hand-rolled in a `RealtimeRegistry`.
+
+- **Handshake auth**: a `HandshakeInterceptor` reads the bearer token from the `?token=`
+  query parameter (browsers cannot set headers on a `WebSocket`), resolves the user, and
+  stores `userId` in the session attributes. Unauthenticated handshakes are rejected.
+- **Registry**: `RealtimeRegistry` holds two maps — `userId -> sessions` (a user may
+  have several tabs) and `channelId -> sessions` (active subscriptions). Both are
+  concurrent and pruned on disconnect.
+- **Client → server frames** (JSON envelope `{type, ...}`):
+  - `{type:"subscribe", channelId}` — server verifies membership, then registers the
+    session under that channel. Non-members are silently ignored.
+  - `{type:"unsubscribe", channelId}`.
+  - Heartbeat is the native WebSocket ping/pong; no app-level ping needed.
+- **Server → client frames**:
+  - `{type:"message", channelId, message}` — pushed to every session subscribed to the
+    channel.
+  - `{type:"notification", notification}` — pushed to every session of the target user.
+- The server never trusts the client to broadcast. Clients send messages via REST; only
+  the backend pushes frames, looking up target sessions through the registry.
 
 ```mermaid
 sequenceDiagram
@@ -216,7 +228,7 @@ sequenceDiagram
   participant R as REST
   participant S as MessageService
   participant DB as PostgreSQL
-  participant B as STOMP broker
+  participant B as RealtimeRegistry
   participant Bob as Bob (browser)
 
   A->>R: POST /channels/42/messages
@@ -224,11 +236,11 @@ sequenceDiagram
   S->>DB: insert message + attachments
   S->>S: detect @mentions
   S->>DB: insert notifications
-  S->>B: publish /topic/channel.42 (message)
-  S->>B: publish /user/queue/notifications (Bob)
-  B-->>Bob: message push
-  B-->>Bob: notification push
-  B-->>A: message push (own echo, confirms persisted)
+  S->>B: sessionsForChannel(42) -> push message frame
+  S->>B: sessionsForUser(Bob) -> push notification frame
+  B-->>Bob: message frame
+  B-->>Bob: notification frame
+  B-->>A: message frame (own echo, confirms persisted)
 ```
 
 ### Notifications
@@ -237,8 +249,9 @@ Generated server-side at send time:
 - **MENTION** — message content contains `@username` of a channel member.
 - **DIRECT_MESSAGE** — any message in a `DIRECT` channel, for the other member.
 
-Each is persisted and pushed to `/user/queue/notifications`. Unread count is derived
-from `is_read = false`. No email/push; in-app only.
+Each is persisted and pushed as a `notification` frame to every WebSocket session of
+the target user. Unread count is derived from `is_read = false`. No email/push; in-app
+only.
 
 ### Media
 
@@ -250,13 +263,22 @@ from `is_read = false`. No email/push; in-app only.
   URL and stores an `ATTACHMENT(kind=YOUTUBE, url=videoId)`; the frontend renders a
   privacy-friendly `youtube-nocookie.com` iframe.
 
-### Auth (lightweight, explicitly not production)
+### Auth (username + password, intentionally minimal)
 
-`POST /api/auth/login {username}` upserts a user and returns an opaque bearer token
-(random, stored in a `sessions` table or signed). An `AuthFilter` resolves the token
-to the current user for REST and for the STOMP `CONNECT` frame. No passwords, no
-refresh, no roles beyond channel ownership. This is a known simplification, called out
-so it is not mistaken for real security.
+- `POST /api/auth/register {username, password, displayName}` creates a user. The
+  password is hashed with JDK `PBKDF2WithHmacSHA256` (random per-user salt, fixed
+  iteration count); the stored `password_hash` encodes `iterations:salt:hash`. No
+  external hashing library.
+- `POST /api/auth/login {username, password}` recomputes the hash with the stored salt,
+  compares in constant time, and on success returns an opaque random bearer token stored
+  in a `sessions` table (`token`, `user_id`, `created_at`).
+- An `AuthFilter` resolves the `Authorization: Bearer <token>` header to the current
+  user for REST; the WebSocket handshake resolves the same token from the `?token=`
+  query parameter.
+- Scope limits, called out so they are not mistaken for production security: no refresh
+  tokens, no token expiry/rotation, no rate limiting, no email verification, no roles
+  beyond per-channel `OWNER`/`MEMBER`. Hashing and constant-time comparison are real;
+  the surrounding session lifecycle is minimal by design.
 
 ### Database lifecycle
 
@@ -279,7 +301,7 @@ frontend/src
     notifications/NotificationBell, NotificationPanel, useNotifications
     media/        ImageAttachment, GifAttachment, YouTubeEmbed, FileUploader
   components/      Avatar, Button, Dialog, Icon, Spinner, EmptyState (shared, dumb)
-  lib/            apiClient.ts, stompClient.ts, queryClient.ts, mentions.ts
+  lib/            apiClient.ts, wsClient.ts, queryClient.ts, mentions.ts
   hooks/          usePresence, useInfiniteHistory
   types/          api.ts (shared DTO types)
   styles/         tokens.css, globals.css
@@ -292,15 +314,17 @@ frontend/src
   `['notifications']`.
 - **TanStack Router** owns navigation: `/`, `/c/$channelId`, `/dm/$userId`. The active
   channel id comes from the route, not component state.
-- **STOMP client** (`lib/stompClient.ts`) is a singleton. On a channel message push it
-  updates the matching Query cache (optimistic merge), so realtime and cache stay in
-  one source of truth. Notification pushes bump the `['notifications']` cache.
+- **WebSocket client** (`lib/wsClient.ts`) is a singleton with auto-reconnect and a
+  small `subscribe(channelId)` API that sends `subscribe`/`unsubscribe` frames. On a
+  `message` frame it updates the matching Query cache (optimistic merge), so realtime
+  and cache stay in one source of truth. `notification` frames bump the
+  `['notifications']` cache.
 
 ```mermaid
 flowchart TD
   Route[TanStack Router route] --> View[ChannelView]
   View --> Q[TanStack Query cache]
-  STOMP[STOMP push] --> Q
+  STOMP[WebSocket push] --> Q
   Q --> List[MessageList renders]
   Composer[MessageComposer] -- POST --> API[REST]
   API --> Q
@@ -377,9 +401,11 @@ Each phase ends with a runnable stack and a `test.sh` assertion for the new path
 ## 12. Risks & Open Questions
 
 - **Spring Boot 4.0.6 + Java 25** are recent; pin exact dependency versions and verify
-  the WebSocket/STOMP and Data JDBC starters resolve before building features on them.
+  the WebSocket and Data JDBC starters resolve before building features on them.
 - **TypeScript 6.x** is recent; confirm Vite/React 19 type compatibility early.
-- **Auth simplification** — confirm a username-only identity is acceptable for v1.
+- **Auth scope** — username + password with PBKDF2 hashing; tokens have no expiry and
+  there is no rate limiting. Acceptable for a single-node clone, not for the open
+  internet.
 - **Media storage on a volume** is single-node; fine for this scope, not for scale-out.
 - **Presence/online indicators** are not in scope unless requested (cheap to add later
   via STOMP connect/disconnect events).
