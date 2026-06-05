@@ -180,7 +180,8 @@ com.slackclone
 
 | Method | Path | Purpose |
 |---|---|---|
-| POST | `/api/auth/login` | Resolve/create user by username, return token |
+| POST | `/api/auth/register` | Create user (username, password, display name) |
+| POST | `/api/auth/login` | Verify password, return bearer token |
 | GET | `/api/users/me` | Current user |
 | GET | `/api/users` | Directory (for starting DMs) |
 | GET | `/api/channels` | Channels visible to current user |
