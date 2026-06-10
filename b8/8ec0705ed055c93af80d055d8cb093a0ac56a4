@@ -1,0 +1,33 @@
+pocs/revapi-maven-java-poc/README.md
+  s_fc669cfe091259::t_d6fed981b6bf06 1-115
+pocs/revapi-maven-java-poc/src/main/java/com/example/Calculator.java
+  s_fc669cfe091259::t_587debf403f5ff 1-16
+pocs/revapi-maven-java-poc/pom.xml
+  s_fc669cfe091259::t_36ace5c3b04c54 1-51
+pocs/revapi-maven-java-poc/test.sh
+  s_fc669cfe091259::t_ab758ad531c48c 1-38
+pocs/revapi-maven-java-poc/.gitignore
+  s_fc669cfe091259::t_fc86913fc4aba7 1
+pocs/revapi-maven-java-poc/versions/Calculator.v1.java
+  s_fc669cfe091259::t_0b5a95ed684fa7 1-16
+pocs/revapi-maven-java-poc/versions/Calculator.v2.java
+  s_fc669cfe091259::t_3fa58f56ccd0c3 1-12
+pocs/revapi-maven-java-poc/revapi-flow.svg
+  s_fc669cfe091259::t_7bfbbc71431a4e 1-60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "b88ec0705ed055c93af80d055d8cb093a0ac56a4",
+  "prompts": {},
+  "sessions": {
+    "s_fc669cfe091259": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a793bc4e-32db-4805-bd81-a20179eba3de",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
