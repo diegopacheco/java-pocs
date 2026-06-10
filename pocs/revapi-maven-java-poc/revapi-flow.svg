@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="824" viewBox="0 0 760 824" font-family="'Caveat','Comic Sans MS',cursive">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&amp;display=swap');
+      text { font-family: 'Caveat','Comic Sans MS',cursive; }
+    </style>
+    <filter id="wobble">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 L3,5 Z" fill="#495057"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="760" height="824" fill="#FFFDF7"/>
+  <text x="380" y="40" text-anchor="middle" font-size="30" font-weight="600" fill="#343A40">Revapi breaking-change detection</text>
+
+  <g filter="url(#wobble)" stroke-linecap="round">
+    <rect x="70" y="64"  width="620" height="72" rx="14" fill="#FFF3BF" stroke="#F0C000" stroke-width="2.5"/>
+    <rect x="70" y="194" width="620" height="72" rx="14" fill="#D3F9D8" stroke="#37B24D" stroke-width="2.5"/>
+    <rect x="70" y="324" width="620" height="72" rx="14" fill="#D0EBFF" stroke="#1C7ED6" stroke-width="2.5"/>
+    <rect x="70" y="454" width="620" height="72" rx="14" fill="#E5DBFF" stroke="#7048E8" stroke-width="2.5"/>
+    <rect x="70" y="584" width="620" height="72" rx="14" fill="#FFE3E3" stroke="#F06595" stroke-width="2.5"/>
+    <rect x="70" y="714" width="620" height="72" rx="14" fill="#FFC9C9" stroke="#E03131" stroke-width="3"/>
+
+    <line x1="380" y1="136" x2="380" y2="192" stroke="#495057" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <line x1="380" y1="266" x2="380" y2="322" stroke="#495057" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <line x1="380" y1="396" x2="380" y2="452" stroke="#495057" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <line x1="380" y1="526" x2="380" y2="582" stroke="#495057" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <line x1="380" y1="656" x2="380" y2="712" stroke="#495057" stroke-width="2.5" marker-end="url(#arrow)"/>
+  </g>
+
+  <g fill="#343A40">
+    <text x="380" y="96"  text-anchor="middle" font-size="23" font-weight="600">Calculator v1</text>
+    <text x="380" y="122" text-anchor="middle" font-size="19">add &#183; subtract &#183; multiply(): int</text>
+
+    <text x="380" y="226" text-anchor="middle" font-size="23" font-weight="600">Maven local repo</text>
+    <text x="380" y="252" text-anchor="middle" font-size="19">calculator : 1.0.0  (the baseline / oldVersion)</text>
+
+    <text x="380" y="356" text-anchor="middle" font-size="23" font-weight="600">Calculator v2</text>
+    <text x="380" y="382" text-anchor="middle" font-size="19">subtract removed &#183; multiply(): long &#183; bump 2.0.0</text>
+
+    <text x="380" y="486" text-anchor="middle" font-size="23" font-weight="600">revapi:check</text>
+    <text x="380" y="512" text-anchor="middle" font-size="19">compares 2.0.0 against 1.0.0</text>
+
+    <text x="380" y="616" text-anchor="middle" font-size="20" font-weight="600">java.method.removed</text>
+    <text x="380" y="642" text-anchor="middle" font-size="20" font-weight="600">java.method.returnTypeChanged</text>
+
+    <text x="380" y="758" text-anchor="middle" font-size="26" font-weight="600" fill="#C92A2A">BUILD FAILURE</text>
+  </g>
+
+  <g fill="#5C5F66" font-size="18">
+    <text x="396" y="172" text-anchor="start">mvn install  (revapi skipped)</text>
+    <text x="396" y="302" text-anchor="start">edit source, becomes the new API</text>
+    <text x="396" y="432" text-anchor="start">mvn verify  triggers the check</text>
+    <text x="396" y="562" text-anchor="start">incompatible API differences</text>
+    <text x="396" y="692" text-anchor="start">failBuildOnProblemsFound</text>
+  </g>
+</svg>
