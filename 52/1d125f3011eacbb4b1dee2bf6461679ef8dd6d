@@ -1,0 +1,43 @@
+pocs/java-25-spring-ai-2-structured-outputs/test.sh
+  s_f9e5d131d9b89c::t_b606230b6496e8 1-11
+pocs/java-25-spring-ai-2-structured-outputs/src/test/resources/application.properties
+  s_f9e5d131d9b89c::t_f0120afaec7822 1-2
+pocs/java-25-spring-ai-2-structured-outputs/.gitignore
+  s_f9e5d131d9b89c::t_4e9db60a5cc25a 4-7
+pocs/java-25-spring-ai-2-structured-outputs/start.sh
+  s_f9e5d131d9b89c::t_368221eaf427c3 1-21
+pocs/java-25-spring-ai-2-structured-outputs/src/main/java/com/github/diegopacheco/sandboxspring/structuredoutput/ActorsFilms.java
+  s_f9e5d131d9b89c::t_d5a6bd60c6664c 1-5
+pocs/java-25-spring-ai-2-structured-outputs/src/main/java/com/github/diegopacheco/sandboxspring/structuredoutput/FilmographyController.java
+  s_f9e5d131d9b89c::t_14f7aa7e2424cd 1-32
+pocs/java-25-spring-ai-2-structured-outputs/src/main/resources/application.properties
+  s_f9e5d131d9b89c::t_9a999177b9c2ad 2-5
+pocs/java-25-spring-ai-2-structured-outputs/pom.xml
+  s_f9e5d131d9b89c::t_089a8e8aa59a8c 4-62
+pocs/java-25-spring-ai-2-structured-outputs/stop.sh
+  s_f9e5d131d9b89c::t_51c7ffb400b318 1-8
+pocs/java-25-spring-ai-2-structured-outputs/src/main/java/com/github/diegopacheco/sandboxspring/structuredoutput/FilmographyService.java
+  s_f9e5d131d9b89c::t_bc7d648da4fe5e 1-35
+pocs/java-25-spring-ai-2-structured-outputs/architecture.svg
+  s_f9e5d131d9b89c::t_afe276b770663b 1-66
+pocs/java-25-spring-ai-2-structured-outputs/src/test/java/com/github/diegopacheco/sandboxspring/ApplicationTests.java
+  s_f9e5d131d9b89c::t_0367b99310c67f 1-21
+pocs/java-25-spring-ai-2-structured-outputs/README.md
+  s_f9e5d131d9b89c::t_b95d916ffde04a 1-106
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "521d125f3011eacbb4b1dee2bf6461679ef8dd6d",
+  "prompts": {},
+  "sessions": {
+    "s_f9e5d131d9b89c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8c177e1b-9d9b-4ea5-b6a1-573d99c20b31",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
