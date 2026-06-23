@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="780" viewBox="0 0 900 780" font-family="Caveat, 'Comic Sans MS', 'Bradley Hand', cursive">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;display=swap');</style>
+    <filter id="wobble">
+      <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L9,4 L0,8" fill="none" stroke="#2b2b2b" stroke-width="2"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="780" fill="#fffdf7"/>
+  <text x="450" y="48" text-anchor="middle" font-size="34" font-weight="700" fill="#2b2b2b">Self-Correcting Structured Output — Spring AI 2.0</text>
+
+  <g filter="url(#wobble)">
+    <g fill="none" stroke="#2b2b2b" stroke-width="2.4" marker-end="url(#arrow)">
+      <path d="M450,128 L450,158"/>
+      <path d="M450,218 L450,248"/>
+      <path d="M450,308 L450,338"/>
+      <path d="M450,398 L450,428"/>
+      <path d="M450,488 L450,520"/>
+      <path d="M450,610 L450,650"/>
+      <path d="M630,565 L740,565 L740,453 L630,453"/>
+    </g>
+
+    <g stroke="#2b2b2b" stroke-width="2.4">
+      <rect x="270" y="68" width="360" height="60" rx="14" fill="#DCE7FF"/>
+      <rect x="270" y="158" width="360" height="60" rx="14" fill="#D7F0E3"/>
+      <rect x="270" y="248" width="360" height="60" rx="14" fill="#FCE1C2"/>
+      <rect x="270" y="338" width="360" height="60" rx="14" fill="#EAD9FB"/>
+      <rect x="270" y="428" width="360" height="60" rx="14" fill="#FAD4D4"/>
+      <rect x="270" y="520" width="360" height="90" rx="14" fill="#FFF0B3"/>
+      <rect x="250" y="650" width="400" height="64" rx="14" fill="#CFF5D1"/>
+    </g>
+
+    <g fill="#2b2b2b" text-anchor="middle">
+      <text x="450" y="92" font-size="21" font-weight="700">Client (curl)</text>
+      <text x="450" y="116" font-size="15">GET /api/filmography/validated?actor=...</text>
+
+      <text x="450" y="195" font-size="21" font-weight="700">FilmographyController</text>
+
+      <text x="450" y="278" font-size="20" font-weight="700">ChatClient</text>
+      <text x="450" y="300" font-size="15">.entity(ActorsFilms.class, validateSchema())</text>
+
+      <text x="450" y="368" font-size="20" font-weight="700">Schema generator</text>
+      <text x="450" y="390" font-size="15">record ActorsFilms  →  JSON Schema (into prompt)</text>
+
+      <text x="450" y="458" font-size="20" font-weight="700">OpenAI  gpt-4o-mini</text>
+      <text x="450" y="480" font-size="15">returns JSON</text>
+
+      <text x="450" y="552" font-size="19" font-weight="700">StructuredOutputValidationAdvisor</text>
+      <text x="450" y="576" font-size="15">validate JSON against the schema</text>
+      <text x="450" y="598" font-size="15">recursive advisor (auto-registered)</text>
+
+      <text x="450" y="690" font-size="19" font-weight="700">Typed ActorsFilms record  →  JSON to client</text>
+    </g>
+
+    <g fill="#b33" text-anchor="middle" font-size="16" font-weight="700">
+      <text x="690" y="620">invalid</text>
+      <text x="785" y="510">append error,</text>
+      <text x="785" y="530">retry (max 3)</text>
+    </g>
+    <text x="468" y="638" text-anchor="start" fill="#1b7a3d" font-size="16" font-weight="700">valid</text>
+  </g>
+</svg>
