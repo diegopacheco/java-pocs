@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: java-25-postgres-pgrust-fun
+  datasource:
+    url: jdbc:postgresql://localhost:6543/booksdb
+    username: books
+    password: books
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: pgrust-hikari-pool
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+  sql:
+    init:
+      mode: always
+server:
+  port: ${APP_PORT:18080}
+springdoc:
+  api-docs:
+    path: /swagger
+  swagger-ui:
+    path: /swagger-ui

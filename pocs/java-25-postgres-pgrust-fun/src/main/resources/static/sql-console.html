@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pgrust SQL Console</title>
+    <style>
+        :root {
+            color-scheme: light dark;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 24px;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .links {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .links a {
+            color: #93c5fd;
+            text-decoration: none;
+        }
+        textarea {
+            width: 100%;
+            min-height: 180px;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 14px;
+            border-radius: 12px;
+            border: 1px solid #475569;
+            background: #020617;
+            color: #e2e8f0;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 16px;
+            padding: 12px 20px;
+            border: 0;
+            border-radius: 999px;
+            background: #2563eb;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #111827;
+        }
+        th, td {
+            border: 1px solid #334155;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        pre {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 12px;
+            background: #111827;
+            border: 1px solid #334155;
+            overflow: auto;
+        }
+        .status {
+            margin-top: 16px;
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1>pgrust SQL Console</h1>
+    <div class="links">
+        <a href="/api/books">/api/books</a>
+        <a href="/swagger-ui">/swagger-ui</a>
+        <a href="/swagger">/swagger</a>
+    </div>
+    <textarea id="sql">select id, title, author, isbn, published_year from books order by id</textarea>
+    <button id="run" type="button">Run SQL</button>
+    <div class="status" id="status">Ready</div>
+    <div id="table"></div>
+    <pre id="raw"></pre>
+</main>
+<script>
+    const sqlInput = document.getElementById("sql");
+    const runButton = document.getElementById("run");
+    const statusNode = document.getElementById("status");
+    const tableNode = document.getElementById("table");
+    const rawNode = document.getElementById("raw");
+
+    function escapeHtml(value) {
+        return String(value)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll("\"", "&quot;")
+            .replaceAll("'", "&#39;");
+    }
+
+    function renderTable(payload) {
+        if (!payload.columns || payload.columns.length === 0 || !payload.rows || payload.rows.length === 0) {
+            tableNode.innerHTML = "";
+            return;
+        }
+        const header = payload.columns.map(column => `<th>${escapeHtml(column)}</th>`).join("");
+        const rows = payload.rows.map(row => {
+            const values = payload.columns.map(column => `<td>${escapeHtml(row[column] ?? "")}</td>`).join("");
+            return `<tr>${values}</tr>`;
+        }).join("");
+        tableNode.innerHTML = `<table><thead><tr>${header}</tr></thead><tbody>${rows}</tbody></table>`;
+    }
+
+    async function runSql() {
+        statusNode.textContent = "Running";
+        tableNode.innerHTML = "";
+        rawNode.textContent = "";
+        const response = await fetch("/sql-console/query", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ sql: sqlInput.value })
+        });
+        const payload = await response.json();
+        if (!response.ok) {
+            statusNode.textContent = `Failed with status ${response.status}`;
+            rawNode.textContent = JSON.stringify(payload, null, 2);
+            return;
+        }
+        statusNode.textContent = payload.updatedCount == null ? `Returned ${payload.rows.length} row(s)` : `Updated ${payload.updatedCount} row(s)`;
+        renderTable(payload);
+        rawNode.textContent = JSON.stringify(payload, null, 2);
+    }
+
+    runButton.addEventListener("click", runSql);
+    runSql();
+</script>
+</body>
+</html>
+
