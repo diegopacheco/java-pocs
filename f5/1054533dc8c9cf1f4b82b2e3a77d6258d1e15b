@@ -1,0 +1,31 @@
+pocs/java-25-postgres-pgrust-fun/test.sh
+  s_5ff430aeee7516::t_f1a03cd370e38f 21-22
+  s_5ff430aeee7516::t_31e19f9cfe81a0 18-19
+pocs/java-25-postgres-pgrust-fun/README.md
+  s_5ff430aeee7516::t_f1a03cd370e38f 126-127
+pocs/java-25-postgres-pgrust-fun/src/main/resources/static/sql-console.html
+  s_5ff430aeee7516::t_f1a03cd370e38f 461-484
+  s_5ff430aeee7516::t_31e19f9cfe81a0 9-30,34-49,52,54-86,89-100,104-106,110-115,117-137,142,144,146-148,150-283,288,291-292,295,297-301,303-309,311-369,375-429,438-444,455-460,485-510,513,524-552,554,556,559-578,580-585,589-590,592-594
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/sql/SqlConsoleController.java
+  s_5ff430aeee7516::t_1e677ae0314bf2 5,10-11,22-27
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/sql/SqlConsoleService.java
+  s_5ff430aeee7516::t_205f4ff35ab5f4 14,18,57-75
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/sql/SqlTableInfo.java
+  s_5ff430aeee7516::t_b02fab1d07e9b3 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "f51054533dc8c9cf1f4b82b2e3a77d6258d1e15b",
+  "prompts": {},
+  "sessions": {
+    "s_5ff430aeee7516": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "607f7ccf-fb1f-45eb-8613-688329fee6c0",
+        "model": "gpt-5.4"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
