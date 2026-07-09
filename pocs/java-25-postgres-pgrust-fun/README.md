@@ -159,16 +159,30 @@ Source used for these notes: https://github.com/malisper/pgrust
 
 ## Screenshots
 
-The files below were captured with Playwright after starting the app:
+The screenshots below were captured with Playwright after starting the app.
 
-- `docs/screenshots/books-api.png`
-- `docs/screenshots/swagger-ui.png`
-- `docs/screenshots/sql-console.png`
+### Books API
+
+This image shows the paginated `GET /api/books?page=0&size=5` response rendered directly by the browser.
+
+![Books API screenshot](docs/screenshots/books-api.png)
+
+### Swagger UI
+
+This image shows Swagger UI fully loaded with the API operations expanded and ready to test from the browser.
+
+![Swagger UI screenshot](docs/screenshots/swagger-ui.png)
+
+### SQL Console
+
+This image shows the light-themed SQL console with the editor, line numbers, syntax highlighting, result panel, and right-side table catalog.
+
+![SQL Console screenshot](docs/screenshots/sql-console.png)
 
 Commands used:
 
 ```bash
-npx playwright screenshot http://localhost:18080/api/books docs/screenshots/books-api.png
-npx playwright screenshot http://localhost:18080/swagger-ui docs/screenshots/swagger-ui.png
-npx playwright screenshot http://localhost:18080/sql-console docs/screenshots/sql-console.png
+npx playwright screenshot --browser chromium --wait-for-timeout 1000 --viewport-size "1600,1200" --full-page "http://localhost:18080/api/books?page=0&size=5" docs/screenshots/books-api.png
+npx playwright screenshot --browser chromium --wait-for-selector ".swagger-ui .opblock" --wait-for-timeout 3000 --viewport-size "1600,1200" --full-page http://localhost:18080/swagger-ui docs/screenshots/swagger-ui.png
+npx playwright screenshot --browser chromium --color-scheme light --wait-for-selector ".table-card" --wait-for-timeout 1500 --viewport-size "1600,1400" --full-page http://localhost:18080/sql-console docs/screenshots/sql-console.png
 ```
