@@ -6,25 +6,25 @@
     <title>pgrust SQL Console</title>
     <style>
         :root {
-            color-scheme: dark;
-            --bg: #09090b;
-            --panel: rgba(15, 23, 42, 0.78);
-            --panel-strong: rgba(15, 23, 42, 0.96);
-            --line: rgba(148, 163, 184, 0.18);
-            --text: #e7e5e4;
-            --muted: #a8a29e;
+            color-scheme: light;
+            --bg: #fffaf5;
+            --panel: rgba(255, 255, 255, 0.82);
+            --panel-strong: rgba(255, 255, 255, 0.97);
+            --line: rgba(148, 163, 184, 0.28);
+            --text: #292524;
+            --muted: #78716c;
             --accent: #f97316;
             --accent-soft: rgba(249, 115, 22, 0.18);
             --danger: #fb7185;
             --danger-soft: rgba(251, 113, 133, 0.14);
-            --success: #34d399;
-            --keyword: #f59e0b;
-            --string: #86efac;
-            --number: #7dd3fc;
-            --comment: #78716c;
-            --identifier: #c4b5fd;
-            --editor-text: #f8fafc;
-            --shadow: 0 30px 80px rgba(0, 0, 0, 0.42);
+            --success: #059669;
+            --keyword: #c2410c;
+            --string: #15803d;
+            --number: #0369a1;
+            --comment: #a8a29e;
+            --identifier: #7c3aed;
+            --editor-text: #1f2937;
+            --shadow: 0 30px 80px rgba(120, 113, 108, 0.16);
         }
         * {
             box-sizing: border-box;
@@ -33,9 +33,9 @@
             margin: 0;
             min-height: 100vh;
             background:
-                radial-gradient(circle at top left, rgba(249, 115, 22, 0.14), transparent 28%),
-                radial-gradient(circle at top right, rgba(34, 197, 94, 0.1), transparent 22%),
-                linear-gradient(135deg, #020617 0%, #111827 52%, #1c1917 100%);
+                radial-gradient(circle at top left, rgba(249, 115, 22, 0.12), transparent 30%),
+                radial-gradient(circle at top right, rgba(14, 165, 233, 0.1), transparent 24%),
+                linear-gradient(135deg, #fff7ed 0%, #fffaf5 48%, #f5f3ff 100%);
             color: var(--text);
             font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
         }
@@ -44,7 +44,7 @@
             position: fixed;
             inset: 0;
             pointer-events: none;
-            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(120,113,108,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(120,113,108,0.06) 1px, transparent 1px);
             background-size: 24px 24px;
             mask-image: radial-gradient(circle at center, black, transparent 85%);
         }
@@ -107,9 +107,9 @@
         }
         .links a {
             text-decoration: none;
-            color: #fed7aa;
-            border: 1px solid rgba(251, 146, 60, 0.2);
-            background: rgba(124, 45, 18, 0.18);
+            color: #9a3412;
+            border: 1px solid rgba(251, 146, 60, 0.25);
+            background: rgba(255, 237, 213, 0.9);
             padding: 10px 14px;
             border-radius: 999px;
             font-size: 0.9rem;
@@ -178,9 +178,9 @@
             margin: 0;
             padding: 20px 14px;
             list-style: none;
-            background: rgba(2, 6, 23, 0.92);
+            background: rgba(245, 243, 255, 0.95);
             border-right: 1px solid var(--line);
-            color: #78716c;
+            color: #a8a29e;
             font-family: "SFMono-Regular", "Consolas", monospace;
             font-size: 13px;
             line-height: 1.6;
@@ -191,7 +191,7 @@
         .editor-stage {
             position: relative;
             overflow: hidden;
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(3, 7, 18, 0.98));
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.98));
         }
         .editor-highlight,
         .sql-input {
@@ -214,12 +214,12 @@
         .sql-input {
             resize: none;
             color: transparent;
-            caret-color: #fff7ed;
+            caret-color: #9a3412;
             outline: none;
             z-index: 1;
         }
         .sql-input::selection {
-            background: rgba(251, 146, 60, 0.28);
+            background: rgba(251, 146, 60, 0.18);
         }
         .token-keyword {
             color: var(--keyword);
@@ -246,7 +246,7 @@
         .panel {
             border: 1px solid var(--line);
             border-radius: 22px;
-            background: rgba(2, 6, 23, 0.62);
+            background: rgba(255, 255, 255, 0.74);
             overflow: hidden;
         }
         .panel h2 {
@@ -270,11 +270,11 @@
             display: block;
         }
         .error-panel h2 {
-            color: #fecdd3;
+            color: #be123c;
         }
         .error-message {
             margin: 0;
-            color: #ffe4e6;
+            color: #9f1239;
             font-family: "SFMono-Regular", "Consolas", monospace;
             line-height: 1.6;
             white-space: pre-wrap;
@@ -295,19 +295,19 @@
             font-family: "Avenir Next", "Segoe UI", sans-serif;
         }
         th {
-            color: #fdba74;
-            background: rgba(124, 45, 18, 0.16);
+            color: #9a3412;
+            background: rgba(255, 237, 213, 0.92);
             position: sticky;
             top: 0;
         }
         td {
-            color: #e5e7eb;
+            color: #292524;
         }
         pre {
             margin: 0;
             white-space: pre-wrap;
             word-break: break-word;
-            color: #cbd5e1;
+            color: #44403c;
             font-family: "SFMono-Regular", "Consolas", monospace;
             line-height: 1.6;
         }
@@ -333,12 +333,12 @@
             border: 1px solid var(--line);
             border-radius: 18px;
             padding: 14px 16px;
-            background: rgba(2, 6, 23, 0.54);
+            background: rgba(255, 255, 255, 0.76);
         }
         .table-card h3 {
             margin: 0 0 10px;
             font-size: 1rem;
-            color: #fed7aa;
+            color: #9a3412;
             font-family: "Avenir Next", "Segoe UI", sans-serif;
         }
         .columns {
@@ -350,9 +350,9 @@
             display: inline-flex;
             padding: 6px 10px;
             border-radius: 999px;
-            border: 1px solid rgba(125, 211, 252, 0.18);
-            color: #bae6fd;
-            background: rgba(8, 47, 73, 0.32);
+            border: 1px solid rgba(125, 211, 252, 0.28);
+            color: #075985;
+            background: rgba(224, 242, 254, 0.9);
             font-size: 0.82rem;
             font-family: "SFMono-Regular", "Consolas", monospace;
         }
