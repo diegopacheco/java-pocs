@@ -1,0 +1,86 @@
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/book/domain/Book.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-5
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/book/repository/JdbcBookRepository.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-29,35-38,47-62
+  s_5ff430aeee7516::t_41bcff576aec37 30-34,39-46
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/sql/SqlConsoleService.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-4,6-28,30-71
+  s_5ff430aeee7516::t_9c7e7b9fb5d599 5,29
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/book/web/BookController.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-3,5-12,14-30,34-42
+  s_5ff430aeee7516::t_41bcff576aec37 4,13,31-33
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/book/domain/CreateBookRequest.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-5
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/sql/SqlConsoleController.java
+  s_5ff430aeee7516::t_9c7e7b9fb5d599 22
+  s_5ff430aeee7516::t_36f877f3482ec3 1-21,23-24
+pocs/java-25-postgres-pgrust-fun/src/main/resources/data.sql
+  s_5ff430aeee7516::t_36f877f3482ec3 1-11
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/book/repository/BookRepository.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-9,11,14-15
+  s_5ff430aeee7516::t_41bcff576aec37 10,12-13
+pocs/java-25-postgres-pgrust-fun/pom.xml
+  s_5ff430aeee7516::t_36f877f3482ec3 1-62
+pocs/java-25-postgres-pgrust-fun/stop.sh
+  s_5ff430aeee7516::t_36f877f3482ec3 1-24
+pocs/java-25-postgres-pgrust-fun/test.sh
+  s_5ff430aeee7516::t_7dafb19aad94f3 4-5
+  s_5ff430aeee7516::t_36f877f3482ec3 1-3,7,9,12,15-16,18-21
+  s_5ff430aeee7516::t_c36aaa727bfc11 6,13-14,17
+  s_5ff430aeee7516::t_41bcff576aec37 8,10-11
+pocs/java-25-postgres-pgrust-fun/README.md
+  s_5ff430aeee7516::t_7dafb19aad94f3 107-108,124,132,134
+  s_5ff430aeee7516::t_41bcff576aec37 43,59-91
+  s_5ff430aeee7516::t_36f877f3482ec3 1-42,44-58,92-106,109-123,125-131,133,135-169,173
+  s_5ff430aeee7516::t_c176aa2aaf70fe 170-172
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/error/ApiExceptionHandler.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-27
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/PgrustFunApplication.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-13
+pocs/java-25-postgres-pgrust-fun/src/main/resources/static/sql-console.html
+  s_5ff430aeee7516::t_36f877f3482ec3 1-152
+pocs/java-25-postgres-pgrust-fun/src/main/resources/schema.sql
+  s_5ff430aeee7516::t_36f877f3482ec3 1-8
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/book/service/BookService.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-3,5-22,29-53
+  s_5ff430aeee7516::t_41bcff576aec37 4,23-28,54-62
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/sql/SqlQueryResponse.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-8
+pocs/java-25-postgres-pgrust-fun/src/test/java/com/diegopacheco/pgrustfun/book/service/BookServiceTest.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-3,5-24,26,31-55,85-88,96-97,100-109
+  s_5ff430aeee7516::t_41bcff576aec37 4,25,27-30,56-84,89-95,98-99
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/book/domain/BookPage.java
+  s_5ff430aeee7516::t_41bcff576aec37 1-7
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/sql/SqlQueryRequest.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-5
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/sql/SqlConsolePageController.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-19
+pocs/java-25-postgres-pgrust-fun/src/main/resources/application.yml
+  s_5ff430aeee7516::t_36f877f3482ec3 1-17,19-23
+  s_5ff430aeee7516::t_7dafb19aad94f3 18
+pocs/java-25-postgres-pgrust-fun/.gitignore
+  s_5ff430aeee7516::t_36f877f3482ec3 1-4
+pocs/java-25-postgres-pgrust-fun/start.sh
+  s_5ff430aeee7516::t_36f877f3482ec3 1-7,9-45,47-49,51-55
+  s_5ff430aeee7516::t_7dafb19aad94f3 8,46,50,56-57
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/config/OpenApiConfiguration.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-19
+pocs/java-25-postgres-pgrust-fun/src/main/java/com/diegopacheco/pgrustfun/error/ApiError.java
+  s_5ff430aeee7516::t_36f877f3482ec3 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "beaf97a90d20884f86f9ad592db4dc145479a6f6",
+  "prompts": {},
+  "sessions": {
+    "s_5ff430aeee7516": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "607f7ccf-fb1f-45eb-8613-688329fee6c0",
+        "model": "gpt-5.4"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
