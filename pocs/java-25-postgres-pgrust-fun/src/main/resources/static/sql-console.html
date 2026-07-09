@@ -6,92 +6,428 @@
     <title>pgrust SQL Console</title>
     <style>
         :root {
-            color-scheme: light dark;
-            font-family: Arial, sans-serif;
+            color-scheme: dark;
+            --bg: #09090b;
+            --panel: rgba(15, 23, 42, 0.78);
+            --panel-strong: rgba(15, 23, 42, 0.96);
+            --line: rgba(148, 163, 184, 0.18);
+            --text: #e7e5e4;
+            --muted: #a8a29e;
+            --accent: #f97316;
+            --accent-soft: rgba(249, 115, 22, 0.18);
+            --danger: #fb7185;
+            --danger-soft: rgba(251, 113, 133, 0.14);
+            --success: #34d399;
+            --keyword: #f59e0b;
+            --string: #86efac;
+            --number: #7dd3fc;
+            --comment: #78716c;
+            --identifier: #c4b5fd;
+            --editor-text: #f8fafc;
+            --shadow: 0 30px 80px rgba(0, 0, 0, 0.42);
+        }
+        * {
+            box-sizing: border-box;
         }
         body {
             margin: 0;
-            padding: 24px;
-            background: #0f172a;
-            color: #e2e8f0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, rgba(249, 115, 22, 0.14), transparent 28%),
+                radial-gradient(circle at top right, rgba(34, 197, 94, 0.1), transparent 22%),
+                linear-gradient(135deg, #020617 0%, #111827 52%, #1c1917 100%);
+            color: var(--text);
+            font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 24px 24px;
+            mask-image: radial-gradient(circle at center, black, transparent 85%);
         }
         main {
-            max-width: 1100px;
+            max-width: 1440px;
             margin: 0 auto;
+            padding: 32px;
+        }
+        .shell {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) 320px;
+            gap: 24px;
+            align-items: start;
+        }
+        .workspace, .sidebar {
+            background: var(--panel);
+            backdrop-filter: blur(18px);
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+        }
+        .workspace {
+            overflow: hidden;
+        }
+        .hero {
+            padding: 28px 28px 18px;
+            border-bottom: 1px solid var(--line);
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: #fdba74;
+            font-size: 12px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
         }
         h1 {
-            margin-top: 0;
+            margin: 16px 0 10px;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            font-weight: 700;
+        }
+        .subtitle {
+            max-width: 60ch;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
         }
         .links {
             display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .links a {
+            text-decoration: none;
+            color: #fed7aa;
+            border: 1px solid rgba(251, 146, 60, 0.2);
+            background: rgba(124, 45, 18, 0.18);
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+        }
+        .editor-block {
+            padding: 24px 28px 28px;
+        }
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             gap: 16px;
             margin-bottom: 16px;
         }
-        .links a {
-            color: #93c5fd;
-            text-decoration: none;
+        .toolbar-meta {
+            color: var(--muted);
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
         }
-        textarea {
-            width: 100%;
-            min-height: 180px;
-            font-family: "SFMono-Regular", Consolas, monospace;
-            font-size: 14px;
-            border-radius: 12px;
-            border: 1px solid #475569;
-            background: #020617;
-            color: #e2e8f0;
-            padding: 16px;
-            box-sizing: border-box;
+        .toolbar-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
         }
         button {
-            margin-top: 16px;
-            padding: 12px 20px;
             border: 0;
             border-radius: 999px;
-            background: #2563eb;
+            background: linear-gradient(135deg, #f97316, #ea580c);
             color: white;
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
             font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            padding: 12px 18px;
             cursor: pointer;
+            box-shadow: 0 14px 32px rgba(249, 115, 22, 0.24);
+        }
+        button:disabled {
+            cursor: wait;
+            opacity: 0.72;
+        }
+        .status {
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+        .status.success {
+            color: var(--success);
+        }
+        .status.error {
+            color: var(--danger);
+        }
+        .editor-shell {
+            display: grid;
+            grid-template-columns: 68px minmax(0, 1fr);
+            min-height: 340px;
+            max-height: 460px;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            background: var(--panel-strong);
+        }
+        .line-numbers {
+            margin: 0;
+            padding: 20px 14px;
+            list-style: none;
+            background: rgba(2, 6, 23, 0.92);
+            border-right: 1px solid var(--line);
+            color: #78716c;
+            font-family: "SFMono-Regular", "Consolas", monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            text-align: right;
+            overflow: hidden;
+            user-select: none;
+        }
+        .editor-stage {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(3, 7, 18, 0.98));
+        }
+        .editor-highlight,
+        .sql-input {
+            position: absolute;
+            inset: 0;
+            margin: 0;
+            padding: 20px 22px;
+            border: 0;
+            background: transparent;
+            font-family: "SFMono-Regular", "Consolas", monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre;
+            overflow: auto;
+        }
+        .editor-highlight {
+            color: var(--editor-text);
+            pointer-events: none;
+        }
+        .sql-input {
+            resize: none;
+            color: transparent;
+            caret-color: #fff7ed;
+            outline: none;
+            z-index: 1;
+        }
+        .sql-input::selection {
+            background: rgba(251, 146, 60, 0.28);
+        }
+        .token-keyword {
+            color: var(--keyword);
+            font-weight: 700;
+        }
+        .token-string {
+            color: var(--string);
+        }
+        .token-number {
+            color: var(--number);
+        }
+        .token-comment {
+            color: var(--comment);
+            font-style: italic;
+        }
+        .token-identifier {
+            color: var(--identifier);
+        }
+        .panels {
+            display: grid;
+            gap: 18px;
+            margin-top: 20px;
+        }
+        .panel {
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: rgba(2, 6, 23, 0.62);
+            overflow: hidden;
+        }
+        .panel h2 {
+            margin: 0;
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.95rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
+        }
+        .panel-body {
+            padding: 18px;
+        }
+        .error-panel {
+            border-color: rgba(251, 113, 133, 0.28);
+            background: var(--danger-soft);
+            display: none;
+        }
+        .error-panel.visible {
+            display: block;
+        }
+        .error-panel h2 {
+            color: #fecdd3;
+        }
+        .error-message {
+            margin: 0;
+            color: #ffe4e6;
+            font-family: "SFMono-Regular", "Consolas", monospace;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        .result-scroll {
+            overflow: auto;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            background: #111827;
+            min-width: 620px;
         }
         th, td {
-            border: 1px solid #334155;
-            padding: 10px;
+            border-bottom: 1px solid var(--line);
+            padding: 12px 14px;
             text-align: left;
             vertical-align: top;
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
+        }
+        th {
+            color: #fdba74;
+            background: rgba(124, 45, 18, 0.16);
+            position: sticky;
+            top: 0;
+        }
+        td {
+            color: #e5e7eb;
         }
         pre {
-            margin-top: 20px;
-            padding: 16px;
-            border-radius: 12px;
-            background: #111827;
-            border: 1px solid #334155;
-            overflow: auto;
-        }
-        .status {
-            margin-top: 16px;
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
             color: #cbd5e1;
+            font-family: "SFMono-Regular", "Consolas", monospace;
+            line-height: 1.6;
+        }
+        .sidebar {
+            padding: 24px;
+            position: sticky;
+            top: 20px;
+        }
+        .sidebar h2 {
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+        }
+        .sidebar p {
+            margin: 0 0 18px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .tables {
+            display: grid;
+            gap: 14px;
+        }
+        .table-card {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 14px 16px;
+            background: rgba(2, 6, 23, 0.54);
+        }
+        .table-card h3 {
+            margin: 0 0 10px;
+            font-size: 1rem;
+            color: #fed7aa;
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
+        }
+        .columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .columns span {
+            display: inline-flex;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(125, 211, 252, 0.18);
+            color: #bae6fd;
+            background: rgba(8, 47, 73, 0.32);
+            font-size: 0.82rem;
+            font-family: "SFMono-Regular", "Consolas", monospace;
+        }
+        .empty {
+            color: var(--muted);
+            font-family: "Avenir Next", "Segoe UI", sans-serif;
+        }
+        @media (max-width: 1120px) {
+            .shell {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
         }
     </style>
 </head>
 <body>
 <main>
-    <h1>pgrust SQL Console</h1>
-    <div class="links">
-        <a href="/api/books">/api/books</a>
-        <a href="/swagger-ui">/swagger-ui</a>
-        <a href="/swagger">/swagger</a>
+    <div class="shell">
+        <section class="workspace">
+            <div class="hero">
+                <div class="eyebrow">pgrust browser workbench</div>
+                <h1>Query the database without leaving the app.</h1>
+                <p class="subtitle">Use the embedded SQL console to inspect books, run one statement at a time, and get visible feedback when pgrust rejects the query.</p>
+                <div class="links">
+                    <a href="/api/books?page=0&size=10">/api/books</a>
+                    <a href="/swagger-ui">/swagger-ui</a>
+                    <a href="/swagger">/swagger</a>
+                </div>
+            </div>
+            <div class="editor-block">
+                <div class="toolbar">
+                    <div class="toolbar-meta">single statement mode</div>
+                    <div class="toolbar-actions">
+                        <div class="status" id="status">Ready</div>
+                        <button id="run" type="button">Run SQL</button>
+                    </div>
+                </div>
+                <div class="editor-shell">
+                    <ol class="line-numbers" id="lineNumbers"></ol>
+                    <div class="editor-stage">
+                        <pre class="editor-highlight" id="highlight"></pre>
+                        <textarea class="sql-input" id="sql" spellcheck="false">select id, title, author, isbn, published_year
+from books
+order by id
+limit 10</textarea>
+                    </div>
+                </div>
+                <div class="panels">
+                    <section class="panel error-panel" id="errorPanel">
+                        <h2>Query error</h2>
+                        <div class="panel-body">
+                            <p class="error-message" id="errorMessage"></p>
+                        </div>
+                    </section>
+                    <section class="panel">
+                        <h2>Result grid</h2>
+                        <div class="panel-body result-scroll" id="table"></div>
+                    </section>
+                    <section class="panel">
+                        <h2>Response payload</h2>
+                        <div class="panel-body">
+                            <pre id="raw"></pre>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <aside class="sidebar">
+            <h2>Tables</h2>
+            <p>The right rail reflects the visible tables in the public schema so you can discover what is queryable before you type.</p>
+            <div class="tables" id="tables"></div>
+        </aside>
     </div>
-    <textarea id="sql">select id, title, author, isbn, published_year from books order by id</textarea>
-    <button id="run" type="button">Run SQL</button>
-    <div class="status" id="status">Ready</div>
-    <div id="table"></div>
-    <pre id="raw"></pre>
 </main>
 <script>
     const sqlInput = document.getElementById("sql");
@@ -99,6 +435,13 @@
     const statusNode = document.getElementById("status");
     const tableNode = document.getElementById("table");
     const rawNode = document.getElementById("raw");
+    const lineNumbersNode = document.getElementById("lineNumbers");
+    const highlightNode = document.getElementById("highlight");
+    const tablesNode = document.getElementById("tables");
+    const errorPanel = document.getElementById("errorPanel");
+    const errorMessageNode = document.getElementById("errorMessage");
+
+    const sqlKeywords = /\b(select|from|where|insert|into|values|update|set|delete|create|table|alter|drop|order|by|group|having|limit|offset|join|left|right|inner|outer|on|as|and|or|not|null|is|in|exists|count|returning|distinct|case|when|then|else|end)\b/gi;
 
     function escapeHtml(value) {
         return String(value)
@@ -109,9 +452,65 @@
             .replaceAll("'", "&#39;");
     }
 
+    function updateLineNumbers() {
+        const lineCount = Math.max(sqlInput.value.split("\n").length, 1);
+        lineNumbersNode.innerHTML = Array.from({ length: lineCount }, (_, index) => `<li>${index + 1}</li>`).join("");
+    }
+
+    function highlightSql(sql) {
+        const tokenPattern = /(--.*$)|('(?:''|[^'])*')|(\b\d+\b)|(\b[a-z_][a-z0-9_]*\b)/gim;
+        let cursor = 0;
+        let html = "";
+        for (const match of sql.matchAll(tokenPattern)) {
+            const [value, commentToken, stringToken, numberToken, wordToken] = match;
+            const index = match.index ?? 0;
+            html += escapeHtml(sql.slice(cursor, index));
+            if (commentToken) {
+                html += `<span class="token-comment">${escapeHtml(value)}</span>`;
+            } else if (stringToken) {
+                html += `<span class="token-string">${escapeHtml(value)}</span>`;
+            } else if (numberToken) {
+                html += `<span class="token-number">${escapeHtml(value)}</span>`;
+            } else if (wordToken) {
+                if (sqlKeywords.test(value)) {
+                    html += `<span class="token-keyword">${escapeHtml(value.toUpperCase())}</span>`;
+                    sqlKeywords.lastIndex = 0;
+                } else {
+                    html += `<span class="token-identifier">${escapeHtml(value)}</span>`;
+                }
+            }
+            cursor = index + value.length;
+        }
+        html += escapeHtml(sql.slice(cursor));
+        return html + "\n";
+    }
+
+    function refreshEditor() {
+        updateLineNumbers();
+        highlightNode.innerHTML = highlightSql(sqlInput.value);
+    }
+
+    function syncScroll() {
+        highlightNode.scrollTop = sqlInput.scrollTop;
+        highlightNode.scrollLeft = sqlInput.scrollLeft;
+        lineNumbersNode.scrollTop = sqlInput.scrollTop;
+    }
+
+    function showError(message) {
+        errorMessageNode.textContent = message;
+        errorPanel.classList.add("visible");
+        statusNode.textContent = "Query failed";
+        statusNode.className = "status error";
+    }
+
+    function clearError() {
+        errorMessageNode.textContent = "";
+        errorPanel.classList.remove("visible");
+    }
+
     function renderTable(payload) {
         if (!payload.columns || payload.columns.length === 0 || !payload.rows || payload.rows.length === 0) {
-            tableNode.innerHTML = "";
+            tableNode.innerHTML = '<div class="empty">This statement did not return tabular rows.</div>';
             return;
         }
         const header = payload.columns.map(column => `<th>${escapeHtml(column)}</th>`).join("");
@@ -122,31 +521,78 @@
         tableNode.innerHTML = `<table><thead><tr>${header}</tr></thead><tbody>${rows}</tbody></table>`;
     }
 
-    async function runSql() {
-        statusNode.textContent = "Running";
-        tableNode.innerHTML = "";
-        rawNode.textContent = "";
-        const response = await fetch("/sql-console/query", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ sql: sqlInput.value })
-        });
-        const payload = await response.json();
-        if (!response.ok) {
-            statusNode.textContent = `Failed with status ${response.status}`;
-            rawNode.textContent = JSON.stringify(payload, null, 2);
+    function renderTables(tables) {
+        if (!Array.isArray(tables) || tables.length === 0) {
+            tablesNode.innerHTML = '<div class="empty">No public tables found.</div>';
             return;
         }
-        statusNode.textContent = payload.updatedCount == null ? `Returned ${payload.rows.length} row(s)` : `Updated ${payload.updatedCount} row(s)`;
-        renderTable(payload);
-        rawNode.textContent = JSON.stringify(payload, null, 2);
+        tablesNode.innerHTML = tables.map(table => `
+            <section class="table-card">
+                <h3>${escapeHtml(table.name)}</h3>
+                <div class="columns">
+                    ${table.columns.map(column => `<span>${escapeHtml(column)}</span>`).join("")}
+                </div>
+            </section>
+        `).join("");
     }
 
+    async function loadTables() {
+        try {
+            const response = await fetch("/sql-console/tables");
+            const payload = await response.json();
+            if (!response.ok) {
+                renderTables([]);
+                return;
+            }
+            renderTables(payload);
+        } catch (error) {
+            tablesNode.innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
+        }
+    }
+
+    async function runSql() {
+        runButton.disabled = true;
+        statusNode.textContent = "Running";
+        statusNode.className = "status";
+        tableNode.innerHTML = "";
+        rawNode.textContent = "";
+        clearError();
+        try {
+            const response = await fetch("/sql-console/query", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ sql: sqlInput.value })
+            });
+            const contentType = response.headers.get("content-type") || "";
+            const payload = contentType.includes("application/json") ? await response.json() : { message: await response.text() };
+            if (!response.ok) {
+                const message = payload.message || payload.error || "Unknown SQL error";
+                showError(message);
+                rawNode.textContent = JSON.stringify(payload, null, 2);
+                return;
+            }
+            statusNode.textContent = payload.updatedCount == null ? `Returned ${payload.rows.length} row(s)` : `Updated ${payload.updatedCount} row(s)`;
+            statusNode.className = "status success";
+            renderTable(payload);
+            rawNode.textContent = JSON.stringify(payload, null, 2);
+            await loadTables();
+        } catch (error) {
+            showError(error.message);
+            rawNode.textContent = JSON.stringify({ message: error.message }, null, 2);
+        } finally {
+            runButton.disabled = false;
+        }
+    }
+
+    sqlInput.addEventListener("input", refreshEditor);
+    sqlInput.addEventListener("scroll", syncScroll);
     runButton.addEventListener("click", runSql);
+    refreshEditor();
+    syncScroll();
+    loadTables();
     runSql();
 </script>
 </body>
 </html>
-

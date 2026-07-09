@@ -123,7 +123,8 @@ You can override the HTTP port with `APP_PORT=19090 ./start.sh`.
 
 Open `http://localhost:18080/sql-console`.
 The page loads a starter query against the `books` table.
-The UI renders both a result grid and the raw JSON payload.
+The UI shows line numbers, SQL syntax highlighting, a right-side table catalog, a result grid, and the raw JSON payload.
+Query errors are rendered directly in the page so invalid SQL is visible without opening the browser console.
 Only one SQL statement is accepted per request.
 You can use it for reads, inserts, updates, and DDL.
 

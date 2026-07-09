@@ -11,9 +11,11 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class SqlConsoleService {
@@ -50,6 +52,25 @@ public class SqlConsoleService {
                 }
             }
         });
+    }
+
+    public List<SqlTableInfo> tables() {
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList("""
+                select table_name, column_name, ordinal_position
+                from information_schema.columns
+                where table_schema = 'public'
+                order by table_name, ordinal_position
+                """);
+        Map<String, List<String>> grouped = new LinkedHashMap<>();
+        for (Map<String, Object> row : rows) {
+            String tableName = String.valueOf(row.get("table_name"));
+            String columnName = String.valueOf(row.get("column_name"));
+            grouped.computeIfAbsent(tableName, ignored -> new ArrayList<>()).add(columnName);
+        }
+        return grouped.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey(Comparator.naturalOrder()))
+                .map(entry -> new SqlTableInfo(entry.getKey(), List.copyOf(entry.getValue())))
+                .collect(Collectors.toList());
     }
 
     private String normalize(String sql) {

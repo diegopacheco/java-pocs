@@ -15,7 +15,10 @@ printf '%s' "${CREATE_JSON}" | grep -q "\"isbn\":\"${UNIQUE_ISBN}\""
 
 curl -fsS "${BASE_URL}/swagger" | grep -q '"openapi"'
 curl -fsSL "${BASE_URL}/swagger-ui" | grep -q 'Swagger UI'
-curl -fsS "${BASE_URL}/sql-console" | grep -q 'pgrust SQL Console'
+curl -fsS "${BASE_URL}/sql-console" | grep -q 'Query the database without leaving the app.'
+curl -fsS "${BASE_URL}/sql-console/tables" | grep -q '"name":"books"'
 curl -fsS -X POST "${BASE_URL}/sql-console/query" -H 'Content-Type: application/json' -d '{"sql":"select count(*) as total from books"}' | grep -q '"total"'
+INVALID_SQL_RESPONSE="$(curl -sS -X POST "${BASE_URL}/sql-console/query" -H 'Content-Type: application/json' -d '{"sql":"select * from table_that_does_not_exist"}')"
+printf '%s' "${INVALID_SQL_RESPONSE}" | grep -q '"message"'
 
 printf 'All runtime checks passed\n'
