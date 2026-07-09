@@ -1,0 +1,19 @@
+pocs/java-25-postgres-pgrust-fun/README.md
+  s_5ff430aeee7516::t_e32a20ff2cb01a 162,164-180,185-187
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "b40490ae95024483886fa33836d309b2b1c4c3bd",
+  "prompts": {},
+  "sessions": {
+    "s_5ff430aeee7516": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "607f7ccf-fb1f-45eb-8613-688329fee6c0",
+        "model": "gpt-5.4"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
