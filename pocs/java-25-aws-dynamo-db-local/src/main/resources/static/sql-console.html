@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>DynamoDB SQL Console</title>
+    <style>
+        :root {
+            --bg: #f7f9fc;
+            --panel: #ffffff;
+            --border: #e2e8f0;
+            --accent: #3b82f6;
+            --accent-soft: #eff6ff;
+            --text: #1f2937;
+            --muted: #64748b;
+            --error: #dc2626;
+            --ok: #16a34a;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+        header {
+            padding: 24px 32px;
+            background: var(--panel);
+            border-bottom: 1px solid var(--border);
+        }
+        header h1 { margin: 0; font-size: 20px; }
+        header p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+        main { max-width: 1000px; margin: 0 auto; padding: 24px 32px; }
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+        }
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: "SF Mono", Menlo, Consolas, monospace;
+            font-size: 14px;
+            resize: vertical;
+            color: var(--text);
+            background: #fbfcfe;
+        }
+        .samples { margin: 12px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+        .samples button {
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid #dbeafe;
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .run {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .run:hover { background: #2563eb; }
+        .status { margin: 14px 0; font-size: 13px; color: var(--muted); }
+        .status.error { color: var(--error); }
+        .status.ok { color: var(--ok); }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+        th { background: #f1f5f9; color: var(--muted); font-weight: 600; }
+        .table-wrap { overflow-x: auto; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>DynamoDB SQL Console</h1>
+    <p>Runs PartiQL over the DynamoDB JDBC driver against DynamoDB Local at localhost:8000</p>
+</header>
+<main>
+    <div class="card">
+        <textarea id="sql" spellcheck="false">SELECT id, title, author, totalPages, pagesRead FROM "Books"</textarea>
+        <div class="samples">
+            <button data-sql='SELECT id, title, author, totalPages, pagesRead FROM "Books"'>Select all</button>
+            <button data-sql="INSERT INTO &quot;Books&quot; (id, title, author, totalPages, pagesRead) VALUES ('sql-1', 'PartiQL Guide', 'AWS', 300, 0)">Insert</button>
+            <button data-sql="UPDATE &quot;Books&quot; SET pagesRead = 42 WHERE id = 'sql-1'">Update pages</button>
+            <button data-sql="DELETE FROM &quot;Books&quot; WHERE id = 'sql-1'">Delete</button>
+        </div>
+        <button class="run" id="run">Run</button>
+    </div>
+    <div class="status" id="status">Ready.</div>
+    <div class="card table-wrap" id="resultCard" style="display:none;">
+        <table id="result"></table>
+    </div>
+</main>
+<script>
+    const sqlBox = document.getElementById('sql');
+    const statusEl = document.getElementById('status');
+    const resultCard = document.getElementById('resultCard');
+    const resultTable = document.getElementById('result');
+
+    document.querySelectorAll('.samples button').forEach(function (b) {
+        b.addEventListener('click', function () { sqlBox.value = b.getAttribute('data-sql'); });
+    });
+
+    document.getElementById('run').addEventListener('click', run);
+
+    async function run() {
+        statusEl.className = 'status';
+        statusEl.textContent = 'Running...';
+        resultCard.style.display = 'none';
+        try {
+            const res = await fetch('/api/sql/execute', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sql: sqlBox.value })
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                statusEl.className = 'status error';
+                statusEl.textContent = 'Error: ' + (data.message || res.status);
+                return;
+            }
+            if (data.updateCount !== null && data.updateCount !== undefined) {
+                statusEl.className = 'status ok';
+                statusEl.textContent = 'Statement executed. Update count: ' + data.updateCount;
+                return;
+            }
+            statusEl.className = 'status ok';
+            statusEl.textContent = data.rowCount + ' row(s) returned.';
+            render(data.columns, data.rows);
+        } catch (e) {
+            statusEl.className = 'status error';
+            statusEl.textContent = 'Request failed: ' + e.message;
+        }
+    }
+
+    function render(columns, rows) {
+        let head = '<thead><tr>';
+        columns.forEach(function (c) { head += '<th>' + c + '</th>'; });
+        head += '</tr></thead>';
+        let body = '<tbody>';
+        rows.forEach(function (row) {
+            body += '<tr>';
+            columns.forEach(function (c) {
+                const v = row[c];
+                body += '<td>' + (v === null || v === undefined ? '' : v) + '</td>';
+            });
+            body += '</tr>';
+        });
+        body += '</tbody>';
+        resultTable.innerHTML = head + body;
+        resultCard.style.display = 'block';
+    }
+</script>
+</body>
+</html>

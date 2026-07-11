@@ -1,0 +1,51 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: bookstore
+  datasource:
+    url: jdbc:dynamodb://localhost:8000
+    driver-class-name: com.dbvis.driver.dynamodb.jdbc.DynamoDbDriver
+    hikari:
+      pool-name: dynamodb-hikari
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 10000
+      data-source-properties:
+        AccessKey: dummy
+        SecretKey: dummy
+        Region: us-east-1
+        RunConnectionCheck: false
+
+dynamodb:
+  endpoint: http://localhost:8000
+  region: us-east-1
+  access-key: dummy
+  secret-key: dummy
+  table: Books
+
+auth:
+  username: admin
+  password: admin
+
+jwt:
+  secret: change-me-bookstore-super-secret-key-for-hs256-signing-0123456789
+  expiration-minutes: 60
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
