@@ -1,0 +1,42 @@
+pocs/java-25-aws-dynamo-db-local/src/main/java/com/bookstore/security/JwtAuthFilter.java
+  s_3777402bce4507::t_da80a65b86d61f 22
+pocs/java-25-aws-dynamo-db-local/src/main/java/com/bookstore/web/dto/TableSchema.java
+  s_3777402bce4507::t_9b2066669c1754 1-6
+pocs/java-25-aws-dynamo-db-local/README.md
+  s_3777402bce4507::t_6a172f7c2efe69 35,37-40
+  s_3777402bce4507::t_78dae9e5bd7bf0 13,16
+  s_3777402bce4507::t_ecbadd0ffc379e 95-96,99
+pocs/java-25-aws-dynamo-db-local/src/main/java/com/bookstore/service/SqlConsoleService.java
+  s_3777402bce4507::t_de5f259394ce80 8,11,17-20,26,28,30-45
+pocs/java-25-aws-dynamo-db-local/src/test/java/com/bookstore/BookApiIntegrationTest.java
+  s_3777402bce4507::t_afd9575c8b224e 138-147,157-166
+  s_3777402bce4507::t_fda2d92ee358dc 167-168
+pocs/java-25-aws-dynamo-db-local/demo.sh
+  s_3777402bce4507::t_38719f762b42d3 55-59
+pocs/java-25-aws-dynamo-db-local/src/main/java/com/bookstore/web/SqlConsoleController.java
+  s_3777402bce4507::t_7db897513272b9 3-5,14,35-39
+  s_3777402bce4507::t_b34b2cdb686bd2 40
+pocs/java-25-aws-dynamo-db-local/src/main/java/com/bookstore/repository/BookRepository.java
+  s_3777402bce4507::t_c0421edc36a86e 13-17,29,32,34,39-59
+pocs/java-25-aws-dynamo-db-local/printscreens/architecture.svg
+  s_3777402bce4507::t_ed3cdf5f703fc6 44,49
+pocs/java-25-aws-dynamo-db-local/src/main/resources/static/sql-console.html
+  s_3777402bce4507::t_53c26cf1fbeab7 236
+  s_3777402bce4507::t_67f914f82e8db4 9-11,14-15,17-26,28-33,35-37,39,47-66,71-75,77-94,96-121,123-124,126-128,130,134-138,140-232,235,237-255,257-296,299,302,305,307,309-310,312-314,317,320,322-324,326,329-336
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.11",
+  "base_commit_sha": "95552e12210246c8c1c092ddbaf54b2f4db5b5d4",
+  "prompts": {},
+  "sessions": {
+    "s_3777402bce4507": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d1ae84df-1e55-4c32-9e1c-f083bdcfa67c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
