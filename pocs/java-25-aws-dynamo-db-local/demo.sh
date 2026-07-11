@@ -35,14 +35,16 @@ step "PATCH /api/books/$ID/pages (track pages read = 90)"
 curl -s -X PATCH "$B/api/books/$ID/pages" -H "$AUTH" -H 'Content-Type: application/json' \
   -d '{"pagesRead":90}' | pretty
 
-step "GET /api/books?page=0&size=2 (paginated, defaults)"
-curl -s "$B/api/books?page=0&size=2" -H "$AUTH" | pretty
+step "GET /api/books?size=2 (DynamoDB cursor pagination, first page)"
+PAGE1=$(curl -s "$B/api/books?size=2" -H "$AUTH")
+echo "$PAGE1" | pretty
+NEXT=$(echo "$PAGE1" | sed -E 's/.*"nextToken":"([^"]*)".*/\1/')
 
-step "GET /api/books?page=1&size=2 (next page)"
-curl -s "$B/api/books?page=1&size=2" -H "$AUTH" | pretty
+step "GET /api/books?size=2 with nextToken (next page)"
+curl -s -G "$B/api/books" -H "$AUTH" --data-urlencode "size=2" --data-urlencode "nextToken=$NEXT" | pretty
 
 step "POST /api/books/batch-pages (atomic transaction, success)"
-TWO=$(curl -s "$B/api/books?page=0&size=5" -H "$AUTH" | grep -oE '"id":"[^"]+"' | head -2 | sed -E 's/"id":"([^"]+)"/\1/')
+TWO=$(curl -s "$B/api/books?size=5" -H "$AUTH" | grep -oE '"id":"[^"]+"' | head -2 | sed -E 's/"id":"([^"]+)"/\1/')
 ID1=$(echo "$TWO" | sed -n '1p')
 ID2=$(echo "$TWO" | sed -n '2p')
 curl -s -X POST "$B/api/books/batch-pages" -H "$AUTH" -H 'Content-Type: application/json' \

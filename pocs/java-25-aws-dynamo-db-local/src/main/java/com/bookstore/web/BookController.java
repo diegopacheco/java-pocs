@@ -18,7 +18,7 @@ import com.bookstore.service.BookService;
 import com.bookstore.service.TransactionService;
 import com.bookstore.web.dto.BatchPagesRequest;
 import com.bookstore.web.dto.CreateBookRequest;
-import com.bookstore.web.dto.PageResponse;
+import com.bookstore.web.dto.CursorPage;
 import com.bookstore.web.dto.PageUpdate;
 import com.bookstore.web.dto.UpdatePagesRequest;
 
@@ -46,11 +46,11 @@ public class BookController {
     }
 
     @GetMapping
-    @Operation(summary = "List books with pagination (page defaults to 0, size defaults to 2)")
-    public PageResponse<Book> list(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "2") int size) {
-        return bookService.list(page, size);
+    @Operation(summary = "List books using DynamoDB cursor pagination (size defaults to 2; pass nextToken to page forward)")
+    public CursorPage<Book> list(
+            @RequestParam(defaultValue = "2") int size,
+            @RequestParam(required = false) String nextToken) {
+        return bookService.list(size, nextToken);
     }
 
     @GetMapping("/{id}")

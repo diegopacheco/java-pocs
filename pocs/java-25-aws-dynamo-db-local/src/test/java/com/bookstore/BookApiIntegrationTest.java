@@ -1,6 +1,7 @@
 package com.bookstore;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,6 +9,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
@@ -112,25 +114,29 @@ class BookApiIntegrationTest {
 
     @Test
     @Order(3)
-    void listBooksIsPaginatedAndDefaultsToPageZeroSizeTwo() {
+    void listBooksUsesDynamoDbCursorPaginationWithDefaultSizeTwo() {
         String jwt = token();
         create(jwt, "Zzz Padding One", "Filler", 100);
         create(jwt, "Zzz Padding Two", "Filler", 100);
         create(jwt, "Zzz Padding Three", "Filler", 100);
 
-        Map defaults = client.get().uri("/api/books").headers(h -> h.setBearerAuth(jwt))
+        Map first = client.get().uri("/api/books").headers(h -> h.setBearerAuth(jwt))
                 .retrieve().toEntity(Map.class).getBody();
-        assertEquals(0, ((Number) defaults.get("page")).intValue(), "page must default to 0");
-        assertEquals(2, ((Number) defaults.get("size")).intValue(), "size must default to 2");
-        assertEquals(2, ((List<?>) defaults.get("content")).size(),
-                "a full default page must contain exactly 2 books so the client can page");
-        assertTrue(((Number) defaults.get("total")).intValue() >= 3, "total counts every book, not just the page");
+        assertEquals(2, ((Number) first.get("size")).intValue(), "size must default to 2");
+        List<?> firstContent = (List<?>) first.get("content");
+        assertTrue(firstContent.size() <= 2, "a page must never return more than size items");
+        String next = (String) first.get("nextToken");
+        assertNotNull(next, "with more than 2 books DynamoDB must return a nextToken to page forward");
 
-        Map second = client.get().uri("/api/books?page=1&size=3").headers(h -> h.setBearerAuth(jwt))
+        Map second = client.get().uri("/api/books?size=2&nextToken={t}", next).headers(h -> h.setBearerAuth(jwt))
                 .retrieve().toEntity(Map.class).getBody();
-        assertEquals(1, ((Number) second.get("page")).intValue());
-        assertEquals(3, ((Number) second.get("size")).intValue());
-        assertTrue(((List<?>) second.get("content")).size() <= 3);
+        List<Map<String, Object>> secondContent = (List<Map<String, Object>>) second.get("content");
+        assertFalse(secondContent.isEmpty(), "following the cursor must return the next page of books");
+
+        Set<Object> firstIds = firstContent.stream().map(b -> ((Map<?, ?>) b).get("id")).collect(java.util.stream.Collectors.toSet());
+        Set<Object> secondIds = secondContent.stream().map(b -> b.get("id")).collect(java.util.stream.Collectors.toSet());
+        assertTrue(java.util.Collections.disjoint(firstIds, secondIds),
+                "the second page must contain different books than the first, proving the cursor advanced");
     }
 
     @Test

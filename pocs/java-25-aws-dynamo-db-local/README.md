@@ -88,7 +88,7 @@ Base URL `http://localhost:8080`. **Every `/api/**` endpoint enforces `Authoriza
 | --- | --- | --- | --- |
 | POST | `/api/auth/login` | no | Get a JWT (`admin` / `admin`) |
 | POST | `/api/books` | yes | Create a book |
-| GET | `/api/books?page=0&size=2` | yes | List books, paginated (defaults `page=0`, `size=2`) |
+| GET | `/api/books?size=2&nextToken=...` | yes | List books, DynamoDB cursor pagination (`size` defaults to 2) |
 | GET | `/api/books/{id}` | yes | Get one book |
 | PATCH | `/api/books/{id}/pages` | yes | Track pages read |
 | POST | `/api/books/batch-pages` | yes | Atomic multi-book page update (transaction) |
@@ -134,19 +134,19 @@ Base URL `http://localhost:8080`. **Every `/api/**` endpoint enforces `Authoriza
 { "id": "9c6f69b7-d0d5-47a8-afcf-02bd4a1a2021", "title": "Effective Java", "author": "Joshua Bloch", "totalPages": 412, "pagesRead": 75 }
 ```
 
-**GET `/api/books?page=0&size=2`** — paginated. `page` defaults to `0`, `size` defaults to `2`. Because DynamoDB has no SQL `OFFSET`, the Scan result is sorted by title and paged in the service layer; `total`/`totalPages` describe the whole catalog.
+**GET `/api/books?size=2`** — **DynamoDB-native cursor pagination**. Because DynamoDB has no SQL `OFFSET`, the repository pages with the SDK's PartiQL `ExecuteStatement` using `limit` + the opaque `nextToken` cursor (`LastEvaluatedKey`). `size` defaults to `2`. To get the next page, pass the returned `nextToken` back as a query parameter; a `null` `nextToken` means the last page. There is no `total` — DynamoDB does not count without a full scan.
 ```json
 {
-  "page": 0,
   "size": 2,
-  "total": 10,
-  "totalPages": 5,
+  "count": 2,
+  "nextToken": "eyJFeGNsdXNpdmVTdGFydEtleSI6ey...",
   "content": [
-    { "id": "d05847dc-...", "title": "Accelerate", "author": "Forsgren, Humble, Kim", "totalPages": 288, "pagesRead": 288 },
-    { "id": "13a4c2b3-...", "title": "Clean Code", "author": "Robert C. Martin", "totalPages": 464, "pagesRead": 120 }
+    { "id": "9ea9313b-...", "title": "Refactoring", "author": "Martin Fowler", "totalPages": 448, "pagesRead": 88 },
+    { "id": "b08ff88c-...", "title": "Release It!", "author": "Michael Nygard", "totalPages": 378, "pagesRead": 150 }
   ]
 }
 ```
+Next page: `GET /api/books?size=2&nextToken=eyJFeGNsdXNpdmVTdGFydEtleSI6ey...`
 
 **POST `/api/books/batch-pages` (success)** — one atomic transaction
 ```json
@@ -183,9 +183,14 @@ Base URL `http://localhost:8080`. **Every `/api/**` endpoint enforces `Authoriza
 
 ![swagger](printscreens/swagger-ui.png)
 
-**SQL console** — light theme, PartiQL over JDBC, live results (`/sql-console`)
+**SQL console** (`/sql-console`) — light theme, PartiQL over JDBC, live results, with a **schema sidebar** (tables + fields, keys badged), **syntax highlighting**, **autocomplete** (keywords + table/field names from the live schema), and **Cmd/Ctrl+Enter to run**. It is **JWT-protected**: a login modal signs in and stores the token in `localStorage` (no CSRF surface, since the token is only sent via an explicit `Authorization` header).
 
 ![sql console](printscreens/sql-console.png)
+
+Login modal and field autocomplete:
+
+![sql console login](printscreens/sql-console-login.png)
+![sql console autocomplete](printscreens/sql-console-autocomplete.png)
 
 **Health** — app + DynamoDB indicator (`/actuator/health`)
 

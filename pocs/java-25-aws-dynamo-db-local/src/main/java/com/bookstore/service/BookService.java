@@ -1,7 +1,5 @@
 package com.bookstore.service;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -13,7 +11,7 @@ import com.bookstore.error.ValidationException;
 import com.bookstore.model.Book;
 import com.bookstore.repository.BookRepository;
 import com.bookstore.web.dto.CreateBookRequest;
-import com.bookstore.web.dto.PageResponse;
+import com.bookstore.web.dto.CursorPage;
 
 @Service
 public class BookService {
@@ -39,17 +37,12 @@ public class BookService {
         return book;
     }
 
-    public PageResponse<Book> list(int page, int size) {
-        if (page < 0 || size < 1) {
-            throw new ValidationException("page must be >= 0 and size must be >= 1");
+    public CursorPage<Book> list(int size, String nextToken) {
+        if (size < 1) {
+            throw new ValidationException("size must be >= 1");
         }
-        List<Book> all = repository.findAll().stream()
-                .sorted(Comparator.comparing(Book::title))
-                .toList();
-        long total = all.size();
-        int totalPages = (int) Math.ceil((double) total / size);
-        List<Book> content = all.stream().skip((long) page * size).limit(size).toList();
-        return new PageResponse<>(page, size, total, totalPages, content);
+        BookRepository.Page page = repository.scan(size, nextToken);
+        return new CursorPage<>(size, page.items().size(), page.nextToken(), page.items());
     }
 
     public Book get(String id) {

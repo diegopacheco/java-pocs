@@ -1,6 +1,7 @@
 package com.bookstore.repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,6 +13,8 @@ import com.bookstore.model.Book;
 
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
+import software.amazon.awssdk.services.dynamodb.model.ExecuteStatementRequest;
+import software.amazon.awssdk.services.dynamodb.model.ExecuteStatementResponse;
 import software.amazon.awssdk.services.dynamodb.model.ExecuteTransactionRequest;
 import software.amazon.awssdk.services.dynamodb.model.ParameterizedStatement;
 
@@ -61,6 +64,30 @@ public class BookRepository {
 
     public List<Book> findAll() {
         return jdbc.query("SELECT id, title, author, totalPages, pagesRead FROM \"" + table + "\"", BOOK_MAPPER);
+    }
+
+    public Page scan(int size, String nextToken) {
+        ExecuteStatementRequest.Builder request = ExecuteStatementRequest.builder()
+                .statement("SELECT id, title, author, totalPages, pagesRead FROM \"" + table + "\"")
+                .limit(size);
+        if (nextToken != null && !nextToken.isBlank()) {
+            request.nextToken(nextToken);
+        }
+        ExecuteStatementResponse response = client.executeStatement(request.build());
+        List<Book> items = response.items().stream().map(BookRepository::toBook).toList();
+        return new Page(items, response.nextToken());
+    }
+
+    private static Book toBook(Map<String, AttributeValue> item) {
+        return new Book(
+                item.get("id").s(),
+                item.get("title").s(),
+                item.get("author").s(),
+                Integer.parseInt(item.get("totalPages").n()),
+                Integer.parseInt(item.get("pagesRead").n()));
+    }
+
+    public record Page(List<Book> items, String nextToken) {
     }
 
     public Optional<Book> findById(String id) {
