@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive, animated solar system visualizer.">
+  <title>Helios — Solar System Visualizer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grain"></div>
+  <header class="masthead">
+    <a class="brand" href="#">HELIOS <span>°</span></a>
+    <p class="issue">CELESTIAL ATLAS · 2026</p>
+    <button class="about-trigger" id="aboutTrigger" type="button">ABOUT THIS MAP</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="intro">
+        <p class="eyebrow">AN INTERACTIVE ORRERY</p>
+        <h1>Our small place<br>in the <em>cosmos.</em></h1>
+        <p class="lede">Trace eight worlds in perpetual motion. Select a planet to uncover its scale, rhythm, and distance from our star.</p>
+      </div>
+
+      <div class="stage" id="stage">
+        <canvas id="space" aria-label="Animated view of the solar system"></canvas>
+        <div class="stage-label label-top">N<br><span>0°</span></div>
+        <div class="stage-label label-side">ORBITAL PLANE<br><span>ECLIPTIC J2000</span></div>
+        <div class="planet-card" id="planetCard" aria-live="polite">
+          <button id="closeCard" type="button" aria-label="Close planet details">×</button>
+          <p id="cardNumber">PLANET 03</p>
+          <h2 id="cardName">Earth</h2>
+          <div class="card-rule"></div>
+          <dl>
+            <div><dt>YEAR</dt><dd id="cardYear">365.25 days</dd></div>
+            <div><dt>RADIUS</dt><dd id="cardRadius">6,371 km</dd></div>
+            <div><dt>DISTANCE</dt><dd id="cardDistance">149.6m km</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="Visualizer controls">
+      <div class="play-group">
+        <button id="playButton" class="play" type="button" aria-label="Pause orbital motion"><span></span></button>
+        <div><b id="playLabel">SYSTEM IN MOTION</b><small>Click any planet to inspect</small></div>
+      </div>
+      <label class="range-control"><span>ORBITAL SPEED</span><input id="speed" type="range" min="0" max="3" value="1" step="0.05"><output id="speedOutput">1.00×</output></label>
+      <button class="reset" id="resetButton" type="button">RESET VIEW ↗</button>
+    </section>
+
+    <section class="planet-index" aria-label="Planet index">
+      <p class="section-number">01 — 08</p>
+      <div class="index-heading"><h2>The planetary<br><em>index</em></h2><p>Eight distinct worlds orbit one ordinary star. Choose a name to bring its path into focus.</p></div>
+      <div class="planet-list" id="planetList"></div>
+    </section>
+  </main>
+
+  <dialog id="aboutDialog">
+    <button id="closeAbout" type="button" aria-label="Close">×</button>
+    <p class="eyebrow">ABOUT HELIOS</p>
+    <h2>A moving portrait of our cosmic neighborhood.</h2>
+    <p>Orbital periods and planetary data are proportionally interpreted for exploration. Sizes and distances are visually compressed so all eight worlds can share one frame.</p>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
