@@ -135,8 +135,16 @@ class BookApiIntegrationTest {
 
     @Test
     @Order(4)
-    void sqlConsoleRunsPartiqlOverJdbc() {
-        ResponseEntity<Map> response = client.post().uri("/api/sql/execute")
+    void sqlConsoleRequiresJwtAndRunsPartiqlOverJdbc() {
+        ResponseEntity<String> unauthorized = client.post().uri("/api/sql/execute")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Map.of("sql", "SELECT id FROM \"Books\""))
+                .retrieve().toEntity(String.class);
+        assertEquals(HttpStatus.UNAUTHORIZED, unauthorized.getStatusCode(),
+                "the SQL console is now behind JWT, so an anonymous statement must be rejected");
+
+        String jwt = token();
+        ResponseEntity<Map> response = client.post().uri("/api/sql/execute").headers(h -> h.setBearerAuth(jwt))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Map.of("sql", "SELECT id, title FROM \"Books\""))
                 .retrieve().toEntity(Map.class);
@@ -144,6 +152,18 @@ class BookApiIntegrationTest {
         assertTrue(((Number) response.getBody().get("rowCount")).intValue() >= 0,
                 "the SQL console must return a structured result set from DynamoDB");
         assertNotNull(response.getBody().get("columns"));
+    }
+
+    @Test
+    @Order(5)
+    void schemaEndpointListsBooksTableWithFields() {
+        String jwt = token();
+        ResponseEntity<List> response = client.get().uri("/api/sql/schema").headers(h -> h.setBearerAuth(jwt))
+                .retrieve().toEntity(List.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        boolean hasBooks = response.getBody().stream()
+                .anyMatch(t -> "Books".equals(((Map<?, ?>) t).get("name")));
+        assertTrue(hasBooks, "the schema browser must discover the Books table so the console can list its fields");
     }
 
     private Book create(String jwt, String title, String author, int totalPages) {

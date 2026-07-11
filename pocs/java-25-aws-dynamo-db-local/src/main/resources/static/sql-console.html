@@ -6,72 +6,37 @@
     <title>DynamoDB SQL Console</title>
     <style>
         :root {
-            --bg: #f7f9fc;
-            --panel: #ffffff;
-            --border: #e2e8f0;
-            --accent: #3b82f6;
-            --accent-soft: #eff6ff;
-            --text: #1f2937;
-            --muted: #64748b;
-            --error: #dc2626;
-            --ok: #16a34a;
+            --bg: #f7f9fc; --panel: #ffffff; --border: #e2e8f0; --accent: #3b82f6;
+            --accent-soft: #eff6ff; --text: #1f2937; --muted: #64748b; --error: #dc2626; --ok: #16a34a;
+            --kw: #7c3aed; --str: #16a34a; --num: #d97706; --tbl: #2563eb;
         }
         * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-        }
-        header {
-            padding: 24px 32px;
-            background: var(--panel);
-            border-bottom: 1px solid var(--border);
-        }
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); }
+        header { padding: 20px 32px; background: var(--panel); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
         header h1 { margin: 0; font-size: 20px; }
-        header p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
-        main { max-width: 1000px; margin: 0 auto; padding: 24px 32px; }
-        .card {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+        header p { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+        .layout { display: flex; gap: 20px; max-width: 1200px; margin: 0 auto; padding: 24px 32px; align-items: flex-start; }
+        .editor-col { flex: 1; min-width: 0; }
+        .schema-col { width: 290px; flex-shrink: 0; }
+        .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin-bottom: 18px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+        .editor { position: relative; height: 170px; border: 1px solid var(--border); border-radius: 8px; background: #fbfcfe; overflow: hidden; }
+        .editor pre, .editor textarea {
+            margin: 0; position: absolute; inset: 0; padding: 12px; border: 0; width: 100%; height: 100%;
+            font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 14px; line-height: 1.5;
+            white-space: pre-wrap; overflow-wrap: break-word; overflow: auto; tab-size: 2;
         }
-        textarea {
-            width: 100%;
-            min-height: 120px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px;
-            font-family: "SF Mono", Menlo, Consolas, monospace;
-            font-size: 14px;
-            resize: vertical;
-            color: var(--text);
-            background: #fbfcfe;
-        }
+        .editor pre { z-index: 1; pointer-events: none; color: var(--text); }
+        .editor textarea { z-index: 2; resize: none; color: transparent; background: transparent; caret-color: var(--text); outline: none; }
+        .tok-kw { color: var(--kw); font-weight: 600; }
+        .tok-str { color: var(--str); }
+        .tok-num { color: var(--num); }
+        .tok-tbl { color: var(--tbl); }
         .samples { margin: 12px 0; display: flex; flex-wrap: wrap; gap: 8px; }
-        .samples button {
-            background: var(--accent-soft);
-            color: var(--accent);
-            border: 1px solid #dbeafe;
-            border-radius: 999px;
-            padding: 6px 12px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        .run {
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-        }
+        .samples button { background: var(--accent-soft); color: var(--accent); border: 1px solid #dbeafe; border-radius: 999px; padding: 6px 12px; font-size: 12px; cursor: pointer; }
+        .actions { display: flex; gap: 10px; align-items: center; }
+        .run { background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; }
         .run:hover { background: #2563eb; }
+        .ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 8px; padding: 9px 14px; font-size: 13px; cursor: pointer; }
         .status { margin: 14px 0; font-size: 13px; color: var(--muted); }
         .status.error { color: var(--error); }
         .status.ok { color: var(--ok); }
@@ -79,88 +44,296 @@
         th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); }
         th { background: #f1f5f9; color: var(--muted); font-weight: 600; }
         .table-wrap { overflow-x: auto; }
+        .schema-col h3 { margin: 0 0 12px; font-size: 15px; }
+        .schema-col .sub { color: var(--muted); font-size: 12px; margin: 0 0 12px; }
+        .tbl-block { margin-bottom: 14px; }
+        .tbl-name { font-weight: 600; font-size: 13px; color: var(--tbl); cursor: pointer; display: flex; align-items: center; gap: 6px; }
+        .tbl-name:hover { text-decoration: underline; }
+        .field { font-size: 12px; padding: 3px 0 3px 16px; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; }
+        .field:hover { color: var(--accent); }
+        .badge { background: #fde68a; color: #92400e; border-radius: 4px; font-size: 10px; padding: 1px 5px; }
+        .autocomplete { position: fixed; z-index: 50; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,0.12); min-width: 160px; max-height: 220px; overflow-y: auto; display: none; }
+        .autocomplete div { padding: 6px 12px; font-size: 13px; font-family: "SF Mono", Menlo, monospace; cursor: pointer; }
+        .autocomplete div.active, .autocomplete div:hover { background: var(--accent-soft); color: var(--accent); }
+        .modal { position: fixed; inset: 0; background: rgba(15,23,42,0.35); display: none; align-items: center; justify-content: center; z-index: 100; }
+        .modal.open { display: flex; }
+        .modal .card { width: 340px; margin: 0; }
+        .modal h2 { margin: 0 0 4px; font-size: 18px; }
+        .modal p { margin: 0 0 16px; color: var(--muted); font-size: 13px; }
+        .modal label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 4px; }
+        .modal input { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; }
+        .modal .run { width: 100%; margin-top: 18px; }
+        .modal .err { color: var(--error); font-size: 13px; margin-top: 10px; min-height: 16px; }
     </style>
 </head>
 <body>
 <header>
-    <h1>DynamoDB SQL Console</h1>
-    <p>Runs PartiQL over the DynamoDB JDBC driver against DynamoDB Local at localhost:8000</p>
+    <div>
+        <h1>DynamoDB SQL Console</h1>
+        <p>PartiQL over the DynamoDB JDBC driver against DynamoDB Local at localhost:8000</p>
+    </div>
+    <button class="ghost" id="logout">Log out</button>
 </header>
-<main>
-    <div class="card">
-        <textarea id="sql" spellcheck="false">SELECT id, title, author, totalPages, pagesRead FROM "Books"</textarea>
-        <div class="samples">
-            <button data-sql='SELECT id, title, author, totalPages, pagesRead FROM "Books"'>Select all</button>
-            <button data-sql="INSERT INTO &quot;Books&quot; (id, title, author, totalPages, pagesRead) VALUES ('sql-1', 'PartiQL Guide', 'AWS', 300, 0)">Insert</button>
-            <button data-sql="UPDATE &quot;Books&quot; SET pagesRead = 42 WHERE id = 'sql-1'">Update pages</button>
-            <button data-sql="DELETE FROM &quot;Books&quot; WHERE id = 'sql-1'">Delete</button>
+
+<div class="layout">
+    <section class="editor-col">
+        <div class="card">
+            <div class="editor">
+                <pre aria-hidden="true"><code id="hl"></code></pre>
+                <textarea id="sql" spellcheck="false" autocomplete="off"></textarea>
+            </div>
+            <div class="samples">
+                <button data-sql='SELECT id, title, author, totalPages, pagesRead FROM "Books"'>Select all</button>
+                <button data-sql="INSERT INTO &quot;Books&quot; (id, title, author, totalPages, pagesRead) VALUES ('sql-1', 'PartiQL Guide', 'AWS', 300, 0)">Insert</button>
+                <button data-sql="UPDATE &quot;Books&quot; SET pagesRead = 42 WHERE id = 'sql-1'">Update pages</button>
+                <button data-sql="DELETE FROM &quot;Books&quot; WHERE id = 'sql-1'">Delete</button>
+            </div>
+            <div class="actions">
+                <button class="run" id="run">Run</button>
+                <span class="status" id="status" style="margin:0;">Ready.</span>
+            </div>
         </div>
-        <button class="run" id="run">Run</button>
+        <div class="card table-wrap" id="resultCard" style="display:none;">
+            <table id="result"></table>
+        </div>
+    </section>
+
+    <aside class="schema-col">
+        <div class="card">
+            <h3>Tables</h3>
+            <p class="sub">Click a table or field to insert it. <a href="#" id="refresh">refresh</a></p>
+            <div id="schema"></div>
+        </div>
+    </aside>
+</div>
+
+<div class="autocomplete" id="ac"></div>
+
+<div class="modal" id="loginModal">
+    <div class="card">
+        <h2>Sign in</h2>
+        <p>The SQL console is protected by JWT. Use admin / admin.</p>
+        <label>Username</label>
+        <input id="username" value="admin" autocomplete="username"/>
+        <label>Password</label>
+        <input id="password" type="password" value="admin" autocomplete="current-password"/>
+        <button class="run" id="loginBtn">Sign in</button>
+        <div class="err" id="loginErr"></div>
     </div>
-    <div class="status" id="status">Ready.</div>
-    <div class="card table-wrap" id="resultCard" style="display:none;">
-        <table id="result"></table>
-    </div>
-</main>
+</div>
+
 <script>
+    const KEYWORDS = ['SELECT','FROM','WHERE','INSERT','INTO','VALUES','VALUE','UPDATE','SET','DELETE','AND','OR','NOT','IN','ORDER','BY','LIMIT','ASC','DESC','AS','NULL','EXISTS','BETWEEN','LIKE','CONTAINS'];
+    const KEY = 'bookstore_jwt';
+
     const sqlBox = document.getElementById('sql');
+    const hl = document.getElementById('hl');
     const statusEl = document.getElementById('status');
     const resultCard = document.getElementById('resultCard');
     const resultTable = document.getElementById('result');
+    const schemaEl = document.getElementById('schema');
+    const ac = document.getElementById('ac');
+    const modal = document.getElementById('loginModal');
+    let dictionary = KEYWORDS.slice();
+    let acItems = [], acIndex = -1, acStart = 0;
 
-    document.querySelectorAll('.samples button').forEach(function (b) {
-        b.addEventListener('click', function () { sqlBox.value = b.getAttribute('data-sql'); });
+    function token() { return localStorage.getItem(KEY); }
+    function authHeaders(extra) { return Object.assign({ 'Authorization': 'Bearer ' + token() }, extra || {}); }
+    function showModal() { modal.classList.add('open'); document.getElementById('password').focus(); }
+    function hideModal() { modal.classList.remove('open'); }
+
+    function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+    function highlight(text) {
+        let i = 0, out = '';
+        while (i < text.length) {
+            const c = text[i];
+            if (c === "'") {
+                let j = i + 1; while (j < text.length && text[j] !== "'") j++; j++;
+                out += '<span class="tok-str">' + esc(text.slice(i, Math.min(j, text.length))) + '</span>'; i = j;
+            } else if (c === '"') {
+                let j = i + 1; while (j < text.length && text[j] !== '"') j++; j++;
+                out += '<span class="tok-tbl">' + esc(text.slice(i, Math.min(j, text.length))) + '</span>'; i = j;
+            } else if (/[A-Za-z_]/.test(c)) {
+                let j = i; while (j < text.length && /[A-Za-z0-9_]/.test(text[j])) j++;
+                const w = text.slice(i, j);
+                out += KEYWORDS.includes(w.toUpperCase()) ? '<span class="tok-kw">' + esc(w) + '</span>' : esc(w); i = j;
+            } else if (/[0-9]/.test(c)) {
+                let j = i; while (j < text.length && /[0-9.]/.test(text[j])) j++;
+                out += '<span class="tok-num">' + esc(text.slice(i, j)) + '</span>'; i = j;
+            } else { out += esc(c); i++; }
+        }
+        return out;
+    }
+
+    function render() {
+        hl.innerHTML = highlight(sqlBox.value) + (sqlBox.value.endsWith('\n') ? ' ' : '');
+        hl.parentElement.scrollTop = sqlBox.scrollTop;
+        hl.parentElement.scrollLeft = sqlBox.scrollLeft;
+    }
+
+    sqlBox.addEventListener('input', function () { render(); updateAutocomplete(); });
+    sqlBox.addEventListener('scroll', render);
+    sqlBox.addEventListener('blur', function () { setTimeout(closeAc, 150); });
+
+    function caretCoords(ta) {
+        const div = document.createElement('div');
+        const s = getComputedStyle(ta);
+        ['fontFamily','fontSize','fontWeight','lineHeight','letterSpacing','paddingTop','paddingRight','paddingBottom','paddingLeft','whiteSpace','overflowWrap','tabSize'].forEach(p => div.style[p] = s[p]);
+        div.style.position = 'absolute'; div.style.visibility = 'hidden'; div.style.whiteSpace = 'pre-wrap'; div.style.overflowWrap = 'break-word';
+        div.style.width = ta.clientWidth + 'px';
+        div.textContent = ta.value.substring(0, ta.selectionStart);
+        const span = document.createElement('span'); span.textContent = '.'; div.appendChild(span);
+        document.body.appendChild(div);
+        const rect = ta.getBoundingClientRect();
+        const x = rect.left + span.offsetLeft - ta.scrollLeft;
+        const y = rect.top + span.offsetTop - ta.scrollTop;
+        const lh = parseFloat(s.lineHeight) || parseFloat(s.fontSize) * 1.4;
+        document.body.removeChild(div);
+        return { x: x, y: y + lh };
+    }
+
+    function currentWord() {
+        const upto = sqlBox.value.substring(0, sqlBox.selectionStart);
+        const m = upto.match(/[A-Za-z_][A-Za-z0-9_]*$/);
+        return m ? { word: m[0], start: sqlBox.selectionStart - m[0].length } : { word: '', start: sqlBox.selectionStart };
+    }
+
+    function updateAutocomplete() {
+        const cw = currentWord();
+        if (cw.word.length < 1) { closeAc(); return; }
+        const low = cw.word.toLowerCase();
+        acItems = dictionary.filter(function (d) { return d.toLowerCase().startsWith(low) && d.toLowerCase() !== low; }).slice(0, 10);
+        if (acItems.length === 0) { closeAc(); return; }
+        acStart = cw.start; acIndex = 0;
+        const pos = caretCoords(sqlBox);
+        ac.style.left = pos.x + 'px'; ac.style.top = pos.y + 'px';
+        drawAc();
+        ac.style.display = 'block';
+    }
+
+    function drawAc() {
+        ac.innerHTML = acItems.map(function (it, i) { return '<div class="' + (i === acIndex ? 'active' : '') + '" data-i="' + i + '">' + it + '</div>'; }).join('');
+    }
+
+    function closeAc() { ac.style.display = 'none'; acItems = []; acIndex = -1; }
+
+    function accept(i) {
+        const it = acItems[i]; if (!it) return;
+        const before = sqlBox.value.substring(0, acStart);
+        const after = sqlBox.value.substring(sqlBox.selectionStart);
+        sqlBox.value = before + it + after;
+        const caret = (before + it).length;
+        sqlBox.setSelectionRange(caret, caret);
+        closeAc(); render(); sqlBox.focus();
+    }
+
+    ac.addEventListener('mousedown', function (e) {
+        const d = e.target.closest('[data-i]'); if (d) { e.preventDefault(); accept(parseInt(d.getAttribute('data-i'), 10)); }
     });
 
+    sqlBox.addEventListener('keydown', function (e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') { e.preventDefault(); closeAc(); run(); return; }
+        if (ac.style.display === 'block' && acItems.length) {
+            if (e.key === 'ArrowDown') { e.preventDefault(); acIndex = (acIndex + 1) % acItems.length; drawAc(); return; }
+            if (e.key === 'ArrowUp') { e.preventDefault(); acIndex = (acIndex - 1 + acItems.length) % acItems.length; drawAc(); return; }
+            if (e.key === 'Enter' || e.key === 'Tab') { e.preventDefault(); accept(acIndex); return; }
+            if (e.key === 'Escape') { closeAc(); return; }
+        }
+    });
+
+    function insertAtCaret(text) {
+        const start = sqlBox.selectionStart, end = sqlBox.selectionEnd;
+        sqlBox.value = sqlBox.value.substring(0, start) + text + sqlBox.value.substring(end);
+        const caret = start + text.length;
+        sqlBox.setSelectionRange(caret, caret);
+        render(); sqlBox.focus();
+    }
+
+    document.querySelectorAll('.samples button').forEach(function (b) {
+        b.addEventListener('click', function () { sqlBox.value = b.getAttribute('data-sql'); render(); });
+    });
     document.getElementById('run').addEventListener('click', run);
+    document.getElementById('refresh').addEventListener('click', function (e) { e.preventDefault(); loadSchema(); });
+    document.getElementById('logout').addEventListener('click', function () { localStorage.removeItem(KEY); showModal(); });
+    document.getElementById('loginBtn').addEventListener('click', login);
+
+    async function login() {
+        const errEl = document.getElementById('loginErr');
+        errEl.textContent = '';
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: document.getElementById('username').value, password: document.getElementById('password').value })
+            });
+            if (!res.ok) { errEl.textContent = 'Invalid credentials'; return; }
+            const data = await res.json();
+            localStorage.setItem(KEY, data.token);
+            hideModal(); init();
+        } catch (e) { errEl.textContent = 'Login failed: ' + e.message; }
+    }
+
+    async function loadSchema() {
+        const res = await fetch('/api/sql/schema', { headers: authHeaders() });
+        if (res.status === 401) { showModal(); return; }
+        const tables = await res.json();
+        dictionary = KEYWORDS.slice();
+        schemaEl.innerHTML = tables.map(function (t) {
+            t.attributes.forEach(function (a) { if (dictionary.indexOf(a) < 0) dictionary.push(a); });
+            if (dictionary.indexOf(t.name) < 0) dictionary.push(t.name);
+            const fields = t.attributes.map(function (a) {
+                const key = t.keys.indexOf(a) >= 0 ? '<span class="badge">key</span>' : '';
+                return '<div class="field" data-insert="' + a + '"><span>' + a + '</span>' + key + '</div>';
+            }).join('');
+            return '<div class="tbl-block"><div class="tbl-name" data-table="' + t.name + '">&#128203; ' + t.name + '</div>' + fields + '</div>';
+        }).join('');
+        schemaEl.querySelectorAll('[data-table]').forEach(function (el) {
+            el.addEventListener('click', function () { insertAtCaret('"' + el.getAttribute('data-table') + '"'); });
+        });
+        schemaEl.querySelectorAll('[data-insert]').forEach(function (el) {
+            el.addEventListener('click', function () { insertAtCaret(el.getAttribute('data-insert')); });
+        });
+    }
 
     async function run() {
-        statusEl.className = 'status';
-        statusEl.textContent = 'Running...';
-        resultCard.style.display = 'none';
+        statusEl.className = 'status'; statusEl.textContent = 'Running...'; resultCard.style.display = 'none';
         try {
             const res = await fetch('/api/sql/execute', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                method: 'POST', headers: authHeaders({ 'Content-Type': 'application/json' }),
                 body: JSON.stringify({ sql: sqlBox.value })
             });
+            if (res.status === 401) { showModal(); statusEl.className = 'status error'; statusEl.textContent = 'Session expired, sign in again.'; return; }
             const data = await res.json();
-            if (!res.ok) {
-                statusEl.className = 'status error';
-                statusEl.textContent = 'Error: ' + (data.message || res.status);
-                return;
-            }
+            if (!res.ok) { statusEl.className = 'status error'; statusEl.textContent = 'Error: ' + (data.message || res.status); return; }
             if (data.updateCount !== null && data.updateCount !== undefined) {
-                statusEl.className = 'status ok';
-                statusEl.textContent = 'Statement executed. Update count: ' + data.updateCount;
-                return;
+                statusEl.className = 'status ok'; statusEl.textContent = 'Statement executed. Update count: ' + data.updateCount;
+                loadSchema(); return;
             }
-            statusEl.className = 'status ok';
-            statusEl.textContent = data.rowCount + ' row(s) returned.';
-            render(data.columns, data.rows);
-        } catch (e) {
-            statusEl.className = 'status error';
-            statusEl.textContent = 'Request failed: ' + e.message;
-        }
+            statusEl.className = 'status ok'; statusEl.textContent = data.rowCount + ' row(s) returned.';
+            renderTable(data.columns, data.rows);
+        } catch (e) { statusEl.className = 'status error'; statusEl.textContent = 'Request failed: ' + e.message; }
     }
 
-    function render(columns, rows) {
+    function renderTable(columns, rows) {
         let head = '<thead><tr>';
         columns.forEach(function (c) { head += '<th>' + c + '</th>'; });
-        head += '</tr></thead>';
-        let body = '<tbody>';
+        head += '</tr></thead><tbody>';
         rows.forEach(function (row) {
-            body += '<tr>';
-            columns.forEach(function (c) {
-                const v = row[c];
-                body += '<td>' + (v === null || v === undefined ? '' : v) + '</td>';
-            });
-            body += '</tr>';
+            head += '<tr>';
+            columns.forEach(function (c) { const v = row[c]; head += '<td>' + (v === null || v === undefined ? '' : v) + '</td>'; });
+            head += '</tr>';
         });
-        body += '</tbody>';
-        resultTable.innerHTML = head + body;
+        resultTable.innerHTML = head + '</tbody>';
         resultCard.style.display = 'block';
     }
+
+    function init() {
+        if (!sqlBox.value) sqlBox.value = 'SELECT id, title, author, totalPages, pagesRead FROM "Books"';
+        render();
+        loadSchema();
+    }
+
+    if (token()) { hideModal(); init(); } else { showModal(); }
 </script>
 </body>
 </html>

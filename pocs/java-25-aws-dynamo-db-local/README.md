@@ -10,10 +10,10 @@ A bookstore backed by **DynamoDB Local**. You can create books, list them, fetch
 | --- | --- |
 | Language | Java 25 |
 | Framework | Spring Boot 4.1.0 (Spring Framework 7) |
-| Data access | Spring `JdbcTemplate` with explicit SQL |
+| Reads / SQL console | Spring `JdbcTemplate` with explicit SQL over the JDBC driver |
 | Connection pool | HikariCP |
 | JDBC driver | `com.dbvis:dynamodb-jdbc:1.5` (PartiQL over JDBC) |
-| Transactions | AWS SDK v2 `DynamoDbClient.executeTransaction` (bundled in the driver jar) |
+| Writes | AWS SDK v2 `DynamoDbClient.executeTransaction` — every write is a DynamoDB transaction |
 | Datastore | `amazon/dynamodb-local` on `podman`, port 8000 |
 | API docs | springdoc-openapi 3.0.3 (`/swagger`, `/swagger-ui`) |
 | Auth | Hand-rolled HS256 JWT (no extra library), servlet filter |
@@ -32,11 +32,12 @@ DynamoDB is a NoSQL, HTTP/JSON service. It is **not** a relational database and 
 | **B. Third-party DynamoDB JDBC driver** *(chosen)* | HikariCP pools connections; SQL/PartiQL runs over `java.sql`; a browser SQL console works. | The driver translates each statement to a single PartiQL `ExecuteStatement`; **JDBC `commit()` is not a real DynamoDB transaction**; Spring Data JDBC's entity/repository mapping does not work (no relational dialect). |
 | **C. Hybrid (relational DB + DynamoDB)** | Every library used literally. | Two datastores, more moving parts, and the relational half is not DynamoDB at all. |
 
-This project takes **Option B** and is honest about its one real limitation:
+This project takes **Option B** and is honest about the split:
 
-- **CRUD and the `/sql-console`** go through HikariCP → the DynamoDB JDBC driver → **explicit SQL** (`INSERT/SELECT/UPDATE`). The driver parses the SQL and issues a PartiQL `ExecuteStatement` per call.
-- **Spring Data JDBC** cannot map entities to DynamoDB because there is no relational `Dialect` for it. We therefore use **`JdbcTemplate`** (the JDBC foundation Spring Data JDBC is built on) with explicit SQL. This is the accurate, working subset of the requirement.
-- **Transactions** cannot come from the JDBC driver — it only ever calls `ExecuteStatement` and its `commit()`/`rollback()` do nothing transactional. To get a *true* ACID transaction, the batch endpoint uses the AWS SDK's `ExecuteTransaction` directly. The SDK is already bundled inside the driver jar, so this adds no dependency.
+- **Reads and the `/sql-console`** go through HikariCP → the DynamoDB JDBC driver → **explicit SQL** (`SELECT`). The driver parses the SQL and issues a PartiQL `ExecuteStatement` per call.
+- **Every write is a DynamoDB transaction.** `BookRepository.insert` and `updatePages`, and `TransactionService.batchUpdatePages`, all call the AWS SDK's `ExecuteTransaction` (PartiQL `INSERT`/`UPDATE` statements). Single-item writes get transactional guarantees too — e.g. `INSERT` rejects a duplicate `id` and `UPDATE` is guarded by `totalPages >= pagesRead`; a violation cancels the transaction. The SDK is bundled inside the driver jar, so this adds no dependency.
+- **Why not the JDBC driver for writes?** It only ever calls `ExecuteStatement` and its `commit()`/`rollback()` do nothing transactional. Real ACID has to come from `ExecuteTransaction`, which is why the write path uses the SDK directly.
+- **Spring Data JDBC** cannot map entities to DynamoDB because there is no relational `Dialect` for it. We therefore use **`JdbcTemplate`** (the JDBC foundation Spring Data JDBC is built on) with explicit SQL for reads. This is the accurate, working subset of the requirement.
 
 ## How DynamoDB works (the short version)
 
@@ -91,10 +92,11 @@ Base URL `http://localhost:8080`. **Every `/api/**` endpoint enforces `Authoriza
 | GET | `/api/books/{id}` | yes | Get one book |
 | PATCH | `/api/books/{id}/pages` | yes | Track pages read |
 | POST | `/api/books/batch-pages` | yes | Atomic multi-book page update (transaction) |
-| POST | `/api/sql/execute` | no | Run PartiQL/SQL against DynamoDB Local |
+| POST | `/api/sql/execute` | yes | Run PartiQL/SQL against DynamoDB Local |
+| GET | `/api/sql/schema` | yes | List tables with their keys and sampled fields |
 | GET | `/actuator/health` | no | Health of app + DynamoDB |
 | GET | `/swagger` · `/swagger-ui` | no | OpenAPI UI |
-| GET | `/sql-console` | no | Light-themed SQL console page |
+| GET | `/sql-console` | no | Light-themed SQL console page (prompts for login) |
 
 ### Calling each API (real responses)
 

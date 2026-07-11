@@ -52,8 +52,11 @@ step "POST /api/books/batch-pages (rollback, expect 409)"
 curl -s -w "\nHTTP %{http_code}\n" -X POST "$B/api/books/batch-pages" -H "$AUTH" -H 'Content-Type: application/json' \
   -d "{\"updates\":[{\"id\":\"$ID1\",\"pagesRead\":5},{\"id\":\"$ID2\",\"pagesRead\":999999}]}"
 
-step "POST /api/sql/execute (PartiQL over JDBC, no token needed)"
-curl -s -X POST "$B/api/sql/execute" -H 'Content-Type: application/json' \
+step "GET /api/sql/schema (tables and fields, requires token)"
+curl -s "$B/api/sql/schema" -H "$AUTH" | pretty
+
+step "POST /api/sql/execute (PartiQL over JDBC, requires token)"
+curl -s -X POST "$B/api/sql/execute" -H "$AUTH" -H 'Content-Type: application/json' \
   -d '{"sql":"SELECT id, title, author, totalPages, pagesRead FROM \"Books\""}' | pretty
 
 step "GET /actuator/health"

@@ -5,21 +5,44 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.bookstore.web.dto.SqlResponse;
+import com.bookstore.web.dto.TableSchema;
+
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+import software.amazon.awssdk.services.dynamodb.model.KeySchemaElement;
 
 @Service
 public class SqlConsoleService {
 
     private final JdbcTemplate jdbc;
+    private final DynamoDbClient client;
 
-    public SqlConsoleService(JdbcTemplate jdbc) {
+    public SqlConsoleService(JdbcTemplate jdbc, DynamoDbClient client) {
         this.jdbc = jdbc;
+        this.client = client;
+    }
+
+    public List<TableSchema> schema() {
+        List<TableSchema> schemas = new ArrayList<>();
+        for (String name : client.listTables().tableNames()) {
+            var table = client.describeTable(b -> b.tableName(name)).table();
+            List<String> keys = table.keySchema().stream().map(KeySchemaElement::attributeName).toList();
+            Set<String> attributes = new LinkedHashSet<>(keys);
+            try {
+                client.scan(b -> b.tableName(name).limit(25)).items().forEach(item -> attributes.addAll(item.keySet()));
+            } catch (Exception ignored) {
+            }
+            schemas.add(new TableSchema(name, keys, new ArrayList<>(attributes)));
+        }
+        return schemas;
     }
 
     public SqlResponse execute(String sql) {

@@ -41,12 +41,12 @@
     <text x="525" y="326" font-size="16" text-anchor="middle" fill="#475569">Controllers</text>
     <text x="525" y="348" font-size="16" text-anchor="middle" fill="#475569">Services</text>
 
-    <text x="810" y="130" font-size="21" text-anchor="middle">CRUD + SQL console</text>
+    <text x="810" y="130" font-size="21" text-anchor="middle">Reads + SQL console</text>
     <text x="810" y="158" font-size="16" text-anchor="middle" fill="#475569">JdbcTemplate (explicit SQL)</text>
     <text x="810" y="180" font-size="16" text-anchor="middle" fill="#475569">HikariCP pool</text>
     <text x="810" y="205" font-size="16" text-anchor="middle" fill="#475569">DynamoDB JDBC driver</text>
 
-    <text x="810" y="455" font-size="21" text-anchor="middle">Batch page update</text>
+    <text x="810" y="455" font-size="21" text-anchor="middle">All writes (transactions)</text>
     <text x="810" y="483" font-size="16" text-anchor="middle" fill="#475569">AWS SDK v2 DynamoDbClient</text>
     <text x="810" y="508" font-size="16" text-anchor="middle" fill="#475569">ExecuteTransaction</text>
 

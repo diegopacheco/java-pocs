@@ -10,6 +10,11 @@ import org.springframework.stereotype.Repository;
 import com.bookstore.config.DynamoProperties;
 import com.bookstore.model.Book;
 
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
+import software.amazon.awssdk.services.dynamodb.model.ExecuteTransactionRequest;
+import software.amazon.awssdk.services.dynamodb.model.ParameterizedStatement;
+
 @Repository
 public class BookRepository {
 
@@ -21,16 +26,37 @@ public class BookRepository {
             (int) rs.getDouble("pagesRead"));
 
     private final JdbcTemplate jdbc;
+    private final DynamoDbClient client;
     private final String table;
 
-    public BookRepository(JdbcTemplate jdbc, DynamoProperties props) {
+    public BookRepository(JdbcTemplate jdbc, DynamoDbClient client, DynamoProperties props) {
         this.jdbc = jdbc;
+        this.client = client;
         this.table = props.table();
     }
 
     public void insert(Book book) {
-        jdbc.update("INSERT INTO \"" + table + "\" (id, title, author, totalPages, pagesRead) VALUES (?, ?, ?, ?, ?)",
-                book.id(), book.title(), book.author(), book.totalPages(), book.pagesRead());
+        ParameterizedStatement statement = ParameterizedStatement.builder()
+                .statement("INSERT INTO \"" + table + "\" VALUE {'id':?, 'title':?, 'author':?, 'totalPages':?, 'pagesRead':?}")
+                .parameters(
+                        AttributeValue.fromS(book.id()),
+                        AttributeValue.fromS(book.title()),
+                        AttributeValue.fromS(book.author()),
+                        AttributeValue.fromN(Integer.toString(book.totalPages())),
+                        AttributeValue.fromN(Integer.toString(book.pagesRead())))
+                .build();
+        client.executeTransaction(ExecuteTransactionRequest.builder().transactStatements(statement).build());
+    }
+
+    public void updatePages(String id, int pagesRead) {
+        ParameterizedStatement statement = ParameterizedStatement.builder()
+                .statement("UPDATE \"" + table + "\" SET pagesRead = ? WHERE id = ? AND totalPages >= ?")
+                .parameters(
+                        AttributeValue.fromN(Integer.toString(pagesRead)),
+                        AttributeValue.fromS(id),
+                        AttributeValue.fromN(Integer.toString(pagesRead)))
+                .build();
+        client.executeTransaction(ExecuteTransactionRequest.builder().transactStatements(statement).build());
     }
 
     public List<Book> findAll() {
@@ -40,9 +66,5 @@ public class BookRepository {
     public Optional<Book> findById(String id) {
         return jdbc.query("SELECT id, title, author, totalPages, pagesRead FROM \"" + table + "\" WHERE id = ?",
                 BOOK_MAPPER, id).stream().findFirst();
-    }
-
-    public int updatePages(String id, int pagesRead) {
-        return jdbc.update("UPDATE \"" + table + "\" SET pagesRead = ? WHERE id = ?", pagesRead, id);
     }
 }
