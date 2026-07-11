@@ -1,0 +1,29 @@
+pocs/gpt-5.6-sol-space/styles.css
+  s_efa99922062a09::t_630514f7dcdebc 1-68
+pocs/gpt-5.6-sol-space/index.html
+  s_efa99922062a09::t_630514f7dcdebc 1-69
+pocs/gpt-5.6-sol-space/app.js
+  s_efa99922062a09::t_630514f7dcdebc 1-138
+pocs/gpt-5.6-sol-space/start.sh
+  s_efa99922062a09::t_630514f7dcdebc 1-4
+pocs/gpt-5.6-sol-space/README.md
+  s_efa99922062a09::t_630514f7dcdebc 1-31
+pocs/gpt-5.6-sol-space/stop.sh
+  s_efa99922062a09::t_630514f7dcdebc 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "12ac757a17b073c5ef0337cc286d7a67476e0b67",
+  "prompts": {},
+  "sessions": {
+    "s_efa99922062a09": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f5311-68ea-71c0-a3cc-788ece88d2af",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
