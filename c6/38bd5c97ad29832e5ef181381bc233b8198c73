@@ -1,0 +1,38 @@
+pocs/java-25-aws-dynamo-db-local/README.md
+  s_3777402bce4507::t_21c487b4622386 137,141-142,144-145,149
+  s_3777402bce4507::t_1048bc19280989 91
+  s_3777402bce4507::t_de5981aa987e09 186,190-193
+  s_3777402bce4507::t_c27d471e69f699 194
+pocs/java-25-aws-dynamo-db-local/demo.sh
+  s_3777402bce4507::t_4ac32b9255821d 38-41,43-44,47
+pocs/java-25-aws-dynamo-db-local/src/main/java/com/bookstore/web/dto/CursorPage.java
+  s_3777402bce4507::t_76ee92397d2d37 1-6
+pocs/java-25-aws-dynamo-db-local/src/test/java/com/bookstore/BookApiIntegrationTest.java
+  s_3777402bce4507::t_7b6ad970ddf26a 4,12
+  s_3777402bce4507::t_dca7d6f8b3aaf2 117,123,125-129,131,133-139
+pocs/java-25-aws-dynamo-db-local/src/main/java/com/bookstore/web/BookController.java
+  s_3777402bce4507::t_2f944525d09df2 49-53
+  s_3777402bce4507::t_5d0f998912fe6a 21
+pocs/java-25-aws-dynamo-db-local/src/main/java/com/bookstore/repository/BookRepository.java
+  s_3777402bce4507::t_1f60e862951e0a 4,16-17
+  s_3777402bce4507::t_8f0760feaf75ca 69-92
+pocs/java-25-aws-dynamo-db-local/src/main/java/com/bookstore/service/BookService.java
+  s_3777402bce4507::t_42c3616802e927 40-42,44-45
+  s_3777402bce4507::t_4c89b477d69343 14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.11",
+  "base_commit_sha": "c638bd5c97ad29832e5ef181381bc233b8198c73",
+  "prompts": {},
+  "sessions": {
+    "s_3777402bce4507": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d1ae84df-1e55-4c32-9e1c-f083bdcfa67c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
