@@ -1,0 +1,43 @@
+services:
+  floci:
+    image: floci/floci:latest
+    environment:
+      FLOCI_HOSTNAME: floci
+      FLOCI_SERVICES_DOCKER_NETWORK: floci-poc
+      FLOCI_SERVICES_SQS_ENABLED: "true"
+      FLOCI_SERVICES_SNS_ENABLED: "true"
+      FLOCI_SERVICES_KINESIS_ENABLED: "true"
+      FLOCI_SERVICES_MSK_ENABLED: "true"
+      FLOCI_SERVICES_S3_ENABLED: "true"
+    ports:
+      - "${FLOCI_PORT:-4566}:4566"
+    volumes:
+      - "${PODMAN_SOCKET_PATH}:/var/run/docker.sock:z"
+    security_opt:
+      - label=type:container_runtime_t
+    networks:
+      - floci-poc
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:4566/_floci/health >/dev/null"]
+      interval: 1s
+      timeout: 1s
+      retries: 60
+  app:
+    build:
+      context: .
+      dockerfile: Containerfile
+    environment:
+      AWS_ENDPOINT: http://floci:4566
+      AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    depends_on:
+      floci:
+        condition: service_healthy
+    networks:
+      - floci-poc
+networks:
+  floci-poc:
+    name: floci-poc

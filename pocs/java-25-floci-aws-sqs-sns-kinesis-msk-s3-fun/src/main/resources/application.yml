@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: java-25-floci-aws
+server:
+  port: 8080
+aws:
+  endpoint: ${AWS_ENDPOINT:http://localhost:4566}
+  region: ${AWS_REGION:us-east-1}
+  access-key: ${AWS_ACCESS_KEY_ID:test}
+  secret-key: ${AWS_SECRET_ACCESS_KEY:test}
+resources:
+  sqs-queue: poc-sqs
+  sns-topic: poc-sns
+  sns-queue: poc-sns-delivery
+  kinesis-stream: poc-kinesis
+  msk-kafka-version: 3.6.0
+  s3-bucket: poc-s3
+  s3-key: value.txt
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
