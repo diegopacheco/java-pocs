@@ -1,0 +1,66 @@
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/src/main/java/com/diegopacheco/floci/api/MskController.java
+  s_fb9124db3d90c3::t_9b1ee4ba8be828 30-31,50-51
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-29,32-49,52-63
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/src/main/resources/application.yml
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-21
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/src/main/java/com/diegopacheco/floci/api/KinesisController.java
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-76
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/test.sh
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-2,10-32
+  s_fb9124db3d90c3::t_c6f44244fbe256 3-9,33
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/README.md
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-27,30-35,37,45-46,48-50,52-65,68-105
+  s_fb9124db3d90c3::t_ff75dffe751289 39-44
+  s_fb9124db3d90c3::t_8b0ba793ae6a69 28-29
+  s_fb9124db3d90c3::t_c6f44244fbe256 36,38,47,51,66-67
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/src/main/java/com/diegopacheco/floci/api/SnsController.java
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-90
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/.gitignore
+  s_fb9124db3d90c3::t_c6f44244fbe256 5
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-4
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/src/main/java/com/diegopacheco/floci/api/ApiExceptionHandler.java
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-22
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/src/main/java/com/diegopacheco/floci/api/SqsController.java
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-56
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/pom.xml
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-74
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/compose.yaml
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-12,14-15,18-20,22-34,36-43
+  s_fb9124db3d90c3::t_0a2824b8ec6b4d 16
+  s_fb9124db3d90c3::t_ff75dffe751289 13,35
+  s_fb9124db3d90c3::t_be0b4ffe04eef6 21
+  s_fb9124db3d90c3::t_f00ba00ac3a684 17
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/src/main/java/com/diegopacheco/floci/Application.java
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-11
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/Containerfile
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-11
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/start.sh
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-11,41-42,45-50
+  s_fb9124db3d90c3::t_c6f44244fbe256 12-40,43-44
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/src/main/java/com/diegopacheco/floci/config/AwsConfig.java
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-84
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/src/main/java/com/diegopacheco/floci/api/ApiModels.java
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-20
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/src/main/java/com/diegopacheco/floci/api/S3Controller.java
+  s_fb9124db3d90c3::t_9b1ee4ba8be828 37-39
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-36,40-66
+pocs/java-25-floci-aws-sqs-sns-kinesis-msk-s3-fun/stop.sh
+  s_fb9124db3d90c3::t_c6f44244fbe256 9-16,18
+  s_fb9124db3d90c3::t_5a04b18ebf2bf0 1-8,17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "df9aa8576aa2ad2798e099242d9cd36c09ccb1f5",
+  "prompts": {},
+  "sessions": {
+    "s_fb9124db3d90c3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f9feb-a36f-7e33-aa01-b53998f286ce",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
