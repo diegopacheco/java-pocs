@@ -1,0 +1,71 @@
+pocs/big-decimal-facts/src/main/java/com/github/diegopacheco/sandboxspring/money/MoneyMath.java
+  s_876e68cb6d19d5::t_738467ac836ed4 6,25-26,29,31-32,39-41,45
+  s_876e68cb6d19d5::t_dfcae53b598d00 1-5,7-24,27-28,30,33-38,42-44,46-60
+pocs/big-decimal-facts/src/main/java/com/github/diegopacheco/sandboxspring/controller/LedgerController.java
+  s_876e68cb6d19d5::t_fa8777be291060 1-124
+pocs/big-decimal-facts/src/test/java/com/github/diegopacheco/sandboxspring/money/LedgerServiceTest.java
+  s_876e68cb6d19d5::t_da6a0bcd401e0d 1-121
+pocs/big-decimal-facts/src/main/java/com/github/diegopacheco/sandboxspring/money/Money.java
+  s_876e68cb6d19d5::t_dfcae53b598d00 1-7,9-10,12,14-16,18-20,22-24,26-27,30-33,35-38,40-42,44-46,48-50,58-67,69-70
+  s_876e68cb6d19d5::t_738467ac836ed4 8,11,13,17,21,25,28-29,34,39,43,47,51-57,68
+pocs/big-decimal-facts/src/test/java/com/github/diegopacheco/sandboxspring/money/LedgerWiringTest.java
+  s_876e68cb6d19d5::t_da6a0bcd401e0d 1-15,18-33
+  s_876e68cb6d19d5::t_972fd2176d0e28 16-17
+pocs/big-decimal-facts/src/main/java/com/github/diegopacheco/sandboxspring/money/InMemoryLedgerRepository.java
+  s_876e68cb6d19d5::t_738467ac836ed4 39,46,50
+  s_876e68cb6d19d5::t_dfcae53b598d00 1-38,40-45,47-49,51-52
+pocs/big-decimal-facts/test.sh
+  s_876e68cb6d19d5::t_d9931029895028 1-4
+pocs/big-decimal-facts/src/test/java/com/github/diegopacheco/sandboxspring/money/NeverBinaryFloatingPointTest.java
+  s_876e68cb6d19d5::t_9949a60be3785c 1-81
+pocs/big-decimal-facts/README.md
+  s_876e68cb6d19d5::t_dbc2c72d7de39c 9-10,12,15,17-32,34-35
+  s_876e68cb6d19d5::t_f600ca2dc0131d 1-8,11,13-14,16,33,36
+pocs/big-decimal-facts/pom.xml
+  s_876e68cb6d19d5::t_9c6f8b92a35876 1-48
+pocs/big-decimal-facts/src/test/java/com/github/diegopacheco/sandboxspring/money/RoundOnceAtLedgerBoundaryTest.java
+  s_876e68cb6d19d5::t_9911b81f63ba28 60-61
+  s_876e68cb6d19d5::t_9f960ad9742467 1-59,62-103
+pocs/big-decimal-facts/test-endpoints.sh
+  s_876e68cb6d19d5::t_d9931029895028 1-136
+pocs/big-decimal-facts/src/main/java/com/github/diegopacheco/sandboxspring/money/LedgerRepository.java
+  s_876e68cb6d19d5::t_dfcae53b598d00 1-16
+pocs/big-decimal-facts/src/test/java/com/github/diegopacheco/sandboxspring/money/BigDecimalDisciplineTest.java
+  s_876e68cb6d19d5::t_9949a60be3785c 1-34,45-71
+  s_876e68cb6d19d5::t_01b8057273798b 35-44
+pocs/big-decimal-facts/src/test/java/com/github/diegopacheco/sandboxspring/money/LedgerEntryInvariantTest.java
+  s_876e68cb6d19d5::t_01b8057273798b 35
+  s_876e68cb6d19d5::t_9f960ad9742467 1-34,36-66
+pocs/big-decimal-facts/src/main/java/com/github/diegopacheco/sandboxspring/Application.java
+  s_876e68cb6d19d5::t_f600ca2dc0131d 1-27
+pocs/big-decimal-facts/src/test/java/com/github/diegopacheco/sandboxspring/controller/LedgerEndpointTest.java
+  s_876e68cb6d19d5::t_2063346e55e7d7 1-5,12-14,16-19,22,25-26,29-30,35-38,41-43,48-51,54-55,59-62,65-66,68-71,74-76,78-81,83,88,100,103-104,107-108
+  s_876e68cb6d19d5::t_95d4435d69b93a 6-11,15,20-21,23-24,27-28,31-34,39-40,44-47,52-53,56-58,63-64,67,72-73,77,82,85-87,89-99,101-102,105-106
+  s_876e68cb6d19d5::t_36d960215521e3 84
+pocs/big-decimal-facts/src/main/java/com/github/diegopacheco/sandboxspring/money/LedgerEntry.java
+  s_876e68cb6d19d5::t_738467ac836ed4 17,22,24-25
+  s_876e68cb6d19d5::t_dfcae53b598d00 1-16,18-21,23,26-38
+pocs/big-decimal-facts/src/main/java/com/github/diegopacheco/sandboxspring/money/LedgerService.java
+  s_876e68cb6d19d5::t_738467ac836ed4 69
+  s_876e68cb6d19d5::t_4418e5d0d9f8b4 1-68,70-73
+pocs/big-decimal-facts/src/main/java/com/github/diegopacheco/sandboxspring/money/Posting.java
+  s_876e68cb6d19d5::t_dfcae53b598d00 1-19
+pocs/big-decimal-facts/src/test/java/com/github/diegopacheco/sandboxspring/money/LedgerStorageFidelityTest.java
+  s_876e68cb6d19d5::t_da6a0bcd401e0d 1-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "500e4dd30d14e7cd00db4f448feecef6b042d496",
+  "prompts": {},
+  "sessions": {
+    "s_876e68cb6d19d5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9e189a2e-1d5c-4c42-afe9-5acb462cdaf8",
+        "model": "claude-opus-5"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
