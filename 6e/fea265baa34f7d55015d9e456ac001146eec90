@@ -1,0 +1,94 @@
+pocs/java-27-fun/src/main/java/com/github/diegopacheco/java27/g1gc/DefaultCollector.java
+  s_1feaf681381684::t_e7f53957bad42e 1-25
+pocs/java-27-fun/README.md
+  s_1feaf681381684::t_b3ed81c889976d 1-187
+pocs/java-27-fun/src/main/java/com/github/diegopacheco/java27/compactheaders/CompactObjectHeaders.java
+  s_1feaf681381684::t_cd519076afb6ec 1-25
+pocs/java-27-fun/src/main/java/com/github/diegopacheco/java27/jfrredaction/JfrRedaction.java
+  s_1feaf681381684::t_656efe7f1026e3 1-38
+pocs/java-27-fun/src/main/java/Main.java
+  s_1feaf681381684::t_e034e303b91720 1-26,28-40,44-55
+  s_1feaf681381684::t_1ae95a7b5d4157 27
+  s_1feaf681381684::t_c60c1e4f03022b 41-43
+  s_1feaf681381684::t_6a7ae9e8471da9 56
+pocs/java-27-fun/src/main/java/com/github/diegopacheco/java27/structuredconcurrency/StructuredConcurrency.java
+  s_1feaf681381684::t_070b7f23e73d1d 1-52
+pocs/java-27-fun/src/test/java/com/github/diegopacheco/java27/primitivepatterns/PrimitivePatternsTest.java
+  s_1feaf681381684::t_a954357403b464 1-49
+pocs/java-27-fun/src/test/java/com/github/diegopacheco/java27/vectorapi/VectorMathTest.java
+  s_1feaf681381684::t_fce50caf177473 1-50
+pocs/java-27-fun/src/test/java/com/github/diegopacheco/java27/g1gc/DefaultCollectorTest.java
+  s_1feaf681381684::t_b9d226db86999c 1-28
+pocs/java-27-fun/scripts/status.sh
+  s_1feaf681381684::t_77b64987cf815a 1-22
+pocs/java-27-fun/.gitignore
+  s_1feaf681381684::t_7125d9c86d65bb 1-110
+pocs/java-27-fun/src/main/java/com/github/diegopacheco/java27/lazyconstants/LazyConstants.java
+  s_1feaf681381684::t_c1af0f2822422c 1-54
+pocs/java-27-fun/src/test/java/com/github/diegopacheco/java27/compactheaders/CompactObjectHeadersTest.java
+  s_1feaf681381684::t_6f05fd0d4d5b6a 1-26
+pocs/java-27-fun/scripts/test-all.sh
+  s_1feaf681381684::t_bac9d4a0c036db 1-7
+pocs/java-27-fun/scripts/common.sh
+  s_1feaf681381684::t_2b16f382c3052d 1-69
+pocs/java-27-fun/src/main/java/com/github/diegopacheco/java27/vectorapi/VectorMath.java
+  s_1feaf681381684::t_2a64cf9a35e7d9 1-45
+pocs/java-27-fun/src/test/java/com/github/diegopacheco/java27/jfrredaction/JfrRedactionTest.java
+  s_1feaf681381684::t_17d284d9b97e86 1-34,36-37
+  s_1feaf681381684::t_ea89334df29596 35
+pocs/java-27-fun/pom.xml
+  s_1feaf681381684::t_34397f531adc04 8-59
+  s_1feaf681381684::t_0824c174ec9380 5-7
+  s_1feaf681381684::t_8a399dc8fd79ed 60-61
+  s_1feaf681381684::t_6c54cf45742c25 1-4
+pocs/java-27-fun/src/test/java/com/github/diegopacheco/java27/pqctls/HybridKeyExchangeTest.java
+  s_1feaf681381684::t_3f3470977d5da2 1-25,30-32,34-38,42-43
+  s_1feaf681381684::t_d0c2abb789abe6 26-29,33,39-41
+pocs/java-27-fun/diagram/architecture.svg
+  s_1feaf681381684::t_5b2205c4e95f8e 8-12
+  s_1feaf681381684::t_ee07e685c4ff23 1-6,13-30,32-36,38-42,44-92,96-103
+  s_1feaf681381684::t_cb9eb567e1415c 7
+  s_1feaf681381684::t_2cbbda04560e32 31,37,43,93-95
+pocs/java-27-fun/scripts/setup.sh
+  s_1feaf681381684::t_2cf4cf7edc5416 1-21
+pocs/java-27-fun/src/main/java/com/github/diegopacheco/java27/structuredconcurrency/OrderFailedException.java
+  s_1feaf681381684::t_c399a4cd28dacf 1-8
+pocs/java-27-fun/scripts/stop-all.sh
+  s_1feaf681381684::t_81c6a2c3284709 1-18
+pocs/java-27-fun/src/test/java/com/github/diegopacheco/java27/pem/PemCodecTest.java
+  s_1feaf681381684::t_1c91f47b7484e9 1-55
+pocs/java-27-fun/run.sh
+  s_1feaf681381684::t_7125d9c86d65bb 1-2
+pocs/java-27-fun/scripts/start-all.sh
+  s_1feaf681381684::t_53f1c7bcf63996 1-39
+pocs/java-27-fun/src/test/java/com/github/diegopacheco/java27/structuredconcurrency/StructuredConcurrencyTest.java
+  s_1feaf681381684::t_326afa7f22e1b6 1-41
+pocs/java-27-fun/src/main/java/com/github/diegopacheco/java27/primitivepatterns/PrimitivePatterns.java
+  s_1feaf681381684::t_cab8b2e375dde0 1-48
+pocs/java-27-fun/src/main/java/com/github/diegopacheco/java27/pqctls/HybridKeyExchange.java
+  s_1feaf681381684::t_8e8674e7a3caa6 1-12,16-21,26-27,33-38,40,42-47
+  s_1feaf681381684::t_5fc8daf9a03c8b 13-15,22-25,28-32,39,41
+pocs/java-27-fun/src/test/java/com/github/diegopacheco/java27/lazyconstants/LazyConstantsTest.java
+  s_1feaf681381684::t_254634c62d3da3 1-52
+pocs/java-27-fun/src/main/java/com/github/diegopacheco/java27/pem/PemCodec.java
+  s_1feaf681381684::t_d1c8a8aa1cd30b 1-2,4-13,18-36,38-39
+  s_1feaf681381684::t_7b4a01c20ad675 3,14-17,37
+pocs/java-27-fun/.sdkmanrc
+  s_1feaf681381684::t_b80d2d8f4c2b15 1-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "6efea265baa34f7d55015d9e456ac001146eec90",
+  "prompts": {},
+  "sessions": {
+    "s_1feaf681381684": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5f1bc568-251a-4a2b-af81-65a25ce2d60e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
