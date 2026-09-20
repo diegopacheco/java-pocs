@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 780" width="1180" height="780" font-family="Caveat, 'Comic Sans MS', 'Segoe Print', cursive">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;display=swap');
+      .bx { stroke: #2b2b2b; stroke-width: 2.4; filter: url(#wobble); }
+      .pn { fill: #fafafa; stroke: #2b2b2b; stroke-width: 2.4; stroke-dasharray: 10 7; filter: url(#wobble); }
+      .ln { stroke: #2b2b2b; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .t  { fill: #1a1a1a; font-size: 21px; font-weight: 700; }
+      .s  { fill: #4a4a4a; font-size: 16px; }
+      .h  { fill: #1a1a1a; font-size: 20px; font-weight: 700; }
+      .ti { fill: #1a1a1a; font-size: 34px; font-weight: 700; }
+      .lg { fill: #4a4a4a; font-size: 17px; }
+    </style>
+    <filter id="wobble" x="-6%" y="-18%" width="112%" height="136%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <marker id="ar" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 1 1 L 11 6 L 1 11" fill="none" stroke="#2b2b2b" stroke-width="2.2"/>
+    </marker>
+  </defs>
+
+  <rect width="1180" height="780" fill="#ffffff"/>
+  <text class="ti" x="590" y="52" text-anchor="middle">java-27-fun</text>
+  <text class="lg" x="590" y="80" text-anchor="middle">one package per JDK 27 feature, one test class per feature</text>
+
+  <rect class="bx" x="60" y="104" width="234" height="66" rx="12" fill="#dbe7f3"/>
+  <text class="t" x="177" y="133" text-anchor="middle">scripts/start-all.sh</text>
+  <text class="s" x="177" y="156" text-anchor="middle">resolves JDK 27, builds</text>
+
+  <path class="ln" d="M 298 137 Q 328 130 354 137" marker-end="url(#ar)"/>
+
+  <rect class="bx" x="360" y="104" width="214" height="66" rx="12" fill="#c9e4de"/>
+  <text class="t" x="467" y="133" text-anchor="middle">Main</text>
+  <text class="s" x="467" y="156" text-anchor="middle">prints the top 5</text>
+
+  <path class="ln" d="M 467 174 Q 473 194 467 212" marker-end="url(#ar)"/>
+
+  <rect class="bx" x="640" y="104" width="480" height="66" rx="12" fill="#fbf3c1"/>
+  <text class="t" x="880" y="133" text-anchor="middle">JVM flags</text>
+  <text class="s" x="880" y="156" text-anchor="middle">--enable-preview  --add-modules jdk.incubator.vector</text>
+
+  <path class="ln" d="M 638 137 Q 608 144 578 137" marker-end="url(#ar)"/>
+
+  <rect class="pn" x="52" y="216" width="1076" height="402" rx="16"/>
+  <text class="h" x="76" y="248">9 feature packages under com.github.diegopacheco.java27</text>
+
+  <rect class="bx" x="88" y="268" width="316" height="96" rx="12" fill="#ffd9b3"/>
+  <text class="t" x="108" y="300">* JEP 531 Lazy Constants</text>
+  <text class="s" x="108" y="325">lazyconstants</text>
+  <text class="s" x="108" y="348">LazyConstant, List/Map/Set.ofLazy</text>
+
+  <rect class="bx" x="432" y="268" width="316" height="96" rx="12" fill="#ffd9b3"/>
+  <text class="t" x="452" y="300">* JEP 532 Primitive Patterns</text>
+  <text class="s" x="452" y="325">primitivepatterns</text>
+  <text class="s" x="452" y="348">instanceof and switch on primitives</text>
+
+  <rect class="bx" x="776" y="268" width="316" height="96" rx="12" fill="#ffd9b3"/>
+  <text class="t" x="796" y="300">* JEP 533 Structured Conc.</text>
+  <text class="s" x="796" y="325">structuredconcurrency</text>
+  <text class="s" x="796" y="348">StructuredTaskScope, Joiner</text>
+
+  <rect class="bx" x="88" y="384" width="316" height="96" rx="12" fill="#f7d6e0"/>
+  <text class="t" x="108" y="416">* JEP 527 Post-Quantum TLS</text>
+  <text class="s" x="108" y="441">pqctls</text>
+  <text class="s" x="108" y="464">X25519MLKEM768 by default</text>
+
+  <rect class="bx" x="432" y="384" width="316" height="96" rx="12" fill="#f7d6e0"/>
+  <text class="t" x="452" y="416">* JEP 534 Compact Headers</text>
+  <text class="s" x="452" y="441">compactheaders</text>
+  <text class="s" x="452" y="464">96 bits down to 64 bits</text>
+
+  <rect class="bx" x="776" y="384" width="316" height="96" rx="12" fill="#e2d9f3"/>
+  <text class="t" x="796" y="416">JEP 523 G1 Everywhere</text>
+  <text class="s" x="796" y="441">g1gc</text>
+  <text class="s" x="796" y="464">no more Serial by ergonomics</text>
+
+  <rect class="bx" x="88" y="500" width="316" height="96" rx="12" fill="#e2d9f3"/>
+  <text class="t" x="108" y="532">JEP 538 PEM Encodings</text>
+  <text class="s" x="108" y="557">pem</text>
+  <text class="s" x="108" y="580">PEMEncoder, PEMDecoder</text>
+
+  <rect class="bx" x="432" y="500" width="316" height="96" rx="12" fill="#e2d9f3"/>
+  <text class="t" x="452" y="532">JEP 536 JFR Redaction</text>
+  <text class="s" x="452" y="557">jfrredaction</text>
+  <text class="s" x="452" y="580">secrets never leave the process</text>
+
+  <rect class="bx" x="776" y="500" width="316" height="96" rx="12" fill="#e2d9f3"/>
+  <text class="t" x="796" y="532">JEP 537 Vector API</text>
+  <text class="s" x="796" y="557">vectorapi</text>
+  <text class="s" x="796" y="580">SIMD lanes, scale and dot</text>
+
+  <path class="ln" d="M 358 697 L 252 697 Q 244 697 244 688 L 245 626" marker-end="url(#ar)"/>
+  <path class="ln" d="M 590 662 Q 596 644 590 626" marker-end="url(#ar)"/>
+  <path class="ln" d="M 822 697 L 928 697 Q 936 697 936 688 L 935 626" marker-end="url(#ar)"/>
+
+  <rect class="bx" x="360" y="664" width="460" height="66" rx="12" fill="#c9e4de"/>
+  <text class="t" x="590" y="693" text-anchor="middle">scripts/test-all.sh</text>
+  <text class="s" x="590" y="716" text-anchor="middle">JUnit 6 - 39 tests, one class per feature</text>
+
+  <text class="lg" x="60" y="700">* shown by Main</text>
+  <text class="lg" x="60" y="726">4 final, 4 preview, 1 incubator</text>
+</svg>
