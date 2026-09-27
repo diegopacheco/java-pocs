@@ -1,0 +1,8 @@
+{
+    "buck.projectConfig": {
+        "projectPath": "/Users/diegopacheco/git/diegopacheco/java-pocs/pocs/hello-buck-java",
+        "flavor": [],
+        "target": "",
+        "platform": "linux-x86_64"
+    }
+}
