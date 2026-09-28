@@ -148,3 +148,14 @@ override.tf.json
 
 .idea/
 stale_outputs_checked
+.bsp/
+.bloop/
+.scala-build/
+__pycache__/
+*.pyc
+venv/
+.venv/
+*.egg-info/
+.pytest_cache/
+.zig-cache/
+.DS_Store
