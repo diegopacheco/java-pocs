@@ -1,0 +1,316 @@
+pocs/Adendo-Curso-Spring-JSF/.project
+  h_8e2c3875396153 36-46
+pocs/Adendo-Curso-Spring/.project
+  h_8e2c3875396153 19-29
+pocs/Android-testTest/.project
+  h_8e2c3875396153 34-44
+pocs/Apache-Camel/.project
+  h_8e2c3875396153 29-39
+pocs/Apache-Curator-Playground/.project
+  h_8e2c3875396153 23-33
+pocs/Atomix-Fun/.project
+  h_8e2c3875396153 4-6,10-11,14-27
+pocs/Esper-Fun/.project
+  h_8e2c3875396153 4-6,10-11,14-27
+pocs/Exercicios-Spring-Framework/.project
+  h_8e2c3875396153 17-27
+pocs/FAST-taining/.project
+  h_8e2c3875396153 17-27
+pocs/Fluent-Interface/.project
+  h_8e2c3875396153 17-27
+pocs/HystrixFun/.project
+  h_8e2c3875396153 24-34
+pocs/JMS-ActiveMQ/.project
+  h_8e2c3875396153 29-39
+pocs/Java8-samples/.project
+  h_8e2c3875396153 17-27
+pocs/LombokFun/.project
+  h_8e2c3875396153 23-33
+pocs/MBassador-fun/.project
+  h_8e2c3875396153 4-6,10-11,14-27
+pocs/NetflixOSS-pocs/HystrixFun/.project
+  h_8e2c3875396153 25-35
+pocs/NetflixOSS-pocs/astyanax-cassandra-fun/.project
+  h_8e2c3875396153 18-28
+pocs/NetflixOSS-pocs/blitz4j-fun/.project
+  h_8e2c3875396153 18-28
+pocs/NetflixOSS-pocs/cassandra-kundera-fun/.project
+  h_8e2c3875396153 18-28
+pocs/NetflixOSS-pocs/feign-client-fun/.project
+  h_8e2c3875396153 18-28
+pocs/NetflixOSS-pocs/gatling-stress-fun/.project
+  h_8e2c3875396153 19-29
+pocs/NetflixOSS-pocs/governator-guice-fun/.project
+  h_8e2c3875396153 18-28
+pocs/NetflixOSS-pocs/java-jwt-security/.project
+  h_8e2c3875396153 18-28
+pocs/NetflixOSS-pocs/karyon-poc/.project
+  h_8e2c3875396153 18-28
+pocs/NetflixOSS-pocs/ribbon-fun/.project
+  h_8e2c3875396153 25-35
+pocs/NetflixOSS-pocs/rxJavaFun/.project
+  h_8e2c3875396153 25-35
+pocs/NetflixOSS-pocs/servo-metrics/.project
+  h_8e2c3875396153 18-28
+pocs/NetflixOSS-pocs/zuul-fun/.project
+  h_8e2c3875396153 19-29
+pocs/Spring-Integration/.project
+  h_8e2c3875396153 29-39
+pocs/activemq-web-ajax-rest/.project
+  h_8e2c3875396153 35-45
+pocs/akka-playground/.project
+  h_8e2c3875396153 29-39
+pocs/apache-cxf-jbossas5-camel/.project
+  h_8e2c3875396153 48-58
+pocs/archunit-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/arrangodb-java-fun/.project
+  h_8e2c3875396153 4-6,10-11,14-27
+pocs/awaitility/.project
+  h_8e2c3875396153 4-6,10-11,14-27
+pocs/aws-dynamodb-fun/.project
+  h_8e2c3875396153 3-22,26,35,42-50
+pocs/aws-java-ips/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/aws-s3-fun/.project
+  h_8e2c3875396153 3-22,26,35,42-50
+pocs/aws-sqs-fun/.project
+  h_8e2c3875396153 3-22,26,35,42-50
+pocs/aws-xray-fun/.project
+  h_8e2c3875396153 5-6,10-11,15-16,20-21,24-40
+pocs/aws-xray-playground/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/baratine-pojo-microservices/.project
+  h_8e2c3875396153 4-6,10-11,14-27
+pocs/buildr/.project
+  h_8e2c3875396153 1,3-27
+pocs/bytebuddy-fun/.project
+  h_8e2c3875396153 4-6,10-11,14-28
+pocs/cache-playground/.project
+  h_8e2c3875396153 29-39
+pocs/camel-activemq-pojo-routing/.project
+  h_8e2c3875396153 35-45
+pocs/camel-activemq-tests/.project
+  h_8e2c3875396153 35-45
+pocs/camel-cxf-jms-test/.project
+  h_8e2c3875396153 48-58
+pocs/camel-cxf-test/.project
+  h_8e2c3875396153 35-45
+pocs/camel-jms-request-reply/.project
+  h_8e2c3875396153 29-39
+pocs/cassandra-kundera-fun/.project
+  h_8e2c3875396153 18-28
+pocs/cglib-playground/.project
+  h_8e2c3875396153 29-39
+pocs/consistent-hashing/.project
+  h_8e2c3875396153 23-33
+pocs/cxf-attachments-mtom/.project
+  h_8e2c3875396153 29-39
+pocs/cxf-cglib-endpoint/.project
+  h_8e2c3875396153 29-39
+pocs/cxf-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/cxf-programatic-endpoint/.project
+  h_8e2c3875396153 29-39
+pocs/docker-testing/.project
+  h_8e2c3875396153 4-6,10-11,14-27
+pocs/eclipse-collections-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/es6-plugin/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/etl-smooks-tests/.project
+  h_8e2c3875396153 35-45
+pocs/fp-java/.project
+  h_8e2c3875396153 17-27
+pocs/google-grpc-fun/.project
+  h_8e2c3875396153 33-41
+pocs/gr34/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/gradle-system-args/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/graphql-rx-fun/.project
+  h_8e2c3875396153 4-6,10-11,14-28
+pocs/guice-gdrl-fun/.project
+  h_8e2c3875396153 18-28
+pocs/guice3/.project
+  h_8e2c3875396153 29-39
+pocs/guice4-java-servlets/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/hawtdb-fun/.project
+  h_8e2c3875396153 17-27
+pocs/high-order-functions-like/.project
+  h_8e2c3875396153 17-27
+pocs/hornetq-camel-component/.project
+  h_8e2c3875396153 29-39
+pocs/hornetq-jboss-mdb/.project
+  h_8e2c3875396153 35-45
+pocs/hornetq-tests/.project
+  h_8e2c3875396153 35-45
+pocs/ignite-fun/.project
+  h_8e2c3875396153 23-33
+pocs/ioc/.project
+  h_8e2c3875396153 18-28
+pocs/janio-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/jasper/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/java-america-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/java-concurrent/.project
+  h_8e2c3875396153 17-27
+pocs/java-ifless/.project
+  h_8e2c3875396153 17-27
+pocs/java-jedis-module-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/java-netoworking/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/java-proxy/.project
+  h_8e2c3875396153 3-22,26,35,42-50
+pocs/java-sandbox/.project
+  h_8e2c3875396153 17-27
+pocs/java-slang-playground/.project
+  h_8e2c3875396153 4-6,10-11,14-27
+pocs/java-sockets/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/java-truth-assertion-land/.project
+  h_8e2c3875396153 3-22,26,35,42-50
+pocs/java.8.playground/.project
+  h_8e2c3875396153 17-27
+pocs/java8-fp/.project
+  h_8e2c3875396153 17-27
+pocs/java8-luna/.project
+  h_8e2c3875396153 17-27
+pocs/java9-simple-poc/.project
+  h_8e2c3875396153 17-27
+pocs/jbossas7-jee6-playground/.project
+  h_8e2c3875396153 62-72
+pocs/jdbc-redis-client-test/.project
+  h_8e2c3875396153 17-27
+pocs/jest-fun/.project
+  h_8e2c3875396153 4-6,10-11,14-27
+pocs/jgroups-discoverability/.project
+  h_8e2c3875396153 1,3-27
+pocs/jms-binary-data/.project
+  h_8e2c3875396153 29-39
+pocs/jolt-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/junit-runners-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/lettuce-redis-fix/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/linux-process/.project
+  h_8e2c3875396153 3-22,26,35,42-50
+pocs/lucene3-playground/.project
+  h_8e2c3875396153 29-39
+pocs/mapdb-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/netty4-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/noexceptions-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/pitest-java-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/polimorfismo/.project
+  h_8e2c3875396153 17-27
+pocs/quarkus-fun/.project
+  h_8e2c3875396153 23-33
+pocs/rabbitmq-simple-fun/.project
+  h_8e2c3875396153 4-6,10-11,14-27
+pocs/reactor-fun/.project
+  h_8e2c3875396153 18-28
+pocs/rest-cxf-kid/.project
+  h_8e2c3875396153 29-39
+pocs/rethinkdb-java-fun/.project
+  h_8e2c3875396153 4-6,10-11,14-27
+pocs/retrofit-fun/.project
+  h_8e2c3875396153 4-6,10-11,14-27
+pocs/ribbon-fun/.project
+  h_8e2c3875396153 24-34
+pocs/rulebook-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/rxJavaFun/.project
+  h_8e2c3875396153 24-34
+pocs/scala-test/.project
+  h_8e2c3875396153 18-28
+pocs/serde-benchmarks/src/main/java/com/github/diegopacheco/serdebenchs/avro/AvroHttpRequest.java
+  h_8e2c3875396153 6-7,17-159,161-166,168-169,171-173,177-178,180-188,192-193,195-201,205-209,212,214-223,227-232,235-236,238-243,245-246,250-252,254-257,261-262,264-265,269-276,279-290,292,294-299,301-351,353,355-356
+pocs/serde-benchmarks/src/main/java/com/github/diegopacheco/serdebenchs/avro/PersonIdentifier.java
+  h_8e2c3875396153 17-105,107-218,222-223,225-238,242-243,245-258,262-266,271-280,283-287,291-298,302-306,311-319,323-327,332-338,342-344,346,351-359,363-367,372-378,381-396,398-400,402-405,407-409,411-414,416,418-421,423,425,427,429-434,436,438,440-445,447-449,451-453,455-456,458,460-461
+pocs/spring-batch-test-proof-concept/.project
+  h_8e2c3875396153 48-58
+pocs/spring-batch-tests/.project
+  h_8e2c3875396153 42-52
+pocs/spring-boot-2-fun-config/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/spring-boot-2-fun-eureka/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/spring-boot-2-fun-web/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/spring-boot-2-fun-zuul/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/spring-cloud-functions-fun/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/spring-framework-3-tests/.project
+  h_8e2c3875396153 29-39
+pocs/spring-jndi-beans-ear/.project
+  h_8e2c3875396153 35-45
+pocs/spring-jndi-beans-ejb-mdb/.project
+  h_8e2c3875396153 29-39
+pocs/spring-jndi-beans-jar/.project
+  h_8e2c3875396153 29-39
+pocs/spring-jndi-beans-war/.project
+  h_8e2c3875396153 35-45
+pocs/spring-reflections-war/.project
+  h_8e2c3875396153 35-45
+pocs/spring-shared-context-ear/.project
+  h_8e2c3875396153 35-45
+pocs/spring-shared-context-ejb-mdb/.project
+  h_8e2c3875396153 29-39
+pocs/spring-shared-context-jar/.project
+  h_8e2c3875396153 29-39
+pocs/spring-shared-context-war/.project
+  h_8e2c3875396153 35-45
+pocs/spring-statemachine-fun/.project
+  h_8e2c3875396153 3-22,26,35,42-50
+pocs/spring4-java8-luna4-fun/.project
+  h_8e2c3875396153 23-33
+pocs/spring4-playground/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/state-behaivor/.project
+  h_8e2c3875396153 17-27
+pocs/terracota-spring-test/.project
+  h_8e2c3875396153 24-34
+pocs/terracota-test/.project
+  h_8e2c3875396153 24-34
+pocs/testContainers-localstack-aws/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/testContainers-spring4/.project
+  h_8e2c3875396153 5-6,10-11,14-27
+pocs/thinkerpop-poc/.project
+  h_8e2c3875396153 5-6,10-11,14-28
+pocs/titan-poc/.project
+  h_8e2c3875396153 5-6,10-11,14-28
+pocs/uber-tchannel-fun/.project
+  h_8e2c3875396153 3-22,26,35,42-50
+pocs/unirest-fun/.project
+  h_8e2c3875396153 4-6,10-11,14-28
+pocs/unirest-java-fun/.project
+  h_8e2c3875396153 3-22,26,35,42-50
+pocs/utPLSQL-test/.project
+  h_8e2c3875396153 29-39
+pocs/vert.x-fun/vertx-java-fun/.project
+  h_8e2c3875396153 23-33
+pocs/wilfly-swarm-fun/.project
+  h_8e2c3875396153 30-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5bda7d3c0e0e09545e75b5d9519b787a50cf39a2",
+  "prompts": {},
+  "humans": {
+    "h_8e2c3875396153": {
+      "author": "diegopacheco <diego.pacheco.it@gmail.com>"
+    }
+  }
+}
